@@ -1,0 +1,40 @@
+.search-container {
+    background: #f3f2f1;
+    padding: 40px;
+    padding: 40px;
+  }
+  .govuk-input-wrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  .govuk-input {
+    flex: 1;
+    height: 50px;
+    padding: 0 10px;
+    font-size: 1rem;
+    border: 2px solid #0b0c0c;
+    border-right: none;
+    box-sizing: border-box;
+  }
+
+  .btms-search__button {
+    width: 50px;
+    height: 50px;
+    background-color: #1d70b8;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  .btms-search__button:hover {
+    background-color: #207dce;
+  }
+
+  .btms-search__button svg {
+    fill: none;
+    stroke: #fff;
+    stroke-width: 2;
+  }

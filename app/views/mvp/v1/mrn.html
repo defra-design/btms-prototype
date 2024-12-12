@@ -1,0 +1,125 @@
+{% extends "layouts/forms.html" %}
+{% set title = 'Search results' %}
+{% set signedIn = 'true' %}
+{% set fullWidth = true %}
+{% set hideButton = true %}
+
+
+
+{% block form %}
+
+<ul class="govuk-list search-results-header">
+  <li><span>MRN</span> 24GB6T3HFCIZV1HAR9</li>
+  <li><span>Status</span> On hold</li>
+  <li><span>Last updated</span> 5 November 2024, 12:20</li>
+  <!-- <li>
+    <span>Filter by</span>  
+      <div class="govuk-checkboxes__item">
+        <input class="govuk-checkboxes__input" id="waste" name="waste" type="checkbox" value="carcasses">
+        <label class="govuk-label govuk-checkboxes__label" for="waste">
+          Waste from animal carcasses
+        </label>
+  </li> -->
+</ul>
+<div class="govuk-summary-card">
+  <div class="govuk-summary-card__title-wrapper">
+    <h2 class="govuk-summary-card__title">Tandoori Chicken</h2>
+    <ul class="govuk-summary-card__actions">
+      <li class="govuk-summary-card__action">
+        <strong class="govuk-tag govuk-tag--red"> MISMATCH </strong>
+      </li>
+    </ul>
+  </div>
+  <div class="govuk-summary-card__content container govuk-body">
+    <div class="grid-row">
+      <dl class="column-third">
+        <dt>Commodity code</dt>
+        <dd>1602323010</dd>
+      </dl>
+      <dl class="column-third">
+        <dt>Weight (kg)</dt>
+        <dd>5</dd>
+      </dl>
+      <dl class="column-third">
+        <dt>Checks</dt>
+        <dd>CHED P (H222) - Pending</dd>
+      </dl>
+    </div>
+  <div class="document-ref">
+    <div class="header">Document references</div>
+
+      <details class="govuk-details" data-module="govuk-details">
+        <summary class="govuk-details__summary">
+          <span class="govuk-details__summary-text">1 match</span>
+        </summary>
+        <div class="govuk-details__text"></div>
+      </details>
+
+      <details class="govuk-details" data-module="govuk-details">
+        <summary class="govuk-details__summary">
+          <span class="govuk-details__summary-text">1 mismatch</span>
+        </summary>
+        <div class="govuk-details__text">
+          <p>The following document reference cannot be found: <strong>GBCHD2024.4433177</strong></p>
+        </div>
+      </details>
+
+    </div>
+
+  </div>
+</div>
+
+<style>
+  .search-results-header span {
+    font-weight: 600;
+    display: inline-block;
+    min-width: 140px;
+    line-height: 1.6;
+  }
+  dd,
+  dt {
+    margin: 0;
+  }
+  dt {
+    font-weight: 600;
+    padding-bottom: 0.5em;
+  }
+
+  .grid-row {
+    margin: 0 -15px;
+  }
+  .container {
+    display: grid;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .column-third,
+  .column-one-third {
+    padding: 0 15px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+  }
+  @media (min-width: 641px) {
+    .column-third,
+    .column-one-third {
+      float: left;
+      width: 33.33333%;
+    }
+  }
+  .document-ref .header{
+    font-weight: 600;
+    margin-top: 20px;
+    padding-bottom: 0.4em;
+  }
+  .document-ref details {
+    border-top: 1px solid #b1b4b6;
+    margin: 0px;
+    padding: 15px 0;
+    display: block;
+
+  }
+</style>
+{% endblock %}

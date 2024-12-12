@@ -1,0 +1,32 @@
+{% extends "layouts/forms.html" %}
+{% set title = 'Search' %}
+{% set signedIn = 'true' %}
+{% set fullWidth = true %}
+{% set hideButton = true %}
+{% set showheader = true %}
+
+
+{% block form %}
+
+  <div class="govuk-form-group search-container">
+    <h1 class="govuk-label-wrapper">
+      <label class="govuk-label govuk-label--l" for="event-name"> Search by MRN or CHED </label>
+    </h1>
+    <div id="account-number-hint" class="govuk-hint">
+      MRN, for example, 24GB0Z8WEJ9ZBTL73B <br />
+      CHED, for example, CHEDP.GB.2024.4433124
+    </div>
+    <div class="govuk-input-wrapper">
+      <input class="govuk-input" id="data.searchTerm" name="data.searchTerm" type="text" value="" />
+      <button type="submit" class="btms-search__button">
+        <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <circle cx="10" cy="10" r="8" stroke="#ffffff" stroke-width="2"></circle>
+          <line x1="15" y1="15" x2="22" y2="22" stroke="#ffffff" stroke-width="2"></line>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+
+
+  {% endblock %}
