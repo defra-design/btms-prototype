@@ -15,7 +15,7 @@
 
 
 {% block beforeContent %}
-{%- if backlink -%}
+{%- if not backlink -%}
   {% include 'includes/back.html' %}
 {%- endif -%}
 {% endblock %}
