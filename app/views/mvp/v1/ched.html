@@ -1,307 +1,89 @@
 {% extends "layouts/forms.html" %}
 {% set title = 'Search results' %}
 {% set signedIn = 'true' %}
-{% set fullWidth = true %}
+{% set fullWidth = false %}
 {% set hideButton = true %}
 {% set hideBackLink = false %}
 
 
+{% block beforeContent %}
+<nav class="govuk-breadcrumbs" aria-label="Breadcrumb">
+  <ol class="govuk-breadcrumbs__list">
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="search">Home</a>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      MRN: CHEDP.GB.2024.4450758
+    </li>
+
+  </ol>
+</nav>
+{% endblock %}
 
 {% block form %}
 
 <ul class="govuk-list search-results-header govuk-!-margin-bottom-7">
-  <li><span>MRN</span> 24GB0Z8WEJ9ZBTL73B</li>
-  <li><span>Status</span> On hold</li>
-  <li><span>Last updated</span> 5 November 2024, 12:20</li>
-  <!-- <li>
-    <span>Filter by</span>  
-      <div class="govuk-checkboxes__item">
-        <input class="govuk-checkboxes__input" id="waste" name="waste" type="checkbox" value="carcasses">
-        <label class="govuk-label govuk-checkboxes__label" for="waste">
-          Waste from animal carcasses
-        </label>
-  </li> -->
+  <li><span>CHED</span> CHEDP.GB.2024.4450758</li>
+  <li><span>Decision</span> Acceptable</li>
+  <li><span>Description</span> Cleared for Internal Market</li>
+  <li><span>Last updated</span> 5 November 2024, 11:23</li>
 </ul>
 
-<div class="govuk-!-margin-bottom-2 filter">
-  <label for="orderBy" class="govuk-label govuk-!-display-inline-block"><strong>Filter results</strong> </label>
-  <select class="govuk-select govuk-!-display-inline-block govuk-!-margin-right-3" id="orderBy" name="orderBy">
-    <option value="allMatches" selected="">
-      Show all match types
-    </option>
-    <option value="matchOnly">
-      Match only
-    </option>
-    <option value="misMatchOnly">
-      Mismatch only
-    </option>
-  </select>
-</div>
-<!-- <p>Showing 2 commodity lines accociated with this MRN</p> -->
-<hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+<table class="govuk-table govuk-!-margin-bottom-7">
+  <thead class="govuk-table__head">
+    <tr class="govuk-table__row">
+      <th scope="col" class="govuk-table__header app-custom-class">Commodity code</th>
+      <th scope="col" class="govuk-table__header app-custom-class">Description</th>
+      <th scope="col" class="govuk-table__header app-custom-class">Weight (kg)</th>
+    </tr>
+  </thead>
+  <tbody class="govuk-table__body">
+    <tr class="govuk-table__row">
+      <td class="govuk-table__cell">160232</td>
+      <td class="govuk-table__cell">Of fowls of the species Gallus domesticus</td>
+      <td class="govuk-table__cell">5</td>
 
-<div class="govuk-summary-card result2">
-  <div class="govuk-summary-card__title-wrapper">
-    <h2 class="govuk-summary-card__title">Turkeys</h2>
-    <ul class="govuk-summary-card__actions">
-      <li class="govuk-summary-card__action">
-        <strong class="govuk-tag govuk-tag--green"> MATCH </strong>
-      </li>
-    </ul>
-  </div>
-  <div class="govuk-summary-card__content container govuk-body">
-    <div class="grid-row">
-      <dl class="column-third">
-        <dt>Commodity code</dt>
-        <dd>1602311100</dd>
-      </dl>
-      <dl class="column-third">
-        <dt>Weight (kg)</dt>
-        <dd>10</dd>
-      </dl>
-      <dl class="column-third">
-        <dt>Checks</dt>
-        <dd>CHED P (H222) - Released</dd>
-      </dl>
-    </div>
-  <div class="document-ref">
-    <div class="header">Document references</div>
+    </tr>
 
-      <details class="govuk-details" data-module="govuk-details">
-        <summary class="govuk-details__summary">
-          <span class="govuk-details__summary-text">1 match</span>
-        </summary>
-        <div class="govuk-details__text container">
-          <p class="govuk-body govuk-!-margin-bottom-6">Document reference <b>GBCHD2024.4450799</b> matches with:</p>
-          <div class="grid-row">
-            <dl class="column-third">
-              <dt>CHED Reference</dt>
-              <dd><a href="#">CHEDP.GB.2024.4450799</a></dd>
-            </dl>
-            <dl class="column-third">
-              <dt>Decision </dt>
-              <dd>
-                <ul class="govuk-list ">
-                  <li>Acceptable </li>
-                  <li>Cleared for internal market</li>
-                </ul>
-            </dl>
-            <dl class="column-third">
-              <dt>Last updated</dt>
-              <dd>5 November 2024, 09:23</dd>
-            </dl>
-          </div>
+  </tbody>
+</table>
+<h1 class="govuk-heading-m">Matching MRNs</h1>
+<p>There are three matching MRNs linked to CHEDP.GB.2024.4450758 </p>
+<table class="govuk-table">
+  <thead class="govuk-table__head">
+    <tr class="govuk-table__row">
+      <th scope="col" class="govuk-table__header app-custom-class">MRN</th>
+      <th scope="col" class="govuk-table__header app-custom-class">Status</th>
+      <th scope="col" class="govuk-table__header app-custom-class">Last updated</th>
+    </tr>
+  </thead>
+  <tbody class="govuk-table__body">
+    <tr class="govuk-table__row">
+      <td class="govuk-table__cell"><a href="mrn">24GB0Z8WEJ9ZBTL73B</a></td>
+      <td class="govuk-table__cell">On hold</td>
+      <td class="govuk-table__cell">5 November 2024, 12:20</a></td>
 
-          <table class="govuk-table">
-            <thead class="govuk-table__head">
-              <tr class="govuk-table__row">
-                <th scope="col" class="govuk-table__header app-custom-class">Commodity code</th>
-                <th scope="col" class="govuk-table__header app-custom-class">Description</th>
-                <th scope="col" class="govuk-table__header app-custom-class">Weight (kg)</th>
-              </tr>
-            </thead>
-            <tbody class="govuk-table__body">
-              <tr class="govuk-table__row">
-                <td class="govuk-table__cell">160231</td>
-                <td class="govuk-table__cell">Of Turkeys</td>
-                <td class="govuk-table__cell">10</td>
+    </tr>
+    <tr class="govuk-table__row">
+      <td class="govuk-table__cell"><a href="#">24GB1X2TGM3741HZJK</a></td>
+      <td class="govuk-table__cell">On hold</td>
+      <td class="govuk-table__cell">6 November 2024, 11:24</td>
 
-              </tr>
-        
-            </tbody>
-          </table>
+    </tr>
+    <tr class="govuk-table__row">
+      <td class="govuk-table__cell"><a href="#">24GB0Z8WEJ9ZBTL73A</a></td>
+      <td class="govuk-table__cell">On hold</td>
+      <td class="govuk-table__cell">6 November 2024, 07:11</td>
+    </tr>
 
-        </div>
-      </details>
-
-
-
-    </div>
-
-  </div>
-</div>
-
-<div class="govuk-summary-card result1">
-  <div class="govuk-summary-card__title-wrapper">
-    <h2 class="govuk-summary-card__title">Tandoori Chicken</h2>
-    <ul class="govuk-summary-card__actions">
-      <li class="govuk-summary-card__action">
-        <strong class="govuk-tag govuk-tag--red"> MISMATCH </strong>
-      </li>
-    </ul>
-  </div>
-  <div class="govuk-summary-card__content container govuk-body">
-    <div class="grid-row">
-      <dl class="column-third">
-        <dt>Commodity code</dt>
-        <dd>1602323010</dd>
-      </dl>
-      <dl class="column-third">
-        <dt>Weight (kg)</dt>
-        <dd>5</dd>
-      </dl>
-      <dl class="column-third">
-        <dt>Checks</dt>
-        <dd>CHED P (H222) - Pending</dd>
-      </dl>
-    </div>
-  <div class="document-ref">
-    <div class="header">Document references</div>
-
-      <details class="govuk-details" data-module="govuk-details">
-        <summary class="govuk-details__summary">
-          <span class="govuk-details__summary-text">1 match</span>
-        </summary>
-        <div class="govuk-details__text container">
-          <p class="govuk-body govuk-!-margin-bottom-6">Document reference <b>GBCHD2024.4450758</b> matches with:</p>
-          <div class="grid-row">
-            <dl class="column-third">
-              <dt>CHED Reference</dt>
-              <dd><a href="#">CHEDP.GB.2024.4450758</a></dd>
-            </dl>
-            <dl class="column-third">
-              <dt>Decision </dt>
-              <dd>
-                <ul class="govuk-list ">
-                  <li>Acceptable </li>
-                  <li>Cleared for internal market</li>
-                </ul>
-            </dl>
-            <dl class="column-third">
-              <dt>Last updated</dt>
-              <dd>5 November 2024, 11:23</dd>
-            </dl>
-          </div>
-
-          <table class="govuk-table">
-            <thead class="govuk-table__head">
-              <tr class="govuk-table__row">
-                <th scope="col" class="govuk-table__header app-custom-class">Commodity code</th>
-                <th scope="col" class="govuk-table__header app-custom-class">Description</th>
-                <th scope="col" class="govuk-table__header app-custom-class">Weight (kg)</th>
-              </tr>
-            </thead>
-            <tbody class="govuk-table__body">
-              <tr class="govuk-table__row">
-                <td class="govuk-table__cell">160232</td>
-                <td class="govuk-table__cell">Of fowls of the species Gallus domesticus</td>
-                <td class="govuk-table__cell">5</td>
-
-              </tr>
-        
-            </tbody>
-          </table>
-
-        </div>
-      </details>
-
-      <details class="govuk-details" data-module="govuk-details">
-        <summary class="govuk-details__summary">
-          <span class="govuk-details__summary-text">1 mismatch</span>
-        </summary>
-        <div class="govuk-details__text">
-          <p>The following document reference from the customs declaration cannot be found:</p>
-          <ul class="govuk-list search-results-header">
-            <li><span>GBCHD2024.4433177</span></li>
-          </ul>
-        </div>
-      </details>
-
-    </div>
-
-  </div>
-</div>
+  </tbody>
+</table>
 <style>
-  .search-results-header span {
+    .search-results-header span {
     font-weight: 600;
     display: inline-block;
     min-width: 140px;
     line-height: 1.6;
   }
-  .filter label {
-    font-weight: 600;
-    display: inline-block;
-    min-width: 140px;
-  }
-
-  dd,
-  dt {
-    margin: 0;
-  }
-  dt {
-    font-weight: 600;
-    padding-bottom: 0.5em;
-  }
-
-  .grid-row {
-    margin: 0 -15px;
-  }
-  .container {
-    display: grid;
-    margin-bottom: 0;
-    padding-bottom: 0;
-  }
-
-  .column-third,
-  .column-one-third {
-    padding: 0 15px;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    margin-bottom: 20px;
-  }
-  @media (min-width: 641px) {
-    .column-third,
-    .column-one-third {
-      float: left;
-      width: 33.33333%;
-    }
-  }
-  .document-ref .header{
-    font-weight: 600;
-    margin-top: 20px;
-    padding-bottom: 0.4em;
-  }
-  .document-ref details {
-    border-top: 1px solid #b1b4b6;
-    margin: 0px;
-    padding: 15px 0;
-    display: block;
-
-  }
-  .govuk-tag {
-    min-width: 120px;
-    text-align: center;
-}
 </style>
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const dropdown = document.getElementById("orderBy");
-    const result1 = document.querySelector(".result1");
-    const result2 = document.querySelector(".result2");
-
-    // Function to handle filtering
-    function filterResults() {
-      const value = dropdown.value;
-
-      if (value === "allMatches") {
-        result1.style.display = "block";
-        result2.style.display = "block";
-      } else if (value === "matchOnly") {
-        result1.style.display = "none";
-        result2.style.display = "block";
-      } else if (value === "misMatchOnly") {
-        result1.style.display = "block";
-        result2.style.display = "none";
-      }
-    }
-
-    // Attach event listener to dropdown
-    dropdown.addEventListener("change", filterResults);
-
-    // Initialize results on page load
-    filterResults();
-  });
-</script>
-
 {% endblock %}

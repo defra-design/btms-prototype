@@ -6,6 +6,19 @@
 {% set hideBackLink = false %}
 
 
+{% block beforeContent %}
+<nav class="govuk-breadcrumbs" aria-label="Breadcrumb">
+  <ol class="govuk-breadcrumbs__list">
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="search">Home</a>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      MRN: 24GB0Z8WEJ9ZBTL73B
+    </li>
+
+  </ol>
+</nav>
+{% endblock %}
 
 {% block form %}
 
@@ -157,7 +170,7 @@
           <div class="grid-row">
             <dl class="column-third">
               <dt>CHED Reference</dt>
-              <dd><a href="#">CHEDP.GB.2024.4450758</a></dd>
+              <dd><a href="ched">CHEDP.GB.2024.4450758</a></dd>
             </dl>
             <dl class="column-third">
               <dt>Decision </dt>
@@ -212,12 +225,7 @@
   </div>
 </div>
 <style>
-  .search-results-header span {
-    font-weight: 600;
-    display: inline-block;
-    min-width: 140px;
-    line-height: 1.6;
-  }
+
   .filter label {
     font-weight: 600;
     display: inline-block;
