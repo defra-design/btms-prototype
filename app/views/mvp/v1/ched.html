@@ -1,16 +1,18 @@
 {% extends "layouts/forms.html" %}
 {% set title = 'Search results' %}
 {% set signedIn = 'true' %}
-{% set fullWidth = false %}
+{% set fullWidth = true %}
 {% set hideButton = true %}
 {% set hideBackLink = false %}
-
+{% set showSubheader = true %}
+{% set subHeader = 'Showing result for' %}
+{% set title = 'CHEDP.GB.2024.4450758' %}
 
 {% block beforeContent %}
 <nav class="govuk-breadcrumbs" aria-label="Breadcrumb">
   <ol class="govuk-breadcrumbs__list">
     <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="search">Home</a>
+      <a class="govuk-breadcrumbs__link" href="search">Search</a>
     </li>
     <li class="govuk-breadcrumbs__list-item">
       CHED: CHEDP.GB.2024.4450758
@@ -22,7 +24,7 @@
 
 {% block form %}
 
-<ul class="govuk-list search-results-header govuk-!-margin-bottom-7">
+<ul class="govuk-list search-results-header govuk-!-margin-bottom-7 searchBanner">
   <li><span>CHED</span> CHEDP.GB.2024.4450758</li>
   <li><span>Decision</span> Acceptable</li>
   <li><span>Description</span> Cleared for Internal Market</li>

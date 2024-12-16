@@ -14,7 +14,7 @@ module.exports = router => {
       else if(search == '24GB6T3HFCIZV1HAR9') {
       res.redirect('mrn')
     }
-    else if(search == '') {
+    else {
       res.redirect('search')
     }
   })

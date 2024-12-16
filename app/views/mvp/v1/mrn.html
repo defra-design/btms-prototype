@@ -1,57 +1,48 @@
 {% extends "layouts/forms.html" %}
-{% set title = 'Search results' %}
 {% set signedIn = 'true' %}
 {% set fullWidth = true %}
 {% set hideButton = true %}
 {% set hideBackLink = false %}
+{% set showSubheader = true %}
+{% set subHeader = 'Showing result for' %}
+{% set title = '24GB0Z8WEJ9ZBTL73B' %}
 
 
 {% block beforeContent %}
 <nav class="govuk-breadcrumbs" aria-label="Breadcrumb">
   <ol class="govuk-breadcrumbs__list">
     <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="search">Home</a>
+      <a class="govuk-breadcrumbs__link" href="search">Search</a>
     </li>
     <li class="govuk-breadcrumbs__list-item">
       MRN: 24GB0Z8WEJ9ZBTL73B
     </li>
-
   </ol>
 </nav>
 {% endblock %}
 
+
 {% block form %}
 
-<ul class="govuk-list search-results-header govuk-!-margin-bottom-7">
+<ul class="govuk-list search-results-header searchBanner">
   <li><span>MRN</span> 24GB0Z8WEJ9ZBTL73B</li>
   <li><span>Status</span> On hold</li>
   <li><span>Last updated</span> 5 November 2024, 12:20</li>
-  <!-- <li>
-    <span>Filter by</span>  
-      <div class="govuk-checkboxes__item">
-        <input class="govuk-checkboxes__input" id="waste" name="waste" type="checkbox" value="carcasses">
-        <label class="govuk-label govuk-checkboxes__label" for="waste">
-          Waste from animal carcasses
-        </label>
-  </li> -->
 </ul>
 
-<div class="govuk-!-margin-bottom-2 filter">
-  <label for="orderBy" class="govuk-label govuk-!-display-inline-block"><strong>Filter results</strong> </label>
-  <select class="govuk-select govuk-!-display-inline-block govuk-!-margin-right-3" id="orderBy" name="orderBy">
-    <option value="allMatches" selected="">
-      Show all match types
-    </option>
-    <option value="matchOnly">
-      Match only
-    </option>
-    <option value="misMatchOnly">
-      Mismatch only
-    </option>
-  </select>
+<div class="govuk-!-margin-bottom-2 align-row">
+  <p class="align-left">Displaying <span class="commodity-number">2</span> linked to this MRN</p>
+  <div class="filter">
+    <label for="orderBy" class="govuk-label">Filter items by</label>
+    <select class="govuk-select" id="orderBy" name="orderBy">
+      <option value="allMatches" selected="">All match types</option>
+      <option value="matchOnly">Match only</option>
+      <option value="misMatchOnly">Mismatch only</option>
+    </select>
+  </div>
 </div>
-<!-- <p>Showing 2 commodity lines accociated with this MRN</p> -->
-<hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+
+
 
 <div class="govuk-summary-card result2">
   <div class="govuk-summary-card__title-wrapper">
@@ -227,9 +218,9 @@
 <style>
 
   .filter label {
-    font-weight: 600;
-    display: inline-block;
-    min-width: 140px;
+    /* font-weight: 600; */
+    /* display: inline-block;
+    min-width: 140px; */
   }
 
   dd,
@@ -281,35 +272,90 @@
     min-width: 120px;
     text-align: center;
 }
+.commodity-number {
+  font-weight: 700;
+}
+
+.align-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Vertically align items */
+  padding: 1em 0 0.5em  0;
+}
+
+.align-left {
+  margin: 0; /* Remove default margins */
+}
+
+.filter {
+  display: flex;
+  align-items: center;
+}
+
+.govuk-label {
+  margin-right: 0.5em; /* Space between label and dropdown */
+}
+@media (max-width: 700px) {
+  .align-row {
+    flex-direction: column; /* Stack elements vertically */
+    align-items: flex-start; /* Align to the left */
+  }
+
+  .filter {
+    margin-top: 1em; /* Space between text and filter dropdown */
+
+  }
+}
 </style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const dropdown = document.getElementById("orderBy");
-    const result1 = document.querySelector(".result1");
-    const result2 = document.querySelector(".result2");
+  $(document).ready(function () {
+    const $dropdown = $("#orderBy");
+    const $result1 = $(".result1");
+    const $result2 = $(".result2");
+    const $commodityNumber = $(".commodity-number");
+
+    // Function to count and update the visible commodities
+    function updateCommodityCount() {
+      const visibleResults = [$result1, $result2].filter(
+        ($result) => $result.is(":visible")
+      );
+      const count = visibleResults.length;
+
+      $commodityNumber.text(count);
+      $commodityNumber.next("span").remove(); // Remove existing text to avoid duplication
+      $commodityNumber.after(
+        `<span> ${count === 1 ? "item" : "items"}</span>`
+      );
+    }
 
     // Function to handle filtering
     function filterResults() {
-      const value = dropdown.value;
+      const value = $dropdown.val();
 
       if (value === "allMatches") {
-        result1.style.display = "block";
-        result2.style.display = "block";
+        $result1.show();
+        $result2.show();
       } else if (value === "matchOnly") {
-        result1.style.display = "none";
-        result2.style.display = "block";
+        $result1.hide();
+        $result2.show();
       } else if (value === "misMatchOnly") {
-        result1.style.display = "block";
-        result2.style.display = "none";
+        $result1.show();
+        $result2.hide();
       }
+
+      // Update the commodity count after filtering
+      updateCommodityCount();
     }
 
     // Attach event listener to dropdown
-    dropdown.addEventListener("change", filterResults);
+    $dropdown.on("change", filterResults);
 
-    // Initialize results on page load
+    // Initialize results and commodity count on page load
     filterResults();
   });
 </script>
+
+
 
 {% endblock %}

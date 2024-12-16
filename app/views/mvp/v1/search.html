@@ -13,12 +13,18 @@
     <h1 class="govuk-label-wrapper">
       <label class="govuk-label govuk-label--l" for="event-name"> Search by MRN or CHED </label>
     </h1>
-    <div id="account-number-hint" class="govuk-hint">
-      MRN, for example, 24GB6T3HFCIZV1HAR9 <br />
-      CHED, for example, CHEDP.GB.2024.4450758
+    <div class="search-hint govuk-hint govuk-body-s">
+      <ul class="govuk-list">
+        <li>
+          MRN, for example, 24GB6T3HFCIZV1HAR9
+        </li>
+        <li>
+          CHED, for example, CHEDP.GB.2024.4450758
+        </li>
+      </ul>  
     </div>
     <div class="govuk-input-wrapper">
-      <input class="govuk-input" id="data.searchTerm" name="data.searchTerm" type="text" value="" />
+      <input class="govuk-input" id="data.searchTerm" name="data.searchTerm" type="text" value="{{ data.searchTerm }}" />
       <button type="submit" class="btms-search__button">
         <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
           <circle cx="10" cy="10" r="8" stroke="#ffffff" stroke-width="2"></circle>
