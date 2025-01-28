@@ -8,3 +8,4 @@ const router = govukPrototypeKit.requests.setupRouter()
 
 // Add your routes here
 require('./views/mvp/v1/search')(router)
+require('./views/mvp/v2/search')(router)

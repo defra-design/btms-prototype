@@ -1,39 +1,55 @@
-{% extends "layouts/main.html" %}
-
-{% set pageName="Home" %}
+{% extends "layouts/main.html" %} 
+{% set pageName="Home" %} 
 
 {% block content %}
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-
     <!-- {% include "govuk-prototype-kit/includes/homepage-top.njk" %} -->
 
-    <h1 class="govuk-heading-l">
-      {{ serviceName }} (BTMS)
-    </h1>
+    <h1 class="govuk-heading-l">{{ serviceName }} (BTMS)</h1>
     <h2 class="govuk-heading-m">BTMS MVPs</h2>
-    <p class="govuk-heading-s">Version 1 (December 2024)</p>
-    <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+    <p class="govuk-heading-s">
+      Version 2 (January 2024)
+      <strong class="govuk-tag govuk-tag--blue"> New </strong>
+    </p>
+    <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible" />
 
-    <p>Used for testing in December 2024, this scenario involves the user searching by CHED or MRN to identify doc matching errors.  </p>
-    <p>Links to screens used in testing (in-progress) </p>
-<p>To search mrn or ched use examples in the search tooltip</p>
-  <ul class="govuk-list govuk-list--bullet">
-    <li><a href="mvp/v1/search">Search</a></li>
-    <li><a href="mvp/v1/mrn">MRN search results - 2 commodity line items</a> <br><span class="govuk-body-s">(search : 24GB6T3HFCIZV1HAR9)</span</li>
-    <li><a href="mvp/v1/ched">CHED P search - 3 linked MRNS </a><br><span class="govuk-body-s">(search : CHEDP.GB.2024.4450758)</span></li>
-  </ul>
+    <p>Used for testing in January 2024, this scenario involves the user searching by CHED or MRN to identify matching errors.</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li><a href="mvp/v2/search">Search</a></li>
+      <li><a href="mvp/v2/mrn">MRN search results - 2 commodity line items</a> <br /><span class="govuk-body-s">(search : 24GB6T3HFCIZV1HAR9)</span></li>
+    </ul>
+    <!-- {% include "govuk-prototype-kit/includes/homepage-bottom.njk" %} -->
+    <p class="govuk-heading-s">Other links</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li><a target="_blank" href="#">FIGMA MVP designs</a></li>
+      <li><a target="_blank" href="#">Mural MVP overview</a></li>
+    </ul>
+
+    <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible" />
+
+    <p class="govuk-heading-s">
+      Version 1 (December 2024)
+      <strong class="govuk-tag govuk-tag--green"> Finished </strong>
+    </p>
+    <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible" />
+
+    <p>Used for testing in December 2024, this scenario involves the user searching by CHED or MRN to identify doc matching errors.</p>
+    <p>Links to screens used in testing (Complete)</p>
+    <p>To search mrn or ched use examples in the search tooltip</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li><a href="mvp/v1/search">Search</a></li>
+      <li><a href="mvp/v1/mrn">MRN search results - 2 commodity line items</a> <br /><span class="govuk-body-s">(search : 24GB6T3HFCIZV1HAR9)</span></li>
+      <li><a href="mvp/v1/ched">CHED P search - 3 linked MRNS </a><br /><span class="govuk-body-s">(search : CHEDP.GB.2024.4450758)</span></li>
+    </ul>
     <!-- {% include "govuk-prototype-kit/includes/homepage-bottom.njk" %} -->
     <p class="govuk-heading-s">Other links</p>
     <ul class="govuk-list govuk-list--bullet">
       <li><a target="_blank" href="https://www.figma.com/design/nYStOOGtyH9Vuyt6AEllas/BTMS?node-id=663-30641&t=G1J1QTmBFA5mslak-4">FIGMA MVP designs</a></li>
-      <li><a target="_blank" href="https://app.mural.co/t/coredefra2548/m/coredefra2548/1733133878208/d32436d81e5757dae6357bcb22b6f133b33d59fa">Mural MVP overview</li>
+      <li><a target="_blank" href="https://app.mural.co/t/coredefra2548/m/coredefra2548/1733133878208/d32436d81e5757dae6357bcb22b6f133b33d59fa">Mural MVP overview</a></li>
     </ul>
- 
   </div>
-
-
 </div>
 
 {% endblock %}
