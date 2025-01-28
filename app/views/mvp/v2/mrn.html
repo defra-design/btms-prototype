@@ -257,7 +257,7 @@
         <th scope="col" class="govuk-table__header third " >Description</th>
         <th scope="col" class="govuk-table__header forth " >Quantity / Weight</th>
 
-        <th scope="col" class="govuk-table__header fifth " >Decision (authority)</th>
+        <th scope="col" class="govuk-table__header fifth " style="width: 30%;" >Decision (authority)</th>
 
       </tr>
     </thead>
@@ -336,7 +336,7 @@
         <th scope="col" class="govuk-table__header third " >Description</th>
         <th scope="col" class="govuk-table__header forth " >Quantity / Weight</th>
 
-        <th scope="col" class="govuk-table__header fifth " >Decision (authority)</th>
+        <th scope="col" class="govuk-table__header fifth " style="width: 30%;">Decision (authority)</th>
 
       </tr>
     </thead>
@@ -414,7 +414,7 @@
         <th scope="col" class="govuk-table__header third " >Description</th>
         <th scope="col" class="govuk-table__header forth " >Quantity / Weight</th>
 
-        <th scope="col" class="govuk-table__header fifth " >Decision (authority)</th>
+        <th scope="col" class="govuk-table__header fifth " style="width: 30%;" >Decision (authority)</th>
 
       </tr>
     </thead>
@@ -511,15 +511,7 @@ dd {
   max-width: 200px;
 }
 
-@media (max-width: 700px) {
-  .definition-list {
-    grid-template-columns: 1fr; /* Stack items vertically */
-  }
 
-  .row {
-    margin-bottom: 0rem; /* Add spacing between rows */
-  }
-}
 
 
 .data-table th, .data-table td, .govuk-tag, .govuk-list {
@@ -560,6 +552,19 @@ td .govuk-list {
   display: block;
 }
 
+
+@media (max-width: 800px) {
+  .definition-list {
+    grid-template-columns: 1fr; /* Stack items vertically */
+  }
+
+  .row {
+    margin-bottom: 0rem; /* Add spacing between rows */
+  }
+  .data-table th, .data-table td, .govuk-tag, .govuk-list,dd, dt {
+    font-size: 14px;
+}
+}
 </style>
 <script>
 document.querySelectorAll('.govuk-table__cell').forEach(cell => {
