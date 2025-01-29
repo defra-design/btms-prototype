@@ -14,6 +14,9 @@ module.exports = router => {
       else if(search == '24GB6T3HFCIZV1HAR9') {
       res.redirect('mrn')
     }
+    else if(search == '24GBDX8QQ4WWFZNAR3') {
+      res.redirect('mrn-auth')
+    }
     else {
       res.redirect('search')
     }
