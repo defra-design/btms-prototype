@@ -1,0 +1,113 @@
+  .mrn{
+
+    
+  .sectionHeader {
+    border-bottom: 1px solid #b1b4b6;
+    padding: 0 0 .5em 0;
+    margin: 0 0 .5em 0;
+
+  }
+  .ched-header {
+    margin-top: 1em;
+    padding-top: 1em;
+
+  }
+
+  .govuk-table {
+    margin: .5em 0 1em 0;
+  }
+  /* definiton list */
+  .container {
+    background-color: #f3f3f3;
+  }
+
+  .definition-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive columns with a max width of 200px */
+    gap: 1rem;
+    padding: 1em .5em;
+    margin: 0;
+  }
+
+  .row {
+    display: flex;
+    flex-direction: column;
+  }
+
+  dt {
+    font-weight: bold;
+    margin: 0;
+    color: #000;
+    padding: 0;
+  }
+
+  dd {
+    margin: 0.3rem 0 0 0;
+    width: 300px;
+  }
+
+
+
+
+  .data-table th, .data-table td, .govuk-tag, .govuk-list, .data-table td span, dd, dt {
+  font-size: 14px;
+  }
+
+  td .govuk-list {
+    margin-bottom: 0;
+  }
+
+  .mrn-container, .ched-container {
+    padding: .5em 0 1em 0;
+  }
+  .govuk-tag--red.message{
+    text-decoration:underline dotted;text-underline-position:under;
+      cursor: help; 
+  }
+
+  /* styling of tooltip */
+  /* If you want to style the tooltip further, e.g., change background colour or text colour */
+  /* Initially hide the custom tooltip */
+  .tooltip {
+    display: none;
+    position: absolute;
+    width: 300px;
+    padding: 10px;
+    z-index: 10;
+    background-color: #f3f2f1  ;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3); /* Add drop shadow here */
+
+  }
+
+  /* Show tooltip on hover */
+  .govuk-table__cell:hover .tooltip {
+    display: block;
+  }
+
+
+  @media (max-width: 800px) {
+    .definition-list {
+      grid-template-columns: 1fr; /* Stack items vertically */
+    }
+
+    .row {
+      margin-bottom: 0rem; /* Add spacing between rows */
+    }
+    .data-table th, .data-table td, .govuk-tag, .govuk-list,dd, dt {
+      font-size: 14px;
+  }
+  }
+
+
+
+
+}
+
+.auth {
+  .govuk-table__cell.decision ul li:last-child {
+    border-top: 1px solid rgba(177, 180, 182, 0.7);
+    padding-top: 8px;
+      margin-top: 10px;
+      margin-bottom: 0;
+  }
+}

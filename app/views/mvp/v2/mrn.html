@@ -6,6 +6,7 @@
 {% set showSubheader = true %}
 {% set subHeader = 'Showing result for' %}
 {% set title = '24GB0Z8WEJ9ZBTL73B' %}
+{% set cssClassName = 'mrn' %}
 
 
 {% block beforeContent %}
@@ -23,6 +24,11 @@
 
 
 {% block form %}
+<style>
+  .govuk-width-container {
+      max-width: 1200px;
+}
+</style>
 <h2 class="govuk-heading-m sectionHeader">Customs declaration details</h2>
 
 <div class="mrn-container">
@@ -65,7 +71,7 @@
       <tr class="govuk-table__row">
         <td class="govuk-table__cell">5</td>
         <td class="govuk-table__cell">2104200090</td>
-        <td class="govuk-table__cell" data-tooltip="PREPERED MISCELLANEOUS FOODSTUFFS:SOUPS AND BROTHS AND PREPARATIONS THEREFOR; HOMOGENISED COMPOSITE FOOD PREPARATIONS">PREPERED MISCELLANEOUS FOODSTUFFS:SO ...</td>
+        <td class="govuk-table__cell" data-tooltip="PREPERED MISCELLANEOUS FOODSTUFFS:SOUPS AND BROTHS AND PREPARATIONS THEREFOR; HOMOGENISED COMPOSITE FOOD PREPARATIONS"><span>PREPERED MISCELLANEOUS FOODSTUFFS:SO ...</span></td>
         <td class="govuk-table__cell">6.54</td>
         <td class="govuk-table__cell">
           <ul class="govuk-list">
@@ -129,7 +135,7 @@
       <tr class="govuk-table__row">
         <td class="govuk-table__cell">4</td>
         <td class="govuk-table__cell">203121100</td>
-        <td class="govuk-table__cell" data-tooltip="EDIBLE OFFAL OF BOVINE ANIMALS, SWINE, SHEEP, GOATS, HORSES, ASSES, MULES OR HINNIES, FRESH, CHILLED OR FROZEN">EDIBLE OFFAL OF BOVINE ANIMALS SWINE ...</td>
+        <td class="govuk-table__cell" data-tooltip="EDIBLE OFFAL OF BOVINE ANIMALS, SWINE, SHEEP, GOATS, HORSES, ASSES, MULES OR HINNIES, FRESH, CHILLED OR FROZEN"><span>EDIBLE OFFAL OF BOVINE ANIMALS SWINE ...</span></td>
         <td class="govuk-table__cell">4.74</td>
         <td class="govuk-table__cell">
           <ul class="govuk-list">
@@ -150,7 +156,7 @@
       <tr class="govuk-table__row">
         <td class="govuk-table__cell">5</td>
         <td class="govuk-table__cell">203121900</td>
-        <td class="govuk-table__cell" data-tooltip="SHOULDERS AND CUTS OF DOMESTIC SWINE AND CUTS THEREOF, DRIED OR SMOKED, WITH BONE INSHOULDERS AND CUTS THEREOF, DRIED OR SMOKED, WITH BONE IN">SHOULDERS AND CUTS OF DOMESTIC SWINE ...</td>
+        <td class="govuk-table__cell" data-tooltip="SHOULDERS AND CUTS OF DOMESTIC SWINE AND CUTS THEREOF, DRIED OR SMOKED, WITH BONE INSHOULDERS AND CUTS THEREOF, DRIED OR SMOKED, WITH BONE IN"><span>SHOULDERS AND CUTS OF DOMESTIC SWINE ...</span></td>
         <td class="govuk-table__cell">102.8</td>
         <td class="govuk-table__cell">
           <ul class="govuk-list">
@@ -171,7 +177,7 @@
       <tr class="govuk-table__row">
         <td class="govuk-table__cell">6</td>
         <td class="govuk-table__cell">203191500</td>
-        <td class="govuk-table__cell" data-tooltip="MEAT OF SWINE FRESH CHILLED OR FROZEN">MEAT OF SWINE FRESH CHILLED OR FROZE ...</td>
+        <td class="govuk-table__cell" data-tooltip="MEAT OF SWINE FRESH CHILLED OR FROZEN"><span>MEAT OF SWINE FRESH CHILLED OR FROZE ...</span></td>
         <td class="govuk-table__cell">56.96</td>
         <td class="govuk-table__cell">
           <ul class="govuk-list ">
@@ -195,7 +201,7 @@
       <tr class="govuk-table__row">
         <td class="govuk-table__cell">7</td>
         <td class="govuk-table__cell">203191500</td>
-        <td class="govuk-table__cell" data-tooltip="MEAT OF SWINE FRESH CHILLED OR FROZEN FOODS">MEAT OF SWINE FRESH CHILLED OR FROZE ...</td>
+        <td class="govuk-table__cell" data-tooltip="MEAT OF SWINE FRESH CHILLED OR FROZEN FOODS"><span>MEAT OF SWINE FRESH CHILLED OR FROZE ...</span></td>
         <td class="govuk-table__cell">56.96</td>
         <td class="govuk-table__cell">
           <ul class="govuk-list">
@@ -461,142 +467,19 @@
     </tbody>
   </table>
 </div>
-<style>
-  .govuk-width-container {
-    max-width: 1200px;
-}
-.sectionHeader {
-  border-bottom: 1px solid #b1b4b6;
-  padding: 0 0 .5em 0;
-  margin: 0 0 .5em 0;
 
-}
-.ched-header {
-  margin: 1.5em 0 .5em 0;
-
-}
-/* .govuk-width-container {
-width: 1024px;
-} */
-
-/* definiton list */
-.container {
-  background-color: #f3f3f3;
-  padding: 0 1em;
-  margin: 1em auto;
-}
-
-.definition-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive columns with a max width of 200px */
-  gap: 1rem;
-}
-
-.row {
-  display: flex;
-  flex-direction: column;
-}
-
-dt {
-  font-size: 16px;
-  font-weight: bold;
-  margin: 0;
-  color: #000;
-  padding: 0;
-}
-
-dd {
-  margin: 0.3rem 0 0 0;
-  font-size: 16px;
-  max-width: 200px;
-}
-
-
-
-
-.data-table th, .data-table td, .govuk-tag, .govuk-list {
-font-size: 16px;
-}
-.data-table td span{
-  font-size: 14px;
-
-}
-td .govuk-list {
-  margin-bottom: 0;
-}
-
-.mrn-container, .ched-container {
-  padding: 0em 0 .3em 0;
-}
-.govuk-tag--red.message{
-  text-decoration:underline dotted;text-underline-position:under;
-    cursor: help; 
-}
-
-/* styling of tooltip */
-/* If you want to style the tooltip further, e.g., change background colour or text colour */
-/* Initially hide the custom tooltip */
-.tooltip {
-  display: none;
-  position: absolute;
-  width: 300px;
-  padding: 10px;
-  z-index: 10;
-  background-color: #f3f2f1  ;
-  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3); /* Add drop shadow here */
-
-}
-
-/* Show tooltip on hover */
-.govuk-table__cell:hover .tooltip {
-  display: block;
-}
-
-
-@media (max-width: 800px) {
-  .definition-list {
-    grid-template-columns: 1fr; /* Stack items vertically */
-  }
-
-  .row {
-    margin-bottom: 0rem; /* Add spacing between rows */
-  }
-  .data-table th, .data-table td, .govuk-tag, .govuk-list,dd, dt {
-    font-size: 14px;
-}
-}
-</style>
 <script>
-document.querySelectorAll('.govuk-table__cell').forEach(cell => {
-  // Check if the cell has the data-tooltip attribute
-  if (cell.hasAttribute('data-tooltip')) {
-    // Add cursor style
-    cell.style.cursor = 'help';
 
-    cell.addEventListener('mouseenter', function() {
-      const tooltipText = cell.getAttribute('data-tooltip'); // Get the tooltip content
-      const tooltip = document.createElement('span');
-      tooltip.classList.add('tooltip');
-      tooltip.innerHTML = tooltipText; // Use innerHTML to allow HTML content
-      cell.appendChild(tooltip);
 
-      // Position the tooltip
-      const rect = cell.getBoundingClientRect();
-      tooltip.style.left = `${rect.left}px`;
-      tooltip.style.top = `${rect.bottom + window.scrollY - 10}px`; // Adjusted to appear higher (subtract 10px)
-    });
 
-    cell.addEventListener('mouseleave', function() {
-      const tooltip = cell.querySelector('.tooltip');
-      if (tooltip) {
-        tooltip.remove();
-      }
-    });
-  }
-});
+
+
+
 
 
 
 
 </script>
+
+
 {% endblock %}

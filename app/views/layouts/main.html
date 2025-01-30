@@ -21,8 +21,10 @@
     {% block header %}
         {{ govukHeader({
             homepageUrl: "/index",
+            classes: serviceName,
+
             serviceName: serviceName,
-            serviceUrl: '/mvp/v1/search',
+            serviceUrl: '/index',
             navigation: [
                 {
                     href: accountLink,
