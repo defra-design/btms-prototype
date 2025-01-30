@@ -1,29 +1,35 @@
-  .mrn{
+  /* Sets 1200px width on the results pages */
 
-    
+
+
+
+.mrn {
+  .govuk-width-container {
+    max-width: 1200px;
+  }
+  /* Titles of sections */
   .sectionHeader {
     border-bottom: 1px solid #b1b4b6;
     padding: 0 0 .5em 0;
     margin: 0 0 .5em 0;
-
   }
+
   .ched-header {
     margin-top: 1em;
-    padding-top: 1em;
-
   }
 
-  .govuk-table {
-    margin: .5em 0 1em 0;
+  .mrn-container, .ched-container {
+    padding: .5em 0 1em 0;
   }
-  /* definiton list */
+
+  /* Definition list */
   .container {
     background-color: #f3f3f3;
   }
 
   .definition-list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive columns with a max width of 200px */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive columns */
     gap: 1rem;
     padding: 1em .5em;
     margin: 0;
@@ -46,37 +52,45 @@
     width: 300px;
   }
 
+  /* Table design */
+  .govuk-table {
+    margin: .5em 0 1em 0;
+  }
 
-
-
-  .data-table th, .data-table td, .govuk-tag, .govuk-list, .data-table td span, dd, dt {
-  font-size: 14px;
+  .data-table th,
+  .data-table td,
+  .govuk-tag,
+  .govuk-list,
+  .data-table td span,
+  dd,
+  dt {
+    font-size: 14px;
   }
 
   td .govuk-list {
     margin-bottom: 0;
   }
 
-  .mrn-container, .ched-container {
-    padding: .5em 0 1em 0;
+  .govuk-tag--red.message {
+    text-decoration: underline dotted;
+    text-underline-position: under;
+    cursor: help;
   }
-  .govuk-tag--red.message{
-    text-decoration:underline dotted;text-underline-position:under;
-      cursor: help; 
+ 
+  th:last-child {
+    width: 25%;
   }
+  
 
-  /* styling of tooltip */
-  /* If you want to style the tooltip further, e.g., change background colour or text colour */
-  /* Initially hide the custom tooltip */
+  /* Styling of tooltip */
   .tooltip {
     display: none;
     position: absolute;
     width: 300px;
     padding: 10px;
     z-index: 10;
-    background-color: #f3f2f1  ;
-    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3); /* Add drop shadow here */
-
+    background-color: #f3f2f1;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3); /* Drop shadow */
   }
 
   /* Show tooltip on hover */
@@ -84,6 +98,7 @@
     display: block;
   }
 
+    /* Responsive */
 
   @media (max-width: 800px) {
     .definition-list {
@@ -93,21 +108,29 @@
     .row {
       margin-bottom: 0rem; /* Add spacing between rows */
     }
-    .data-table th, .data-table td, .govuk-tag, .govuk-list,dd, dt {
+
+    .data-table th,
+    .data-table td,
+    .govuk-tag,
+    .govuk-list,
+    dd,
+    dt {
       font-size: 14px;
+    }
   }
-  }
 
-
-
-
-}
-
-.auth {
-  .govuk-table__cell.decision ul li:last-child {
+  .govuk-table__cell.multi-auth ul li {
     border-top: 1px solid rgba(177, 180, 182, 0.7);
     padding-top: 8px;
-      margin-top: 10px;
-      margin-bottom: 0;
+    margin-top: 10px;
+    margin-bottom: 0;
   }
+  .govuk-table__cell.multi-auth ul li:first-child  {
+    border-top: none;
+    padding-top: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
 }
+

@@ -6,7 +6,7 @@
 {% set showSubheader = true %}
 {% set subHeader = 'Showing result for' %}
 {% set title = '24GB0Z8WEJ9ZBTL73B' %}
-{% set cssClassName = 'mrn' %}
+{% set bodyClasses = 'mrn' %}
 
 
 {% block beforeContent %}
@@ -16,7 +16,7 @@
       <a class="govuk-breadcrumbs__link" href="search">Search</a>
     </li>
     <li class="govuk-breadcrumbs__list-item">
-      24GB0Z8WEJ9ZBTL73B
+      {{ title }}
     </li>
   </ol>
 </nav>
@@ -24,11 +24,6 @@
 
 
 {% block form %}
-<style>
-  .govuk-width-container {
-      max-width: 1200px;
-}
-</style>
 <h2 class="govuk-heading-m sectionHeader">Customs declaration details</h2>
 
 <div class="mrn-container">
@@ -36,7 +31,7 @@
     <dl class="definition-list ">
       <div class="row">
         <dt>MRN</dt>
-        <dd>24GB0Z8WEJ9ZBTL73B</dd>
+        <dd>{{ title }}</dd>
       </div>
       <div class="row">
         <dt>DUCR</dt>
@@ -57,13 +52,13 @@
   <table class="govuk-table data-table">
     <thead class="govuk-table__head">
       <tr class="govuk-table__row">
-        <th scope="col" class="govuk-table__header first" >Item  number</th>
-        <th scope="col" class="govuk-table__header second">Commodity code</th>
-        <th scope="col" class="govuk-table__header third ">Description</th>
-        <th scope="col" class="govuk-table__header forth ">Quantity / Weight</th>
-        <th scope="col" class="govuk-table__header fifth" >CHED reference</th>
-        <th scope="col" class="govuk-table__header fifth" >Match</th>
-        <th scope="col" class="govuk-table__header fifth " style="width: 25%;">Decision (authority)</th>
+        <th scope="col" class="govuk-table__header" >Item  number</th>
+        <th scope="col" class="govuk-table__header">Commodity code</th>
+        <th scope="col" class="govuk-table__header ">Description</th>
+        <th scope="col" class="govuk-table__header ">Quantity / Weight</th>
+        <th scope="col" class="govuk-table__header" >CHED reference</th>
+        <th scope="col" class="govuk-table__header" >Match</th>
+        <th scope="col" class="govuk-table__header" >Decision (authority)</th>
 
       </tr>
     </thead>
@@ -80,6 +75,7 @@
             </li>
         </ul>
         </td>
+        
         <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Yes</strong></td>
         <td class="govuk-table__cell decision">  
             <ul class="govuk-list">
@@ -121,13 +117,13 @@
   <table class="govuk-table data-table">
     <thead class="govuk-table__head">
       <tr class="govuk-table__row">
-        <th scope="col" class="govuk-table__header first" >Item  number</th>
-        <th scope="col" class="govuk-table__header second">Commodity code</th>
-        <th scope="col" class="govuk-table__header third ">Description</th>
-        <th scope="col" class="govuk-table__header forth ">Quantity / Weight</th>
-        <th scope="col" class="govuk-table__header fifth" >CHED reference</th>
-        <th scope="col" class="govuk-table__header fifth" >Match</th>
-        <th scope="col" class="govuk-table__header fifth " style="width: 25%;">Decision (authority)</th>
+        <th scope="col" class="govuk-table__header " >Item  number</th>
+        <th scope="col" class="govuk-table__header">Commodity code</th>
+        <th scope="col" class="govuk-table__header ">Description</th>
+        <th scope="col" class="govuk-table__header ">Quantity / Weight</th>
+        <th scope="col" class="govuk-table__header" >CHED reference</th>
+        <th scope="col" class="govuk-table__header" >Match</th>
+        <th scope="col" class="govuk-table__header ">Decision (authority)</th>
 
       </tr>
     </thead>
@@ -143,8 +139,9 @@
               GBCHD2024.4777512
             </li>
         </ul>
-        </td>
-        <td class="govuk-table__cell no-match" data-tooltip="The following document reference from the customs declaration cannot be found: <br><br> GBCHD2024.4777512"><strong class="govuk-tag govuk-tag--red message">No</strong></td>
+        </td> 
+        </ul>
+        <td class="govuk-table__cell no-match" data-tooltip="{{ data.noMatch }}  <br><br> GBCHD2024.4777512"><strong class="govuk-tag govuk-tag--red message">No</strong></td>
         <td class="govuk-table__cell decision">  
             <ul class="govuk-list">
               <li>
@@ -165,7 +162,7 @@
             </li>
         </ul>
         </td>
-        <td class="govuk-table__cell no-match" data-tooltip="The following document reference from the customs declaration cannot be found: <br><br> GBCHD2024.4777511"><strong class="govuk-tag govuk-tag--red message">No</strong></td>
+        <td class="govuk-table__cell no-match" data-tooltip="{{ data.noMatch }} <br><br>GBCHD2024.4777511"><strong class="govuk-tag govuk-tag--red message">No</strong></td>
         <td class="govuk-table__cell decision">  
             <ul class="govuk-list">
               <li>
@@ -189,7 +186,7 @@
             </li>
         </ul>
         </td>
-        <td class="govuk-table__cell no-match" data-tooltip="The following document reference from the customs declaration cannot be found: <br><br> GBCHD2024.4777474"><strong class="govuk-tag govuk-tag--red message">No</strong></td>
+        <td class="govuk-table__cell no-match" data-tooltip="{{ data.noMatch }} <br><br>GBCHD2024.4777474"><strong class="govuk-tag govuk-tag--red message">No</strong></td>
         <td class="govuk-table__cell decision">  
             <ul class="govuk-list">
               <li>
@@ -216,7 +213,7 @@
             </li>
         </ul>
         </td>
-        <td class="govuk-table__cell no-match" data-tooltip="The following document reference from the customs declaration cannot be found: <br><br> GBCHD2024.4777446 <br>GBCHD2024.4777458"><strong class="govuk-tag govuk-tag--red message">No</strong></td>
+        <td class="govuk-table__cell no-match" data-tooltip="{{ data.noMatch }} <br><br>GBCHD2024.4777446 <br>GBCHD2024.4777458"><strong class="govuk-tag govuk-tag--red message">No</strong></td>
         <td class="govuk-table__cell decision">  
             <ul class="govuk-list">
               <li>

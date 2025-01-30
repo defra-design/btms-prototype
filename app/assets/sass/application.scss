@@ -8,6 +8,10 @@
 @import "patterns/mrn";
 $govuk-new-typography-scale: true;
 
+.govuk-header__navigation { 
+  display: inline-block;
+  float: right;
+}
 
 .search-results-header span {
     font-weight: 600;

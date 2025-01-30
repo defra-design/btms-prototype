@@ -21,21 +21,17 @@
     {% block header %}
         {{ govukHeader({
             homepageUrl: "/index",
-            classes: serviceName,
+            classes: "test",
 
             serviceName: serviceName,
-            serviceUrl: '/index',
+            serviceUrl: 'search',
             navigation: [
                 {
-                    href: accountLink,
-                    text: data['dia'],
-                    active: true if account == 'true'
-                },
-                {
-                    href: "https://get-an-identity-prototype.herokuapp.com/user-research/qual/sign-out",
-                    text: "Sign out"
+                    href: "/index",
+                    text: "Sign out",
+                    classes: "test2"
                 }
-            ] if signedIn == 'false'
+            ] if signedIn != 'false'
         }) 
     }}
 

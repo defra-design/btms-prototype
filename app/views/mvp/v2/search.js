@@ -11,10 +11,10 @@ module.exports = router => {
     if(search == 'CHEDP.GB.2024.4450758' ) {
         res.redirect('ched')
       } 
-      else if(search == '24GB6T3HFCIZV1HAR9') {
+      else if(search == '24GB0Z8WEJ9ZBTL73B') {
       res.redirect('mrn')
     }
-    else if(search == '24GBDX8QQ4WWFZNAR3') {
+    else if(search == '25GB0HQ0W2IZKO9AR0') {
       res.redirect('mrn-auth')
     }
     else if(search == '24GBDX8QQ4WWFZNAR3') {
