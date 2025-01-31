@@ -20,6 +20,12 @@ module.exports = router => {
     else if(search == '24GBDX8QQ4WWFZNAR3') {
       res.redirect('mrn-try-auth')
     }
+    else if(search == '2025.5426583') {
+      res.redirect('no-mrn')
+    }
+    else if(search == '25GB0P0TEP7CZCNAR6') {
+      res.redirect('no-ched')
+    }
     else {
       res.redirect('search')
     }

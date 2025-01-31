@@ -18,7 +18,7 @@
     margin-top: 1em;
   }
 
-  .mrn-container, .ched-container {
+  .mrn-container, .ched-container{
     padding: .5em 0 1em 0;
   }
 
@@ -96,6 +96,11 @@
   /* Show tooltip on hover */
   .govuk-table__cell:hover .tooltip {
     display: block;
+  }
+
+  // inset text for no cheds
+  .ched-inset {
+    margin: 1em 0em 3em;
   }
 
     /* Responsive */
