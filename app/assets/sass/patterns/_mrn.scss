@@ -119,7 +119,8 @@
     .govuk-tag,
     .govuk-list,
     dd,
-    dt {
+    dt, 
+    .no-match {
       font-size: 14px;
     }
   }

@@ -30,6 +30,7 @@ window.GOVUKPrototypeKit.documentReady(() => {
           tooltip.style.background = '#f3f2f1';
           tooltip.style.color = '##0b0c0c';
           tooltip.style.padding = '10px';
+          tooltip.style.fontSize = '14px';
           tooltip.style.width = '300px';
           tooltip.style.boxShadow = '2px 2px 8px rgba(0, 0, 0, 0.3)';
 
