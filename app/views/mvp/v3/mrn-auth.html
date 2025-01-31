@@ -1,0 +1,241 @@
+{% extends "layouts/forms.html" %}
+{% set signedIn = 'true' %}
+{% set fullWidth = true %}
+{% set hideButton = true %}
+{% set hideBackLink = false %}
+{% set showSubheader = true %}
+{% set subHeader = 'Showing result for' %}
+{% set title = '25GB0HQ0W2IZKO9AR0' %}
+{% set bodyClasses = 'mrn' %}
+{% set cssClassName = 'auth' %}
+
+
+
+{% block beforeContent %}
+<nav class="govuk-breadcrumbs" aria-label="Breadcrumb">
+  <ol class="govuk-breadcrumbs__list">
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="search">Search</a>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      {{ title }}
+    </li>
+  </ol>
+</nav>
+{% endblock %}
+
+
+{% block form %}
+
+
+<h2 class="govuk-heading-m sectionHeader">Customs declaration details</h2>
+
+<div class="mrn-container">
+  <div class="container govuk-body">
+    <dl class="definition-list ">
+      <div class="row">
+        <dt>MRN</dt>
+        <dd>{{ title }}</dd>
+      </div>
+      <div class="row">
+        <dt>DUCR</dt>
+        <dd>4GB943952494000-BER047811</dd>
+      </div>
+      <div class="row">
+        <dt>CDS status</dt>
+        <dd>Current</dd>
+      </div>
+      <div class="row">
+        <dt>Last updated</dt>
+        <dd>13 January 2025, 09:53</dd>
+      </div>
+    </dl>
+  </div>
+
+
+  <table class="govuk-table data-table">
+    <thead class="govuk-table__head">
+      <tr class="govuk-table__row">
+        <th scope="col" class="govuk-table__header" >Item  number</th>
+        <th scope="col" class="govuk-table__header">Commodity code</th>
+        <th scope="col" class="govuk-table__header ">Description</th>
+        <th scope="col" class="govuk-table__header ">Quantity / Weight</th>
+        <th scope="col" class="govuk-table__header" >CHED reference</th>
+        <th scope="col" class="govuk-table__header" >Match</th>
+        <th scope="col" class="govuk-table__header">Decision (authority)</th>
+
+      </tr>
+    </thead>
+    <tbody class="govuk-table__body">
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">1</td>
+        <td class="govuk-table__cell">302499000</td>
+        <td class="govuk-table__cell">FISH 157-13722170</td>
+        <td class="govuk-table__cell">90</td>
+        <td class="govuk-table__cell">
+          <ul class="govuk-list">
+            <li>
+              GBCHD2025.5403171
+            </li>
+            <li>
+              GBIUU
+            </li>
+        </ul>
+        </td>
+        <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Yes</strong></td>
+        <td class="govuk-table__cell decision">  
+            <ul class="govuk-list">
+              <li>
+                Release - Inspection Complete <span>(PHA-POAO)</span>
+              </li>
+              <li>
+                Release - Inspection Complete <span>(PHA-IUU)</span>
+              </li>
+            </ul>
+        </td>
+      </tr>
+
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">2</td>
+        <td class="govuk-table__cell">302899090</td>
+        <td class="govuk-table__cell">FISH 157-13722170</td>
+        <td class="govuk-table__cell">1221</td>
+        <td class="govuk-table__cell">
+          <ul class="govuk-list">
+            <li>
+              GBCHD2025.5403171
+            </li>
+            <li>
+              GBIUU
+            </li>
+        </ul>
+        </td>
+        <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Yes</strong></td>
+        <td class="govuk-table__cell decision">  
+            <ul class="govuk-list">
+              <li>
+                Release - Inspection Complete <span>(PHA-POAO)</span>
+              </li>
+              <li>
+                Release - Inspection Complete <span>(PHA-IUU)</span>
+              </li>
+            </ul>
+        </td>
+      </tr> 
+    </tbody>
+  </table>
+</div>
+
+
+
+
+<h2 class="govuk-heading-m sectionHeader ched-header">IPAFFS notification (CHED) details</h2>
+
+<div class="ched-container">
+  <div class="container govuk-body">
+    <dl class="definition-list ">
+      <div class="row">
+        <dt>CHED reference</dt>
+        <dd>CHEDP.GB.2025.5403171</dd>
+      </div>
+      <div class="row">
+        <dt>CHED Status</dt>
+        <dd>Valid</dd>
+      </div>
+      <div class="row">
+        <dt>Risk outcome</dt>
+        <dd>Completed</dd>
+      </div>
+      <div class="row">
+        <dt>Last updated</dt>
+        <dd>15 November 2024, 20:11</dd>
+      </div>
+    </dl>
+  </div>
+
+
+  <table class="govuk-table data-table">
+    <thead class="govuk-table__head">
+      <tr class="govuk-table__row">
+        <th scope="col" class="govuk-table__header first" >Item  number</th>
+        <th scope="col" class="govuk-table__header second" >Commodity code</th>
+        <th scope="col" class="govuk-table__header third " >Description</th>
+        <th scope="col" class="govuk-table__header forth " >Quantity / Weight</th>
+
+        <th scope="col" class="govuk-table__header fifth " style="width: 30%;" >Decision (authority)</th>
+
+      </tr>
+    </thead>
+    <tbody class="govuk-table__body">
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">10</td>
+        <td class="govuk-table__cell">3024990</td>
+        <td class="govuk-table__cell">Pampus spp.</td>
+        <td class="govuk-table__cell">90</td>
+        <td class="govuk-table__cell decision">  
+            <ul class="govuk-list">
+              <li>
+                Acceptable for internal market <span>(PHA-POAO)</span>
+              </li>
+              <li>
+                IUU Compliant <span> (PHA-IUU)</span>
+              </li>
+            </ul>
+        </td>
+      </tr>
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">2</td>
+        <td class="govuk-table__cell">3028990</td>
+        <td class="govuk-table__cell">Cephalopholis sonnerati</td>
+        <td class="govuk-table__cell">918</td>
+        <td class="govuk-table__cell decision">  
+            <ul class="govuk-list">
+              <li>
+                Acceptable for internal market <span>(PHA-POAO)</span>
+              </li>
+              <li>
+                IUU Compliant <span> (PHA-IUU)</span>
+              </li>
+            </ul>
+        </td>
+      </tr>
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">7</td>
+        <td class="govuk-table__cell">3028990</td>
+        <td class="govuk-table__cell">Plectropomus spp.</td>
+        <td class="govuk-table__cell">68</td>
+        <td class="govuk-table__cell decision">  
+            <ul class="govuk-list">
+              <li>
+                Acceptable for internal market <span>(PHA-POAO)</span>
+              </li>
+              <li>
+                IUU Compliant <span>(PHA-IUU)</span>
+              </li>
+            </ul>
+        </td>
+      </tr>
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">8</td>
+        <td class="govuk-table__cell">3028990</td>
+        <td class="govuk-table__cell">Stolephorus spp..</td>
+        <td class="govuk-table__cell">150</td>
+        <td class="govuk-table__cell decision">  
+            <ul class="govuk-list">
+              <li>
+                Acceptable for internal market <span>(PHA-POAO)</span>
+              </li>
+              <li>
+                IUU Compliant <span>(PHA-IUU)</span>
+              </li>
+            </ul>
+        </td>
+      </tr>
+     
+    </tbody>
+  </table>
+</div>
+
+
+
+{% endblock %}

@@ -1,0 +1,536 @@
+{% extends "layouts/forms.html" %}
+{% set signedIn = 'true' %}
+{% set fullWidth = true %}
+{% set hideButton = true %}
+{% set hideBackLink = false %}
+{% set showSubheader = true %}
+{% set subHeader = 'Showing result for' %}
+{% set title = '24GBDX8QQ4WWFZNAR3' %}
+{% set bodyClasses = 'mrn' %}
+{% set cssClassName = 'auth' %}
+
+{% block beforeContent %}
+<nav class="govuk-breadcrumbs" aria-label="Breadcrumb">
+  <ol class="govuk-breadcrumbs__list">
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="search">Search</a>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      {{ title }}
+    </li>
+  </ol>
+</nav>
+{% endblock %}
+
+
+{% block form %}
+
+<h2 class="govuk-heading-m sectionHeader">Customs declaration details</h2>
+
+<div class="mrn-container">
+  <div class="container govuk-body">
+    <dl class="definition-list ">
+      <div class="row">
+        <dt>MRN</dt>
+        <dd>{{ title }} </dd>
+      </div>
+      <div class="row">
+        <dt>DUCR</dt>
+        <dd>4GB943952494000-BER047811</dd>
+      </div>
+      <div class="row">
+        <dt>CDS status</dt>
+        <dd>Cancelled</dd>
+      </div>
+      <div class="row">
+        <dt>Last updated</dt>
+        <dd>13 January 2025, 09:53</dd>
+      </div>
+    </dl>
+  </div>
+
+
+  <table class="govuk-table data-table">
+    <thead class="govuk-table__head">
+      <tr class="govuk-table__row">
+        <th scope="col" class="govuk-table__header" >Item  number</th>
+        <th scope="col" class="govuk-table__header">Commodity code</th>
+        <th scope="col" class="govuk-table__header ">Description</th>
+        <th scope="col" class="govuk-table__header ">Quantity / Weight</th>
+        <th scope="col" class="govuk-table__header" >CHED reference</th>
+        <th scope="col" class="govuk-table__header" >Match</th>
+        <th scope="col" class="govuk-table__header ">Decision (authority)</th>
+
+      </tr>
+    </thead>
+    <tbody class="govuk-table__body">
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">1</td>
+        <td class="govuk-table__cell">302499000</td>
+        <td class="govuk-table__cell">CHILLI PEPPERS</td>
+        <td class="govuk-table__cell">3471</td>
+        <td class="govuk-table__cell">
+          <ul class="govuk-list">
+            <li>
+              GBCHD2024.5286242
+            </li>
+            <li>
+              GBCHD2024.5286265
+            </li>
+        </ul>
+        </td>
+        <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Yes</strong></td>
+        <td class="govuk-table__cell decision multi-auth">  
+            <ul class="govuk-list">
+              <li>
+                Hold - Awaiting Decision <span>(PHA-FNAO)</span>
+              </li>
+              <li>
+                Hold - To Be Inspected <span>(PP-PHSI)</span>
+              </li>
+            </ul>
+        </td>
+      </tr>
+
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">2</td>
+        <td class="govuk-table__cell">709601000</td>
+        <td class="govuk-table__cell">SWEET PEPPER</td>
+        <td class="govuk-table__cell">2850</td>
+        <td class="govuk-table__cell">
+          <ul class="govuk-list">
+            <li>
+              GBCHD2024.5286255
+            </li>
+            <li>
+              GBCHD2024.5286265
+            </li>
+        </ul>
+        </td>
+        <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Yes</strong></td>
+        <td class="govuk-table__cell decision multi-auth">  
+            <ul class="govuk-list">
+              <li>
+                Hold - Awaiting Decision <span>(PHA-FNAO)</span>
+              </li>
+              <li>
+                Hold - To Be Inspected <span>(PP-PHSI)</span>
+              </li>
+              <li>
+                Hold - To Be Inspected <span>(PP-HMI)</span>
+              </li>
+            </ul>
+        </td>
+      </tr>
+
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">3</td>
+        <td class="govuk-table__cell">302899080</td>
+        <td class="govuk-table__cell">AUBERGINE EGGPLANT</td>
+        <td class="govuk-table__cell">180</td>
+        <td class="govuk-table__cell">
+          <ul class="govuk-list">
+
+            <li>
+              GBCHD2024.5313986
+            </li>
+        </ul>
+        </td>
+        <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Yes</strong></td>
+        <td class="govuk-table__cell decision">  
+            <ul class="govuk-list">
+              <li>
+                Hold - To Be Inspected <span>(PP-HMI)</span>
+              </li>
+            </ul>
+        </td>
+      </tr> 
+
+    </tbody>
+  </table>
+
+  
+</div>
+
+<div class="mrn-container">
+  <div class="container govuk-body">
+    <dl class="definition-list ">
+      <div class="row">
+        <dt>MRN</dt>
+        <dd>24GBDYHR49XV9BSAR0 </dd>
+      </div>
+      <div class="row">
+        <dt>DUCR</dt>
+        <dd>4GB943952494000-BER047811A</dd>
+      </div>
+      <div class="row">
+        <dt>CDS status</dt>
+        <dd>Current
+        </dd>
+      </div>
+      <div class="row">
+        <dt>Last updated</dt>
+        <dd>14 January 2025, 12:11</dd>
+      </div>
+    </dl>
+  </div>
+
+
+  <table class="govuk-table data-table">
+    <thead class="govuk-table__head">
+      <tr class="govuk-table__row">
+        <th scope="col" class="govuk-table__header" >Item  number</th>
+        <th scope="col" class="govuk-table__header">Commodity code</th>
+        <th scope="col" class="govuk-table__header ">Description</th>
+        <th scope="col" class="govuk-table__header ">Quantity / Weight</th>
+        <th scope="col" class="govuk-table__header" >CHED reference</th>
+        <th scope="col" class="govuk-table__header" >Match</th>
+        <th scope="col" class="govuk-table__header ">Decision (authority)</th>
+
+      </tr>
+    </thead>
+    <tbody class="govuk-table__body">
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">1</td>
+        <td class="govuk-table__cell">302499000</td>
+        <td class="govuk-table__cell">CHILLI PEPPERS</td>
+        <td class="govuk-table__cell">3471</td>
+        <td class="govuk-table__cell">
+          <ul class="govuk-list">
+            <li>
+              GBCHD2024.5286242
+            </li>
+            <li>
+              GBCHD2024.5313986
+            </li>
+        </ul>
+        </td>
+        <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Yes</strong></td>
+        <td class="govuk-table__cell decision">  
+            <ul class="govuk-list">
+              <li>
+                Release - Inspection Complete <span>(PP-PHSI)</span>
+              </li>
+                      
+            </ul>
+        </td>
+      </tr>
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">1</td>
+        <td class="govuk-table__cell">302499000</td>
+        <td class="govuk-table__cell">CHILLI PEPPERS</td>
+        <td class="govuk-table__cell">3471</td>
+        <td class="govuk-table__cell">
+          <ul class="govuk-list">
+            <li>
+              GBCHD2024.5286242
+            </li>
+            <li>
+              GBCHD2024.5313986
+            </li>
+        </ul>
+        </td>
+        <td class="govuk-table__cell no-match" data-tooltip="{{ data.noMatch }}  <br><br> GBCHD2024.5286242"><strong class="govuk-tag govuk-tag--red message">No</strong></td>
+        <td class="govuk-table__cell decision">  
+            <ul class="govuk-list">
+              <li>
+                No match <span>(PHA-FNAO)</span>
+              </li>
+                      
+            </ul>
+        </td>
+      </tr>
+
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">2</td>
+        <td class="govuk-table__cell">709601000</td>
+        <td class="govuk-table__cell">SWEET PEPPER</td>
+        <td class="govuk-table__cell">2850</td>
+        <td class="govuk-table__cell">
+          <ul class="govuk-list">
+            <li>
+              GBCHD2024.5286255
+            </li>
+            <li>
+              GBCHD2024.5313986
+            </li>
+        </ul>
+        </td>
+        <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Yes</strong></td>
+        <td class="govuk-table__cell decision multi-auth">  
+            <ul class="govuk-list">
+              <li>
+                Hold - Awaiting Decision <span>(PHA-FNAO)</span>
+              </li>
+              <li>
+                Hold - To Be Inspected <span>(PP-PHSI)</span>
+              </li>
+              <li>
+                Hold - To Be Inspected <span>(PP-HMI)</span>
+              </li>
+            </ul>
+        </td>
+      </tr>
+
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">3</td>
+        <td class="govuk-table__cell">302899080</td>
+        <td class="govuk-table__cell">AUBERGINE EGGPLANT</td>
+        <td class="govuk-table__cell">180</td>
+        <td class="govuk-table__cell">
+          <ul class="govuk-list">
+
+            <li>
+              GBCHD2024.5313986
+            </li>
+        </ul>
+        </td>
+        <td class="govuk-table__cell no-match" data-tooltip="{{ data.noMatch }}  <br><br> GBCHD2024.5313986"><strong class="govuk-tag govuk-tag--red message">No</strong></td>
+        <td class="govuk-table__cell decision">  
+            <ul class="govuk-list">
+              <li>
+                No match <span>(PP-HMI)</span>
+              </li>
+            </ul>
+        </td>
+      </tr> 
+
+    </tbody>
+  </table>
+
+  
+</div>
+
+
+
+<h2 class="govuk-heading-m sectionHeader ched-header">IPAFFS notification (CHED) details</h2>
+
+<div class="ched-container">
+  <div class="container govuk-body">
+    <dl class="definition-list ">
+      <div class="row">
+        <dt>CHED reference</dt>
+        <dd>CHEDD.GB.2024.5286242</dd>
+      </div>
+      <div class="row">
+        <dt>CHED Status</dt>
+        <dd>Valid</dd>
+      </div>
+      <div class="row">
+        <dt>Risk outcome</dt>
+        <dd>Completed</dd>
+      </div>
+      <div class="row">
+        <dt>Last updated</dt>
+        <dd>15 November 2024, 20:11</dd>
+      </div>
+    </dl>
+  </div>
+
+
+  <table class="govuk-table data-table">
+    <thead class="govuk-table__head">
+      <tr class="govuk-table__row">
+        <th scope="col" class="govuk-table__header" >Item  number</th>
+        <th scope="col" class="govuk-table__header" >Commodity code</th>
+        <th scope="col" class="govuk-table__header " >Description</th>
+        <th scope="col" class="govuk-table__header " >Quantity / Weight</th>
+
+        <th scope="col" class="govuk-table__header " >Decision (authority)</th>
+
+      </tr>
+    </thead>
+    <tbody class="govuk-table__body">
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">1</td>
+        <td class="govuk-table__cell">709609920</td>
+        <td class="govuk-table__cell">Capsicum annuum</td>
+        <td class="govuk-table__cell">3471</td>
+        <td class="govuk-table__cell decision ">  
+            <ul class="govuk-list">
+              <li>
+                Acceptable for internal market <span>(PHA-FNAO)</span>
+              </li>
+            </ul>
+        </td>
+      </tr>
+     
+    </tbody>
+  </table>
+</div>
+
+<div class="ched-container">
+  <div class="container govuk-body">
+    <dl class="definition-list ">
+      <div class="row">
+        <dt>CHED reference</dt>
+        <dd>CHEDPP.GB.2024.5286265</dd>
+      </div>
+      <div class="row">
+        <dt>CHED Status</dt>
+        <dd>Valid</dd>
+      </div>
+      <div class="row">
+        <dt>Risk outcome</dt>
+        <dd>Completed</dd>
+      </div>
+      <div class="row">
+        <dt>Last updated</dt>
+        <dd>15 November 2024, 20:11</dd>
+      </div>
+    </dl>
+  </div>
+
+
+  <table class="govuk-table data-table">
+    <thead class="govuk-table__head">
+      <tr class="govuk-table__row">
+        <th scope="col" class="govuk-table__header" >Item  number</th>
+        <th scope="col" class="govuk-table__header" >Commodity code</th>
+        <th scope="col" class="govuk-table__header " >Description</th>
+        <th scope="col" class="govuk-table__header " >Quantity / Weight</th>
+
+        <th scope="col" class="govuk-table__header " >Decision (authority)</th>
+
+      </tr>
+    </thead>
+    <tbody class="govuk-table__body">
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">1</td>
+        <td class="govuk-table__cell">709609920</td>
+        <td class="govuk-table__cell">Capsicum annuum</td>
+        <td class="govuk-table__cell">3471</td>
+        <td class="govuk-table__cell decision ">  
+            <ul class="govuk-list">
+              <li>
+                Acceptable for internal market <span>(PP-PHSI)</span>
+              </li>
+            </ul>
+        </td>
+      </tr>
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">2</td>
+        <td class="govuk-table__cell">7096010</td>
+        <td class="govuk-table__cell">Capsicum annuum</td>
+        <td class="govuk-table__cell">2850</td>
+        <td class="govuk-table__cell decision multi-auth">  
+            <ul class="govuk-list ">
+              <li>
+                Acceptable for internal market <span>(PP-PHSI)</span>
+              </li>
+              <li>
+                Acceptable for internal market <span>(PP-HMI)</span>
+              </li>
+            </ul>
+        </td>
+      </tr>
+
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">3</td>
+        <td class="govuk-table__cell">7093000</td>
+        <td class="govuk-table__cell">Solanum melongena</td>
+        <td class="govuk-table__cell">180</td>
+        <td class="govuk-table__cell decision multi-auth">  
+            <ul class="govuk-list ">
+              <li>
+                Acceptable for internal market <span>(PP-PHSI)</span>
+              </li>
+              <li>
+                Acceptable for internal market <span>(PP-HMI)</span>
+              </li>
+            </ul>
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>
+
+<div class="ched-container">
+  <div class="container govuk-body">
+    <dl class="definition-list ">
+      <div class="row">
+        <dt>CHED reference</dt>
+        <dd>CHEDPP.GB.2024.5313986</dd>
+      </div>
+      <div class="row">
+        <dt>CHED Status</dt>
+        <dd>Valid</dd>
+      </div>
+      <div class="row">
+        <dt>Risk outcome</dt>
+        <dd>Completed</dd>
+      </div>
+      <div class="row">
+        <dt>Last updated</dt>
+        <dd>15 November 2024, 20:11</dd>
+      </div>
+    </dl>
+  </div>
+
+
+  <table class="govuk-table data-table">
+    <thead class="govuk-table__head">
+      <tr class="govuk-table__row">
+        <th scope="col" class="govuk-table__header" >Item  number</th>
+        <th scope="col" class="govuk-table__header" >Commodity code</th>
+        <th scope="col" class="govuk-table__header " >Description</th>
+        <th scope="col" class="govuk-table__header " >Quantity / Weight</th>
+
+        <th scope="col" class="govuk-table__header " >Decision (authority)</th>
+
+      </tr>
+    </thead>
+    <tbody class="govuk-table__body">
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">1</td>
+        <td class="govuk-table__cell">709609920</td>
+        <td class="govuk-table__cell">Capsicum annuum</td>
+        <td class="govuk-table__cell">3471</td>
+        <td class="govuk-table__cell decision ">  
+            <ul class="govuk-list">
+              <li>
+                Acceptable for internal market <span>(PP-PHSI)</span>
+              </li>
+            </ul>
+        </td>
+      </tr>
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">2</td>
+        <td class="govuk-table__cell">7096010</td>
+        <td class="govuk-table__cell">Capsicum annuum</td>
+        <td class="govuk-table__cell">2850</td>
+        <td class="govuk-table__cell decision multi-auth">  
+            <ul class="govuk-list ">
+              <li>
+                Acceptable for internal market <span>(PP-PHSI)</span>
+              </li>
+              <li>
+                Acceptable for internal market <span>(PP-HMI)</span>
+              </li>
+            </ul>
+        </td>
+      </tr>
+
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">3</td>
+        <td class="govuk-table__cell">7093000</td>
+        <td class="govuk-table__cell">Solanum melongena</td>
+        <td class="govuk-table__cell">180</td>
+        <td class="govuk-table__cell decision multi-auth">  
+            <ul class="govuk-list ">
+              <li>
+                Acceptable for internal market <span>(PP-PHSI)</span>
+              </li>
+              <li>
+                Acceptable for internal market <span>(PP-HMI)</span>
+              </li>
+            </ul>
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}

@@ -1,0 +1,99 @@
+{% extends "layouts/forms.html" %}
+{% set signedIn = 'true' %}
+{% set fullWidth = true %}
+{% set hideButton = true %}
+{% set hideBackLink = false %}
+{% set showSubheader = true %}
+{% set subHeader = 'Showing result for' %}
+{% set title = 'CHEDPP.GB.2025.5426583' %}
+{% set bodyClasses = 'mrn' %}
+
+
+{% block beforeContent %}
+<nav class="govuk-breadcrumbs" aria-label="Breadcrumb">
+  <ol class="govuk-breadcrumbs__list">
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="search">Search</a>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      {{ title }}
+    </li>
+  </ol>
+</nav>
+{% endblock %}
+
+
+{% block form %}
+<h2 class="govuk-heading-m sectionHeader">Customs declaration details</h2>
+
+{{ govukInsetText({
+  text: "There are no matching Customs declaration details",
+  classes: "ched-inset"
+}) }}
+
+
+<h2 class="govuk-heading-m sectionHeader ched-header">IPAFFS notification (CHED) details</h2>
+
+<div class="ched-container">
+  <div class="container govuk-body">
+    <dl class="definition-list ">
+      <div class="row">
+        <dt>CHED reference</dt>
+        <dd>CHEDPP.GB.2025.5426583</dd>
+      </div>
+      <div class="row">
+        <dt>CHED Status</dt>
+        <dd>Valid</dd>
+      </div>
+      <div class="row">
+        <dt>Risk outcome</dt>
+        <dd>Completed</dd>
+      </div>
+      <div class="row">
+        <dt>Last updated</dt>
+        <dd>15 November 2024, 20:11</dd>
+      </div>
+    </dl>
+  </div>
+
+
+  <table class="govuk-table data-table">
+    <thead class="govuk-table__head">
+      <tr class="govuk-table__row">
+        <th scope="col" class="govuk-table__header first" >Item  number</th>
+        <th scope="col" class="govuk-table__header second" >Commodity code</th>
+        <th scope="col" class="govuk-table__header third " >Description</th>
+        <th scope="col" class="govuk-table__header forth " >Quantity / Weight</th>
+
+        <th scope="col" class="govuk-table__header fifth " style="width: 30%;" >Decision (authority)</th>
+
+      </tr>
+    </thead>
+    <tbody class="govuk-table__body">
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">1</td>
+        <td class="govuk-table__cell">709999060</td>
+        <td class="govuk-table__cell">Momordica charantia</td>
+        <td class="govuk-table__cell">2880</td>
+        <td class="govuk-table__cell decision multi-auth">  
+            <ul class="govuk-list">
+              <li>
+                Acceptable for internal market <span>(PHA-PHSI)</span>
+              </li>
+              <li>
+                Acceptable for internal market <span>(PP-HMI)</span>
+              </li>
+            </ul>
+        </td>
+      </tr>
+    
+    </tbody>
+  </table>
+</div>
+
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,482 @@
+{% extends "layouts/forms.html" %}
+{% set signedIn = 'true' %}
+{% set fullWidth = true %}
+{% set hideButton = true %}
+{% set hideBackLink = false %}
+{% set showSubheader = true %}
+{% set subHeader = 'Showing result for' %}
+{% set title = '24GB0Z8WEJ9ZBTL73B' %}
+{% set bodyClasses = 'mrn' %}
+
+
+{% block beforeContent %}
+<nav class="govuk-breadcrumbs" aria-label="Breadcrumb">
+  <ol class="govuk-breadcrumbs__list">
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="search">Search</a>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      {{ title }}
+    </li>
+  </ol>
+</nav>
+{% endblock %}
+
+
+{% block form %}
+<h2 class="govuk-heading-m sectionHeader">Customs declaration details</h2>
+
+<div class="mrn-container">
+  <div class="container govuk-body">
+    <dl class="definition-list ">
+      <div class="row">
+        <dt>MRN</dt>
+        <dd>{{ title }}</dd>
+      </div>
+      <div class="row">
+        <dt>DUCR</dt>
+        <dd>4GB335031931000-WB2408-27WWL6274S</dd>
+      </div>
+      <div class="row">
+        <dt>CDS status</dt>
+        <dd>Current</dd>
+      </div>
+      <div class="row">
+        <dt>Last updated</dt>
+        <dd>15 November 2024, 11:23</dd>
+      </div>
+    </dl>
+  </div>
+
+
+  <table class="govuk-table data-table">
+    <thead class="govuk-table__head">
+      <tr class="govuk-table__row">
+        <th scope="col" class="govuk-table__header" >Item  number</th>
+        <th scope="col" class="govuk-table__header">Commodity code</th>
+        <th scope="col" class="govuk-table__header ">Description</th>
+        <th scope="col" class="govuk-table__header ">Quantity / Weight</th>
+        <th scope="col" class="govuk-table__header" >CHED reference</th>
+        <th scope="col" class="govuk-table__header" >Match</th>
+        <th scope="col" class="govuk-table__header" >Decision (authority)</th>
+
+      </tr>
+    </thead>
+    <tbody class="govuk-table__body">
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">5</td>
+        <td class="govuk-table__cell">2104200090</td>
+        <td class="govuk-table__cell" data-tooltip="PREPERED MISCELLANEOUS FOODSTUFFS:SOUPS AND BROTHS AND PREPARATIONS THEREFOR; HOMOGENISED COMPOSITE FOOD PREPARATIONS"><span>PREPERED MISCELLANEOUS FOODSTUFFS:SO ...</span></td>
+        <td class="govuk-table__cell">6.54</td>
+        <td class="govuk-table__cell">
+          <ul class="govuk-list">
+            <li>
+              GBCHD2024.4777515
+            </li>
+        </ul>
+        </td>
+        
+        <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Yes</strong></td>
+        <td class="govuk-table__cell decision">  
+            <ul class="govuk-list">
+              <li>
+                Release - Inspection Complete <span>(PHA-POAO)</span>
+              </li>
+            </ul>
+        </td>
+      </tr>
+
+      
+    </tbody>
+  </table>
+</div>
+
+<div class="mrn-container">
+  <div class="container govuk-body">
+    <dl class="definition-list ">
+      <div class="row">
+        <dt>MRN</dt>
+        <dd>24GB9JLCVIDG6URAR7</dd>
+      </div>
+      <div class="row">
+        <dt>DUCR</dt>
+        <dd>4GB335031931000-WB2408-27WWL6274S</dd>
+      </div>
+      <div class="row">
+        <dt>CDS status</dt>
+        <dd>Current</dd>
+      </div>
+      <div class="row">
+        <dt>Last updated</dt>
+        <dd>15 November 2024, 11:23</dd>
+      </div>
+    </dl>
+  </div>
+
+
+  <table class="govuk-table data-table">
+    <thead class="govuk-table__head">
+      <tr class="govuk-table__row">
+        <th scope="col" class="govuk-table__header " >Item  number</th>
+        <th scope="col" class="govuk-table__header">Commodity code</th>
+        <th scope="col" class="govuk-table__header ">Description</th>
+        <th scope="col" class="govuk-table__header ">Quantity / Weight</th>
+        <th scope="col" class="govuk-table__header" >CHED reference</th>
+        <th scope="col" class="govuk-table__header" >Match</th>
+        <th scope="col" class="govuk-table__header ">Decision (authority)</th>
+
+      </tr>
+    </thead>
+    <tbody class="govuk-table__body">
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">4</td>
+        <td class="govuk-table__cell">203121100</td>
+        <td class="govuk-table__cell" data-tooltip="EDIBLE OFFAL OF BOVINE ANIMALS, SWINE, SHEEP, GOATS, HORSES, ASSES, MULES OR HINNIES, FRESH, CHILLED OR FROZEN"><span>EDIBLE OFFAL OF BOVINE ANIMALS SWINE ...</span></td>
+        <td class="govuk-table__cell">4.74</td>
+        <td class="govuk-table__cell">
+          <ul class="govuk-list">
+            <li>
+              GBCHD2024.4777512
+            </li>
+        </ul>
+        </td> 
+        </ul>
+        <td class="govuk-table__cell no-match" data-tooltip="{{ data.noMatch }} GBCHD2024.4777512"><strong class="govuk-tag govuk-tag--red message">No</strong></td>
+        <td class="govuk-table__cell decision">  
+            <ul class="govuk-list">
+              <li>
+                No match <span>(PHA-POAO)</span>
+              </li>
+            </ul>
+        </td>
+      </tr>
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">5</td>
+        <td class="govuk-table__cell">203121900</td>
+        <td class="govuk-table__cell" data-tooltip="SHOULDERS AND CUTS OF DOMESTIC SWINE AND CUTS THEREOF, DRIED OR SMOKED, WITH BONE INSHOULDERS AND CUTS THEREOF, DRIED OR SMOKED, WITH BONE IN"><span>SHOULDERS AND CUTS OF DOMESTIC SWINE ...</span></td>
+        <td class="govuk-table__cell">102.8</td>
+        <td class="govuk-table__cell">
+          <ul class="govuk-list">
+            <li>
+              GBCHD2024.4777511
+            </li>
+        </ul>
+        </td>
+        <td class="govuk-table__cell no-match" data-tooltip="{{ data.noMatch }} GBCHD2024.4777511"><strong class="govuk-tag govuk-tag--red message">No</strong></td>
+        <td class="govuk-table__cell decision">  
+            <ul class="govuk-list">
+              <li>
+                No match <span>(PHA-POAO)</span>
+              </li>
+            </ul>
+        </td>
+      </tr>
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">6</td>
+        <td class="govuk-table__cell">203191500</td>
+        <td class="govuk-table__cell" data-tooltip="MEAT OF SWINE FRESH CHILLED OR FROZEN"><span>MEAT OF SWINE FRESH CHILLED OR FROZE ...</span></td>
+        <td class="govuk-table__cell">56.96</td>
+        <td class="govuk-table__cell">
+          <ul class="govuk-list ">
+            <li >
+              GBCHD2024.4777474
+            </li>
+            <li >
+              GBCHD2024.4777500
+            </li>
+        </ul>
+        </td>
+        <td class="govuk-table__cell no-match" data-tooltip="{{ data.noMatch }} GBCHD2024.4777474"><strong class="govuk-tag govuk-tag--red message">No</strong></td>
+        <td class="govuk-table__cell decision">  
+            <ul class="govuk-list">
+              <li>
+                No match <span>(PHA-POAO)</span>
+              </li>
+            </ul>
+        </td>
+      </tr>
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">7</td>
+        <td class="govuk-table__cell">203191500</td>
+        <td class="govuk-table__cell" data-tooltip="MEAT OF SWINE FRESH CHILLED OR FROZEN FOODS"><span>MEAT OF SWINE FRESH CHILLED OR FROZE ...</span></td>
+        <td class="govuk-table__cell">56.96</td>
+        <td class="govuk-table__cell">
+          <ul class="govuk-list">
+            <li >
+              GBCHD2024.4777419
+            </li>
+            <li>
+              GBCHD2024.4777446
+            </li>
+            <li>
+              GBCHD2024.4777458
+            </li>
+        </ul>
+        </td>
+        <td class="govuk-table__cell no-match" data-tooltip="{{ data.noMatch }} GBCHD2024.4777446 <br>GBCHD2024.4777458"><strong class="govuk-tag govuk-tag--red message">No</strong></td>
+        <td class="govuk-table__cell decision">  
+            <ul class="govuk-list">
+              <li>
+                No match <span>(PHA-POAO)</span>
+              </li>
+            </ul>
+        </td>
+      </tr>     
+    </tbody>
+  </table>
+</div>
+
+
+<h2 class="govuk-heading-m sectionHeader ched-header">IPAFFS notification (CHED) details</h2>
+
+<div class="ched-container">
+  <div class="container govuk-body">
+    <dl class="definition-list ">
+      <div class="row">
+        <dt>CHED reference</dt>
+        <dd>CHEDP.GB.2024.4777419</dd>
+      </div>
+      <div class="row">
+        <dt>CHED Status</dt>
+        <dd>Valid</dd>
+      </div>
+      <div class="row">
+        <dt>Risk outcome</dt>
+        <dd>Completed</dd>
+      </div>
+      <div class="row">
+        <dt>Last updated</dt>
+        <dd>15 November 2024, 20:11</dd>
+      </div>
+    </dl>
+  </div>
+
+
+  <table class="govuk-table data-table">
+    <thead class="govuk-table__head">
+      <tr class="govuk-table__row">
+        <th scope="col" class="govuk-table__header first" >Item  number</th>
+        <th scope="col" class="govuk-table__header second" >Commodity code</th>
+        <th scope="col" class="govuk-table__header third " >Description</th>
+        <th scope="col" class="govuk-table__header forth " >Quantity / Weight</th>
+
+        <th scope="col" class="govuk-table__header fifth " style="width: 30%;" >Decision (authority)</th>
+
+      </tr>
+    </thead>
+    <tbody class="govuk-table__body">
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">1</td>
+        <td class="govuk-table__cell">160100</td>
+        <td class="govuk-table__cell">Suidae</td>
+        <td class="govuk-table__cell">4.81</td>
+        <td class="govuk-table__cell decision">  
+            <ul class="govuk-list">
+              <li>
+                Acceptable for internal market <span>(PHA-POAO)</span>
+              </li>
+            </ul>
+        </td>
+      </tr>
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">2</td>
+        <td class="govuk-table__cell">160241</td>
+        <td class="govuk-table__cell">Suidae</td>
+        <td class="govuk-table__cell">1.68</td>
+        <td class="govuk-table__cell decision">  
+            <ul class="govuk-list">
+              <li>
+                Acceptable for internal market <span>(PHA-POAO)</span>
+              </li>
+            </ul>
+        </td>
+      </tr>
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">3</td>
+        <td class="govuk-table__cell">160249</td>
+        <td class="govuk-table__cell">Suidae</td>
+        <td class="govuk-table__cell">3.9</td>
+        <td class="govuk-table__cell decision">  
+            <ul class="govuk-list">
+              <li>
+                Acceptable for internal market <span>(PHA-POAO)</span>
+              </li>
+            </ul>
+        </td>
+      </tr>      
+    </tbody>
+  </table>
+</div>
+
+<div class="ched-container">
+  <div class="container govuk-body">
+    <dl class="definition-list ">
+      <div class="row">
+        <dt>CHED reference</dt>
+        <dd>CHEDP.GB.2024.4777515</dd>
+      </div>
+      <div class="row">
+        <dt>CHED Status</dt>
+        <dd>Valid</dd>
+      </div>
+      <div class="row">
+        <dt>Risk outcome</dt>
+        <dd>Completed</dd>
+      </div>
+      <div class="row">
+        <dt>Last updated</dt>
+        <dd>15 November 2024, 20:11</dd>
+      </div>
+    </dl>
+  </div>
+
+
+  <table class="govuk-table data-table">
+    <thead class="govuk-table__head">
+      <tr class="govuk-table__row">
+        <th scope="col" class="govuk-table__header first" >Item  number</th>
+        <th scope="col" class="govuk-table__header second" >Commodity code</th>
+        <th scope="col" class="govuk-table__header third " >Description</th>
+        <th scope="col" class="govuk-table__header forth " >Quantity / Weight</th>
+
+        <th scope="col" class="govuk-table__header fifth " style="width: 30%;">Decision (authority)</th>
+
+      </tr>
+    </thead>
+    <tbody class="govuk-table__body">
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">1</td>
+        <td class="govuk-table__cell">160100</td>
+        <td class="govuk-table__cell">Suidae</td>
+        <td class="govuk-table__cell">15.71</td>
+        <td class="govuk-table__cell decision">  
+            <ul class="govuk-list">
+              <li>
+                Acceptable for internal market <span>(PHA-POAO)</span>
+              </li>
+            </ul>
+        </td>
+      </tr>
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">2</td>
+        <td class="govuk-table__cell">401</td>
+        <td class="govuk-table__cell">Bos taurus</td>
+        <td class="govuk-table__cell">726.42</td>
+        <td class="govuk-table__cell decision">  
+            <ul class="govuk-list">
+              <li>
+                Acceptable for internal market <span>(PHA-POAO)</span>
+              </li>
+            </ul>
+        </td>
+      </tr>
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">3</td>
+        <td class="govuk-table__cell">40229</td>
+        <td class="govuk-table__cell">Bos taurus</td>
+        <td class="govuk-table__cell">74.34</td>
+        <td class="govuk-table__cell decision">  
+            <ul class="govuk-list">
+              <li>
+                Acceptable for internal market <span>(PHA-POAO)</span>
+              </li>
+            </ul>
+        </td>
+      </tr>      
+    </tbody>
+  </table>
+</div>
+<div class="ched-container">
+  <div class="container govuk-body">
+    <dl class="definition-list ">
+      <div class="row">
+        <dt>CHED reference</dt>
+        <dd>CHEDP.GB.2024.4777500</dd>
+      </div>
+      <div class="row">
+        <dt>CHED Status</dt>
+        <dd>Valid</dd>
+      </div>
+      <div class="row">
+        <dt>Risk outcome</dt>
+        <dd>Completed</dd>
+      </div>
+      <div class="row">
+        <dt>Last updated</dt>
+        <dd>15 November 2024, 20:11</dd>
+      </div>
+    </dl>
+  </div>
+
+
+  <table class="govuk-table data-table">
+    <thead class="govuk-table__head">
+      <tr class="govuk-table__row">
+        <th scope="col" class="govuk-table__header first" >Item  number</th>
+        <th scope="col" class="govuk-table__header second" >Commodity code</th>
+        <th scope="col" class="govuk-table__header third " >Description</th>
+        <th scope="col" class="govuk-table__header forth " >Quantity / Weight</th>
+
+        <th scope="col" class="govuk-table__header fifth " style="width: 30%;" >Decision (authority)</th>
+
+      </tr>
+    </thead>
+    <tbody class="govuk-table__body">
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">1</td>
+        <td class="govuk-table__cell">160100</td>
+        <td class="govuk-table__cell">Suidae</td>
+        <td class="govuk-table__cell">4.15</td>
+        <td class="govuk-table__cell decision">  
+            <ul class="govuk-list">
+              <li>
+                Acceptable for internal market <span>(PHA-POAO)</span>
+              </li>
+            </ul>
+        </td>
+      </tr>
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">2</td>
+        <td class="govuk-table__cell">2031211</td>
+        <td class="govuk-table__cell">Sus scrofa domesticus</td>
+        <td class="govuk-table__cell">4.75</td>
+        <td class="govuk-table__cell decision">  
+            <ul class="govuk-list">
+              <li>
+                Acceptable for internal market <span>(PHA-POAO)</span>
+              </li>
+            </ul>
+        </td>
+      </tr>  
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">3</td>
+        <td class="govuk-table__cell">2031219</td>
+        <td class="govuk-table__cell">Sus scrofa domesticus</td>
+        <td class="govuk-table__cell">102.8</td>
+        <td class="govuk-table__cell decision">  
+            <ul class="govuk-list">
+              <li>
+                Acceptable for internal market <span>(PHA-POAO)</span>
+              </li>
+            </ul>
+        </td>
+      </tr>  
+    </tbody>
+  </table>
+</div>
+
+<script>
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+{% endblock %}
