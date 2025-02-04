@@ -230,7 +230,12 @@
             </li>
         </ul>
         </td>
-        <td class="govuk-table__cell no-match" data-tooltip="{{ data.noMatch }}  <br><br> GBCHD2024.5286242"><strong class="govuk-tag govuk-tag--red message">No</strong></td>
+        <td class="govuk-table__cell no-match" tabindex="0">
+          <span><strong class="govuk-tag govuk-tag--red message">No</strong></span>
+          <span class="tooltip" role="tooltip">
+            {{ data.noMatch | safe }} GBCHD2024.5286242
+          </span>
+      </td>
         <td class="govuk-table__cell decision">  
             <ul class="govuk-list">
               <li>
@@ -285,7 +290,12 @@
             </li>
         </ul>
         </td>
-        <td class="govuk-table__cell no-match" data-tooltip="{{ data.noMatch }}  <br><br> GBCHD2024.5313986"><strong class="govuk-tag govuk-tag--red message">No</strong></td>
+        <td class="govuk-table__cell no-match" tabindex="0">
+          <span><strong class="govuk-tag govuk-tag--red message">No</strong></span>
+          <span class="tooltip" role="tooltip">
+            {{ data.noMatch | safe }} GBCHD2024.5313986
+          </span>
+      </td>
         <td class="govuk-table__cell decision">  
             <ul class="govuk-list">
               <li>

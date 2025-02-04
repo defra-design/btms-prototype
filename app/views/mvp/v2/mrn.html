@@ -66,7 +66,13 @@
       <tr class="govuk-table__row">
         <td class="govuk-table__cell">5</td>
         <td class="govuk-table__cell">2104200090</td>
-        <td class="govuk-table__cell" data-tooltip="PREPERED MISCELLANEOUS FOODSTUFFS:SOUPS AND BROTHS AND PREPARATIONS THEREFOR; HOMOGENISED COMPOSITE FOOD PREPARATIONS"><span>PREPERED MISCELLANEOUS FOODSTUFFS:SO ...</span></td>
+        <!-- <td class="govuk-table__cell" data-tooltip="PREPERED MISCELLANEOUS FOODSTUFFS:SOUPS AND BROTHS AND PREPARATIONS THEREFOR; HOMOGENISED COMPOSITE FOOD PREPARATIONS"><span>PREPERED MISCELLANEOUS FOODSTUFFS:SO ...</span></td> -->
+        <td class="govuk-table__cell" tabindex="0">
+          <span>PREPERED MISCELLANEOUS FOODSTUFFS:SO ...</span>
+          <span class="tooltip" role="tooltip">
+            PREPERED MISCELLANEOUS FOODSTUFFS:SOUPS AND BROTHS AND PREPARATIONS THEREFOR; HOMOGENISED COMPOSITE FOOD PREPARATIONS
+          </span>
+      </td>
         <td class="govuk-table__cell">6.54</td>
         <td class="govuk-table__cell">
           <ul class="govuk-list">
@@ -134,7 +140,7 @@
         <!-- <td class="govuk-table__cell" data-tooltip="EDIBLE OFFAL OF BOVINE ANIMALS, SWINE, SHEEP, GOATS, HORSES, ASSES, MULES OR HINNIES, FRESH, CHILLED OR FROZEN"><span>EDIBLE OFFAL OF BOVINE ANIMALS SWINE ...</span></td> -->
         <td class="govuk-table__cell" tabindex="0">
           <span>EDIBLE OFFAL OF BOVINE ANIMALS SWINE ...</span>
-          <span class="tooltip2" role="tooltip">
+          <span class="tooltip" role="tooltip">
             EDIBLE OFFAL OF BOVINE ANIMALS, SWINE, SHEEP, GOATS, HORSES, ASSES, MULES OR HINNIES, FRESH, CHILLED OR FROZEN
           </span>
       </td>
@@ -147,7 +153,14 @@
         </ul>
         </td> 
         </ul>
-        <td class="govuk-table__cell no-match" data-tooltip="{{ data.noMatch }} GBCHD2024.4777512"><strong class="govuk-tag govuk-tag--red message">No</strong></td>
+        <td class="govuk-table__cell no-match" tabindex="0">
+          <span><strong class="govuk-tag govuk-tag--red message">No</strong></span>
+          <span class="tooltip" role="tooltip">
+            {{ data.noMatch | safe }} GBCHD2024.4777512
+          </span>
+      </td>
+
+        <!-- <td class="govuk-table__cell no-match" data-tooltip="{{ data.noMatch }} GBCHD2024.4777512"><strong class="govuk-tag govuk-tag--red message">No</strong></td> -->
         <td class="govuk-table__cell decision">  
             <ul class="govuk-list">
               <li>
@@ -161,7 +174,7 @@
         <td class="govuk-table__cell">203121900</td>
         <td class="govuk-table__cell" tabindex="0">
           <span>SHOULDERS AND CUTS OF DOMESTIC SWINE ...</span>
-          <span class="tooltip2" role="tooltip">
+          <span class="tooltip" role="tooltip">
             SHOULDERS AND CUTS OF DOMESTIC SWINE AND CUTS THEREOF, DRIED OR SMOKED, WITH BONE INSHOULDERS AND CUTS THEREOF, DRIED OR SMOKED, WITH BONE IN
           </span>
       </td>
@@ -174,7 +187,13 @@
             </li>
         </ul>
         </td>
-        <td class="govuk-table__cell no-match" data-tooltip="{{ data.noMatch }} GBCHD2024.4777511"><strong class="govuk-tag govuk-tag--red message">No</strong></td>
+        <!-- <td class="govuk-table__cell no-match" data-tooltip="{{ data.noMatch }} GBCHD2024.4777511"><strong class="govuk-tag govuk-tag--red message">No</strong></td> -->
+        <td class="govuk-table__cell no-match" tabindex="0">
+          <span><strong class="govuk-tag govuk-tag--red message">No</strong></span>
+          <span class="tooltip" role="tooltip">
+            {{ data.noMatch | safe }} GBCHD2024.4777511
+          </span>
+      </td>
         <td class="govuk-table__cell decision">  
             <ul class="govuk-list">
               <li>
@@ -188,7 +207,7 @@
         <td class="govuk-table__cell">203191500</td>
         <td class="govuk-table__cell" tabindex="0">
           <span>MEAT OF SWINE FRESH CHILLED OR FROZE ...</span>
-          <span class="tooltip2" role="tooltip">
+          <span class="tooltip" role="tooltip">
             MEAT OF SWINE FRESH CHILLED OR FROZEN
           </span>
       </td>
@@ -203,7 +222,13 @@
             </li>
         </ul>
         </td>
-        <td class="govuk-table__cell no-match" data-tooltip="{{ data.noMatch }} GBCHD2024.4777474"><strong class="govuk-tag govuk-tag--red message">No</strong></td>
+        <td class="govuk-table__cell no-match" tabindex="0">
+          <span><strong class="govuk-tag govuk-tag--red message">No</strong></span>
+          <span class="tooltip" role="tooltip">
+            {{ data.noMatch | safe }} GBCHD2024.4777474
+          </span>
+      </td>
+        <!-- <td class="govuk-table__cell no-match" data-tooltip="{{ data.noMatch }} GBCHD2024.4777474"><strong class="govuk-tag govuk-tag--red message">No</strong></td> -->
         <td class="govuk-table__cell decision">  
             <ul class="govuk-list">
               <li>
@@ -218,7 +243,7 @@
         <!-- <td class="govuk-table__cell" data-tooltip="MEAT OF SWINE FRESH CHILLED OR FROZEN FOODS"><span>MEAT OF SWINE FRESH CHILLED OR FROZE ...</span></td> -->
         <td class="govuk-table__cell" tabindex="0">
           <span>MEAT OF SWINE FRESH CHILLED OR FROZE ...</span>
-          <span class="tooltip2" role="tooltip">
+          <span class="tooltip" role="tooltip">
             MEAT OF SWINE FRESH CHILLED OR FROZEN FOODS
           </span>
       </td>
@@ -236,7 +261,13 @@
             </li>
         </ul>
         </td>
-        <td class="govuk-table__cell no-match" data-tooltip="{{ data.noMatch }} GBCHD2024.4777446 <br>GBCHD2024.4777458"><strong class="govuk-tag govuk-tag--red message">No</strong></td>
+        <td class="govuk-table__cell no-match" tabindex="0">
+          <span><strong class="govuk-tag govuk-tag--red message">No</strong></span>
+          <span class="tooltip" role="tooltip">
+            {{ data.noMatch | safe }} GBCHD2024.4777446 <br> GBCHD2024.4777458
+          </span>
+      </td>
+        <!-- <td class="govuk-table__cell no-match" data-tooltip="{{ data.noMatch }} GBCHD2024.4777446 <br>GBCHD2024.4777458"><strong class="govuk-tag govuk-tag--red message">No</strong></td> -->
         <td class="govuk-table__cell decision">  
             <ul class="govuk-list">
               <li>

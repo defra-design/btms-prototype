@@ -93,17 +93,5 @@ $govuk-new-typography-scale: true;
   font-weight: 700;
 }
 
-.tooltip2 {
-  visibility: hidden;
-  position: absolute;
-  width: 300px;
-  padding: 10px;
-  z-index: 10;
-  background-color: #f3f2f1;
-  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3); /* Drop shadow */
-}
 
-.govuk-table__cell:hover .tooltip2,
-.govuk-table__cell:focus .tooltip2 {
-  visibility: visible;
-}
+
