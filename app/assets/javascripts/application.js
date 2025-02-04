@@ -46,6 +46,11 @@ window.GOVUKPrototypeKit.documentReady(() => {
     }
   });
 
-
+  document.addEventListener("DOMContentLoaded", function () {
+    document.querySelector(".btms-clear__button").addEventListener("click", function () {
+      document.getElementById("searchTerm").value = "";
+    });
+  });
+  
 
 });

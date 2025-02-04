@@ -6,7 +6,9 @@
   .govuk-input-wrapper {
     display: flex;
     align-items: center;
+    position: relative; /* Add this */
   }
+  
 
   .govuk-input {
     flex: 1;
@@ -38,3 +40,27 @@
     stroke: #fff;
     stroke-width: 2;
   }
+  .btms-clear__button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    color: #666;
+    position: absolute;
+    right: 60px; /* Adjust based on input field padding */
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .btms-clear__button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    color: #666;
+    position: absolute;
+    right: 60px; /* Adjust based on input field padding */
+    top: 50%;
+    transform: translateY(-50%);
+    display: none; /* Hide by default */
+  }
+    

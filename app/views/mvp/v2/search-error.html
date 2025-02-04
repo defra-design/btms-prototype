@@ -23,15 +23,13 @@
         </li>
       </ul>  
     </div>
-    <div class="govuk-form-group {% if data.error %}govuk-form-group--error{% endif %}">
-      {% if data.error %}
-        <p id="full-name-input-error" class="govuk-error-message">
-          <span class="govuk-visually-hidden">Error:</span> {{ data.errorMessage }}
-        </p>
-      {% endif %}
+ 
+    <div class="govuk-form-group govuk-form-group--error">
+      <p id="full-name-input-error" class="govuk-error-message">
+        <span class="govuk-visually-hidden">Error:</span> Enter a valid search reference
+      </p>
       <div class="govuk-input-wrapper">
-        <input class="govuk-input" id="data.searchTerm" name="data.searchTerm" type="text" 
-               value="{{ data.searchTerm }}" />
+        <input class="govuk-input" id="data.searchTerm" name="data.searchTerm" type="text" value="{{ data.searchTerm or '25GB0P0T' }}" />
         <button type="submit" class="btms-search__button">
           <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
             <circle cx="10" cy="10" r="8" stroke="#ffffff" stroke-width="2"></circle>
@@ -39,8 +37,7 @@
           </svg>
         </button>
       </div>
-    </div>
-    
+    </div>    
   </div>
 
 

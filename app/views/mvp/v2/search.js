@@ -1,35 +1,51 @@
-const _ = require('lodash')
+const _ = require('lodash');
 
-module.exports = router => {
-
-  
+module.exports = (router) => {
   router.post(['/mvp/v2/search/'], (req, res, next) => {
     const data = req.session.data;
-    var search = req.session.data['data.searchTerm'];
+    const search = req.body['data.searchTerm']; // Extract search term from request body
+
+    // ✅ Reset the error state BEFORE processing
+    delete data.error;
+    delete data.errorMessage;
+
+    // Define valid search cases for redirection
+    const searchRedirects = {
+      '24GB0Z8WEJ9ZBTL73B': 'mrn',
+      '25GB0HQ0W2IZKO9AR0': 'mrn-auth',
+      '24GBDX8QQ4WWFZNAR3': 'mrn-try-auth',
+      'CHEDPP.GB.2025.5426583': 'no-mrn',
+      '25GB0P0TEP7CZCNAR6': 'no-ched'
+    };
+
+    // Check if search term exists in predefined redirects
+    if (searchRedirects[search]) {
+      req.session.data.searchTerm = search; // Save search term to session
+      return res.redirect(searchRedirects[search]);
+    }
+
+    // Define error cases
+    const errorCases = {
+      '25GB0P0T': 'You must enter a valid MRN or CHED',
+      '': 'You must enter a valid MRN or CHED',
+      'CHEDP.GB.2024.4433124': 'This reference cannot be found.'
+    };
+
+    // If the search term is one of the error cases, set the error message
+    if (errorCases.hasOwnProperty(search)) {
+      data.error = 'true';
+      data.errorMessage = errorCases[search];
+      data.searchTerm = search; // Save search term to session
+      return res.redirect('search');
+    }
+
+    // For any other search term (not in redirects or error cases), show a general error message
+    data.error = 'true';
+    data.errorMessage = 'You must enter a valid MRN or CHED';
+    data.searchTerm = search; // Save search term to session
+    return res.redirect('search');
+  });
 
 
-    if(search == 'CHEDP.GB.2024.4450758' ) {
-        res.redirect('ched')
-      } 
-      else if(search == '24GB0Z8WEJ9ZBTL73B') {
-      res.redirect('mrn')
-    }
-    else if(search == '25GB0HQ0W2IZKO9AR0') {
-      res.redirect('mrn-auth')
-    }
-    else if(search == '24GBDX8QQ4WWFZNAR3') {
-      res.redirect('mrn-try-auth')
-    }
-    else if(search == 'CHEDPP.GB.2025.5426583') {
-      res.redirect('no-mrn')
-    }
-    else if(search == '25GB0P0TEP7CZCNAR6') {
-      res.redirect('no-ched')
-    }
-    else {
-      res.redirect('search')
-    }
-  })
-
-
-}
+  
+};
