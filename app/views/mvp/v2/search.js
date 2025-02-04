@@ -3,8 +3,8 @@ const _ = require('lodash');
 module.exports = (router) => {
   router.post(['/mvp/v2/search/'], (req, res, next) => {
     const data = req.session.data;
-    const search = req.body['data.searchTerm']; // Extract search term from request body
-
+    const search = req.body['data.searchTerm'] || req.query.searchTerm; // Support both body and query params
+    
     // ✅ Reset the error state BEFORE processing
     delete data.error;
     delete data.errorMessage;
@@ -26,9 +26,10 @@ module.exports = (router) => {
 
     // Define error cases
     const errorCases = {
-      '25GB0P0T': 'You must enter a valid MRN or CHED',
-      '': 'You must enter a valid MRN or CHED',
-      'CHEDP.GB.2024.4433124': 'This reference cannot be found.'
+      '25GB0P0T': 'Enter a valid MRN or CHED reference in the correct format',
+      '': 'Enter an MRN or CHED reference',
+      'CHEDP.GB.2024.4433124': 'This CHED reference cannot be found',
+      '24GBDX8QQ4WWFJHGA4': 'This MRN reference cannot be found'
     };
 
     // If the search term is one of the error cases, set the error message

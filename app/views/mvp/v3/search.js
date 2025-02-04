@@ -8,10 +8,8 @@ module.exports = router => {
     var search = req.session.data['data.searchTerm'];
 
 
-    if(search == 'CHEDP.GB.2024.4450758' ) {
-        res.redirect('ched')
-      } 
-      else if(search == '24GBDCS6GQ0LFQIAR1') {
+
+   if(search == '24GBDCS6GQ0LFQIAR1') {
       res.redirect('mrn')
     }
     else if(search == '25GB0HQ0W2IZKO9AR0') {
@@ -22,9 +20,6 @@ module.exports = router => {
     }
     else if(search == 'CHEDPP.GB.2025.5426583') {
       res.redirect('no-mrn')
-    }
-    else if(search == '25GB0P0TEP7CZCNAR6') {
-      res.redirect('no-ched')
     }
     else if(search == '25GB0P0TEP7CZCNAR6') {
       res.redirect('no-ched')
