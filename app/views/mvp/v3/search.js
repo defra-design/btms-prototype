@@ -5,13 +5,14 @@ module.exports = (router) => {
     const data = req.session.data;
     const search = req.body['data.searchTerm'] || req.query.searchTerm; // Support both body and query params
     
-    // ✅ Reset the error state BEFORE processing
+    // Reset the error state BEFORE processing
     delete data.error;
     delete data.errorMessage;
 
     // Define valid search cases for redirection
     const searchRedirects = {
       '24GB0Z8WEJ9ZBTL73B': 'mrn',
+      '4GB335031931000-WB2408-27WWL6274S': 'mrn',
       '25GB0HQ0W2IZKO9AR0': 'mrn-auth',
       '24GBDX8QQ4WWFZNAR3': 'mrn-try-auth',
       'CHEDPP.GB.2025.5426583': 'no-mrn',

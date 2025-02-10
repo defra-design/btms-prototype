@@ -25,6 +25,45 @@
 
 {% block form %}
 <h2 class="govuk-heading-m sectionHeader">Customs declaration details</h2>
+<div class="inline-form-group">
+  <div class="govuk-form-group">
+    <label class="govuk-label" for="match">Match</label>
+    <select class="govuk-select" id="match" name="match">
+      <option value="show-all" selected>Show all</option>
+      <option value="match">Yes</option>
+      <option value="noMatch">No</option>
+    </select>
+  </div>
+
+  <div class="govuk-form-group">
+    <label class="govuk-label" for="decision">Decision</label>
+    <select class="govuk-select" id="decision" name="decision">
+      <option value="show-all" selected>Show all</option>
+      <option value="hold">Hold</option>
+      <option value="release">Release</option>
+    </select>
+  </div>
+  <div class="govuk-form-group">
+     <a class="clear-filter" href="#" style="display: none;">Clear filters</a>
+   </div>
+</div>
+
+<style>
+.inline-form-group {
+    display: flex;
+    align-items: center; /* Align items vertically in the center */
+    gap: 20px; /* Adjust spacing between elements */
+}
+
+.inline-form-group .govuk-form-group {
+    margin-bottom: 10px; /* Remove extra spacing */
+} 
+.clear-filter {
+  display: inline-block;
+    padding-top: 6px;
+    margin-top: 20px;
+}
+</style>
 
 <div class="mrn-container">
   <div class="container govuk-body">
@@ -63,7 +102,7 @@
       </tr>
     </thead>
     <tbody class="govuk-table__body">
-      <tr class="govuk-table__row">
+      <tr class="govuk-table__row match">
         <td class="govuk-table__cell">5</td>
         <td class="govuk-table__cell">2104200090</td>
         <!-- <td class="govuk-table__cell" data-tooltip="PREPERED MISCELLANEOUS FOODSTUFFS:SOUPS AND BROTHS AND PREPARATIONS THEREFOR; HOMOGENISED COMPOSITE FOOD PREPARATIONS"><span>PREPERED MISCELLANEOUS FOODSTUFFS:SO ...</span></td> -->
@@ -134,7 +173,7 @@
       </tr>
     </thead>
     <tbody class="govuk-table__body">
-      <tr class="govuk-table__row">
+      <tr class="govuk-table__row no-match">
         <td class="govuk-table__cell">4</td>
         <td class="govuk-table__cell">203121100</td>
         <!-- <td class="govuk-table__cell" data-tooltip="EDIBLE OFFAL OF BOVINE ANIMALS, SWINE, SHEEP, GOATS, HORSES, ASSES, MULES OR HINNIES, FRESH, CHILLED OR FROZEN"><span>EDIBLE OFFAL OF BOVINE ANIMALS SWINE ...</span></td> -->
@@ -169,7 +208,7 @@
             </ul>
         </td>
       </tr>
-      <tr class="govuk-table__row">
+      <tr class="govuk-table__row no-match">
         <td class="govuk-table__cell">5</td>
         <td class="govuk-table__cell">203121900</td>
         <td class="govuk-table__cell" tabindex="0">
@@ -202,7 +241,7 @@
             </ul>
         </td>
       </tr>
-      <tr class="govuk-table__row">
+      <tr class="govuk-table__row no-match">
         <td class="govuk-table__cell">6</td>
         <td class="govuk-table__cell">203191500</td>
         <td class="govuk-table__cell" tabindex="0">
@@ -237,7 +276,7 @@
             </ul>
         </td>
       </tr>
-      <tr class="govuk-table__row">
+      <tr class="govuk-table__row no-match">
         <td class="govuk-table__cell">7</td>
         <td class="govuk-table__cell">203191500</td>
         <!-- <td class="govuk-table__cell" data-tooltip="MEAT OF SWINE FRESH CHILLED OR FROZEN FOODS"><span>MEAT OF SWINE FRESH CHILLED OR FROZE ...</span></td> -->
@@ -275,7 +314,41 @@
               </li>
             </ul>
         </td>
-      </tr>     
+      </tr>    
+      <tr class="govuk-table__row match">
+        <td class="govuk-table__cell">8</td>
+        <td class="govuk-table__cell">1601009911</td>
+        <!-- <td class="govuk-table__cell" data-tooltip="MEAT OF SWINE FRESH CHILLED OR FROZEN FOODS"><span>MEAT OF SWINE FRESH CHILLED OR FROZE ...</span></td> -->
+        <td class="govuk-table__cell" tabindex="0">
+          <span>SAUSAGES AND SIMILAR PRODUCTS, OF MEAT ...</span>
+          <span class="tooltip" role="tooltip">
+            SAUSAGES AND SIMILAR PRODUCTS, OF MEAT, MEAT OFFAL, BLOOD OR INSECTS; FOOD PREPARATIONS BASED ON THESE PRODUCTS
+
+          </span>
+      </td>
+        <td class="govuk-table__cell">56.96</td>
+        <td class="govuk-table__cell">
+          <ul class="govuk-list">
+            <li >
+              GBCHD2024.4777419
+            </li>
+            <li>
+              GBCHD2024.4777515
+            </li>
+            <li>
+              GBCHD2024.4777500
+            </li>
+        </ul>
+        </td>
+        <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Yes</strong></td>
+        <td class="govuk-table__cell decision">  
+            <ul class="govuk-list">
+              <li>
+                Release - Inspection Complete <span>(PHA-POAO)</span>
+              </li>
+            </ul>
+        </td>
+      </tr>   
     </tbody>
   </table>
 </div>
@@ -518,19 +591,46 @@
     </tbody>
   </table>
 </div>
-
 <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const matchSelect = document.getElementById("match");
+    const clearFilterLink = document.querySelector(".clear-filter");
+    const tableRows = document.querySelectorAll(".govuk-table__body tr");
 
+    matchSelect.addEventListener("change", function () {
+      const selectedValue = matchSelect.value;
 
+      // Show or hide the "Clear filters" link
+      if (selectedValue === "match" || selectedValue === "noMatch") {
+        clearFilterLink.style.display = "inline-block"; // Show the link
+      } else {
+        clearFilterLink.style.display = "none"; // Hide the link
+      }
 
+      // Filter the table rows
+      tableRows.forEach(row => {
+        const isMatchRow = row.classList.contains("match");
+        const isNoMatchRow = row.classList.contains("no-match");
 
+        if (selectedValue === "show-all") {
+          row.style.display = ""; // Show all rows
+        } else if (selectedValue === "match") {
+          row.style.display = isMatchRow ? "" : "none"; // Show only "Yes" rows
+        } else if (selectedValue === "noMatch") {
+          row.style.display = isNoMatchRow ? "" : "none"; // Show only "No" rows
+        }
+      });
+    });
 
-
-
-
-
-
+    // Clear filters functionality
+    clearFilterLink.addEventListener("click", function (e) {
+      e.preventDefault(); // Prevent the default link behavior
+      matchSelect.value = "show-all"; // Reset the dropdown to "Show all"
+      matchSelect.dispatchEvent(new Event("change")); // Trigger the change event
+    });
+  });
 </script>
+
 
 
 {% endblock %}
