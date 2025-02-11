@@ -4,6 +4,22 @@
 
 
 .mrn {
+  .inline-form-group {
+    display: flex;
+    align-items: center; /* Align items vertically in the center */
+    gap: 20px; /* Adjust spacing between elements */
+}
+
+.inline-form-group .govuk-form-group {
+    margin-bottom: 10px; /* Remove extra spacing */
+} 
+.clear-filter {
+  display: inline-block;
+    padding-top: 6px;
+    margin-top: 20px;
+}
+
+
   .govuk-width-container {
     max-width: 1200px;
   }
@@ -66,7 +82,7 @@
   dt  {
     font-size: 14px;
   }
-  .govuk-inset-text, .govuk-label, .govuk-select {
+  .govuk-inset-text, .govuk-label, .govuk-select, .govuk-inset-text p {
     font-size: 16px;
 
   }

@@ -48,22 +48,7 @@
    </div>
 </div>
 
-<style>
-.inline-form-group {
-    display: flex;
-    align-items: center; /* Align items vertically in the center */
-    gap: 20px; /* Adjust spacing between elements */
-}
 
-.inline-form-group .govuk-form-group {
-    margin-bottom: 10px; /* Remove extra spacing */
-} 
-.clear-filter {
-  display: inline-block;
-    padding-top: 6px;
-    margin-top: 20px;
-}
-</style>
 
 <div class="mrn-container">
   <div class="container govuk-body">
@@ -352,7 +337,12 @@
     </tbody>
   </table>
 </div>
+<div class="govuk-inset-text" style="display: none;">
 
+    <p>There are no commodities that match the filters selected. </p>
+    
+    <p>Please adjust your search criteria and try again.</p>
+  </div>
 
 <h2 class="govuk-heading-m sectionHeader ched-header">IPAFFS notification (CHED) details</h2>
 
@@ -591,65 +581,7 @@
     </tbody>
   </table>
 </div>
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const matchSelect = document.getElementById("match");
-    const decisionSelect = document.getElementById("decision");
-    const clearFilterLink = document.querySelector(".clear-filter");
-    const tableRows = document.querySelectorAll(".mrn-container tr");
-
-    // Function to filter rows based on both dropdowns
-    function filterRows() {
-      const matchValue = matchSelect.value;
-      const decisionValue = decisionSelect.value;
-
-      tableRows.forEach(row => {
-        const isMatchRow = row.classList.contains("match");
-        const isNoMatchRow = row.classList.contains("no-match");
-        const isHoldRow = row.classList.contains("hold");
-        const isReleaseRow = row.classList.contains("release");
-
-        // Match filter logic
-        const matchFilter =
-          matchValue === "show-all" ||
-          (matchValue === "match" && isMatchRow) ||
-          (matchValue === "noMatch" && isNoMatchRow);
-
-        // Decision filter logic
-        const decisionFilter =
-          decisionValue === "show-all" ||
-          (decisionValue === "hold" && isHoldRow) ||
-          (decisionValue === "release" && isReleaseRow);
-
-        // Show or hide the row based on both filters
-        if (matchFilter && decisionFilter) {
-          row.style.display = "";
-        } else {
-          row.style.display = "none";
-        }
-      });
-
-      // Show or hide the "Clear filters" link
-      if (matchValue !== "show-all" || decisionValue !== "show-all") {
-        clearFilterLink.style.display = "inline";
-      } else {
-        clearFilterLink.style.display = "none";
-      }
-    }
-
-    // Add event listeners to both dropdowns
-    matchSelect.addEventListener("change", filterRows);
-    decisionSelect.addEventListener("change", filterRows);
-
-    // Clear filters functionality
-    clearFilterLink.addEventListener("click", function (e) {
-      e.preventDefault(); // Prevent the default link behavior
-      matchSelect.value = "show-all"; // Reset the "Match" dropdown
-      decisionSelect.value = "show-all"; // Reset the "Decision" dropdown
-      filterRows(); // Trigger the filtering logic
-    });
-  });
-</script>
+<script></script>
 
 
 
