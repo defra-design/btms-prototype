@@ -46,7 +46,9 @@
     </select>
   </div>
   <div class="govuk-form-group">
-     <a class="clear-filter" href="#" style="display: none;">Clear filters</a>
+    <a href="#" class="clear-filter" >Clear Filters</a>
+
+
    </div>
 </div>
 <div class="mrn-container">
@@ -578,98 +580,94 @@
     border-left: 10px solid #b1b4b6;
 
   }
+
 </style>
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    const matchSelect = document.getElementById("match");
-    const decisionSelect = document.getElementById("decision");
-    const clearFilterLink = document.querySelector(".clear-filter");
-    const mrnContainers = document.querySelectorAll(".mrn-container");
-    const insetText = document.querySelector(".govuk-inset-text");
-  
-    function filterRows() {
-      let allRowsHidden = true; // Assume all rows are hidden initially
-  
-      mrnContainers.forEach(container => {
-        const table = container.querySelector(".govuk-table");
-        const tableHead = table.querySelector(".govuk-table__head");
-        const tableRows = container.querySelectorAll(".govuk-table__body tr");
-        const matchValue = matchSelect.value;
-        const decisionValue = decisionSelect.value;
-        let containerHidden = true; // Assume all rows in this container are hidden
-        let noDataMessage = container.querySelector(".no-data-message");
-  
-        if (!noDataMessage) {
-          noDataMessage = document.createElement("p");
-          noDataMessage.className = "no-data-message govuk-body";
-          noDataMessage.innerText = "This are no commodities that match the filters selected.";
-          noDataMessage.style.display = "none";
-          container.appendChild(noDataMessage);
-        }
-  
-        tableRows.forEach(row => {
-          const isMatchRow = row.classList.contains("match");
-          const isNoMatchRow = row.classList.contains("no-match");
-          const isHoldRow = row.classList.contains("hold");
-          const isReleaseRow = row.classList.contains("release");
-  
-          // Match filter logic
-          const matchFilter =
-            matchValue === "show-all" ||
-            (matchValue === "match" && isMatchRow) ||
-            (matchValue === "noMatch" && isNoMatchRow);
-  
-          // Decision filter logic
-          const decisionFilter =
-            decisionValue === "show-all" ||
-            (decisionValue === "hold" && isHoldRow) ||
-            (decisionValue === "release" && isReleaseRow);
-  
-          // Show or hide the row based on both filters
-          if (matchFilter && decisionFilter) {
-            row.style.display = "";
-            containerHidden = false; // At least one row is visible
-            allRowsHidden = false; // At least one row in any container is visible
-          } else {
-            row.style.display = "none";
-          }
-        });
-  
-        // Show or hide the table head and no data message based on whether any rows are visible
-        if (containerHidden) {
-          tableHead.style.display = "none"; // Hide the table header
-          noDataMessage.style.display = "block"; // Show the no data message
-        } else {
-          tableHead.style.display = ""; // Show the table header
-          noDataMessage.style.display = "none"; // Hide the no data message
-        }
+      const matchSelect = document.getElementById("match");
+      const decisionSelect = document.getElementById("decision");
+      const clearFilterLink = document.querySelector(".clear-filter");
+      const mrnContainers = document.querySelectorAll(".mrn-container");
+      const insetText = document.querySelector(".govuk-inset-text");
+
+      function filterRows() {
+          let allRowsHidden = true;
+
+          mrnContainers.forEach(container => {
+              const table = container.querySelector(".govuk-table");
+              const tableHead = table.querySelector(".govuk-table__head");
+              const tableRows = container.querySelectorAll(".govuk-table__body tr");
+              const matchValue = matchSelect.value;
+              const decisionValue = decisionSelect.value;
+              let containerHidden = true;
+              let noDataMessage = container.querySelector(".no-data-message");
+
+              if (!noDataMessage) {
+                  noDataMessage = document.createElement("p");
+                  noDataMessage.className = "no-data-message govuk-body";
+                  noDataMessage.innerText = "There are no commodities that match the filters selected.";
+                  noDataMessage.style.display = "none";
+                  container.appendChild(noDataMessage);
+              }
+
+              tableRows.forEach(row => {
+                  const isMatchRow = row.classList.contains("match");
+                  const isNoMatchRow = row.classList.contains("no-match");
+                  const isHoldRow = row.classList.contains("hold");
+                  const isReleaseRow = row.classList.contains("release");
+
+                  const matchFilter =
+                      matchValue === "show-all" ||
+                      (matchValue === "match" && isMatchRow) ||
+                      (matchValue === "noMatch" && isNoMatchRow);
+
+                  const decisionFilter =
+                      decisionValue === "show-all" ||
+                      (decisionValue === "hold" && isHoldRow) ||
+                      (decisionValue === "release" && isReleaseRow);
+
+                  if (matchFilter && decisionFilter) {
+                      row.style.display = "";
+                      containerHidden = false;
+                      allRowsHidden = false;
+                  } else {
+                      row.style.display = "none";
+                  }
+              });
+
+              if (containerHidden) {
+                  tableHead.style.display = "none";
+                  noDataMessage.style.display = "block";
+              } else {
+                  tableHead.style.display = "";
+                  noDataMessage.style.display = "none";
+              }
+          });
+
+          insetText.style.display = allRowsHidden ? "block" : "none";
+
+          // Show or hide the "Clear filters" link based on filter selections
+          clearFilterLink.style.display =
+              matchSelect.value !== "show-all" || decisionSelect.value !== "show-all"
+                  ? "inline-block"
+                  : "none";
+      }
+
+      // Add event listeners to both dropdowns
+      matchSelect.addEventListener("change", filterRows);
+      decisionSelect.addEventListener("change", filterRows);
+
+      // Clear filters functionality
+      clearFilterLink.addEventListener("click", function (e) {
+          e.preventDefault(); // Prevent the default link behavior
+          matchSelect.value = "show-all"; // Reset the "Match" dropdown
+          decisionSelect.value = "show-all"; // Reset the "Decision" dropdown
+          filterRows(); // Trigger the filtering logic
       });
-  
-      // Show or hide the inset text based on whether all rows are hidden
-      insetText.style.display = allRowsHidden ? "block" : "none";
-  
-      // Show or hide the "Clear filters" link
-      clearFilterLink.style.display =
-        matchSelect.value !== "show-all" || decisionSelect.value !== "show-all"
-          ? "inline-block"
-          : "none";
-    }
-  
-    // Add event listeners to both dropdowns
-    matchSelect.addEventListener("change", filterRows);
-    decisionSelect.addEventListener("change", filterRows);
-  
-    // Clear filters functionality
-    clearFilterLink.addEventListener("click", function (e) {
-      e.preventDefault(); // Prevent the default link behavior
-      matchSelect.value = "show-all"; // Reset the "Match" dropdown
-      decisionSelect.value = "show-all"; // Reset the "Decision" dropdown
-      filterRows(); // Trigger the filtering logic
-    });
-  
-    // Initial check in case filtering is applied on page load
-    filterRows();
+
+      // Initial check to hide the "Clear Filters" link when page loads
+      filterRows();
   });
-  </script>
+</script>
   
 {% endblock %}
