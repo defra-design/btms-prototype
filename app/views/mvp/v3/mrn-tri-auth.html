@@ -26,7 +26,29 @@
 {% block form %}
 
 <h2 class="govuk-heading-m sectionHeader">Customs declaration details</h2>
+<div class="inline-form-group">
+  <div class="govuk-form-group">
+    <label class="govuk-label" for="match">Match</label>
+    <select class="govuk-select" id="match" name="match">
+      <option value="show-all" selected>Show all</option>
+      <option value="match">Yes</option>
+      <option value="noMatch">No</option>
+    </select>
+  </div>
 
+  <div class="govuk-form-group">
+    <label class="govuk-label" for="decision">Decision</label>
+    <select class="govuk-select" id="decision" name="decision">
+      <option value="show-all" selected>Show all</option>
+      <option value="hold">Hold</option>
+      <option value="release">Release</option>
+      <option value="refusal">Refusal</option>
+    </select>
+  </div>
+  <div class="govuk-form-group">
+     <a class="clear-filter" href="#" style="display: none;">Clear filters</a>
+   </div>
+</div>
 <div class="mrn-container">
   <div class="container govuk-body">
     <dl class="definition-list ">
@@ -63,8 +85,8 @@
 
       </tr>
     </thead>
-    <tbody class="govuk-table__body">
-      <tr class="govuk-table__row">
+    <tbody class="govuk-table__body ">
+      <tr class="govuk-table__row match hold">
         <td class="govuk-table__cell">1</td>
         <td class="govuk-table__cell">302499000</td>
         <td class="govuk-table__cell">CHILLI PEPPERS</td>
@@ -92,7 +114,7 @@
         </td>
       </tr>
 
-      <tr class="govuk-table__row">
+      <tr class="govuk-table__row match hold">
         <td class="govuk-table__cell">2</td>
         <td class="govuk-table__cell">709601000</td>
         <td class="govuk-table__cell">SWEET PEPPER</td>
@@ -123,7 +145,7 @@
         </td>
       </tr>
 
-      <tr class="govuk-table__row">
+      <tr class="govuk-table__row match hold">
         <td class="govuk-table__cell">3</td>
         <td class="govuk-table__cell">302899080</td>
         <td class="govuk-table__cell">AUBERGINE EGGPLANT</td>
@@ -190,7 +212,7 @@
       </tr>
     </thead>
     <tbody class="govuk-table__body">
-      <tr class="govuk-table__row">
+      <tr class="govuk-table__row match release">
         <td class="govuk-table__cell">1</td>
         <td class="govuk-table__cell">302499000</td>
         <td class="govuk-table__cell">CHILLI PEPPERS</td>
@@ -215,7 +237,7 @@
             </ul>
         </td>
       </tr>
-      <tr class="govuk-table__row">
+      <tr class="govuk-table__row no-match">
         <td class="govuk-table__cell">1</td>
         <td class="govuk-table__cell">302499000</td>
         <td class="govuk-table__cell">CHILLI PEPPERS</td>
@@ -246,7 +268,7 @@
         </td>
       </tr>
 
-      <tr class="govuk-table__row">
+      <tr class="govuk-table__row match hold">
         <td class="govuk-table__cell">2</td>
         <td class="govuk-table__cell">709601000</td>
         <td class="govuk-table__cell">SWEET PEPPER</td>
@@ -277,7 +299,7 @@
         </td>
       </tr>
 
-      <tr class="govuk-table__row">
+      <tr class="govuk-table__row no-match">
         <td class="govuk-table__cell">3</td>
         <td class="govuk-table__cell">302899080</td>
         <td class="govuk-table__cell">AUBERGINE EGGPLANT</td>
@@ -542,5 +564,112 @@
     </tbody>
   </table>
 </div>
+<style>
+  .no-data-message {
+    font-size: 16px;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.25;
+    color: #0b0c0c;
+    padding: 15px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    clear: both;
+    border-left: 10px solid #b1b4b6;
 
+  }
+</style>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const matchSelect = document.getElementById("match");
+    const decisionSelect = document.getElementById("decision");
+    const clearFilterLink = document.querySelector(".clear-filter");
+    const mrnContainers = document.querySelectorAll(".mrn-container");
+    const insetText = document.querySelector(".govuk-inset-text");
+  
+    function filterRows() {
+      let allRowsHidden = true; // Assume all rows are hidden initially
+  
+      mrnContainers.forEach(container => {
+        const table = container.querySelector(".govuk-table");
+        const tableHead = table.querySelector(".govuk-table__head");
+        const tableRows = container.querySelectorAll(".govuk-table__body tr");
+        const matchValue = matchSelect.value;
+        const decisionValue = decisionSelect.value;
+        let containerHidden = true; // Assume all rows in this container are hidden
+        let noDataMessage = container.querySelector(".no-data-message");
+  
+        if (!noDataMessage) {
+          noDataMessage = document.createElement("p");
+          noDataMessage.className = "no-data-message govuk-body";
+          noDataMessage.innerText = "This are no commodities that match the filters selected.";
+          noDataMessage.style.display = "none";
+          container.appendChild(noDataMessage);
+        }
+  
+        tableRows.forEach(row => {
+          const isMatchRow = row.classList.contains("match");
+          const isNoMatchRow = row.classList.contains("no-match");
+          const isHoldRow = row.classList.contains("hold");
+          const isReleaseRow = row.classList.contains("release");
+  
+          // Match filter logic
+          const matchFilter =
+            matchValue === "show-all" ||
+            (matchValue === "match" && isMatchRow) ||
+            (matchValue === "noMatch" && isNoMatchRow);
+  
+          // Decision filter logic
+          const decisionFilter =
+            decisionValue === "show-all" ||
+            (decisionValue === "hold" && isHoldRow) ||
+            (decisionValue === "release" && isReleaseRow);
+  
+          // Show or hide the row based on both filters
+          if (matchFilter && decisionFilter) {
+            row.style.display = "";
+            containerHidden = false; // At least one row is visible
+            allRowsHidden = false; // At least one row in any container is visible
+          } else {
+            row.style.display = "none";
+          }
+        });
+  
+        // Show or hide the table head and no data message based on whether any rows are visible
+        if (containerHidden) {
+          tableHead.style.display = "none"; // Hide the table header
+          noDataMessage.style.display = "block"; // Show the no data message
+        } else {
+          tableHead.style.display = ""; // Show the table header
+          noDataMessage.style.display = "none"; // Hide the no data message
+        }
+      });
+  
+      // Show or hide the inset text based on whether all rows are hidden
+      insetText.style.display = allRowsHidden ? "block" : "none";
+  
+      // Show or hide the "Clear filters" link
+      clearFilterLink.style.display =
+        matchSelect.value !== "show-all" || decisionSelect.value !== "show-all"
+          ? "inline-block"
+          : "none";
+    }
+  
+    // Add event listeners to both dropdowns
+    matchSelect.addEventListener("change", filterRows);
+    decisionSelect.addEventListener("change", filterRows);
+  
+    // Clear filters functionality
+    clearFilterLink.addEventListener("click", function (e) {
+      e.preventDefault(); // Prevent the default link behavior
+      matchSelect.value = "show-all"; // Reset the "Match" dropdown
+      decisionSelect.value = "show-all"; // Reset the "Decision" dropdown
+      filterRows(); // Trigger the filtering logic
+    });
+  
+    // Initial check in case filtering is applied on page load
+    filterRows();
+  });
+  </script>
+  
 {% endblock %}
