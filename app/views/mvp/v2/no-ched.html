@@ -76,8 +76,12 @@
         </ul>
         </td>
         
-        <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Yes</strong></td>
-        <td class="govuk-table__cell decision">  
+        <td class="govuk-table__cell no-match" tabindex="0">
+          <span><strong class="govuk-tag govuk-tag--red message">No</strong></span>
+          <span class="tooltip" role="tooltip">
+            {{ data.noMatch | safe }} GBCHD2024.4777515
+          </span>
+      </td>        <td class="govuk-table__cell decision">  
             <ul class="govuk-list">
               <li>
                 Release - Inspection Complete <span>(PHA-POAO)</span>

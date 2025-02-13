@@ -13,7 +13,7 @@ module.exports = (router) => {
     const searchRedirects = {
       '24GB0Z8WEJ9ZBTL73B': 'mrn',
       '4GB335031931000-WB2408-27WWL6274S': 'mrn',
-      '25GB0HQ0W2IZKO9AR0': 'mrn-auth',
+      'CHEDP.GB.2025.5403171': 'mrn-auth',
       '24GBDX8QQ4WWFZNAR3': 'mrn-try-auth',
       'CHEDPP.GB.2025.5426583': 'no-mrn',
       '25GB0P0TEP7CZCNAR6': 'no-ched'
