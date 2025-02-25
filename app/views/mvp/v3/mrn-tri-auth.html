@@ -46,6 +46,15 @@
     </select>
   </div>
   <div class="govuk-form-group">
+    <label class="govuk-label" for="auth">Authority</label>
+    <select class="govuk-select" id="auth" name="auth">
+      <option value="show-all" selected>Show all</option>
+      <option value="FNAO">PHA-FNAO</option>
+      <option value="HMI">PP-HMI</option>
+      <option value="PHSI">PP-PHSI</option>
+    </select>
+  </div>
+  <div class="govuk-form-group">
     <a href="#" class="clear-filter" >Clear Filters</a>
 
 
@@ -56,7 +65,11 @@
     <dl class="definition-list ">
       <div class="row">
         <dt>MRN</dt>
-        <dd>{{ title }} </dd>
+        <dd>
+          <strong class="govuk-tag govuk-tag--yellow">
+            {{ title }} 
+          </strong>
+        </dd>
       </div>
       <div class="row">
         <dt>DUCR</dt>
@@ -106,10 +119,10 @@
         <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Yes</strong></td>
         <td class="govuk-table__cell decision multi-auth">  
             <ul class="govuk-list">
-              <li>
+              <li class="FNAO">
                 Hold - Awaiting Decision <span>(PHA-FNAO)</span>
               </li>
-              <li>
+              <li class="PHSI">
                 Hold - To Be Inspected <span>(PP-PHSI)</span>
               </li>
             </ul>
@@ -134,13 +147,13 @@
         <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Yes</strong></td>
         <td class="govuk-table__cell decision multi-auth">  
             <ul class="govuk-list">
-              <li>
+              <li class="FNAO">
                 Hold - Awaiting Decision <span>(PHA-FNAO)</span>
               </li>
-              <li>
+              <li class="PHSI">
                 Hold - To Be Inspected <span>(PP-PHSI)</span>
               </li>
-              <li>
+              <li class="HMI">
                 Hold - To Be Inspected <span>(PP-HMI)</span>
               </li>
             </ul>
@@ -163,7 +176,7 @@
         <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Yes</strong></td>
         <td class="govuk-table__cell decision">  
             <ul class="govuk-list">
-              <li>
+              <li class="HMI">
                 Hold - To Be Inspected <span>(PP-HMI)</span>
               </li>
             </ul>
@@ -232,7 +245,7 @@
         <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Yes</strong></td>
         <td class="govuk-table__cell decision">  
             <ul class="govuk-list">
-              <li>
+              <li class="PHSI">
                 Release - Inspection Complete <span>(PP-PHSI)</span>
               </li>
                       
@@ -262,7 +275,7 @@
       </td>
         <td class="govuk-table__cell decision">  
             <ul class="govuk-list">
-              <li>
+              <li class="FNAO">
                 No match <span>(PHA-FNAO)</span>
               </li>
                       
@@ -288,13 +301,13 @@
         <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Yes</strong></td>
         <td class="govuk-table__cell decision multi-auth">  
             <ul class="govuk-list">
-              <li>
+              <li class="FNAO">
                 Hold - Awaiting Decision <span>(PHA-FNAO)</span>
               </li>
-              <li>
+              <li class="PHSI">
                 Hold - To Be Inspected <span>(PP-PHSI)</span>
               </li>
-              <li>
+              <li class="HMI">
                 Hold - To Be Inspected <span>(PP-HMI)</span>
               </li>
             </ul>
@@ -322,7 +335,7 @@
       </td>
         <td class="govuk-table__cell decision">  
             <ul class="govuk-list">
-              <li>
+              <li class="">
                 No match <span>(PP-HMI)</span>
               </li>
             </ul>

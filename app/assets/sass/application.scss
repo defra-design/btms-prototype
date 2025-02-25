@@ -89,6 +89,10 @@ $govuk-new-typography-scale: true;
     min-width: 120px;
     text-align: center;
 }
+.govuk-tag--yellow {
+  font-weight: 700;
+  max-width: fit-content;
+}
 .commodity-number {
   font-weight: 700;
 }
