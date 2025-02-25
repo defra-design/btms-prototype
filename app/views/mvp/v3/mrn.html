@@ -176,7 +176,7 @@
         <td class="govuk-table__cell">4.74</td>
         <td class="govuk-table__cell">
           <ul class="govuk-list">
-            <li>
+            <li class="error">
               GBCHD2024.4777512
             </li>
         </ul>
@@ -211,7 +211,7 @@
         <td class="govuk-table__cell">102.8</td>
         <td class="govuk-table__cell">
           <ul class="govuk-list">
-            <li>
+            <li class="error">
               GBCHD2024.4777511
             </li>
         </ul>
@@ -243,7 +243,7 @@
         <td class="govuk-table__cell">56.96</td>
         <td class="govuk-table__cell">
           <ul class="govuk-list ">
-            <li >
+            <li class="error">
               GBCHD2024.4777474
             </li>
             <li >
@@ -279,10 +279,10 @@
         <td class="govuk-table__cell">56.96</td>
         <td class="govuk-table__cell">
           <ul class="govuk-list">
-            <li >
+            <li class="error">
               GBCHD2024.4777419
             </li>
-            <li>
+            <li class="error">
               GBCHD2024.4777446
             </li>
             <li>
@@ -344,9 +344,7 @@
 </div>
 <div class="govuk-inset-text" style="display: none;">
 
-    <p>There are no MRN commodities that match the filters selected. </p>
-    
-    <p>Please adjust your search criteria and try again.</p>
+  
   </div>
 
 <h2 class="govuk-heading-m sectionHeader ched-header">IPAFFS notification (CHED) details</h2>
@@ -593,94 +591,92 @@
     margin-top: 20px;
 }
 </style>
-<script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+      const matchSelect = document.getElementById("match");
+      const decisionSelect = document.getElementById("decision");
+      const clearFilterLink = document.querySelector(".clear-filter");
+      const mrnContainers = document.querySelectorAll(".mrn-container");
+      const insetText = document.querySelector(".govuk-inset-text");
 
- // Filters
- document.addEventListener("DOMContentLoaded", function () {
-    const matchSelect = document.getElementById("match");
-    const decisionSelect = document.getElementById("decision");
-    const clearFilterLink = document.querySelector(".clear-filter");
-    const mrnContainers = document.querySelectorAll(".mrn-container");
-    const insetText = document.querySelector(".govuk-inset-text"); // Reference to the inset text
-  
-    // Function to filter rows based on both dropdowns
-    function filterRows() {
-      let allRowsHidden = true; // Assume all rows are hidden initially
-  
-      mrnContainers.forEach(container => {
-        const tableRows = container.querySelectorAll(".govuk-table__body tr");
-        const matchValue = matchSelect.value;
-        const decisionValue = decisionSelect.value;
-        let containerHidden = true; // Assume all rows in this container are hidden
-  
-        tableRows.forEach(row => {
-          const isMatchRow = row.classList.contains("match");
-          const isNoMatchRow = row.classList.contains("no-match");
-          const isHoldRow = row.classList.contains("hold");
-          const isReleaseRow = row.classList.contains("release");
-  
-          // Match filter logic
-          const matchFilter =
-            matchValue === "show-all" ||
-            (matchValue === "match" && isMatchRow) ||
-            (matchValue === "noMatch" && isNoMatchRow);
-  
-          // Decision filter logic
-          const decisionFilter =
-            decisionValue === "show-all" ||
-            (decisionValue === "hold" && isHoldRow) ||
-            (decisionValue === "release" && isReleaseRow);
-  
-          // Show or hide the row based on both filters
-          if (matchFilter && decisionFilter) {
-            row.style.display = "";
-            containerHidden = false; // At least one row is visible
-            allRowsHidden = false; // At least one row in any container is visible
-          } else {
-            row.style.display = "none";
-          }
-        });
-  
-        // Hide or show the container based on whether any rows are visible
-        if (containerHidden) {
-          container.style.display = "none";
-        } else {
-          container.style.display = "";
-        }
+      function filterRows() {
+          let allRowsHidden = true;
+
+          mrnContainers.forEach(container => {
+              const table = container.querySelector(".govuk-table");
+              const tableHead = table.querySelector(".govuk-table__head");
+              const tableRows = container.querySelectorAll(".govuk-table__body tr");
+              const matchValue = matchSelect.value;
+              const decisionValue = decisionSelect.value;
+              let containerHidden = true;
+              let noDataMessage = container.querySelector(".no-data-message");
+
+              if (!noDataMessage) {
+                  noDataMessage = document.createElement("p");
+                  noDataMessage.className = "no-data-message govuk-body";
+                  noDataMessage.innerText = "There are no commodities that match the filters selected.";
+                  noDataMessage.style.display = "none";
+                  container.appendChild(noDataMessage);
+              }
+
+              tableRows.forEach(row => {
+                  const isMatchRow = row.classList.contains("match");
+                  const isNoMatchRow = row.classList.contains("no-match");
+                  const isHoldRow = row.classList.contains("hold");
+                  const isReleaseRow = row.classList.contains("release");
+
+                  const matchFilter =
+                      matchValue === "show-all" ||
+                      (matchValue === "match" && isMatchRow) ||
+                      (matchValue === "noMatch" && isNoMatchRow);
+
+                  const decisionFilter =
+                      decisionValue === "show-all" ||
+                      (decisionValue === "hold" && isHoldRow) ||
+                      (decisionValue === "release" && isReleaseRow);
+
+                  if (matchFilter && decisionFilter) {
+                      row.style.display = "";
+                      containerHidden = false;
+                      allRowsHidden = false;
+                  } else {
+                      row.style.display = "none";
+                  }
+              });
+
+              if (containerHidden) {
+                  tableHead.style.display = "none";
+                  noDataMessage.style.display = "block";
+              } else {
+                  tableHead.style.display = "";
+                  noDataMessage.style.display = "none";
+              }
+          });
+
+          insetText.style.display = allRowsHidden ? "block" : "none";
+
+          // Show or hide the "Clear filters" link based on filter selections
+          clearFilterLink.style.display =
+              matchSelect.value !== "show-all" || decisionSelect.value !== "show-all"
+                  ? "inline-block"
+                  : "none";
+      }
+
+      // Add event listeners to both dropdowns
+      matchSelect.addEventListener("change", filterRows);
+      decisionSelect.addEventListener("change", filterRows);
+
+      // Clear filters functionality
+      clearFilterLink.addEventListener("click", function (e) {
+          e.preventDefault(); // Prevent the default link behavior
+          matchSelect.value = "show-all"; // Reset the "Match" dropdown
+          decisionSelect.value = "show-all"; // Reset the "Decision" dropdown
+          filterRows(); // Trigger the filtering logic
       });
-  
-      // Show or hide the inset text based on whether all rows are hidden
-      if (allRowsHidden) {
-        insetText.style.display = "block"; // Show the inset text
-      } else {
-        insetText.style.display = "none"; // Hide the inset text
-      }
-  
-      // Show or hide the "Clear filters" link
-      if (matchSelect.value !== "show-all" || decisionSelect.value !== "show-all") {
-        clearFilterLink.style.display = "inline-block";
-      } else {
-        clearFilterLink.style.display = "none";
-      }
-    }
-  
-    // Add event listeners to both dropdowns
-    matchSelect.addEventListener("change", filterRows);
-    decisionSelect.addEventListener("change", filterRows);
-  
-    // Clear filters functionality
-    clearFilterLink.addEventListener("click", function (e) {
-      e.preventDefault(); // Prevent the default link behavior
-      matchSelect.value = "show-all"; // Reset the "Match" dropdown
-      decisionSelect.value = "show-all"; // Reset the "Decision" dropdown
-      filterRows(); // Trigger the filtering logic
-    });
-  
-    // Initial check in case filtering is applied on page load
-    filterRows();
+
+      // Initial check to hide the "Clear Filters" link when page loads
+      filterRows();
   });
-
-
 </script>
 
 
