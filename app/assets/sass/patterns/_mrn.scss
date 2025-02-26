@@ -168,5 +168,44 @@
     margin-bottom: 0;
   }
 
+
+  .no-data-message {
+    font-size: 16px;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.25;
+    color: #0b0c0c;
+    padding: 15px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    clear: both;
+    border-left: 10px solid #b1b4b6;
+
+  }
+  .error{
+    color: #d4351c;
+  }
+   .govuk-table__cell.multi-auth ul li.visible-li{
+  border-top: none;
+    padding-top: initial;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.breadcrumbs-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.download-link {
+  font-weight: bold;
+  text-decoration: none;
+  margin-left: auto;
+}
+
+.download-link::before {
+  content: "📄 "; /* Optional: Add an icon before the link */
+}
 }
 

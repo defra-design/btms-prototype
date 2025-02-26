@@ -41,7 +41,13 @@
       <option value="show-all" selected>Show all</option>
       <option value="hold">Hold</option>
       <option value="release">Release</option>
-      <option value="refusal">Refused</option>
+    </select>
+  </div>
+  <div class="govuk-form-group">
+    <label class="govuk-label" for="auth">Authority</label>
+    <select class="govuk-select" id="auth" name="auth">
+      <option value="show-all" selected>Select all</option>
+      <option value="POAO">PHA-POAO</option>
     </select>
   </div>
   <div class="govuk-form-group">
@@ -92,7 +98,7 @@
       </tr>
     </thead>
     <tbody class="govuk-table__body">
-      <tr class="govuk-table__row match hold">
+      <tr class="govuk-table__row match hold POAO">
         <td class="govuk-table__cell">5</td>
         <td class="govuk-table__cell">2104200090</td>
         <!-- <td class="govuk-table__cell" data-tooltip="PREPERED MISCELLANEOUS FOODSTUFFS:SOUPS AND BROTHS AND PREPARATIONS THEREFOR; HOMOGENISED COMPOSITE FOOD PREPARATIONS"><span>PREPERED MISCELLANEOUS FOODSTUFFS:SO ...</span></td> -->
@@ -114,8 +120,8 @@
         <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Yes</strong></td>
         <td class="govuk-table__cell decision">  
             <ul class="govuk-list">
-              <li>
-                Hold Awaiting decision <span>(PHA-POAO)</span>
+              <li class="POAO">
+                Hold - Awaiting decision <span>(PHA-POAO)</span>
               </li>
             </ul>
         </td>
@@ -163,7 +169,7 @@
       </tr>
     </thead>
     <tbody class="govuk-table__body">
-      <tr class="govuk-table__row no-match">
+      <tr class="govuk-table__row no-match POAO">
         <td class="govuk-table__cell">4</td>
         <td class="govuk-table__cell">203121100</td>
         <!-- <td class="govuk-table__cell" data-tooltip="EDIBLE OFFAL OF BOVINE ANIMALS, SWINE, SHEEP, GOATS, HORSES, ASSES, MULES OR HINNIES, FRESH, CHILLED OR FROZEN"><span>EDIBLE OFFAL OF BOVINE ANIMALS SWINE ...</span></td> -->
@@ -192,13 +198,13 @@
         <!-- <td class="govuk-table__cell no-match" data-tooltip="{{ data.noMatch }} GBCHD2024.4777512"><strong class="govuk-tag govuk-tag--red message">No</strong></td> -->
         <td class="govuk-table__cell decision">  
             <ul class="govuk-list">
-              <li>
+              <li class="POAO">
                 No match <span>(PHA-POAO)</span>
               </li>
             </ul>
         </td>
       </tr>
-      <tr class="govuk-table__row no-match">
+      <tr class="govuk-table__row no-match POAO">
         <td class="govuk-table__cell">5</td>
         <td class="govuk-table__cell">203121900</td>
         <td class="govuk-table__cell" tabindex="0">
@@ -225,13 +231,13 @@
       </td>
         <td class="govuk-table__cell decision">  
             <ul class="govuk-list">
-              <li>
+              <li class="POAO">
                 No match <span>(PHA-POAO)</span>
               </li>
             </ul>
         </td>
       </tr>
-      <tr class="govuk-table__row no-match">
+      <tr class="govuk-table__row no-match POAO">
         <td class="govuk-table__cell">6</td>
         <td class="govuk-table__cell">203191500</td>
         <td class="govuk-table__cell" tabindex="0">
@@ -260,13 +266,13 @@
         <!-- <td class="govuk-table__cell no-match" data-tooltip="{{ data.noMatch }} GBCHD2024.4777474"><strong class="govuk-tag govuk-tag--red message">No</strong></td> -->
         <td class="govuk-table__cell decision">  
             <ul class="govuk-list">
-              <li>
+              <li class="POAO">
                 No match <span>(PHA-POAO)</span>
               </li>
             </ul>
         </td>
       </tr>
-      <tr class="govuk-table__row no-match">
+      <tr class="govuk-table__row no-match POAO">
         <td class="govuk-table__cell">7</td>
         <td class="govuk-table__cell">203191500</td>
         <!-- <td class="govuk-table__cell" data-tooltip="MEAT OF SWINE FRESH CHILLED OR FROZEN FOODS"><span>MEAT OF SWINE FRESH CHILLED OR FROZE ...</span></td> -->
@@ -299,13 +305,13 @@
         <!-- <td class="govuk-table__cell no-match" data-tooltip="{{ data.noMatch }} GBCHD2024.4777446 <br>GBCHD2024.4777458"><strong class="govuk-tag govuk-tag--red message">No</strong></td> -->
         <td class="govuk-table__cell decision">  
             <ul class="govuk-list">
-              <li>
+              <li class="POAO">
                 No match <span>(PHA-POAO)</span>
               </li>
             </ul>
         </td>
       </tr>    
-      <tr class="govuk-table__row match release">
+      <tr class="govuk-table__row match release POAO">
         <td class="govuk-table__cell">8</td>
         <td class="govuk-table__cell">1601009911</td>
         <!-- <td class="govuk-table__cell" data-tooltip="MEAT OF SWINE FRESH CHILLED OR FROZEN FOODS"><span>MEAT OF SWINE FRESH CHILLED OR FROZE ...</span></td> -->
@@ -333,8 +339,8 @@
         <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Yes</strong></td>
         <td class="govuk-table__cell decision">  
             <ul class="govuk-list">
-              <li>
-                Release - Inspection Complete <span>(PHA-POAO)</span>
+              <li class="POAO">
+                Release - Inspection complete <span>(PHA-POAO)</span>
               </li>
             </ul>
         </td>
@@ -342,10 +348,7 @@
     </tbody>
   </table>
 </div>
-<div class="govuk-inset-text" style="display: none;">
 
-  
-  </div>
 
 <h2 class="govuk-heading-m sectionHeader ched-header">IPAFFS notification (CHED) details</h2>
 
@@ -584,100 +587,6 @@
     </tbody>
   </table>
 </div>
-<style>
-  .clear-filter {
-  display: inline-block;
-    padding-top: 6px;
-    margin-top: 20px;
-}
-</style>
-  <script>
-  document.addEventListener("DOMContentLoaded", function () {
-      const matchSelect = document.getElementById("match");
-      const decisionSelect = document.getElementById("decision");
-      const clearFilterLink = document.querySelector(".clear-filter");
-      const mrnContainers = document.querySelectorAll(".mrn-container");
-      const insetText = document.querySelector(".govuk-inset-text");
-
-      function filterRows() {
-          let allRowsHidden = true;
-
-          mrnContainers.forEach(container => {
-              const table = container.querySelector(".govuk-table");
-              const tableHead = table.querySelector(".govuk-table__head");
-              const tableRows = container.querySelectorAll(".govuk-table__body tr");
-              const matchValue = matchSelect.value;
-              const decisionValue = decisionSelect.value;
-              let containerHidden = true;
-              let noDataMessage = container.querySelector(".no-data-message");
-
-              if (!noDataMessage) {
-                  noDataMessage = document.createElement("p");
-                  noDataMessage.className = "no-data-message govuk-body";
-                  noDataMessage.innerText = "There are no commodities that match the filters selected.";
-                  noDataMessage.style.display = "none";
-                  container.appendChild(noDataMessage);
-              }
-
-              tableRows.forEach(row => {
-                  const isMatchRow = row.classList.contains("match");
-                  const isNoMatchRow = row.classList.contains("no-match");
-                  const isHoldRow = row.classList.contains("hold");
-                  const isReleaseRow = row.classList.contains("release");
-
-                  const matchFilter =
-                      matchValue === "show-all" ||
-                      (matchValue === "match" && isMatchRow) ||
-                      (matchValue === "noMatch" && isNoMatchRow);
-
-                  const decisionFilter =
-                      decisionValue === "show-all" ||
-                      (decisionValue === "hold" && isHoldRow) ||
-                      (decisionValue === "release" && isReleaseRow);
-
-                  if (matchFilter && decisionFilter) {
-                      row.style.display = "";
-                      containerHidden = false;
-                      allRowsHidden = false;
-                  } else {
-                      row.style.display = "none";
-                  }
-              });
-
-              if (containerHidden) {
-                  tableHead.style.display = "none";
-                  noDataMessage.style.display = "block";
-              } else {
-                  tableHead.style.display = "";
-                  noDataMessage.style.display = "none";
-              }
-          });
-
-          insetText.style.display = allRowsHidden ? "block" : "none";
-
-          // Show or hide the "Clear filters" link based on filter selections
-          clearFilterLink.style.display =
-              matchSelect.value !== "show-all" || decisionSelect.value !== "show-all"
-                  ? "inline-block"
-                  : "none";
-      }
-
-      // Add event listeners to both dropdowns
-      matchSelect.addEventListener("change", filterRows);
-      decisionSelect.addEventListener("change", filterRows);
-
-      // Clear filters functionality
-      clearFilterLink.addEventListener("click", function (e) {
-          e.preventDefault(); // Prevent the default link behavior
-          matchSelect.value = "show-all"; // Reset the "Match" dropdown
-          decisionSelect.value = "show-all"; // Reset the "Decision" dropdown
-          filterRows(); // Trigger the filtering logic
-      });
-
-      // Initial check to hide the "Clear Filters" link when page loads
-      filterRows();
-  });
-</script>
 
 
 

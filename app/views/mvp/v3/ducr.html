@@ -29,6 +29,34 @@
 
 
 <h2 class="govuk-heading-m sectionHeader">Customs declaration details</h2>
+<div class="inline-form-group">
+  <div class="govuk-form-group">
+    <label class="govuk-label" for="match">Match</label>
+    <select class="govuk-select" id="match" name="match">
+      <option value="show-all" selected>Show all</option>
+      <option value="match">Yes</option>
+    </select>
+  </div>
+
+  <div class="govuk-form-group">
+    <label class="govuk-label" for="decision">Decision</label>
+    <select class="govuk-select" id="decision" name="decision">
+      <option value="show-all" selected>Show all</option>
+      <option value="release">Release</option>
+    </select>
+  </div>
+  <div class="govuk-form-group">
+    <label class="govuk-label" for="auth">Authority</label>
+    <select class="govuk-select" id="auth" name="auth">
+      <option value="show-all" selected>Select all</option>
+      <option value="IUU">PHA-IUU</option>
+      <option value="POAO">PHA-POAO</option>
+    </select>
+  </div>
+  <div class="govuk-form-group">
+     <a class="clear-filter" href="#" style="display: none;">Clear filters</a>
+   </div>
+</div>
 
 <div class="mrn-container">
   <div class="container govuk-body">
@@ -70,8 +98,8 @@
 
       </tr>
     </thead>
-    <tbody class="govuk-table__body">
-      <tr class="govuk-table__row">
+    <tbody class="govuk-table__body ">
+      <tr class="govuk-table__row match release POAO IUU">
         <td class="govuk-table__cell">1</td>
         <td class="govuk-table__cell">302499000</td>
         <td class="govuk-table__cell">FISH 157-13722170</td>
@@ -89,17 +117,17 @@
         <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Yes</strong></td>
         <td class="govuk-table__cell decision multi-auth">  
             <ul class="govuk-list">
-              <li>
+              <li class="POAO">
                 Release - Inspection Complete <span>(PHA-POAO)</span>
               </li>
-              <li>
+              <li class="IUU">
                 Release - Inspection Complete <span>(PHA-IUU)</span>
               </li>
             </ul>
         </td>
       </tr>
 
-      <tr class="govuk-table__row">
+      <tr class="govuk-table__row match release POAO IUU">
         <td class="govuk-table__cell">2</td>
         <td class="govuk-table__cell">302899090</td>
         <td class="govuk-table__cell">FISH 157-13722170</td>
@@ -117,10 +145,10 @@
         <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Yes</strong></td>
         <td class="govuk-table__cell decision multi-auth">  
             <ul class="govuk-list">
-              <li>
+              <li class="POAO">
                 Release - Inspection Complete <span>(PHA-POAO)</span>
               </li>
-              <li>
+              <li class="IUU">
                 Release - Inspection Complete <span>(PHA-IUU)</span>
               </li>
             </ul>
@@ -131,13 +159,7 @@
 </div>
 
 
-<style>
-  .govuk-tag {
-  max-width: 100%;
-  color: #0b0c0c;
-  margin: 0;
-  }
-</style>
+
 
 <h2 class="govuk-heading-m sectionHeader ched-header">IPAFFS notification (CHED) details</h2>
 
