@@ -27,10 +27,10 @@ module.exports = (router) => {
 
     // Define error cases
     const errorCases = {
-      '25GB0P0T': 'Enter a valid MRN or CHED reference in the correct format',
-      '': 'Enter an MRN or CHED reference',
-      'CHEDP.GB.2024.4433124': 'This MRN or CHED reference cannot be found',
-      '24GBDX8QQ4WWFJHGA4': 'This MRN or CHED reference cannot be found'
+      '25GB0P0T': 'Enter a valid MRN, CHED or DUCR reference in the correct format',
+      '': 'Enter an MRN, CHED or DUCR reference',
+      'CHEDP.GB.2024.4433124': 'This MRN, CHED or DUCR reference cannot be found',
+      '24GBDX8QQ4WWFJHGA4': 'This MRN, CHED or DUCR reference cannot be found'
     };
 
     // If the search term is one of the error cases, set the error message
@@ -43,7 +43,7 @@ module.exports = (router) => {
 
     // For any other search term (not in redirects or error cases), show a general error message
     data.error = 'true';
-    data.errorMessage = 'You must enter a valid MRN or CHED';
+    data.errorMessage = 'Enter a valid MRN, CHED or DUCR reference in the correct format';
     data.searchTerm = search; // Save search term to session
     return res.redirect('search');
   });
