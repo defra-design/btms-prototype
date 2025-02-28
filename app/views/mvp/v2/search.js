@@ -27,7 +27,7 @@ module.exports = (router) => {
     // Define error cases
     const errorCases = {
       '25GB0P0T': 'Enter a valid MRN or CHED reference in the correct format',
-      '': 'Enter a valid MRN or CHED reference in the correct format',
+      '': 'Enter an MRN or CHED reference',
       'CHEDP.GB.2024.4433124': 'This MRN or CHED reference cannot be found',
       '24GBDX8QQ4WWFJHGA4': 'This MRN or CHED reference cannot be found'
     };
