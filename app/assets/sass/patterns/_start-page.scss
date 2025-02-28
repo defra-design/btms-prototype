@@ -1,0 +1,97 @@
+////
+/// @group patterns/start-page
+////
+.start-page{
+  .govuk-phase-banner {
+    margin-bottom: govuk-spacing(6);
+    border-bottom-color: govuk-colour("light-blue");
+  }
+  
+  main {
+    padding-top: 0;
+  }
+
+  .govuk-phase-banner {
+    padding-top: govuk-spacing(1);
+    padding-bottom: govuk-spacing(3);
+    background-color: govuk-colour("blue");
+  }
+  .govuk-phase-banner__content, .govuk-phase-banner__text a{
+    color: govuk-colour("white");
+
+  }
+  .background{
+    background-color: govuk-colour("blue");
+    padding: .5em 0 3em 0;
+
+  }
+  .govuk-grid-column-two-thirds {
+    padding-left: 0;
+  }
+  .govuk-header__container{
+    border-bottom: none;
+  }
+  .govuk-header {
+    border-bottom: 0;
+    padding-bottom: 10px;
+  }
+
+
+.start-page-banner__tag {
+  color: govuk-colour("blue");
+  background-color: govuk-colour("white");
+
+  > :last-child {
+    margin-right: 0 !important;
+    margin-bottom: 0 !important;
+  }
+}
+
+.start-page-banner__heading,
+.start-page-banner__description {
+  margin-bottom: govuk-spacing(6);
+}
+
+.start-page-banner__actions {
+  color: govuk-colour("white");
+  font-family: "GDS Transport", Arial, sans-serif;
+
+  @include govuk-media-query($from: tablet) {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.start-page-banner__text,
+.start-page-banner__link,
+.start-page-banner__link:link,
+.start-page-banner__link:visited,
+.start-page-banner__actions .govuk-link {
+  color: govuk-colour("white");
+}
+
+.start-page-banner__actions p {
+  margin-bottom: 0;
+}
+
+.start-page-banner__button.govuk-button:link,
+.start-page-banner__button.govuk-button:visited,
+.start-page-banner__button.govuk-button:active,
+.start-page-banner__button.govuk-button:hover {
+  margin-bottom: govuk-spacing(3);
+  color: govuk-colour("blue");
+  background-color: govuk-colour("white");
+  box-shadow: 0 2px 0 govuk-colour("blue");
+
+  @include govuk-media-query($from: tablet) {
+    margin-right: govuk-spacing(3);
+    margin-bottom: 0;
+  }
+}
+
+.start-page-banner__button.govuk-button:hover {
+  background-color: govuk-colour("light-grey");
+}
+
+}
+

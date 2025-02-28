@@ -27,20 +27,28 @@
             serviceUrl: 'search',
             navigation: [
                 {
-                    href: "/index",
+                    href: "manage-account",
+                    text: "Manage account",
+                    classes: "test2"
+                },
+                {
+                    href: "sign-out",
                     text: "Sign out",
                     classes: "test2"
                 }
             ] if signedIn != 'false'
         }) 
     }}
+    {% if not hidePhaseBanner %}
 
-    {{ govukPhaseBanner({
-        tag: { 
-        text: "Beta"},
-        html: 'This is a new service. Help us improve it and <a class="govuk-link" href="#">give your feedback (opens in new tab)</a>.',
-        classes: 'govuk-width-container'
-    }) }}
+        {{ govukPhaseBanner({
+            tag: { 
+            text: "Beta"},
+            html: 'This is a new service. Help us improve it and <a class="govuk-link" href="#">give your feedback (opens in new tab)</a>.',
+            classes: 'govuk-width-container'
+        }) }}
+    {% endif %}
+
     {% endblock %}
     
     {% block footer %}
