@@ -6,7 +6,6 @@
 {% set showheader = true %}
 {% set hideBackLink = true %}
 
-
 {% block form %}
 
   <div class="govuk-form-group search-container">
@@ -32,9 +31,13 @@
           <span class="govuk-visually-hidden">Error:</span> {{ data.errorMessage }}
         </p>
       {% endif %}
-      <div class="govuk-input-wrapper">
-        <input class="govuk-input" id="data.searchTerm" name="data.searchTerm" type="text" 
-               value="{{ data.searchTerm }}" />
+      <div class="govuk-input-wrapper" style="position: relative; display: flex; align-items: center;">
+        <input class="govuk-input" id="searchTerm" name="data.searchTerm" type="text" 
+               value="{{ data.searchTerm }}" oninput="toggleClearButton()" style="padding-right: 30px;" />
+        <button type="button" id="clearButton" class="clear-search" onclick="clearSearch()" 
+                style="color:#1d70b8; position: absolute; right: 60px; background: none; border: none; font-size: 30px; cursor: pointer;">
+          &times;
+        </button>
         <button type="submit" class="btms-search__button">
           <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
             <circle cx="10" cy="10" r="8" stroke="#ffffff" stroke-width="2"></circle>
@@ -43,9 +46,25 @@
         </button>
       </div>
     </div>
-    
   </div>
 
+  <script>
+    function toggleClearButton() {
+      const input = document.getElementById('searchTerm');
+      const clearButton = document.getElementById('clearButton');
+      if (input.value.trim() !== '') {
+        clearButton.style.display = 'block';
+      } else {
+        clearButton.style.display = 'none';
+      }
+    }
 
+    function clearSearch() {
+      const input = document.getElementById('searchTerm');
+      input.value = '';
+      toggleClearButton();
+      input.focus();
+    }
+  </script>
 
-  {% endblock %}
+{% endblock %}
