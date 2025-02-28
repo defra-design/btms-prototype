@@ -31,7 +31,13 @@
          <span class="govuk-caption-l">{{subHeader}}</span>
        {% endif %}
        {% if not showheader %}
-        <h1 class="govuk-heading-l">{{ title | safe }}</h1>
+        <div style="display: flex; align-items: baseline; gap: 10px;">
+          <h1 class="govuk-heading-l">{{ title | safe }}</h1>
+          {% if showEdit %}
+          <a href="search?searchTerm=">Change</a>
+
+        {% endif %}
+      </div>
        {% endif %}
 
 
