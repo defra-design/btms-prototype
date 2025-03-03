@@ -2,6 +2,7 @@
 // For guidance on how to add JavaScript see:
 // https://prototype-kit.service.gov.uk/docs/adding-css-javascript-and-images
 //
+  //tooltips 
 
 window.GOVUKPrototypeKit.documentReady(() => {
     document.querySelectorAll('.govuk-table__cell').forEach(cell => {
@@ -51,6 +52,8 @@ window.GOVUKPrototypeKit.documentReady(() => {
       document.getElementById("searchTerm").value = "";
     });
   });
+
+  //filters js functionality 
   
   document.addEventListener("DOMContentLoaded", function () {
       const matchSelect = document.getElementById("match");

@@ -53,22 +53,24 @@
   </div>
 
   <script>
-    function toggleClearButton() {
-      const input = document.getElementById('searchTerm');
-      const clearButton = document.getElementById('clearButton');
-      if (input.value.trim() !== '') {
-        clearButton.style.display = 'block';
-      } else {
-        clearButton.style.display = 'none';
-      }
-    }
+document.addEventListener('DOMContentLoaded', function () {
+  const input = document.getElementById('searchTerm');
+  const clearButton = document.getElementById('clearButton');
 
-    function clearSearch() {
-      const input = document.getElementById('searchTerm');
-      input.value = '';
-      toggleClearButton();
-      input.focus();
-    }
+  function toggleClearButton() {
+    clearButton.style.display = input.value.trim() ? 'block' : 'none';
+  }
+
+  input.addEventListener('input', toggleClearButton);
+  clearButton.addEventListener('click', function () {
+    input.value = '';
+    toggleClearButton();
+    input.focus();
+  });
+
+  toggleClearButton(); // Ensure correct initial state
+});
+
   </script>
 
 {% endblock %}
