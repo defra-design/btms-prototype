@@ -30,12 +30,12 @@
                     href: "manage-account",
                     text: "Manage account",
                     classes: "test2"
-                },
+                } if hideManageAccount != 'true',
                 {
                     href: "sign-out",
                     text: "Sign out",
                     classes: "test2"
-                }
+                } 
             ] if signedIn != 'false'
         }) 
     }}

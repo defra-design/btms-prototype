@@ -40,11 +40,7 @@ module.exports = (router) => {
       return res.redirect('search');
     }
 
-    // For any other search term (not in redirects or error cases), show a general error message
-    data.error = 'true';
-    data.errorMessage = 'Enter a valid MRN or CHED reference in the correct format';
-    data.searchTerm = search; // Save search term to session
-    return res.redirect('search');
+    
   });
 
 
