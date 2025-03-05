@@ -119,10 +119,12 @@
 }
 
   .govuk-table__cell:hover .tooltip,
-  .govuk-table__cell:focus .tooltip {
+  .govuk-table__cell:focus .tooltip, 
+  .tooltip-container:hover .tooltip,
+  .tooltip-container:focus .tooltip{
     visibility: visible;
   }
-  .govuk-table__cell {
+  .govuk-table__cell, .tooltip-container {
     position: relative;
     overflow: visible; /* Ensure tooltip can be fully visible */
     

@@ -22,7 +22,7 @@
           MRN, 24GB0Z8WEJ9ZBTL73B
         </li>
         <li>
-          CHED, CHEDP.GB.2024.4433124 or GBCHD2024.4433124
+          CHED, CHEDP.GB.2025.4433124 or GBCHD2025.4433124
         </li>
         <li>
           DUCR, 4GB335031931000-WB2408-27WWL6274S
@@ -52,25 +52,5 @@
     </div>
   </div>
 
-  <script>
-document.addEventListener('DOMContentLoaded', function () {
-  const input = document.getElementById('searchTerm');
-  const clearButton = document.getElementById('clearButton');
-
-  function toggleClearButton() {
-    clearButton.style.display = input.value.trim() ? 'block' : 'none';
-  }
-
-  input.addEventListener('input', toggleClearButton);
-  clearButton.addEventListener('click', function () {
-    input.value = '';
-    toggleClearButton();
-    input.focus();
-  });
-
-  toggleClearButton(); // Ensure correct initial state
-});
-
-  </script>
 
 {% endblock %}
