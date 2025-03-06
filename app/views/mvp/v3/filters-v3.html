@@ -4,14 +4,16 @@
 {% set hideButton = true %}
 {% set hideBackLink = false %}
 {% set showSubheader = true %}
-{% set showEdit = true %}
 {% set subHeader = 'Showing result for' %}
 {% set title = 'CHEDP.GB.2025.5403171' %}
 {% set bodyClasses = 'mrn' %}
 {% set cssClassName = 'auth' %}
 {% set hideManageAccount = 'false' %}
 
+{% block headIcons %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
+{% endblock %}
 
 {% block beforeContent %}
 <nav class="govuk-breadcrumbs" aria-label="Breadcrumb">
@@ -24,6 +26,7 @@
         {{title}}
       </li>
     </ol>
+    <a href="/public/images/CHEDP.GB.2025.5403171.xlsx" class="govuk-link download-link" download>Download as Excel</a>
   </div>
 </nav>
 <style>
@@ -66,7 +69,7 @@
    </div>
 </div>
 
-<div class="mrn-container">
+<div class="mrn-container" id="mrn-toggle">
   <div class="container govuk-body">
     <dl class="definition-list ">
       <div class="row">
@@ -89,81 +92,90 @@
         <dt>Last updated</dt>
         <dd>{{ '22 May 2024' | mrnTime }}</dd>
       </div>
+ 
     </dl>
   </div>
 
 
+
+
+<div id="commodityTable1" class="commodity-table">
   <table class="govuk-table data-table">
-    <thead class="govuk-table__head">
-      <tr class="govuk-table__row">
-        <th scope="col" class="govuk-table__header" >Item  number</th>
-        <th scope="col" class="govuk-table__header">Commodity code</th>
-        <th scope="col" class="govuk-table__header ">Description</th>
-        <th scope="col" class="govuk-table__header ">Quantity / Weight</th>
-        <th scope="col" class="govuk-table__header" >CHED reference</th>
-        <th scope="col" class="govuk-table__header" >Match</th>
-        <th scope="col" class="govuk-table__header">Decision (authority)</th>
-
-      </tr>
-    </thead>
-    <tbody class="govuk-table__body ">
-      <tr class="govuk-table__row match release POAO IUU">
-        <td class="govuk-table__cell">1</td>
-        <td class="govuk-table__cell">302499000</td>
-        <td class="govuk-table__cell">FISH 157-13722170</td>
-        <td class="govuk-table__cell">90</td>
-        <td class="govuk-table__cell">
-          <ul class="govuk-list">
-            <li>
-              GBCHD2025.5403171
-            </li>
-            <li>
-              GBIUU
-            </li>
-        </ul>
-        </td>
-        <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Yes</strong></td>
-        <td class="govuk-table__cell decision multi-auth">  
+      <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+              <th scope="col" class="govuk-table__header">Item number</th>
+              <th scope="col" class="govuk-table__header">Commodity code</th>
+              <th scope="col" class="govuk-table__header">Description</th>
+              <th scope="col" class="govuk-table__header">Quantity / Weight</th>
+              <th scope="col" class="govuk-table__header">CHED reference</th>
+              <th scope="col" class="govuk-table__header">Match</th>
+              <th scope="col" class="govuk-table__header">Decision (authority)</th>
+          </tr>
+      </thead>
+      <tbody class="govuk-table__body">
+        <tr class="govuk-table__row match release POAO IUU">
+          <td class="govuk-table__cell">1</td>
+          <td class="govuk-table__cell">302499000</td>
+          <td class="govuk-table__cell">FISH 157-13722170</td>
+          <td class="govuk-table__cell">90</td>
+          <td class="govuk-table__cell">
             <ul class="govuk-list">
-              <li class="POAO">
-                Release - Inspection Complete <span>(PHA-POAO)</span>
+              <li>
+                GBCHD2025.5403171
               </li>
-              <li class="IUU">
-                Release - Inspection Complete <span>(PHA-IUU)</span>
+              <li>
+                GBIUU
               </li>
-            </ul>
-        </td>
-      </tr>
-
-      <tr class="govuk-table__row match release POAO IUU">
-        <td class="govuk-table__cell">2</td>
-        <td class="govuk-table__cell">302899090</td>
-        <td class="govuk-table__cell">FISH 157-13722170</td>
-        <td class="govuk-table__cell">1221</td>
-        <td class="govuk-table__cell">
-          <ul class="govuk-list">
-            <li>
-              GBCHD2025.5403171
-            </li>
-            <li>
-              GBIUU
-            </li>
-        </ul>
-        </td>
-        <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Yes</strong></td>
-        <td class="govuk-table__cell decision multi-auth">  
+          </ul>
+          </td>
+          <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Yes</strong></td>
+          <td class="govuk-table__cell decision multi-auth">  
+              <ul class="govuk-list">
+                <li class="POAO">
+                  Release - Inspection Complete <span>(PHA-POAO)</span>
+                </li>
+                <li class="IUU">
+                  Release - Inspection Complete <span>(PHA-IUU)</span>
+                </li>
+              </ul>
+          </td>
+        </tr>
+  
+        <tr class="govuk-table__row match release POAO IUU">
+          <td class="govuk-table__cell">2</td>
+          <td class="govuk-table__cell">302899090</td>
+          <td class="govuk-table__cell">FISH 157-13722170</td>
+          <td class="govuk-table__cell">1221</td>
+          <td class="govuk-table__cell">
             <ul class="govuk-list">
-              <li class="POAO">
-                Release - Inspection Complete <span>(PHA-POAO)</span>
+              <li>
+                GBCHD2025.5403171
               </li>
-              <li class="IUU">
-                Release - Inspection Complete <span>(PHA-IUU)</span>
+              <li>
+                GBIUU
               </li>
-            </ul>
-        </td>
-      </tr> 
-    </tbody>
+          </ul>
+          </td>
+          <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Yes</strong></td>
+          <td class="govuk-table__cell decision multi-auth">  
+              <ul class="govuk-list">
+                <li class="POAO">
+                  Release - Inspection Complete <span>(PHA-POAO)</span>
+                </li>
+                <li class="IUU">
+                  Release - Inspection Complete <span>(PHA-IUU)</span>
+                </li>
+              </ul>
+          </td>
+        </tr>
+      </tbody>
   </table>
+</div>
+
+
+
+
+
 </div>
 
 
@@ -171,7 +183,7 @@
 
 <h2 class="govuk-heading-m sectionHeader ched-header">IPAFFS notification (CHED) details</h2>
 
-<div class="ched-container">
+<div class="ched-container" id="toggle">
   <div class="container govuk-body">
     <dl class="definition-list ">
       <div class="row">
@@ -195,9 +207,17 @@
         <dd>{{ '22 May 2024' | chedTime }}</dd>
       </div>
     </dl>
+    <div class="toggle-wrapper">
+      <!-- Chevron arrow wrapper -->
+      <div id="toggleArrowContainer">
+        <i id="toggleArrow" class="fas fa-chevron-down"></i>
+      </div>
+    </div>
   </div>
 
 
+
+<div id="commodityTable2" class="commodity-table">
   <table class="govuk-table data-table">
     <thead class="govuk-table__head">
       <tr class="govuk-table__row">
@@ -278,8 +298,74 @@
      
     </tbody>
   </table>
+  </div>
+  </div>
 </div>
 
 
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const toggleArea = document.getElementById("toggle"); // The clickable area
+  const commodityTable = document.getElementById("commodityTable2"); // The table to toggle
+  const toggleArrow = document.getElementById("toggleArrow"); // The chevron icon
 
+  // Initially, show the table and change the chevron to up
+  commodityTable.style.display = "block";  // Show the table by default
+  toggleArrow.classList.remove("fa-chevron-down");
+  toggleArrow.classList.add("fa-chevron-up"); // Chevron up to indicate the table is visible
+
+  toggleArea.addEventListener("click", function () {
+    // Toggle the visibility of the table
+    if (commodityTable.style.display === "none") {
+      commodityTable.style.display = "block"; // Show the table
+      toggleArrow.classList.remove("fa-chevron-down");
+      toggleArrow.classList.add("fa-chevron-up"); // Change chevron to up
+    } else {
+      commodityTable.style.display = "none"; // Hide the table
+      toggleArrow.classList.remove("fa-chevron-up");
+      toggleArrow.classList.add("fa-chevron-down"); // Change chevron to down
+    }
+  });
+});
+
+
+
+
+</script>
+<style>
+  .govuk-icon--down::before {
+  content: '\2193'; /* Down arrow symbol */
+}
+
+.govuk-icon--up::before {
+  content: '\2191'; /* Up arrow symbol */
+}
+.container {
+    position: relative;
+    cursor: pointer;
+  }
+
+
+
+#toggleArrowContainer {
+  position: absolute;
+  top: 0; /* Align the chevron container to the top of the parent container */
+  right: 20px; /* Adjust this for spacing from the right edge */
+  display: flex;
+  align-items: center;  /* Center the chevron vertically */
+  justify-content: center;  /* Center the chevron horizontally */
+  height: 100%; /* Ensure it takes up the full height of the container */
+  border-left: 1px solid #dbdbdb; /* Add left border */
+  padding-left: 10px;
+
+}
+
+#toggleArrow {
+  font-size: 1.2em; /* Adjust for better visual appearance */
+  color: #1d70b8;
+  padding-left: 10px; /* Space between arrow and border */
+}
+
+
+</style>
 {% endblock %}
