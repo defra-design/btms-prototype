@@ -180,6 +180,7 @@ window.GOVUKPrototypeKit.documentReady(() => {
 
 //clear search 
 document.addEventListener('DOMContentLoaded', function () {
+  
   const input = document.getElementById('searchTerm');
   const clearButton = document.getElementById('clearButton');
 
@@ -196,3 +197,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
   toggleClearButton(); // Ensure correct initial state
 });
+document.addEventListener("DOMContentLoaded", function () {
+  setTimeout(function () {
+      document.getElementById("searchTerm").focus();
+  }, 100); // Small delay to ensure rendering is complete
+});
+
