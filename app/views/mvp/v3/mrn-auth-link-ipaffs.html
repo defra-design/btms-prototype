@@ -73,7 +73,15 @@
     <dl class="definition-list ">
       <div class="row">
         <dt>MRN</dt>
-        <dd>24GB0Z8WEJ9ZBTL73B</dd>
+        
+        <dd>
+          
+          <strong class="govuk-tag govuk-tag--yellow">
+           
+             24GB0Z8WEJ9ZBTL73B
+          </strong>
+        
+        </dd>
       </div>
       <div class="row">
         <dt>DUCR</dt>
@@ -139,7 +147,21 @@
 
 
 <h2 class="govuk-heading-m sectionHeader ched-header">IPAFFS notification (CHED) details</h2>
+<div class="inline-form-group">
 
+  <div class="govuk-form-group">
+    <label class="govuk-label" for="authChed">Authority</label>
+    <select class="govuk-select" id="authChed" name="authChed">
+      <option value="show-all" selected>Show all</option>
+      <option value="POAO">PHA-POAO</option>
+    </select>
+  </div>
+  <div class="govuk-form-group">
+    <a href="#" class="clear-filter" >Clear Filters</a>
+
+
+   </div>
+</div>
 <div class="ched-container">
   <div class="container govuk-body">
     <dl class="definition-list ">
@@ -182,14 +204,14 @@
     </thead>
     <tbody class="govuk-table__body">
 
-      <tr class="govuk-table__row">
+      <tr class="govuk-table__row POAO">
         <td class="govuk-table__cell">1</td>
         <td class="govuk-table__cell">02102010</td>
         <td class="govuk-table__cell">Bovidae</td>
         <td class="govuk-table__cell">100</td>
         <td class="govuk-table__cell decision multi-auth">  
             <ul class="govuk-list">
-              <li>
+              <li class="POAO">
                 Scheduled inspection <span>(PHA-POAO)</span>
               </li>
         

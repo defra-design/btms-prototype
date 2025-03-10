@@ -209,5 +209,11 @@
 .download-link::before {
   content: "📄 "; /* Optional: Add an icon before the link */
 }
+
+.fas {
+  margin-left: 2px;
+  color: #0b0c0c;
+  font-size: 12px;
+  }
 }
 

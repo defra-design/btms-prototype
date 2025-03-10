@@ -225,6 +225,7 @@ function filterChedRows() {
       const isPHSIRow = row.classList.contains("PHSI");
       const isFNAORow = row.classList.contains("FNAO");
       const isIUURow = row.classList.contains("IUU");
+      const isAPHARow = row.classList.contains("APHA");
       const isPOAORow = row.classList.contains("POAO");
       
       // Authority filter for CHED section
@@ -234,6 +235,7 @@ function filterChedRows() {
         (authValue === "FNAO" && isFNAORow) ||
         (authValue === "IUU" && isIUURow) ||
         (authValue === "POAO" && isPOAORow) ||
+        (authValue === "APHA" && isAPHARow) ||
         (authValue === "HMI" && isHMIRow);
 
       if (authFilter) {
@@ -247,7 +249,7 @@ function filterChedRows() {
             li.style.display = ""; // Show matching authorities
             
             // Add visible-li class when authValue is a valid authority
-            if (authValue === "FNAO" || authValue === "HMI" || authValue === "PHSI" || authValue === "POAO" || authValue === "IUU") {
+            if (authValue === "FNAO" || authValue === "HMI" || authValue === "PHSI" || authValue === "POAO" || authValue === "APHA" || authValue === "IUU") {
               li.classList.add("visible-li");
             } else {
               li.classList.remove("visible-li");
@@ -285,6 +287,7 @@ function filterChedRows() {
       case "PHSI": return "PP-PHSI";
       case "IUU": return "PHA-IUU";
       case "POAO": return "PHA-POAO";
+      case "APHA": return "APHA";
       default: return "";
     }
   }

@@ -9,6 +9,7 @@
 {% set bodyClasses = 'mrn' %}
 {% set cssClassName = 'auth' %}
 {% set hideManageAccount = 'false' %}
+{% set showEdit = true %}
 
 
 
@@ -56,7 +57,7 @@
   <div class="govuk-form-group">
     <label class="govuk-label" for="auth">Authority</label>
     <select class="govuk-select" id="auth" name="auth">
-      <option value="show-all" selected>Select all</option>
+      <option value="show-all" selected>Show all</option>
       <option value="IUU">PHA-IUU</option>
       <option value="POAO">PHA-POAO</option>
     </select>
@@ -170,7 +171,22 @@
 
 
 <h2 class="govuk-heading-m sectionHeader ched-header">IPAFFS notification (CHED) details</h2>
+<div class="inline-form-group">
 
+  <div class="govuk-form-group">
+    <label class="govuk-label" for="authChed">Authority</label>
+    <select class="govuk-select" id="authChed" name="authChed">
+      <option value="show-all" selected>Show all</option>
+      <option value="IUU">PHA-IUU</option>
+      <option value="POAO">PHA-POAO</option>
+    </select>
+  </div>
+  <div class="govuk-form-group">
+    <a href="#" class="clear-filter" >Clear Filters</a>
+
+
+   </div>
+</div>
 <div class="ched-container">
   <div class="container govuk-body">
     <dl class="definition-list ">
@@ -211,65 +227,65 @@
       </tr>
     </thead>
     <tbody class="govuk-table__body">
-      <tr class="govuk-table__row">
+      <tr class="govuk-table__row POAO IUU">
         <td class="govuk-table__cell">10</td>
         <td class="govuk-table__cell">3024990</td>
         <td class="govuk-table__cell">Pampus spp.</td>
         <td class="govuk-table__cell">90</td>
         <td class="govuk-table__cell decision multi-auth">  
             <ul class="govuk-list">
-              <li>
+              <li class="POAO">
                 Acceptable for internal market <span>(PHA-POAO)</span>
               </li>
-              <li>
+              <li class="IUU">
                 IUU Compliant <span> (PHA-IUU)</span>
               </li>
             </ul>
         </td>
       </tr>
-      <tr class="govuk-table__row">
+      <tr class="govuk-table__row POAO IUU">
         <td class="govuk-table__cell">2</td>
         <td class="govuk-table__cell">3028990</td>
         <td class="govuk-table__cell">Cephalopholis sonnerati</td>
         <td class="govuk-table__cell">918</td>
         <td class="govuk-table__cell decision multi-auth">  
             <ul class="govuk-list">
-              <li>
+              <li class="POAO">
                 Acceptable for internal market <span>(PHA-POAO)</span>
               </li>
-              <li>
+              <li class="IUU">
                 IUU Compliant <span> (PHA-IUU)</span>
               </li>
             </ul>
         </td>
       </tr>
-      <tr class="govuk-table__row">
+      <tr class="govuk-table__row POAO IUU">
         <td class="govuk-table__cell">7</td>
         <td class="govuk-table__cell">3028990</td>
         <td class="govuk-table__cell">Plectropomus spp.</td>
         <td class="govuk-table__cell">68</td>
         <td class="govuk-table__cell decision multi-auth">  
             <ul class="govuk-list">
-              <li>
+              <li class="POAO">
                 Acceptable for internal market <span>(PHA-POAO)</span>
               </li>
-              <li>
+              <li class="IUU">
                 IUU Compliant <span>(PHA-IUU)</span>
               </li>
             </ul>
         </td>
       </tr>
-      <tr class="govuk-table__row">
+      <tr class="govuk-table__row POAO IUU">
         <td class="govuk-table__cell">8</td>
         <td class="govuk-table__cell">3028990</td>
         <td class="govuk-table__cell">Stolephorus spp..</td>
         <td class="govuk-table__cell">150</td>
         <td class="govuk-table__cell decision multi-auth">  
             <ul class="govuk-list">
-              <li>
+              <li class="POAO">
                 Acceptable for internal market <span>(PHA-POAO)</span>
               </li>
-              <li>
+              <li class="IUU">
                 IUU Compliant <span>(PHA-IUU)</span>
               </li>
             </ul>
