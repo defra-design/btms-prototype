@@ -353,7 +353,23 @@
 
 
 <h2 class="govuk-heading-m sectionHeader ched-header">IPAFFS notification (CHED) details</h2>
+<div class="inline-form-group">
 
+  <div class="govuk-form-group">
+    <label class="govuk-label" for="authChed">Authority</label>
+    <select class="govuk-select" id="authChed" name="authChed">
+      <option value="show-all" selected>Show all</option>
+      <option value="FNAO">PHA-FNAO</option>
+      <option value="HMI">PP-HMI</option>
+      <option value="PHSI">PP-PHSI</option>
+    </select>
+  </div>
+  <div class="govuk-form-group">
+    <a href="#" class="clear-filter" >Clear Filters</a>
+
+
+   </div>
+</div>
 <div class="ched-container">
   <div class="container govuk-body">
     <dl class="definition-list ">
@@ -390,7 +406,7 @@
       </tr>
     </thead>
     <tbody class="govuk-table__body">
-      <tr class="govuk-table__row">
+      <tr class="govuk-table__row FNAO">
         <td class="govuk-table__cell">1</td>
         <td class="govuk-table__cell">709609920</td>
         <td class="govuk-table__cell">Capsicum annuum</td>
@@ -444,7 +460,7 @@
       </tr>
     </thead>
     <tbody class="govuk-table__body">
-      <tr class="govuk-table__row">
+      <tr class="govuk-table__row PHSI">
         <td class="govuk-table__cell">1</td>
         <td class="govuk-table__cell">709609920</td>
         <td class="govuk-table__cell">Capsicum annuum</td>
@@ -457,7 +473,7 @@
             </ul>
         </td>
       </tr>
-      <tr class="govuk-table__row">
+      <tr class="govuk-table__row PHSI HMI">
         <td class="govuk-table__cell">2</td>
         <td class="govuk-table__cell">7096010</td>
         <td class="govuk-table__cell">Capsicum annuum</td>
@@ -467,14 +483,14 @@
               <li>
                 Acceptable for internal market <span>(PP-PHSI)</span>
               </li>
-              <li>
+              <li class="HMI">
                 Acceptable for internal market <span>(PP-HMI)</span>
               </li>
             </ul>
         </td>
       </tr>
 
-      <tr class="govuk-table__row">
+      <tr class="govuk-table__row PHSI HMI">
         <td class="govuk-table__cell">3</td>
         <td class="govuk-table__cell">7093000</td>
         <td class="govuk-table__cell">Solanum melongena</td>
@@ -484,7 +500,7 @@
               <li>
                 Acceptable for internal market <span>(PP-PHSI)</span>
               </li>
-              <li>
+              <li class="HMI">
                 Acceptable for internal market <span>(PP-HMI)</span>
               </li>
             </ul>
@@ -531,47 +547,47 @@
       </tr>
     </thead>
     <tbody class="govuk-table__body">
-      <tr class="govuk-table__row">
+      <tr class="govuk-table__row PHSI">
         <td class="govuk-table__cell">1</td>
         <td class="govuk-table__cell">709609920</td>
         <td class="govuk-table__cell">Capsicum annuum</td>
         <td class="govuk-table__cell">3471</td>
         <td class="govuk-table__cell decision ">  
             <ul class="govuk-list">
-              <li>
+              <li class="PHSI">
                 Acceptable for internal market <span>(PP-PHSI)</span>
               </li>
             </ul>
         </td>
       </tr>
-      <tr class="govuk-table__row">
+      <tr class="govuk-table__row PHSI HMI">
         <td class="govuk-table__cell">2</td>
         <td class="govuk-table__cell">7096010</td>
         <td class="govuk-table__cell">Capsicum annuum</td>
         <td class="govuk-table__cell">2850</td>
         <td class="govuk-table__cell decision multi-auth">  
             <ul class="govuk-list ">
-              <li>
+              <li class="PHSI">
                 Acceptable for internal market <span>(PP-PHSI)</span>
               </li>
-              <li>
+              <li class="HMI">
                 Acceptable for internal market <span>(PP-HMI)</span>
               </li>
             </ul>
         </td>
       </tr>
 
-      <tr class="govuk-table__row">
+      <tr class="govuk-table__row PHSI HMI">
         <td class="govuk-table__cell">3</td>
         <td class="govuk-table__cell">7093000</td>
         <td class="govuk-table__cell">Solanum melongena</td>
         <td class="govuk-table__cell">180</td>
         <td class="govuk-table__cell decision multi-auth">  
             <ul class="govuk-list ">
-              <li>
+              <li class="PHSI">
                 Acceptable for internal market <span>(PP-PHSI)</span>
               </li>
-              <li>
+              <li class="HMI">
                 Acceptable for internal market <span>(PP-HMI)</span>
               </li>
             </ul>
