@@ -567,12 +567,13 @@ document.addEventListener("DOMContentLoaded", function () {
         const content = document.getElementById(targetId);
         const toggleArrow = toggleArea.querySelector("#toggleArrow");
         const shouldCollapse = toggleArea.getAttribute("data-collapsed") === "true";
+        const container = toggleArea.querySelector(".container"); // Target only .container inside .toggle-area
 
-        if (content) {
+        if (content && container) {
             content.style.display = shouldCollapse ? "none" : "block";
             toggleArrow.classList.add(shouldCollapse ? "fa-chevron-down" : "fa-chevron-up");
 
-            toggleArea.addEventListener("click", function () {
+            container.addEventListener("click", function () {
                 const isHidden = content.style.display === "none";
                 content.style.display = isHidden ? "block" : "none";
                 toggleArrow.classList.toggle("fa-chevron-up", isHidden);
@@ -581,6 +582,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
+
 
 
   </script>
@@ -681,7 +683,7 @@ document.addEventListener("DOMContentLoaded", function () {
       if (!noDataMessage) {
   noDataMessage = document.createElement("p");
   noDataMessage.className = "no-data-message govuk-body";
-  noDataMessage.innerText = "There are no commodities that match the filters selected.";
+  noDataMessage.innerText = "There are no items that match the filters selected.";
   noDataMessage.style.display = "none";
 
   // Append inside .commodity-table instead of container
