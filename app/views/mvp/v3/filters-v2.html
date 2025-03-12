@@ -97,7 +97,7 @@
   <details class="govuk-details" open>
     <summary class="govuk-details__summary">
       <span class="govuk-details__summary-text">
-        Hide commodity details
+        Hide item details
       </span>
     </summary>
     <div class="govuk-details__text">
@@ -217,7 +217,7 @@
   <details class="govuk-details">
     <summary class="govuk-details__summary">
       <span class="govuk-details__summary-text">
-        Hide commodity details
+        Hide item details
       </span>
     </summary>
     <div class="govuk-details__text">
@@ -560,14 +560,23 @@ document.addEventListener("DOMContentLoaded", function () {
     const summaryText = details.querySelector(".govuk-details__summary-text");
 
     details.addEventListener("toggle", function () {
-      if (details.open) {
-        summaryText.textContent = "Hide commodity details";
-      } else {
-        summaryText.textContent = "Show commodity details";
+      let showText = "Show commodity details";
+      let hideText = "Hide commodity details";
+
+      // Check parent container type
+      if (details.closest(".ched-container")) {
+        showText = "Show commodity details";
+        hideText = "Hide commodity details";
+      } else if (details.closest(".mrn-container")) {
+        showText = "Show item details";
+        hideText = "Hide item details";
       }
+
+      summaryText.textContent = details.open ? hideText : showText;
     });
   });
 });
+
 
 
 </script>
