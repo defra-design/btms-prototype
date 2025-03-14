@@ -8,7 +8,9 @@
 @import "patterns/mrn";
 @import "patterns/start-page";
 $govuk-new-typography-scale: true;
-
+.govuk-phase-banner__content__tag {
+  display: none;
+}
 .govuk-header__navigation { 
   display: inline-block;
   float: right;
