@@ -20,7 +20,8 @@ module.exports = (router) => {
       '25GB2XHHM4884KEAR1': 'scenario-1',
       '25GB1EU8XXNPKSTAR4': 'scenario-2',
       '25GB0KTW9JPEMO5AR0': 'scenario-3',
-      '25GB2A3YROMOM5XAR6': 'scenario-4'
+      '25GB2A3YROMOM5XAR6': 'scenario-4',
+      '25GB25XEV402TZBAR5': 'scenario-5'
     };
 
     // Check if search term exists in predefined redirects
