@@ -5,7 +5,7 @@
 {% set hideBackLink = false %}
 {% set showSubheader = true %}
 {% set subHeader = 'Showing result for' %}
-{% set title = '25GB25XEV402TZBAR5' %}
+{% set title = '25GB39TWY8009YRAR9' %}
 {% set bodyClasses = 'mrn' %}
 {% set cssClassName = 'auth' %}
 {% set hideManageAccount = 'false' %}
@@ -28,12 +28,28 @@
     </li>
   </ol>
 </nav>
+
 {% endblock %}
 
 
 {% block form %}
 
-
+<div class="govuk-notification-banner" role="region" aria-labelledby="govuk-notification-banner-title" data-module="govuk-notification-banner">
+  <div class="govuk-notification-banner__header">
+    <h2 class="govuk-notification-banner__title" id="govuk-notification-banner-title">
+      Important
+    </h2>
+  </div>
+  <div class="govuk-notification-banner__content">
+    <p>Certain commodity items have been selected for HMI inspection. You will need to either create a new CHED PP or modify an existing one.
+    </p>
+  </div>
+</div>
+<style>
+  .govuk-notification-banner__content p {
+    font-size: 16px;
+  }
+</style>
 <h2 class="govuk-heading-m sectionHeader">Customs declaration details</h2>
 
 <div class="mrn-container" id="mrn-toggle">
@@ -53,7 +69,7 @@
         <div class="row">
           <dt>DUCR</dt>
           <dd>    
-            5GB616431754000-7760409569
+            5GB776695167000-IM106796
              
     
           </dd>
@@ -92,24 +108,55 @@
       </tr>
     </thead>
     <tbody class="govuk-table__body ">
+ 
+      <tr class="govuk-table__row match release POAO">
+        <td class="govuk-table__cell">2</td>
+        <td class="govuk-table__cell">0709999090</td>
+        <!-- <td class="govuk-table__cell" data-tooltip="MEAT OF SWINE FRESH CHILLED OR FROZEN FOODS"><span>MEAT OF SWINE FRESH CHILLED OR FROZE ...</span></td> -->
+        <td class="govuk-table__cell" tabindex="0">
+          <span>CHINESE CONVOLVULUS - IPOMOEA AQUAT ...</span>
+          <span class="tooltip" role="tooltip">
+            CHINESE CONVOLVULUS - IPOMOEA AQUATICA, ENTSAI, ONG CHOI
+
+          </span>
+      </td>
+        <td class="govuk-table__cell">56.96</td>
+        <td class="govuk-table__cell">
+          <ul class="govuk-list">
+            <li >
+              GBCHD2025.5736652
+            </li>
+
+        </td>
+        <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Yes</strong></td>
+        <td class="govuk-table__cell decision">  
+            <ul class="govuk-list">
+              <li class="POAO">
+                Hold - Awaiting decision <span>(PP-PHSI)</span>
+              </li>
+            </ul>
+        </td>
+      </tr>  
       <tr class="govuk-table__row match release FNAO">
         <td class="govuk-table__cell">3</td>
-        <td class="govuk-table__cell">1211908690</td>
-        <td class="govuk-table__cell">SILVERVINE CUBE</td>
-        <td class="govuk-table__cell">400</td>
-        <td class="govuk-table__cell">
+        <td class="govuk-table__cell">0709999090</td>
+        <td class="govuk-table__cell" tabindex="0">
+          <span>CHINESE CHIVE</span>
+     
+      </td>
+              <td class="govuk-table__cell">100</td>
+        <td class="govuk-table__cell">-</td>
           
           <td class="govuk-table__cell no-match" tabindex="0">
             <span><strong class="govuk-tag govuk-tag--red message">No</strong></span>
             <span class="tooltip" role="tooltip">
               This customs declaration with a GMS product has been selected for HMI inspection. Either create a new CHED PP or amend an existing one referencing the GMS product.  
             </span>
-        </td>        <td class="govuk-table__cell decision multi-auth">  
-           <span>(HMI)</span>
+        </td>        
+        <td class="govuk-table__cell decision multi-auth">  
+           <span>Raise or amend existing CHED (HMI)</span>
         </td>
       </tr>
-
-
     </tbody>
   </table>
 </div>
@@ -126,9 +173,71 @@
 
 
 <h2 class="govuk-heading-m sectionHeader ched-header">IPAFFS notification (CHED) details</h2>
-{{ govukInsetText({
-  text: "There are no IPAFFS notification (CHED) details"
-}) }}
+<div class="ched-container toggle-area" data-target="commodityTable3">
+  <div class="container govuk-body">
+    <dl class="definition-list ">
+      <div class="row">
+        <dt>CHED reference</dt>
+        <dd>
+           
+          CHEDPP.GB.2025.5736652
+
+   
+        </dd>
+      </div>
+      <div class="row">
+        <dt>CHED Status</dt>
+        <dd>New</dd>
+      </div>
+      <div class="row">
+        <dt>Risk outcome</dt>
+        <dd>No inspection</dd>
+      </div>
+      <div class="row">
+        <dt>Last updated</dt>
+        <dd>{{ '22 May 2024' | chedTime }}</dd>
+      </div>
+    </dl>
+    <div class="toggle-wrapper">
+      <!-- Chevron arrow wrapper -->
+      <div id="toggleArrowContainer">
+        <i id="toggleArrow" class="fas fa-chevron-down"></i>
+      </div>
+    </div>
+  </div>
+
+
+
+<div id="commodityTable3" class="commodity-table">
+  <table class="govuk-table data-table">
+    <thead class="govuk-table__head">
+      <tr class="govuk-table__row">
+        <th scope="col" class="govuk-table__header first" >Item  number</th>
+        <th scope="col" class="govuk-table__header second" >Commodity code</th>
+        <th scope="col" class="govuk-table__header third " >Description</th>
+        <th scope="col" class="govuk-table__header forth " >Quantity / Weight</th>
+
+        <th scope="col" class="govuk-table__header fifth " >Decision (authority)</th>
+
+      </tr>
+    </thead>
+    <tbody class="govuk-table__body">
+      <tr class="govuk-table__row FNAO">
+        <td class="govuk-table__cell">1</td>
+        <td class="govuk-table__cell">0709999090</td>
+        <td class="govuk-table__cell">Ipomoea aquatica</td>
+        <td class="govuk-table__cell">300</td>
+        <td class="govuk-table__cell decision multi-auth">  
+
+          Scheduled inspection <span>(PHSI)</span>
+        </td>
+      </tr>
+
+     
+    </tbody>
+  </table>
+  </div>
+  </div>
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
