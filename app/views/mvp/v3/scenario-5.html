@@ -34,17 +34,17 @@
 
 {% block form %}
 
-<div class="govuk-notification-banner" role="region" aria-labelledby="govuk-notification-banner-title" data-module="govuk-notification-banner">
+<!-- <div class="govuk-notification-banner" role="region" aria-labelledby="govuk-notification-banner-title" data-module="govuk-notification-banner">
   <div class="govuk-notification-banner__header">
     <h2 class="govuk-notification-banner__title" id="govuk-notification-banner-title">
       Important
     </h2>
   </div>
   <div class="govuk-notification-banner__content">
-    <p>The are GMS commodity items that have been selected for HMI inspection. Either create a new CHED PP or amend an existing one referencing the GMS products.      
+    <p>This customs declaration has GMS commodity items that have been selected for HMI inspection. Either create a new CHED PP or amend an existing one referencing the GMS products.      
     </p>
   </div>
-</div>
+</div> -->
 <style>
   .govuk-notification-banner__content p {
     font-size: 16px;
@@ -145,13 +145,20 @@
      
       </td>
               <td class="govuk-table__cell">100</td>
-        <td class="govuk-table__cell error">Requires CHED</td>
+        <td class="govuk-table__cell ">
+
+          <span class="error">Requires CHED ...</span>
+          <span class="tooltip" role="tooltip">
+            This customs declaration with a GMS product has been selected for HMI inspection. Either create a new CHED PP or amend an existing one referencing the GMS product. Amend the customs declaration to reference the CHED PP. Amend the customs declaration to reference the CHED PP.
+
+
+          </span>
+        </td>
           
           <td class="govuk-table__cell no-match" tabindex="0">
             <span><strong class="govuk-tag govuk-tag--red message">No</strong></span>
             <span class="tooltip" role="tooltip">
-              This customs declaration with a GMS product has been selected for HMI inspection. Either create a new CHED PP or amend an existing one referencing the GMS product. Amend the customs declaration to reference the CHED PP. 
-            </span>
+              A Customs Declaration has been submitted however no matching CHED has been submitted to Port Health            </span>
         </td>        
         <td class="govuk-table__cell decision multi-auth">  
            <span>No match (HMI)</span>
