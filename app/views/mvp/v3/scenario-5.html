@@ -149,7 +149,7 @@
 
           <span class="error">Requires CHED ...</span>
           <span class="tooltip" role="tooltip">
-            This customs declaration with a GMS product has been selected for HMI inspection. Either create a new CHED PP or amend an existing one referencing the GMS product. Amend the customs declaration to reference the CHED PP. Amend the customs declaration to reference the CHED PP.
+            This customs declaration with a GMS product has been selected for HMI inspection. Either create a new CHED PP or amend an existing one referencing the GMS product. Amend the customs declaration to reference the CHED PP.
 
 
           </span>
@@ -246,52 +246,6 @@
   </div>
   </div>
 
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-      document.querySelectorAll(".toggle-area").forEach(function (toggleArea) {
-          const targetId = toggleArea.getAttribute("data-target");
-          const content = document.getElementById(targetId);
-          const toggleArrow = toggleArea.querySelector("#toggleArrow");
-          const shouldCollapse = toggleArea.getAttribute("data-collapsed") === "true";
-          const container = toggleArea.querySelector(".container"); // Target only .container inside .toggle-area
-  
-          if (content && container) {
-              // Set initial state
-              content.style.display = shouldCollapse ? "none" : "block";
-              toggleArrow.classList.add(shouldCollapse ? "fa-chevron-down" : "fa-chevron-up");
-  
-              // Make container focusable and accessible
-              container.setAttribute("tabindex", "0"); // Allows keyboard focus
-              container.setAttribute("role", "button"); // Identifies as a button for screen readers
-              container.setAttribute("aria-expanded", !shouldCollapse);
-              container.setAttribute("aria-controls", targetId);
-  
-              const toggleContent = () => {
-                  const isHidden = content.style.display === "none";
-                  content.style.display = isHidden ? "block" : "none";
-                  toggleArrow.classList.toggle("fa-chevron-up", isHidden);
-                  toggleArrow.classList.toggle("fa-chevron-down", !isHidden);
-                  container.setAttribute("aria-expanded", isHidden);
-              };
-  
-              // Click event for mouse users
-              container.addEventListener("click", toggleContent);
-  
-              // Keyboard accessibility: Toggle with Enter or Space
-              container.addEventListener("keydown", function (event) {
-                  if (event.key === "Enter" || event.key === " ") {
-                      event.preventDefault(); // Prevent page scrolling on spacebar press
-                      toggleContent();
-                  }
-              });
-          }
-      });
-  });
-  
-  
-  
-  
-    </script>
     
   <style>
     .govuk-icon--down::before {
@@ -625,6 +579,46 @@
   
   
   
+  document.addEventListener("DOMContentLoaded", function () {
+      document.querySelectorAll(".toggle-area").forEach(function (toggleArea) {
+          const targetId = toggleArea.getAttribute("data-target");
+          const content = document.getElementById(targetId);
+          const toggleArrow = toggleArea.querySelector("#toggleArrow");
+          const shouldCollapse = toggleArea.getAttribute("data-collapsed") === "true";
+          const container = toggleArea.querySelector(".container"); // Target only .container inside .toggle-area
+  
+          if (content && container) {
+              // Set initial state
+              content.style.display = shouldCollapse ? "none" : "block";
+              toggleArrow.classList.add(shouldCollapse ? "fa-chevron-down" : "fa-chevron-up");
+  
+              // Make container focusable and accessible
+              container.setAttribute("tabindex", "0"); // Allows keyboard focus
+              container.setAttribute("role", "button"); // Identifies as a button for screen readers
+              container.setAttribute("aria-expanded", !shouldCollapse);
+              container.setAttribute("aria-controls", targetId);
+  
+              const toggleContent = () => {
+                  const isHidden = content.style.display === "none";
+                  content.style.display = isHidden ? "block" : "none";
+                  toggleArrow.classList.toggle("fa-chevron-up", isHidden);
+                  toggleArrow.classList.toggle("fa-chevron-down", !isHidden);
+                  container.setAttribute("aria-expanded", isHidden);
+              };
+  
+              // Click event for mouse users
+              container.addEventListener("click", toggleContent);
+  
+              // Keyboard accessibility: Toggle with Enter or Space
+              container.addEventListener("keydown", function (event) {
+                  if (event.key === "Enter" || event.key === " ") {
+                      event.preventDefault(); // Prevent page scrolling on spacebar press
+                      toggleContent();
+                  }
+              });
+          }
+      });
+  });
   
   
   
