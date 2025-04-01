@@ -2,7 +2,7 @@
 {% set signedIn = 'true' %}
 {% set fullWidth = true %}
 {% set hideButton = true %}
-{% set hideBackLink = false %}
+{% set breadcrumb = true %}
 {% set showSubheader = true %}
 {% set subHeader = 'Showing result for' %}
 {% set title = '25GB0HQ0W2IZKO9AR0' %}
@@ -11,18 +11,7 @@
 
 
 
-{% block beforeContent %}
-<nav class="govuk-breadcrumbs" aria-label="Breadcrumb">
-  <ol class="govuk-breadcrumbs__list">
-    <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="search">Search</a>
-    </li>
-    <li class="govuk-breadcrumbs__list-item">
-      {{ title }}
-    </li>
-  </ol>
-</nav>
-{% endblock %}
+
 
 
 {% block form %}
@@ -36,10 +25,6 @@
       <div class="row">
         <dt>MRN</dt>
         <dd>{{ title }}</dd>
-      </div>
-      <div class="row">
-        <dt>DUCR</dt>
-        <dd>4GB943952494000-BER047811</dd>
       </div>
       <div class="row">
         <dt>CDS status</dt>
@@ -138,17 +123,13 @@
         <dt>CHED reference</dt>
         <dd>CHEDP.GB.2025.5403171</dd>
       </div>
-      <div class="row">
-        <dt>CHED Status</dt>
-        <dd>Valid</dd>
-      </div>
-      <div class="row">
-        <dt>Risk outcome</dt>
-        <dd>Completed</dd>
-      </div>
+
       <div class="row">
         <dt>Last updated</dt>
         <dd>15 November 2024, 20:11</dd>
+      </div>
+      <div class="row">
+      
       </div>
     </dl>
   </div>

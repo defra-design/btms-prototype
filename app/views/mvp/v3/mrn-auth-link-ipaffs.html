@@ -2,107 +2,70 @@
 {% set signedIn = 'true' %}
 {% set fullWidth = true %}
 {% set hideButton = true %}
-{% set hideBackLink = false %}
+{% set breadcrumb = true %}
 {% set showSubheader = true %}
 {% set showEdit = true %}
 {% set subHeader = 'Showing result for' %}
 {% set title = '24GB0Z8WEJ9ZBTL73B' %}
-{% set bodyClasses = 'mrn' %}
+{% set bodyClasses = 'mrn accordion' %}
 {% set cssClassName = 'auth' %}
 {% set hideManageAccount = 'false' %}
 
-{% block headIcons %}
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
-{% endblock %}
-
-{% block beforeContent %}
-<nav class="govuk-breadcrumbs" aria-label="Breadcrumb">
-  <div class="breadcrumbs-container">
-    <ol class="govuk-breadcrumbs__list">
-      <li class="govuk-breadcrumbs__list-item">
-        <a class="govuk-breadcrumbs__link" href="search">Search</a>
-      </li>
-      <li class="govuk-breadcrumbs__list-item">
-        {{title}}
-      </li>
-    </ol>
-  </div>
-</nav>
-<style>
 
 
-</style>
-{% endblock %}
+
 
 
 {% block form %}
 
 
 <h2 class="govuk-heading-m sectionHeader">Customs declaration details</h2>
-<div class="inline-form-group">
-  <div class="govuk-form-group">
-    <label class="govuk-label" for="match">Match</label>
-    <select class="govuk-select" id="match" name="match">
-      <option value="show-all" selected>Show all</option>
-      <option value="match">Yes</option>
-    </select>
-  </div>
 
-  <div class="govuk-form-group">
-    <label class="govuk-label" for="decision">Decision</label>
-    <select class="govuk-select" id="decision" name="decision">
-      <option value="show-all" selected>Show all</option>
-      <option value="release">Hold</option>
-    </select>
-  </div>
-  <div class="govuk-form-group">
-    <label class="govuk-label" for="auth">Authority</label>
-    <select class="govuk-select" id="auth" name="auth">
-      <option value="show-all" selected>Select all</option>
-      <option value="POAO">PHA-POAO</option>
-    </select>
-  </div>
-  <div class="govuk-form-group">
-     <a class="clear-filter" href="#" style="display: none;">Clear filters</a>
-   </div>
-</div>
+<div class="mrn-container" id="mrn-toggle">
 
-<div class="mrn-container">
-  <div class="container govuk-body">
-    <dl class="definition-list ">
-      <div class="row">
-        <dt>MRN</dt>
-        
-        <dd>
+  <div class="toggle-area" data-target="commodityTable1">
+    <div class="container govuk-body">
+      <dl class="definition-list ">
+        <div class="row">
+          <dt>MRN</dt>
           
-          <strong class="govuk-tag govuk-tag--yellow">
-           
-             24GB0Z8WEJ9ZBTL73B
-          </strong>
-        
-        </dd>
+          <dd>
+            
+            <strong class="govuk-tag govuk-tag--yellow">
+             
+               24GB0Z8WEJ9ZBTL73B
+            </strong>
+          
+          </dd>
+        </div>
+        <div class="row">
+          <dt>DUCR</dt>
+          <dd>    
+            4GB943952494000-BER047811
+             
+    
+          </dd>
+        </div>
+        <div class="row">
+          <dt>CDS status</dt>
+          <dd>Current</dd>
+        </div>
+        <div class="row">
+          <dt>Last updated</dt>
+          <dd>{{ '22 May 2024' | mrnTime }}</dd>
+        </div>
+      </dl>
+      <div class="toggle-wrapper">
+        <!-- Chevron arrow wrapper -->
+        <div id="toggleArrowContainer">
+          <i id="toggleArrow" class="fas fa-chevron-down"></i>
+        </div>
       </div>
-      <div class="row">
-        <dt>DUCR</dt>
-        <dd>    
-          4GB943952494000-BER047811
-           
-  
-        </dd>
-      </div>
-      <div class="row">
-        <dt>CDS status</dt>
-        <dd>Current</dd>
-      </div>
-      <div class="row">
-        <dt>Last updated</dt>
-        <dd>{{ '22 May 2024' | mrnTime }}</dd>
-      </div>
-    </dl>
-  </div>
+    </div>
 
 
+
+<div id="commodityTable1" class="commodity-table">
   <table class="govuk-table data-table">
     <thead class="govuk-table__head">
       <tr class="govuk-table__row">
@@ -143,26 +106,21 @@
   </table>
 </div>
 
+</div>
+
+
+
+</div>
+
+
+
 
 
 
 <h2 class="govuk-heading-m sectionHeader ched-header">IPAFFS pre-notification (CHED) details</h2>
-<div class="inline-form-group">
-
-  <div class="govuk-form-group">
-    <label class="govuk-label" for="authChed">Authority</label>
-    <select class="govuk-select" id="authChed" name="authChed">
-      <option value="show-all" selected>Show all</option>
-      <option value="POAO">PHA-POAO</option>
-    </select>
-  </div>
-  <div class="govuk-form-group">
-    <a href="#" class="clear-filter" >Clear Filters</a>
 
 
-   </div>
-</div>
-<div class="ched-container">
+<div class="ched-container toggle-area" data-target="commodityTable3">
   <div class="container govuk-body">
     <dl class="definition-list ">
       <div class="row">
@@ -187,9 +145,17 @@
         <dd>{{ '22 May 2024' | chedTime }}</dd>
       </div>
     </dl>
+    <div class="toggle-wrapper">
+      <!-- Chevron arrow wrapper -->
+      <div id="toggleArrowContainer">
+        <i id="toggleArrow" class="fas fa-chevron-down"></i>
+      </div>
+    </div>
   </div>
 
 
+
+<div id="commodityTable3" class="commodity-table">
   <table class="govuk-table data-table">
     <thead class="govuk-table__head">
       <tr class="govuk-table__row">
@@ -223,7 +189,9 @@
      
     </tbody>
   </table>
-</div>
+  </div>
+  </div>
+
 
 
 

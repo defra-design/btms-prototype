@@ -2,7 +2,7 @@
 {% set signedIn = 'true' %}
 {% set fullWidth = true %}
 {% set hideButton = true %}
-{% set hideBackLink = false %}
+{% set breadcrumb = true %}
 {% set showSubheader = true %}
 {% set subHeader = 'Showing result for' %}
 {% set title = 'CHEDP.GB.2025.5403171' %}
@@ -13,25 +13,7 @@
 
 
 
-{% block beforeContent %}
-<nav class="govuk-breadcrumbs" aria-label="Breadcrumb">
-  <div class="breadcrumbs-container">
-    <ol class="govuk-breadcrumbs__list">
-      <li class="govuk-breadcrumbs__list-item">
-        <a class="govuk-breadcrumbs__link" href="search">Search</a>
-      </li>
-      <li class="govuk-breadcrumbs__list-item">
-        {{title}}
-      </li>
-    </ol>
-    <a href="/public/images/CHEDP.GB.2025.5403171.xlsx" class="govuk-link download-link" download>Download as Excel</a>
-  </div>
-</nav>
-<style>
 
-
-</style>
-{% endblock %}
 
 
 {% block form %}

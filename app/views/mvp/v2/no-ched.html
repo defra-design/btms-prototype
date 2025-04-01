@@ -2,25 +2,14 @@
 {% set signedIn = 'true' %}
 {% set fullWidth = true %}
 {% set hideButton = true %}
-{% set hideBackLink = false %}
+{% set breadcrumb = true %}
 {% set showSubheader = true %}
 {% set subHeader = 'Showing result for' %}
 {% set title = '24GB0Z8WEJ9ZBTL73B' %}
 {% set bodyClasses = 'mrn' %}
 
 
-{% block beforeContent %}
-<nav class="govuk-breadcrumbs" aria-label="Breadcrumb">
-  <ol class="govuk-breadcrumbs__list">
-    <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="search">Search</a>
-    </li>
-    <li class="govuk-breadcrumbs__list-item">
-      {{ title }}
-    </li>
-  </ol>
-</nav>
-{% endblock %}
+
 
 
 {% block form %}
@@ -33,10 +22,7 @@
         <dt>MRN</dt>
         <dd>{{ title }}</dd>
       </div>
-      <div class="row">
-        <dt>DUCR</dt>
-        <dd>4GB335031931000-WB2408-27WWL6274S</dd>
-      </div>
+
       <div class="row">
         <dt>CDS status</dt>
         <dd>Current</dd>

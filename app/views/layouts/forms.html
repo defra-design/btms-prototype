@@ -15,8 +15,8 @@
 
 
 {% block beforeContent %}
-{%- if not backlink -%}
-  {% include 'includes/back.html' %}
+{%- if breadcrumb -%}
+  {% include 'includes/breadcrumb.html' %}
 {%- endif -%}
 {% endblock %}
 
