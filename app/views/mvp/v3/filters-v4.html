@@ -2,7 +2,7 @@
 {% set signedIn = 'true' %}
 {% set fullWidth = true %}
 {% set hideButton = true %}
-{% set hideBackLink = false %}
+{% set breadcrumb = true %}
 {% set showSubheader = true %}
 {% set subHeader = 'Showing result for' %}
 {% set title = '24GBDYHR49XV9BAFS1' %}
@@ -11,35 +11,15 @@
 {% set hideManageAccount = 'false' %}
 {% set showEdit = true %}
 
-{% block headIcons %}
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
-{% endblock %}
-
-{% block beforeContent %}
-<nav class="govuk-breadcrumbs" aria-label="Breadcrumb">
-  <div class="breadcrumbs-container">
-    <ol class="govuk-breadcrumbs__list">
-      <li class="govuk-breadcrumbs__list-item">
-        <a class="govuk-breadcrumbs__link" href="search">Search</a>
-      </li>
-      <li class="govuk-breadcrumbs__list-item">
-        {{title}}
-      </li>
-    </ol>
-  </div>
-</nav>
-<style>
 
 
-</style>
-{% endblock %}
+
 
 
 {% block form %}
 
 
-<h2 class="govuk-heading-m sectionHeader">Customs declaration details</h2>
+<h2 class="govuk-heading-m sectionHeader">{{ data.Cds | safe }}</h2>
 <div class="inline-form-group">
   <div class="govuk-form-group">
     <label class="govuk-label" for="match">Match</label>
@@ -369,7 +349,7 @@
 
 
 
-<h2 class="govuk-heading-m sectionHeader ched-header">IPAFFS pre-notification (CHED) details</h2>
+<h2 class="govuk-heading-m sectionHeader ched-header">{{ data.Ipaffs | safe }}</h2>
 <div class="inline-form-group">
 
   <div class="govuk-form-group">

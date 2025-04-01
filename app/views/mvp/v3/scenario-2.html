@@ -6,7 +6,7 @@
 {% set showSubheader = true %}
 {% set subHeader = 'Showing result for' %}
 {% set title = '25GB1EU8XXNPKSTAR4' %}
-{% set bodyClasses = 'mrn' %}
+{% set bodyClasses = 'mrn accordion' %}
 {% set cssClassName = 'auth' %}
 {% set hideManageAccount = 'false' %}
 {% set showEdit = true %}
@@ -23,7 +23,7 @@
 {% block form %}
 
 
-<h2 class="govuk-heading-m sectionHeader">Customs declaration details</h2>
+<h2 class="govuk-heading-m sectionHeader">{{ data.Cds | safe }}</h2>
 <div class="inline-form-group">
   <div class="govuk-form-group">
     <label class="govuk-label" for="match">Match</label>
@@ -151,7 +151,7 @@
 
 
 
-<h2 class="govuk-heading-m sectionHeader ched-header">IPAFFS pre-notification (CHED) details</h2>
+<h2 class="govuk-heading-m sectionHeader ched-header">{{ data.Ipaffs | safe }}</h2>
 <div class="inline-form-group">
 
   <div class="govuk-form-group">

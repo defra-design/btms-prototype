@@ -18,7 +18,7 @@
 {% block form %}
 
 
-<h2 class="govuk-heading-m sectionHeader">Customs declaration details</h2>
+<h2 class="govuk-heading-m sectionHeader">{{ data.Cds | safe }}</h2>
 <div class="inline-form-group">
   <div class="govuk-form-group">
     <label class="govuk-label" for="match">Match</label>
@@ -218,7 +218,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-<h2 class="govuk-heading-m sectionHeader ched-header">IPAFFS pre-notification (CHED) details</h2>
+<h2 class="govuk-heading-m sectionHeader ched-header">{{ data.Ipaffs | safe }}</h2>
 
 <div class="ched-container">
   <div class="container govuk-body">

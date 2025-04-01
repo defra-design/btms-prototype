@@ -17,7 +17,7 @@
 
 {% block form %}
 
-<h2 class="govuk-heading-m sectionHeader">Customs declaration details</h2>
+<h2 class="govuk-heading-m sectionHeader">{{ data.Cds | safe }}</h2>
 <div class="inline-form-group">
   <div class="govuk-form-group">
     <label class="govuk-label" for="match">Match</label>
@@ -73,7 +73,7 @@
         </div>
         <div class="row">
           <dt>Last updated</dt>
-          <dd>13 January 2025, 09:53</dd>
+          <dd>{{ '22 May 2024' | mrnTime }}</dd>
         </div>
       </dl>
       <div class="toggle-wrapper">
@@ -215,7 +215,7 @@
         </div>
         <div class="row">
           <dt>Last updated</dt>
-          <dd>14 January 2025, 12:11</dd>
+          <dd>{{ '22 May 2024' | mrnTime }}</dd>
         </div>
       </dl>
       <div class="toggle-wrapper">
@@ -372,7 +372,7 @@
 
 
 
-<h2 class="govuk-heading-m sectionHeader ched-header">IPAFFS pre-notification (CHED) details</h2>
+<h2 class="govuk-heading-m sectionHeader ched-header">{{ data.Ipaffs | safe }}</h2>
 <div class="inline-form-group">
 
   <div class="govuk-form-group">
@@ -474,7 +474,7 @@
         </div>
         <div class="row">
           <dt>Last updated</dt>
-          <dd>15 November 2024, 20:11</dd>
+          <dd>{{ '22 May 2024' | chedTime }}</dd>
         </div>
       </dl>
       <div class="toggle-wrapper">
@@ -572,7 +572,7 @@
           </div>
           <div class="row">
             <dt>Last updated</dt>
-            <dd>15 November 2024, 20:11</dd>
+            <dd>{{ '22 May 2024' | chedTime }}</dd>
           </div>
         </dl>
         <div class="toggle-wrapper">
