@@ -217,3 +217,44 @@
   }
 }
 
+.v4 {
+
+/* Optional: remove any dashed split styling if used */
+.first .govuk-table__cell {
+    border-bottom: none;
+  }
+  .govuk-table__cell.split {    
+    border-bottom: 1px dashed #dbdbdb;
+  }
+/* .hold .blank-cell {
+  color:#0b0c0c!important
+} */
+/* Ensure blank cells show normally when "No" match is selected */
+tr.filtered-match-no .blank-cell, 
+tr.filtered-decision-hold .blank-cell, 
+tr.filtered-auth-HMI .blank-cell, 
+tr.first.filtered-auth-PHSI .blank-cell 
+
+{
+  color: #0b0c0c !important; /* GOV.UK default text colour */
+}
+tr.filtered-match-no  .govuk-table__cell {
+    border-bottom: none;
+}
+.PHSI.filtered-match-yes .govuk-table__cell, 
+.filtered-auth-FNAO .govuk-table__cell 
+{
+    border-bottom: 1px solid #dbdbdb;
+}
+.tooltiplink {
+  border-bottom: 1px dashed #d4351c;
+}
+.ched-container .commodity-table td {
+  width: 18%;
+}
+.govuk-list > li:last-child {
+  /* Your styles here */
+  margin-bottom: 0;
+}
+
+}

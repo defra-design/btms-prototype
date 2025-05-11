@@ -1,7 +1,7 @@
 const _ = require('lodash');
 
 module.exports = (router) => {
-  router.post(['/mvp/v3/search/'], (req, res, next) => {
+  router.post(['/mvp/v4/search/'], (req, res, next) => {
     const data = req.session.data;
     const search = req.body['data.searchTerm'] || req.query.searchTerm; // Support both body and query params
     
@@ -21,7 +21,9 @@ module.exports = (router) => {
       '25GB1EU8XXNPKSTAR4': 'scenario-2',
       '25GB0KTW9JPEMO5AR0': 'scenario-3',
       '25GB2A3YROMOM5XAR6': 'scenario-4',
-      '25GB25XEV402TZBAR5': 'scenario-5',
+      '25GB25XEV402TZBAR5': 'gms',
+      '25GB3FJBV1UEKBDAR0': 'multiple-auth',
+      '25GB3HGVAICUT5YAR0': 'multiple-cheds-single-auth',
       '24GBDYHR49XV9BAFS1': 'filters-v4'
     };
 

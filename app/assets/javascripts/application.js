@@ -442,6 +442,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const isHMIRow = row.classList.contains("HMI");
         const isPHSIRow = row.classList.contains("PHSI");
         const isFNAORow = row.classList.contains("FNAO");
+        const isAPHARow = row.classList.contains("APHA");
         const isIUURow = row.classList.contains("IUU");
 
         // Filter conditions
@@ -456,6 +457,7 @@ document.addEventListener("DOMContentLoaded", function () {
           (authValue === "PHSI" && isPHSIRow) ||
           (authValue === "FNAO" && isFNAORow) ||
           (authValue === "HMI" && isHMIRow) ||
+          (authValue === "APHA" && isAPHARow) ||
           (authValue === "IUU" && isIUURow);
 
         const decisionFilter =
@@ -540,6 +542,7 @@ function filterChedRows() {
       const isFNAORow = row.classList.contains("FNAO");
       const isIUURow = row.classList.contains("IUU");
       const isPOAORow = row.classList.contains("POAO");
+      const isAPHARow = row.classList.contains("APHA");
       
       // Authority filter for CHED section
       const authFilter =
@@ -548,6 +551,7 @@ function filterChedRows() {
         (authValue === "FNAO" && isFNAORow) ||
         (authValue === "IUU" && isIUURow) ||
         (authValue === "POAO" && isPOAORow) ||
+        (authValue === "APHA" && isAPHARow) ||
         (authValue === "HMI" && isHMIRow);
 
       if (authFilter) {
@@ -651,7 +655,16 @@ function filterChedRows() {
     authChedSelect.value = "show-all";
     filterChedRows();
   });
-
+  const showBlank = matchSelect.value === "noMatch";
+  const blankCells = document.querySelectorAll(".blank-cell");
+  
+  blankCells.forEach(cell => {
+    if (showBlank) {
+      cell.style.color = ""; // show normally
+    } else {
+      cell.style.color = "transparent"; // hide content
+    }
+  });
   // Initial filtering on page load
   filterRows();
   filterChedRows();
