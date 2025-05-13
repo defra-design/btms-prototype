@@ -3,16 +3,29 @@
 {% set signedIn = 'false' %}
 
 {% block content %}
+<style>
+  .jira {    
+    display: block;
+    margin: 5px 0;
+    font-size: 16px!important;
+    color: #0b0c0c !important;
 
+    }
+    li span {
+      display: block;
+    margin: 5px 0;
+    font-size: 16px!important;
+    }
+
+</style>
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
 
     <h1 class="govuk-heading-l">{{ serviceName }} (BTMS)</h1>
 
-    <h2 class="govuk-heading-m">Post MVP </h2>
+    <h2 class="govuk-heading-m">Latest MVP </h2>
     <p class="govuk-heading-s">
     V4 (May 2025)
-      <strong class="govuk-tag govuk-tag--grey"> Post MVP </strong>
       <strong class="govuk-tag govuk-tag--blue"> In-progress  </strong>
         </p>
         <p>New design for displaying multiple CHEDs per line item with varying match statuses and decision outcomes.
@@ -20,13 +33,34 @@
         <p>Design updates from silent runnning feedback will be included in V4 
         </p>
 
-   
+        <p class="govuk-heading-s">Landing page (external users)  </p>
+ 
     <ul class="govuk-list govuk-list--bullet">
-      <li><a href="/mvp/v4/multiple-auth">MRN showing multiple cheds and multiple authorities per line item </a><br /><span class="govuk-body-s">This scenario covers cases where there are multiple DOC references linked to a single MRN line item, along with multiple authorities associated with that line. The question is: how do we identify which DOC reference corresponds to which authority </span></li>
-      <li><a href="/mvp/v4/multiple-cheds-single-auth">MRN with multiple cheds and single authority </a><br /><span class="govuk-body-s">This scenario cover cases when a MRN line item has multiple DOC references but a single authority  </span></li>
-      <li><a href="/mvp/v4/gms">GMS risk</a> <br /><span class="govuk-body-s">When a CHED PP GMS product has been selected for an HMI inspection </span></li>
+      <li><a href="/mvp/v4/start">Start page</a> <a class="jira" href="https://eaflood.atlassian.net/browse/CDMS-638"> Jira CDMS-638</a><span >Landing page for external users</span></li>
+      <li><a href="/mvp/v4/start">Defra manage account</a> <a class="jira" href="#"> Jira ?</a><span >From the BTSM header external users can access their Defra Account</span></li>
+     
+    </ul>
+    <p class="govuk-heading-s">Search page  </p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li><a href="mvp/v4/search">Search </a> <a class="jira" href="https://eaflood.atlassian.net/browse/CDMS-636"> Jira CDMS-636</a><span>includes search content plus clear search functionality</span></li>
 
-</ul>
+    </ul>
+    <p class="govuk-heading-s">Search results  </p>
+
+    <ul class="govuk-list govuk-list--bullet">
+      <li><a href="/mvp/v4/multiple-auth">MRN line items referenced by multiple CHEDS and multiple authorities per line item </a><a  class=" jira" href="https://eaflood.atlassian.net/browse/CDMS-398"> Jira CDMS-398 </a> <span >This scenario covers cases where there are multiple DOC references linked to a single MRN line item, along with multiple authorities associated with that line. The question is: how do we identify which DOC reference corresponds to which authority </span></a></li>
+      <li><a href="/mvp/v4/multiple-cheds-single-auth">MRN line items referenced by many cheds and single authority </a><a  class=" jira" href="https://eaflood.atlassian.net/browse/CDMS-398"> Jira CDMS-398 </a><span >This scenario cover cases when a MRN line item has multiple DOC references but a single authority  </span></li>
+      <li><a href="/mvp/v4/multiple-auth-dual">MRN line item referenced by 2 CHEDs and CHEDs have 2 authorities each </a><a  class=" jira" href="https://eaflood.atlassian.net/browse/CDMS-398"> Jira CDMS-398 </a><span >This scenario cover cases when a MRN line item has multiple DOC references but a single authority  </span></li>
+      <li></li>
+
+      <li><a href="mvp/v4/search?searchTerm=4GB335031931000-WB2408-27WWL6274S">Adding DUCR to search and the results </a><a  class=" jira" href="https://eaflood.atlassian.net/browse/CDMS-392"> Jira CDMS-392 </a><span>includes clear search-term functionality </span></li>
+
+      <li><a href="/mvp/v4/gms">GMS risk</a> <a  class=" jira" href="https://eaflood.atlassian.net/browse/CDMS-641"> Jira CDMS-641 </a><span >When a CHED PP GMS product has been selected for an HMI inspection </span></li>
+      <li><a href="/mvp/v4/ipaffs">Linking CHEDS to IPAFFS</a> <a  class=" jira" href="https://eaflood.atlassian.net/browse/CDMS-401"> Jira CDMS-401 </a><span >For internal DEFRA users only - access to CHED results page on IPAFFS</span></li>
+  
+ 
+
+    </ul>
 
   <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible" />
 
@@ -43,16 +77,16 @@
 
 
     <ul class="govuk-list govuk-list--bullet">
-      <li><a href="mvp/v3/mrn-auth">Highlighting search reference </a><br /><span class="govuk-body-s">Search terms are highlighted in the results page in yellow</span></li>
-      <li><a href="mvp/v3/search?searchTerm=4GB335031931000-WB2408-27WWL6274S">Adding DUCR search </a><br /><span class="govuk-body-s">also includes clear search-term functionality (DUCR search : 4GB335031931000-WB2408-27WWL6274S)</span></li>
-      <li><a href="mvp/v3/mrn-tri-auth">Filter MRN results (multi-auth)</a> <br /><span class="govuk-body-s">Filter functionality applied to CDS & CHED data</span></li>
+      <li><a href="mvp/v3/mrn-auth">Highlighting search reference </a><br /><span >Search terms are highlighted in the results page in yellow</span></li>
+      <li><a href="mvp/v3/search?searchTerm=4GB335031931000-WB2408-27WWL6274S">Adding DUCR search </a><br /><span >also includes clear search-term functionality (DUCR search : 4GB335031931000-WB2408-27WWL6274S)</span></li>
+      <li><a href="mvp/v3/mrn-tri-auth">Filter MRN results (multi-auth)</a> <br /><span >Filter functionality applied to CDS & CHED data</span></li>
 
-      <li><a href="/mvp/v3/start">Start page</a> <br /><span class="govuk-body-s">For external users - logging in through DEFRA ID, includes manage page</span></li>
-      <li><a href="/mvp/v3/mrn-tri-auth">Mismatch doc reference highlighting</a> <br /><span class="govuk-body-s">Highlights no match CDS references in red</span></li>
-      <li><a href="/mvp/v3/mrn-auth-edit">Edit search functionality</a> <br /><span class="govuk-body-s">(MRN search : 24GBDX8QQ4WWFZNAR3)</span></li>
-      <!-- <li>CHED decisions grouping <br /><span class="govuk-body-s">Place decisions for cheds in the summary bars</span></li> -->
-      <li><a href="/mvp/v3/mrn-auth-link-ipaffs">Linking CHEDS to IPAFFS</a> <br /><span class="govuk-body-s">For internal DEFRA users only - access to CHED results page on IPAFFS</span></li>
-      <li><a href="/mvp/v3/scenario-5">GMS request</a> <br /><span class="govuk-body-s">When a GSM product is selected for SPS inpection</span></li>
+      <li><a href="/mvp/v3/start">Start page</a> <br /><span >For external users - logging in through DEFRA ID, includes manage page</span></li>
+      <li><a href="/mvp/v3/mrn-tri-auth">Mismatch doc reference highlighting</a> <br /><span >Highlights no match CDS references in red</span></li>
+      <li><a href="/mvp/v3/mrn-auth-edit">Edit search functionality</a> <br /><span >(MRN search : 24GBDX8QQ4WWFZNAR3)</span></li>
+      <!-- <li>CHED decisions grouping <br /><span >Place decisions for cheds in the summary bars</span></li> -->
+      <li><a href="/mvp/v3/mrn-auth-link-ipaffs">Linking CHEDS to IPAFFS</a> <br /><span >For internal DEFRA users only - access to CHED results page on IPAFFS</span></li>
+      <li><a href="/mvp/v3/scenario-5">GMS request</a> <br /><span >When a GSM product is selected for SPS inpection</span></li>
     </ul>
     <details class="govuk-details">
       <summary class="govuk-details__summary">
@@ -63,9 +97,9 @@
       <div class="govuk-details__text">
         <h2 class="govuk-heading-s">Accodion patterns</h2>
         <ul class="govuk-list govuk-list--bullet">
-          <li><a href="/mvp/v3/filters-v1">v1 Show hide button inline </a> <br /><span class="govuk-body-s">This pattern uses the <a href="https://design-system.service.gov.uk/components/accordion/">gov accordion pattern</a></span></li>
-          <li><a href="/mvp/v3/filters-v2">v2 Using the details component </a> <br /><span class="govuk-body-s">This pattern uses the <a href="https://design-system.service.gov.uk/components/details/">gov details pattern</a></span></li>
-          <li><a href="/mvp/v3/filters-v3">v3 Using the inline JS chevron toggle </a> <br /><span class="govuk-body-s">Non-GDS pattern - however most elegant solutions</span></li>
+          <li><a href="/mvp/v3/filters-v1">v1 Show hide button inline </a> <br /><span >This pattern uses the <a href="https://design-system.service.gov.uk/components/accordion/">gov accordion pattern</a></span></li>
+          <li><a href="/mvp/v3/filters-v2">v2 Using the details component </a> <br /><span >This pattern uses the <a href="https://design-system.service.gov.uk/components/details/">gov details pattern</a></span></li>
+          <li><a href="/mvp/v3/filters-v3">v3 Using the inline JS chevron toggle </a> <br /><span >Non-GDS pattern - however most elegant solutions</span></li>
 
         </div>
     </details>
@@ -78,10 +112,10 @@
       <div class="govuk-details__text">
         <h2 class="govuk-heading-s">Error messages</h2>
         <ul class="govuk-list govuk-list--bullet">
-          <li><a href="mvp/v3/search?searchTerm=25GB0P0T2">Invalid search</a> <br /><span class="govuk-body-s">(invalid search : 25GB0P0T)</span></li>
-          <li><a href="mvp/v3/search?searchTerm= ">Empty search</a> <br /><span class="govuk-body-s">(invalid search : empty)</span></li>
-          <li><a href="mvp/v3/search?searchTerm=CHEDP.GB.2024.4433124">Ched not found</a> <br /><span class="govuk-body-s">( search : CHEDP.GB.2024.4433124)</span></li>
-          <li><a href="mvp/v3/search?searchTerm=24GBDX8QQ4WWFJHGA4">MRN not found</a> <br /><span class="govuk-body-s">( search : 24GBDX8QQ4WWFJHGA4)</span></li>
+          <li><a href="mvp/v3/search?searchTerm=25GB0P0T2">Invalid search</a> <br /><span >(invalid search : 25GB0P0T)</span></li>
+          <li><a href="mvp/v3/search?searchTerm= ">Empty search</a> <br /><span >(invalid search : empty)</span></li>
+          <li><a href="mvp/v3/search?searchTerm=CHEDP.GB.2024.4433124">Ched not found</a> <br /><span >( search : CHEDP.GB.2024.4433124)</span></li>
+          <li><a href="mvp/v3/search?searchTerm=24GBDX8QQ4WWFJHGA4">MRN not found</a> <br /><span >( search : 24GBDX8QQ4WWFJHGA4)</span></li>
         </ul>
             </div>
     </details>
@@ -95,11 +129,11 @@
         <h2 class="govuk-heading-s">Several senarios comparing BTMS with ALVS</h2>
        <p>The scenarios can be viewed on <a href="https://app.mural.co/t/coredefra2548/m/coredefra2548/1733133878208/d32436d81e5757dae6357bcb22b6f133b33d59fa?wid=0-1742479359839">MURAL alongside</a> the comparisons with ALVS.</p>
         <ul class="govuk-list govuk-list--bullet">
-          <li><a href="mvp/v3/scenario-1">10 Cheds</a> <br /><span class="govuk-body-s">(MRN search : 25GB2XHHM4884KEAR1)</span></li>
-          <li><a href="mvp/v3/scenario-2">Many CHEDS</a> <br /><span class="govuk-body-s">(MRN search : 25GB1EU8XXNPKSTAR4)</span></li>
-          <li><a href="/mvp/v3/scenario-3">Match model issue</a> <br /><span class="govuk-body-s">(MRN search : 25GB0KTW9JPEMO5AR0)</span></li>
-          <li><a href="/mvp/v3/scenario-4">Invalidation issue</a> <br /><span class="govuk-body-s">(MRN search : 25GB2A3YROMOM5XAR6)</span></li>
-          <li><a href="/mvp/v3/scenario-5">GMS risk</a> <br /><span class="govuk-body-s">(MRN search : 25GB25XEV402TZBAR5)</span></li>
+          <li><a href="mvp/v3/scenario-1">10 Cheds</a> <br /><span >(MRN search : 25GB2XHHM4884KEAR1)</span></li>
+          <li><a href="mvp/v3/scenario-2">Many CHEDS</a> <br /><span >(MRN search : 25GB1EU8XXNPKSTAR4)</span></li>
+          <li><a href="/mvp/v3/scenario-3">Match model issue</a> <br /><span >(MRN search : 25GB0KTW9JPEMO5AR0)</span></li>
+          <li><a href="/mvp/v3/scenario-4">Invalidation issue</a> <br /><span >(MRN search : 25GB2A3YROMOM5XAR6)</span></li>
+          <li><a href="/mvp/v3/scenario-5">GMS risk</a> <br /><span >(MRN search : 25GB25XEV402TZBAR5)</span></li>
 
         </ul>
             </div>
@@ -113,9 +147,9 @@
       <div class="govuk-details__text">
         <h2 class="govuk-heading-s">Filtering</h2>
         <ul class="govuk-list govuk-list--bullet">
-          <li><a href="mvp/v3/mrn">Hide results and MRN summary</a> <br /><span class="govuk-body-s">(MRN search : 24GB0Z8WEJ9ZBTL73B)</span></li>
-          <li><a href="mvp/v3/mrn-tri-auth">Hide results - persist MRN summary (multi-auth)</a> <br /><span class="govuk-body-s">(MRN search : 24GBDX8QQ4WWFZNAR3)</span></li>
-          <li><a href="/mvp/v3/mrn-auth">Download data as Excel link</a> <br /><span class="govuk-body-s">Downloads results in Excel format</span></li>
+          <li><a href="mvp/v3/mrn">Hide results and MRN summary</a> <br /><span >(MRN search : 24GB0Z8WEJ9ZBTL73B)</span></li>
+          <li><a href="mvp/v3/mrn-tri-auth">Hide results - persist MRN summary (multi-auth)</a> <br /><span >(MRN search : 24GBDX8QQ4WWFZNAR3)</span></li>
+          <li><a href="/mvp/v3/mrn-auth">Download data as Excel link</a> <br /><span >Downloads results in Excel format</span></li>
 
         </ul>
             </div>
@@ -142,19 +176,19 @@
     <p>Used for testing in January 2025, this scenario involves the user searching by CHED or MRN to identify matching errors.</p>
     <ul class="govuk-list govuk-list--bullet">
       <li><a href="mvp/v2/search">Search</a></li>
-      <li><a href="mvp/v2/mrn">Many to many (matching errors)</a> <br /><span class="govuk-body-s">(MRN search : 24GB0Z8WEJ9ZBTL73B)</span></li>
-      <li><a href="mvp/v2/mrn-auth">Dual authority</a> <br /><span class="govuk-body-s">(MRN search : 25GB0HQ0W2IZKO9AR0)</span></li>
-      <li><a href="mvp/v2/mrn-tri-auth">Tri authority (cancellation and matching errors)</a> <br /><span class="govuk-body-s">(MRN search : 24GBDX8QQ4WWFZNAR3)</span></li>
+      <li><a href="mvp/v2/mrn">Many to many (matching errors)</a> <br /><span >(MRN search : 24GB0Z8WEJ9ZBTL73B)</span></li>
+      <li><a href="mvp/v2/mrn-auth">Dual authority</a> <br /><span >(MRN search : 25GB0HQ0W2IZKO9AR0)</span></li>
+      <li><a href="mvp/v2/mrn-tri-auth">Tri authority (cancellation and matching errors)</a> <br /><span >(MRN search : 24GBDX8QQ4WWFZNAR3)</span></li>
     </ul>
     <p class="govuk-heading-s">Error states and edge cases</p>
     <p>To see error messages, you need to perform a search by clicking the search button.    </p>
     <ul class="govuk-list govuk-list--bullet">
-      <li><a href="mvp/v2/no-mrn">No MRN data</a> <br /><span class="govuk-body-s">(CHED search : CHEDPP.GB.2025.5426583)</span></li>
-      <li><a href="mvp/v2/no-ched">No CHED data</a> <br /><span class="govuk-body-s">(MRN search : 25GB0P0TEP7CZCNAR6)</span></li>
-      <li><a href="mvp/v2/search?searchTerm=25GB0P0T2">Invalid search</a> <br /><span class="govuk-body-s">(invalid search : 25GB0P0T)</span></li>
-      <li><a href="mvp/v2/search?searchTerm= ">Empty search</a> <br /><span class="govuk-body-s">(invalid search : empty)</span></li>
-      <li><a href="mvp/v2/search?searchTerm=CHEDPP.GB.2025.5426583">Ched not found</a> <br /><span class="govuk-body-s">( search : CHEDPP.GB.2025.5426583)</span></li>
-      <li><a href="mvp/v2/search?searchTerm=25GB0P0TEP7CZCNAR6">MRN not found</a> <br /><span class="govuk-body-s">( search : 25GB0P0TEP7CZCNAR6)</span></li>
+      <li><a href="mvp/v2/no-mrn">No MRN data</a> <br /><span >(CHED search : CHEDPP.GB.2025.5426583)</span></li>
+      <li><a href="mvp/v2/no-ched">No CHED data</a> <br /><span >(MRN search : 25GB0P0TEP7CZCNAR6)</span></li>
+      <li><a href="mvp/v2/search?searchTerm=25GB0P0T2">Invalid search</a> <br /><span >(invalid search : 25GB0P0T)</span></li>
+      <li><a href="mvp/v2/search?searchTerm= ">Empty search</a> <br /><span >(invalid search : empty)</span></li>
+      <li><a href="mvp/v2/search?searchTerm=CHEDPP.GB.2025.5426583">Ched not found</a> <br /><span >( search : CHEDPP.GB.2025.5426583)</span></li>
+      <li><a href="mvp/v2/search?searchTerm=25GB0P0TEP7CZCNAR6">MRN not found</a> <br /><span >( search : 25GB0P0TEP7CZCNAR6)</span></li>
     </ul>
 
     <!-- {% include "govuk-prototype-kit/includes/homepage-bottom.njk" %} -->
@@ -178,8 +212,8 @@
     <p>To search mrn or ched use examples in the search tooltip</p>
     <ul class="govuk-list govuk-list--bullet">
       <li><a href="mvp/v1/search">Search</a></li>
-      <li><a href="mvp/v1/mrn">MRN search results - 2 commodity line items</a> <br /><span class="govuk-body-s">(search : 24GB6T3HFCIZV1HAR9)</span></li>
-      <li><a href="mvp/v1/mrn-auth">MRN search results - tri regulated </a><br /><span class="govuk-body-s">(search : 24GB0Z8WEJ9ZBTL73B)</span></li>
+      <li><a href="mvp/v1/mrn">MRN search results - 2 commodity line items</a> <br /><span >(search : 24GB6T3HFCIZV1HAR9)</span></li>
+      <li><a href="mvp/v1/mrn-auth">MRN search results - tri regulated </a><br /><span >(search : 24GB0Z8WEJ9ZBTL73B)</span></li>
     </ul>
     <!-- {% include "govuk-prototype-kit/includes/homepage-bottom.njk" %} -->
     <p class="govuk-heading-s">Other links</p>

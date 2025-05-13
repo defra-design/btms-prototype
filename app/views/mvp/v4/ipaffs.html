@@ -1,0 +1,198 @@
+{% extends "layouts/forms.html" %}
+{% set signedIn = 'true' %}
+{% set fullWidth = true %}
+{% set hideButton = true %}
+{% set breadcrumb = true %}
+{% set showSubheader = true %}
+{% set showEdit = true %}
+{% set subHeader = 'Showing result for' %}
+{% set title = '24GB0Z8WEJ9ZBTL73B' %}
+{% set bodyClasses = 'mrn accordion' %}
+{% set cssClassName = 'auth' %}
+{% set hideManageAccount = 'false' %}
+
+
+
+
+
+
+{% block form %}
+
+
+<h2 class="govuk-heading-m sectionHeader">{{ data.Cds | safe }}</h2>
+
+<div class="mrn-container" id="mrn-toggle">
+
+  <div class="toggle-area" data-target="commodityTable1">
+    <div class="container govuk-body">
+      <dl class="definition-list ">
+        <div class="row">
+          <dt>MRN</dt>
+          
+          <dd>
+            
+            <strong class="govuk-tag govuk-tag--yellow">
+             
+               24GB0Z8WEJ9ZBTL73B
+            </strong>
+          
+          </dd>
+        </div>
+        <div class="row">
+          <dt>DUCR</dt>
+          <dd>    
+            4GB943952494000-BER047811
+             
+    
+          </dd>
+        </div>
+        <div class="row">
+          <dt>CDS status</dt>
+          <dd>Current</dd>
+        </div>
+        <div class="row">
+          <dt>Last updated</dt>
+          <dd>{{ '22 May 2024' | mrnTime }}</dd>
+        </div>
+      </dl>
+      <div class="toggle-wrapper">
+        <!-- Chevron arrow wrapper -->
+        <div id="toggleArrowContainer">
+          <i id="toggleArrow" class="fas fa-chevron-down"></i>
+        </div>
+      </div>
+    </div>
+
+
+
+<div id="commodityTable1" class="commodity-table">
+  <table class="govuk-table data-table">
+    <thead class="govuk-table__head">
+      <tr class="govuk-table__row">
+        <th scope="col" class="govuk-table__header" >Item  number</th>
+        <th scope="col" class="govuk-table__header">Commodity code</th>
+        <th scope="col" class="govuk-table__header ">Description</th>
+        <th scope="col" class="govuk-table__header ">Quantity / Weight</th>
+        <th scope="col" class="govuk-table__header" >CHED reference</th>
+        <th scope="col" class="govuk-table__header" >Match</th>
+        <th scope="col" class="govuk-table__header">Decision (authority)</th>
+
+      </tr>
+    </thead>
+    <tbody class="govuk-table__body ">
+
+      <tr class="govuk-table__row match release POAO IUU">
+        <td class="govuk-table__cell">1</td>
+        <td class="govuk-table__cell">02102010</td>
+        <td class="govuk-table__cell">Bovine meat with bone</td>
+        <td class="govuk-table__cell">100</td>
+        <td class="govuk-table__cell">
+          <ul class="govuk-list">
+            <li>
+              GBCHD2025.5925980
+            </li>
+        </ul>
+        </td>
+        <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Yes</strong></td>
+        <td class="govuk-table__cell decision multi-auth">  
+            <ul class="govuk-list">
+              <li class="POAO">
+                Hold - To be inspected <span>(PHA-POAO)</span>
+              </li>
+            </ul>
+        </td>
+      </tr> 
+    </tbody>
+  </table>
+</div>
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+<h2 class="govuk-heading-m sectionHeader ched-header">{{ data.Ipaffs | safe }}</h2>
+
+
+<div class="ched-container toggle-area" data-target="commodityTable3">
+  <div class="container govuk-body">
+    <dl class="definition-list ">
+      <div class="row">
+        <dt>CHED reference</dt>
+        <dd>
+          <a href="https://ipaffs-prototype.herokuapp.com/part-2/chedp-landbridge/00-ched-overview" target="_blank"><span>CHEDP.GB.2025.5925980</span></a>
+         <i class="fas fa-external-link-alt"></i>
+
+        </dd>
+        
+      </div>
+      <div class="row">
+        <dt>CHED Status</dt>
+        <dd>New</dd>
+      </div>
+      <div class="row">
+        <dt>Risk outcome</dt>
+        <dd>Required</dd>
+      </div>
+      <div class="row">
+        <dt>Last updated</dt>
+        <dd>{{ '22 May 2024' | chedTime }}</dd>
+      </div>
+    </dl>
+    <div class="toggle-wrapper">
+      <!-- Chevron arrow wrapper -->
+      <div id="toggleArrowContainer">
+        <i id="toggleArrow" class="fas fa-chevron-down"></i>
+      </div>
+    </div>
+  </div>
+
+
+
+<div id="commodityTable3" class="commodity-table">
+  <table class="govuk-table data-table">
+    <thead class="govuk-table__head">
+      <tr class="govuk-table__row">
+        <th scope="col" class="govuk-table__header first" >Item  number</th>
+        <th scope="col" class="govuk-table__header second" >Commodity code</th>
+        <th scope="col" class="govuk-table__header third " >Description</th>
+        <th scope="col" class="govuk-table__header forth " >Quantity / Weight</th>
+
+        <th scope="col" class="govuk-table__header fifth "  >Decision (authority)</th>
+
+      </tr>
+    </thead>
+    <tbody class="govuk-table__body">
+
+      <tr class="govuk-table__row POAO">
+        <td class="govuk-table__cell">1</td>
+        <td class="govuk-table__cell">02102010</td>
+        <td class="govuk-table__cell">Bovidae</td>
+        <td class="govuk-table__cell">100</td>
+        <td class="govuk-table__cell decision multi-auth">  
+            <ul class="govuk-list">
+              <li class="POAO">
+                Scheduled inspection <span>(PHA-POAO)</span>
+              </li>
+        
+            </ul>
+        </td>
+      </tr>
+      
+ 
+     
+    </tbody>
+  </table>
+  </div>
+  </div>
+
+
+
+
+{% endblock %}
