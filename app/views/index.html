@@ -45,6 +45,13 @@
       <li><a href="mvp/v4/search">Search </a> <a class="jira" href="https://eaflood.atlassian.net/browse/CDMS-636"> Jira CDMS-636</a><span>includes search content plus clear search functionality</span></li>
 
     </ul>
+    <p class="govuk-heading-xs">Error messages on search   </p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li><a href="mvp/v4/search?searchTerm=25GB0P0T2">Invalid search</a> <br /><span >(invalid search : 25GB0P0T)</span></li>
+      <li><a href="mvp/v4/search?searchTerm= ">Empty search</a> <br /><span >(invalid search : empty)</span></li>
+      <li><a href="mvp/v4/search?searchTerm=CHEDP.GB.2024.4433124">Ched not found</a> <br /><span >( search : CHEDP.GB.2024.4433124)</span></li>
+      <li><a href="mvp/v4/search?searchTerm=24GBDX8QQ4WWFJHGA4">MRN not found</a> <br /><span >( search : 24GBDX8QQ4WWFJHGA4)</span></li>
+    </ul>
     <p class="govuk-heading-s">Search results  </p>
 
     <ul class="govuk-list govuk-list--bullet">
@@ -58,7 +65,15 @@
       <li><a href="/mvp/v4/gms">GMS risk</a> <a  class=" jira" href="https://eaflood.atlassian.net/browse/CDMS-641"> Jira CDMS-641 </a><span >When a CHED PP GMS product has been selected for an HMI inspection </span></li>
       <li><a href="/mvp/v4/ipaffs">Linking CHEDS to IPAFFS</a> <a  class=" jira" href="https://eaflood.atlassian.net/browse/CDMS-401"> Jira CDMS-401 </a><span >For internal DEFRA users only - access to CHED results page on IPAFFS</span></li>
   
- 
+      <li><a href="/mvp/v4/ipaffs">Highlighting search reference CHED </a> <a  class=" jira" href="#"> Jira CDMS-? </a><span >Search terms are highlighted in the results page in yellow</span></li>
+
+      <li><a href="/mvp/v4/gms">Highlighting search reference MRN </a> <a  class=" jira" href="#"> Jira CDMS-? </a><span >Search terms are highlighted in the results page in yellow</span></li>
+
+    </ul>
+    <p class="govuk-heading-xs">Error states on search results   </p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li><a href="/mvp/v4/no-ched">No CHED in search results </a><a  class=" jira" href="#"> Jira ? </a><span >This scenario covers when a MRN is searched for but does not have any matching CHED/s </span></li>
+      <li><a href="/mvp/v4/no-mrn">No MRN in search results </a><a  class=" jira" href="#"> Jira ? </a><span >This scenario covers when a CHED is searched for but does not have any matching MRN/s   </span></li>
 
     </ul>
 
@@ -72,7 +87,7 @@
         </p>
     <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible" />
 
-    <p>All functionalities listed below are considered <strong>stretch goals</strong>.    </p>
+    <p>All functionalities listed below are considered <strong>stretch goals</strong>.</p>
     <p>Additional functionality includes filtering, document search, and improved authority matching.</p>
 
 

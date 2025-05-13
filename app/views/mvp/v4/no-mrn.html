@@ -1,0 +1,134 @@
+{% extends "layouts/forms.html" %}
+{% set signedIn = 'true' %}
+{% set fullWidth = true %}
+{% set hideButton = true %}
+{% set breadcrumb = true %}
+{% set showSubheader = true %}
+{% set subHeader = 'Showing result for' %}
+{% set title = 'CHEDPP.GB.2025.5628254' %}
+{% set bodyClasses = 'mrn accordion v4' %}
+{% set cssClassName = 'auth' %}
+{% set hideManageAccount = 'false' %}
+{% set showEdit = true %}
+
+
+
+
+
+{% block form %}
+
+<h2 class="govuk-heading-m sectionHeader">{{ data.Cds | safe }}</h2>
+
+
+<div class="govuk-inset-text ched-inset">
+  There are no matching Customs declaration details
+</div>
+
+
+
+
+
+<h2 class="govuk-heading-m sectionHeader ched-header">{{ data.Ipaffs | safe }}</h2>
+<div class="inline-form-group">
+
+  <div class="govuk-form-group">
+    <label class="govuk-label" for="authChed">Authority</label>
+    <select class="govuk-select" id="authChed" name="authChed">
+      <option value="show-all" selected>Show all</option>
+      <option value="FNAO">FNAO</option>
+      <option value="HMI">HMI</option>
+      <option value="PHSI">PHSI</option>
+    </select>
+  </div>
+  <div class="govuk-form-group">
+    <a href="#" class="clear-filter" >Clear Filters</a>
+
+
+   </div>
+</div>
+
+
+
+
+    <div class="ched-container toggle-area" data-target="commodityTable5">
+      <div class="container govuk-body">
+        <dl class="definition-list ">
+          <div class="row">
+            <dt>CHED reference</dt>
+            <dd> <strong class="govuk-tag govuk-tag--yellow">
+              <a href="https://ipaffs-prototype.herokuapp.com/part-2/chedp-landbridge/00-ched-overview" target="_blank"><span>CHEDPP.GB.2025.5628254
+              </span></a></strong>
+              <i class="fas fa-external-link-alt"></i>
+            </dd>
+          </div>
+          <div class="row">
+            <dt>CHED Status</dt>
+            <dd>Valid</dd>
+          </div>
+          <div class="row">
+            <dt>Risk outcome</dt>
+            <dd>No inspection</dd>
+          </div>
+          <div class="row">
+            <dt>Last updated</dt>
+            <dd>{{ '22 May 2024' | chedTime }}</dd>
+          </div>
+        </dl>
+        <div class="toggle-wrapper">
+          <!-- Chevron arrow wrapper -->
+          <div id="toggleArrowContainer">
+            <i id="toggleArrow" class="fas fa-chevron-down"></i>
+          </div>
+        </div>
+      </div>
+    
+    
+    
+    <div id="commodityTable5" class="commodity-table">
+    
+    
+  <table class="govuk-table data-table">
+    <thead class="govuk-table__head">
+      <tr class="govuk-table__row">
+        <th scope="col" class="govuk-table__header" >Item  number</th>
+        <th scope="col" class="govuk-table__header" >Commodity code</th>
+        <th scope="col" class="govuk-table__header " >Description</th>
+        <th scope="col" class="govuk-table__header " >Quantity / Weight</th>
+
+        <th scope="col" class="govuk-table__header " >Decision (authority)</th>
+
+      </tr>
+    </thead>
+    <tbody class="govuk-table__body">
+      <tr class="govuk-table__row PHSI">
+        <td class="govuk-table__cell">1</td>
+        <td class="govuk-table__cell">08101000</td>
+        <td class="govuk-table__cell">Fragaria x ananassa			</td>
+        <td class="govuk-table__cell">2883.6</td>
+        <td class="govuk-table__cell decision ">  
+            <ul class="govuk-list">
+              <li class="PHSI">
+                Acceptable for internal market <span>(PHSI)</span>
+              </li>
+              <li class="HMI">
+                Acceptable for internal market <span>(HMI)</span>
+              </li>
+            </ul>
+        </td>
+      </tr>
+
+
+    </tbody>
+  </table>
+      </div>
+      </div>
+
+
+
+
+  
+        
+        
+        
+  
+{% endblock %}
