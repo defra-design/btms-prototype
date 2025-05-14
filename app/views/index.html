@@ -28,16 +28,14 @@
     V4 (May 2025)
       <strong class="govuk-tag govuk-tag--blue"> In-progress  </strong>
         </p>
-        <p>New design for displaying multiple CHEDs per line item with varying match statuses and decision outcomes.
-        </p>
-        <p>Design updates from silent runnning feedback will be included in V4 
-        </p>
+        <p>New design for displaying multiple CHEDs per line item with varying match statuses and decision outcomes. </p>
+        <p>Design updates from silent runnning feedback will be included in V4 </p>
 
         <p class="govuk-heading-s">Landing page (external users)  </p>
  
     <ul class="govuk-list govuk-list--bullet">
       <li><a href="/mvp/v4/start">Start page</a> <a class="jira" href="https://eaflood.atlassian.net/browse/CDMS-638"> Jira CDMS-638</a><span >Landing page for external users</span></li>
-      <li><a href="/mvp/v4/start">Defra manage account</a> <a class="jira" href="#"> Jira ?</a><span >From the BTSM header external users can access their Defra Account</span></li>
+      <li><a href="/mvp/v4/start">Defra manage account</a> <a class="jira" href="https://eaflood.atlassian.net/browse/CDMS-665"> Jira CDMS-665</a><span >From the BTSM header external users can access their Defra Account</span></li>
      
     </ul>
     <p class="govuk-heading-s">Search page  </p>
@@ -45,7 +43,7 @@
       <li><a href="mvp/v4/search">Search </a> <a class="jira" href="https://eaflood.atlassian.net/browse/CDMS-636"> Jira CDMS-636</a><span>includes search content plus clear search functionality</span></li>
 
     </ul>
-    <p class="govuk-heading-xs">Error messages on search   </p>
+    <p class="govuk-heading-xs">Error messages on search  <a class="jira" href="https://eaflood.atlassian.net/browse/CDMS-665"> Jira ?</a> </p>
     <ul class="govuk-list govuk-list--bullet">
       <li><a href="mvp/v4/search?searchTerm=25GB0P0T2">Invalid search</a> <br /><span >(invalid search : 25GB0P0T)</span></li>
       <li><a href="mvp/v4/search?searchTerm= ">Empty search</a> <br /><span >(invalid search : empty)</span></li>
@@ -59,15 +57,20 @@
       <li><a href="/mvp/v4/multiple-cheds-single-auth">MRN line items referenced by many cheds and single authority </a><a  class=" jira" href="https://eaflood.atlassian.net/browse/CDMS-398"> Jira CDMS-398 </a><span >This scenario cover cases when a MRN line item has multiple DOC references but a single authority  </span></li>
       <li><a href="/mvp/v4/multiple-auth-dual">MRN line item referenced by 2 CHEDs and CHEDs have 2 authorities each </a><a  class=" jira" href="https://eaflood.atlassian.net/browse/CDMS-398"> Jira CDMS-398 </a><span >This scenario cover cases when a MRN line item has multiple DOC references but a single authority  </span></li>
       <li></li>
+    </ul>
+    <ul class="govuk-list govuk-list--bullet">
 
       <li><a href="mvp/v4/search?searchTerm=4GB335031931000-WB2408-27WWL6274S">Adding DUCR to search and the results </a><a  class=" jira" href="https://eaflood.atlassian.net/browse/CDMS-392"> Jira CDMS-392 </a><span>includes clear search-term functionality </span></li>
 
       <li><a href="/mvp/v4/gms">GMS risk</a> <a  class=" jira" href="https://eaflood.atlassian.net/browse/CDMS-641"> Jira CDMS-641 </a><span >When a CHED PP GMS product has been selected for an HMI inspection </span></li>
       <li><a href="/mvp/v4/ipaffs">Linking CHEDS to IPAFFS</a> <a  class=" jira" href="https://eaflood.atlassian.net/browse/CDMS-401"> Jira CDMS-401 </a><span >For internal DEFRA users only - access to CHED results page on IPAFFS</span></li>
   
-      <li><a href="/mvp/v4/ipaffs">Highlighting search reference CHED </a> <a  class=" jira" href="#"> Jira CDMS-? </a><span >Search terms are highlighted in the results page in yellow</span></li>
+      <li><a href="/mvp/v4/multiple-auth-dual">Highlighting search reference CHED </a> <a  class=" jira" href="https://eaflood.atlassian.net/browse/CDMS-666"> Jira CDMS-CDMS-666 </a><span >Search terms are highlighted in the results page in yellow</span></li>
 
-      <li><a href="/mvp/v4/gms">Highlighting search reference MRN </a> <a  class=" jira" href="#"> Jira CDMS-? </a><span >Search terms are highlighted in the results page in yellow</span></li>
+      <li><a href="/mvp/v4/gms">Highlighting search reference MRN </a> <a  class=" jira" href="https://eaflood.atlassian.net/browse/CDMS-666"> Jira CDMS-666? </a><span >Search terms are highlighted in the results page in yellow</span></li>
+      
+      <li><a href="/mvp/v4/gms">Breadcrumbs in search results </a> <a  class=" jira" href="https://eaflood.atlassian.net/browse/CDMS-435"> Jira CDMS-435 </a><span >Search terms are highlighted in the results page in yellow</span></li>
+      <li><a href="/mvp/v4/gms">Filters in search results </a> <a  class=" jira" href="https://eaflood.atlassian.net/browse/CDMS-435"> Jira CDMS-435 </a><span >Filter functionality applied to CDS & CHED data</span></li>
 
     </ul>
     <p class="govuk-heading-xs">Error states on search results   </p>
@@ -76,6 +79,17 @@
       <li><a href="/mvp/v4/no-mrn">No MRN in search results </a><a  class=" jira" href="#"> Jira ? </a><span >This scenario covers when a CHED is searched for but does not have any matching MRN/s   </span></li>
 
     </ul>
+
+    <p class="govuk-heading-s">Footer links  </p>
+    <p class="govuk-heading-xs">The inital team decision was to have just Accessibilty, cookies and privacy.  Need to decide on approach - custom or link to generic gov or defra  </p>
+
+    <ul class="govuk-list govuk-list--bullet">
+      <li><a href="#">Accessibilty page </a><a  class=" jira" href="#"> Jira ? </a><span >Need to decide on approach - custom or link to generic gov or defra</span></li>
+      <li><a href="#">Cookies </a><a  class=" jira" href="#"> Jira ? </a><span >Need to decide on approach - custom or link to generic gov or defra  </span></li>
+      <li><a href="#">Privacy </a><a  class=" jira" href="#"> Jira ? </a><span >Need to decide on approach - custom or link to generic gov or defra  </span></li>
+
+    </ul>
+
 
   <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible" />
 
