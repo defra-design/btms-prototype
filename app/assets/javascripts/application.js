@@ -131,8 +131,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // filters 
-
-
 document.addEventListener("DOMContentLoaded", function () {
   const matchFilter = document.getElementById("match");
   const decisionFilter = document.getElementById("decision");
@@ -161,13 +159,13 @@ document.addEventListener("DOMContentLoaded", function () {
     const matchValue = matchFilter?.value ?? "show-all";
     const decisionValue = decisionFilter?.value ?? "show-all";
     const authValue = authFilter?.value ?? "show-all";
-
+  
     mrnContainers.forEach(container => {
       const table = container.querySelector(".govuk-table");
       const rows = container.querySelectorAll("tbody tr");
       const tableHead = table.querySelector(".govuk-table__head");
       let visibleRowFound = false;
-
+  
       let noDataMsg = container.querySelector(".no-data-message");
       if (!noDataMsg) {
         noDataMsg = document.createElement("p");
@@ -176,23 +174,38 @@ document.addEventListener("DOMContentLoaded", function () {
         noDataMsg.style.display = "none";
         container.querySelector(".commodity-table")?.appendChild(noDataMsg);
       }
-
+  
       rows.forEach(row => {
         const decisionItems = row.querySelectorAll("li");
         let matches = true;
-
+  
+        // Remove previous filter classes
+        row.classList.remove(
+          "filtered-match-match",
+          "filtered-match-no-match",
+          ...["release", "hold", "refused"].map(d => `filtered-decision-${d}`),
+          ...["FNAO", "HMI", "PHSI", "POAO", "IUU", "APHA"].map(a => `filtered-auth-${a}`)
+        );
+  
+        // Match filter
         if (matchValue !== "show-all") {
+          row.classList.add(`filtered-match-${matchValue}`);
           matches = matchValue === "match"
             ? row.classList.contains("match")
             : row.classList.contains("no-match");
         }
-
-        if (matches && decisionValue !== "show-all" && !row.classList.contains(decisionValue)) {
-          matches = false;
+  
+        // Decision filter
+        if (matches && decisionValue !== "show-all") {
+          row.classList.add(`filtered-decision-${decisionValue}`);
+          if (!row.classList.contains(decisionValue)) {
+            matches = false;
+          }
         }
-
-        // ✅ FIX: Check for authority match inside <li> elements (not just <tr> class)
+  
+        // Authority filter (via LI classes or text)
         if (matches && authValue !== "show-all") {
+          row.classList.add(`filtered-auth-${authValue}`);
           const matchesAuthorityInList = Array.from(decisionItems).some(li =>
             li.classList.contains(authValue) || li.textContent.includes(authValue)
           );
@@ -200,18 +213,17 @@ document.addEventListener("DOMContentLoaded", function () {
             matches = false;
           }
         }
-
-        // Filter which <li>s are visible
+  
+   // Filter individual <li>s in the decision cell based on selected filters
         decisionItems.forEach(li => {
-          const liAuth = authValue === "show-all" || li.classList.contains(authValue);
-          const liDecision = decisionValue === "show-all" ||
-            !["hold", "release", "refused"].some(d => li.classList.contains(d)) ||
-            li.classList.contains(decisionValue);
-          li.style.display = liAuth && liDecision ? "" : "none";
+          const matchesAuth = authValue === "show-all" || li.classList.contains(authValue) || li.textContent.includes(authValue);
+          const matchesDecision = decisionValue === "show-all" || li.classList.contains(decisionValue) || li.textContent.toLowerCase().includes(decisionValue.toLowerCase());
+
+          li.style.display = matchesAuth && matchesDecision ? "" : "none";
         });
-
+  
         const anyVisibleDecision = Array.from(decisionItems).some(li => li.style.display !== "none");
-
+  
         if (matches && (!decisionItems.length || anyVisibleDecision)) {
           row.style.display = "";
           visibleRowFound = true;
@@ -219,17 +231,17 @@ document.addEventListener("DOMContentLoaded", function () {
           row.style.display = "none";
         }
       });
-
+  
       const showBlank = matchValue === "noMatch";
       const blankCells = container.querySelectorAll(".blank-cell");
       blankCells.forEach(cell => {
         cell.style.color = showBlank ? "" : "transparent";
       });
-
+  
       tableHead.style.display = visibleRowFound ? "" : "none";
       noDataMsg.style.display = visibleRowFound ? "none" : "block";
     });
-
+  
     if (clearFiltersLink) {
       clearFiltersLink.style.display =
         matchValue !== "show-all" || decisionValue !== "show-all" || authValue !== "show-all"
@@ -237,6 +249,7 @@ document.addEventListener("DOMContentLoaded", function () {
           : "none";
     }
   }
+  
 
   function applyChedFilters() {
     const authValue = authChedFilter?.value ?? "show-all";
@@ -286,17 +299,17 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  function syncAuthorityToChed() {
-    if (authFilter && authChedFilter) {
-      const selected = authFilter.value;
+  // function syncAuthorityToChed() {
+  //   if (authFilter && authChedFilter) {
+  //     const selected = authFilter.value;
 
-      if (authChedFilter.value !== selected) {
-        authChedFilter.value = selected;
-        authChedFilter.dispatchEvent(new Event("change", { bubbles: true }));
-        authChedFilter.dispatchEvent(new Event("input", { bubbles: true }));
-      }
-    }
-  }
+  //     if (authChedFilter.value !== selected) {
+  //       authChedFilter.value = selected;
+  //       authChedFilter.dispatchEvent(new Event("change", { bubbles: true }));
+  //       authChedFilter.dispatchEvent(new Event("input", { bubbles: true }));
+  //     }
+  //   }
+  // }
 
   // Event listeners
   matchFilter?.addEventListener("change", applyMrnFilters);
@@ -313,14 +326,16 @@ document.addEventListener("DOMContentLoaded", function () {
     if (matchFilter) matchFilter.value = "show-all";
     if (decisionFilter) decisionFilter.value = "show-all";
     if (authFilter) authFilter.value = "show-all";
-    if (authChedFilter) authChedFilter.value = "show-all";
-
-    authChedFilter.dispatchEvent(new Event("change", { bubbles: true }));
-    authChedFilter.dispatchEvent(new Event("input", { bubbles: true }));
-
+    if (authChedFilter) {
+      authChedFilter.value = "show-all";
+      authChedFilter.dispatchEvent(new Event("change", { bubbles: true }));
+      authChedFilter.dispatchEvent(new Event("input", { bubbles: true }));
+    }
+  
     applyMrnFilters();
     applyChedFilters();
   });
+  
 
   clearChedFilterLink?.addEventListener("click", (e) => {
     e.preventDefault();
