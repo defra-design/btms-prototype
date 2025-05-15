@@ -132,6 +132,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // filters 
 
+
 document.addEventListener("DOMContentLoaded", function () {
   const matchFilter = document.getElementById("match");
   const decisionFilter = document.getElementById("decision");
@@ -143,20 +144,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const mrnContainers = document.querySelectorAll(".mrn-container");
   const chedContainers = document.querySelectorAll(".ched-container");
-
-  const FILTER_CLASSES = [
-    "filtered-match-yes",
-    "filtered-match-no",
-    "filtered-decision-hold",
-    "filtered-decision-release",
-    "filtered-decision-refused",
-    "filtered-auth-FNAO",
-    "filtered-auth-HMI",
-    "filtered-auth-PHSI",
-    "filtered-auth-POAO",
-    "filtered-auth-IUU",
-    "filtered-auth-APHA"
-  ];
 
   function getAuthorityDisplayName(auth) {
     const map = {
@@ -194,57 +181,33 @@ document.addEventListener("DOMContentLoaded", function () {
         const decisionItems = row.querySelectorAll("li");
         let matches = true;
 
-        // Remove old filter-specific classes
-        row.classList.remove(...FILTER_CLASSES);
-
-        // Match filter logic
         if (matchValue !== "show-all") {
-          const isMatch = row.classList.contains("match");
-          const isNoMatch = row.classList.contains("no-match");
-
-          if (matchValue === "match" && isMatch) {
-            row.classList.add("filtered-match-yes");
-          } else if (matchValue === "noMatch" && isNoMatch) {
-            row.classList.add("filtered-match-no");
-          }
-
-          matches = (matchValue === "match" && isMatch) || (matchValue === "noMatch" && isNoMatch);
+          matches = matchValue === "match"
+            ? row.classList.contains("match")
+            : row.classList.contains("no-match");
         }
 
-        // Decision filter logic
-        if (matches && decisionValue !== "show-all") {
-          if (!row.classList.contains(decisionValue)) {
-            matches = false;
-          } else {
-            row.classList.add(`filtered-decision-${decisionValue}`);
-          }
+        if (matches && decisionValue !== "show-all" && !row.classList.contains(decisionValue)) {
+          matches = false;
         }
 
-        // Authority filter logic
+        // ✅ FIX: Check for authority match inside <li> elements (not just <tr> class)
         if (matches && authValue !== "show-all") {
-          const matchesAuthorityInList = Array.from(decisionItems).some(li => {
-            const normalised = li.textContent.trim().toUpperCase();
-            return li.classList.contains(authValue) || normalised.includes(`(${authValue})`);
-          });
-
+          const matchesAuthorityInList = Array.from(decisionItems).some(li =>
+            li.classList.contains(authValue) || li.textContent.includes(authValue)
+          );
           if (!matchesAuthorityInList) {
             matches = false;
-          } else {
-            row.classList.add(`filtered-auth-${authValue}`);
           }
         }
 
-        // Show/hide <li> decisions
+        // Filter which <li>s are visible
         decisionItems.forEach(li => {
-          const liAuthMatch = authValue === "show-all" ||
-            li.classList.contains(authValue) ||
-            li.textContent.toUpperCase().includes(`(${authValue})`);
-
-          const liDecisionMatch = decisionValue === "show-all" ||
+          const liAuth = authValue === "show-all" || li.classList.contains(authValue);
+          const liDecision = decisionValue === "show-all" ||
             !["hold", "release", "refused"].some(d => li.classList.contains(d)) ||
             li.classList.contains(decisionValue);
-
-          li.style.display = liAuthMatch && liDecisionMatch ? "" : "none";
+          li.style.display = liAuth && liDecision ? "" : "none";
         });
 
         const anyVisibleDecision = Array.from(decisionItems).some(li => li.style.display !== "none");
@@ -296,19 +259,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
       rows.forEach(row => {
         const decisionItems = row.querySelectorAll("li");
-
-        const matches = authValue === "show-all" ||
-          row.classList.contains(authValue) ||
-          Array.from(decisionItems).some(li => {
-            const text = li.textContent.trim().toUpperCase();
-            return li.classList.contains(authValue) || text.includes(`(${authValue})`);
-          });
+        const matches = authValue === "show-all" || row.classList.contains(authValue) ||
+          Array.from(decisionItems).some(li => li.textContent.includes(authLabel));
 
         decisionItems.forEach(li => {
-          const showLi = authValue === "show-all" ||
-            li.classList.contains(authValue) ||
-            li.textContent.toUpperCase().includes(`(${authValue})`);
-          li.style.display = showLi ? "" : "none";
+          const matchesText = li.textContent.includes(authLabel);
+          li.style.display = authValue === "show-all" || matchesText ? "" : "none";
         });
 
         const anyVisible = Array.from(decisionItems).some(li => li.style.display !== "none");
