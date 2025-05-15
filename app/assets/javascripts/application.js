@@ -85,266 +85,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-// filters 
 
-// document.addEventListener("DOMContentLoaded", function () {
-//   // Existing selectors
-//   const matchSelect = document.getElementById("match");
-//   const decisionSelect = document.getElementById("decision");
-//   const authSelect = document.getElementById("auth");
-//   const clearFilterLink = document.querySelector(".clear-filter");
-//   const mrnContainers = document.querySelectorAll(".mrn-container");
-  
-//   // New CHED specific selectors
-//   const authChedSelect = document.getElementById("authChed");
-//   const clearChedFilterLink = document.querySelector(".ched-header + .inline-form-group .clear-filter");
-//   const chedContainers = document.querySelectorAll(".ched-container");
-  
-//   // Flag to prevent infinite loops when synchronizing selects
-//   let isSynchronizing = false;
-  
-//   // Original MRN container filtering function (unchanged)
-//   function filterRows() {
-//     let allRowsHidden = true;
-
-//     mrnContainers.forEach(container => {
-//       const table = container.querySelector(".govuk-table");
-//       const tableHead = table.querySelector(".govuk-table__head");
-//       const tableRows = container.querySelectorAll(".govuk-table__body tr");
-//       const matchValue = matchSelect.value;
-//       const decisionValue = decisionSelect.value;
-//       const authValue = authSelect.value;
-//       let containerHidden = true;
-//       let noDataMessage = container.querySelector(".no-data-message");
-
-//       if (!noDataMessage) {
-//         noDataMessage = document.createElement("p");
-//         noDataMessage.className = "no-data-message govuk-body";
-//         noDataMessage.innerText = "There are no items that match the filters selected.";
-//         noDataMessage.style.display = "none";
-//         container.appendChild(noDataMessage);
-//       }
-
-//       tableRows.forEach(row => {
-//         const isMatchRow = row.classList.contains("match");
-//         const isNoMatchRow = row.classList.contains("no-match");
-//         const isHoldRow = row.classList.contains("hold");
-//         const isReleaseRow = row.classList.contains("release");
-//         const isPOAORow = row.classList.contains("POAO");
-//         const isHMIRow = row.classList.contains("HMI");
-//         const isPHSIRow = row.classList.contains("PHSI");
-//         const isFNAORow = row.classList.contains("FNAO");
-//         const isIUURow = row.classList.contains("IUU");
-
-//         // Filter conditions
-//         const matchFilter =
-//           matchValue === "show-all" ||
-//           (matchValue === "match" && isMatchRow) ||
-//           (matchValue === "noMatch" && isNoMatchRow);
-
-//         const authFilter =
-//           authValue === "show-all" ||
-//           (authValue === "POAO" && isPOAORow) ||
-//           (authValue === "PHSI" && isPHSIRow) ||
-//           (authValue === "FNAO" && isFNAORow) ||
-//           (authValue === "HMI" && isHMIRow) ||
-//           (authValue === "IUU" && isIUURow);
-
-//         const decisionFilter =
-//           decisionValue === "show-all" ||
-//           (decisionValue === "hold" && isHoldRow) ||
-//           (decisionValue === "release" && isReleaseRow);
-
-//         if (matchFilter && decisionFilter && authFilter) {
-//           row.style.display = "";
-//           containerHidden = false;
-//           allRowsHidden = false;
-
-//           // Hide or show <li> elements based on the selected authority filter
-//           const decisionItems = row.querySelectorAll(".decision li");
-//           decisionItems.forEach(li => {
-//             if (authValue === "show-all" || li.classList.contains(authValue)) {
-//               li.style.display = ""; // Show matching authorities
-
-//               // Only apply class if authValue is one of the valid authorities
-//               if (authValue === "FNAO" || authValue === "HMI" || authValue === "PHSI" || authValue === "POAO" || authValue === "IUU" ) {
-//                 li.classList.add("visible-li");
-//               } else {
-//                 li.classList.remove("visible-li");
-//               }
-//             } else {
-//               li.style.display = "none"; // Hide non-matching authorities
-//               li.classList.remove("visible-li");
-//             }
-//           });
-//         } else {
-//           row.style.display = "none";
-//         }
-//       });
-
-//       if (containerHidden) {
-//         tableHead.style.display = "none";
-//         noDataMessage.style.display = "block";
-//       } else {
-//         tableHead.style.display = "";
-//         noDataMessage.style.display = "none";
-//       }
-//     });
-
-//     // Show or hide the "Clear filters" link based on filter selections
-//     clearFilterLink.style.display =
-//       matchSelect.value !== "show-all" ||
-//       decisionSelect.value !== "show-all" ||
-//       authSelect.value !== "show-all"
-//         ? "inline-block"
-//         : "none";
-//   }
-
-//   // NEW: Function to filter CHED containers
-// // Function to filter CHED containers
-// function filterChedRows() {
-//   chedContainers.forEach(container => {
-//     const table = container.querySelector(".govuk-table");
-//     const tableHead = table.querySelector(".govuk-table__head");
-//     const tableRows = container.querySelectorAll(".govuk-table__body tr");
-//     const authValue = authChedSelect.value;
-//     let containerHidden = true;
-//     let noDataMessage = container.querySelector(".no-data-message");
-
-//     if (!noDataMessage) {
-//       noDataMessage = document.createElement("p");
-//       noDataMessage.className = "no-data-message govuk-body";
-//       noDataMessage.innerText = "There are no commodities that match the filters selected.";
-//       noDataMessage.style.display = "none";
-//       container.appendChild(noDataMessage);
-//     }
-
-//     // Process each row
-//     tableRows.forEach(row => {
-//       const isHMIRow = row.classList.contains("HMI");
-//       const isPHSIRow = row.classList.contains("PHSI");
-//       const isFNAORow = row.classList.contains("FNAO");
-//       const isIUURow = row.classList.contains("IUU");
-//       const isAPHARow = row.classList.contains("APHA");
-//       const isPOAORow = row.classList.contains("POAO");
-      
-//       // Authority filter for CHED section
-//       const authFilter =
-//         authValue === "show-all" ||
-//         (authValue === "PHSI" && isPHSIRow) ||
-//         (authValue === "FNAO" && isFNAORow) ||
-//         (authValue === "IUU" && isIUURow) ||
-//         (authValue === "POAO" && isPOAORow) ||
-//         (authValue === "APHA" && isAPHARow) ||
-//         (authValue === "HMI" && isHMIRow);
-
-//       if (authFilter) {
-//         row.style.display = "";
-//         containerHidden = false;
-        
-//         // Hide or show <li> elements based on the selected authority filter (for multi-auth cases)
-//         const decisionItems = row.querySelectorAll(".decision li");
-//         decisionItems.forEach(li => {
-//           if (authValue === "show-all" || li.textContent.includes(getAuthorityDisplayName(authValue))) {
-//             li.style.display = ""; // Show matching authorities
-            
-//             // Add visible-li class when authValue is a valid authority
-//             if (authValue === "FNAO" || authValue === "HMI" || authValue === "PHSI" || authValue === "POAO" || authValue === "APHA" || authValue === "IUU") {
-//               li.classList.add("visible-li");
-//             } else {
-//               li.classList.remove("visible-li");
-//             }
-//           } else {
-//             li.style.display = "none"; // Hide non-matching authorities
-//             li.classList.remove("visible-li");
-//           }
-//         });
-//       } else {
-//         row.style.display = "none";
-//       }
-//     });
-
-//     // Show/hide no data message and table head as needed
-//     if (containerHidden) {
-//       tableHead.style.display = "none";
-//       noDataMessage.style.display = "block";
-//     } else {
-//       tableHead.style.display = "";
-//       noDataMessage.style.display = "none";
-//     }
-//   });
-
-//   // Show or hide the CHED "Clear filters" link
-//   clearChedFilterLink.style.display = 
-//     authChedSelect.value !== "show-all" ? "inline-block" : "none";
-// }
-  
-//   // Helper function to get display name of authority
-//   function getAuthorityDisplayName(authValue) {
-//     switch(authValue) {
-//       case "FNAO": return "PHA-FNAO";
-//       case "HMI": return "PP-HMI";
-//       case "PHSI": return "PP-PHSI";
-//       case "IUU": return "PHA-IUU";
-//       case "POAO": return "PHA-POAO";
-//       case "APHA": return "APHA";
-//       default: return "";
-//     }
-//   }
-  
-//   // Function to synchronize authority selection from MRN to CHED (one-way)
-//   function syncAuthority() {
-//     if (!isSynchronizing) {
-//       isSynchronizing = true;
-      
-//       // Set CHED authority to match MRN authority
-//       authChedSelect.value = authSelect.value;
-      
-//       // Trigger CHED filtering with the new value
-//       filterChedRows();
-      
-//       isSynchronizing = false;
-//     }
-//   }
-
-//   // Add event listeners to existing filters
-//   matchSelect.addEventListener("change", filterRows);
-//   decisionSelect.addEventListener("change", filterRows);
-  
-//   // Add event listener to the MRN authority filter with synchronization
-//   authSelect.addEventListener("change", function() {
-//     filterRows();
-//     syncAuthority(); // Synchronize the CHED authority dropdown
-//   });
-  
-//   // Add event listener to CHED authority filter (no synchronization back to MRN)
-//   authChedSelect.addEventListener("change", filterChedRows);
-
-//   // Clear filters functionality for existing filters
-//   clearFilterLink.addEventListener("click", function (e) {
-//     e.preventDefault();
-//     matchSelect.value = "show-all";
-//     decisionSelect.value = "show-all";
-//     authSelect.value = "show-all";
-    
-//     // Also reset the CHED authority filter
-//     authChedSelect.value = "show-all";
-    
-//     filterRows();
-//     filterChedRows();
-//   });
-  
-//   // Clear filter functionality for CHED authority filter (only resets CHED filter)
-//   clearChedFilterLink.addEventListener("click", function (e) {
-//     e.preventDefault();
-//     authChedSelect.value = "show-all";
-//     filterChedRows();
-//   });
-
-//   // Initial filtering on page load
-//   filterRows();
-//   filterChedRows();
-// });
 
 
 // toggle js
@@ -389,285 +130,255 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-  
+// filters 
+
 document.addEventListener("DOMContentLoaded", function () {
-  // Existing selectors
-  const matchSelect = document.getElementById("match");
-  const decisionSelect = document.getElementById("decision");
-  const authSelect = document.getElementById("auth");
-  const clearFilterLink = document.querySelector(".clear-filter");
+  const matchFilter = document.getElementById("match");
+  const decisionFilter = document.getElementById("decision");
+  const authFilter = document.getElementById("auth");
+  const authChedFilter = document.getElementById("authChed");
+
+  const clearFiltersLink = document.querySelector('[data-clear="mrn"]');
+  const clearChedFilterLink = document.querySelector('[data-clear="ched"]');
+
   const mrnContainers = document.querySelectorAll(".mrn-container");
-  
-  // New CHED specific selectors
-  const authChedSelect = document.getElementById("authChed");
-  const clearChedFilterLink = document.querySelector(".ched-header + .inline-form-group .clear-filter");
   const chedContainers = document.querySelectorAll(".ched-container");
-  
-  // Flag to prevent infinite loops when synchronizing selects
-  let isSynchronizing = false;
-  
-  // Original MRN container filtering function (unchanged)
-  function filterRows() {
-    let allRowsHidden = true;
+
+  const FILTER_CLASSES = [
+    "filtered-match-yes",
+    "filtered-match-no",
+    "filtered-decision-hold",
+    "filtered-decision-release",
+    "filtered-decision-refused",
+    "filtered-auth-FNAO",
+    "filtered-auth-HMI",
+    "filtered-auth-PHSI",
+    "filtered-auth-POAO",
+    "filtered-auth-IUU",
+    "filtered-auth-APHA"
+  ];
+
+  function getAuthorityDisplayName(auth) {
+    const map = {
+      FNAO: "FNAO",
+      HMI: "HMI",
+      PHSI: "PHSI",
+      POAO: "POAO",
+      IUU: "IUU",
+      APHA: "APHA"
+    };
+    return map[auth] || "";
+  }
+
+  function applyMrnFilters() {
+    const matchValue = matchFilter?.value ?? "show-all";
+    const decisionValue = decisionFilter?.value ?? "show-all";
+    const authValue = authFilter?.value ?? "show-all";
 
     mrnContainers.forEach(container => {
       const table = container.querySelector(".govuk-table");
+      const rows = container.querySelectorAll("tbody tr");
       const tableHead = table.querySelector(".govuk-table__head");
-      const tableRows = container.querySelectorAll(".govuk-table__body tr");
-      const matchValue = matchSelect.value;
-      const decisionValue = decisionSelect.value;
-      const authValue = authSelect.value;
-      let containerHidden = true;
-      let noDataMessage = container.querySelector(".no-data-message");
+      let visibleRowFound = false;
 
-      if (!noDataMessage) {
-  noDataMessage = document.createElement("p");
-  noDataMessage.className = "no-data-message govuk-body";
-  noDataMessage.innerText = "There are no items that match the filters selected.";
-  noDataMessage.style.display = "none";
+      let noDataMsg = container.querySelector(".no-data-message");
+      if (!noDataMsg) {
+        noDataMsg = document.createElement("p");
+        noDataMsg.className = "no-data-message govuk-body";
+        noDataMsg.textContent = "There are no items that match the filters selected.";
+        noDataMsg.style.display = "none";
+        container.querySelector(".commodity-table")?.appendChild(noDataMsg);
+      }
 
-  // Append inside .commodity-table instead of container
-  const commodityTable = container.querySelector(".commodity-table");
-  if (commodityTable) {
-    commodityTable.appendChild(noDataMessage);
-  }
-}
+      rows.forEach(row => {
+        const decisionItems = row.querySelectorAll("li");
+        let matches = true;
 
-      tableRows.forEach(row => {
-        const isMatchRow = row.classList.contains("match");
-        const isNoMatchRow = row.classList.contains("no-match");
-        const isHoldRow = row.classList.contains("hold");
-        const isReleaseRow = row.classList.contains("release");
-        const isPOAORow = row.classList.contains("POAO");
-        const isHMIRow = row.classList.contains("HMI");
-        const isPHSIRow = row.classList.contains("PHSI");
-        const isFNAORow = row.classList.contains("FNAO");
-        const isAPHARow = row.classList.contains("APHA");
-        const isIUURow = row.classList.contains("IUU");
+        // Remove old filter-specific classes
+        row.classList.remove(...FILTER_CLASSES);
 
-        // Filter conditions
-        const matchFilter =
-          matchValue === "show-all" ||
-          (matchValue === "match" && isMatchRow) ||
-          (matchValue === "noMatch" && isNoMatchRow);
+        // Match filter logic
+        if (matchValue !== "show-all") {
+          const isMatch = row.classList.contains("match");
+          const isNoMatch = row.classList.contains("no-match");
 
-        const authFilter =
-          authValue === "show-all" ||
-          (authValue === "POAO" && isPOAORow) ||
-          (authValue === "PHSI" && isPHSIRow) ||
-          (authValue === "FNAO" && isFNAORow) ||
-          (authValue === "HMI" && isHMIRow) ||
-          (authValue === "APHA" && isAPHARow) ||
-          (authValue === "IUU" && isIUURow);
+          if (matchValue === "match" && isMatch) {
+            row.classList.add("filtered-match-yes");
+          } else if (matchValue === "noMatch" && isNoMatch) {
+            row.classList.add("filtered-match-no");
+          }
 
-        const decisionFilter =
-          decisionValue === "show-all" ||
-          (decisionValue === "hold" && isHoldRow) ||
-          (decisionValue === "release" && isReleaseRow);
+          matches = (matchValue === "match" && isMatch) || (matchValue === "noMatch" && isNoMatch);
+        }
 
-        if (matchFilter && decisionFilter && authFilter) {
-          row.style.display = "";
-          containerHidden = false;
-          allRowsHidden = false;
+        // Decision filter logic
+        if (matches && decisionValue !== "show-all") {
+          if (!row.classList.contains(decisionValue)) {
+            matches = false;
+          } else {
+            row.classList.add(`filtered-decision-${decisionValue}`);
+          }
+        }
 
-          // Hide or show <li> elements based on the selected authority filter
-          const decisionItems = row.querySelectorAll(".decision li");
-          decisionItems.forEach(li => {
-            if (authValue === "show-all" || li.classList.contains(authValue)) {
-              li.style.display = ""; // Show matching authorities
-
-              // Only apply class if authValue is one of the valid authorities
-              if (authValue === "FNAO" || authValue === "HMI" || authValue === "PHSI" || authValue === "POAO" || authValue === "IUU" ) {
-                li.classList.add("visible-li");
-              } else {
-                li.classList.remove("visible-li");
-              }
-            } else {
-              li.style.display = "none"; // Hide non-matching authorities
-              li.classList.remove("visible-li");
-            }
+        // Authority filter logic
+        if (matches && authValue !== "show-all") {
+          const matchesAuthorityInList = Array.from(decisionItems).some(li => {
+            const normalised = li.textContent.trim().toUpperCase();
+            return li.classList.contains(authValue) || normalised.includes(`(${authValue})`);
           });
+
+          if (!matchesAuthorityInList) {
+            matches = false;
+          } else {
+            row.classList.add(`filtered-auth-${authValue}`);
+          }
+        }
+
+        // Show/hide <li> decisions
+        decisionItems.forEach(li => {
+          const liAuthMatch = authValue === "show-all" ||
+            li.classList.contains(authValue) ||
+            li.textContent.toUpperCase().includes(`(${authValue})`);
+
+          const liDecisionMatch = decisionValue === "show-all" ||
+            !["hold", "release", "refused"].some(d => li.classList.contains(d)) ||
+            li.classList.contains(decisionValue);
+
+          li.style.display = liAuthMatch && liDecisionMatch ? "" : "none";
+        });
+
+        const anyVisibleDecision = Array.from(decisionItems).some(li => li.style.display !== "none");
+
+        if (matches && (!decisionItems.length || anyVisibleDecision)) {
+          row.style.display = "";
+          visibleRowFound = true;
         } else {
           row.style.display = "none";
         }
       });
 
-      if (containerHidden) {
-        tableHead.style.display = "none";
-        noDataMessage.style.display = "block";
-      } else {
-        tableHead.style.display = "";
-        noDataMessage.style.display = "none";
-      }
+      const showBlank = matchValue === "noMatch";
+      const blankCells = container.querySelectorAll(".blank-cell");
+      blankCells.forEach(cell => {
+        cell.style.color = showBlank ? "" : "transparent";
+      });
+
+      tableHead.style.display = visibleRowFound ? "" : "none";
+      noDataMsg.style.display = visibleRowFound ? "none" : "block";
     });
 
-    // Show or hide the "Clear filters" link based on filter selections
-    clearFilterLink.style.display =
-      matchSelect.value !== "show-all" ||
-      decisionSelect.value !== "show-all" ||
-      authSelect.value !== "show-all"
-        ? "inline-block"
-        : "none";
+    if (clearFiltersLink) {
+      clearFiltersLink.style.display =
+        matchValue !== "show-all" || decisionValue !== "show-all" || authValue !== "show-all"
+          ? "inline-block"
+          : "none";
+    }
   }
 
-  // NEW: Function to filter CHED containers
-// Function to filter CHED containers
-function filterChedRows() {
-  chedContainers.forEach(container => {
-    const table = container.querySelector(".govuk-table");
-    const tableHead = table.querySelector(".govuk-table__head");
-    const tableRows = container.querySelectorAll(".govuk-table__body tr");
-    const authValue = authChedSelect.value;
-    let containerHidden = true;
-    let noDataMessage = container.querySelector(".no-data-message");
+  function applyChedFilters() {
+    const authValue = authChedFilter?.value ?? "show-all";
+    const authLabel = getAuthorityDisplayName(authValue);
 
-    if (!noDataMessage) {
-      noDataMessage = document.createElement("p");
-      noDataMessage.className = "no-data-message govuk-body";
-      noDataMessage.innerText = "There are no commodities that match the filters selected.";
-      noDataMessage.style.display = "none";
-      container.appendChild(noDataMessage);
-   // Append inside .commodity-table instead of container
-   const commodityTable = container.querySelector(".commodity-table");
-   if (commodityTable) {
-     commodityTable.appendChild(noDataMessage);
-   }
- }
-    
+    chedContainers.forEach(container => {
+      const table = container.querySelector(".govuk-table");
+      const rows = container.querySelectorAll("tbody tr");
+      const tableHead = table.querySelector(".govuk-table__head");
+      let visibleRowFound = false;
 
-    // Process each row
-    tableRows.forEach(row => {
-      const isHMIRow = row.classList.contains("HMI");
-      const isPHSIRow = row.classList.contains("PHSI");
-      const isFNAORow = row.classList.contains("FNAO");
-      const isIUURow = row.classList.contains("IUU");
-      const isPOAORow = row.classList.contains("POAO");
-      const isAPHARow = row.classList.contains("APHA");
-      
-      // Authority filter for CHED section
-      const authFilter =
-        authValue === "show-all" ||
-        (authValue === "PHSI" && isPHSIRow) ||
-        (authValue === "FNAO" && isFNAORow) ||
-        (authValue === "IUU" && isIUURow) ||
-        (authValue === "POAO" && isPOAORow) ||
-        (authValue === "APHA" && isAPHARow) ||
-        (authValue === "HMI" && isHMIRow);
+      let noDataMsg = container.querySelector(".no-data-message");
+      if (!noDataMsg) {
+        noDataMsg = document.createElement("p");
+        noDataMsg.className = "no-data-message govuk-body";
+        noDataMsg.textContent = "There are no commodities that match the filters selected.";
+        noDataMsg.style.display = "none";
+        container.querySelector(".commodity-table")?.appendChild(noDataMsg);
+      }
 
-      if (authFilter) {
-        row.style.display = "";
-        containerHidden = false;
-        
-        // Hide or show <li> elements based on the selected authority filter (for multi-auth cases)
-        const decisionItems = row.querySelectorAll(".decision li");
+      rows.forEach(row => {
+        const decisionItems = row.querySelectorAll("li");
+
+        const matches = authValue === "show-all" ||
+          row.classList.contains(authValue) ||
+          Array.from(decisionItems).some(li => {
+            const text = li.textContent.trim().toUpperCase();
+            return li.classList.contains(authValue) || text.includes(`(${authValue})`);
+          });
+
         decisionItems.forEach(li => {
-          if (authValue === "show-all" || li.textContent.includes(getAuthorityDisplayName(authValue))) {
-            li.style.display = ""; // Show matching authorities
-            
-            // Add visible-li class when authValue is a valid authority
-            if (authValue === "FNAO" || authValue === "HMI" || authValue === "PHSI" || authValue === "POAO" || authValue === "IUU") {
-              li.classList.add("visible-li");
-            } else {
-              li.classList.remove("visible-li");
-            }
-          } else {
-            li.style.display = "none"; // Hide non-matching authorities
-            li.classList.remove("visible-li");
-          }
+          const showLi = authValue === "show-all" ||
+            li.classList.contains(authValue) ||
+            li.textContent.toUpperCase().includes(`(${authValue})`);
+          li.style.display = showLi ? "" : "none";
         });
-      } else {
-        row.style.display = "none";
-      }
+
+        const anyVisible = Array.from(decisionItems).some(li => li.style.display !== "none");
+
+        if (matches && (!decisionItems.length || anyVisible)) {
+          row.style.display = "";
+          visibleRowFound = true;
+        } else {
+          row.style.display = "none";
+        }
+      });
+
+      tableHead.style.display = visibleRowFound ? "" : "none";
+      noDataMsg.style.display = visibleRowFound ? "none" : "block";
     });
 
-    // Show/hide no data message and table head as needed
-    if (containerHidden) {
-      tableHead.style.display = "none";
-      noDataMessage.style.display = "block";
-    } else {
-      tableHead.style.display = "";
-      noDataMessage.style.display = "none";
-    }
-  });
-
-  // Show or hide the CHED "Clear filters" link
-  clearChedFilterLink.style.display = 
-    authChedSelect.value !== "show-all" ? "inline-block" : "none";
-}
-  
-  // Helper function to get display name of authority
-  function getAuthorityDisplayName(authValue) {
-    switch(authValue) {
-      case "FNAO": return "PHA-FNAO";
-      case "HMI": return "PP-HMI";
-      case "PHSI": return "PP-PHSI";
-      case "IUU": return "PHA-IUU";
-      case "POAO": return "PHA-POAO";
-      default: return "";
-    }
-  }
-  
-  // Function to synchronize authority selection from MRN to CHED (one-way)
-  function syncAuthority() {
-    if (!isSynchronizing) {
-      isSynchronizing = true;
-      
-      // Set CHED authority to match MRN authority
-      authChedSelect.value = authSelect.value;
-      
-      // Trigger CHED filtering with the new value
-      filterChedRows();
-      
-      isSynchronizing = false;
+    if (clearChedFilterLink) {
+      clearChedFilterLink.style.display = authValue !== "show-all" ? "inline-block" : "none";
     }
   }
 
-  // Add event listeners to existing filters
-  matchSelect.addEventListener("change", filterRows);
-  decisionSelect.addEventListener("change", filterRows);
-  
-  // Add event listener to the MRN authority filter with synchronization
-  authSelect.addEventListener("change", function() {
-    filterRows();
-    syncAuthority(); // Synchronize the CHED authority dropdown
-  });
-  
-  // Add event listener to CHED authority filter (no synchronization back to MRN)
-  authChedSelect.addEventListener("change", filterChedRows);
+  function syncAuthorityToChed() {
+    if (authFilter && authChedFilter) {
+      const selected = authFilter.value;
 
-  // Clear filters functionality for existing filters
-  clearFilterLink.addEventListener("click", function (e) {
-    e.preventDefault();
-    matchSelect.value = "show-all";
-    decisionSelect.value = "show-all";
-    authSelect.value = "show-all";
-    
-    // Also reset the CHED authority filter
-    authChedSelect.value = "show-all";
-    
-    filterRows();
-    filterChedRows();
+      if (authChedFilter.value !== selected) {
+        authChedFilter.value = selected;
+        authChedFilter.dispatchEvent(new Event("change", { bubbles: true }));
+        authChedFilter.dispatchEvent(new Event("input", { bubbles: true }));
+      }
+    }
+  }
+
+  // Event listeners
+  matchFilter?.addEventListener("change", applyMrnFilters);
+  decisionFilter?.addEventListener("change", applyMrnFilters);
+  authFilter?.addEventListener("change", () => {
+    applyMrnFilters();
+    syncAuthorityToChed();
   });
-  
-  // Clear filter functionality for CHED authority filter (only resets CHED filter)
-  clearChedFilterLink.addEventListener("click", function (e) {
+
+  authChedFilter?.addEventListener("change", applyChedFilters);
+
+  clearFiltersLink?.addEventListener("click", (e) => {
     e.preventDefault();
-    authChedSelect.value = "show-all";
-    filterChedRows();
+    if (matchFilter) matchFilter.value = "show-all";
+    if (decisionFilter) decisionFilter.value = "show-all";
+    if (authFilter) authFilter.value = "show-all";
+    if (authChedFilter) authChedFilter.value = "show-all";
+
+    authChedFilter.dispatchEvent(new Event("change", { bubbles: true }));
+    authChedFilter.dispatchEvent(new Event("input", { bubbles: true }));
+
+    applyMrnFilters();
+    applyChedFilters();
   });
-  const showBlank = matchSelect.value === "noMatch";
-  const blankCells = document.querySelectorAll(".blank-cell");
-  
-  blankCells.forEach(cell => {
-    if (showBlank) {
-      cell.style.color = ""; // show normally
-    } else {
-      cell.style.color = "transparent"; // hide content
+
+  clearChedFilterLink?.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (authChedFilter) {
+      authChedFilter.value = "show-all";
+      authChedFilter.dispatchEvent(new Event("change", { bubbles: true }));
+      authChedFilter.dispatchEvent(new Event("input", { bubbles: true }));
+      applyChedFilters();
     }
   });
-  // Initial filtering on page load
-  filterRows();
-  filterChedRows();
+
+  // Initialise
+  applyMrnFilters();
+  applyChedFilters();
 });
 
 

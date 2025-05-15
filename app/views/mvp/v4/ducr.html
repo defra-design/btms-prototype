@@ -18,35 +18,7 @@
 
 
 <h2 class="govuk-heading-m sectionHeader">Customs declaration details</h2>
-<div class="inline-form-group">
-  <div class="govuk-form-group">
-    <label class="govuk-label" for="match">Match</label>
-    <select class="govuk-select" id="match" name="match">
-      <option value="show-all" selected>Show all</option>
-      <option value="match">Yes</option>
-      <option value="no-match">No</option>
-    </select>
-  </div>
-
-  <div class="govuk-form-group">
-    <label class="govuk-label" for="decision">Decision</label>
-    <select class="govuk-select" id="decision" name="decision">
-      <option value="show-all" selected>Show all</option>
-      <option value="release">Release</option>
-    </select>
-  </div>
-  <div class="govuk-form-group">
-    <label class="govuk-label" for="auth">Authority</label>
-    <select class="govuk-select" id="auth" name="auth">
-      <option value="show-all" selected>Show all</option>
-      <option value="IUU">PHA-IUU</option>
-      <option value="POAO">PHA-POAO</option>
-    </select>
-  </div>
-  <div class="govuk-form-group">
-     <a class="clear-filter" href="#" style="display: none;">Clear filters</a>
-   </div>
-</div>
+{% include 'includes/mrn-filters.html' %}
 
 <div class="mrn-container" id="mrn-toggle">
 
@@ -262,22 +234,8 @@
 
 
 <h2 class="govuk-heading-m sectionHeader ched-header">IPAFFS pre-notification (CHED) details</h2>
-<div class="inline-form-group">
+{% include 'includes/ched-filters.html' %}
 
-  <div class="govuk-form-group">
-    <label class="govuk-label" for="authChed">Authority</label>
-    <select class="govuk-select" id="authChed" name="authChed">
-      <option value="show-all" selected>Show all</option>
-      <option value="IUU">PHA-IUU</option>
-      <option value="POAO">PHA-POAO</option>
-    </select>
-  </div>
-  <div class="govuk-form-group">
-    <a href="#" class="clear-filter" >Clear Filters</a>
-
-
-   </div>
-</div>
 <div class="ched-container toggle-area" data-target="commodityTable3">
   <div class="container govuk-body">
     <dl class="definition-list ">

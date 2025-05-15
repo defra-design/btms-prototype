@@ -4,14 +4,12 @@
 {% set hideButton = true %}
 {% set breadcrumb = true %}
 {% set showSubheader = true %}
-{% set showEdit = true %}
 {% set subHeader = 'Showing result for' %}
-{% set title = '24GB0Z8WEJ9ZBTL73B' %}
+{% set title = '4GB943952494000-BER047811' %}
 {% set bodyClasses = 'mrn accordion' %}
 {% set cssClassName = 'auth' %}
 {% set hideManageAccount = 'false' %}
-
-
+{% set showEdit = true %}
 
 
 
@@ -19,7 +17,8 @@
 {% block form %}
 
 
-<h2 class="govuk-heading-m sectionHeader">{{ data.Cds | safe }}</h2>
+<h2 class="govuk-heading-m sectionHeader">Customs declaration details</h2>
+{% include 'includes/mrn-filters.html' %}
 
 <div class="mrn-container" id="mrn-toggle">
 
@@ -28,21 +27,13 @@
       <dl class="definition-list ">
         <div class="row">
           <dt>MRN</dt>
-          
-          <dd>
-            
-            <strong class="govuk-tag govuk-tag--yellow">
-             
-               24GB0Z8WEJ9ZBTL73B
-            </strong>
-          
-          </dd>
+          <dd>24GB0Z8WEJ9ZBTL73B</dd>
         </div>
         <div class="row">
           <dt>DUCR</dt>
-          <dd>    
-            4GB943952494000-BER047811
-             
+          <dd class="govuk-tag govuk-tag--yellow"> 
+   
+            4GB943952494000-BER047811B
     
           </dd>
         </div>
@@ -67,42 +58,170 @@
 
 <div id="commodityTable1" class="commodity-table">
   <table class="govuk-table data-table">
-    <thead class="govuk-table__head">
-      <tr class="govuk-table__row">
-        <th scope="col" class="govuk-table__header" >Item  number</th>
-        <th scope="col" class="govuk-table__header">Commodity code</th>
-        <th scope="col" class="govuk-table__header ">Description</th>
-        <th scope="col" class="govuk-table__header ">Quantity / Weight</th>
-        <th scope="col" class="govuk-table__header" >CHED reference</th>
-        <th scope="col" class="govuk-table__header" >Match</th>
-        <th scope="col" class="govuk-table__header">Decision (authority)</th>
-
-      </tr>
-    </thead>
-    <tbody class="govuk-table__body ">
-
-      <tr class="govuk-table__row match release POAO IUU">
-        <td class="govuk-table__cell">1</td>
-        <td class="govuk-table__cell">02102010</td>
-        <td class="govuk-table__cell">Bovine meat with bone</td>
-        <td class="govuk-table__cell">100</td>
-        <td class="govuk-table__cell">
-          <ul class="govuk-list">
-            <li>
-              GBCHD2025.5925980
-            </li>
-        </ul>
-        </td>
-        <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Yes</strong></td>
-        <td class="govuk-table__cell decision multi-auth">  
+      <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+              <th scope="col" class="govuk-table__header">Item number</th>
+              <th scope="col" class="govuk-table__header">Commodity code</th>
+              <th scope="col" class="govuk-table__header">Description</th>
+              <th scope="col" class="govuk-table__header">Quantity / Weight</th>
+              <th scope="col" class="govuk-table__header">CHED reference</th>
+              <th scope="col" class="govuk-table__header">Match</th>
+              <th scope="col" class="govuk-table__header">Decision (authority)</th>
+          </tr>
+      </thead>
+      <tbody class="govuk-table__body">
+        <tr class="govuk-table__row match release POAO IUU">
+          <td class="govuk-table__cell">1</td>
+          <td class="govuk-table__cell">302499000</td>
+          <td class="govuk-table__cell">FISH 157-13722170</td>
+          <td class="govuk-table__cell">90</td>
+          <td class="govuk-table__cell">
             <ul class="govuk-list">
-              <li class="POAO">
-                Hold - To be inspected <span>(PHA-POAO)</span>
+              <li>
+                GBCHD2025.5403171
               </li>
-            </ul>
-        </td>
-      </tr> 
-    </tbody>
+              <li>
+                GBIUU
+              </li>
+          </ul>
+          </td>
+          <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Yes</strong></td>
+          <td class="govuk-table__cell decision multi-auth">  
+              <ul class="govuk-list">
+                <li class="POAO">
+                  Release - Inspection complete <span>(PHA-POAO)</span>
+                </li>
+                <li class="IUU">
+                  Release - Inspection complete <span>(PHA-IUU)</span>
+                </li>
+              </ul>
+          </td>
+        </tr>
+  
+        <tr class="govuk-table__row match release POAO IUU">
+          <td class="govuk-table__cell">2</td>
+          <td class="govuk-table__cell">302899090</td>
+          <td class="govuk-table__cell">FISH 157-13722170</td>
+          <td class="govuk-table__cell">1221</td>
+          <td class="govuk-table__cell">
+            <ul class="govuk-list">
+              <li>
+                GBCHD2025.5403171
+              </li>
+              <li>
+                GBIUU
+              </li>
+          </ul>
+          </td>
+          <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Yes</strong></td>
+          <td class="govuk-table__cell decision multi-auth">  
+              <ul class="govuk-list">
+                <li class="POAO">
+                  Release - Inspection complete <span>(PHA-POAO)</span>
+                </li>
+                <li class="IUU">
+                  Release - Inspection complete <span>(PHA-IUU)</span>
+                </li>
+              </ul>
+          </td>
+        </tr>
+      </tbody>
+  </table>
+</div>
+
+</div>
+
+
+
+</div>
+<div class="mrn-container" id="mrn-toggle">
+
+  <div class="mrn-container toggle-area" data-target="commodityTable2" data-collapsed="true">
+    <div class="container govuk-body">
+      <dl class="definition-list ">
+        <div class="row">
+          <dt>MRN</dt>
+          <dd>24GB0Z8WEJ9ZBTL353A</dd>
+        </div>
+        <div class="row">
+          <dt>DUCR</dt>
+          <dd>    
+            4GB943952494000-BER047811A
+             
+    
+          </dd>
+        </div>
+        <div class="row">
+          <dt>CDS status</dt>
+          <dd>Cancelled</dd>
+        </div>
+        <div class="row">
+          <dt>Last updated</dt>
+          <dd>{{ '22 May 2024' | chedTime }}</dd>
+        </div>
+      </dl>
+      <div class="toggle-wrapper">
+        <!-- Chevron arrow wrapper -->
+        <div id="toggleArrowContainer">
+          <i id="toggleArrow" class="fas fa-chevron-down"></i>
+        </div>
+      </div>
+    </div>
+
+
+
+<div id="commodityTable2" class="commodity-table">
+  <table class="govuk-table data-table">
+      <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+              <th scope="col" class="govuk-table__header">Item number</th>
+              <th scope="col" class="govuk-table__header">Commodity code</th>
+              <th scope="col" class="govuk-table__header">Description</th>
+              <th scope="col" class="govuk-table__header">Quantity / Weight</th>
+              <th scope="col" class="govuk-table__header">CHED reference</th>
+              <th scope="col" class="govuk-table__header">Match</th>
+              <th scope="col" class="govuk-table__header">Decision (authority)</th>
+          </tr>
+      </thead>
+      <tbody class="govuk-table__body">
+        <tr class="govuk-table__row match release POAO IUU">
+          <td class="govuk-table__cell">1</td>
+          <td class="govuk-table__cell">302499000</td>
+          <td class="govuk-table__cell">FISH 157-13722170</td>
+          <td class="govuk-table__cell">90</td>
+          <td class="govuk-table__cell">
+            <ul class="govuk-list">
+              <li>
+                GBCHD2025.5403121
+              </li>
+       
+          </ul>
+          </td>
+          <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Yes</strong></td>
+          <td class="govuk-table__cell decision multi-auth">  
+            
+          </td>
+        </tr>
+  
+        <tr class="govuk-table__row match release POAO IUU">
+          <td class="govuk-table__cell">2</td>
+          <td class="govuk-table__cell">302899090</td>
+          <td class="govuk-table__cell">FISH 157-13722170</td>
+          <td class="govuk-table__cell">1221</td>
+          <td class="govuk-table__cell">
+            <ul class="govuk-list">
+              <li>
+                GBCHD2025.5403121
+              </li>
+           
+          </ul>
+          </td>
+          <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Yes</strong></td>
+          <td class="govuk-table__cell decision multi-auth">  
+             
+          </td>
+        </tr>
+      </tbody>
   </table>
 </div>
 
@@ -114,11 +233,8 @@
 
 
 
-
-
-
-<h2 class="govuk-heading-m sectionHeader ched-header">{{ data.Ipaffs | safe }}</h2>
-
+<h2 class="govuk-heading-m sectionHeader ched-header">IPAFFS pre-notification (CHED) details</h2>
+{% include 'includes/ched-filters.html' %}
 
 <div class="ched-container toggle-area" data-target="commodityTable3">
   <div class="container govuk-body">
@@ -126,19 +242,20 @@
       <div class="row">
         <dt>CHED reference</dt>
         <dd>
-          <a href="https://ipaffs-prototype.herokuapp.com/part-2/chedp-landbridge/00-ched-overview" target="_blank"><span>CHEDP.GB.2025.5925980</span></a>
-         <i class="fas fa-external-link-alt"></i>
+           
+            <a href="https://ipaffs-prototype.herokuapp.com/part-2/chedp-landbridge/00-ched-overview" target="_blank"><span> {{ title }}</span></a>
 
+            <i class="fas fa-external-link-alt"></i>
+   
         </dd>
-        
       </div>
       <div class="row">
         <dt>CHED Status</dt>
-        <dd>New</dd>
+        <dd>Valid</dd>
       </div>
       <div class="row">
         <dt>Risk outcome</dt>
-        <dd>Required</dd>
+        <dd>No inspection</dd>
       </div>
       <div class="row">
         <dt>Last updated</dt>
@@ -164,35 +281,175 @@
         <th scope="col" class="govuk-table__header third " >Description</th>
         <th scope="col" class="govuk-table__header forth " >Quantity / Weight</th>
 
-        <th scope="col" class="govuk-table__header fifth "  >Decision (authority)</th>
+        <th scope="col" class="govuk-table__header fifth " >Decision (authority)</th>
 
       </tr>
     </thead>
     <tbody class="govuk-table__body">
-
-      <tr class="govuk-table__row POAO">
-        <td class="govuk-table__cell">1</td>
-        <td class="govuk-table__cell">02102010</td>
-        <td class="govuk-table__cell">Bovidae</td>
-        <td class="govuk-table__cell">100</td>
+      <tr class="govuk-table__row POAO IUU">
+        <td class="govuk-table__cell">10</td>
+        <td class="govuk-table__cell">3024990</td>
+        <td class="govuk-table__cell">Pampus spp.</td>
+        <td class="govuk-table__cell">90</td>
         <td class="govuk-table__cell decision multi-auth">  
             <ul class="govuk-list">
               <li class="POAO">
-                Scheduled inspection <span>(PHA-POAO)</span>
+                Acceptable for internal market <span>(PHA-POAO)</span>
               </li>
-        
+              <li class="IUU">
+                IUU compliant <span> (PHA-IUU)</span>
+              </li>
             </ul>
         </td>
       </tr>
-      
- 
+      <tr class="govuk-table__row POAO IUU">
+        <td class="govuk-table__cell">2</td>
+        <td class="govuk-table__cell">3028990</td>
+        <td class="govuk-table__cell">Cephalopholis sonnerati</td>
+        <td class="govuk-table__cell">918</td>
+        <td class="govuk-table__cell decision multi-auth">  
+            <ul class="govuk-list">
+              <li class="POAO">
+                Acceptable for internal market <span>(PHA-POAO)</span>
+              </li>
+              <li class="IUU">
+                IUU compliant <span> (PHA-IUU)</span>
+              </li>
+            </ul>
+        </td>
+      </tr>
+      <tr class="govuk-table__row POAO IUU">
+        <td class="govuk-table__cell">7</td>
+        <td class="govuk-table__cell">3028990</td>
+        <td class="govuk-table__cell">Plectropomus spp.</td>
+        <td class="govuk-table__cell">68</td>
+        <td class="govuk-table__cell decision multi-auth">  
+            <ul class="govuk-list">
+              <li class="POAO">
+                Acceptable for internal market <span>(PHA-POAO)</span>
+              </li>
+              <li class="IUU">
+                IUU compliant <span>(PHA-IUU)</span>
+              </li>
+            </ul>
+        </td>
+      </tr>
+      <tr class="govuk-table__row POAO IUU">
+        <td class="govuk-table__cell">8</td>
+        <td class="govuk-table__cell">3028990</td>
+        <td class="govuk-table__cell">Stolephorus spp..</td>
+        <td class="govuk-table__cell">150</td>
+        <td class="govuk-table__cell decision multi-auth">  
+            <ul class="govuk-list">
+              <li class="POAO">
+                Acceptable for internal market <span>(PHA-POAO)</span>
+              </li>
+              <li class="IUU">
+                IUU compliant <span>(PHA-IUU)</span>
+              </li>
+            </ul>
+        </td>
+      </tr>
      
     </tbody>
   </table>
   </div>
   </div>
+  <div class="ched-container toggle-area" data-target="commodityTable4" data-collapsed="true">
+    <div class="container govuk-body">
+      <dl class="definition-list ">
+        <div class="row">
+          <dt>CHED reference</dt>
+          <dd>
+
+              <a href="#" target="_blank"><span>               
+                CHEDP.GB.2025.5403121</span></a>
+              <i class="fas fa-external-link-alt"></i>
+
+          </dd>
+        </div>
+        <div class="row">
+          <dt>CHED Status</dt>
+          <dd>Cancelled</dd>
+        </div>
+        <div class="row">
+          <dt>Risk outcome</dt>
+          <dd>No inspection</dd>
+        </div>
+        <div class="row">
+          <dt>Last updated</dt>
+          <dd>{{ '22 May 2024' | chedTime }}</dd>
+        </div>
+      </dl>
+      <div class="toggle-wrapper">
+        <!-- Chevron arrow wrapper -->
+        <div id="toggleArrowContainer">
+          <i id="toggleArrow" class="fas fa-chevron-down"></i>
+        </div>
+      </div>
+    </div>
+  
+  
+  
+  <div id="commodityTable4" class="commodity-table">
+    <table class="govuk-table data-table">
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th scope="col" class="govuk-table__header first" >Item  number</th>
+          <th scope="col" class="govuk-table__header second" >Commodity code</th>
+          <th scope="col" class="govuk-table__header third " >Description</th>
+          <th scope="col" class="govuk-table__header forth " >Quantity / Weight</th>
+  
+          <th scope="col" class="govuk-table__header fifth " >Decision (authority)</th>
+  
+        </tr>
+      </thead>
+      <tbody class="govuk-table__body">
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell">10</td>
+          <td class="govuk-table__cell">3024990</td>
+          <td class="govuk-table__cell">Pampus spp.</td>
+          <td class="govuk-table__cell">90</td>
+          <td class="govuk-table__cell decision multi-auth">  
+        
+          </td>
+        </tr>
+        <tr class="govuk-table__row POAO IUU">
+          <td class="govuk-table__cell">2</td>
+          <td class="govuk-table__cell">3028990</td>
+          <td class="govuk-table__cell">Cephalopholis sonnerati</td>
+          <td class="govuk-table__cell">918</td>
+          <td class="govuk-table__cell decision multi-auth">  
+  
+          </td>
+        </tr>
+        <tr class="govuk-table__row POAO IUU">
+          <td class="govuk-table__cell">7</td>
+          <td class="govuk-table__cell">3028990</td>
+          <td class="govuk-table__cell">Plectropomus spp.</td>
+          <td class="govuk-table__cell">68</td>
+          <td class="govuk-table__cell decision multi-auth">  
+   
+          </td>
+        </tr>
+        <tr class="govuk-table__row POAO IUU">
+          <td class="govuk-table__cell">8</td>
+          <td class="govuk-table__cell">3028990</td>
+          <td class="govuk-table__cell">Stolephorus spp..</td>
+          <td class="govuk-table__cell">150</td>
+          <td class="govuk-table__cell decision multi-auth">  
+    
+          </td>
+        </tr>
+       
+      </tbody>
+    </table>
+    </div>
+    </div>
+</div>
 
 
+  
 
 
 {% endblock %}

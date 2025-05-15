@@ -18,42 +18,8 @@
 {% block form %}
 
 <h2 class="govuk-heading-m sectionHeader">{{ data.Cds | safe }}</h2>
-<div class="inline-form-group">
-  <div class="govuk-form-group">
-    <label class="govuk-label" for="match">Match</label>
-    <select class="govuk-select" id="match" name="match">
-      <option value="show-all" selected>Show all</option>
-      <option value="match">Yes</option>
-      <option value="noMatch">No</option>
-    </select>
-  </div>
+{% include 'includes/mrn-filters.html' %}
 
-  <div class="govuk-form-group">
-    <label class="govuk-label" for="decision">Decision</label>
-    <select class="govuk-select" id="decision" name="decision">
-      <option value="show-all" selected>Show all</option>
-      <option value="hold">Hold</option>
-      <option value="refused">Refused</option>
-      <option value="release">Release</option>
-      <!-- <option value="refusal">Refused</option> -->
-    </select>
-  </div>
-  <div class="govuk-form-group">
-    <label class="govuk-label" for="auth">Authority</label>
-    <select class="govuk-select" id="auth" name="auth">
-      <option value="show-all" selected>Show all</option>
-      <option value="APHA">APHA</option>
-      <option value="FNAO">FNAO</option>
-      <option value="HMI">HMI</option>
-      <option value="PHSI">PHSI</option>
-    </select>
-  </div>
-  <div class="govuk-form-group">
-    <a href="#" class="clear-filter" >Clear Filters</a>
-
-
-   </div>
-</div>
 
 
 
@@ -477,24 +443,8 @@
 
 
 <h2 class="govuk-heading-m sectionHeader ched-header">{{ data.Ipaffs | safe }}</h2>
-<div class="inline-form-group">
+{% include 'includes/ched-filters.html' %}
 
-  <div class="govuk-form-group">
-    <label class="govuk-label" for="authChed">Authority</label>
-    <select class="govuk-select" id="authChed" name="authChed">
-      <option value="show-all" selected>Show all</option>
-      <option value="APHA">APHA</option>
-      <option value="FNAO">FNAO</option>
-      <option value="HMI">HMI</option>
-      <option value="PHSI">PHSI</option>
-    </select>
-  </div>
-  <div class="govuk-form-group">
-    <a href="#" class="clear-filter" >Clear Filters</a>
-
-
-   </div>
-</div>
 
 
 <div class="ched-container toggle-area" data-target="commodityTable3">
@@ -1150,146 +1100,7 @@
     </div>
   
 
-      <script>
-document.addEventListener("DOMContentLoaded", function () {
-  // Get references to the filter dropdowns and the table rows
-  const matchFilter = document.getElementById("match");       // <select> for Match (values: show-all, match, noMatch)
-  const decisionFilter = document.getElementById("decision"); // <select> for Decision (values: show-all, hold, refused, release)
-  const authFilter = document.getElementById("auth");    // <select> for Authority (values: show-all, FNAO, HMI, PHSI)
-  const clearFiltersLink = document.getElementById("clear-filters"); // "Clear Filters" link element
-  const rows = document.querySelectorAll("table tbody tr");          // All data rows in the table (excluding any header rows)
-
-  // Define all the filter class names we will toggle, for easy removal
-  const FILTER_CLASSES = [
-    "filtered-match-yes", "filtered-match-no",
-    "filtered-decision-hold", "filtered-decision-refused", "filtered-decision-release",
-    "filtered-auth-FNAO", "filtered-auth-HMI", "filtered-auth-PHSI"
-  ];
-
-  // Function to apply filters to the table
-  function applyFilters() {
-    const matchValue = matchFilter.value;       // e.g. "match", "noMatch", or "show-all"
-    const decisionValue = decisionFilter.value; // e.g. "hold", "refused", "release", or "show-all"
-    const authValue = authFilter.value;         // e.g. "FNAO", "HMI", "PHSI", or "show-all"
-
-    // Determine if any filter is active (for Clear Filters link visibility)
-    const anyFilterActive = 
-      (matchValue !== "show-all") || (decisionValue !== "show-all") || (authValue !== "show-all");
-
-    // Show or hide the "Clear Filters" link based on active filters
-    if (clearFiltersLink) {
-      clearFiltersLink.style.display = anyFilterActive ? "" : "none";
-    }
-
-    // Loop through each table row to update its classes and visibility
-    rows.forEach(row => {
-      // First, remove any previously added filter-specific classes from the row
-      row.classList.remove(...FILTER_CLASSES);  // Remove all filtered-* classes:contentReference[oaicite:5]{index=5}
-
-      // Also ensure the row and all decision <li> are visible by default before applying new filters
-      row.style.display = "";  // reset any inline hide from a prior filter
-      const decisionItems = row.querySelectorAll("li");
-      decisionItems.forEach(li => {
-        li.classList.remove("hidden");  // remove the hidden class from all decision items
-        // (Assumes a CSS .hidden { display: none; } is defined to hide elements)
-      });
-
-      // Now, apply the filter criteria to decide if this row should be visible
-      let matchesFilter = true;  // this will track if the row satisfies all filters
-
-      // **Match filter logic**
-      if (matchValue !== "show-all") {
-        if (matchValue === "match") {
-          if (!row.classList.contains("match")) {
-            matchesFilter = false;
-          } else {
-            row.classList.add("filtered-match-yes");
-          }
-        } else if (matchValue === "noMatch") {
-          if (!row.classList.contains("no-match")) {
-            matchesFilter = false;
-          } else {
-            row.classList.add("filtered-match-no");
-          }
-        }
-      }
-
-      // **Decision filter logic**
-      if (matchesFilter && decisionValue !== "show-all") {
-        if (!row.classList.contains(decisionValue)) {
-          // The row does not have any decision of the selected type, exclude it
-          matchesFilter = false;
-        } else {
-          // Mark that this row has the filtered decision type
-          row.classList.add(`filtered-decision-${decisionValue}`);
-        }
-      }
-
-      // **Authority filter logic**
-      if (matchesFilter && authValue !== "show-all") {
-        if (!row.classList.contains(authValue)) {
-          // Row has no decision from this authority, exclude it
-          matchesFilter = false;
-        } else {
-          // Mark the row with the filtered authority
-          row.classList.add(`filtered-auth-${authValue}`);
-        }
-      }
-
-      // At this point, matchesFilter indicates if the row passes the Match/Decision/Authority criteria in combination.
-      // Now handle partial visibility of decision <li> within the row for Decision/Authority filters:
-      if (matchesFilter) {
-        // If the row is still a candidate, hide the decision list items that don't match the filters
-        decisionItems.forEach(li => {
-          // If a specific decision type is selected, hide all list items not of that type
-          if (decisionValue !== "show-all" && !li.classList.contains(decisionValue)) {
-            li.classList.add("hidden");
-          }
-          // If a specific authority is selected, hide all list items not of that authority
-          if (authValue !== "show-all" && !li.classList.contains(authValue)) {
-            li.classList.add("hidden");
-          }
-        });
-        // After hiding non-matching decisions, check if any decision item remains visible
-        const anyDecisionVisible = Array.from(decisionItems).some(li => !li.classList.contains("hidden"));
-        if (!anyDecisionVisible) {
-          // No decisions left visible means this row doesn't actually have content for the selected filters
-          matchesFilter = false;
-        }
-      }
-
-      // Finally, show or hide the row based on whether it matched all filters
-      if (!matchesFilter) {
-        row.style.display = "none";  // hide rows that don't match the active filters
-      }
-    });
-  }
-
-  // Attach event listeners to filter dropdowns
-  if (matchFilter)   matchFilter.addEventListener("change", applyFilters);
-  if (decisionFilter) decisionFilter.addEventListener("change", applyFilters);
-  if (authFilter)    authFilter.addEventListener("change", applyFilters);
-
-  
-
-  // Attach event listener to the "Clear Filters" link
-  if (clearFiltersLink) {
-    clearFiltersLink.addEventListener("click", function(e) {
-      e.preventDefault();
-      // Reset all filters to "show-all"
-      if (matchFilter)   matchFilter.value = "show-all";
-      if (decisionFilter) decisionFilter.value = "show-all";
-      if (authFilter)    authFilter.value = "show-all";
-      // Apply filters (which will now remove all filter classes and show everything)
-      applyFilters();
-    });
-  }
-
-  // Initialize the table state on page load (ensure clear filters link is hidden and all rows shown)
-  applyFilters();
-});
-
-        </script>
+     
         
         
         
