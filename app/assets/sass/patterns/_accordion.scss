@@ -4,9 +4,14 @@
   .govuk-icon--down::before {
     content: '\2193'; /* Down arrow symbol */
   }
-  .container:focus {
-      outline: 3px solid #ffdd00; /* GOV.UK yellow */
-      box-shadow: 0 0 0 3px black; /* Black outline for contrast */
+  #toggleArrowContainer{
+    cursor: pointer;
+
+  }
+  #toggleArrowContainer:focus {
+    outline: 3px solid #ffdd00; /* GOV.UK yellow */
+    box-shadow: 0 0 0 3px black; /* Optional: black outline for contrast */
+    border-radius: 2px; /* Optional: soften edges */
   }
   
   .govuk-icon--up::before {
@@ -14,7 +19,7 @@
   }
   .container {
       position: relative;
-      cursor: pointer;
+   
       border: 1px solid #dbdbdb; /* Add left border */
   
   

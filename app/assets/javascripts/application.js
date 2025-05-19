@@ -91,44 +91,43 @@ document.addEventListener("DOMContentLoaded", function () {
 // toggle js
 document.addEventListener("DOMContentLoaded", function () {
   document.querySelectorAll(".toggle-area").forEach(function (toggleArea) {
-      const targetId = toggleArea.getAttribute("data-target");
-      const content = document.getElementById(targetId);
-      const toggleArrow = toggleArea.querySelector("#toggleArrow");
-      const shouldCollapse = toggleArea.getAttribute("data-collapsed") === "true";
-      const container = toggleArea.querySelector(".container"); // Target only .container inside .toggle-area
+    const targetId = toggleArea.getAttribute("data-target");
+    const content = document.getElementById(targetId);
+    const toggleArrow = toggleArea.querySelector("#toggleArrow");
+    const toggleArrowContainer = toggleArea.querySelector("#toggleArrowContainer");
+    const shouldCollapse = toggleArea.getAttribute("data-collapsed") === "true";
 
-      if (content && container) {
-          // Set initial state
-          content.style.display = shouldCollapse ? "none" : "block";
-          toggleArrow.classList.add(shouldCollapse ? "fa-chevron-down" : "fa-chevron-up");
+    if (content && toggleArrowContainer) {
+      // Set initial state
+      content.style.display = shouldCollapse ? "none" : "block";
+      toggleArrow.classList.add(shouldCollapse ? "fa-chevron-down" : "fa-chevron-up");
 
-          // Make container focusable and accessible
-          container.setAttribute("tabindex", "0"); // Allows keyboard focus
-          container.setAttribute("role", "button"); // Identifies as a button for screen readers
-          container.setAttribute("aria-expanded", !shouldCollapse);
-          container.setAttribute("aria-controls", targetId);
+      // Accessibility
+      toggleArrowContainer.setAttribute("tabindex", "0");
+      toggleArrowContainer.setAttribute("role", "button");
+      toggleArrowContainer.setAttribute("aria-expanded", !shouldCollapse);
+      toggleArrowContainer.setAttribute("aria-controls", targetId);
 
-          const toggleContent = () => {
-              const isHidden = content.style.display === "none";
-              content.style.display = isHidden ? "block" : "none";
-              toggleArrow.classList.toggle("fa-chevron-up", isHidden);
-              toggleArrow.classList.toggle("fa-chevron-down", !isHidden);
-              container.setAttribute("aria-expanded", isHidden);
-          };
+      const toggleContent = () => {
+        const isHidden = content.style.display === "none";
+        content.style.display = isHidden ? "block" : "none";
+        toggleArrow.classList.toggle("fa-chevron-up", isHidden);
+        toggleArrow.classList.toggle("fa-chevron-down", !isHidden);
+        toggleArrowContainer.setAttribute("aria-expanded", isHidden);
+      };
 
-          // Click event for mouse users
-          container.addEventListener("click", toggleContent);
+      toggleArrowContainer.addEventListener("click", toggleContent);
 
-          // Keyboard accessibility: Toggle with Enter or Space
-          container.addEventListener("keydown", function (event) {
-              if (event.key === "Enter" || event.key === " ") {
-                  event.preventDefault(); // Prevent page scrolling on spacebar press
-                  toggleContent();
-              }
-          });
-      }
+      toggleArrowContainer.addEventListener("keydown", function (event) {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          toggleContent();
+        }
+      });
+    }
   });
 });
+
 
 // filters 
 document.addEventListener("DOMContentLoaded", function () {
