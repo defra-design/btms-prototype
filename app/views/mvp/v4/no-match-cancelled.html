@@ -111,6 +111,22 @@
           </tr>
           <tr class="no-match">
             <td class="govuk-table__cell ">3</td>
+            <td class="govuk-table__cell ">0808309088</td>
+            <td class="govuk-table__cell ">PEARS</td>
+            <td class="govuk-table__cell ">1000</td>
+            <td class="govuk-table__cell  " tabindex="0">
+              <span class="">GBCHD2025.5628299 </span>
+              <span class="tooltip" role="tooltip">
+                {{ data.noMatchContextual | safe }} 
+              </span>
+            </td>
+            <td class="govuk-table__cell ">
+              <strong class="govuk-tag govuk-tag--green">Yes</strong>
+            </td>
+            <td class="govuk-table__cell">CHED replaced</td>
+          </tr>
+          <tr class="no-match">
+            <td class="govuk-table__cell ">4</td>
             <td class="govuk-table__cell ">0808309100</td>
             <td class="govuk-table__cell ">SCOTCH BONNET</td>
             <td class="govuk-table__cell ">1200</td>
@@ -286,7 +302,78 @@
         </div>
 
 
-      
+ 
+        <div class="ched-container toggle-area" data-target="commodityTable7" data-collapsed="true">
+          <div class="container govuk-body">
+            <dl class="definition-list ">
+              <div class="row">
+                <dt>CHED reference</dt>
+                <dd>
+                  <a href="https://ipaffs-prototype.herokuapp.com/part-2/chedp-landbridge/00-ched-overview" target="_blank"><span>CHEDPP.GB.2025.5628299
+                  </span></a>
+                  <i class="fas fa-external-link-alt"></i>
+                </dd>
+              </div>
+              <div class="row">
+                <dt>CHED Status</dt>
+                <dd>Replaced</dd>
+              </div>
+              <div class="row">
+                <dt>Risk outcome</dt>
+                <dd>No inspection</dd>
+              </div>
+              <div class="row">
+                <dt>Last updated</dt>
+                <dd>{{ '22 May 2024' | chedTime }}</dd>
+              </div>
+            </dl>
+            <div class="toggle-wrapper">
+              <!-- Chevron arrow wrapper -->
+              <div id="toggleArrowContainer">
+                <i id="toggleArrow" class="fas fa-chevron-down"></i>
+              </div>
+            </div>
+          </div>
+        
+        
+        
+        <div id="commodityTable7" class="commodity-table">
+        
+        
+      <table class="govuk-table data-table">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header" >Item  number</th>
+            <th scope="col" class="govuk-table__header" >Commodity code</th>
+            <th scope="col" class="govuk-table__header " >Description</th>
+            <th scope="col" class="govuk-table__header " >Quantity / Weight</th>
+    
+            <th scope="col" class="govuk-table__header " >Decision (authority)</th>
+    
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          <tr class="govuk-table__row PHSI HMI">
+            <td class="govuk-table__cell">1</td>
+            <td class="govuk-table__cell">0808309090</td>
+            <td class="govuk-table__cell">Pirum			</td>
+            <td class="govuk-table__cell">1000</td>
+            <td class="govuk-table__cell decision ">  
+                <ul class="govuk-list">
+                  <li class="PHSI">
+                    Acceptable for internal market <span>(PHSI)</span>
+                  </li>
+           
+                </ul>
+            </td>
+          </tr>
+    
+    
+        </tbody>
+      </table>
+          </div>
+          </div>
+       
         
         
   
