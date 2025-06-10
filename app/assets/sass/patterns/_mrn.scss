@@ -291,5 +291,26 @@ tr.filtered-match-no  .govuk-table__cell {
       margin-bottom: 5px;
 
     }
+     .govuk-grid-row {
+    flex-direction: column;
+  }
+
+  .govuk-grid-column-full {
+  }
+
+  .govuk-heading-l {
+    font-size: 1.5rem;
+  }
+  .mrn-container, .ched-container {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-x: auto; /* in case child content is still too wide */
+  }
+
+  .mrn-container *, .ched-container * {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
   }
 }
