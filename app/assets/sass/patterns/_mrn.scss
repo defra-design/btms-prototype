@@ -273,29 +273,25 @@ tr.filtered-match-no  .govuk-table__cell {
   /* Your styles here */
   margin-bottom: 0;
 }
-  @media screen and (max-width: 767px) {
+  @media screen and (max-width: 1024px) {
     /* Styles here apply only on screens 767px wide or smaller (most phones) */
       .inline-form-group {
         display: block;
 
     }
-    .headerh1, .searchLink {
-        display: block;
-        clear:both
-    }
+ 
     .commodity-table {
       overflow: scroll;
 
     }
-    .govuk-heading-l, .searchLink {
-      margin-bottom: 5px;
 
-    }
      .govuk-grid-row {
     flex-direction: column;
   }
 
   .govuk-grid-column-full {
+    width: 100%;
+    padding: 0;
   }
 
   .govuk-heading-l {
@@ -311,6 +307,9 @@ tr.filtered-match-no  .govuk-table__cell {
   .mrn-container *, .ched-container * {
     max-width: 100%;
     box-sizing: border-box;
+  }
+  .govuk-main-wrapper {
+    padding: 10px;
   }
   }
 }
