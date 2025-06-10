@@ -62,5 +62,17 @@
     top: 50%;
     transform: translateY(-50%);
     display: none; /* Hide by default */
+    
   }
     
+   @media screen and (max-width: 767px) {
+    /* Styles here apply only on screens 767px wide or smaller (most phones) */
+
+    .search-container{
+      padding: 10px;
+    }
+    .search-hint li {
+      font-size: 14px!important;
+    }
+
+  }

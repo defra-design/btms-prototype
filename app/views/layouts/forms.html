@@ -31,10 +31,10 @@
          <span class="govuk-caption-l">{{subHeader}}</span>
        {% endif %}
        {% if not showheader %}
-        <div style="display: flex; align-items: baseline; gap: 10px;">
+        <div class="headerh1" >
           <h1 class="govuk-heading-l">{{ title | safe }}</h1>
           {% if showEdit %}
-          <a href="search?searchTerm=">Search again</a>
+          <a class="searchLink" href="search?searchTerm=">Search again</a>
 
         {% endif %}
       </div>
