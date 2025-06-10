@@ -273,6 +273,11 @@ tr.filtered-match-no  .govuk-table__cell {
   /* Your styles here */
   margin-bottom: 0;
 }
+
+    .commodity-table {
+      overflow: scroll;
+
+    }
   @media screen and (max-width: 1024px) {
     /* Styles here apply only on screens 767px wide or smaller (most phones) */
       .inline-form-group {
