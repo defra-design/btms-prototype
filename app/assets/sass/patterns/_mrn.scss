@@ -278,7 +278,7 @@ tr.filtered-match-no  .govuk-table__cell {
       overflow: scroll;
 
     }
-  @media screen and (max-width: 1024px) {
+  @media screen and (max-width: 767px) {
     /* Styles here apply only on screens 767px wide or smaller (most phones) */
       .inline-form-group {
         display: block;
