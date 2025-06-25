@@ -1,5 +1,5 @@
 {% extends "layouts/forms.html" %}
-{% set title = 'Search by MRN, CHED or DUCR' %}
+{% set title = 'You are signed out' %}
 {% set signedIn = 'false' %}
 {% set fullWidth = false %}
 {% set hideButton = true %}
@@ -10,7 +10,7 @@
 {% block form %}
 
   <h1 class="govuk-heading-l">
-    You are signed out
+    {{title}}
 
   </h1>
 
