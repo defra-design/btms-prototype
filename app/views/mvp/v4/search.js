@@ -56,6 +56,41 @@ module.exports = (router) => {
     return res.redirect('search');
   });
 
+  router.post(['/mvp/v4/cookies/'], (req, res, next) => {
+  const cookies = req.body.cookies;
 
-  
+  // Do something with the preference (e.g., set a cookie)
+    res.render('mvp/v4/cookies', {
+    cookies
+  });
+});
+
+router.post(['/mvp/v4/search-cookies', '/mvp/v4/search-cookies/'], (req, res) => {
+  const preference = req.body.cookies;
+
+  if (preference === 'Yes' || preference === 'No') {
+    res.cookie('cookiePreference', preference, { maxAge: 365 * 24 * 60 * 60 * 1000 }); // 1 year
+    return res.redirect('/mvp/v4/search-cookies?confirmation=true');
+  }
+
+  res.redirect('/mvp/v4/search-cookies');
+});
+
+router.get(['/mvp/v4/search-cookies', '/mvp/v4/search-cookies/'], (req, res) => {
+  const cookies = req.cookies.cookiePreference || '';
+  const showConfirmation = req.query.confirmation === 'true';
+
+  res.render('mvp/v4/search-cookies', {
+    serviceName: 'Border Trade Matching Service',
+    cookies,
+    showConfirmation
+  });
+});
+
+
+
+
+
+
+
 };
