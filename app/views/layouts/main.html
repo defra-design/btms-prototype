@@ -3,6 +3,7 @@
     https://prototype-kit.service.gov.uk/docs/how-to-use-layouts
     #}
 
+
     {% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
 
     {% set accountLink %}
@@ -58,7 +59,7 @@
                  {
                 href: "accessibility-statement",
                 text: "Accessibility statement"
-            },
+            } if a11y != 'false',
             {
                 href: "/manage-prototype",
                 text: "Manage your prototype"

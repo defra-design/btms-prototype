@@ -1,7 +1,9 @@
 // For guidance on how to create filters see:
 // https://prototype-kit.service.gov.uk/docs/filters
 //
-
+module.exports = (env) => {
+  env.addGlobal('govukRebrand', true)
+}
 const govukPrototypeKit = require('govuk-prototype-kit');
 const addFilter = govukPrototypeKit.views.addFilter;
 
