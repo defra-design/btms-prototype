@@ -1,31 +1,20 @@
 {% extends "layouts/main.html" %} 
-{% set pageName="Home" %} 
 {% set signedIn = 'false' %}
+{% set bodyClasses = 'index' %}
+{% set title = serviceName %}
+{% set footer = 'false' %}
+
 
 {% block content %}
-<style>
-  .jira {    
-    display: table;
-    margin: 5px 0;
-    font-size: 16px!important;
-    color: #0b0c0c !important;
 
-    }
-    li span {
-      display: table;
-    margin: 5px 0;
-    font-size: 16px!important;
-    }
-
-</style>
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
 
-    <h1 class="govuk-heading-l">{{ serviceName }} (BTMS)</h1>
+    <h1 class="govuk-heading-l">{{ title }} (BTMS)</h1>
 
     <h2 class="govuk-heading-m">Latest MVP </h2>
     <p class="govuk-heading-s">
-    V4 (May 2025)
+    V4 (July 2025)
       <strong class="govuk-tag govuk-tag--blue"> In-progress  </strong>
         </p>
         <p>New design for displaying multiple CHEDs per line item with varying match statuses and decision outcomes. </p>
@@ -88,16 +77,14 @@
     <ul class="govuk-list govuk-list--bullet">
       <li><a href="/mvp/v4/no-ched">No CHED in search results </a><a  class=" jira" href="https://eaflood.atlassian.net/browse/CDMS-691"> Jira CDMS-691 </a><span >This scenario covers when a MRN is searched for but does not have any matching CHED/s </span></li>
       <li><a href="/mvp/v4/no-mrn">No MRN in search results </a><a  class=" jira" href="https://eaflood.atlassian.net/browse/CDMS-690"> Jira CDMS-690 </a><span >This scenario covers when a CHED is searched for but does not have any matching MRN/s   </span></li>
-
     </ul>
 
     <p class="govuk-heading-s">Footer links  </p>
-    <p class="govuk-heading-xs">The initial decision was to include only Accessibility, Cookies, and Privacy. We now need to decide whether to use custom BTMS versions or link to the generic GOV.UK or Defra versions. </p>
 
     <ul class="govuk-list govuk-list--bullet">
       <li><a href="/mvp/v4/accessibility-statement">Accessibility statement</a><a  class=" jira" href="https://eaflood.atlassian.net/browse/CDMS-263"> Jira CDMS-263 </a><span >Need to decide on approach - custom or link to generic gov or defra</span></li>
       <li><a href="/mvp/v4/cookies">Cookies </a><a  class=" jira" href="https://eaflood.atlassian.net/browse/CDMS-260"> Jira CDMS-260 </a><span >Need to decide on approach - custom or link to generic gov or defra  </span></li>
-      <li><a href="#">Privacy </a><a  class=" jira" href="https://eaflood.atlassian.net/browse/CDMS-262"> Jira CDMS-262 </a><span >Need to decide on approach - custom or link to generic gov or defra  </span></li>
+      <!-- <li><a href="#">Privacy </a><a  class=" jira" href="https://eaflood.atlassian.net/browse/CDMS-262"> Jira CDMS-262 </a><span >Need to decide on approach - custom or link to generic gov or defra  </span></li> -->
 
     </ul>
     <p class="govuk-heading-s">Error pages  </p>
@@ -105,11 +92,19 @@
       <li><a href="/mvp/v4/unauthorised">403 - Forbidden (logged in but not with the correct organisation) </a><a  class=" jira" href="https://eaflood.atlassian.net/browse/CDMS-795"> Jira CDMS-795 </a></li>
       <li><a href="/mvp/v4/401">401: unauthorised (not logged in) </a><a  class=" jira" href="https://eaflood.atlassian.net/browse/CDMS-795"> Jira CDMS-795 </a></li>
       <li><a href="/mvp/v4/404">404: page not found </a><a  class=" jira" href="https://eaflood.atlassian.net/browse/CDMS-795"> Jira CDMS-795 </a></li>
-      <li><a href="/mvp/v4/500">500 & 502 problem with this service </a><a  class=" jira" href="https://eaflood.atlassian.net/browse/CDMS-795"> Jira CDMS-795 </a></li>
-</span></li>
-      
+      <li><a href="/mvp/v4/500">500 & 502 problem with this service </a><a  class=" jira" href="https://eaflood.atlassian.net/browse/CDMS-795"> Jira CDMS-795 </a></li></li>
     </ul>
 
+    <p class="govuk-heading-s">Status page  </p>
+    <p class="govuk-body-s">The BTMS status page shows real-time updates on system performance, highlighting any issues with CDS, IPAFFS, or the BTMS platform. It helps users quickly see what’s working, what’s not, and when problems began. Its accessible via the BTMS status footer link or outage banner on the search page</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li><a href="/mvp/v4/status/search-cds">Search page - outage alert CDS </a><a  class=" jira" href="https://eaflood.atlassian.net/browse/CDMS-863 "> Jira CDMS-863  </a><span>Search page showing CDS outage banner </span></li>
+      <li><a href="/mvp/v4/status/search-cds-ipaffs">Search page - outage alert CDS & IPAFFS </a><a  class=" jira" href="https://eaflood.atlassian.net/browse/CDMS-863 "> Jira CDMS-863  </a><span>Search page showing CDS and IPAFFS outage banner </span></li>
+      <li><a href="/mvp/v4/status/status-operational">Status overview - Operational </a><a  class=" jira" href="https://eaflood.atlassian.net/browse/CDMS-863 "> Jira CDMS-863  </a><span>Status page showing all systems operational </span></li>
+      <li><a href="/mvp/v4/status/status-outage-cds">Status overview - Outage CDS </a><a  class=" jira" href="https://eaflood.atlassian.net/browse/CDMS-863 "> Jira CDMS-863  </a><span>Status page showing CDS outage </span></li>
+      <li><a href="/mvp/v4/status/status-outage-ipaffs-cds">Status overview - Outage CDS & ipaffs </a><a  class=" jira" href="https://eaflood.atlassian.net/browse/CDMS-863 "> Jira CDMS-863  </a><span>Status page showing CDS and IPAFFS outage </span></li>
+      <li><a href="/mvp/v4/status/status-outage-btms">Status overview - BTMS outage </a><a  class=" jira" href="https://eaflood.atlassian.net/browse/CDMS-863 "> Jira CDMS-863  </a><span>Status page showing BTMS outage </span></li>
+    </ul>
   <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible" />
 
     <h2 class="govuk-heading-m">BTMS MVPs</h2>

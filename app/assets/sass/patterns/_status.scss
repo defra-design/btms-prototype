@@ -1,0 +1,79 @@
+
+.btmsStatus {
+.table-small {
+  font-size: 16px;
+}
+
+.table-small th,
+.table-small td,
+.table-small .govuk-body,
+.table-small .govuk-hint,
+.table-small strong,
+.table-small span {
+  font-size: 16px;
+}
+
+.status-cell,
+.details-cell {
+  vertical-align: top;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  line-height: 1;
+  color: $govuk-success-colour; // Default to green
+  position: relative;
+}
+
+.status::before {
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* Outage (red) */
+.status.outage {
+  color: $govuk-error-colour;
+}
+
+.status.outage::before {
+  background-image: url('/public/images/icon-error.svg');
+}
+
+/* Operational (green) */
+.status.operational::before {
+  background-image: url('/public/images/icon-operational.svg');
+}
+.govuk-notification-banner--outage {
+    border-color: $govuk-error-colour;
+    background-color: $govuk-error-colour
+}
+.govuk-notification-banner__title::before {
+  content: '';
+  -webkit-mask-image: url('/public/images/icon-error.svg');
+  mask-image: url('/public/images/icon-error.svg');
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+
+  background-color: white; /* This is what gives the icon its visible colour */
+  width: 1.5rem;
+  height: 1.5rem;
+  display: inline-block;
+  margin-right: 0.5rem;
+  vertical-align: top;
+}
+
+
+.govuk-notification-banner__heading {
+
+    margin-bottom: 5px!important;
+}
+}

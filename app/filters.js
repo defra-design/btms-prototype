@@ -48,3 +48,39 @@ addFilter('mrnTime', function() {
         return error.message.split(':')[0];
     }
 });
+
+// Filter for IPAFS time (1 hour and 20min earlier)
+addFilter('ipaffsTime', function(offsetStr) {
+    try {
+        const date = new Date();
+
+        // Default offset if none provided
+        let offsetMinutes = -80; // 1hr 20min ago
+
+        if (typeof offsetStr === 'string') {
+            const match = offsetStr.match(/([+-])(\d+)(min|hr)/);
+            if (match) {
+                const [, sign, value, unit] = match;
+                let minutes = parseInt(value, 10);
+                if (unit === 'hr') minutes *= 60;
+                offsetMinutes = (sign === '-' ? -1 : 1) * minutes;
+            }
+        }
+
+        // Apply the offset
+        date.setMinutes(date.getMinutes() + offsetMinutes);
+
+        // Format date and time
+        const formattedDate = new Intl.DateTimeFormat('en-GB', {
+            year: 'numeric', month: 'long', day: 'numeric'
+        }).format(date);
+
+        const formattedTime = new Intl.DateTimeFormat('en-GB', {
+            hour: '2-digit', minute: '2-digit'
+        }).format(date);
+
+        return `${formattedDate}, ${formattedTime}`;
+    } catch (error) {
+        return error.message.split(':')[0];
+    }
+});

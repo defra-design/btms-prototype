@@ -3,7 +3,6 @@
     https://prototype-kit.service.gov.uk/docs/how-to-use-layouts
     #}
 
-
     {% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
 
     {% set accountLink %}
@@ -56,7 +55,11 @@
         {{ govukFooter({
         meta: {
             items: [
-                 {
+            {
+                href: "status/status-operational",
+                text: "BTMS status"
+            },
+            {
                 href: "accessibility-statement",
                 text: "Accessibility statement"
             }, 
@@ -64,6 +67,7 @@
                 href: "cookies?cookies=''",
                 text: "Cookies"
             }, 
+         
             {
                 href: "/manage-prototype",
                 text: "Manage your prototype"
@@ -72,7 +76,7 @@
                     href: "/manage-prototype/clear-data",
                     text: "Clear data"
                 }
-            ] if a11y != 'false'
+            ] if footer != 'false'
             }
             }) 
         }}
