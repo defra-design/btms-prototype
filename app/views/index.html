@@ -20,14 +20,14 @@
         <p>New design for displaying multiple CHEDs per line item with varying match statuses and decision outcomes. </p>
         <p>Design updates from silent runnning feedback will be included in V4 </p>
 
-        <p class="govuk-heading-s">Landing pages  </p>
+        <p class="govuk-heading-s" id="landing">Landing pages  </p>
  
     <ul class="govuk-list govuk-list--bullet">
       <li><a href="/mvp/v4/start">Start page (external user)</a> <a class="jira" href="https://eaflood.atlassian.net/browse/CDMS-368"> Jira CDMS-368</a><span >Landing page for external users</span></li>
       <li><a href="/mvp/v4/start-no-cta">Start page - no CTA (internal user)</a> <a class="jira" href="https://eaflood.atlassian.net/browse/CDMS-368"> Jira CDMS-368</a><span >Landing page for external users</span></li>
 </ul>
 
-    <p class="govuk-heading-s">Account management  </p>
+    <p class="govuk-heading-s" id="account">Account management  </p>
     <ul class="govuk-list govuk-list--bullet">
       <li><a href="/mvp/v4/manage-account">Defra manage account (external user)</a> <a class="jira" href="https://eaflood.atlassian.net/browse/CDMS-665"> Jira CDMS-665</a><span >From the BTSM header external users can access their Defra Account</span></li>
       <li><a href="/mvp/v4/ducr">Account header (external user)</a> <a class="jira" href="https://eaflood.atlassian.net/browse/CDMS-665"> Jira CDMS-665</a><span >Header includes signout and manage account</span></li>
@@ -36,20 +36,20 @@
 
     </ul>
 
-    <p class="govuk-heading-s">Search page  </p>
+    <p class="govuk-heading-s" id="search">Search page  </p>
     <ul class="govuk-list govuk-list--bullet">
       <li><a href="mvp/v4/search">Search </a> <a class="jira" href="https://eaflood.atlassian.net/browse/CDMS-636"> Jira CDMS-636</a><span>includes search content plus clear search functionality</span></li>
       <li><a href="mvp/v4/search-cookies">Search - inc Cookie banner</a> <a class="jira" href="https://eaflood.atlassian.net/browse/CDMS-260"> Jira CDMS-636</a><span>Search page with cookie banner</span></li>
 
     </ul>
-    <p class="govuk-heading-xs">Error messages on search  <a class="jira" href="https://eaflood.atlassian.net/browse/CDMS-369"> Jira CDMS-369</a> </p>
+    <p class="govuk-heading-xs" id="error-search">Error messages on search  <a class="jira" href="https://eaflood.atlassian.net/browse/CDMS-369"> Jira CDMS-369</a> </p>
     <ul class="govuk-list govuk-list--bullet">
       <li><a href="mvp/v4/search?searchTerm=25GB0P0T2">Invalid search</a> <br /><span >(invalid search : 25GB0P0T)</span></li>
       <li><a href="mvp/v4/search?searchTerm= ">Empty search</a> <br /><span >(invalid search : empty)</span></li>
       <li><a href="mvp/v4/search?searchTerm=CHEDP.GB.2024.4433124">Ched not found</a> <br /><span >( search : CHEDP.GB.2024.4433124)</span></li>
       <li><a href="mvp/v4/search?searchTerm=24GBDX8QQ4WWFJHGA4">MRN not found</a> <br /><span >( search : 24GBDX8QQ4WWFJHGA4)</span></li>
     </ul>
-    <p class="govuk-heading-s">Search results  </p>
+    <p class="govuk-heading-s" id="searchResults">Search results  </p>
 
     <ul class="govuk-list govuk-list--bullet">
       <li><a href="/mvp/v4/multiple-auth">MRN line items referenced by multiple CHEDS and multiple authorities per line item </a><a  class=" jira" href="https://eaflood.atlassian.net/browse/CDMS-398"> Jira CDMS-398 </a> <span >This scenario covers cases where there are multiple DOC references linked to a single MRN line item, along with multiple authorities associated with that line. The question is: how do we identify which DOC reference corresponds to which authority </span></a></li>
@@ -73,13 +73,13 @@
       <li><a href="/mvp/v4/gms">Accordion functionality </a> <a  class=" jira" href="https://eaflood.atlassian.net/browse/CDMS-426"> Jira CDMS-426 </a><span >MRNS tables are placed withing collapsable accordians - closed by default for cancelled,replaced or deleted states</span></li>
 
     </ul>
-    <p class="govuk-heading-xs">Error states on search results   </p>
+    <p class="govuk-heading-xs" id="no-mrn">Error states on search results   </p>
     <ul class="govuk-list govuk-list--bullet">
       <li><a href="/mvp/v4/no-ched">No CHED in search results </a><a  class=" jira" href="https://eaflood.atlassian.net/browse/CDMS-691"> Jira CDMS-691 </a><span >This scenario covers when a MRN is searched for but does not have any matching CHED/s </span></li>
       <li><a href="/mvp/v4/no-mrn">No MRN in search results </a><a  class=" jira" href="https://eaflood.atlassian.net/browse/CDMS-690"> Jira CDMS-690 </a><span >This scenario covers when a CHED is searched for but does not have any matching MRN/s   </span></li>
     </ul>
 
-    <p class="govuk-heading-s">Footer links  </p>
+    <p class="govuk-heading-s" id="footer">Footer links  </p>
 
     <ul class="govuk-list govuk-list--bullet">
       <li><a href="/mvp/v4/accessibility-statement">Accessibility statement</a><a  class=" jira" href="https://eaflood.atlassian.net/browse/CDMS-263"> Jira CDMS-263 </a><span >Need to decide on approach - custom or link to generic gov or defra</span></li>
@@ -87,7 +87,7 @@
       <!-- <li><a href="#">Privacy </a><a  class=" jira" href="https://eaflood.atlassian.net/browse/CDMS-262"> Jira CDMS-262 </a><span >Need to decide on approach - custom or link to generic gov or defra  </span></li> -->
 
     </ul>
-    <p class="govuk-heading-s">Error pages  </p>
+    <p class="govuk-heading-s" id="error">Error pages  </p>
     <ul class="govuk-list govuk-list--bullet">
       <li><a href="/mvp/v4/unauthorised">403 - Forbidden (logged in but not with the correct organisation) </a><a  class=" jira" href="https://eaflood.atlassian.net/browse/CDMS-795"> Jira CDMS-795 </a></li>
       <li><a href="/mvp/v4/401">401: unauthorised (not logged in) </a><a  class=" jira" href="https://eaflood.atlassian.net/browse/CDMS-795"> Jira CDMS-795 </a></li>
