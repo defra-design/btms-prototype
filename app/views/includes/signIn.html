@@ -1,0 +1,28 @@
+{{ govukRadios({
+        name: "radio",
+        class: "radio",
+        fieldset: {
+          legend: {
+            text: "How do you want to sign in?",
+            isPageHeading: true,
+            classes: "govuk-fieldset__legend--m"
+          }
+        },
+        value: data.test,
+        items: [
+          {
+            value: "Yes",
+            text: "Defra Single Sign-On",
+            hint: {
+              text: "If you have a Defra or APHA email address"
+             }          
+          },
+          {
+            value: "No",
+            text: "Government Gateway ",
+            hint: {
+              text: "If you have an HMRC or PHA email address"
+             } 
+          }
+        ]
+      }) }}

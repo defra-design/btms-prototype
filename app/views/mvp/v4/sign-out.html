@@ -8,7 +8,11 @@
 
 
 {% block form %}
-
+<style>
+  .govuk-section-break--visible  {
+    border-bottom: 1px solid #dbdbdb;
+  }
+</style>
   <h1 class="govuk-heading-l">
     {{title}}
 
@@ -17,14 +21,16 @@
   <p class="govuk-body">
             You will need to sign in again to access {{ serviceName }}.
   </p>
+<hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
 
+  {% include 'includes/signIn.html' %}
+
+
+ 
   <div class="govuk-form-group">
 
       <a href="sign-in" class="govuk-button">Sign in</a>
 
   </div>
-
-
-
 
   {% endblock %}

@@ -63,11 +63,19 @@
 }
 
 .start-page-banner__text,
+.govuk-fieldset__heading,
 .start-page-banner__link,
 .start-page-banner__link:link,
 .start-page-banner__link:visited,
+.govuk-hint,
 .start-page-banner__actions .govuk-link {
   color: govuk-colour("white");
+}
+
+.govuk-label {
+  color: govuk-colour("white");
+  font-weight: 700;
+
 }
 
 .start-page-banner__actions p {
@@ -92,6 +100,8 @@
 .start-page-banner__button.govuk-button:hover {
   background-color: govuk-colour("light-grey");
 }
+
+
 
 }
 
