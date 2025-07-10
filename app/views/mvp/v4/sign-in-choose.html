@@ -1,12 +1,13 @@
 {% extends "layouts/forms.html" %}
-{% set title = 'You are signed out' %}
+{% set title = 'How do you want to sign in?' %}
+{% set buttonText = 'Sign in' %}
 {% set signedIn = 'false' %}
 {% set fullWidth = false %}
 {% set hideButton = false %}
 {% set showheader = true %}
 {% set hideBackLink = true %}
+{% set showHeading = false %}
 {% set bodyClasses = 'signIn' %}
-{% set buttonText = 'Sign in' %}
 
 
 {% block form %}
@@ -17,20 +18,11 @@
   </h1>
 
   <p class="govuk-body">
-            You will need to sign in again to access {{ serviceName }}.
-  </p>
-<hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
 
 {{ govukRadios({
   name: "signIn",
   class: "radio",
-fieldset: {
-    legend: {
-      text: "How do you want to sign in?",
-      isPageHeading: showHeading,
-      classes: "govuk-fieldset__legend--m"
-    }
-  },
+
   value: data.signIn,
   items: [
     {
@@ -49,8 +41,10 @@ fieldset: {
     }
   ]
 }) }}
+  </p>
 
- 
+
+
 
 
   {% endblock %}

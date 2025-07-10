@@ -89,8 +89,41 @@ router.get(['/mvp/v4/search-cookies', '/mvp/v4/search-cookies/'], (req, res) => 
 
 
 
+router.post(['/mvp/v4/sign-in-choose'], (req, res) => {
+  const selected = req.body.signIn;
+
+  if (selected === 'entra') {
+    res.redirect('/mvp/v4/sign-in-entra');
+  } else if (selected === 'gg') {
+    res.redirect('/mvp/v4/sign-in-gg');
+  } else {
+    // If nothing is selected, re-render with an error message
+    res.render('mvp/v4/sign-in-choose', {
+      data: {
+        signIn: ''
+      },
+      errorMessage: 'Select how you want to sign in'
+    });
+  }
+});
 
 
+router.post(['/mvp/v4/sign-out'], (req, res) => {
+  const selected = req.body.signIn;
 
+  if (selected === 'entra') {
+    res.redirect('/mvp/v4/sign-in-entra');
+  } else if (selected === 'gg') {
+    res.redirect('/mvp/v4/sign-in-gg');
+  } else {
+    // If nothing is selected, re-render with an error message
+    res.render('mvp/v4/sign-in-choose', {
+      data: {
+        signIn: ''
+      },
+      errorMessage: 'Select how you want to sign in'
+    });
+  }
+});
 
 };

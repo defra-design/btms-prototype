@@ -1,0 +1,58 @@
+{% extends "layouts/forms.html" %}
+{% set title = 'Search by MRN, CHED or DUCR' %}
+{% set signedIn = 'true' %}
+{% set fullWidth = true %}
+{% set hideButton = true %}
+{% set showheader = true %}
+{% set hideBackLink = true %}
+{% set hideManageAccount = 'false' %}
+{% set hideBackLink = true %}
+{% set hideManageAccount = 'true' %}
+
+{% block form %}
+
+  <div class="govuk-form-group search-container">
+    <h1 class="govuk-label-wrapper">
+      <label class="govuk-label govuk-label--l" for="event-name"> Search for an MRN, CHED or DUCR </label>
+    </h1>
+    <div class="search-hint govuk-hint govuk-body-s">
+      <ul class="govuk-list">
+        <li>
+          For example:
+        </li>
+        <li>
+          MRN, 24GB0Z8WEJ9ZBTL73B
+        </li>
+        <li>
+          CHED, CHEDP.GB.2025.4433124 or GBCHD2025.4433124
+        </li>
+        <li>
+          DUCR, 4GB335031931000-WB2408-27WWL6274S
+        </li>
+      </ul>  
+    </div>
+    <div class="govuk-form-group {% if data.error %}govuk-form-group--error{% endif %}">
+      {% if data.error %}
+        <p id="full-name-input-error" class="govuk-error-message">
+          <span class="govuk-visually-hidden">Error:</span> {{ data.errorMessage }}
+        </p>
+      {% endif %}
+      <div class="govuk-input-wrapper" style="position: relative; display: flex; align-items: center;">
+        <input class="govuk-input" id="searchTerm" name="data.searchTerm" type="text" 
+               value="{{ data.searchTerm }}" oninput="toggleClearButton()" style="padding-right: 30px;" />
+        <button type="button" id="clearButton" class="clear-search" onclick="clearSearch()" 
+                style="color:#1d70b8; position: absolute; right: 60px; background: none; border: none; font-size: 30px; cursor: pointer;">
+          &times;
+        </button>
+        <button type="submit" class="btms-search__button">
+          <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <circle cx="10" cy="10" r="8" stroke="#ffffff" stroke-width="2"></circle>
+            <line x1="15" y1="15" x2="22" y2="22" stroke="#ffffff" stroke-width="2"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+{% endblock %}

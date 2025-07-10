@@ -1,0 +1,30 @@
+{% extends "layouts/forms.html" %}
+{% set title = 'Search by MRN, CHED or DUCR' %}
+{% set signedIn = 'false' %}
+{% set fullWidth = false %}
+{% set hideButton = true %}
+{% set showheader = true %}
+{% set hideBackLink = true %}
+
+
+{% block form %}
+
+  <h1 class="govuk-heading-xl">
+    You are signed out
+
+  </h1>
+
+  <p class="govuk-body">
+            You will need to sign in again to access {{ serviceName }}.
+  </p>
+
+  <div class="govuk-form-group">
+
+      <a href="sign-in" class="govuk-button">Sign in</a>
+
+  </div>
+
+
+
+
+  {% endblock %}
