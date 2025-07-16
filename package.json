@@ -8,6 +8,7 @@
     "@govuk-prototype-kit/common-templates": "2.0.1",
     "govuk-frontend": "^5.11.0",
     "govuk-prototype-kit": "13.17.0",
-    "jquery": "3.7.1"
+    "jquery": "3.7.1",
+    "lodash": "^4.17.21"
   }
 }
