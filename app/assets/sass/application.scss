@@ -144,3 +144,21 @@
 .error{
   color: #d4351c;
 }
+
+
+
+.govuk-template--rebranded {
+  .govuk-header__navigation-item a{
+    font-weight: 700;
+  }
+  .govuk-header__service-name + .govuk-header__navigation {
+   padding: 0;
+    margin: 19px 0 11px;
+  }
+  .start-page .govuk-header__content {
+    display:none;
+  }
+  .govuk-footer__crown {
+    margin-bottom: 0;
+  }
+}

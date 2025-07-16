@@ -1,3 +1,8 @@
 {
-  "serviceName": "Border Trade Matching Service"
+  "serviceName": "Border Trade Matching Service",
+"plugins": {
+  "govuk-frontend": {
+	"rebrand": true
+  }
+}
 }
