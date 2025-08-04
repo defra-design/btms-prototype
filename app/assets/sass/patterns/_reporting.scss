@@ -1,0 +1,110 @@
+.reporting {
+
+  // Ensure layout uses flex for side panel and main
+  .govuk-grid-row {
+    display: flex;
+    align-items: stretch;
+    gap: 20px;
+  }
+
+  // Filters sidebar styling
+  .govuk-grid-column-one-quarter.filters {
+    background-color: #f3f2f1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  label {
+    font-weight: 700;
+    font-size: 16px;
+  }
+
+  .govuk-label,
+  .govuk-list {
+    font-size: 16px;
+
+  }
+
+  // Panel spacing
+  .govuk-tabs__panel {
+    border: none;
+    padding: 30px 10px;
+  }
+
+  // Container holding each section (e.g. Matches, Releases)
+  .stat-card-container {
+    margin-bottom: 40px;
+  }
+
+  // Group of stat cards
+  .stat-card-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 10px;
+  }
+
+  // Individual stat card styling
+  .stat-card {
+    width: 200px;
+    height: 140px;
+    background-color: #eeeeef;
+    padding: 16px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+    .stat-card__label {
+      font-weight: bold;
+      font-size: 18px;
+      margin-bottom: 0px;
+    }
+
+    .stat-card__value-wrapper {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+
+    .stat-card__value {
+      font-size: 2rem;
+      font-weight: 700;
+    }
+
+    .stat-card__percentage {
+      font-size: 16px;
+    }
+  }
+
+  .govuk-input {
+    height: 40px;
+    border: 2px solid #0b0c0c;
+  }
+
+  // Optional colours for stat cards
+  .stat-card--blue {
+    background-color: #d5e1f0;
+  }
+
+  .stat-card--grey {
+    background-color: #f3f2f1;
+  }
+
+  .stat-card--green {
+    background-color: #d8f4d4;
+  }
+
+  .stat-card--yellow {
+    background-color: #fff7bf;
+  }
+
+  // Responsive fallback
+  @media (max-width: 768px) {
+    .stat-card {
+      width: 100%;
+    }
+  }
+}

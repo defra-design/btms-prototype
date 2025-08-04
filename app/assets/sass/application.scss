@@ -1,7 +1,7 @@
 //
 // For guidance on how to add CSS and SCSS see:
 // https://prototype-kit.service.gov.uk/docs/adding-css-javascript-and-images
-// 
+//
 
 // Add extra styles here
 @import "patterns/_search";
@@ -9,12 +9,14 @@
 @import "patterns/start-page";
 @import "patterns/accordion";
 @import "patterns/status";
+@import "patterns/reporting";
+
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
 
 
 // index page styles
 .index {
-  .jira {    
+  .jira {
     display: table;
     margin: 5px 0;
     font-size: 16px!important;
@@ -37,7 +39,7 @@
 .govuk-phase-banner__content__tag {
   display: none;
 }
-.govuk-header__navigation { 
+.govuk-header__navigation {
   display: inline-block;
   float: right;
 }

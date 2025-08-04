@@ -1,0 +1,47 @@
+{% macro timeInput(params) %}
+  {% set id = params.id or "time" %}
+  {% set namePrefix = params.namePrefix or id %}
+  {% set label = params.label or "Time" %}
+  {% set hour = params.hour or "" %}
+  {% set minute = params.minute or "" %}
+
+  <div class="govuk-form-group">
+    <fieldset class="govuk-fieldset" role="group" aria-describedby="{{ id }}-hint">
+      <label class="govuk-fieldset__legend">
+        {{ label }} (optional)
+      </label>
+
+      <div class="govuk-date-input" id="{{ id }}">
+        <div class="govuk-date-input__item">
+          <div class="govuk-form-group">
+            <span class="govuk-label govuk-date-input__label" for="{{ id }}-hour">
+              Hour
+            </span>
+            <input class="govuk-input govuk-date-input__input govuk-input--width-2"
+                   id="{{ id }}-hour"
+                   name="{{ namePrefix }}-hour"
+                   type="text"
+                   pattern="[0-9]*"
+                   inputmode="numeric"
+                   value="{{ hour }}">
+          </div>
+        </div>
+
+        <div class="govuk-date-input__item">
+          <div class="govuk-form-group">
+            <span class="govuk-label govuk-date-input__label" for="{{ id }}-minute">
+              Minutes
+            </span>
+            <input class="govuk-input govuk-date-input__input govuk-input--width-2"
+                   id="{{ id }}-minute"
+                   name="{{ namePrefix }}-minute"
+                   type="text"
+                   pattern="[0-9]*"
+                   inputmode="numeric"
+                   value="{{ minute }}">
+          </div>
+        </div>
+      </div>
+    </fieldset>
+  </div>
+{% endmacro %}

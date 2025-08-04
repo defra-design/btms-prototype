@@ -2,7 +2,16 @@
 // For guidance on how to add JavaScript see:
 // https://prototype-kit.service.gov.uk/docs/adding-css-javascript-and-images
 //
-  //tooltips 
+  //tooltips
+
+
+// Initialise MOJ Date Picker
+import { MOJFrontend } from '@ministryofjustice/frontend';
+
+window.GOVUKPrototypeKit.documentReady(() => {
+  const datePickers = document.querySelectorAll('[data-module="moj-date-input"]');
+  datePickers.forEach(el => new MOJFrontend.components.DateInput({ el }));
+});
 
 window.GOVUKPrototypeKit.documentReady(() => {
     document.querySelectorAll('.govuk-table__cell').forEach(cell => {
@@ -53,14 +62,14 @@ window.GOVUKPrototypeKit.documentReady(() => {
     });
   });
 
-  //filters js functionality 
-  
+  //filters js functionality
+
 
 });
 
-//clear search 
+//clear search
 document.addEventListener('DOMContentLoaded', function () {
-  
+
   const input = document.getElementById('searchTerm');
   const clearButton = document.getElementById('clearButton');
 
@@ -129,7 +138,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-// filters 
+// filters
 document.addEventListener("DOMContentLoaded", function () {
   const matchFilter = document.getElementById("match");
   const decisionFilter = document.getElementById("decision");
@@ -158,13 +167,13 @@ document.addEventListener("DOMContentLoaded", function () {
     const matchValue = matchFilter?.value ?? "show-all";
     const decisionValue = decisionFilter?.value ?? "show-all";
     const authValue = authFilter?.value ?? "show-all";
-  
+
     mrnContainers.forEach(container => {
       const table = container.querySelector(".govuk-table");
       const rows = container.querySelectorAll("tbody tr");
       const tableHead = table.querySelector(".govuk-table__head");
       let visibleRowFound = false;
-  
+
       let noDataMsg = container.querySelector(".no-data-message");
       if (!noDataMsg) {
         noDataMsg = document.createElement("p");
@@ -173,11 +182,11 @@ document.addEventListener("DOMContentLoaded", function () {
         noDataMsg.style.display = "none";
         container.querySelector(".commodity-table")?.appendChild(noDataMsg);
       }
-  
+
       rows.forEach(row => {
         const decisionItems = row.querySelectorAll("li");
         let matches = true;
-  
+
         // Remove previous filter classes
         row.classList.remove(
           "filtered-match-match",
@@ -185,7 +194,7 @@ document.addEventListener("DOMContentLoaded", function () {
           ...["release", "hold", "refused"].map(d => `filtered-decision-${d}`),
           ...["FNAO", "HMI", "PHSI", "POAO", "IUU", "APHA"].map(a => `filtered-auth-${a}`)
         );
-  
+
         // Match filter
         if (matchValue !== "show-all") {
           row.classList.add(`filtered-match-${matchValue}`);
@@ -193,7 +202,7 @@ document.addEventListener("DOMContentLoaded", function () {
             ? row.classList.contains("match")
             : row.classList.contains("no-match");
         }
-  
+
         // Decision filter
         if (matches && decisionValue !== "show-all") {
           row.classList.add(`filtered-decision-${decisionValue}`);
@@ -201,7 +210,7 @@ document.addEventListener("DOMContentLoaded", function () {
             matches = false;
           }
         }
-  
+
         // Authority filter (via LI classes or text)
         if (matches && authValue !== "show-all") {
           row.classList.add(`filtered-auth-${authValue}`);
@@ -212,7 +221,7 @@ document.addEventListener("DOMContentLoaded", function () {
             matches = false;
           }
         }
-  
+
    // Filter individual <li>s in the decision cell based on selected filters
         decisionItems.forEach(li => {
           const matchesAuth = authValue === "show-all" || li.classList.contains(authValue) || li.textContent.includes(authValue);
@@ -220,9 +229,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
           li.style.display = matchesAuth && matchesDecision ? "" : "none";
         });
-  
+
         const anyVisibleDecision = Array.from(decisionItems).some(li => li.style.display !== "none");
-  
+
         if (matches && (!decisionItems.length || anyVisibleDecision)) {
           row.style.display = "";
           visibleRowFound = true;
@@ -230,17 +239,17 @@ document.addEventListener("DOMContentLoaded", function () {
           row.style.display = "none";
         }
       });
-  
+
       const showBlank = matchValue === "noMatch";
       const blankCells = container.querySelectorAll(".blank-cell");
       blankCells.forEach(cell => {
         cell.style.color = showBlank ? "" : "transparent";
       });
-  
+
       tableHead.style.display = visibleRowFound ? "" : "none";
       noDataMsg.style.display = visibleRowFound ? "none" : "block";
     });
-  
+
     if (clearFiltersLink) {
       clearFiltersLink.style.display =
         matchValue !== "show-all" || decisionValue !== "show-all" || authValue !== "show-all"
@@ -248,7 +257,7 @@ document.addEventListener("DOMContentLoaded", function () {
           : "none";
     }
   }
-  
+
 
   function applyChedFilters() {
     const authValue = authChedFilter?.value ?? "show-all";
@@ -330,11 +339,11 @@ document.addEventListener("DOMContentLoaded", function () {
       authChedFilter.dispatchEvent(new Event("change", { bubbles: true }));
       authChedFilter.dispatchEvent(new Event("input", { bubbles: true }));
     }
-  
+
     applyMrnFilters();
     applyChedFilters();
   });
-  
+
 
   clearChedFilterLink?.addEventListener("click", (e) => {
     e.preventDefault();

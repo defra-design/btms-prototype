@@ -1,0 +1,11 @@
+{% macro statCard(label, value, percentage = "", modifier = "") %}
+  <div class="stat-card {{ modifier }}">
+    <div class="stat-card__label">{{ label }}</div>
+    <div class="stat-card__value-wrapper">
+      <span class="stat-card__value">{{ value }}</span>
+      {% if percentage %}
+        <span class="stat-card__percentage">({{ percentage }})</span>
+      {% endif %}
+    </div>
+  </div>
+{% endmacro %}

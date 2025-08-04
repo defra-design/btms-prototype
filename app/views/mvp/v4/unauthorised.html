@@ -1,3 +1,5 @@
+<!-- prettier-ignore-start -->
+
 {% extends "layouts/forms.html" %}
 {% set title = 'You do not have the correct permissions to access this service' %}
 {% set signedIn = 'false' %}
@@ -5,22 +7,23 @@
 {% set hideButton = true %}
 {% set showheader = true %}
 {% set hideBackLink = true %}
+<!-- prettier-ignore-end -->
 
 
 {% block form %}
 
-  <h1 class="govuk-heading-l">
-    {{title}}
+<h1 class="govuk-heading-l">
+  {{title}}
 
-  </h1>
+</h1>
 
-  <p class="govuk-body">
-            Contact your organisation’s administrator if you need access.
-  </p>
-
-
+<p class="govuk-body">
+  Contact your organisation’s administrator if you need access.
+</p>
 
 
 
 
-  {% endblock %}
+
+
+{% endblock %}

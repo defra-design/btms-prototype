@@ -1,0 +1,195 @@
+{% extends "layouts/forms.html" %}
+{% set title = 'BTMS Reporting' %}
+{% set fullWidth = true %}
+{% set hideButton = true %}
+{% set showheader = true %}
+{% set bodyClasses = 'reporting' %}
+{% set hideBackLink = false %}
+
+{% block form %}
+{% from "includes/stat-card.njk" import statCard %}
+{% from "includes/time-input.njk" import timeInput %}
+
+
+<h1 class="govuk-heading-l">{{ title }}</h1>
+
+<div class="govuk-grid-row">
+  <!-- Filters Column -->
+  <div class="govuk-grid-column-one-quarter filters">
+    <div class="govuk-form-group">
+      <fieldset class="govuk-fieldset">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+          Filter by
+        </legend>
+        <!-- Start date -->
+        <div class="govuk-form-group govuk-!-margin-bottom-4">
+          <!-- MOJ Start date picker goes here -->
+          {{ mojDatePicker({
+          id: "startDate",
+          name: "startDate",
+          value: "29/06/2025",
+          label: {
+            text: "Start date"
+          }
+        }) }}
+        </div>
+
+
+
+        <!-- End date -->
+        <div class="govuk-form-group govuk-!-margin-bottom-4">
+          <!-- MOJ End date picker goes here -->
+          {{ mojDatePicker({
+          id: "endDate",
+          name: "endDate",
+          value: "30/06/2025",
+          label: {
+            text: "End date"
+          }
+        }) }}
+        </div>
+        <!-- start time -->
+        <div class="govuk-form-group govuk-!-margin-bottom-4">
+
+          {{ timeInput({
+          id: "end-time",
+          namePrefix: "endTime",
+          label: "Start time",
+          hour: "00",
+          minute: "00"
+        }) }}
+
+        </div>
+        <!-- End time -->
+        <div class="govuk-form-group govuk-!-margin-bottom-4">
+
+          {{ timeInput({
+          id: "end-time",
+          namePrefix: "endTime",
+          label: "End time",
+          hour: "23",
+          minute: "59"
+        }) }}
+
+        </div>
+
+        <button class="govuk-button govuk-!-margin-bottom-4" data-module="govuk-button">Update results</button>
+      </fieldset>
+    </div>
+    <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+      Date and time range
+    </legend>
+
+    <nav class="govuk-!-margin-top-1">
+    <ul class="govuk-list" id="preset-links">
+      <li><a href="#" data-start="2025-06-30T12:00" data-end="2025-06-30T13:00">Last 1 hour</a></li>
+      <li><a href="#" data-start="2025-06-29T00:00" data-end="2025-06-30T00:00">Last 24 hours</a></li>
+      <li><a href="#" data-start="2025-06-23T00:00" data-end="2025-06-30T00:00">Last 7 days</a></li>
+      <li><a href="#" data-start="2025-05-31T00:00" data-end="2025-06-30T00:00">Last 30 days</a></li>
+    </ul>
+    </nav>
+  </div>
+
+  <!-- Main Content -->
+  <div class="govuk-grid-column-three-quarters">
+    <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-5">
+      Showing results from 29 June 2025 to 30 June 2025
+    </p>
+
+    <!-- Tabs -->
+    <div class="govuk-tabs" data-module="govuk-tabs">
+      <ul class="govuk-tabs__list">
+        <li class="govuk-tabs__list-item govuk-tabs__list-item--selected">
+          <a class="govuk-tabs__tab" href="#summary">Summary view</a>
+        </li>
+        <li class="govuk-tabs__list-item">
+          <a class="govuk-tabs__tab" href="#chart">Chart view</a>
+        </li>
+      </ul>
+
+      <!-- Summary view -->
+      <div class="govuk-tabs__panel" id="summary">
+
+        <!-- Matches -->
+        <div class="stat-card-container govuk-!-margin-bottom-6">
+          <h2 class="govuk-heading-m">Matches</h2>
+          <p class="govuk-body">Number of matching Commodity lines in the MRN vs those that couldn't be matched to an
+            IPAFFS document</p>
+          <div class="stat-card-group">
+            {{ statCard("Matches", "1,302", "94.97%") }}
+            {{ statCard("Mismatches", "69", "5.03%") }}
+            {{ statCard("Total", "1,371") }}
+          </div>
+        </div>
+
+        <!-- Releases -->
+        <div class="stat-card-container govuk-!-margin-bottom-6">
+          <h2 class="govuk-heading-m">Releases</h2>
+          <p class="govuk-body">Shows the number of MRNs that were automatically or manually released by HMRC.</p>
+          <div class="stat-card-group">
+            {{ statCard("Automatic", "1,175", "98.49%", "stat-card--blue") }}
+            {{ statCard("Manual", "18", "1.51%", "stat-card--blue") }}
+            {{ statCard("Total", "1,193", "", "stat-card--blue") }}
+          </div>
+        </div>
+
+        <!-- Unique clearance requests -->
+        <div class="stat-card-container govuk-!-margin-bottom-6">
+          <h2 class="govuk-heading-m">Unique clearance requests</h2>
+          <p class="govuk-body">Shows the total number of unique clearance requests made.</p>
+          <div class="stat-card-group">
+            {{ statCard("Unique clearances", "1,371", "66.50%") }}
+            {{ statCard("Total", "2,060") }}
+          </div>
+        </div>
+
+        <!-- CHED types -->
+        <div class="stat-card-container govuk-!-margin-bottom-6">
+          <h2 class="govuk-heading-m">IPAFFS pre-notification CHED types</h2>
+          <p class="govuk-body">Shows how many CHED pre-notifications were submitted through IPAFFS</p>
+          <div class="stat-card-group">
+            {{ statCard("CHED A", "249", "3.52%", "stat-card--blue") }}
+            {{ statCard("CHED P", "5,399", "75.98%", "stat-card--blue") }}
+            {{ statCard("CHED PP", "1,167", "16.40%", "stat-card--blue") }}
+            {{ statCard("CHED D", "291", "4.10%", "stat-card--blue") }}
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Chart view placeholder -->
+      <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="chart">
+        <p class="govuk-body">Charts coming soon.</p>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const links = document.querySelectorAll('#preset-links a');
+
+  links.forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+
+      const start = new Date(link.getAttribute('data-start'));
+      const end = new Date(link.getAttribute('data-end'));
+
+      const pad = n => n.toString().padStart(2, '0');
+
+      // Dates
+      document.getElementById('startDate').value = `${pad(start.getDate())}/${pad(start.getMonth()+1)}/${start.getFullYear()}`;
+      document.getElementById('endDate').value = `${pad(end.getDate())}/${pad(end.getMonth()+1)}/${end.getFullYear()}`;
+
+      // Time - match the names from timeInput component
+      document.querySelector('[name="startTime-hour"]').value = pad(start.getHours());
+      document.querySelector('[name="startTime-minute"]').value = pad(start.getMinutes());
+      document.querySelector('[name="endTime-hour"]').value = pad(end.getHours());
+      document.querySelector('[name="endTime-minute"]').value = pad(end.getMinutes());
+    });
+  });
+});
+
+
+</script>
+{% endblock %}

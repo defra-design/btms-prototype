@@ -6,18 +6,18 @@
     {% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
 
     {% set accountLink %}
-    
+
     {%- if account == 'true' -%}
         /user-research/mvp/
         {%- else -%}
         /landing-pages/interstitial
         {%- endif -%}
     {% endset -%}
-    
+
     {% block pageTitle %}
     {% if subHeader %}{{ subHeader }} {% endif %}{{ title | safe }} - {{ serviceName | safe }}
     {% endblock %}
-    
+
     {% block header %}
         {{ govukHeader({
             homepageUrl: "/index",
@@ -35,14 +35,14 @@
                     href: "sign-out",
                     text: "Sign out",
                     classes: "test2"
-                } 
+                }
             ] if signedIn != 'false'
-        }) 
+        })
     }}
     <!-- {% if not hidePhaseBanner %}
 
         {{ govukPhaseBanner({
-            tag: { 
+            tag: {
             text: "Beta"},
             html: 'This is a new service. Help us improve it and <a class="govuk-link" target="_blank" href="https://www.smartsurvey.co.uk/s/7YJV5/">give your feedback (opens in new tab)</a>.',
             classes: 'govuk-width-container'
@@ -50,7 +50,7 @@
     {% endif %} -->
 
     {% endblock %}
-    
+
     {% block footer %}
         {{ govukFooter({
         meta: {
@@ -59,15 +59,19 @@
                 href: "/mvp/v4/status/status-operational",
                 text: "BTMS status"
             },
+                       {
+                href: "/mvp/v4/reporting/summary-view",
+                text: "BTMS Reporting"
+            },
             {
                 href: "/mvp/v4/accessibility-statement",
                 text: "Accessibility statement"
-            }, 
+            },
              {
                 href: "/mvp/v4/cookies?cookies=''",
                 text: "Cookies"
-            }, 
-         
+            },
+
             {
                 href: "/manage-prototype",
                 text: "Manage your prototype"
@@ -78,9 +82,9 @@
                 }
             ] if footer != 'false'
             }
-            }) 
+            })
         }}
-        
+
         {{ data | log }}
-    
+
     {% endblock %}
