@@ -1,4 +1,4 @@
-{% extends "layouts/main.html" %} 
+{% extends "layouts/main.html" %}
 {% set signedIn = 'false' %}
 {% set bodyClasses = 'index' %}
 {% set title = serviceName %}
@@ -21,7 +21,7 @@
         <p>Design updates from silent runnning feedback will be included in V4 </p>
 
         <p class="govuk-heading-s" id="landing">Landing pages  </p>
- 
+
     <ul class="govuk-list govuk-list--bullet">
       <li><a href="/mvp/v4/start">Start page (external user)</a> <a class="jira" href="https://eaflood.atlassian.net/browse/CDMS-368"> Jira CDMS-368</a><span >Landing page for external users</span></li>
       <li><a href="/mvp/v4/start-no-cta">Start page - no CTA (internal user)</a> <a class="jira" href="https://eaflood.atlassian.net/browse/CDMS-368"> Jira CDMS-368</a><span >Landing page for external users</span></li>
@@ -64,11 +64,11 @@
 
       <li><a href="/mvp/v4/gms">GMS risk</a> <a  class=" jira" href="https://eaflood.atlassian.net/browse/CDMS-641"> Jira CDMS-641 </a><span >When a CHED PP GMS product has been selected for an HMI inspection </span></li>
       <li><a href="/mvp/v4/ipaffs">Linking CHEDS to IPAFFS</a> <a  class=" jira" href="https://eaflood.atlassian.net/browse/CDMS-401"> Jira CDMS-401 </a><span >For internal DEFRA users only - access to CHED results page on IPAFFS</span></li>
-  
+
       <li><a href="/mvp/v4/multiple-auth-dual">Highlighting search reference CHED </a> <a  class=" jira" href="https://eaflood.atlassian.net/browse/CDMS-666"> Jira CDMS-666 </a><span >Search terms are highlighted in the results page in yellow</span></li>
 
       <li><a href="/mvp/v4/gms">Highlighting search reference MRN </a> <a  class=" jira" href="https://eaflood.atlassian.net/browse/CDMS-666"> Jira CDMS-666 </a><span >Search terms are highlighted in the results page in yellow</span></li>
-      
+
       <li><a href="/mvp/v4/no-match-cancelled">Content for decisions for cancelled and replaced CHED MRN line items <a  class=" jira" href="https://eaflood.atlassian.net/browse/CDMS-739"> Jira CDMS-749 </a><span >How might we inform users that an MRN line item—although it has a match—has since been replaced?</span></li>
       <li><a href="/mvp/v4/gms">Filters in search results </a> <a  class=" jira" href="https://eaflood.atlassian.net/browse/CDMS-435"> Jira CDMS-435 </a><span >Filter functionality applied to CDS & CHED tables - match (MRN), decision (MRN) and authority (MRN & CHED)</span></li>
       <li><a href="/mvp/v4/gms">Accordion functionality </a> <a  class=" jira" href="https://eaflood.atlassian.net/browse/CDMS-426"> Jira CDMS-426 </a><span >MRNS tables are placed withing collapsable accordians - closed by default for cancelled,replaced or deleted states</span></li>
@@ -110,9 +110,10 @@
 
        <p class="govuk-heading-s" id="status">Reporting page  </p>
     <p class="govuk-body-s">Reporting lets users view BTMS data in a structured format – for example, matches vs no matches over a date range they specify.</p>
-      <li><a href="/mvp/v4/status/search-cds">Search page - outage alert CDS </a><a  class=" jira" href="https://eaflood.atlassian.net/browse/CDMS-863 "> Jira CDMS-863  </a><span>Search page showing CDS outage banner </span></li>
-
-  <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible" />
+        <ul class="govuk-list govuk-list--bullet">
+         <li><a href="/mvp/v4/reporting/summary-view">Reporting page - summary view </a><a  class=" jira" href="https://eaflood.atlassian.net/browse/CDMS-863 "> Jira CDMS-?  </a><span>Summary view showing 4 key metrics </span></li>
+          </ul>
+    <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible" />
 
     <h2 class="govuk-heading-m">BTMS MVPs</h2>
     <p class="govuk-heading-s">
@@ -141,7 +142,7 @@
     <details class="govuk-details">
       <summary class="govuk-details__summary">
         <span class="govuk-details__summary-text">
-          Accordion patterns 
+          Accordion patterns
         </span>
       </summary>
       <div class="govuk-details__text">
@@ -156,7 +157,7 @@
     <details class="govuk-details">
       <summary class="govuk-details__summary">
         <span class="govuk-details__summary-text">
-          Updated error messages (inc DUCR ref) 
+          Updated error messages (inc DUCR ref)
         </span>
       </summary>
       <div class="govuk-details__text">
@@ -172,7 +173,7 @@
     <details class="govuk-details">
       <summary class="govuk-details__summary">
         <span class="govuk-details__summary-text">
-          User testing scenarios with Customs 25 team (21/03/24) 
+          User testing scenarios with Customs 25 team (21/03/24)
         </span>
       </summary>
       <div class="govuk-details__text">
@@ -191,7 +192,7 @@
     <details class="govuk-details">
       <summary class="govuk-details__summary">
         <span class="govuk-details__summary-text">
-          Archive 
+          Archive
         </span>
       </summary>
       <div class="govuk-details__text">
