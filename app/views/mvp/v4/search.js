@@ -1,10 +1,12 @@
 const _ = require('lodash');
+const moment = require('moment');
+
 
 module.exports = (router) => {
   router.post(['/mvp/v4/search/'], (req, res, next) => {
     const data = req.session.data;
     const search = req.body['data.searchTerm'] || req.query.searchTerm; // Support both body and query params
-    
+
     // Reset the error state BEFORE processing
     delete data.error;
     delete data.errorMessage;
@@ -125,5 +127,58 @@ router.post(['/mvp/v4/sign-out'], (req, res) => {
     });
   }
 });
+
+
+// router.post(['/mvp/v4/reporting/summary-view'], (req, res) => {
+//   req.session.data = req.session.data || {};
+//   req.session.data.searchResults = 'true';
+
+//   res.render('mvp/v4/reporting/summary-view', {
+//     data: req.session.data
+//   });
+// });
+
+
+
+router.post(['/mvp/v4/reporting/summary-view'], (req, res) => {
+  req.session.data = req.session.data || {};
+
+  const rawStartDate = req.body['startDate'] || '29/06/2025';
+  const rawEndDate = req.body['endDate'] || '30/06/2025';
+
+  const startHour = req.body['startTime-hour'] || '00';
+  const startMinute = req.body['startTime-minute'] || '00';
+  const endHour = req.body['endTime-hour'] || '23';
+  const endMinute = req.body['endTime-minute'] || '59';
+
+  req.session.data.startDate = rawStartDate;
+  req.session.data.endDate = rawEndDate;
+  req.session.data.startTime = { hour: startHour, minute: startMinute };
+  req.session.data.endTime = { hour: endHour, minute: endMinute };
+
+  const startDateTime = moment(`${rawStartDate} ${startHour}:${startMinute}`, 'DD/MM/YYYY HH:mm');
+  const endDateTime = moment(`${rawEndDate} ${endHour}:${endMinute}`, 'DD/MM/YYYY HH:mm');
+
+  const sameDay = startDateTime.isSame(endDateTime, 'day');
+
+  req.session.data.displayDateRange = sameDay
+    ? `Showing results from ${startDateTime.format('HH:mm')} to ${endDateTime.format('HH:mm')} on ${startDateTime.format('D MMMM YYYY')}`
+    : `Showing results from ${startDateTime.format('D MMMM YYYY')} at ${startDateTime.format('HH:mm')} to ${endDateTime.format('D MMMM YYYY')} at ${endDateTime.format('HH:mm')}`;
+
+  req.session.data.searchResults = 'true';
+
+  res.redirect('/mvp/v4/reporting/summary-view');
+});
+
+
+
+router.get(['/mvp/v4/reporting/summary-view'], (req, res) => {
+  req.session.data = req.session.data || {};
+
+  res.render('mvp/v4/reporting/summary-view', {
+    data: req.session.data
+  });
+});
+
 
 };

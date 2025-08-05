@@ -16,7 +16,7 @@
 <div class="govuk-grid-row">
   <!-- Filters Column -->
   <div class="govuk-grid-column-one-quarter filters">
-    <div class="govuk-form-group">
+    <div class="govuk-form-group govuk-!-margin-bottom-1">
       <fieldset class="govuk-fieldset">
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
           Filter by
@@ -25,13 +25,13 @@
         <div class="govuk-form-group govuk-!-margin-bottom-4">
           <!-- MOJ Start date picker goes here -->
           {{ mojDatePicker({
-          id: "startDate",
-          name: "startDate",
-          value: "29/06/2025",
-          label: {
-            text: "Start date"
-          }
-        }) }}
+            id: "startDate",
+            name: "startDate",
+            value: data.startDate or "",
+            label: {
+              text: "Start date"
+            }
+          }) }}
         </div>
 
 
@@ -40,60 +40,66 @@
         <div class="govuk-form-group govuk-!-margin-bottom-4">
           <!-- MOJ End date picker goes here -->
           {{ mojDatePicker({
-          id: "endDate",
-          name: "endDate",
-          value: "30/06/2025",
-          label: {
-            text: "End date"
-          }
-        }) }}
+            id: "endDate",
+            name: "endDate",
+            value: data.endDate or "",
+            label: {
+              text: "End date"
+            }
+          }) }}
         </div>
         <!-- start time -->
         <div class="govuk-form-group govuk-!-margin-bottom-4">
-
           {{ timeInput({
-          id: "end-time",
-          namePrefix: "endTime",
-          label: "Start time",
-          hour: "00",
-          minute: "00"
-        }) }}
-
+            id: "start-time",
+            namePrefix: "startTime",
+            label: "Start time",
+            hour: data.startTime and data.startTime.hour or "",
+            minute: data.startTime and data.startTime.minute or ""
+          }) }}
         </div>
         <!-- End time -->
         <div class="govuk-form-group govuk-!-margin-bottom-4">
-
           {{ timeInput({
-          id: "end-time",
-          namePrefix: "endTime",
-          label: "End time",
-          hour: "23",
-          minute: "59"
-        }) }}
+            id: "end-time",
+            namePrefix: "endTime",
+            label: "End time",
+            hour: data.endTime and data.endTime.hour or "",
+            minute: data.endTime and data.endTime.minute or ""
+          }) }}
+
 
         </div>
 
-        <button class="govuk-button govuk-!-margin-bottom-4" data-module="govuk-button">Update results</button>
+        <button class="govuk-button govuk-!-margin-bottom-6" data-module="govuk-button">Update results</button>
+        <ul class="govuk-list" id="clear-filters">
+          <li><a href="#" data-start="" data-end="">Clear filters</a></li>
+
+        </ul>
+
       </fieldset>
     </div>
     <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
-      Date and time range
+      Filter by time period
     </legend>
 
     <nav class="govuk-!-margin-top-1">
-    <ul class="govuk-list" id="preset-links">
-      <li><a href="#" data-start="2025-06-30T12:00" data-end="2025-06-30T13:00">Last 1 hour</a></li>
-      <li><a href="#" data-start="2025-06-29T00:00" data-end="2025-06-30T00:00">Last 24 hours</a></li>
-      <li><a href="#" data-start="2025-06-23T00:00" data-end="2025-06-30T00:00">Last 7 days</a></li>
-      <li><a href="#" data-start="2025-05-31T00:00" data-end="2025-06-30T00:00">Last 30 days</a></li>
-    </ul>
+      <ul class="govuk-list" id="preset-links">
+        <li><a href="#" data-start="2025-06-30T12:00" data-end="2025-06-30T13:00">Last 1 hour</a></li>
+        <li><a href="#" data-start="2025-06-29T00:00" data-end="2025-06-30T23:59">Last 24 hours</a></li>
+        <li><a href="#" data-start="2025-06-23T00:00" data-end="2025-06-30T23:59">Last 7 days</a></li>
+        <li><a href="#" data-start="2025-05-31T00:00" data-end="2025-06-30T23:59">Last 30 days</a></li>
+      </ul>
     </nav>
   </div>
 
   <!-- Main Content -->
   <div class="govuk-grid-column-three-quarters">
+    {% if data.searchResults == 'true'%}
+
+
     <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-5">
-      Showing results from 29 June 2025 to 30 June 2025
+        {{ data.displayDateRange }}
     </p>
 
     <!-- Tabs -->
@@ -113,8 +119,8 @@
         <!-- Matches -->
         <div class="stat-card-container govuk-!-margin-bottom-6">
           <h2 class="govuk-heading-m">Matches</h2>
-          <p class="govuk-body">Number of matching Commodity lines in the MRN vs those that couldn't be matched to an
-            IPAFFS document</p>
+          <!-- <p class="govuk-body">Number of matching Commodity lines in the MRN vs those that couldn't be matched to an
+            IPAFFS document</p>-->
           <div class="stat-card-group">
             {{ statCard("Matches", "1,302", "94.97%") }}
             {{ statCard("Mismatches", "69", "5.03%") }}
@@ -125,7 +131,7 @@
         <!-- Releases -->
         <div class="stat-card-container govuk-!-margin-bottom-6">
           <h2 class="govuk-heading-m">Releases</h2>
-          <p class="govuk-body">Shows the number of MRNs that were automatically or manually released by HMRC.</p>
+          <!-- <p class="govuk-body">Shows the number of MRNs that were automatically or manually released by HMRC.</p> -->
           <div class="stat-card-group">
             {{ statCard("Automatic", "1,175", "98.49%", "stat-card--blue") }}
             {{ statCard("Manual", "18", "1.51%", "stat-card--blue") }}
@@ -136,7 +142,7 @@
         <!-- Unique clearance requests -->
         <div class="stat-card-container govuk-!-margin-bottom-6">
           <h2 class="govuk-heading-m">Unique clearance requests</h2>
-          <p class="govuk-body">Shows the total number of unique clearance requests made.</p>
+          <!-- <p class="govuk-body">Shows the total number of unique clearance requests made.</p> -->
           <div class="stat-card-group">
             {{ statCard("Unique clearances", "1,371", "66.50%") }}
             {{ statCard("Total", "2,060") }}
@@ -146,7 +152,7 @@
         <!-- CHED types -->
         <div class="stat-card-container govuk-!-margin-bottom-6">
           <h2 class="govuk-heading-m">IPAFFS pre-notification CHED types</h2>
-          <p class="govuk-body">Shows how many CHED pre-notifications were submitted through IPAFFS</p>
+          <!-- <p class="govuk-body">Shows how many CHED pre-notifications were submitted through IPAFFS</p> -->
           <div class="stat-card-group">
             {{ statCard("CHED A", "249", "3.52%", "stat-card--blue") }}
             {{ statCard("CHED P", "5,399", "75.98%", "stat-card--blue") }}
@@ -162,30 +168,62 @@
         <p class="govuk-body">Charts coming soon.</p>
       </div>
     </div>
+    {% else %}
+
+    <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-5">
+      No results
+    </p>
+    {{ govukInsetText({
+        html: " Use the filters on the left and click ‘Update results’ to see reporting data."
+    }) }}
+    {% endif %}
+
   </div>
 </div>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  const links = document.querySelectorAll('#preset-links a');
+  const presetLinks = document.querySelectorAll('#preset-links a, #clear-filters a');
+  const form = document.getElementById('filter-form');
 
-  links.forEach(link => {
+  presetLinks.forEach(link => {
     link.addEventListener('click', e => {
       e.preventDefault();
 
-      const start = new Date(link.getAttribute('data-start'));
-      const end = new Date(link.getAttribute('data-end'));
+      const startAttr = link.getAttribute('data-start');
+      const endAttr = link.getAttribute('data-end');
 
       const pad = n => n.toString().padStart(2, '0');
 
-      // Dates
-      document.getElementById('startDate').value = `${pad(start.getDate())}/${pad(start.getMonth()+1)}/${start.getFullYear()}`;
-      document.getElementById('endDate').value = `${pad(end.getDate())}/${pad(end.getMonth()+1)}/${end.getFullYear()}`;
+      if (startAttr && endAttr) {
+        const start = new Date(startAttr);
+        const end = new Date(endAttr);
 
-      // Time - match the names from timeInput component
-      document.querySelector('[name="startTime-hour"]').value = pad(start.getHours());
-      document.querySelector('[name="startTime-minute"]').value = pad(start.getMinutes());
-      document.querySelector('[name="endTime-hour"]').value = pad(end.getHours());
-      document.querySelector('[name="endTime-minute"]').value = pad(end.getMinutes());
+        if (isNaN(start.getTime()) || isNaN(end.getTime())) {
+          console.error('Invalid date format');
+          return;
+        }
+
+        // Set date fields
+        document.getElementById('startDate').value = `${pad(start.getDate())}/${pad(start.getMonth() + 1)}/${start.getFullYear()}`;
+        document.getElementById('endDate').value = `${pad(end.getDate())}/${pad(end.getMonth() + 1)}/${end.getFullYear()}`;
+
+        // Set time fields
+        document.querySelector('[name="startTime-hour"]').value = pad(start.getHours());
+        document.querySelector('[name="startTime-minute"]').value = pad(start.getMinutes());
+        document.querySelector('[name="endTime-hour"]').value = pad(end.getHours());
+        document.querySelector('[name="endTime-minute"]').value = pad(end.getMinutes());
+      } else {
+        // Clear all fields
+        document.getElementById('startDate').value = '';
+        document.getElementById('endDate').value = '';
+        document.querySelector('[name="startTime-hour"]').value = '';
+        document.querySelector('[name="startTime-minute"]').value = '';
+        document.querySelector('[name="endTime-hour"]').value = '';
+        document.querySelector('[name="endTime-minute"]').value = '';
+      }
+
+      // Submit the form
+      form.submit();
     });
   });
 });
