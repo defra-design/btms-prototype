@@ -266,9 +266,9 @@ tr.filtered-match-no  .govuk-table__cell {
 .tooltiplink {
   border-bottom: 1px dashed #d4351c;
 }
-// .ched-container .commodity-table td {
-//   width: 18%;
-// }
+.ched-container .commodity-table td:last-child  {
+  width: 18%;
+}
 .govuk-list > li:last-child {
   /* Your styles here */
   margin-bottom: 0;
