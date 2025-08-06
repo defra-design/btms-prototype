@@ -266,55 +266,55 @@ tr.filtered-match-no  .govuk-table__cell {
 .tooltiplink {
   border-bottom: 1px dashed #d4351c;
 }
-.ched-container .commodity-table td {
-  width: 18%;
-}
+// .ched-container .commodity-table td {
+//   width: 18%;
+// }
 .govuk-list > li:last-child {
   /* Your styles here */
   margin-bottom: 0;
 }
 
-    .commodity-table {
-      overflow: scroll;
+    // .commodity-table {
+    //   overflow: scroll;
 
-    }
-  @media screen and (max-width: 767px) {
-    /* Styles here apply only on screens 767px wide or smaller (most phones) */
-      .inline-form-group {
-        display: block;
+    // }
+  // @media screen and (max-width: 767px) {
+  //   /* Styles here apply only on screens 767px wide or smaller (most phones) */
+  //     .inline-form-group {
+  //       display: block;
 
-    }
+  //   }
 
-    .commodity-table {
-      overflow: scroll;
+  //   .commodity-table {
+  //     overflow: scroll;
 
-    }
+  //   }
 
-     .govuk-grid-row {
-    flex-direction: column;
-  }
+  //    .govuk-grid-row {
+  //   flex-direction: column;
+  // }
 
-  .govuk-grid-column-full {
-    width: 100%;
-    padding: 0;
-  }
+  // .govuk-grid-column-full {
+  //   width: 100%;
+  //   padding: 0;
+  // }
 
-  .govuk-heading-l {
-    font-size: 1.5rem;
-  }
-  .mrn-container, .ched-container {
-    width: 100%;
-    max-width: 100%;
-    box-sizing: border-box;
-    overflow-x: auto; /* in case child content is still too wide */
-  }
+  // .govuk-heading-l {
+  //   font-size: 1.5rem;
+  // }
+  // .mrn-container, .ched-container {
+  //   width: 100%;
+  //   max-width: 100%;
+  //   box-sizing: border-box;
+  //   overflow-x: auto; /* in case child content is still too wide */
+  // }
 
-  .mrn-container *, .ched-container * {
-    max-width: 100%;
-    box-sizing: border-box;
-  }
-  .govuk-main-wrapper {
-    padding: 10px;
-  }
-  }
+  // .mrn-container *, .ched-container * {
+  //   max-width: 100%;
+  //   box-sizing: border-box;
+  // }
+  // .govuk-main-wrapper {
+  //   padding: 10px;
+  // }
+  // }
 }
