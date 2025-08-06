@@ -5,13 +5,7 @@
   //tooltips
 
 
-// Initialise MOJ Date Picker
-import { MOJFrontend } from '@ministryofjustice/frontend';
 
-window.GOVUKPrototypeKit.documentReady(() => {
-  const datePickers = document.querySelectorAll('[data-module="moj-date-input"]');
-  datePickers.forEach(el => new MOJFrontend.components.DateInput({ el }));
-});
 
 window.GOVUKPrototypeKit.documentReady(() => {
     document.querySelectorAll('.govuk-table__cell').forEach(cell => {

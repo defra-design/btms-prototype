@@ -9,7 +9,15 @@
 {% block form %}
 {% from "includes/stat-card.njk" import statCard %}
 {% from "includes/time-input.njk" import timeInput %}
+<script>
+  // Initialise MOJ Date Picker
+import { MOJFrontend } from '@ministryofjustice/frontend';
 
+window.GOVUKPrototypeKit.documentReady(() => {
+  const datePickers = document.querySelectorAll('[data-module="moj-date-input"]');
+  datePickers.forEach(el => new MOJFrontend.components.DateInput({ el }));
+});
+</script>
 
 <h1 class="govuk-heading-l">{{ title }}</h1>
 
