@@ -30,11 +30,10 @@
       <dl class="definition-list ">
         <div class="row">
           <dt>MRN</dt>
-          <dd> 
-            <strong class="govuk-tag govuk-tag--yellow">
-            {{title}}
-          </strong> 
-        </dd>
+          <dd>
+              {{title}}
+
+          </dd>
         </div>
         <div class="row">
           <dt>DUCR</dt>
@@ -42,7 +41,8 @@
         </div>
         <div class="row">
           <dt>CDS status</dt>
-          <dd>Current
+          <dd>            <strong class="govuk-tag govuk-tag--yellow">Current  </strong>
+
           </dd>
         </div>
         <div class="row">
@@ -64,63 +64,71 @@
       <table class="govuk-table data-table">
         <thead class="govuk-table__head">
           <tr class="govuk-table__row">
-            <th scope="col" class="govuk-table__header">Item number</th>
             <th scope="col" class="govuk-table__header">Commodity code</th>
             <th scope="col" class="govuk-table__header">Description</th>
             <th scope="col" class="govuk-table__header">Quantity / Weight</th>
             <th scope="col" class="govuk-table__header">CHED reference</th>
             <th scope="col" class="govuk-table__header">Match</th>
-            <th scope="col" class="govuk-table__header">Decision (authority)</th>
+            <th scope="col" class="govuk-table__header">Authority</th>
+            <th scope="col" class="govuk-table__header">Decision</th>
           </tr>
         </thead>
         <tbody class="govuk-table__body">
           <!-- CHILLI PEPPERS -->
           <tr class="match FNAO first hold">
-            <td class="govuk-table__cell">1</td>
             <td class="govuk-table__cell">0709609920</td>
             <td class="govuk-table__cell">CHILLI PEPPERS</td>
             <td class="govuk-table__cell">3600</td>
             <td class="govuk-table__cell split">GBCHD2025.5764207</td>
             <td class="govuk-table__cell split"><strong class="govuk-tag govuk-tag--green">Yes</strong></td>
+            <td class="govuk-table__cell split">FNAO</td>
             <td class="govuk-table__cell split">
               <ul class="govuk-list">
-                <li class="FNAO">Hold - Awaiting decision <span>(FNAO)</span></li>
+                <li class="FNAO">Hold - Awaiting decision </li>
               </ul>
-            </td>          
+            </td>
+
           </tr>
           <tr class="match PHSI HMI first release hold second2">
-            <td class="govuk-table__cell blank-cell ">1</td>
             <td class="govuk-table__cell blank-cell">0709609920</td>
             <td class="govuk-table__cell blank-cell">CHILLI PEPPERS</td>
             <td class="govuk-table__cell blank-cell">3600</td>
             <td class="govuk-table__cell split">GBCHD2025.5764082</td>
             <td class="govuk-table__cell split"><strong class="govuk-tag govuk-tag--green">Yes</strong></td>
-            <td class="govuk-table__cell split">
+
+            <td class="govuk-table__cell decision split">
               <ul class="govuk-list">
-                <li class="PHSI">Release -Inspection complete <span>(PHSI)</span></li>
-                <li class="HMI">Hold - Awaiting decision <span>(HMI)</span></li>
+                <li class="PHSI">PHSI </li>
+                <li class="HMI ">HMI </li>
               </ul>
             </td>
+            <td class="govuk-table__cell split">
+              <ul class="govuk-list ">
+                <li class="PHSI">Release -Inspection complete </li>
+                <li class="HMI">Hold - Awaiting decision </li>
+              </ul>
+            </td>
+
           </tr>
           <tr class="no-match third">
-            <td class="govuk-table__cell blank-cell">1</td>
             <td class="govuk-table__cell blank-cell">0709609920</td>
             <td class="govuk-table__cell blank-cell">CHILLI PEPPERS</td>
             <td class="govuk-table__cell blank-cell">3600</td>
             <td class="govuk-table__cell  " tabindex="0">
               <span class="tooltiplink error">GBCHD2025.5764223</span>
               <span class="tooltip" role="tooltip">
-                {{ data.noMatchContextual | safe }} 
+                {{ data.noMatchContextual | safe }}
               </span>
             </td>
             <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--red">No</strong></td>
+            <td class="govuk-table__cell ">FNAO</td>
             <td class="govuk-table__cell">No match</td>
+
           </tr>
-          
-    
+
+
           <!-- SWEET PEPPERS -->
           <tr class="govuk-table__row match refused FNAO first">
-            <td class="govuk-table__cell">2</td>
             <td class="govuk-table__cell">0709609920</td>
             <td class="govuk-table__cell">SWEET PEPPERS</td>
             <td class="govuk-table__cell">4470</td>
@@ -128,14 +136,15 @@
             <td class="govuk-table__cell split">
               <strong class="govuk-tag govuk-tag--green">Yes</strong>
             </td>
+            <td class="govuk-table__cell split">FNAO</td>
             <td class="govuk-table__cell decision split">
               <ul class="govuk-list">
-                <li class="FNAO">Refused - Not acceptable (FNAO)</span></li>
+                <li class="FNAO">Refused - Not acceptable </li>
               </ul>
             </td>
+
           </tr>
           <tr class="govuk-table__row match hold release PHSI HMI second">
-            <td class="govuk-table__cell blank-cell">2</td>
             <td class="govuk-table__cell blank-cell">0709609920</td>
             <td class="govuk-table__cell blank-cell">SWEET PEPPERS</td>
             <td class="govuk-table__cell blank-cell">4470</td>
@@ -143,17 +152,23 @@
             <td class="govuk-table__cell">
               <strong class="govuk-tag govuk-tag--green">Yes</strong>
             </td>
+
             <td class="govuk-table__cell decision">
               <ul class="govuk-list">
-                <li class="PHSI">Release -Inspection complete <span>(PHSI)</span></li>
-                <li class="HMI ">Hold - Awaiting decision <span>(HMI)</span></li>
+                <li class="PHSI">PHSI</span></li>
+                <li class="HMI ">HMI</span></li>
+              </ul>
+            </td>
+            <td class="govuk-table__cell decision">
+              <ul class="govuk-list">
+                <li class="PHSI">Release -Inspection complete </li>
+                <li class="HMI ">Hold - Awaiting decision </li>
               </ul>
             </td>
           </tr>
-    
+
           <!-- SWEET PEPPERS - Third block -->
           <tr class="govuk-table__row match release hold HMI PHSI ">
-            <td class="govuk-table__cell">8</td>
             <td class="govuk-table__cell">0808309090</td>
             <td class="govuk-table__cell"> PEARS</td>
             <td class="govuk-table__cell">570</td>
@@ -162,18 +177,25 @@
               <strong class="govuk-tag govuk-tag--green">Yes</strong>
             </td>
             <td class="govuk-table__cell decision">
-                 <ul class="govuk-list">
-                <li class="PHSI">Release -Inspection complete <span>(PHSI)</span></li>
-                <li class="HMI">Hold - Awaiting decision <span>(HMI)</span></li>
+              <ul class="govuk-list">
+                <li class="PHSI">PHSI</span></li>
+                <li class="HMI ">HMI</span></li>
               </ul>
             </td>
+            <td class="govuk-table__cell decision">
+              <ul class="govuk-list">
+                <li class="PHSI">Release -Inspection complete </li>
+                <li class="HMI">Hold - Awaiting decision </li>
+              </ul>
+            </td>
+
           </tr>
         </tbody>
       </table>
     </div>
-    
 
-</div>
+
+  </div>
 
 
 
@@ -191,7 +213,8 @@
       <div class="row">
         <dt>CHED reference</dt>
         <dd>
-          <a href="https://ipaffs-prototype.herokuapp.com/part-2/chedp-landbridge/00-ched-overview" target="_blank"><span>CHEDD.GB.2025.5764207</span></a>
+          <a href="https://ipaffs-prototype.herokuapp.com/part-2/chedp-landbridge/00-ched-overview"
+            target="_blank"><span>CHEDD.GB.2025.5764207</span></a>
           <i class="fas fa-external-link-alt"></i>
         </dd>
       </div>
@@ -218,228 +241,256 @@
 
 
 
-<div id="commodityTable1" class="commodity-table">
+  <div id="commodityTable1" class="commodity-table">
 
-  <table class="govuk-table data-table">
-    <thead class="govuk-table__head">
-      <tr class="govuk-table__row">
-        <th scope="col" class="govuk-table__header" >Item  number</th>
-        <th scope="col" class="govuk-table__header" >Commodity code</th>
-        <th scope="col" class="govuk-table__header " >Description</th>
-        <th scope="col" class="govuk-table__header " >Quantity / Weight</th>
-
-        <th scope="col" class="govuk-table__header " >Decision (authority)</th>
-
-      </tr>
-    </thead>
-    <tbody class="govuk-table__body">
-      <tr class="govuk-table__row FNAO">
-        <td class="govuk-table__cell">1</td>
-        <td class="govuk-table__cell">0709609920</td>
-        <td class="govuk-table__cell">
-          <span>Peppers (other …</span>
-
-          <span class="tooltip" role="tooltip">
-            Peppers (other than sweet) (Capsicum spp.)            
-          </span>
-
-        </td>
-        <td class="govuk-table__cell">3600</td>
-        <td class="govuk-table__cell decision ">  
-            <ul class="govuk-list">
-              <li>
-                Acceptable for internal market <span>(FNAO)</span>
-              </li>
-            </ul>
-        </td>
-      </tr>
-     
-    </tbody>
-  </table>
-  </div>
-  </div>
-
-
-  <div class="ched-container toggle-area" data-target="commodityTable4">
-    <div class="container govuk-body">
-      <dl class="definition-list ">
-        <div class="row">
-          <dt>CHED reference</dt>
-          <dd>
-            <a href="https://ipaffs-prototype.herokuapp.com/part-2/chedp-landbridge/00-ched-overview" target="_blank"><span>CHEDD.GB.2025.5764242</span></a>
-            <i class="fas fa-external-link-alt"></i>
-          </dd>
-        </div>
-        <div class="row">
-          <dt>CHED Status</dt>
-          <dd>Rejected</dd>
-        </div>
-        <div class="row">
-          <dt>Risk outcome</dt>
-          <dd>Inspect </dd>
-        </div>
-        <div class="row">
-          <dt>Last updated</dt>
-          <dd>{{ '22 May 2024' | chedTime }}</dd>
-        </div>
-      </dl>
-      <div class="toggle-wrapper">
-        <!-- Chevron arrow wrapper -->
-        <div id="toggleArrowContainer">
-          <i id="toggleArrow" class="fas fa-chevron-down"></i>
-        </div>
-      </div>
-    </div>
-  
-  
-  
-  <div id="commodityTable4" class="commodity-table">
-  
     <table class="govuk-table data-table">
       <thead class="govuk-table__head">
         <tr class="govuk-table__row">
-          <th scope="col" class="govuk-table__header" >Item  number</th>
-          <th scope="col" class="govuk-table__header" >Commodity code</th>
-          <th scope="col" class="govuk-table__header " >Description</th>
-          <th scope="col" class="govuk-table__header " >Quantity / Weight</th>
-  
-          <th scope="col" class="govuk-table__header " >Decision (authority)</th>
-  
+          <th scope="col" class="govuk-table__header">Commodity code</th>
+          <th scope="col" class="govuk-table__header ">Description</th>
+          <th scope="col" class="govuk-table__header ">Quantity / Weight</th>
+          <th scope="col" class="govuk-table__header ">Authority</th>
+          <th scope="col" class="govuk-table__header ">Decision</th>
+
+        </tr>
+      </thead>
+      <tbody class="govuk-table__body">
+        <tr class="govuk-table__row FNAO">
+          <td class="govuk-table__cell">0709609920</td>
+          <td class="govuk-table__cell">
+            <span>Peppers (other …</span>
+
+            <span class="tooltip" role="tooltip">
+              Peppers (other than sweet) (Capsicum spp.)
+            </span>
+
+          </td>
+          <td class="govuk-table__cell">3600</td>
+          <td class="govuk-table__cell">FNAO</td>
+
+          <td class="govuk-table__cell decision ">
+            <ul class="govuk-list">
+              <li>
+                Acceptable for internal market
+              </li>
+            </ul>
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<div class="ched-container toggle-area" data-target="commodityTable4">
+  <div class="container govuk-body">
+    <dl class="definition-list ">
+      <div class="row">
+        <dt>CHED reference</dt>
+        <dd>
+          <a href="https://ipaffs-prototype.herokuapp.com/part-2/chedp-landbridge/00-ched-overview"
+            target="_blank"><span>CHEDD.GB.2025.5764242</span></a>
+          <i class="fas fa-external-link-alt"></i>
+        </dd>
+      </div>
+      <div class="row">
+        <dt>CHED Status</dt>
+        <dd>Rejected</dd>
+      </div>
+      <div class="row">
+        <dt>Risk outcome</dt>
+        <dd>Inspect </dd>
+      </div>
+      <div class="row">
+        <dt>Last updated</dt>
+        <dd>{{ '22 May 2024' | chedTime }}</dd>
+      </div>
+    </dl>
+    <div class="toggle-wrapper">
+      <!-- Chevron arrow wrapper -->
+      <div id="toggleArrowContainer">
+        <i id="toggleArrow" class="fas fa-chevron-down"></i>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div id="commodityTable4" class="commodity-table">
+
+    <table class="govuk-table data-table">
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th scope="col" class="govuk-table__header">Commodity code</th>
+          <th scope="col" class="govuk-table__header ">Description</th>
+          <th scope="col" class="govuk-table__header ">Quantity / Weight</th>
+          <th scope="col" class="govuk-table__header">Authority</th>
+          <th scope="col" class="govuk-table__header ">Decision </th>
+
+        </tr>
+      </thead>
+      <tbody class="govuk-table__body">
+        <tr class="govuk-table__row FNAO">
+          <td class="govuk-table__cell">07096010</td>
+          <td class="govuk-table__cell">Sweet peppers</td>
+          <td class="govuk-table__cell">4470</td>
+          <td class="govuk-table__cell">FNAO</td>
+
+          <td class="govuk-table__cell decision ">
+            <ul class="govuk-list">
+              <li>
+                Not acceptable
+              </li>
+            </ul>
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<div class="ched-container toggle-area" data-target="commodityTable5">
+  <div class="container govuk-body">
+    <dl class="definition-list ">
+      <div class="row">
+        <dt>CHED reference</dt>
+        <dd>
+          <a href="https://ipaffs-prototype.herokuapp.com/part-2/chedp-landbridge/00-ched-overview"
+            target="_blank"><span>CHEDPP.GB.2025.5764082</span></a>
+          <i class="fas fa-external-link-alt"></i>
+        </dd>
+      </div>
+      <div class="row">
+        <dt>CHED Status</dt>
+        <dd>Valid</dd>
+      </div>
+      <div class="row">
+        <dt>Risk outcome</dt>
+        <dd>No inspection</dd>
+      </div>
+      <div class="row">
+        <dt>Last updated</dt>
+        <dd>{{ '22 May 2024' | chedTime }}</dd>
+      </div>
+    </dl>
+    <div class="toggle-wrapper">
+      <!-- Chevron arrow wrapper -->
+      <div id="toggleArrowContainer">
+        <i id="toggleArrow" class="fas fa-chevron-down"></i>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div id="commodityTable5" class="commodity-table">
+
+
+    <table class="govuk-table data-table">
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th scope="col" class="govuk-table__header">Commodity code</th>
+          <th scope="col" class="govuk-table__header ">Description</th>
+          <th scope="col" class="govuk-table__header ">Quantity / Weight</th>
+          <th scope="col" class="govuk-table__header">Authority</th>
+
+          <th scope="col" class="govuk-table__header ">Decision </th>
+
         </tr>
       </thead>
       <tbody class="govuk-table__body">
         <tr class="govuk-table__row PHSI">
-          <td class="govuk-table__cell">1</td>
-          <td class="govuk-table__cell">07096010</td>
-          <td class="govuk-table__cell">Sweet peppers</td>
-          <td class="govuk-table__cell">4470</td>
-          <td class="govuk-table__cell decision ">  
-              <ul class="govuk-list">
-                <li>
-                  Not acceptable <span>(FNAO)</span>
-                </li>
-              </ul>
-          </td>
-        </tr>
-        
-      </tbody>
-    </table>
-    </div>
-    </div>
-
-
-    <div class="ched-container toggle-area" data-target="commodityTable5">
-      <div class="container govuk-body">
-        <dl class="definition-list ">
-          <div class="row">
-            <dt>CHED reference</dt>
-            <dd>
-              <a href="https://ipaffs-prototype.herokuapp.com/part-2/chedp-landbridge/00-ched-overview" target="_blank"><span>CHEDPP.GB.2025.5764082</span></a>
-              <i class="fas fa-external-link-alt"></i>
-            </dd>
-          </div>
-          <div class="row">
-            <dt>CHED Status</dt>
-            <dd>Valid</dd>
-          </div>
-          <div class="row">
-            <dt>Risk outcome</dt>
-            <dd>No inspection</dd>
-          </div>
-          <div class="row">
-            <dt>Last updated</dt>
-            <dd>{{ '22 May 2024' | chedTime }}</dd>
-          </div>
-        </dl>
-        <div class="toggle-wrapper">
-          <!-- Chevron arrow wrapper -->
-          <div id="toggleArrowContainer">
-            <i id="toggleArrow" class="fas fa-chevron-down"></i>
-          </div>
-        </div>
-      </div>
-    
-    
-    
-    <div id="commodityTable5" class="commodity-table">
-    
-    
-  <table class="govuk-table data-table">
-    <thead class="govuk-table__head">
-      <tr class="govuk-table__row">
-        <th scope="col" class="govuk-table__header" >Item  number</th>
-        <th scope="col" class="govuk-table__header" >Commodity code</th>
-        <th scope="col" class="govuk-table__header " >Description</th>
-        <th scope="col" class="govuk-table__header " >Quantity / Weight</th>
-
-        <th scope="col" class="govuk-table__header " >Decision (authority)</th>
-
-      </tr>
-    </thead>
-    <tbody class="govuk-table__body">
-      <tr class="govuk-table__row PHSI">
-        <td class="govuk-table__cell">1</td>
-        <td class="govuk-table__cell">0709609920</td>
-        <td class="govuk-table__cell">Capsicum annuum		</td>
-        <td class="govuk-table__cell">3600</td>
-        <td class="govuk-table__cell decision ">  
+          <td class="govuk-table__cell">0709609920</td>
+          <td class="govuk-table__cell">Capsicum annuum </td>
+          <td class="govuk-table__cell">3600</td>
+          <td class="govuk-table__cell decision ">
             <ul class="govuk-list">
               <li class="PHSI">
-                Acceptable for internal market <span>(PHSI)</span>
+                PHSI
               </li>
               <li class="HMI">
-                Scheduled inspection <span>(HMI)</span>
+                HMI
               </li>
             </ul>
-        </td>
-      </tr>
-      <tr class="govuk-table__row PHSI HMI">
-        <td class="govuk-table__cell">2</td>
-        <td class="govuk-table__cell">07096010</td>
-        <td class="govuk-table__cell">Capsicum annuum		</td>
-        <td class="govuk-table__cell">4470</td>
-        <td class="govuk-table__cell decision">  
-            <ul class="govuk-list ">
+          </td>
+          <td class="govuk-table__cell decision ">
+            <ul class="govuk-list">
               <li class="PHSI">
-                Acceptable for internal market <span>(PHSI)</span>
+                Acceptable for internal market
               </li>
               <li class="HMI">
-                Scheduled inspection <span>(HMI)</span>
+                Scheduled inspection
               </li>
             </ul>
-        </td>
-      </tr>
-
-      <tr class="govuk-table__row PHSI HMI">
-        <td class="govuk-table__cell">3</td>
-        <td class="govuk-table__cell">0808309090</td>
-        <td class="govuk-table__cell">Pyrus communis	</td>
-        <td class="govuk-table__cell">570</td>
-        <td class="govuk-table__cell decision ">  
-            <ul class="govuk-list ">
+          </td>
+        </tr>
+        <tr class="govuk-table__row PHSI HMI">
+          <td class="govuk-table__cell">07096010</td>
+          <td class="govuk-table__cell">Capsicum annuum </td>
+          <td class="govuk-table__cell">4470</td>
+          <td class="govuk-table__cell decision ">
+            <ul class="govuk-list">
               <li class="PHSI">
-                Acceptable for internal market <span>(PHSI)</span>
+                PHSI
               </li>
               <li class="HMI">
-                Scheduled inspection <span>(HMI)</span>
+                HMI
               </li>
-           
             </ul>
-        </td>
-      </tr>
+          </td>
+          <td class="govuk-table__cell decision ">
+            <ul class="govuk-list">
+              <li class="PHSI">
+                Acceptable for internal market
+              </li>
+              <li class="HMI">
+                Scheduled inspection
+              </li>
+            </ul>
+          </td>
+        </tr>
 
-    </tbody>
-  </table>
-      </div>
-      </div>
+        <tr class="govuk-table__row PHSI HMI">
+          <td class="govuk-table__cell">0808309090</td>
+          <td class="govuk-table__cell">Pyrus communis </td>
+          <td class="govuk-table__cell">570</td>
+          <td class="govuk-table__cell decision ">
+            <ul class="govuk-list">
+              <li class="PHSI">
+                PHSI
+              </li>
+              <li class="HMI">
+                HMI
+              </li>
+            </ul>
+          </td>
+          <td class="govuk-table__cell decision ">
+            <ul class="govuk-list">
+              <li class="PHSI">
+                Acceptable for internal market
+              </li>
+              <li class="HMI">
+                Scheduled inspection
+              </li>
+            </ul>
+          </td>
+        </tr>
 
-        
-        
-        
-        
-        
-        
-        
-        
-  
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
 {% endblock %}

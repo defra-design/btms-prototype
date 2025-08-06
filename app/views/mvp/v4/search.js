@@ -4,13 +4,18 @@ const moment = require('moment');
 module.exports = (router) => {
   router.post(['/mvp/v4/search/'], (req, res, next) => {
     const data = req.session.data;
-    const search = req.body['data.searchTerm'] || req.query.searchTerm; // Support both body and query params
+    const search = req.body['data.searchTerm'] || req.query.searchTerm;
+
+    // Patterns
+    const mrnPattern = /^24GB[A-Z0-9]{12}$/;
+    const chedPattern = /^(CHED(P|PP)?\.GB\.\d{4}\.\d+|GBCHD\d{4}\.\d+)$/;
+    const ducrPattern = /^[A-Z0-9]{1,35}-[A-Z0-9]{1,35}$/;
 
     // Reset error state before processing
     delete data.error;
     delete data.errorMessage;
 
-    // Define valid search cases for redirection
+    // Valid redirections
     const searchRedirects = {
       '24GB0Z8WEJ9ZBTL73B': 'mrn',
       '4GB335031931000-WB2408-27WWL6274S': 'ducr',
@@ -39,6 +44,14 @@ module.exports = (router) => {
       data.error = 'true';
       data.errorMessage = 'Enter an MRN, CHED or DUCR reference';
       data.searchTerm = '';
+    } else if (
+      !mrnPattern.test(search) &&
+      !chedPattern.test(search) &&
+      !ducrPattern.test(search)
+    ) {
+      data.error = 'true';
+      data.errorMessage = 'Enter an MRN, CHED or DUCR reference in the correct format';
+      data.searchTerm = search;
     } else {
       data.error = 'true';
       data.errorMessage = `${search} cannot be found`;
@@ -58,7 +71,7 @@ module.exports = (router) => {
 
     if (preference === 'Yes' || preference === 'No') {
       res.cookie('cookiePreference', preference, {
-        maxAge: 365 * 24 * 60 * 60 * 1000 // 1 year
+        maxAge: 365 * 24 * 60 * 60 * 1000
       });
       return res.redirect('/mvp/v4/search-cookies?confirmation=true');
     }

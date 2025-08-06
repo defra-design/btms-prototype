@@ -6,7 +6,7 @@
 .mrn {
   .headerh1 {
     display: flex;
-     align-items: baseline; 
+     align-items: baseline;
      gap: 10px;
   }
   .inline-form-group {
@@ -17,7 +17,7 @@
 
 .inline-form-group .govuk-form-group {
     margin-bottom: 10px; /* Remove extra spacing */
-} 
+}
 .clear-filter {
   display: inline-block;
     margin-top: 20px;
@@ -100,11 +100,11 @@
     text-underline-position: under;
     cursor: help;
   }
- 
-  th:last-child {
-    width: 25%;
-  }
-  
+
+  // th:last-child {
+  //   width: 25%;
+  // }
+
 
   /* Styling of tooltip */
   .tooltip {
@@ -117,14 +117,14 @@
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
     display: block;
   }
-  
+
   /* Apply cursor: help only to table cells that contain a .tooltip */
 .govuk-table__cell:has(.tooltip) {
   cursor: help;
 }
 
   .govuk-table__cell:hover .tooltip,
-  .govuk-table__cell:focus .tooltip, 
+  .govuk-table__cell:focus .tooltip,
   .tooltip-container:hover .tooltip,
   .tooltip-container:focus .tooltip{
     visibility: visible;
@@ -132,7 +132,7 @@
   .govuk-table__cell, .tooltip-container {
     position: relative;
     overflow: visible; /* Ensure tooltip can be fully visible */
-    
+
   }
 
   // inset text for no cheds
@@ -156,7 +156,7 @@
     .govuk-tag,
     .govuk-list,
     dd,
-    dt, 
+    dt,
     .no-match{
       font-size: 14px;
     }
@@ -228,26 +228,26 @@
 .first .govuk-table__cell {
     border-bottom: none;
   }
-  .govuk-table__cell.split {    
+  .govuk-table__cell.split {
     border-bottom: 1px dashed #dbdbdb;
   }
 /* .hold .blank-cell {
   color:#0b0c0c!important
 } */
 /* Ensure blank cells show normally when "No" match is selected */
-tr.filtered-match-no .blank-cell, 
+tr.filtered-match-no .blank-cell,
 
-tr.filtered-auth-HMI .blank-cell, 
-tr.first.filtered-auth-PHSI .blank-cell, 
-tr.first.filtered-decision-release .blank-cell, 
-tr.second.filtered-decision-hold .blank-cell 
+tr.filtered-auth-HMI .blank-cell,
+tr.first.filtered-auth-PHSI .blank-cell,
+tr.first.filtered-decision-release .blank-cell,
+tr.second.filtered-decision-hold .blank-cell
 {
   color: #0b0c0c !important; /* GOV.UK default text colour */
 }
 tr.filtered-match-no  .govuk-table__cell {
     border-bottom: none;
 }
-.PHSI.filtered-match-yes .govuk-table__cell, 
+.PHSI.filtered-match-yes .govuk-table__cell,
 .filtered-auth-FNAO .govuk-table__cell,
 .filtered-auth-HMI .govuk-table__cell
 .first.filtered-decision-release .govuk-table__cell,
@@ -284,7 +284,7 @@ tr.filtered-match-no  .govuk-table__cell {
         display: block;
 
     }
- 
+
     .commodity-table {
       overflow: scroll;
 
