@@ -186,17 +186,25 @@
             <td class="govuk-table__cell decision">
               <ul class="govuk-list">
                 <li class="PHSI">PHSI</span></li>
-                <li class="HMI ">HMI</span></li>
+                <li class="HMI error">HMI</span></li>
               </ul>
             </td>
             <td class="govuk-table__cell decision">
               <ul class="govuk-list">
                 <li class="PHSI">Release -Inspection complete </li>
-                <li class="HMI">Hold - Awaiting decision </li>
+                <li class="HMI ">
+
+
+                  <span class="tooltiplink error">Remove HMI check from CDS</span>
+              <span class="tooltip" role="tooltip">
+                   An HMI SPS check is not required for this commodity item in IPAFFS. Please remove this check from your CDS declaration.
+              </span>
+                </li>
               </ul>
             </td>
 
-          </tr>
+
+
         </tbody>
       </table>
     </div>
@@ -477,9 +485,7 @@
               <li class="PHSI">
                 PHSI
               </li>
-              <li class="HMI">
-                HMI
-              </li>
+
             </ul>
           </td>
           <td class="govuk-table__cell decision ">
@@ -487,9 +493,7 @@
               <li class="PHSI">
                 Acceptable for internal market
               </li>
-              <li class="HMI">
-                Scheduled inspection
-              </li>
+
             </ul>
           </td>
         </tr>
