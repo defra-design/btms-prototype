@@ -110,15 +110,16 @@
       width: 100%;
     }
   }
-.chart {
-  border-bottom: 1px solid #f3f2f1 ;
-}
 
-.btms-stats .govuk-heading-s {
-  margin: 24px 0 8px 0;
-  font-size: 18px;
+  .chart {
+    border-bottom: 1px solid #f3f2f1;
+  }
 
-}
+  .btms-stats .govuk-heading-s {
+    margin: 24px 0 8px 0;
+    font-size: 18px;
+
+  }
 
   .legend-item {
     display: inline-flex;
@@ -147,21 +148,23 @@
     margin-bottom: 4px;
   }
 
-.legend-dot {
-  display: inline-block;
-  width: 14px;
-  height: 14px;
-  border-radius: 4px;
-  margin-right: 6px;
-}
+  .legend-dot {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border-radius: 4px;
+    margin-right: 6px;
+  }
 
-.matches-dot {
-  background-color: #5694CA; /* Matches - blue */
-}
+  .matches-dot {
+    background-color: #5694CA;
+    /* Matches - blue */
+  }
 
-.mismatches-dot {
-  background-color: #2BA8A3; /* No matches - teal */
-}
+  .mismatches-dot {
+    background-color: #2BA8A3;
+    /* No matches - teal */
+  }
 
   .matches-colour {
     background-color: #5694CA;
@@ -171,6 +174,40 @@
     background-color: #2BA8A3;
   }
 
+  /* IPAFFS chart heading highlight */
+  .ipaafs-heading {
+    background-color: #d5e1f0;
+    padding: 2px 6px;
+    display: inline-block;
+  }
 
+  /* Legend dot colours for CHED types */
+  .ched-a-dot {
+    background-color: #D81B60;
+    /* magenta */
+  }
+
+  .ched-p-dot {
+    background-color: #2BA8A3;
+    /* teal */
+  }
+
+  .ched-pp-dot {
+    background-color: #5694CA;
+    /* blue */
+  }
+
+  .ched-d-dot {
+    background-color: #F57C00;
+    /* orange */
+  }
+
+  .btms-stats {
+    .percentage {
+      display: block;
+      font-size: 14px;
+      padding-top: 5px;
+    }
+  }
 
 }
