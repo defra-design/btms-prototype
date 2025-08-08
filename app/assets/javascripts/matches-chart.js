@@ -135,32 +135,56 @@ window.GOVUKPrototypeKit.documentReady(() => {
       options: {
         responsive: true,
         maintainAspectRatio: false,
+        interaction: {
+          mode: 'nearest', // anchor to the closest point
+          intersect: true // require the cursor to be on/near a point
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+
+          // match the previous white tooltip design
+          tooltip: {
+            position: 'nearest',
+            backgroundColor: '#fff',
+            borderColor: '#ccc',
+            borderWidth: 1,
+            displayColors: false, // hide the little colour squares
+            titleColor: '#0b0c0c',
+            bodyColor: '#0b0c0c',
+            titleFont: {
+              weight: 'bold',
+              size: 14
+            },
+            bodyFont: {
+              size: 14
+            },
+            padding: 12,
+            boxPadding: 6,
+            callbacks: {
+              title: (ctx) => ctx[0].label, // e.g. 08:00
+              label: (ctx) => `${ctx.dataset.label}: ${ctx.formattedValue}`
+            }
+          }
+        },
         scales: {
+          x: {
+            title: {
+              display: true,
+              text: 'Time of Day'
+            }
+          },
           y: {
             beginAtZero: true,
             title: {
               display: true,
               text: 'Volume'
             }
-          },
-          x: {
-            title: {
-              display: true,
-              text: 'Time of Day'
-            }
-          }
-        },
-        plugins: {
-          legend: {
-            display: false
-
-          },
-          tooltip: {
-            mode: 'index',
-            intersect: false
           }
         }
       }
+
     });
   }
 });
