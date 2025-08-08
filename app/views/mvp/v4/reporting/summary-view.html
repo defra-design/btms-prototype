@@ -1,5 +1,5 @@
 {% extends "layouts/forms.html" %}
-{% set title = 'BTMS Reporting' %}
+{% set title = 'BTMS reporting data' %}
 {% set fullWidth = true %}
 {% set hideButton = true %}
 {% set showheader = true %}
@@ -83,7 +83,7 @@
 
         </div>
 
-        <button class="govuk-button govuk-!-margin-bottom-6" data-module="govuk-button">Update results</button>
+        <button class="govuk-button govuk-!-margin-bottom-6" data-module="govuk-button">Update</button>
         <ul class="govuk-list" id="clear-filters">
           <li><a href="#" data-start="" data-end="">Clear filters</a></li>
 
@@ -338,7 +338,7 @@
       No results
     </p>
     {{ govukInsetText({
-        html: " Use the filters on the left and click ‘Update results’ to see reporting data."
+        html: " To view reporting data, set the filters and select 'update results'."
     }) }}
 
     <script>
