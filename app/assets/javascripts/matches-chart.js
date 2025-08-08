@@ -9,16 +9,15 @@ window.GOVUKPrototypeKit.documentReady(() => {
       options: {
         responsive: true,
         maintainAspectRatio: false,
-
         interaction: {
-          mode: 'nearest',
-          intersect: true
+          mode: 'nearest', // or 'index' if you want all series at that x
+          intersect: false
         },
-
         elements: {
           point: {
-            hitRadius: 6,
-            hoverRadius: 5
+            radius: 3,
+            hitRadius: 12, // make the hover target bigger
+            hoverRadius: 6
           }
         },
 
@@ -222,101 +221,127 @@ window.GOVUKPrototypeKit.documentReady(() => {
     });
   }
 
-// IPAFFS pre-notification CHED types
-const chedEl = document.getElementById('chedTypesChart');
-if (chedEl) {
-  new Chart(chedEl, {
-    type: 'line',
-    data: {
-      labels: [
-        '00:00','01:00','02:00','03:00','04:00','05:00',
-        '06:00','07:00','08:00','09:00','10:00','11:00',
-        '12:00','13:00','14:00','15:00','16:00','17:00',
-        '18:00','19:00','20:00','21:00','22:00','23:00'
-      ],
-      datasets: [
-        // CHED P (teal) – dominant series
-        {
-          label: 'CHED P',
-          data: [230,235,210,235,235,210,245,248,250,200,230,248,250,225,220,205,220,235,245,210,205,205,200,200],
-          borderColor: '#2BA8A3',
-          backgroundColor: 'rgba(43,168,163,0.10)',
-          tension: 0.3,
-          borderWidth: 2,
-          pointRadius: 3,
-          fill: false
-        },
-        // CHED PP (blue)
-        {
-          label: 'CHED PP',
-          data: [45,42,48,50,40,44,60,52,52,50,44,55,42,48,50,53,45,55,50,53,52,54,50,49],
-          borderColor: '#5694CA',
-          backgroundColor: 'rgba(86,148,202,0.10)',
-          tension: 0.3,
-          borderWidth: 2,
-          pointRadius: 3,
-          fill: false
-        },
-        // CHED A (magenta)
-        {
-          label: 'CHED A',
-          data: [8,14,12,10,7,11,9,12,9,15,7,12,10,9,11,10,11,10,8,14,9,10,12,13],
-          borderColor: '#D81B60',
-          backgroundColor: 'rgba(216,27,96,0.10)',
-          tension: 0.3,
-          borderWidth: 2,
-          pointRadius: 3,
-          fill: false
-        },
-        // CHED D (orange)
-        {
-          label: 'CHED D',
-          data: [5,7,6,5,4,6,5,9,7,10,6,12,9,8,10,9,10,9,7,13,8,9,10,11],
-          borderColor: '#F57C00',
-          backgroundColor: 'rgba(245,124,0,0.10)',
-          tension: 0.3,
-          borderWidth: 2,
-          pointRadius: 3,
-          fill: false
-        }
-      ]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
+  // IPAFFS pre-notification CHED types
+  const chedEl = document.getElementById('chedTypesChart');
+  if (chedEl) {
+    new Chart(chedEl, {
+      type: 'line',
+      data: {
+        labels: [
+          '00:00', '01:00', '02:00', '03:00', '04:00', '05:00',
+          '06:00', '07:00', '08:00', '09:00', '10:00', '11:00',
+          '12:00', '13:00', '14:00', '15:00', '16:00', '17:00',
+          '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'
+        ],
+        datasets: [
+          // CHED P (teal) – dominant series
+          {
+            label: 'CHED P',
+            data: [230, 235, 210, 235, 235, 210, 245, 248, 250, 200, 230, 248, 250, 225, 220, 205, 220, 235, 245, 210, 205, 205, 200, 200],
+            borderColor: '#2BA8A3',
+            backgroundColor: 'rgba(43,168,163,0.10)',
+            tension: 0.3,
+            borderWidth: 2,
+            pointRadius: 3,
+            fill: false
+          },
+          // CHED PP (blue)
+          {
+            label: 'CHED PP',
+            data: [45, 42, 48, 50, 40, 44, 60, 52, 52, 50, 44, 55, 42, 48, 50, 53, 45, 55, 50, 53, 52, 54, 50, 49],
+            borderColor: '#5694CA',
+            backgroundColor: 'rgba(86,148,202,0.10)',
+            tension: 0.3,
+            borderWidth: 2,
+            pointRadius: 3,
+            fill: false
+          },
+          // CHED A (magenta)
+          {
+            label: 'CHED A',
+            data: [8, 14, 12, 10, 7, 11, 9, 12, 9, 15, 7, 12, 10, 9, 11, 10, 11, 10, 8, 14, 9, 10, 12, 13],
+            borderColor: '#D81B60',
+            backgroundColor: 'rgba(216,27,96,0.10)',
+            tension: 0.3,
+            borderWidth: 2,
+            pointRadius: 3,
+            fill: false
+          },
+          // CHED D (orange)
+          {
+            label: 'CHED D',
+            data: [5, 7, 6, 5, 4, 6, 5, 9, 7, 10, 6, 12, 9, 8, 10, 9, 10, 9, 7, 13, 8, 9, 10, 11],
+            borderColor: '#F57C00',
+            backgroundColor: 'rgba(245,124,0,0.10)',
+            tension: 0.3,
+            borderWidth: 2,
+            pointRadius: 3,
+            fill: false
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
 
-      // single series per hover (no multi-line tooltip)
-      interaction: { mode: 'nearest', intersect: true },
+        // single series per hover (no multi-line tooltip)
+        interaction: {
+          mode: 'nearest',
+          intersect: true
+        },
 
-      elements: { point: { hitRadius: 6, hoverRadius: 5 } },
+        elements: {
+          point: {
+            hitRadius: 6,
+            hoverRadius: 5
+          }
+        },
 
-      plugins: {
-        legend: { display: false }, // using your custom key below the chart
-        tooltip: {
-          backgroundColor: '#fff',
-          borderColor: '#ccc',
-          borderWidth: 1,
-          displayColors: false,
-          titleColor: '#0b0c0c',
-          bodyColor: '#0b0c0c',
-          titleFont: { weight: 'bold', size: 14 },
-          bodyFont: { size: 14 },
-          padding: 12,
-          boxPadding: 6,
-          callbacks: {
-            title: (ctx) => `Time: ${ctx[0].label}`,
-            label: (ctx) => `${ctx.dataset.label}: ${ctx.formattedValue}`
+        plugins: {
+          legend: {
+            display: false
+          }, // using your custom key below the chart
+          tooltip: {
+            backgroundColor: '#fff',
+            borderColor: '#ccc',
+            borderWidth: 1,
+            displayColors: false,
+            titleColor: '#0b0c0c',
+            bodyColor: '#0b0c0c',
+            titleFont: {
+              weight: 'bold',
+              size: 14
+            },
+            bodyFont: {
+              size: 14
+            },
+            padding: 12,
+            boxPadding: 6,
+            callbacks: {
+              title: (ctx) => `Time: ${ctx[0].label}`,
+              label: (ctx) => `${ctx.dataset.label}: ${ctx.formattedValue}`
+            }
+          }
+        },
+
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: 'Time of Day'
+            }
+          },
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: 'Volume'
+            }
           }
         }
-      },
-
-      scales: {
-        x: { title: { display: true, text: 'Time of Day' } },
-        y: { beginAtZero: true, title: { display: true, text: 'Volume' } }
       }
-    }
-  });
-}
+    });
+  }
 
 
 });
