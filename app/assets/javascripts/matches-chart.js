@@ -117,7 +117,7 @@ window.GOVUKPrototypeKit.documentReady(() => {
         '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'
       ],
       [{
-          label: 'Manual releases',
+          label: 'Manual',
           data: [7, 6, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 5, 6, 7, 6, 5, 6, 7, 6, 5, 4, 3, 2],
           borderColor: '#2BA8A3',
           backgroundColor: '#2BA8A3',
@@ -126,7 +126,7 @@ window.GOVUKPrototypeKit.documentReady(() => {
           pointRadius: 3
         },
         {
-          label: 'Automatic releases',
+          label: 'Automatic',
           data: [230, 220, 210, 215, 230, 240, 250, 240, 230, 210, 200, 190, 180, 170, 165, 175, 185, 195, 200, 195, 180, 170, 160, 150],
           borderColor: '#5694CA',
           backgroundColor: '#5694CA',
@@ -198,7 +198,7 @@ window.GOVUKPrototypeKit.documentReady(() => {
             boxPadding: 6,
             callbacks: {
               title: (ctx) => `Time: ${ctx[0].label}`,
-              label: (ctx) => `Requests: ${ctx.formattedValue}`
+              label: (ctx) => `Unique clearances: ${ctx.formattedValue}`
             }
           }
         },
