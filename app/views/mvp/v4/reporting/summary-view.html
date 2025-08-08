@@ -11,12 +11,16 @@
 {% from "includes/time-input.njk" import timeInput %}
 <script>
   // Initialise MOJ Date Picker
-import { MOJFrontend } from '@ministryofjustice/frontend';
+  import {
+    MOJFrontend
+  } from '@ministryofjustice/frontend';
 
-window.GOVUKPrototypeKit.documentReady(() => {
-  const datePickers = document.querySelectorAll('[data-module="moj-date-input"]');
-  datePickers.forEach(el => new MOJFrontend.components.DateInput({ el }));
-});
+  window.GOVUKPrototypeKit.documentReady(() => {
+    const datePickers = document.querySelectorAll('[data-module="moj-date-input"]');
+    datePickers.forEach(el => new MOJFrontend.components.DateInput({
+      el
+    }));
+  });
 </script>
 
 <h1 class="govuk-heading-l">{{ title }}</h1>
@@ -107,7 +111,7 @@ window.GOVUKPrototypeKit.documentReady(() => {
 
 
     <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-5">
-        {{ data.displayDateRange }}
+      {{ data.displayDateRange }}
     </p>
 
     <!-- Tabs -->
@@ -173,9 +177,84 @@ window.GOVUKPrototypeKit.documentReady(() => {
 
       <!-- Chart view placeholder -->
       <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="chart">
-        <p class="govuk-body">Charts coming soon.</p>
+
+          <div class="govuk-grid-row govuk-!-margin-top-4 charts govuk-!-margin-bottom#-6">
+            <div class="govuk-grid-column-full chart">
+
+              <h2 class="govuk-heading-m">Matches</h2>
+
+              <div class="btms-chart-container ">
+                <canvas id="matchesChart" width="600" height="400"></canvas>
+              </div>
+
+              <div class="govuk-grid-row btms-stats">
+                <div class="govuk-grid-column-one-third">
+                  <h3 class="govuk-heading-s">
+                    <span class="legend-dot matches-dot"></span> Matches
+                  </h3>
+                  <p class="govuk-heading-m">
+                    1,302 <span class="govuk-body govuk-body-s	">(98.19%)</span>
+                  </p>
+                </div>
+                <div class="govuk-grid-column-one-third">
+                  <h3 class="govuk-heading-s">
+                    <span class="legend-dot mismatches-dot"></span> No matches
+                  </h3>
+                  <p class="govuk-heading-m">
+                    24 <span class="govuk-body govuk-body-s	">(1.81%)</span>
+                  </p>
+                </div>
+                <div class="govuk-grid-column-one-third">
+                  <h3 class="govuk-heading-s">Total</h3>
+                  <p class="govuk-heading-m">1,371</p>
+                </div>
+              </div>
+
+
+
+            </div>
+          </div>
+
+       <div class="govuk-grid-row  charts govuk-!-margin-top-7 govuk-!-margin-bottom#-4">
+            <div class="govuk-grid-column-full chart">
+
+              <h2 class="govuk-heading-m">Releases</h2>
+
+              <div class="btms-chart-container ">
+               <canvas id="btmsHourlyReleasesChart" width="600" height="400"></canvas>
+              </div>
+
+              <div class="govuk-grid-row btms-stats">
+                <div class="govuk-grid-column-one-third">
+                  <h3 class="govuk-heading-s">
+                    <span class="legend-dot matches-dot"></span> Automatic
+                  </h3>
+                  <p class="govuk-heading-m">
+                    1,175 <span class="govuk-body govuk-body-s	">(98.49%)</span>
+                  </p>
+                </div>
+                <div class="govuk-grid-column-one-third">
+                  <h3 class="govuk-heading-s">
+                    <span class="legend-dot mismatches-dot"></span> Manual
+                  </h3>
+                  <p class="govuk-heading-m">
+                    18 <span class="govuk-body govuk-body-s	">(1.51%)</span>
+                  </p>
+                </div>
+                <div class="govuk-grid-column-one-third">
+                  <h3 class="govuk-heading-s">Total</h3>
+                  <p class="govuk-heading-m">1,371</p>
+                </div>
+              </div>
+
+
+
+            </div>
+          </div>
       </div>
+
     </div>
+
     {% else %}
 
     <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-5">
@@ -184,58 +263,66 @@ window.GOVUKPrototypeKit.documentReady(() => {
     {{ govukInsetText({
         html: " Use the filters on the left and click ‘Update results’ to see reporting data."
     }) }}
+
+    <script>
+      document.getElementById('toggleChart').addEventListener('click', function (e) {
+        e.preventDefault();
+        const chartDiv = document.getElementById('chartContainer');
+        chartDiv.style.display = chartDiv.style.display === 'none' ? 'block' : 'none';
+      });
+    </script>
     {% endif %}
 
   </div>
 </div>
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-  const presetLinks = document.querySelectorAll('#preset-links a, #clear-filters a');
-  const form = document.getElementById('filter-form');
+  document.addEventListener('DOMContentLoaded', () => {
+    const presetLinks = document.querySelectorAll('#preset-links a, #clear-filters a');
+    const form = document.getElementById('filter-form');
 
-  presetLinks.forEach(link => {
-    link.addEventListener('click', e => {
-      e.preventDefault();
+    presetLinks.forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
 
-      const startAttr = link.getAttribute('data-start');
-      const endAttr = link.getAttribute('data-end');
+        const startAttr = link.getAttribute('data-start');
+        const endAttr = link.getAttribute('data-end');
 
-      const pad = n => n.toString().padStart(2, '0');
+        const pad = n => n.toString().padStart(2, '0');
 
-      if (startAttr && endAttr) {
-        const start = new Date(startAttr);
-        const end = new Date(endAttr);
+        if (startAttr && endAttr) {
+          const start = new Date(startAttr);
+          const end = new Date(endAttr);
 
-        if (isNaN(start.getTime()) || isNaN(end.getTime())) {
-          console.error('Invalid date format');
-          return;
+          if (isNaN(start.getTime()) || isNaN(end.getTime())) {
+            console.error('Invalid date format');
+            return;
+          }
+
+          // Set date fields
+          document.getElementById('startDate').value =
+            `${pad(start.getDate())}/${pad(start.getMonth() + 1)}/${start.getFullYear()}`;
+          document.getElementById('endDate').value =
+            `${pad(end.getDate())}/${pad(end.getMonth() + 1)}/${end.getFullYear()}`;
+
+          // Set time fields
+          document.querySelector('[name="startTime-hour"]').value = pad(start.getHours());
+          document.querySelector('[name="startTime-minute"]').value = pad(start.getMinutes());
+          document.querySelector('[name="endTime-hour"]').value = pad(end.getHours());
+          document.querySelector('[name="endTime-minute"]').value = pad(end.getMinutes());
+        } else {
+          // Clear all fields
+          document.getElementById('startDate').value = '';
+          document.getElementById('endDate').value = '';
+          document.querySelector('[name="startTime-hour"]').value = '';
+          document.querySelector('[name="startTime-minute"]').value = '';
+          document.querySelector('[name="endTime-hour"]').value = '';
+          document.querySelector('[name="endTime-minute"]').value = '';
         }
 
-        // Set date fields
-        document.getElementById('startDate').value = `${pad(start.getDate())}/${pad(start.getMonth() + 1)}/${start.getFullYear()}`;
-        document.getElementById('endDate').value = `${pad(end.getDate())}/${pad(end.getMonth() + 1)}/${end.getFullYear()}`;
-
-        // Set time fields
-        document.querySelector('[name="startTime-hour"]').value = pad(start.getHours());
-        document.querySelector('[name="startTime-minute"]').value = pad(start.getMinutes());
-        document.querySelector('[name="endTime-hour"]').value = pad(end.getHours());
-        document.querySelector('[name="endTime-minute"]').value = pad(end.getMinutes());
-      } else {
-        // Clear all fields
-        document.getElementById('startDate').value = '';
-        document.getElementById('endDate').value = '';
-        document.querySelector('[name="startTime-hour"]').value = '';
-        document.querySelector('[name="startTime-minute"]').value = '';
-        document.querySelector('[name="endTime-hour"]').value = '';
-        document.querySelector('[name="endTime-minute"]').value = '';
-      }
-
-      // Submit the form
-      form.submit();
+        // Submit the form
+        form.submit();
+      });
     });
   });
-});
-
-
 </script>
 {% endblock %}

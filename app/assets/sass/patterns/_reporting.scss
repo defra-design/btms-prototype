@@ -14,7 +14,10 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+
   }
+
+
 
   label {
     font-weight: 700;
@@ -107,4 +110,67 @@
       width: 100%;
     }
   }
+.chart {
+  border-bottom: 1px solid #f3f2f1 ;
+}
+
+.btms-stats .govuk-heading-s {
+  margin: 24px 0 8px 0;
+  font-size: 18px;
+
+}
+
+  .legend-item {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 10px;
+  }
+
+  .chartjs-tooltip {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+
+
+  .legend-colour {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+    vertical-align: middle;
+    border-radius: 3px;
+  }
+
+  .btms-chart-key-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+
+.legend-dot {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+  margin-right: 6px;
+}
+
+.matches-dot {
+  background-color: #5694CA; /* Matches - blue */
+}
+
+.mismatches-dot {
+  background-color: #2BA8A3; /* No matches - teal */
+}
+
+  .matches-colour {
+    background-color: #5694CA;
+  }
+
+  .mismatches-colour {
+    background-color: #2BA8A3;
+  }
+
+
+
 }
