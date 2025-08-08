@@ -66,11 +66,16 @@
       margin-bottom: 0px;
     }
 
-    .stat-card__value-wrapper {
-      display: flex;
-      align-items: baseline;
-      gap: 6px;
-    }
+ .stat-card__value-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* aligns both number and percentage to the left */
+}
+.stat-card__percentage {
+  display: block;    /* forces it to go to the next line */
+  margin-left: 0;    /* removes any inline gap from flex */
+  margin-top: 2px;   /* small spacing below the number */
+}
 
     .stat-card__value {
       font-size: 2rem;
@@ -78,7 +83,7 @@
     }
 
     .stat-card__percentage {
-      font-size: 16px;
+      font-size: 14px;
     }
   }
 
@@ -113,6 +118,7 @@
 
   .chart {
     border-bottom: 1px solid #f3f2f1;
+        padding-bottom: 10px;
   }
 
   .btms-stats .govuk-heading-s {
@@ -205,9 +211,9 @@
   .btms-stats {
     .percentage {
       display: block;
-      font-size: 14px;
+      font-size: 14px!important;
       padding-top: 5px;
     }
-  }
+ }
 
 }
