@@ -18,7 +18,7 @@
     <h1 class="govuk-heading-l">
       Showing {{ total }} no match{% if total != 1 %}es{% endif %}
     </h1>
-
+<p class="govuk-hint">Clicking an MRN opens the search results in a new tab.</p>
     {% if total == 0 %}
       <p class="govuk-body">No MRNs found.</p>
     {% else %}
@@ -44,8 +44,11 @@
       <tr class="govuk-table__row">
   <td class="govuk-table__cell">
         <a class="govuk-link"
-          href="/mvp/v4/search-results?mrn={{ row.mrn | urlencode }}&cc={{ row.commodityCode }}&desc={{ row.description | urlencode }}&ched={{ row.chedRef | urlencode }}&auth={{ row.authority | urlencode }}&updated={{ row.lastUpdated | urlencode }}">
+          href="/mvp/v4/search-results?mrn={{ row.mrn | urlencode }}&cc={{ row.commodityCode }}&desc={{ row.description | urlencode }}&ched={{ row.chedRef | urlencode }}&auth={{ row.authority | urlencode }}&updated={{ row.lastUpdated | urlencode }}"
+          target="_blank"
+         rel="noopener noreferrer">
           {{ row.mrn }}
+
         </a>
       </td>
         <td class="govuk-table__cell">{{ row.commodityCode }}</td>
