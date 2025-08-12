@@ -1,0 +1,554 @@
+[
+  {
+    "mrn": "25GBXAJI0Y6DPBHSAHX",
+    "commodityCode": "0702000000",
+    "description": "TOMATOES",
+    "chedRef": "GBCHD2025.5764001",
+    "authority": "PHSI",
+    "lastUpdated": "01/08/2025 08:00"
+  },
+  {
+    "mrn": "25GBTHV3A3ZMF8MDD4V",
+    "commodityCode": "0707000500",
+    "description": "CUCUMBERS",
+    "chedRef": "GBCHD2025.5764002",
+    "authority": "HMI",
+    "lastUpdated": "01/08/2025 12:00"
+  },
+  {
+    "mrn": "25GB30T9NT3W5UZBIKC",
+    "commodityCode": "0703101100",
+    "description": "ONIONS",
+    "chedRef": "GBCHD2025.5764003",
+    "authority": "PHSI",
+    "lastUpdated": "01/08/2025 16:00"
+  },
+  {
+    "mrn": "25GBIDKWNNHJ7XVG0FN",
+    "commodityCode": "0703200000",
+    "description": "GARLIC",
+    "chedRef": "GBCHD2025.5764004",
+    "authority": "HMI",
+    "lastUpdated": "01/08/2025 20:00"
+  },
+  {
+    "mrn": "25GB9XUY41IBLJH75LX",
+    "commodityCode": "0704901000",
+    "description": "CABBAGE",
+    "chedRef": "GBCHD2025.5764005",
+    "authority": "PHSI",
+    "lastUpdated": "02/08/2025 00:00"
+  },
+  {
+    "mrn": "25GBO6QJIUJV6OH9SDB",
+    "commodityCode": "0705110000",
+    "description": "LETTUCE",
+    "chedRef": "GBCHD2025.5764006",
+    "authority": "HMI",
+    "lastUpdated": "01/08/2025 23:00"
+  },
+  {
+    "mrn": "25GBDW2PCN9T84AZYTJ",
+    "commodityCode": "0705190000",
+    "description": "LETTUCE (OTHER)",
+    "chedRef": "GBCHD2025.5764007",
+    "authority": "PHSI",
+    "lastUpdated": "02/08/2025 03:00"
+  },
+  {
+    "mrn": "25GBXEPQ85JSG65KXVF",
+    "commodityCode": "0707009010",
+    "description": "GHERKINS",
+    "chedRef": "GBCHD2025.5764008",
+    "authority": "HMI",
+    "lastUpdated": "02/08/2025 07:00"
+  },
+  {
+    "mrn": "25GB1T2TALA753LC58D",
+    "commodityCode": "0709300000",
+    "description": "AUBERGINES",
+    "chedRef": "GBCHD2025.5764009",
+    "authority": "PHSI",
+    "lastUpdated": "02/08/2025 11:00"
+  },
+  {
+    "mrn": "25GBRC11ERTJ5PHT0HL",
+    "commodityCode": "0709200000",
+    "description": "ASPARAGUS",
+    "chedRef": "GBCHD2025.5764010",
+    "authority": "HMI",
+    "lastUpdated": "02/08/2025 15:00"
+  },
+  {
+    "mrn": "25GB9XPSEIMVIHCWI64",
+    "commodityCode": "0709931000",
+    "description": "COURGETTES",
+    "chedRef": "GBCHD2025.5764011",
+    "authority": "PHSI",
+    "lastUpdated": "02/08/2025 14:00"
+  },
+  {
+    "mrn": "25GBCIYHE7UR23GDPPQ",
+    "commodityCode": "0707009019",
+    "description": "PICKLING CUCUMBERS",
+    "chedRef": "GBCHD2025.5764012",
+    "authority": "HMI",
+    "lastUpdated": "02/08/2025 18:00"
+  },
+  {
+    "mrn": "25GB0Y9DOM5IGQPKI7P",
+    "commodityCode": "0706100000",
+    "description": "CARROTS",
+    "chedRef": "GBCHD2025.5764013",
+    "authority": "PHSI",
+    "lastUpdated": "02/08/2025 22:00"
+  },
+  {
+    "mrn": "25GB5TB94874FRHOCN9",
+    "commodityCode": "0706909000",
+    "description": "ROOT VEGETABLES (MIXED)",
+    "chedRef": "GBCHD2025.5764014",
+    "authority": "HMI",
+    "lastUpdated": "03/08/2025 02:00"
+  },
+  {
+    "mrn": "25GBJ2QP89UZFK8UT0C",
+    "commodityCode": "0709609920",
+    "description": "CHILLI PEPPERS",
+    "chedRef": "GBCHD2025.5764015",
+    "authority": "PHSI",
+    "lastUpdated": "03/08/2025 06:00"
+  },
+  {
+    "mrn": "25GBVS4F8CGVYIE6IVW",
+    "commodityCode": "0709601090",
+    "description": "SWEET PEPPERS",
+    "chedRef": "GBCHD2025.5764016",
+    "authority": "HMI",
+    "lastUpdated": "03/08/2025 05:00"
+  },
+  {
+    "mrn": "25GBPVS7HZIOYKL1CQ9",
+    "commodityCode": "0707000505",
+    "description": "MINI CUCUMBERS",
+    "chedRef": "GBCHD2025.5764017",
+    "authority": "PHSI",
+    "lastUpdated": "03/08/2025 09:00"
+  },
+  {
+    "mrn": "25GB9CHJ755NF4ZW9XA",
+    "commodityCode": "0703101900",
+    "description": "SHALLOTS",
+    "chedRef": "GBCHD2025.5764018",
+    "authority": "HMI",
+    "lastUpdated": "03/08/2025 13:00"
+  },
+  {
+    "mrn": "25GB3KX7EEDTJVZHWJR",
+    "commodityCode": "0701905000",
+    "description": "POTATOES (NEW)",
+    "chedRef": "GBCHD2025.5764019",
+    "authority": "PHSI",
+    "lastUpdated": "03/08/2025 17:00"
+  },
+  {
+    "mrn": "25GB64DPJA1WJ0TPAC5",
+    "commodityCode": "0701100000",
+    "description": "SEED POTATOES",
+    "chedRef": "GBCHD2025.5764020",
+    "authority": "HMI",
+    "lastUpdated": "03/08/2025 21:00"
+  },
+  {
+    "mrn": "25GB6T4UFEL6246HID2",
+    "commodityCode": "0701909000",
+    "description": "POTATOES (OTHER)",
+    "chedRef": "GBCHD2025.5764021",
+    "authority": "PHSI",
+    "lastUpdated": "03/08/2025 20:00"
+  },
+  {
+    "mrn": "25GB5OWF75935A0L725",
+    "commodityCode": "0702100000",
+    "description": "TOMATOES (CHERRY)",
+    "chedRef": "GBCHD2025.5764022",
+    "authority": "HMI",
+    "lastUpdated": "04/08/2025 00:00"
+  },
+  {
+    "mrn": "25GB3J2D54I3QK2IAGL",
+    "commodityCode": "0703909000",
+    "description": "LEEKS",
+    "chedRef": "GBCHD2025.5764023",
+    "authority": "PHSI",
+    "lastUpdated": "04/08/2025 04:00"
+  },
+  {
+    "mrn": "25GB58KXO9T7E8G8JDP",
+    "commodityCode": "0709907000",
+    "description": "SPINACH",
+    "chedRef": "GBCHD2025.5764024",
+    "authority": "HMI",
+    "lastUpdated": "04/08/2025 08:00"
+  },
+  {
+    "mrn": "25GB0LVSNUJZA7TZ0YN",
+    "commodityCode": "0709906000",
+    "description": "PARSLEY",
+    "chedRef": "GBCHD2025.5764025",
+    "authority": "PHSI",
+    "lastUpdated": "04/08/2025 12:00"
+  },
+  {
+    "mrn": "25GBCXLL4ZKLOOKEP7Y",
+    "commodityCode": "0709999090",
+    "description": "HERBS (MIXED)",
+    "chedRef": "GBCHD2025.5764026",
+    "authority": "HMI",
+    "lastUpdated": "04/08/2025 11:00"
+  },
+  {
+    "mrn": "25GB6WKTAKPUXQPHR62",
+    "commodityCode": "0808108000",
+    "description": "APPLES",
+    "chedRef": "GBCHD2025.5764027",
+    "authority": "PHSI",
+    "lastUpdated": "04/08/2025 15:00"
+  },
+  {
+    "mrn": "25GBGDSWM31YIHAIR4C",
+    "commodityCode": "0808309090",
+    "description": "PEARS",
+    "chedRef": "GBCHD2025.5764028",
+    "authority": "HMI",
+    "lastUpdated": "04/08/2025 19:00"
+  },
+  {
+    "mrn": "25GBOWGZRIXA11DPG8S",
+    "commodityCode": "0805400000",
+    "description": "GRAPEFRUIT",
+    "chedRef": "GBCHD2025.5764029",
+    "authority": "PHSI",
+    "lastUpdated": "04/08/2025 23:00"
+  },
+  {
+    "mrn": "25GBBI4Q2Y9V86WZS3T",
+    "commodityCode": "0805201000",
+    "description": "MANDARINS",
+    "chedRef": "GBCHD2025.5764030",
+    "authority": "HMI",
+    "lastUpdated": "05/08/2025 03:00"
+  },
+  {
+    "mrn": "25GB60RJIW1SWJCKJLT",
+    "commodityCode": "0805102200",
+    "description": "ORANGES",
+    "chedRef": "GBCHD2025.5764031",
+    "authority": "PHSI",
+    "lastUpdated": "05/08/2025 02:00"
+  },
+  {
+    "mrn": "25GBEIYZCOTOHP6VZ41",
+    "commodityCode": "0806201000",
+    "description": "GRAPES",
+    "chedRef": "GBCHD2025.5764032",
+    "authority": "HMI",
+    "lastUpdated": "05/08/2025 06:00"
+  },
+  {
+    "mrn": "25GBNAM148P0TVHHPBM",
+    "commodityCode": "0807110000",
+    "description": "WATERMELONS",
+    "chedRef": "GBCHD2025.5764033",
+    "authority": "PHSI",
+    "lastUpdated": "05/08/2025 10:00"
+  },
+  {
+    "mrn": "25GBYOFQEWAOUAXEQBN",
+    "commodityCode": "0807190000",
+    "description": "MELONS (OTHER)",
+    "chedRef": "GBCHD2025.5764034",
+    "authority": "HMI",
+    "lastUpdated": "05/08/2025 14:00"
+  },
+  {
+    "mrn": "25GBHL1N13JCAT9MX2X",
+    "commodityCode": "0809400500",
+    "description": "PLUMS",
+    "chedRef": "GBCHD2025.5764035",
+    "authority": "PHSI",
+    "lastUpdated": "05/08/2025 18:00"
+  },
+  {
+    "mrn": "25GB18HAFEYUHZ1GV0E",
+    "commodityCode": "0806101000",
+    "description": "GRAPES (TABLE)",
+    "chedRef": "GBCHD2025.5764036",
+    "authority": "HMI",
+    "lastUpdated": "05/08/2025 17:00"
+  },
+  {
+    "mrn": "25GB38DALY8OZCYWD14",
+    "commodityCode": "0904110000",
+    "description": "PEPPER, DRIED",
+    "chedRef": "GBCHD2025.5764037",
+    "authority": "PHSI",
+    "lastUpdated": "05/08/2025 21:00"
+  },
+  {
+    "mrn": "25GBVE92MPNSM43D8W3",
+    "commodityCode": "0904220000",
+    "description": "CHILLI POWDER",
+    "chedRef": "GBCHD2025.5764038",
+    "authority": "HMI",
+    "lastUpdated": "06/08/2025 01:00"
+  },
+  {
+    "mrn": "25GBZP08J3TRP0J43D5",
+    "commodityCode": "0710809500",
+    "description": "FROZEN PEPPERS",
+    "chedRef": "GBCHD2025.5764039",
+    "authority": "PHSI",
+    "lastUpdated": "06/08/2025 05:00"
+  },
+  {
+    "mrn": "25GBIQVNB4GH2M5ZJA8",
+    "commodityCode": "0710807500",
+    "description": "FROZEN SPINACH",
+    "chedRef": "GBCHD2025.5764040",
+    "authority": "HMI",
+    "lastUpdated": "06/08/2025 09:00"
+  },
+  {
+    "mrn": "25GBDZR1YXR2DHYLURT",
+    "commodityCode": "0712909090",
+    "description": "VEGETABLE MIXES",
+    "chedRef": "GBCHD2025.5764041",
+    "authority": "PHSI",
+    "lastUpdated": "06/08/2025 08:00"
+  },
+  {
+    "mrn": "25GBP0LZJJEGET1GHR0",
+    "commodityCode": "2005700000",
+    "description": "OLIVES (PRESERVED)",
+    "chedRef": "GBCHD2025.5764042",
+    "authority": "HMI",
+    "lastUpdated": "06/08/2025 12:00"
+  },
+  {
+    "mrn": "25GB9SKDGIGATJ9TZE5",
+    "commodityCode": "2005998000",
+    "description": "VEGETABLES (PREPARED)",
+    "chedRef": "GBCHD2025.5764043",
+    "authority": "PHSI",
+    "lastUpdated": "06/08/2025 16:00"
+  },
+  {
+    "mrn": "25GBR5UQPGB7R3OCWBF",
+    "commodityCode": "2002909100",
+    "description": "TOMATOES (PREPARED)",
+    "chedRef": "GBCHD2025.5764044",
+    "authority": "HMI",
+    "lastUpdated": "06/08/2025 20:00"
+  },
+  {
+    "mrn": "25GBUK9E1V2ISQP49KW",
+    "commodityCode": "2008199890",
+    "description": "NUTS (PREPARED)",
+    "chedRef": "GBCHD2025.5764045",
+    "authority": "PHSI",
+    "lastUpdated": "07/08/2025 00:00"
+  },
+  {
+    "mrn": "25GBV08HHXFGCAQVKIZ",
+    "commodityCode": "2008709090",
+    "description": "PEACHES (PREPARED)",
+    "chedRef": "GBCHD2025.5764046",
+    "authority": "HMI",
+    "lastUpdated": "06/08/2025 23:00"
+  },
+  {
+    "mrn": "25GBZQY72WX7PTX63CF",
+    "commodityCode": "0811907500",
+    "description": "FROZEN RASPBERRIES",
+    "chedRef": "GBCHD2025.5764047",
+    "authority": "PHSI",
+    "lastUpdated": "07/08/2025 03:00"
+  },
+  {
+    "mrn": "25GBL0UKEYZ7SRCBPLJ",
+    "commodityCode": "0811207000",
+    "description": "FROZEN STRAWBERRIES",
+    "chedRef": "GBCHD2025.5764048",
+    "authority": "HMI",
+    "lastUpdated": "07/08/2025 07:00"
+  },
+  {
+    "mrn": "25GBD84U89YJB1QX6GV",
+    "commodityCode": "0811909500",
+    "description": "FROZEN FRUIT MIX",
+    "chedRef": "GBCHD2025.5764049",
+    "authority": "PHSI",
+    "lastUpdated": "07/08/2025 11:00"
+  },
+  {
+    "mrn": "25GBWRDMLY4LYK83TQL",
+    "commodityCode": "2008192000",
+    "description": "PEANUT BUTTER",
+    "chedRef": "GBCHD2025.5764050",
+    "authority": "HMI",
+    "lastUpdated": "07/08/2025 15:00"
+  },
+  {
+    "mrn": "25GBL8OS9XTOGN1W1HT",
+    "commodityCode": "2008194000",
+    "description": "ALMOND PASTE",
+    "chedRef": "GBCHD2025.5764051",
+    "authority": "PHSI",
+    "lastUpdated": "07/08/2025 14:00"
+  },
+  {
+    "mrn": "25GB7PZE9VIFTTD96QE",
+    "commodityCode": "1101001500",
+    "description": "WHEAT FLOUR",
+    "chedRef": "GBCHD2025.5764052",
+    "authority": "HMI",
+    "lastUpdated": "07/08/2025 18:00"
+  },
+  {
+    "mrn": "25GB3RZSJ49ITN7S55J",
+    "commodityCode": "1102209000",
+    "description": "MAIZE FLOUR",
+    "chedRef": "GBCHD2025.5764053",
+    "authority": "PHSI",
+    "lastUpdated": "07/08/2025 22:00"
+  },
+  {
+    "mrn": "25GB2O7S3KKV9RFTMTT",
+    "commodityCode": "1108121500",
+    "description": "MAIZE STARCH",
+    "chedRef": "GBCHD2025.5764054",
+    "authority": "HMI",
+    "lastUpdated": "08/08/2025 02:00"
+  },
+  {
+    "mrn": "25GBQLGZUI1B0Z3NX39",
+    "commodityCode": "1108135000",
+    "description": "POTATO STARCH",
+    "chedRef": "GBCHD2025.5764055",
+    "authority": "PHSI",
+    "lastUpdated": "08/08/2025 06:00"
+  },
+  {
+    "mrn": "25GBRBSV55PSQ0OXFQ8",
+    "commodityCode": "1209912000",
+    "description": "VEGETABLE SEEDS",
+    "chedRef": "GBCHD2025.5764056",
+    "authority": "HMI",
+    "lastUpdated": "08/08/2025 05:00"
+  },
+  {
+    "mrn": "25GBMYX444NLZ15BCW7",
+    "commodityCode": "1209913000",
+    "description": "HERB SEEDS",
+    "chedRef": "GBCHD2025.5764057",
+    "authority": "PHSI",
+    "lastUpdated": "08/08/2025 09:00"
+  },
+  {
+    "mrn": "25GB90PDW5PY6B2KNFT",
+    "commodityCode": "0910110000",
+    "description": "GINGER",
+    "chedRef": "GBCHD2025.5764058",
+    "authority": "HMI",
+    "lastUpdated": "08/08/2025 13:00"
+  },
+  {
+    "mrn": "25GBU2GC5WI6FQJJA26",
+    "commodityCode": "0910201000",
+    "description": "TURMERIC",
+    "chedRef": "GBCHD2025.5764059",
+    "authority": "PHSI",
+    "lastUpdated": "08/08/2025 17:00"
+  },
+  {
+    "mrn": "25GBYFPMVXPJ4HNRIUU",
+    "commodityCode": "0909310000",
+    "description": "CUMIN SEEDS",
+    "chedRef": "GBCHD2025.5764060",
+    "authority": "HMI",
+    "lastUpdated": "08/08/2025 21:00"
+  },
+  {
+    "mrn": "25GB9K9XJUY0BVR6K2V",
+    "commodityCode": "0910910000",
+    "description": "SPICE MIX",
+    "chedRef": "GBCHD2025.5764061",
+    "authority": "PHSI",
+    "lastUpdated": "08/08/2025 20:00"
+  },
+  {
+    "mrn": "25GBMWWYZX4W6XLPU0D",
+    "commodityCode": "2008994800",
+    "description": "FRUIT PREP",
+    "chedRef": "GBCHD2025.5764062",
+    "authority": "HMI",
+    "lastUpdated": "09/08/2025 00:00"
+  },
+  {
+    "mrn": "25GBK0GET8T63J3R30M",
+    "commodityCode": "2007993900",
+    "description": "JAMS",
+    "chedRef": "GBCHD2025.5764063",
+    "authority": "PHSI",
+    "lastUpdated": "09/08/2025 04:00"
+  },
+  {
+    "mrn": "25GBE8F840982N2ATQY",
+    "commodityCode": "2008999700",
+    "description": "MIXED FRUIT PREP",
+    "chedRef": "GBCHD2025.5764064",
+    "authority": "HMI",
+    "lastUpdated": "09/08/2025 08:00"
+  },
+  {
+    "mrn": "25GBYV37DIA5U6HC36K",
+    "commodityCode": "2003901000",
+    "description": "MUSHROOMS (PRESERVED)",
+    "chedRef": "GBCHD2025.5764065",
+    "authority": "PHSI",
+    "lastUpdated": "09/08/2025 12:00"
+  },
+  {
+    "mrn": "25GBOF8KRD5EQY08P0F",
+    "commodityCode": "2003100000",
+    "description": "MUSHROOMS",
+    "chedRef": "GBCHD2025.5764066",
+    "authority": "HMI",
+    "lastUpdated": "09/08/2025 11:00"
+  },
+  {
+    "mrn": "25GBODRO8BNP84DYT9M",
+    "commodityCode": "2008707090",
+    "description": "PEARS (PREPARED)",
+    "chedRef": "GBCHD2025.5764067",
+    "authority": "PHSI",
+    "lastUpdated": "09/08/2025 15:00"
+  },
+  {
+    "mrn": "25GBOGE4QXXVA2IEUC1",
+    "commodityCode": "0702000000",
+    "description": "TOMATOES",
+    "chedRef": "GBCHD2025.5764068",
+    "authority": "HMI",
+    "lastUpdated": "09/08/2025 19:00"
+  },
+  {
+    "mrn": "25GBHH5LF6A4FEJGXAA",
+    "commodityCode": "0707000500",
+    "description": "CUCUMBERS",
+    "chedRef": "GBCHD2025.5764069",
+    "authority": "PHSI",
+    "lastUpdated": "09/08/2025 23:00"
+  }
+]

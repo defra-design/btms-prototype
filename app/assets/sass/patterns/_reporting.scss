@@ -1,24 +1,22 @@
 .reporting {
 
-  // Ensure layout uses flex for side panel and main
+  /* ===== Reporting layout ===== */
   .govuk-grid-row {
     display: flex;
     align-items: stretch;
     gap: 20px;
   }
 
-  // Filters sidebar styling
+  /* Filters sidebar */
   .govuk-grid-column-one-quarter.filters {
     background-color: #f3f2f1;
     padding: 20px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-
   }
 
-
-
+  /* Typography tweaks */
   label {
     font-weight: 700;
     font-size: 16px;
@@ -27,21 +25,20 @@
   .govuk-label,
   .govuk-list {
     font-size: 16px;
-
   }
 
-  // Panel spacing
+  /* Tabs panel spacing */
   .govuk-tabs__panel {
     border: none;
     padding: 30px 10px;
   }
 
-  // Container holding each section (e.g. Matches, Releases)
+  /* Sections (Matches, Releases, etc.) */
   .stat-card-container {
     margin-bottom: 40px;
   }
 
-  // Group of stat cards
+  /* Card group */
   .stat-card-group {
     display: flex;
     flex-wrap: wrap;
@@ -49,50 +46,54 @@
     margin-top: 10px;
   }
 
-  // Individual stat card styling
+  /* ===== Stat card ===== */
   .stat-card {
     width: 200px;
-    height: 140px;
     background-color: #eeeeef;
     padding: 16px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
-
-    .stat-card__label {
-      font-weight: bold;
-      font-size: 18px;
-      margin-bottom: 0px;
-    }
-
- .stat-card__value-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start; /* aligns both number and percentage to the left */
-}
-.stat-card__percentage {
-  display: block;    /* forces it to go to the next line */
-  margin-left: 0;    /* removes any inline gap from flex */
-  margin-top: 2px;   /* small spacing below the number */
-}
-
-    .stat-card__value {
-      font-size: 2rem;
-      font-weight: 700;
-    }
-
-    .stat-card__percentage {
-      font-size: 14px;
-    }
+    justify-content: flex-start;
+    /* keep content aligned from the top */
+    gap: 8px;
+    /* consistent vertical spacing */
   }
 
+  .stat-card__label {
+    font-weight: 700;
+    font-size: 18px;
+    margin: 0;
+  }
+
+  .stat-card__value-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 4px;
+    /* space below label */
+  }
+
+  .stat-card__value {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.1;
+    /* stable line height for the number */
+  }
+
+  .stat-card__percentage {
+    display: block;
+    font-size: 14px;
+    margin-top: 2px;
+  }
+
+  /* Input look in sidebar */
   .govuk-input {
     height: 40px;
     border: 2px solid #0b0c0c;
   }
 
-  // Optional colours for stat cards
+  /* Optional colour variants */
   .stat-card--blue {
     background-color: #d5e1f0;
   }
@@ -109,22 +110,31 @@
     background-color: #fff7bf;
   }
 
-  // Responsive fallback
+  /* “View details” link inside card */
+  .statcard-link {
+    font-size: 16px;
+    padding-top: 6px;
+    margin: 0;
+    margin-top: auto;
+    /* pins link to bottom so numbers align across cards */
+  }
+
+  /* Responsive */
   @media (max-width: 768px) {
     .stat-card {
       width: 100%;
     }
   }
 
+  /* Charts & legends */
   .chart {
     border-bottom: 1px solid #f3f2f1;
-        padding-bottom: 10px;
+    padding-bottom: 10px;
   }
 
   .btms-stats .govuk-heading-s {
     margin: 24px 0 8px 0;
     font-size: 18px;
-
   }
 
   .legend-item {
@@ -136,7 +146,6 @@
   .chartjs-tooltip {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
   }
-
 
   .legend-colour {
     display: inline-block;
@@ -162,16 +171,17 @@
     margin-right: 6px;
   }
 
+  /* Matches - blue */
   .matches-dot {
     background-color: #5694CA;
-    /* Matches - blue */
   }
 
+  /* No matches - teal */
   .mismatches-dot {
     background-color: #2BA8A3;
-    /* No matches - teal */
   }
 
+  /* Chart key colours */
   .matches-colour {
     background-color: #5694CA;
   }
@@ -190,30 +200,34 @@
   /* Legend dot colours for CHED types */
   .ched-a-dot {
     background-color: #D81B60;
-    /* magenta */
   }
 
+  /* magenta */
   .ched-p-dot {
     background-color: #2BA8A3;
-    /* teal */
   }
 
+  /* teal */
   .ched-pp-dot {
     background-color: #5694CA;
-    /* blue */
   }
 
+  /* blue */
   .ched-d-dot {
     background-color: #F57C00;
-    /* orange */
   }
 
-  .btms-stats {
-    .percentage {
-      display: block;
-      font-size: 14px!important;
-      padding-top: 5px;
-    }
- }
+  /* orange */
+
+  .btms-stats .percentage {
+    display: block;
+    font-size: 14px !important;
+    padding-top: 5px;
+  }
+
 
 }
+ .no-match
+  td, th {
+    font-size: 14px;
+ }

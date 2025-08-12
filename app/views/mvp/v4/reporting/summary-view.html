@@ -4,7 +4,7 @@
 {% set hideButton = true %}
 {% set showheader = true %}
 {% set bodyClasses = 'reporting' %}
-{% set hideBackLink = false %}
+{% set hideBackLink = true %}
 
 {% block form %}
 {% from "includes/stat-card.njk" import statCard %}
@@ -133,11 +133,11 @@
           <h2 class="govuk-heading-m">Matches</h2>
           <!-- <p class="govuk-body">Number of matching Commodity lines in the MRN vs those that couldn't be matched to an
             IPAFFS document</p>-->
-          <div class="stat-card-group">
-            {{ statCard("Matches", "1,302", "94.97%") }}
-            {{ statCard("No matches", "69", "5.03%") }}
-            {{ statCard("Total", "1,371") }}
-          </div>
+            <div class="stat-card-group">
+              {{ statCard("Matches", "1,302", "94.97%") }}
+              {{ statCard("No matches", "69", "5.03%", "", "/mvp/v4/reporting/no-matches") }}
+              {{ statCard("Total", "1,371", "") }}
+            </div>
         </div>
 
         <!-- Releases -->
