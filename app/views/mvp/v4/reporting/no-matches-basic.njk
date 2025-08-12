@@ -11,8 +11,9 @@
 {% endblock %}
 
 {% block content %}
-  <h1 class="govuk-heading-l">No matches (basic)</h1>
-
+    <h1 class="govuk-heading-l">
+      Showing {{ total }} no match{% if total != 1 %}es{% endif %}
+    </h1>
   {% if displayRange %}
     <p class="govuk-hint">{{ displayRange }}</p>
   {% endif %}

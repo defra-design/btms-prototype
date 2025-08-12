@@ -391,14 +391,7 @@
     "authority": "PHSI",
     "lastUpdated": "07/08/2025 11:00"
   },
-  {
-    "mrn": "25GBWRDMLY4LYK83TQL",
-    "commodityCode": "2008192000",
-    "description": "PEANUT BUTTER",
-    "chedRef": "GBCHD2025.5764050",
-    "authority": "HMI",
-    "lastUpdated": "07/08/2025 15:00"
-  },
+
   {
     "mrn": "25GBL8OS9XTOGN1W1HT",
     "commodityCode": "2008194000",
