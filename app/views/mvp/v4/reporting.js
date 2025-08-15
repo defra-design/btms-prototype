@@ -76,85 +76,99 @@ module.exports = (router) => {
     });
   });
 
-  // --- Search results (title = MRN, line data from query) ---
-  router.get('/mvp/v4/search-results', (req, res) => {
-    const { mrn, cc, desc, ched, auth, updated } = req.query;
+// --- Search results (title = MRN, line data from query) ---
+router.get('/mvp/v4/search-results', (req, res) => {
+  const { mrn, cc, desc, ched, auth, updated } = req.query;
 
-    res.render('mvp/v4/search-results', {
-      title: mrn || 'Search results',
-      line: {
-        commodityCode: cc      || '',
-        description:   desc    || '',
-        chedRef:       ched    || '',
-        authority:     auth    || '',
-        lastUpdated:   updated || ''
-      }
-    });
+  // Accept several inputs and normalise to "D MMMM YYYY, HH:mm"
+  const parseFormats = [
+    'D MMMM YYYY [at] h:mma', // e.g. "15 August 2025 at 9:41am"
+    'D MMMM YYYY, HH:mm',     // e.g. "15 August 2025, 09:41"
+    moment.ISO_8601
+  ];
+
+  let displayUpdated = '';
+  if (updated) {
+    const m = moment(updated, parseFormats, true);
+    displayUpdated = m.isValid() ? m.format('D MMMM YYYY, HH:mm') : updated;
+  }
+
+  res.render('mvp/v4/search-results', {
+    title: mrn || 'Search results',
+    headerLastUpdated: displayUpdated,  // <-- use this in the view header
+    line: {
+      commodityCode: cc   || '',
+      description:   desc || '',
+      chedRef:       ched || '',
+      authority:     auth || '',
+      lastUpdated:   displayUpdated     // if you also show it in the table/body
+    }
+  });
+});
+
+
+// --- No matches (basic: MRN / port / lastUpdated) ---
+router.get('/mvp/v4/reporting/no-matches-basic', (req, res) => {
+  console.log('[routes] HIT /mvp/v4/reporting/no-matches-basic');
+
+  const file = path.join(process.cwd(), 'app', 'data', 'no-matches-basic.json');
+  console.log('[routes] no-matches-basic reading:', file);
+
+  let raw = [];
+  try {
+    raw = JSON.parse(fs.readFileSync(file, 'utf8')) || [];
+    console.log('[routes] no-matches-basic loaded rows:', raw.length);
+  } catch (e) {
+    console.error('Failed to read no-matches-basic.json:', e.message);
+    raw = [];
+  }
+
+  // Normalise: keep only the fields we render and drop any legacy noMatchCount
+  const rowsNormalised = raw.map(r => ({
+    mrn: r.mrn || '',
+    portOfEntry: r.portOfEntry || '',
+    lastUpdated: r.lastUpdated || '' // e.g. "15 August 2025 at 9:41am"
+  }));
+
+  // Sort by lastUpdated (newest first)
+  const parseGovDate = s => (s ? moment(s, 'D MMMM YYYY [at] h:mma', true) : null);
+  rowsNormalised.sort((a, b) => {
+    const ma = parseGovDate(a.lastUpdated);
+    const mb = parseGovDate(b.lastUpdated);
+    if (ma && mb) return mb.valueOf() - ma.valueOf(); // DESC (newest first)
+    if (ma && !mb) return -1;
+    if (!ma && mb) return 1;
+    return 0;
   });
 
-  // --- No matches (basic: MRN / count / port) ---
-  router.get('/mvp/v4/reporting/no-matches-basic', (req, res) => {
-    console.log('[routes] HIT /mvp/v4/reporting/no-matches-basic');
+  // Pagination
+  const pageSize = 50;
+  const page       = Math.max(1, parseInt(req.query.page || '1', 10));
+  const total      = rowsNormalised.length;
+  const pages      = Math.max(1, Math.ceil(total / pageSize));
+  const startIndex = Math.min((page - 1) * pageSize, Math.max(total - 1, 0));
+  const endIndex   = Math.min(startIndex + pageSize, total);
+  const rows       = rowsNormalised.slice(startIndex, endIndex);
 
-    const file = path.join(process.cwd(), 'app', 'data', 'no-matches-basic.json');
-    console.log('[routes] no-matches-basic reading:', file);
+  const pagination = {
+    page,
+    pages,
+    prev: page > 1 ? page - 1 : null,
+    next: page < pages ? page + 1 : null,
+    window: Array.from({ length: pages }, (_, i) => i + 1)
+  };
 
-    let raw = [];
-    try {
-      raw = JSON.parse(fs.readFileSync(file, 'utf8'));
-      console.log('[routes] no-matches-basic loaded rows:', raw.length);
-    } catch (e) {
-      console.error('Failed to read no-matches-basic.json:', e.message);
-      raw = [];
-    }
+  const displayRange = total ? `Showing ${startIndex + 1} to ${endIndex} of ${total}` : '';
 
-    // If file already has basic rows use as-is; otherwise aggregate by MRN
-    let basics;
-    if (raw.length && Object.prototype.hasOwnProperty.call(raw[0], 'noMatchCount')) {
-      basics = raw.map(r => ({
-        mrn: r.mrn,
-        noMatchCount: Number(r.noMatchCount) || 0,
-        portOfEntry: r.portOfEntry || ''
-      }));
-    } else {
-      const grouped = _.groupBy(raw, 'mrn');
-      basics = Object.entries(grouped).map(([mrn, items]) => {
-        const withPort = items.find(i => i.portOfEntry && i.portOfEntry.trim() !== '');
-        return {
-          mrn,
-          noMatchCount: items.length,
-          portOfEntry: withPort ? withPort.portOfEntry : ''
-        };
-      });
-    }
-
-    // Pagination
-    const pageSize = 25;
-    const page       = Math.max(1, parseInt(req.query.page || '1', 10));
-    const total      = basics.length;
-    const pages      = Math.max(1, Math.ceil(total / pageSize));
-    const startIndex = Math.min((page - 1) * pageSize, Math.max(total - 1, 0));
-    const endIndex   = Math.min(startIndex + pageSize, total);
-    const rows       = basics.slice(startIndex, endIndex);
-
-    const pagination = {
-      page,
-      pages,
-      prev: page > 1 ? page - 1 : null,
-      next: page < pages ? page + 1 : null,
-      window: Array.from({ length: pages }, (_, i) => i + 1)
-    };
-
-    const displayRange = total ? `Showing ${startIndex + 1} to ${endIndex} of ${total}` : '';
-
-    res.render('mvp/v4/reporting/no-matches-basic', {
-      rows,
-      total,
-      pagination,
-      pageSize,
-      startIndex,
-      endIndex,
-      displayRange
-    });
+  res.render('mvp/v4/reporting/no-matches-basic', {
+    rows,
+    total,
+    pagination,
+    pageSize,
+    startIndex,
+    endIndex,
+    displayRange
   });
+});
+
 };

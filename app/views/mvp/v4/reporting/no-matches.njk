@@ -33,7 +33,7 @@
       <th scope="col" class="govuk-table__header">Commodity code</th>
       <th scope="col" class="govuk-table__header">Description</th>
       <th scope="col" class="govuk-table__header">CHED reference</th>
-      <th scope="col" class="govuk-table__header">Authority</th>
+      {# <th scope="col" class="govuk-table__header">Authority</th> #}
       <th scope="col" class="govuk-table__header">Last updated</th>
 
     </tr>
@@ -54,7 +54,7 @@
         <td class="govuk-table__cell">{{ row.commodityCode }}</td>
         <td class="govuk-table__cell">{{ row.description }}</td>
         <td class="govuk-table__cell">{{ row.chedRef or "None" }}</td>
-        <td class="govuk-table__cell">{{ row.authority }}</td>
+        {# <td class="govuk-table__cell">{{ row.authority }}</td> #}
                 <td class="govuk-table__cell">{{ row.lastUpdated }}</td>
 
       </tr>

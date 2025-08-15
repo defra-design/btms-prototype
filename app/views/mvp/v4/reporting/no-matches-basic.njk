@@ -11,22 +11,25 @@
 {% endblock %}
 
 {% block content %}
-    <h1 class="govuk-heading-l">
-      Showing {{ total }} no match{% if total != 1 %}es{% endif %}
-    </h1>
+  {% set count = total or (rows | length) %}
+
+  <h1 class="govuk-heading-l">
+    Showing {{ count }} MRN{% if count != 1 %}s{% endif %}
+  </h1>
+
   {% if displayRange %}
     <p class="govuk-hint">{{ displayRange }}</p>
   {% endif %}
 
-  {% if total == 0 %}
+  {% if count == 0 %}
     <p class="govuk-body">No MRNs found.</p>
   {% else %}
     <table class="govuk-table">
       <thead class="govuk-table__head">
         <tr class="govuk-table__row">
           <th scope="col" class="govuk-table__header">MRN</th>
-          <th scope="col" class="govuk-table__header">No matches</th>
           <th scope="col" class="govuk-table__header">Port of entry</th>
+          <th scope="col" class="govuk-table__header">Last updated</th>
         </tr>
       </thead>
       <tbody class="govuk-table__body">
@@ -34,19 +37,19 @@
           <tr class="govuk-table__row">
             <td class="govuk-table__cell">
               <a class="govuk-link"
-                 href="/mvp/v4/search-results?mrn={{ row.mrn | urlencode }}"
+                 href="/mvp/v4/search-results?mrn={{ row.mrn | urlencode }}&updated={{ row.lastUpdated | urlencode }}"
                  target="_blank" rel="noopener noreferrer">
                 {{ row.mrn }}
               </a>
             </td>
-            <td class="govuk-table__cell">{{ row.noMatchCount or 0 }}</td>
             <td class="govuk-table__cell">{{ row.portOfEntry or '—' }}</td>
+            <td class="govuk-table__cell">{{ row.lastUpdated or '—' }}</td>
           </tr>
         {% endfor %}
       </tbody>
     </table>
 
-    {% if pagination.pages > 1 %}
+    {% if pagination and pagination.pages > 1 %}
       <nav class="govuk-pagination" role="navigation" aria-label="results">
         <ul class="govuk-pagination__list">
           {% if pagination.prev %}
