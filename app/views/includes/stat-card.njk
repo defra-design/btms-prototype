@@ -1,4 +1,4 @@
-{% macro statCard(label, value, percentage = "", modifier = "", href = "") %}
+{% macro statCard(label, value, percentage = "", modifier = "", href = "", linkText = "") %}
   <div class="stat-card {{ modifier }}">
     <div class="stat-card__label">{{ label }}</div>
     <div class="stat-card__value-wrapper">
@@ -10,7 +10,9 @@
 
     {% if href %}
       <p class="statcard-link">
-        <a href="{{ href }}" class="govuk-link">View no matches</a>
+        <a href="{{ href }}" class="govuk-link" download>
+          {{ linkText or ('View ' ~ label | lower) }}
+        </a>
       </p>
     {% endif %}
   </div>

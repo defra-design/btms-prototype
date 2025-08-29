@@ -7,14 +7,25 @@
 {% set hideBackLink = false %}
 
 {% block form %}
+{% from "govuk/components/checkboxes/macro.njk" import govukCheckboxes %}
 {% from "includes/stat-card.njk" import statCard %}
 {% from "includes/time-input.njk" import timeInput %}
+
+<style>
+  .govuk-checkboxes label {
+    font-weight: 100;
+  }
+
+  .reporting .govuk-grid-column-one-quarter.filters {
+    padding: 10px 10px 10px 10px;
+  }
+</style>
+
 <script>
   // Initialise MOJ Date Picker
   import {
     MOJFrontend
   } from '@ministryofjustice/frontend';
-
   window.GOVUKPrototypeKit.documentReady(() => {
     const datePickers = document.querySelectorAll('[data-module="moj-date-input"]');
     datePickers.forEach(el => new MOJFrontend.components.DateInput({
@@ -33,34 +44,28 @@
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
           Filter by
         </legend>
+
         <!-- Start date -->
         <div class="govuk-form-group govuk-!-margin-bottom-4">
-          <!-- MOJ Start date picker goes here -->
           {{ mojDatePicker({
             id: "startDate",
             name: "startDate",
             value: data.startDate or "",
-            label: {
-              text: "Start date"
-            }
+            label: { text: "Start date" }
           }) }}
         </div>
 
-
-
         <!-- End date -->
         <div class="govuk-form-group govuk-!-margin-bottom-4">
-          <!-- MOJ End date picker goes here -->
           {{ mojDatePicker({
             id: "endDate",
             name: "endDate",
             value: data.endDate or "",
-            label: {
-              text: "End date"
-            }
+            label: { text: "End date" }
           }) }}
         </div>
-        <!-- start time -->
+
+        <!-- Start time -->
         <div class="govuk-form-group govuk-!-margin-bottom-4">
           {{ timeInput({
             id: "start-time",
@@ -70,6 +75,7 @@
             minute: data.startTime and data.startTime.minute or ""
           }) }}
         </div>
+
         <!-- End time -->
         <div class="govuk-form-group govuk-!-margin-bottom-4">
           {{ timeInput({
@@ -79,71 +85,180 @@
             hour: data.endTime and data.endTime.hour or "",
             minute: data.endTime and data.endTime.minute or ""
           }) }}
-
-
         </div>
 
-        <button class="govuk-button govuk-!-margin-bottom-6" data-module="govuk-button">Update</button>
+        {# -------------------- Port of entry (persist + counter) -------------------- #}
+        {% set selectedPorts = data.selectedPorts or [] %}
+        <div class="govuk-form-group govuk-!-margin-bottom-4" id="portOfEntry-group">
+          <fieldset class="govuk-fieldset" aria-describedby="portOfEntry-hint portOfEntry-count">
+            <legend
+              class="govuk-fieldset__legend govuk-fieldset__legend--s govuk-!-font-size-16 govuk-!-margin-bottom-2">
+              Port of entry
+            </legend>
+
+            <div id="portOfEntry-hint"
+              class="govuk-hint govuk-!-margin-bottom-1 govuk-!-font-size-16 govuk-!-margin-bottom-1">
+              Select one or more ports
+            </div>
+
+            <p id="portOfEntry-count"
+              class="govuk-hint govuk-!-margin-top-0 govuk-!-margin-bottom-2 govuk-!-font-size-16" aria-live="polite">
+              {{ (selectedPorts | length) }} selected
+            </p>
+
+            <!-- Scrollable wrapper -->
+            <div style="max-height: 220px; overflow-y: auto; border-bottom: 1px solid #aaa9a9; padding: 5px;">
+        {{ govukCheckboxes({
+          idPrefix: "portOfEntry",
+          name: "portOfEntry",
+          classes: "govuk-checkboxes--small",
+          items: [
+            { value: "Felixstowe (GBFXT)",  text: "Felixstowe (GBFXT)",  checked: "Felixstowe (GBFXT)"  in selectedPorts },
+            { value: "Gatwick (GBLGW)",     text: "Gatwick (GBLGW)",     checked: "Gatwick (GBLGW)"    in selectedPorts },
+            { value: "Portsmouth (GBPMH)",  text: "Portsmouth (GBPMH)",  checked: "Portsmouth (GBPMH)" in selectedPorts },
+            { value: "Sevington (GBSEV)",   text: "Sevington (GBSEV)",   checked: "Sevington (GBSEV)"  in selectedPorts },
+            { value: "Southampton (GBSOU)", text: "Southampton (GBSOU)", checked: "Southampton (GBSOU)"in selectedPorts },
+            { value: "Plymouth (GBPLY)",    text: "Plymouth (GBPLY)",    checked: "Plymouth (GBPLY)"   in selectedPorts },
+            { value: "Liverpool (GBLIV)",   text: "Liverpool (GBLIV)",   checked: "Liverpool (GBLIV)"  in selectedPorts },
+            { value: "Hull (GBHUL)",        text: "Hull (GBHUL)",        checked: "Hull (GBHUL)"       in selectedPorts },
+            { value: "Immingham (GBIMM)",   text: "Immingham (GBIMM)",   checked: "Immingham (GBIMM)"  in selectedPorts },
+            { value: "Dover (GBDVR)",       text: "Dover (GBDVR)",       checked: "Dover (GBDVR)"      in selectedPorts },
+            { value: "Harwich (GBHRW)",     text: "Harwich (GBHRW)",     checked: "Harwich (GBHRW)"    in selectedPorts },
+            { value: "Teesport (GBTEE)",    text: "Teesport (GBTEE)",    checked: "Teesport (GBTEE)"   in selectedPorts },
+            { value: "Grangemouth (GBGRG)", text: "Grangemouth (GBGRG)", checked: "Grangemouth (GBGRG)"in selectedPorts }
+          ]
+        }) }}
+
+            </div>
+          </fieldset>
+        </div>
+
+
+        <script>
+          // Live-update "N selected" as boxes change
+          (function () {
+            const group = document.getElementById('portOfEntry-group');
+            if (!group) return;
+            const boxes = group.querySelectorAll('input[name="portOfEntry"]');
+            const countEl = document.getElementById('portOfEntry-count');
+            const update = () => {
+              const n = Array.from(boxes).filter(b => b.checked).length;
+              countEl.textContent = n + ' selected';
+            };
+            boxes.forEach(b => b.addEventListener('change', update));
+          })();
+        </script>
+        {# ------------------ end Port of entry block ------------------ #}
+
+        <!-- Update button -->
+        <button class="govuk-button govuk-!-margin-bottom-6" data-module="govuk-button" type="submit">Update</button>
         <ul class="govuk-list" id="clear-filters">
           <li><a href="#" data-start="" data-end="">Clear filters</a></li>
-
         </ul>
-
       </fieldset>
     </div>
-    <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
-      Filter by time period
-    </legend>
 
+    <!-- Preset time filters -->
+    <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+      Filter by date
+    </legend>
     <nav class="govuk-!-margin-top-1">
-      <ul class="govuk-list" id="preset-links">
-        <li><a href="#" data-start="2025-08-15T10:00" data-end="2025-08-15T11:00">Last 1 hour</a></li>
-        <li><a href="#" data-start="2025-08-14T11:00" data-end="2025-08-15T11:00">Last 24 hours</a></li>
-        <li><a href="#" data-start="2025-08-15T11:00" data-end="2025-08-07T11:00">Last 7 days</a></li>
-        <li><a href="#" data-start="2025-08-15T11:00" data-end="2025-07-15T11:00">Last 30 days</a></li>
-      </ul>
+<ul class="govuk-list" id="preset-links">
+  <li><a href="#" data-range="today">Today</a></li>
+  <li><a href="#" data-range="yesterday">Yesterday</a></li>
+  <li><a href="#" data-range="last-week">Last week</a></li>
+  <li><a href="#" data-range="last-month">Last month</a></li>
+</ul>
+
+<script>
+  function pad(n) {
+    return n.toString().padStart(2, '0');
+  }
+
+  function formatISO(date) {
+    return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}T${pad(date.getHours())}:${pad(date.getMinutes())}`;
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const now = new Date();
+    const startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0);
+    const endOfToday   = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59);
+
+    const startOfYesterday = new Date(startOfToday);
+    startOfYesterday.setDate(startOfYesterday.getDate() - 1);
+    const endOfYesterday = new Date(endOfToday);
+    endOfYesterday.setDate(endOfYesterday.getDate() - 1);
+
+    const startOfLastWeek = new Date(startOfToday);
+    startOfLastWeek.setDate(startOfLastWeek.getDate() - 7);
+
+    const startOfLastMonth = new Date(startOfToday);
+    startOfLastMonth.setMonth(startOfLastMonth.getMonth() - 1);
+
+    // Map ranges
+    const ranges = {
+      "today":      { start: startOfToday, end: endOfToday },
+      "yesterday":  { start: startOfYesterday, end: endOfYesterday },
+      "last-week":  { start: startOfLastWeek, end: endOfToday },
+      "last-month": { start: startOfLastMonth, end: endOfToday }
+    };
+
+    // Apply to links
+    document.querySelectorAll("#preset-links a").forEach(link => {
+      const rangeKey = link.getAttribute("data-range");
+      if (ranges[rangeKey]) {
+        link.setAttribute("data-start", formatISO(ranges[rangeKey].start));
+        link.setAttribute("data-end",   formatISO(ranges[rangeKey].end));
+      }
+    });
+  });
+</script>
+
     </nav>
   </div>
 
   <!-- Main Content -->
   <div class="govuk-grid-column-three-quarters">
     {% if data.searchResults == 'true'%}
+    {% set ports = data.selectedPorts or [] %}
+    {% set n = ports | length %}
 
 
-    <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-5">
-     Showing results from {{ data.displayDateRange }}
-    </p>
 
-    <!-- Tabs -->
+
+<p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-5">
+  Showing results from {{ data.displayDateRange }}
+  {% if n == 0 %}
+    for all ports
+  {% elseif n <= 3 %}
+    for {{ ports | join(', ') }}
+  {% else %}
+    for {{ ports[0] }}, {{ ports[1] }}, {{ ports[2] }} + {{ n - 3 }} more
+  {% endif %}
+</p>
+
+
+
+
     <div class="govuk-tabs" data-module="govuk-tabs">
       <ul class="govuk-tabs__list">
-        <li class="govuk-tabs__list-item govuk-tabs__list-item--selected">
-          <a class="govuk-tabs__tab" href="#summary">Summary view</a>
-        </li>
-        <li class="govuk-tabs__list-item">
-          <a class="govuk-tabs__tab" href="#chart">Chart view</a>
-        </li>
+        <li class="govuk-tabs__list-item govuk-tabs__list-item--selected"><a class="govuk-tabs__tab"
+            href="#summary">Summary view</a></li>
+        <li class="govuk-tabs__list-item"><a class="govuk-tabs__tab" href="#chart">Chart view</a></li>
       </ul>
 
-      <!-- Summary view -->
       <div class="govuk-tabs__panel" id="summary">
-
-        <!-- Matches -->
         <div class="stat-card-container govuk-!-margin-bottom-6">
           <h2 class="govuk-heading-m">Matches</h2>
-          <!-- <p class="govuk-body">Number of matching Commodity lines in the MRN vs those that couldn't be matched to an
-            IPAFFS document</p>-->
-            <div class="stat-card-group">
-              {{ statCard("Matches", "1,302", "95.04%") }}
-              {{ statCard("No matches", "68", "4.96%", "", "/mvp/v4/reporting/no-matches-basic") }}
-              {{ statCard("Total", "1,370", "") }}
-            </div>
+          <div class="stat-card-group">
+            {{ statCard("Matches", "1,302", "95.04%") }}
+            {{ statCard("No matches", "68", "4.96%", "", "/mvp/v4/reporting/no-matches-basic.csv", "Download CSV") }}
+            {{ statCard("Total", "1,370", "") }}
+          </div>
         </div>
 
-        <!-- Releases -->
         <div class="stat-card-container govuk-!-margin-bottom-6">
           <h2 class="govuk-heading-m">Releases</h2>
-          <!-- <p class="govuk-body">Shows the number of MRNs that were automatically or manually released by HMRC.</p> -->
           <div class="stat-card-group">
             {{ statCard("Auto", "1,175", "98.49%", "stat-card--blue") }}
             {{ statCard("Manual", "18", "1.51%", "stat-card--blue") }}
@@ -151,20 +266,16 @@
           </div>
         </div>
 
-        <!-- Unique clearance requests -->
         <div class="stat-card-container govuk-!-margin-bottom-6">
           <h2 class="govuk-heading-m">Unique clearance requests</h2>
-          <!-- <p class="govuk-body">Shows the total number of unique clearance requests made.</p> -->
           <div class="stat-card-group">
             {{ statCard("Unique clearances", "1,371", "66.50%") }}
             {{ statCard("Total", "2,060") }}
           </div>
         </div>
 
-        <!-- CHED types -->
         <div class="stat-card-container govuk-!-margin-bottom-6">
           <h2 class="govuk-heading-m">Pre-notifications by CHED type</h2>
-          <!-- <p class="govuk-body">Shows how many CHED pre-notifications were submitted through IPAFFS</p> -->
           <div class="stat-card-group">
             {{ statCard("CHED A", "249", "3.52%", "stat-card--blue") }}
             {{ statCard("CHED P", "5,399", "75.98%", "stat-card--blue") }}
@@ -172,11 +283,9 @@
             {{ statCard("CHED D", "291", "4.10%", "stat-card--blue") }}
           </div>
         </div>
-
       </div>
 
-      <!-- Chart view placeholder -->
-      <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="chart">
+  <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="chart">
 
         <div class="govuk-grid-row charts govuk-!-margin-bottom-4">
           <div class="govuk-grid-column-full chart">
@@ -329,63 +438,52 @@
         </div>
 
       </div>
-
     </div>
-
     {% else %}
-
-    <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-5">
-      No results
-    </p>
-    {{ govukInsetText({
-        html: " To view reporting data, set the filters and select 'update'."
-    }) }}
-
-    <script>
-      document.getElementById('toggleChart').addEventListener('click', function (e) {
-        e.preventDefault();
-        const chartDiv = document.getElementById('chartContainer');
-        chartDiv.style.display = chartDiv.style.display === 'none' ? 'block' : 'none';
-      });
-    </script>
+    <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-5">No results</p>
+    {{ govukInsetText({ html: " To view reporting data, set the filters and select 'update'." }) }}
     {% endif %}
-
   </div>
 </div>
+
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     const presetLinks = document.querySelectorAll('#preset-links a, #clear-filters a');
-    const form = document.getElementById('filter-form');
+    const form = document.getElementById('filter-form'); // ensure your form has this id
+    const portGroup = document.getElementById('portOfEntry-group');
+    const portBoxes = portGroup ? portGroup.querySelectorAll('input[name="portOfEntry"]') : [];
+    const countEl = document.getElementById('portOfEntry-count');
+
+    // Helper: update counter
+    function updatePortCount() {
+      const n = Array.from(portBoxes).filter(b => b.checked).length;
+      if (countEl) countEl.textContent = n + ' selected';
+    }
+
+    // Attach change event to each checkbox for live updates
+    portBoxes.forEach(b => b.addEventListener('change', updatePortCount));
 
     presetLinks.forEach(link => {
       link.addEventListener('click', e => {
         e.preventDefault();
-
         const startAttr = link.getAttribute('data-start');
         const endAttr = link.getAttribute('data-end');
-
         const pad = n => n.toString().padStart(2, '0');
 
         if (startAttr && endAttr) {
           const start = new Date(startAttr);
           const end = new Date(endAttr);
+          if (!isNaN(start.getTime()) && !isNaN(end.getTime())) {
+            document.getElementById('startDate').value =
+              `${pad(start.getDate())}/${pad(start.getMonth() + 1)}/${start.getFullYear()}`;
+            document.getElementById('endDate').value =
+              `${pad(end.getDate())}/${pad(end.getMonth() + 1)}/${end.getFullYear()}`;
 
-          if (isNaN(start.getTime()) || isNaN(end.getTime())) {
-            console.error('Invalid date format');
-            return;
+            document.querySelector('[name="startTime-hour"]').value = pad(start.getHours());
+            document.querySelector('[name="startTime-minute"]').value = pad(start.getMinutes());
+            document.querySelector('[name="endTime-hour"]').value = pad(end.getHours());
+            document.querySelector('[name="endTime-minute"]').value = pad(end.getMinutes());
           }
-
-          // Set date fields
-          document.getElementById('startDate').value =
-            `${pad(start.getDate())}/${pad(start.getMonth() + 1)}/${start.getFullYear()}`;
-          document.getElementById('endDate').value =
-            `${pad(end.getDate())}/${pad(end.getMonth() + 1)}/${end.getFullYear()}`;
-
-          // Set time fields
-          document.querySelector('[name="startTime-hour"]').value = pad(start.getHours());
-          document.querySelector('[name="startTime-minute"]').value = pad(start.getMinutes());
-          document.querySelector('[name="endTime-hour"]').value = pad(end.getHours());
-          document.querySelector('[name="endTime-minute"]').value = pad(end.getMinutes());
         } else {
           // Clear all fields
           document.getElementById('startDate').value = '';
@@ -394,12 +492,16 @@
           document.querySelector('[name="startTime-minute"]').value = '';
           document.querySelector('[name="endTime-hour"]').value = '';
           document.querySelector('[name="endTime-minute"]').value = '';
+
+          // Clear all port checkboxes
+          portBoxes.forEach(b => b.checked = false);
+          updatePortCount();
         }
 
-        // Submit the form
-        form.submit();
+        if (form) form.submit();
       });
     });
   });
 </script>
+
 {% endblock %}
