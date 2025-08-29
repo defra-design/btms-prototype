@@ -12,25 +12,17 @@
 {% from "includes/time-input.njk" import timeInput %}
 
 <style>
-  .govuk-checkboxes label {
-    font-weight: 100;
-  }
-
-  .reporting .govuk-grid-column-one-quarter.filters {
-    padding: 10px 10px 10px 10px;
-  }
+  .govuk-checkboxes label { font-weight: 100; }
+  .reporting .govuk-grid-column-one-quarter.filters { padding: 10px; }
+  .port-scroll { max-height: 220px; overflow-y: auto; border-bottom: 1px solid #aaa9a9; padding: 5px; }
 </style>
 
 <script>
-  // Initialise MOJ Date Picker
-  import {
-    MOJFrontend
-  } from '@ministryofjustice/frontend';
-  window.GOVUKPrototypeKit.documentReady(() => {
-    const datePickers = document.querySelectorAll('[data-module="moj-date-input"]');
-    datePickers.forEach(el => new MOJFrontend.components.DateInput({
-      el
-    }));
+  // Initialise MOJ Date Picker (robust to global/ESM)
+  window.GOVUKPrototypeKit?.documentReady?.(() => {
+    const Moj = window.MOJFrontend || window.moj?.Frontend || null;
+    const nodes = document.querySelectorAll('[data-module="moj-date-input"]');
+    if (Moj?.components?.DateInput) nodes.forEach(el => new Moj.components.DateInput({ el }));
   });
 </script>
 
@@ -41,9 +33,7 @@
   <div class="govuk-grid-column-one-quarter filters">
     <div class="govuk-form-group govuk-!-margin-bottom-1">
       <fieldset class="govuk-fieldset">
-        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
-          Filter by
-        </legend>
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">Filter by</legend>
 
         <!-- Start date -->
         <div class="govuk-form-group govuk-!-margin-bottom-4">
@@ -91,417 +81,250 @@
         {% set selectedPorts = data.selectedPorts or [] %}
         <div class="govuk-form-group govuk-!-margin-bottom-4" id="portOfEntry-group">
           <fieldset class="govuk-fieldset" aria-describedby="portOfEntry-hint portOfEntry-count">
-            <legend
-              class="govuk-fieldset__legend govuk-fieldset__legend--s govuk-!-font-size-16 govuk-!-margin-bottom-2">
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--s govuk-!-font-size-16 govuk-!-margin-bottom-2">
               Port of entry
             </legend>
 
-            <div id="portOfEntry-hint"
-              class="govuk-hint govuk-!-margin-bottom-1 govuk-!-font-size-16 govuk-!-margin-bottom-1">
+            <div id="portOfEntry-hint" class="govuk-hint govuk-!-margin-bottom-1 govuk-!-font-size-16">
               Select one or more ports
             </div>
 
-            <p id="portOfEntry-count"
-              class="govuk-hint govuk-!-margin-top-0 govuk-!-margin-bottom-2 govuk-!-font-size-16" aria-live="polite">
+            <p id="portOfEntry-count" class="govuk-hint govuk-!-margin-top-0 govuk-!-margin-bottom-2 govuk-!-font-size-16" aria-live="polite">
               {{ (selectedPorts | length) }} selected
             </p>
 
-            <!-- Scrollable wrapper -->
-            <div style="max-height: 220px; overflow-y: auto; border-bottom: 1px solid #aaa9a9; padding: 5px;">
-        {{ govukCheckboxes({
-          idPrefix: "portOfEntry",
-          name: "portOfEntry",
-          classes: "govuk-checkboxes--small",
-          items: [
-            { value: "Felixstowe (GBFXT)",  text: "Felixstowe (GBFXT)",  checked: "Felixstowe (GBFXT)"  in selectedPorts },
-            { value: "Gatwick (GBLGW)",     text: "Gatwick (GBLGW)",     checked: "Gatwick (GBLGW)"    in selectedPorts },
-            { value: "Portsmouth (GBPMH)",  text: "Portsmouth (GBPMH)",  checked: "Portsmouth (GBPMH)" in selectedPorts },
-            { value: "Sevington (GBSEV)",   text: "Sevington (GBSEV)",   checked: "Sevington (GBSEV)"  in selectedPorts },
-            { value: "Southampton (GBSOU)", text: "Southampton (GBSOU)", checked: "Southampton (GBSOU)"in selectedPorts },
-            { value: "Plymouth (GBPLY)",    text: "Plymouth (GBPLY)",    checked: "Plymouth (GBPLY)"   in selectedPorts },
-            { value: "Liverpool (GBLIV)",   text: "Liverpool (GBLIV)",   checked: "Liverpool (GBLIV)"  in selectedPorts },
-            { value: "Hull (GBHUL)",        text: "Hull (GBHUL)",        checked: "Hull (GBHUL)"       in selectedPorts },
-            { value: "Immingham (GBIMM)",   text: "Immingham (GBIMM)",   checked: "Immingham (GBIMM)"  in selectedPorts },
-            { value: "Dover (GBDVR)",       text: "Dover (GBDVR)",       checked: "Dover (GBDVR)"      in selectedPorts },
-            { value: "Harwich (GBHRW)",     text: "Harwich (GBHRW)",     checked: "Harwich (GBHRW)"    in selectedPorts },
-            { value: "Teesport (GBTEE)",    text: "Teesport (GBTEE)",    checked: "Teesport (GBTEE)"   in selectedPorts },
-            { value: "Grangemouth (GBGRG)", text: "Grangemouth (GBGRG)", checked: "Grangemouth (GBGRG)"in selectedPorts }
-          ]
-        }) }}
-
+            <div class="port-scroll">
+              {{ govukCheckboxes({
+                idPrefix: "portOfEntry",
+                name: "portOfEntry",
+                classes: "govuk-checkboxes--small",
+                items: [
+                  { value: "Felixstowe (GBFXT)",  text: "Felixstowe (GBFXT)",  checked: "Felixstowe (GBFXT)"  in selectedPorts },
+                  { value: "Gatwick (GBLGW)",     text: "Gatwick (GBLGW)",     checked: "Gatwick (GBLGW)"    in selectedPorts },
+                  { value: "Portsmouth (GBPMH)",  text: "Portsmouth (GBPMH)",  checked: "Portsmouth (GBPMH)" in selectedPorts },
+                  { value: "Sevington (GBSEV)",   text: "Sevington (GBSEV)",   checked: "Sevington (GBSEV)"  in selectedPorts },
+                  { value: "Southampton (GBSOU)", text: "Southampton (GBSOU)", checked: "Southampton (GBSOU)" in selectedPorts },
+                  { value: "Plymouth (GBPLY)",    text: "Plymouth (GBPLY)",    checked: "Plymouth (GBPLY)"   in selectedPorts },
+                  { value: "Liverpool (GBLIV)",   text: "Liverpool (GBLIV)",   checked: "Liverpool (GBLIV)"  in selectedPorts },
+                  { value: "Hull (GBHUL)",        text: "Hull (GBHUL)",        checked: "Hull (GBHUL)"       in selectedPorts },
+                  { value: "Immingham (GBIMM)",   text: "Immingham (GBIMM)",   checked: "Immingham (GBIMM)"  in selectedPorts },
+                  { value: "Dover (GBDVR)",       text: "Dover (GBDVR)",       checked: "Dover (GBDVR)"      in selectedPorts },
+                  { value: "Harwich (GBHRW)",     text: "Harwich (GBHRW)",     checked: "Harwich (GBHRW)"    in selectedPorts },
+                  { value: "Teesport (GBTEE)",    text: "Teesport (GBTEE)",    checked: "Teesport (GBTEE)"   in selectedPorts },
+                  { value: "Grangemouth (GBGRG)", text: "Grangemouth (GBGRG)", checked: "Grangemouth (GBGRG)" in selectedPorts }
+                ]
+              }) }}
             </div>
           </fieldset>
         </div>
-
-
-        <script>
-          // Live-update "N selected" as boxes change
-          (function () {
-            const group = document.getElementById('portOfEntry-group');
-            if (!group) return;
-            const boxes = group.querySelectorAll('input[name="portOfEntry"]');
-            const countEl = document.getElementById('portOfEntry-count');
-            const update = () => {
-              const n = Array.from(boxes).filter(b => b.checked).length;
-              countEl.textContent = n + ' selected';
-            };
-            boxes.forEach(b => b.addEventListener('change', update));
-          })();
-        </script>
         {# ------------------ end Port of entry block ------------------ #}
 
         <!-- Update button -->
         <button class="govuk-button govuk-!-margin-bottom-6" data-module="govuk-button" type="submit">Update</button>
+
+        <!-- Clear filters -->
         <ul class="govuk-list" id="clear-filters">
           <li><a href="#" data-start="" data-end="">Clear filters</a></li>
         </ul>
       </fieldset>
     </div>
 
-    <!-- Preset time filters -->
-    <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
-      Filter by date
-    </legend>
+    <!-- Preset date filters -->
+    <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">Filter by date</legend>
     <nav class="govuk-!-margin-top-1">
-<ul class="govuk-list" id="preset-links">
-  <li><a href="#" data-range="today">Today</a></li>
-  <li><a href="#" data-range="yesterday">Yesterday</a></li>
-  <li><a href="#" data-range="last-week">Last week</a></li>
-  <li><a href="#" data-range="last-month">Last month</a></li>
-</ul>
-
-<script>
-  function pad(n) {
-    return n.toString().padStart(2, '0');
-  }
-
-  function formatISO(date) {
-    return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}T${pad(date.getHours())}:${pad(date.getMinutes())}`;
-  }
-
-  document.addEventListener("DOMContentLoaded", () => {
-    const now = new Date();
-    const startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0);
-    const endOfToday   = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59);
-
-    const startOfYesterday = new Date(startOfToday);
-    startOfYesterday.setDate(startOfYesterday.getDate() - 1);
-    const endOfYesterday = new Date(endOfToday);
-    endOfYesterday.setDate(endOfYesterday.getDate() - 1);
-
-    const startOfLastWeek = new Date(startOfToday);
-    startOfLastWeek.setDate(startOfLastWeek.getDate() - 7);
-
-    const startOfLastMonth = new Date(startOfToday);
-    startOfLastMonth.setMonth(startOfLastMonth.getMonth() - 1);
-
-    // Map ranges
-    const ranges = {
-      "today":      { start: startOfToday, end: endOfToday },
-      "yesterday":  { start: startOfYesterday, end: endOfYesterday },
-      "last-week":  { start: startOfLastWeek, end: endOfToday },
-      "last-month": { start: startOfLastMonth, end: endOfToday }
-    };
-
-    // Apply to links
-    document.querySelectorAll("#preset-links a").forEach(link => {
-      const rangeKey = link.getAttribute("data-range");
-      if (ranges[rangeKey]) {
-        link.setAttribute("data-start", formatISO(ranges[rangeKey].start));
-        link.setAttribute("data-end",   formatISO(ranges[rangeKey].end));
-      }
-    });
-  });
-</script>
-
+      <ul class="govuk-list" id="preset-links">
+        <li><a href="#" data-range="today">Today</a></li>
+        <li><a href="#" data-range="yesterday">Yesterday</a></li>
+        <li><a href="#" data-range="last-week">Last week</a></li>
+        <li><a href="#" data-range="last-month">Last month</a></li>
+      </ul>
     </nav>
   </div>
 
   <!-- Main Content -->
   <div class="govuk-grid-column-three-quarters">
     {% if data.searchResults == 'true'%}
-    {% set ports = data.selectedPorts or [] %}
-    {% set n = ports | length %}
 
+      {# ---- CLEAN the selection for display: drop _unchecked and empties ---- #}
+      {% set raw = data.selectedPorts or [] %}
+      {% set n = 0 %}
+      {% set first = "" %}
+      {% set second = "" %}
+      {% set third = "" %}
 
+      {% for p in raw %}
+        {% if p and p != '_unchecked' %}
+          {% set n = n + 1 %}
+          {% if n == 1 %}{% set first = p %}
+          {% elif n == 2 %}{% set second = p %}
+          {% elif n == 3 %}{% set third = p %}{% endif %}
+        {% endif %}
+      {% endfor %}
 
+      <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-5">
+        {{ data.displayDateRange }}
+        {% if n == 0 %}
+          for all ports
+        {% elif n == 1 %}
+          for {{ first }}
+        {% elif n == 2 %}
+          for {{ first }}, {{ second }}
+        {% elif n == 3 %}
+          for {{ first }}, {{ second }}, {{ third }}
+        {% else %}
+          for {{ first }}, {{ second }}, {{ third }} + {{ n - 3 }} more
+        {% endif %}
+      </p>
 
-<p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-5">
-  Showing results from {{ data.displayDateRange }}
-  {% if n == 0 %}
-    for all ports
-  {% elseif n <= 3 %}
-    for {{ ports | join(', ') }}
-  {% else %}
-    for {{ ports[0] }}, {{ ports[1] }}, {{ ports[2] }} + {{ n - 3 }} more
-  {% endif %}
-</p>
+      <div class="govuk-tabs" data-module="govuk-tabs">
+        <ul class="govuk-tabs__list">
+          <li class="govuk-tabs__list-item govuk-tabs__list-item--selected">
+            <a class="govuk-tabs__tab" href="#summary">Summary view</a>
+          </li>
+          <li class="govuk-tabs__list-item">
+            <a class="govuk-tabs__tab" href="#chart">Chart view</a>
+          </li>
+        </ul>
 
-
-
-
-    <div class="govuk-tabs" data-module="govuk-tabs">
-      <ul class="govuk-tabs__list">
-        <li class="govuk-tabs__list-item govuk-tabs__list-item--selected"><a class="govuk-tabs__tab"
-            href="#summary">Summary view</a></li>
-        <li class="govuk-tabs__list-item"><a class="govuk-tabs__tab" href="#chart">Chart view</a></li>
-      </ul>
-
-      <div class="govuk-tabs__panel" id="summary">
-        <div class="stat-card-container govuk-!-margin-bottom-6">
-          <h2 class="govuk-heading-m">Matches</h2>
-          <div class="stat-card-group">
-            {{ statCard("Matches", "1,302", "95.04%") }}
-            {{ statCard("No matches", "68", "4.96%", "", "/mvp/v4/reporting/no-matches-basic.csv", "Download CSV") }}
-            {{ statCard("Total", "1,370", "") }}
-          </div>
-        </div>
-
-        <div class="stat-card-container govuk-!-margin-bottom-6">
-          <h2 class="govuk-heading-m">Releases</h2>
-          <div class="stat-card-group">
-            {{ statCard("Auto", "1,175", "98.49%", "stat-card--blue") }}
-            {{ statCard("Manual", "18", "1.51%", "stat-card--blue") }}
-            {{ statCard("Total", "1,193", "", "stat-card--blue") }}
-          </div>
-        </div>
-
-        <div class="stat-card-container govuk-!-margin-bottom-6">
-          <h2 class="govuk-heading-m">Unique clearance requests</h2>
-          <div class="stat-card-group">
-            {{ statCard("Unique clearances", "1,371", "66.50%") }}
-            {{ statCard("Total", "2,060") }}
-          </div>
-        </div>
-
-        <div class="stat-card-container govuk-!-margin-bottom-6">
-          <h2 class="govuk-heading-m">Pre-notifications by CHED type</h2>
-          <div class="stat-card-group">
-            {{ statCard("CHED A", "249", "3.52%", "stat-card--blue") }}
-            {{ statCard("CHED P", "5,399", "75.98%", "stat-card--blue") }}
-            {{ statCard("CHED PP", "1,167", "16.40%", "stat-card--blue") }}
-            {{ statCard("CHED D", "291", "4.10%", "stat-card--blue") }}
-          </div>
-        </div>
-      </div>
-
-  <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="chart">
-
-        <div class="govuk-grid-row charts govuk-!-margin-bottom-4">
-          <div class="govuk-grid-column-full chart">
-
+        <div class="govuk-tabs__panel" id="summary">
+          <div class="stat-card-container govuk-!-margin-bottom-6">
             <h2 class="govuk-heading-m">Matches</h2>
-
-            <div class="btms-chart-container ">
-              <canvas id="matchesChart" width="600" height="400"></canvas>
+            <div class="stat-card-group">
+              {{ statCard("Matches", "1,302", "95.04%") }}
+              {{ statCard("No matches", "68", "4.96%", "", "/mvp/v4/reporting/no-matches-basic.csv", "Download CSV") }}
+              {{ statCard("Total", "1,370", "") }}
             </div>
-
-            <div class="govuk-grid-row btms-stats">
-              <div class="govuk-grid-column-one-third">
-                <h3 class="govuk-heading-s">
-                  <span class="legend-dot matches-dot"></span> Matches
-                </h3>
-                <p class="govuk-heading-m">
-                  1,302 <span class="govuk-body govuk-body-s	percentage">(95.04%)</span>
-                </p>
-              </div>
-              <div class="govuk-grid-column-one-third">
-                <h3 class="govuk-heading-s">
-                  <span class="legend-dot mismatches-dot"></span> No matches
-                </h3>
-                <p class="govuk-heading-m">
-                  68 <span class="govuk-body govuk-body-s	percentage">(4.96%)</span>
-                </p>
-              </div>
-              <div class="govuk-grid-column-one-third">
-                <h3 class="govuk-heading-s">Total</h3>
-                <p class="govuk-heading-m">1,371</p>
-              </div>
-            </div>
-
-
-
           </div>
-        </div>
 
-        <div class="govuk-grid-row  charts govuk-!-margin-top-4 govuk-!-margin-bottom-4">
-          <div class="govuk-grid-column-full chart">
-
+          <div class="stat-card-container govuk-!-margin-bottom-6">
             <h2 class="govuk-heading-m">Releases</h2>
-
-            <div class="btms-chart-container ">
-              <canvas id="btmsHourlyReleasesChart" width="600" height="400"></canvas>
+            <div class="stat-card-group">
+              {{ statCard("Auto", "1,175", "98.49%", "stat-card--blue") }}
+              {{ statCard("Manual", "18", "1.51%", "", "/mvp/v4/reporting/manual-release.csv", "Download CSV") }}
+              {{ statCard("Total", "1,193", "", "stat-card--blue") }}
             </div>
-
-            <div class="govuk-grid-row btms-stats">
-              <div class="govuk-grid-column-one-third">
-                <h3 class="govuk-heading-s">
-                  <span class="legend-dot matches-dot"></span> Automatic
-                </h3>
-                <p class="govuk-heading-m">
-                  1,175 <span class="govuk-body govuk-body-s percentage">(98.49%)</span>
-                </p>
-              </div>
-              <div class="govuk-grid-column-one-third">
-                <h3 class="govuk-heading-s">
-                  <span class="legend-dot mismatches-dot"></span> Manual
-                </h3>
-                <p class="govuk-heading-m">
-                  18 <span class="govuk-body govuk-body-s	percentage">(1.51%)</span>
-                </p>
-              </div>
-              <div class="govuk-grid-column-one-third">
-                <h3 class="govuk-heading-s">Total</h3>
-                <p class="govuk-heading-m">1,371</p>
-              </div>
-            </div>
-
           </div>
-        </div>
 
-        <div class="govuk-grid-row  charts govuk-!-margin-top-4 govuk-!-margin-bottom-4">
-          <div class="govuk-grid-column-full chart">
-
+          <div class="stat-card-container govuk-!-margin-bottom-6">
             <h2 class="govuk-heading-m">Unique clearance requests</h2>
-
-            <div class="btms-chart-container ">
-              <canvas id="uniqueRequestsChart" width="600" height="400"></canvas>
+            <p class="govuk-!-font-size-16">Each clearance request is a message from CDS to BTMS about an MRN. An MRN can have multiple requests if updated. ‘Total’ counts all messages. ‘Unique’ counts distinct MRNs.</p>
+            <div class="stat-card-group">
+              {{ statCard("Unique clearances", "1,371", "66.50%") }}
+              {{ statCard("Total", "2,060") }}
             </div>
+          </div>
 
-            <div class="govuk-grid-row btms-stats">
-              <div class="govuk-grid-column-one-third">
-                <h3 class="govuk-heading-s">
-                  <span class="legend-dot matches-dot"></span> Unique clearances
-
-                </h3>
-                <p class="govuk-heading-m">
-                  1,371 <span class="govuk-body govuk-body-s	percentage">(66.50%)</span>
-                </p>
-              </div>
-              <div class="govuk-grid-column-one-third">
-                <h3 class="govuk-heading-s">Total</h3>
-                <p class="govuk-heading-m">2,060</p>
-              </div>
+          <div class="stat-card-container govuk-!-margin-bottom-6">
+            <h2 class="govuk-heading-m">Pre-notifications by CHED type</h2>
+            <div class="stat-card-group">
+              {{ statCard("CHED A", "249", "3.52%", "stat-card--blue") }}
+              {{ statCard("CHED P", "5,399", "75.98%", "stat-card--blue") }}
+              {{ statCard("CHED PP", "1,167", "16.40%", "stat-card--blue") }}
+              {{ statCard("CHED D", "291", "4.10%", "stat-card--blue") }}
             </div>
-
           </div>
         </div>
 
-        <div class="govuk-grid-row charts govuk-!-margin-top-4 govuk-!-margin-bottom-4">
-          <div class="govuk-grid-column-full chart">
-
-            <h2 class="govuk-heading-m ipaafs-heading">
-              Pre-notifications by CHED type
-
-            </h2>
-
-            <div class="btms-chart-container">
-              <canvas id="chedTypesChart" width="600" height="400"></canvas>
-            </div>
-
-            <div class="govuk-grid-row btms-stats">
-              <div class="govuk-grid-column-one-quarter">
-                <h3 class="govuk-heading-s">
-                  <span class="legend-dot ched-a-dot"></span> CHED A
-                </h3>
-                <p class="govuk-heading-m">
-                  249 <span class="govuk-body govuk-body-s percentage">(3.51%)</span>
-                </p>
-              </div>
-              <div class="govuk-grid-column-one-quarter">
-                <h3 class="govuk-heading-s">
-                  <span class="legend-dot ched-p-dot"></span> CHED P
-                </h3>
-                <p class="govuk-heading-m">
-                  5,399 <span class="govuk-body govuk-body-s percentage">(75.96%)</span>
-                </p>
-              </div>
-              <div class="govuk-grid-column-one-quarter">
-                <h3 class="govuk-heading-s">
-                  <span class="legend-dot ched-pp-dot"></span> CHED PP
-                </h3>
-                <p class="govuk-heading-m">
-                  1,167 <span class="govuk-body govuk-body-s percentage">(16.41%)</span>
-                </p>
-              </div>
-              <div class="govuk-grid-column-one-quarter">
-                <h3 class="govuk-heading-s">
-                  <span class="legend-dot ched-d-dot"></span> CHED D
-                </h3>
-                <p class="govuk-heading-m">
-                  291 <span class="govuk-body govuk-body-s percentage">(4.10%)</span>
-                </p>
-              </div>
-            </div>
-
-          </div>
+        <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="chart">
+          <div class="govuk-body">Charts would render here.</div>
         </div>
-
       </div>
-    </div>
     {% else %}
-    <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-5">No results</p>
-    {{ govukInsetText({ html: " To view reporting data, set the filters and select 'update'." }) }}
+      <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-5">No results</p>
+      {{ govukInsetText({ html: " To view reporting data, set the filters and select 'update'." }) }}
     {% endif %}
   </div>
 </div>
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    const presetLinks = document.querySelectorAll('#preset-links a, #clear-filters a');
-    const form = document.getElementById('filter-form'); // ensure your form has this id
-    const portGroup = document.getElementById('portOfEntry-group');
-    const portBoxes = portGroup ? portGroup.querySelectorAll('input[name="portOfEntry"]') : [];
-    const countEl = document.getElementById('portOfEntry-count');
+    // Safe form lookup
+    const findForm = (startEl) =>
+      document.getElementById('filter-form') || startEl.closest('form') || document.querySelector('form');
 
-    // Helper: update counter
-    function updatePortCount() {
-      const n = Array.from(portBoxes).filter(b => b.checked).length;
-      if (countEl) countEl.textContent = n + ' selected';
-    }
+    // ===== Port count (real checkboxes only) =====
+    (function setupPortCounter() {
+      const group   = document.getElementById('portOfEntry-group');
+      const boxes   = group ? group.querySelectorAll('input[name="portOfEntry"][type="checkbox"]') : [];
+      const countEl = document.getElementById('portOfEntry-count');
+      const updateCount = () => {
+        const n = Array.from(boxes).filter(b => b.checked).length;
+        if (countEl) countEl.textContent = n + ' selected';
+      };
+      boxes.forEach(b => b.addEventListener('change', updateCount));
+      updateCount();
+    })();
 
-    // Attach change event to each checkbox for live updates
-    portBoxes.forEach(b => b.addEventListener('change', updatePortCount));
+    // ===== Build dynamic preset ranges and submit on click =====
+    (function setupPresets() {
+      const pad = n => String(n).padStart(2, '0');
+      const fmt = d => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
 
-    presetLinks.forEach(link => {
-      link.addEventListener('click', e => {
-        e.preventDefault();
-        const startAttr = link.getAttribute('data-start');
-        const endAttr = link.getAttribute('data-end');
-        const pad = n => n.toString().padStart(2, '0');
+      const now = new Date();
+      const startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0);
+      const endOfToday   = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59);
+      const startOfYesterday = new Date(startOfToday); startOfYesterday.setDate(startOfYesterday.getDate() - 1);
+      const endOfYesterday   = new Date(endOfToday);   endOfYesterday.setDate(endOfYesterday.getDate() - 1);
+      const startOfLastWeek  = new Date(startOfToday); startOfLastWeek.setDate(startOfLastWeek.getDate() - 7);
+      const startOfLastMonth = new Date(startOfToday); startOfLastMonth.setMonth(startOfLastMonth.getMonth() - 1);
 
-        if (startAttr && endAttr) {
-          const start = new Date(startAttr);
-          const end = new Date(endAttr);
-          if (!isNaN(start.getTime()) && !isNaN(end.getTime())) {
-            document.getElementById('startDate').value =
-              `${pad(start.getDate())}/${pad(start.getMonth() + 1)}/${start.getFullYear()}`;
-            document.getElementById('endDate').value =
-              `${pad(end.getDate())}/${pad(end.getMonth() + 1)}/${end.getFullYear()}`;
+      const ranges = {
+        "today":      { start: startOfToday,   end: endOfToday },
+        "yesterday":  { start: startOfYesterday, end: endOfYesterday },
+        "last-week":  { start: startOfLastWeek,  end: endOfToday },
+        "last-month": { start: startOfLastMonth, end: endOfToday }
+      };
 
-            document.querySelector('[name="startTime-hour"]').value = pad(start.getHours());
-            document.querySelector('[name="startTime-minute"]').value = pad(start.getMinutes());
-            document.querySelector('[name="endTime-hour"]').value = pad(end.getHours());
-            document.querySelector('[name="endTime-minute"]').value = pad(end.getMinutes());
-          }
-        } else {
-          // Clear all fields
-          document.getElementById('startDate').value = '';
-          document.getElementById('endDate').value = '';
-          document.querySelector('[name="startTime-hour"]').value = '';
-          document.querySelector('[name="startTime-minute"]').value = '';
-          document.querySelector('[name="endTime-hour"]').value = '';
-          document.querySelector('[name="endTime-minute"]').value = '';
+      document.querySelectorAll('#preset-links a').forEach(link => {
+        const key = link.getAttribute('data-range');
+        if (!ranges[key]) return;
+        link.dataset.start = fmt(ranges[key].start);
+        link.dataset.end   = fmt(ranges[key].end);
 
-          // Clear all port checkboxes
-          portBoxes.forEach(b => b.checked = false);
-          updatePortCount();
-        }
+        link.addEventListener('click', e => {
+          e.preventDefault();
+          const form = findForm(link);
+          const start = new Date(link.dataset.start);
+          const end   = new Date(link.dataset.end);
+          if (isNaN(start) || isNaN(end)) return;
 
-        if (form) form.submit();
+          const dd = n => String(n).padStart(2, '0');
+          document.getElementById('startDate').value =
+            `${dd(start.getDate())}/${dd(start.getMonth()+1)}/${start.getFullYear()}`;
+          document.getElementById('endDate').value =
+            `${dd(end.getDate())}/${dd(end.getMonth()+1)}/${end.getFullYear()}`;
+
+          document.querySelector('[name="startTime-hour"]').value   = dd(start.getHours());
+          document.querySelector('[name="startTime-minute"]').value = dd(start.getMinutes());
+          document.querySelector('[name="endTime-hour"]').value     = dd(end.getHours());
+          document.querySelector('[name="endTime-minute"]').value   = dd(end.getMinutes());
+
+          form && form.submit();
+        });
       });
-    });
+    })();
+
+    // ===== Clear filters (dates + times + port checkboxes) and submit =====
+    (function setupClear() {
+      const clearLink = document.querySelector('#clear-filters a');
+      if (!clearLink) return;
+
+      clearLink.addEventListener('click', e => {
+        e.preventDefault();
+        const form = (document.getElementById('filter-form') || document.querySelector('form'));
+
+        document.getElementById('startDate').value = '';
+        document.getElementById('endDate').value   = '';
+        ['startTime-hour','startTime-minute','endTime-hour','endTime-minute']
+          .forEach(name => { const el = document.querySelector(`[name="${name}"]`); if (el) el.value = ''; });
+
+        document.querySelectorAll('input[name="portOfEntry"][type="checkbox"]').forEach(b => b.checked = false);
+        const countEl = document.getElementById('portOfEntry-count');
+        if (countEl) countEl.textContent = '0 selected';
+
+        form && form.submit();
+      });
+    })();
   });
 </script>
-
 {% endblock %}

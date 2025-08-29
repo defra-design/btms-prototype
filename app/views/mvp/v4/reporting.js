@@ -7,7 +7,32 @@ const moment = require('moment');
 module.exports = (router) => {
   console.log('[routes] reporting.js loaded');
 
-  // --- helper: get distinct ports from data/no-matches-basic.json ---
+  // ---------- small CSV helpers ----------
+  const csvQuote = v => `"${String(v ?? '').replace(/"/g, '""')}"`;
+  const norm = s => String(s ?? '').trim().toUpperCase();
+
+  /**
+   * Build a CSV string with a metadata header block.
+   * meta = { reportName, displayRange, portsLabel }
+   * headers = 'A,B,C'
+   * rows = array of arrays (values already ordered to match headers)
+   */
+  function buildCsv({ meta, headers, rows }) {
+    const metaRows = [
+      ['Report',       meta.reportName],
+      ['Generated at', moment().format('D MMMM YYYY, HH:mm')],
+      ['Date range',   meta.displayRange || 'Not filtered'],
+      ['Ports',        meta.portsLabel || 'All ports'],
+    ]
+      .map(r => r.map(csvQuote).join(','))
+      .join('\n');
+
+    const body = rows.map(r => r.map(csvQuote).join(',')).join('\n');
+
+    return `${metaRows}\n\n${headers}\n${body}\n`;
+  }
+
+  // ---------- distinct ports from a data file (for v2 checkbox options) ----------
   function getUniquePorts() {
     const file = path.join(process.cwd(), 'app', 'data', 'no-matches-basic.json');
     try {
@@ -20,25 +45,18 @@ module.exports = (router) => {
     }
   }
 
-  // --- Helper to register a pair of GET/POST routes for a summary view ---
+  // ---------- helper to register paired summary routes ----------
   const registerSummary = ({ viewPath, getPath, postPath, isV2 = false }) => {
+    // POST (persist filters to session)
     router.post(postPath, (req, res) => {
       req.session.data = req.session.data || {};
 
-      // ----- dates/times -----
-const moment = require('moment');
-
-// If form fields are provided, use them. Otherwise default to "last 24 hours"
-const now = moment();
-const twentyFourHoursAgo = moment().subtract(24, 'hours');
-
-const rawStartDate = req.body['startDate'] || twentyFourHoursAgo.format('DD/MM/YYYY');
-const rawEndDate   = req.body['endDate']   || now.format('DD/MM/YYYY');
-
-const startHour    = req.body['startTime-hour']   || twentyFourHoursAgo.format('HH');
-const startMinute  = req.body['startTime-minute'] || twentyFourHoursAgo.format('mm');
-const endHour      = req.body['endTime-hour']     || now.format('HH');
-const endMinute    = req.body['endTime-minute']   || now.format('mm');
+      const rawStartDate = req.body['startDate'] || '29/06/2025';
+      const rawEndDate   = req.body['endDate']   || '30/06/2025';
+      const startHour    = req.body['startTime-hour']   || '00';
+      const startMinute  = req.body['startTime-minute'] || '00';
+      const endHour      = req.body['endTime-hour']     || '23';
+      const endMinute    = req.body['endTime-minute']   || '59';
 
       req.session.data.startDate = rawStartDate;
       req.session.data.endDate   = rawEndDate;
@@ -50,34 +68,34 @@ const endMinute    = req.body['endTime-minute']   || now.format('mm');
 
       const sameDay = startDateTime.isSame(endDateTime, 'day');
       req.session.data.displayDateRange = sameDay
-        ? `${startDateTime.format('HH:mm')} to ${endDateTime.format('HH:mm')} on ${startDateTime.format('D MMMM YYYY')}`
-        : `${startDateTime.format('D MMMM YYYY')} at ${startDateTime.format('HH:mm')} to ${endDateTime.format('D MMMM YYYY')} at ${endDateTime.format('HH:mm')}`;
+        ? `Showing results from ${startDateTime.format('HH:mm')} to ${endDateTime.format('HH:mm')} on ${startDateTime.format('D MMMM YYYY')}`
+        : `Showing results from ${startDateTime.format('D MMMM YYYY')} at ${startDateTime.format('HH:mm')} to ${endDateTime.format('D MMMM YYYY')} at ${endDateTime.format('HH:mm')}`;
 
-      // ----- v2-only: persist selected ports, removing the hidden marker -----
+      // v2: persist selected ports (checkbox group posts as array or single value)
       if (isV2) {
-        let selected = req.body.portOfEntry || [];
-        if (!Array.isArray(selected)) selected = [selected];
-        // remove the prototype-kit hidden marker and empties
-        selected = selected.filter(v => v && v !== '_unchecked');
-        req.session.data.selectedPorts = selected;
-        console.log('[reporting v2] selectedPorts:', selected);
+        let selectedPorts = Array.isArray(req.body.portOfEntry)
+          ? req.body.portOfEntry
+          : (req.body.portOfEntry ? [req.body.portOfEntry] : []);
+        // strip the hidden marker if present
+        selectedPorts = selectedPorts.filter(v => v && v !== '_unchecked');
+        req.session.data.selectedPorts = selectedPorts;
       }
 
       req.session.data.searchResults = 'true';
-      return res.redirect(getPath);
+      res.redirect(getPath);
     });
 
+    // GET (render view)
     router.get(getPath, (req, res) => {
       req.session.data = req.session.data || {};
-      // v2: supply dynamic port options for building checkbox lists if needed
       if (isV2) {
         req.session.data.portOptions = getUniquePorts();
       }
-      return res.render(viewPath, { data: req.session.data });
+      res.render(viewPath, { data: req.session.data });
     });
   };
 
-  // --- Summary view v1 ---
+  // ---------- Summary view v1 ----------
   registerSummary({
     viewPath: 'mvp/v4/reporting/summary-view',
     getPath:  '/mvp/v4/reporting/summary-view',
@@ -85,7 +103,7 @@ const endMinute    = req.body['endTime-minute']   || now.format('mm');
     isV2: false
   });
 
-  // --- Summary view v2 (new) ---
+  // ---------- Summary view v2 (new) ----------
   registerSummary({
     viewPath: 'mvp/v4/reporting/summary-view-v2',
     getPath:  '/mvp/v4/reporting/summary-view-v2',
@@ -93,7 +111,7 @@ const endMinute    = req.body['endTime-minute']   || now.format('mm');
     isV2: true
   });
 
-  // --- No matches (full table) ---
+  // ---------- No matches (full table) ----------
   router.get('/mvp/v4/reporting/no-matches', (req, res) => {
     const file = path.join(process.cwd(), 'app', 'data', 'no-matches.json');
     console.log('[routes] no-matches reading:', file);
@@ -129,37 +147,7 @@ const endMinute    = req.body['endTime-minute']   || now.format('mm');
     });
   });
 
-  // --- Search results (title = MRN, line data from query) ---
-  router.get('/mvp/v4/search-results', (req, res) => {
-    const { mrn, cc, desc, ched, auth, updated } = req.query;
-
-    // Accept several inputs and normalise to "D MMMM YYYY, HH:mm"
-    const parseFormats = [
-      'D MMMM YYYY [at] h:mma',
-      'D MMMM YYYY, HH:mm',
-      moment.ISO_8601
-    ];
-
-    let displayUpdated = '';
-    if (updated) {
-      const m = moment(updated, parseFormats, true);
-      displayUpdated = m.isValid() ? m.format('D MMMM YYYY, HH:mm') : updated;
-    }
-
-    res.render('mvp/v4/search-results', {
-      title: mrn || 'Search results',
-      headerLastUpdated: displayUpdated,
-      line: {
-        commodityCode: cc   || '',
-        description:   desc || '',
-        chedRef:       ched || '',
-        authority:     auth || '',
-        lastUpdated:   displayUpdated
-      }
-    });
-  });
-
-  // --- No matches (basic: MRN / port / lastUpdated) ---
+  // ---------- No matches (basic table) ----------
   router.get('/mvp/v4/reporting/no-matches-basic', (req, res) => {
     console.log('[routes] HIT /mvp/v4/reporting/no-matches-basic');
 
@@ -175,14 +163,12 @@ const endMinute    = req.body['endTime-minute']   || now.format('mm');
       raw = [];
     }
 
-    // Normalise
     const rowsNormalised = raw.map(r => ({
       mrn: r.mrn || '',
       portOfEntry: r.portOfEntry || '',
       lastUpdated: r.lastUpdated || ''
     }));
 
-    // Sort by lastUpdated (newest first)
     const parseGovDate = s => (s ? moment(s, 'D MMMM YYYY [at] h:mma', true) : null);
     rowsNormalised.sort((a, b) => {
       const ma = parseGovDate(a.lastUpdated);
@@ -193,7 +179,6 @@ const endMinute    = req.body['endTime-minute']   || now.format('mm');
       return 0;
     });
 
-    // Pagination
     const pageSize = 50;
     const page       = Math.max(1, parseInt(req.query.page || '1', 10));
     const total      = rowsNormalised.length;
@@ -223,5 +208,106 @@ const endMinute    = req.body['endTime-minute']   || now.format('mm');
     });
   });
 
-  // NOTE: no duplicate POST for /summary-view-v2 below — handled via registerSummary above.
+  // ---------- Search results (MRN details) ----------
+  router.get('/mvp/v4/search-results', (req, res) => {
+    const { mrn, cc, desc, ched, auth, updated } = req.query;
+
+    const parseFormats = [
+      'D MMMM YYYY [at] h:mma',
+      'D MMMM YYYY, HH:mm',
+      moment.ISO_8601
+    ];
+
+    let displayUpdated = '';
+    if (updated) {
+      const m = moment(updated, parseFormats, true);
+      displayUpdated = m.isValid() ? m.format('D MMMM YYYY, HH:mm') : updated;
+    }
+
+    res.render('mvp/v4/search-results', {
+      title: mrn || 'Search results',
+      headerLastUpdated: displayUpdated,
+      line: {
+        commodityCode: cc   || '',
+        description:   desc || '',
+        chedRef:       ched || '',
+        authority:     auth || '',
+        lastUpdated:   displayUpdated
+      }
+    });
+  });
+
+  // =========================================================
+  // CSV: No matches (basic) — filter by selected ports only
+  // (Date/time NOT applied to rows; meta shows page range)
+  // =========================================================
+  router.get('/mvp/v4/reporting/no-matches-basic.csv', (req, res) => {
+    const file = path.join(process.cwd(), 'app', 'data', 'no-matches-basic-large.json');
+
+    // Load data
+    let rows = [];
+    try { rows = JSON.parse(fs.readFileSync(file, 'utf8')) || []; }
+    catch (e) { console.error('[csv] read error:', e.message); rows = []; }
+
+    // Selected ports (ignore hidden marker)
+    const selected = (req.session?.data?.selectedPorts || []).filter(v => v && v !== '_unchecked');
+
+    // Filter by ports only (no date filtering)
+    if (selected.length) {
+      const wanted = new Set(selected.map(norm));
+      rows = rows.filter(r => wanted.has(norm(r.portOfEntry)));
+    }
+
+    // Build CSV
+    const csv = buildCsv({
+      meta: {
+        reportName:  'No matches',
+        displayRange: req.session?.data?.displayDateRange,
+        portsLabel:   selected.length ? selected.join('; ') : 'All ports',
+      },
+      headers: 'MRN,Port of entry,Last updated',
+      rows: rows.map(r => [r.mrn, r.portOfEntry, r.lastUpdated]),
+    });
+
+    res.setHeader('Content-Type', 'text/csv; charset=utf-8');
+    res.setHeader('Content-Disposition', 'attachment; filename="no-matches.csv"');
+    res.send(csv);
+  });
+
+  // =========================================================
+  // CSV: Manual releases — filter by selected ports only
+  // (Date/time NOT applied to rows; meta shows page range)
+  // =========================================================
+  router.get('/mvp/v4/reporting/manual-release.csv', (req, res) => {
+    const file = path.join(process.cwd(), 'app', 'data', 'manual-release.json');
+
+    // Load data
+    let rows = [];
+    try { rows = JSON.parse(fs.readFileSync(file, 'utf8')) || []; }
+    catch (e) { console.error('[csv] read error:', e.message); rows = []; }
+
+    // Selected ports (ignore hidden marker)
+    const selected = (req.session?.data?.selectedPorts || []).filter(v => v && v !== '_unchecked');
+
+    // Filter by ports only (no date filtering)
+    if (selected.length) {
+      const wanted = new Set(selected.map(norm));
+      rows = rows.filter(r => wanted.has(norm(r.portOfEntry)));
+    }
+
+    // Build CSV
+    const csv = buildCsv({
+      meta: {
+        reportName:  'Manual releases',
+        displayRange: req.session?.data?.displayDateRange,
+        portsLabel:   selected.length ? selected.join('; ') : 'All ports',
+      },
+      headers: 'MRN,Port of entry,Last updated',
+      rows: rows.map(r => [r.mrn, r.portOfEntry, r.lastUpdated]),
+    });
+
+    res.setHeader('Content-Type', 'text/csv; charset=utf-8');
+    res.setHeader('Content-Disposition', 'attachment; filename="manual-releases.csv"');
+    res.send(csv);
+  });
 };
