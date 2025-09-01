@@ -15,6 +15,8 @@
   .govuk-checkboxes label { font-weight: 100; }
   .reporting .govuk-grid-column-one-quarter.filters { padding: 10px; }
   .port-scroll { max-height: 220px; overflow-y: auto; border-bottom: 1px solid #aaa9a9; padding: 5px; }
+  h1:focus { outline: 0; }
+
 </style>
 
 <script>
@@ -33,7 +35,8 @@
   <div class="govuk-grid-column-one-quarter filters">
     <div class="govuk-form-group govuk-!-margin-bottom-1">
       <fieldset class="govuk-fieldset">
-        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">Filter by date </legend>
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">Filter </legend>
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">Date and time </legend>
     <nav class="govuk-!-margin-top-1">
       <ul class="govuk-list" id="preset-links">
         <li><a href="#" data-range="today">Today</a></li>
@@ -74,7 +77,7 @@
         </div>
 
         <!-- End time -->
-        <div class="govuk-form-group govuk-!-margin-bottom-4">
+        <div class="govuk-form-group govuk-!-margin-bottom-4 govuk-!-padding-bottom-4" style="border-bottom: 1px solid #aaa9a9; ">
           {{ timeInput({
             id: "end-time",
             namePrefix: "endTime",
@@ -88,17 +91,17 @@
         {% set selectedPorts = data.selectedPorts or [] %}
         <div class="govuk-form-group govuk-!-margin-bottom-4" id="portOfEntry-group">
           <fieldset class="govuk-fieldset" aria-describedby="portOfEntry-hint portOfEntry-count">
-            <legend class="govuk-fieldset__legend govuk-fieldset__legend--s govuk-!-font-size-16 govuk-!-margin-bottom-2">
-              Port of entry (optional)
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--s govuk-!-font-size-19 govuk-!-margin-bottom-2">
+               Port of entry <span class="govuk-!-font-size-16">(optional)</span>
             </legend>
 
             <div id="portOfEntry-hint" class="govuk-hint govuk-!-margin-bottom-1 govuk-!-font-size-16">
-              Select one or more ports
+              Filter by port of entry
             </div>
 
-            <p id="portOfEntry-count" class="govuk-hint govuk-!-margin-top-0 govuk-!-margin-bottom-2 govuk-!-font-size-16" aria-live="polite">
+            <!-- <p id="portOfEntry-count" class="govuk-hint govuk-!-margin-top-0 govuk-!-margin-bottom-2 govuk-!-font-size-16" aria-live="polite">
               {{ (selectedPorts | length) }} selected
-            </p>
+            </p> -->
 
             <div class="port-scroll">
               {{ govukCheckboxes({
@@ -407,6 +410,11 @@
       const base = form.action ? form.action.split('#')[0] : window.location.pathname;
       form.action = `${base}#${hash}`;
     };
+    // Attach to update button
+document.querySelector('button[type="submit"]').addEventListener('click', e => {
+  const form = findForm(e.target);
+  if (form) setActionHash(form, 'page-top');
+});
 
     // ---- Port counter
     (function () {

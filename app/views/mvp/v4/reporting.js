@@ -33,7 +33,11 @@ module.exports = (router) => {
     return _.sortBy(_.uniq(ports));
   }
 
-  function getDateRangeFromSession(req) {
+  /**
+   * Get date range from session. If none supplied, use a fallback window.
+   * The fallback can be passed per-call, e.g. { start: moment().subtract(1,'month'), end: moment(), label: 'last month' }.
+   */
+  function getDateRangeFromSession(req, fallback = null) {
     const sd  = req.session?.data?.startDate;               // DD/MM/YYYY
     const ed  = req.session?.data?.endDate;
     const sth = req.session?.data?.startTime?.hour   || '00';
@@ -41,9 +45,8 @@ module.exports = (router) => {
     const enh = req.session?.data?.endTime?.hour     || '23';
     const enm = req.session?.data?.endTime?.minute   || '59';
 
-    let start = moment().subtract(24, 'hours');
-    let end   = moment();
     let usedSession = false;
+    let start, end;
 
     if (sd && ed) {
       const s = moment(`${sd} ${sth}:${stm}`, 'DD/MM/YYYY HH:mm', true);
@@ -51,13 +54,25 @@ module.exports = (router) => {
       if (s.isValid()) { start = s; usedSession = true; }
       if (e.isValid()) { end   = e; usedSession = true; }
     }
-    return { start, end, usedSession };
+
+    if (!usedSession) {
+      const fb = fallback || {
+        start: moment().subtract(24, 'hours'),
+        end:   moment(),
+        label: 'last 24 hours'
+      };
+      start = fb.start.clone ? fb.start.clone() : fb.start;
+      end   = fb.end.clone   ? fb.end.clone()   : fb.end;
+      return { start, end, usedSession, fallbackLabel: fb.label || 'last 24 hours' };
+    }
+
+    return { start, end, usedSession, fallbackLabel: 'last 24 hours' };
   }
 
-  function formatRangeLabel(start, end, usedSession) {
+  function formatRangeLabel(start, end, usedSession, fallbackLabel = 'last 24 hours') {
     const left  = start.format('D MMMM YYYY [at] HH:mm');
     const right = end.format('D MMMM YYYY [at] HH:mm');
-    return usedSession ? `${left} to ${right}` : `last 24 hours (${left} to ${right})`;
+    return usedSession ? `${left} to ${right}` : `${fallbackLabel} (${left} to ${right})`;
   }
 
   function cleanSelectedPorts(req) {
@@ -161,7 +176,13 @@ module.exports = (router) => {
         // show list of ports; and compute live stats
         req.session.data.portOptions = getUniquePorts();
 
-        const range = getDateRangeFromSession(req);
+        // *** Change: for v2 summary, default to "last month (this time last month → now)" if the user hasn't set dates ***
+        const range = getDateRangeFromSession(req, {
+          start: moment().subtract(1, 'month'),
+          end:   moment(),
+          label: 'last month'
+        });
+
         const ports = cleanSelectedPorts(req);
 
         // Read seed data
@@ -357,7 +378,12 @@ module.exports = (router) => {
   router.get('/mvp/v4/reporting/no-matches-basic.csv', (req, res) => {
     const seedRows = readJsonSafe('app/data/no-matches-basic-large.json');
 
-    const range = getDateRangeFromSession(req);
+    // *** Change: default to "last month" if the user hasn't set dates ***
+    const range = getDateRangeFromSession(req, {
+      start: moment().subtract(1, 'month'),
+      end:   moment(),
+      label: 'last month'
+    });
     const ports = cleanSelectedPorts(req);
 
     // Shift to selected end time so CSV looks current for the chosen window
@@ -367,7 +393,7 @@ module.exports = (router) => {
 
     const meta = metadataLinesCSV({
       title: 'BTMS — No matches (basic)',
-      rangeLabel: formatRangeLabel(range.start, range.end, range.usedSession),
+      rangeLabel: formatRangeLabel(range.start, range.end, range.usedSession, range.fallbackLabel),
       ports
     });
 
@@ -386,7 +412,7 @@ module.exports = (router) => {
     const seedRows = readJsonSafe('app/data/manual-release.json');
 
     const respectRange = String(req.query.respectRange || '').trim() === '1';
-    const range = getDateRangeFromSession(req);
+    const range = getDateRangeFromSession(req); // defaults to last 24h when unset
     const ports = cleanSelectedPorts(req);
 
     // Shift to selected end time for consistency
@@ -404,7 +430,7 @@ module.exports = (router) => {
     const meta = metadataLinesCSV({
       title: 'BTMS — Manual releases',
       rangeLabel: respectRange
-        ? formatRangeLabel(range.start, range.end, range.usedSession)
+        ? formatRangeLabel(range.start, range.end, range.usedSession, range.fallbackLabel)
         : 'all dates (date filter not applied)',
       ports
     });

@@ -28,6 +28,17 @@ addFilter('chedTime', function() {
     }
 });
 
+module.exports = function (env) {
+  const filters = {};
+
+  filters.commas = (n) => {
+    const num = Number(n || 0);
+    return Number.isFinite(num) ? num.toLocaleString('en-GB') : n;
+  };
+
+  return filters;
+};
+
 // Filter for mrnTime (1 day ago, 1 hour earlier)
 addFilter('mrnTime', function() {
     try {

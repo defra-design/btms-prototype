@@ -1,342 +1,752 @@
 [
   {
-    "mrn": "25GB4JTFNDMEAVSY4",
-    "portOfEntry": "FELIXSTOWE (GBFXT)",
-    "lastUpdated": "29 August 2025, 10:59"
-  },
-  {
-    "mrn": "25GB6DJCUBOQMIMU2",
+    "mrn": "25GB6T8MU7L0R5K4LX",
     "portOfEntry": "GATWICK (GBLGW)",
-    "lastUpdated": "29 August 2025, 10:38"
+    "lastUpdated": "1 September 2025, 13:26"
   },
   {
-    "mrn": "25GBKW0TUUF4DN7TJ",
-    "portOfEntry": "PORTSMOUTH (GBPMH)",
-    "lastUpdated": "29 August 2025, 10:17"
-  },
-  {
-    "mrn": "25GBG55BC76NEIVAR",
-    "portOfEntry": "GATWICK (GBLGW)",
-    "lastUpdated": "29 August 2025, 09:57"
-  },
-  {
-    "mrn": "25GBJW4LYJNR8WP27",
+    "mrn": "25GBFISIU81EZ2WY2",
     "portOfEntry": "SEVINGTON (GBSEV)",
-    "lastUpdated": "29 August 2025, 09:36"
+    "lastUpdated": "1 September 2025, 08:36"
   },
   {
-    "mrn": "25GBEK3WOUNFZL3IH",
-    "portOfEntry": "SOUTHAMPTON (GBSOU)",
-    "lastUpdated": "29 August 2025, 09:16"
+    "mrn": "25GB56XXTLLPH732UR",
+    "portOfEntry": "SEVINGTON (GBSEV)",
+    "lastUpdated": "1 September 2025, 03:46"
   },
   {
-    "mrn": "25GBZ4R5W6MTY9P6L",
-    "portOfEntry": "GATWICK (GBLGW)",
-    "lastUpdated": "29 August 2025, 08:55"
-  },
-  {
-    "mrn": "25GBB6XA2Q0HWKVWQ",
-    "portOfEntry": "FELIXSTOWE (GBFXT)",
-    "lastUpdated": "29 August 2025, 08:34"
-  },
-  {
-    "mrn": "25GBOB557EFNJ7Q5U",
+    "mrn": "25GBH700P2X09V6AK",
     "portOfEntry": "PLYMOUTH (GBPLY)",
-    "lastUpdated": "29 August 2025, 08:14"
+    "lastUpdated": "31 August 2025, 22:56"
   },
   {
-    "mrn": "25GBJVSZZE72SK4WD",
-    "portOfEntry": "LIVERPOOL (GBLIV)",
-    "lastUpdated": "29 August 2025, 07:53"
-  },
-  {
-    "mrn": "25GBNP2X9B60U8N5L",
-    "portOfEntry": "HULL (GBHUL)",
-    "lastUpdated": "29 August 2025, 07:33"
-  },
-  {
-    "mrn": "25GBLG24M1TFIGPWY",
-    "portOfEntry": "PLYMOUTH (GBPLY)",
-    "lastUpdated": "29 August 2025, 07:12"
-  },
-  {
-    "mrn": "25GBV8SKXVG73DPWR",
-    "portOfEntry": "GATWICK (GBLGW)",
-    "lastUpdated": "29 August 2025, 06:51"
-  },
-  {
-    "mrn": "25GBE27SVC337H66Z",
-    "portOfEntry": "IMMINGHAM (GBIMM)",
-    "lastUpdated": "29 August 2025, 06:31"
-  },
-  {
-    "mrn": "25GBE88SNJAE83B1Z",
-    "portOfEntry": "GATWICK (GBLGW)",
-    "lastUpdated": "29 August 2025, 06:10"
-  },
-  {
-    "mrn": "25GB0XKVKDYUJ637Y",
-    "portOfEntry": "GATWICK (GBLGW)",
-    "lastUpdated": "29 August 2025, 05:50"
-  },
-  {
-    "mrn": "25GB78YXY9QMSHURT",
-    "portOfEntry": "DOVER (GBDVR)",
-    "lastUpdated": "29 August 2025, 05:29"
-  },
-  {
-    "mrn": "25GBPS9P981RXMAKG",
-    "portOfEntry": "PLYMOUTH (GBPLY)",
-    "lastUpdated": "29 August 2025, 05:08"
-  },
-  {
-    "mrn": "25GBHRWE0YXUS9CBG",
-    "portOfEntry": "GATWICK (GBLGW)",
-    "lastUpdated": "29 August 2025, 04:48"
-  },
-  {
-    "mrn": "25GBEVKMP57LEHH7E",
-    "portOfEntry": "SEVINGTON (GBSEV)",
-    "lastUpdated": "29 August 2025, 04:27"
-  },
-  {
-    "mrn": "25GB3VEOWD8RVY0ZA",
-    "portOfEntry": "HARWICH (GBHRW)",
-    "lastUpdated": "29 August 2025, 04:07"
-  },
-  {
-    "mrn": "25GB9WPWSYIW4C0F5",
-    "portOfEntry": "HARWICH (GBHRW)",
-    "lastUpdated": "29 August 2025, 03:46"
-  },
-  {
-    "mrn": "25GBPJSPM5804C3I3",
-    "portOfEntry": "HARWICH (GBHRW)",
-    "lastUpdated": "29 August 2025, 03:25"
-  },
-  {
-    "mrn": "25GB7R3E1K9SE7L6L",
-    "portOfEntry": "HULL (GBHUL)",
-    "lastUpdated": "29 August 2025, 03:05"
-  },
-  {
-    "mrn": "25GBN89R5TI53CJDB",
-    "portOfEntry": "DOVER (GBDVR)",
-    "lastUpdated": "29 August 2025, 02:44"
-  },
-  {
-    "mrn": "25GB7B3W2L9MY7ANC",
-    "portOfEntry": "DOVER (GBDVR)",
-    "lastUpdated": "29 August 2025, 02:24"
-  },
-  {
-    "mrn": "25GBAJJF4IFO3GVHY",
-    "portOfEntry": "SEVINGTON (GBSEV)",
-    "lastUpdated": "29 August 2025, 02:03"
-  },
-  {
-    "mrn": "25GBHXAJT1HJDBBN8",
-    "portOfEntry": "HARWICH (GBHRW)",
-    "lastUpdated": "29 August 2025, 01:42"
-  },
-  {
-    "mrn": "25GBHBO3O7HOVKBPA",
-    "portOfEntry": "SEVINGTON (GBSEV)",
-    "lastUpdated": "29 August 2025, 01:22"
-  },
-  {
-    "mrn": "25GBJCCQH3AD4L1SU",
-    "portOfEntry": "HARWICH (GBHRW)",
-    "lastUpdated": "29 August 2025, 01:01"
-  },
-  {
-    "mrn": "25GBBKDJL0XEY0ZM4",
-    "portOfEntry": "LIVERPOOL (GBLIV)",
-    "lastUpdated": "29 August 2025, 00:41"
-  },
-  {
-    "mrn": "25GBUSKVI10Q3560S",
-    "portOfEntry": "HULL (GBHUL)",
-    "lastUpdated": "29 August 2025, 00:20"
-  },
-  {
-    "mrn": "25GB4RE7MAV4F5VJM",
-    "portOfEntry": "DOVER (GBDVR)",
-    "lastUpdated": "28 August 2025, 23:59"
-  },
-  {
-    "mrn": "25GB8EGEO9R0I5RIK",
-    "portOfEntry": "HULL (GBHUL)",
-    "lastUpdated": "28 August 2025, 23:39"
-  },
-  {
-    "mrn": "25GBL0V46CT4C2PMJ",
-    "portOfEntry": "FELIXSTOWE (GBFXT)",
-    "lastUpdated": "28 August 2025, 23:18"
-  },
-  {
-    "mrn": "25GBJOQRPOYSENWWX",
-    "portOfEntry": "LIVERPOOL (GBLIV)",
-    "lastUpdated": "28 August 2025, 22:58"
-  },
-  {
-    "mrn": "25GBPXI0JWMZ659HW",
-    "portOfEntry": "FELIXSTOWE (GBFXT)",
-    "lastUpdated": "28 August 2025, 22:37"
-  },
-  {
-    "mrn": "25GB5H5ZFPPDJFI7O",
-    "portOfEntry": "GATWICK (GBLGW)",
-    "lastUpdated": "28 August 2025, 22:16"
-  },
-  {
-    "mrn": "25GBGH02V4C5R2D6G",
-    "portOfEntry": "SEVINGTON (GBSEV)",
-    "lastUpdated": "28 August 2025, 21:56"
-  },
-  {
-    "mrn": "25GBKV81KJF5ZMJH3",
-    "portOfEntry": "GATWICK (GBLGW)",
-    "lastUpdated": "28 August 2025, 21:35"
-  },
-  {
-    "mrn": "25GBU94TAGY08VPMY",
-    "portOfEntry": "HULL (GBHUL)",
-    "lastUpdated": "28 August 2025, 21:15"
-  },
-  {
-    "mrn": "25GBV3TRH13SQYW3J",
-    "portOfEntry": "HULL (GBHUL)",
-    "lastUpdated": "28 August 2025, 20:54"
-  },
-  {
-    "mrn": "25GBEE9V61YCF3Q1D",
-    "portOfEntry": "DOVER (GBDVR)",
-    "lastUpdated": "28 August 2025, 20:33"
-  },
-  {
-    "mrn": "25GB9URPEPE5KIQ24",
-    "portOfEntry": "PORTSMOUTH (GBPMH)",
-    "lastUpdated": "28 August 2025, 20:13"
-  },
-  {
-    "mrn": "25GBMQRYT6Y1TQ1Y6",
-    "portOfEntry": "PLYMOUTH (GBPLY)",
-    "lastUpdated": "28 August 2025, 19:52"
-  },
-  {
-    "mrn": "25GBRNP3PRNUY0LU1",
-    "portOfEntry": "SOUTHAMPTON (GBSOU)",
-    "lastUpdated": "28 August 2025, 19:32"
-  },
-  {
-    "mrn": "25GBOGUHGY5UU9AVM",
-    "portOfEntry": "SOUTHAMPTON (GBSOU)",
-    "lastUpdated": "28 August 2025, 19:11"
-  },
-  {
-    "mrn": "25GBE0W18872TWVUB",
-    "portOfEntry": "SEVINGTON (GBSEV)",
-    "lastUpdated": "28 August 2025, 18:50"
-  },
-  {
-    "mrn": "25GBCW0S2N6K7JTG8",
-    "portOfEntry": "LIVERPOOL (GBLIV)",
-    "lastUpdated": "28 August 2025, 18:30"
-  },
-  {
-    "mrn": "25GBUKKU0KNSQ4IG6",
-    "portOfEntry": "HARWICH (GBHRW)",
-    "lastUpdated": "28 August 2025, 18:09"
-  },
-  {
-    "mrn": "25GBJ13NACBBZJ3L6",
-    "portOfEntry": "HARWICH (GBHRW)",
-    "lastUpdated": "28 August 2025, 17:49"
-  },
-  {
-    "mrn": "25GBBAJU6MV5SUDQ5",
-    "portOfEntry": "IMMINGHAM (GBIMM)",
-    "lastUpdated": "28 August 2025, 17:28"
-  },
-  {
-    "mrn": "25GBJ5JKTPVPQLDT4",
-    "portOfEntry": "PORTSMOUTH (GBPMH)",
-    "lastUpdated": "28 August 2025, 17:07"
-  },
-  {
-    "mrn": "25GBIKUEU48J6NPGO",
-    "portOfEntry": "PORTSMOUTH (GBPMH)",
-    "lastUpdated": "28 August 2025, 16:47"
-  },
-  {
-    "mrn": "25GBGHQJ80YOK90IG",
-    "portOfEntry": "IMMINGHAM (GBIMM)",
-    "lastUpdated": "28 August 2025, 16:26"
-  },
-  {
-    "mrn": "25GBNOZZA5J71B2OO",
-    "portOfEntry": "HULL (GBHUL)",
-    "lastUpdated": "28 August 2025, 16:06"
-  },
-  {
-    "mrn": "25GBYCVJ7866GUO15",
+    "mrn": "25GBW29ETT8UL626D",
     "portOfEntry": "TEESPORT (GBTEE)",
-    "lastUpdated": "28 August 2025, 15:45"
+    "lastUpdated": "31 August 2025, 18:06"
   },
   {
-    "mrn": "25GBKG85FMS6KMJDI",
-    "portOfEntry": "GATWICK (GBLGW)",
-    "lastUpdated": "28 August 2025, 15:24"
-  },
-  {
-    "mrn": "25GBJ48FUME3KWX3A",
-    "portOfEntry": "PORTSMOUTH (GBPMH)",
-    "lastUpdated": "28 August 2025, 15:04"
-  },
-  {
-    "mrn": "25GBDF7GV7DX1YT4M",
-    "portOfEntry": "SEVINGTON (GBSEV)",
-    "lastUpdated": "28 August 2025, 14:43"
-  },
-  {
-    "mrn": "25GBETOG9M25O17W9",
-    "portOfEntry": "SEVINGTON (GBSEV)",
-    "lastUpdated": "28 August 2025, 14:23"
-  },
-  {
-    "mrn": "25GB8D6OTTUCKBW19",
-    "portOfEntry": "PORTSMOUTH (GBPMH)",
-    "lastUpdated": "28 August 2025, 14:02"
-  },
-  {
-    "mrn": "25GBOWWZ8MXDHXYL0",
+    "mrn": "25GBK0I03E117GVEZC",
     "portOfEntry": "GRANGEMOUTH (GBGRG)",
-    "lastUpdated": "28 August 2025, 13:41"
+    "lastUpdated": "31 August 2025, 13:16"
   },
   {
-    "mrn": "25GBR69D7N083YF7J",
+    "mrn": "25GBVF6V9TDAX12B",
     "portOfEntry": "FELIXSTOWE (GBFXT)",
-    "lastUpdated": "28 August 2025, 13:21"
+    "lastUpdated": "31 August 2025, 08:26"
   },
   {
-    "mrn": "25GBQ6H3QZC4AWNM0",
-    "portOfEntry": "LIVERPOOL (GBLIV)",
-    "lastUpdated": "28 August 2025, 13:00"
+    "mrn": "25GBIMIROXHDDVO82Y",
+    "portOfEntry": "DOVER (GBDVR)",
+    "lastUpdated": "31 August 2025, 03:36"
   },
   {
-    "mrn": "25GBSDF4W5JAYTQAB",
+    "mrn": "25GBWHZGRSUS8GYN",
+    "portOfEntry": "TEESPORT (GBTEE)",
+    "lastUpdated": "30 August 2025, 22:46"
+  },
+  {
+    "mrn": "25GBT2UY8UQLLLVM2",
+    "portOfEntry": "SEVINGTON (GBSEV)",
+    "lastUpdated": "30 August 2025, 17:56"
+  },
+  {
+    "mrn": "25GBVI8PHYOQOUUHSW",
+    "portOfEntry": "HARWICH (GBHRW)",
+    "lastUpdated": "30 August 2025, 13:06"
+  },
+  {
+    "mrn": "25GB5V0Z18DIAGT02",
+    "portOfEntry": "PLYMOUTH (GBPLY)",
+    "lastUpdated": "30 August 2025, 08:16"
+  },
+  {
+    "mrn": "25GBDCLGL04DNVG0UV",
+    "portOfEntry": "GRANGEMOUTH (GBGRG)",
+    "lastUpdated": "30 August 2025, 03:26"
+  },
+  {
+    "mrn": "25GBK5IW1UVE8NLVX",
+    "portOfEntry": "SOUTHAMPTON (GBSOU)",
+    "lastUpdated": "29 August 2025, 22:37"
+  },
+  {
+    "mrn": "25GBFQTLVMLAS3W3D4",
+    "portOfEntry": "PLYMOUTH (GBPLY)",
+    "lastUpdated": "29 August 2025, 17:47"
+  },
+  {
+    "mrn": "25GBK3XSD2KCJHVN",
     "portOfEntry": "FELIXSTOWE (GBFXT)",
-    "lastUpdated": "28 August 2025, 12:40"
+    "lastUpdated": "29 August 2025, 12:57"
   },
   {
-    "mrn": "25GBDK5ATX8SMSTLC",
+    "mrn": "25GBRA31WIQY4OYZ5O",
     "portOfEntry": "FELIXSTOWE (GBFXT)",
-    "lastUpdated": "28 August 2025, 12:19"
+    "lastUpdated": "29 August 2025, 08:07"
   },
   {
-    "mrn": "25GBR5IG0DU4TAG86",
+    "mrn": "25GBV67Q6Q0TUBXS",
+    "portOfEntry": "GATWICK (GBLGW)",
+    "lastUpdated": "29 August 2025, 03:17"
+  },
+  {
+    "mrn": "25GBEJVRT3KTT1TUV",
+    "portOfEntry": "GRANGEMOUTH (GBGRG)",
+    "lastUpdated": "28 August 2025, 22:27"
+  },
+  {
+    "mrn": "25GBTO7Z8E7PDQRUXA",
+    "portOfEntry": "SEVINGTON (GBSEV)",
+    "lastUpdated": "28 August 2025, 17:37"
+  },
+  {
+    "mrn": "25GB7DICHJOV3Q6U",
+    "portOfEntry": "PORTSMOUTH (GBPMH)",
+    "lastUpdated": "28 August 2025, 12:47"
+  },
+  {
+    "mrn": "25GBK5VCE4SDA8EXY5",
+    "portOfEntry": "HARWICH (GBHRW)",
+    "lastUpdated": "28 August 2025, 07:57"
+  },
+  {
+    "mrn": "25GBFM9NZWCMU6NXR",
+    "portOfEntry": "GATWICK (GBLGW)",
+    "lastUpdated": "28 August 2025, 03:07"
+  },
+  {
+    "mrn": "25GB1HBCW5QZREEN",
+    "portOfEntry": "HARWICH (GBHRW)",
+    "lastUpdated": "27 August 2025, 22:17"
+  },
+  {
+    "mrn": "25GB67FWEMIBNFSP1",
+    "portOfEntry": "PLYMOUTH (GBPLY)",
+    "lastUpdated": "27 August 2025, 17:27"
+  },
+  {
+    "mrn": "25GBU0659P72LRWHL",
+    "portOfEntry": "GATWICK (GBLGW)",
+    "lastUpdated": "27 August 2025, 12:37"
+  },
+  {
+    "mrn": "25GBQ9H7GDU5ASLI",
+    "portOfEntry": "GATWICK (GBLGW)",
+    "lastUpdated": "27 August 2025, 07:47"
+  },
+  {
+    "mrn": "25GBK4ZW1ZW7SYH98N",
+    "portOfEntry": "PLYMOUTH (GBPLY)",
+    "lastUpdated": "27 August 2025, 02:57"
+  },
+  {
+    "mrn": "25GB0W21IMD537ZEWI",
+    "portOfEntry": "SEVINGTON (GBSEV)",
+    "lastUpdated": "26 August 2025, 22:08"
+  },
+  {
+    "mrn": "25GB4X9VSL8N045U",
+    "portOfEntry": "PLYMOUTH (GBPLY)",
+    "lastUpdated": "26 August 2025, 17:18"
+  },
+  {
+    "mrn": "25GBU6ER9D9ZEZQXT",
+    "portOfEntry": "GRANGEMOUTH (GBGRG)",
+    "lastUpdated": "26 August 2025, 12:28"
+  },
+  {
+    "mrn": "25GBUWVPK0NPI5UX",
     "portOfEntry": "IMMINGHAM (GBIMM)",
-    "lastUpdated": "28 August 2025, 11:58"
+    "lastUpdated": "26 August 2025, 07:38"
+  },
+  {
+    "mrn": "25GBPEBB0LCRI46I",
+    "portOfEntry": "HULL (GBHUL)",
+    "lastUpdated": "26 August 2025, 02:48"
+  },
+  {
+    "mrn": "25GBEH2S4F1DXPV6",
+    "portOfEntry": "DOVER (GBDVR)",
+    "lastUpdated": "25 August 2025, 21:58"
+  },
+  {
+    "mrn": "25GB0BT22U251CRT96",
+    "portOfEntry": "LIVERPOOL (GBLIV)",
+    "lastUpdated": "25 August 2025, 17:08"
+  },
+  {
+    "mrn": "25GBN3U6GMIY2M8KE",
+    "portOfEntry": "HULL (GBHUL)",
+    "lastUpdated": "25 August 2025, 12:18"
+  },
+  {
+    "mrn": "25GBC0VJAQCUKZQD",
+    "portOfEntry": "GRANGEMOUTH (GBGRG)",
+    "lastUpdated": "25 August 2025, 07:28"
+  },
+  {
+    "mrn": "25GB9QPNC3HWH3ERM6",
+    "portOfEntry": "PLYMOUTH (GBPLY)",
+    "lastUpdated": "25 August 2025, 02:38"
+  },
+  {
+    "mrn": "25GBKNHBTYAS4GB28I",
+    "portOfEntry": "GRANGEMOUTH (GBGRG)",
+    "lastUpdated": "24 August 2025, 21:48"
+  },
+  {
+    "mrn": "25GB5HK4CMYF7XS2PB",
+    "portOfEntry": "GATWICK (GBLGW)",
+    "lastUpdated": "24 August 2025, 16:58"
+  },
+  {
+    "mrn": "25GBGEJAG6ADMUWKM",
+    "portOfEntry": "PLYMOUTH (GBPLY)",
+    "lastUpdated": "24 August 2025, 12:08"
+  },
+  {
+    "mrn": "25GBDC3HCC05WRHKX",
+    "portOfEntry": "PLYMOUTH (GBPLY)",
+    "lastUpdated": "24 August 2025, 07:18"
+  },
+  {
+    "mrn": "25GBR3TXSMNA6SJHZI",
+    "portOfEntry": "GRANGEMOUTH (GBGRG)",
+    "lastUpdated": "24 August 2025, 02:28"
+  },
+  {
+    "mrn": "25GBX0F8VHVAO6R0A",
+    "portOfEntry": "PORTSMOUTH (GBPMH)",
+    "lastUpdated": "23 August 2025, 21:39"
+  },
+  {
+    "mrn": "25GBS32BATQC7OMHBQ",
+    "portOfEntry": "PORTSMOUTH (GBPMH)",
+    "lastUpdated": "23 August 2025, 16:49"
+  },
+  {
+    "mrn": "25GBGVU5OWXMZSFJ",
+    "portOfEntry": "DOVER (GBDVR)",
+    "lastUpdated": "23 August 2025, 11:59"
+  },
+  {
+    "mrn": "25GBUO6VZKJXYMEF",
+    "portOfEntry": "SEVINGTON (GBSEV)",
+    "lastUpdated": "23 August 2025, 07:09"
+  },
+  {
+    "mrn": "25GBF2GU18JFO5R9",
+    "portOfEntry": "GATWICK (GBLGW)",
+    "lastUpdated": "23 August 2025, 02:19"
+  },
+  {
+    "mrn": "25GBMUY4FDHEOD50ZT",
+    "portOfEntry": "SOUTHAMPTON (GBSOU)",
+    "lastUpdated": "22 August 2025, 21:29"
+  },
+  {
+    "mrn": "25GBBHHCPK02E1Q1",
+    "portOfEntry": "HARWICH (GBHRW)",
+    "lastUpdated": "22 August 2025, 16:39"
+  },
+  {
+    "mrn": "25GBADG6R1QBVSOV",
+    "portOfEntry": "SEVINGTON (GBSEV)",
+    "lastUpdated": "22 August 2025, 11:49"
+  },
+  {
+    "mrn": "25GBDX26XGHMPYGB",
+    "portOfEntry": "HULL (GBHUL)",
+    "lastUpdated": "22 August 2025, 06:59"
+  },
+  {
+    "mrn": "25GBBVQ87Z2TJX0SS",
+    "portOfEntry": "FELIXSTOWE (GBFXT)",
+    "lastUpdated": "22 August 2025, 02:09"
+  },
+  {
+    "mrn": "25GBGD5QBQFX0VI8C5",
+    "portOfEntry": "FELIXSTOWE (GBFXT)",
+    "lastUpdated": "21 August 2025, 21:19"
+  },
+  {
+    "mrn": "25GB5Q3Z72V98HR5Z",
+    "portOfEntry": "HULL (GBHUL)",
+    "lastUpdated": "21 August 2025, 16:29"
+  },
+  {
+    "mrn": "25GBMSKPQNIW842L",
+    "portOfEntry": "IMMINGHAM (GBIMM)",
+    "lastUpdated": "21 August 2025, 11:39"
+  },
+  {
+    "mrn": "25GB12WOGE0NOUI5R",
+    "portOfEntry": "DOVER (GBDVR)",
+    "lastUpdated": "21 August 2025, 06:49"
+  },
+  {
+    "mrn": "25GBJB6VF083SL15",
+    "portOfEntry": "DOVER (GBDVR)",
+    "lastUpdated": "21 August 2025, 01:59"
+  },
+  {
+    "mrn": "25GBD4AH95SG2JPXC",
+    "portOfEntry": "HULL (GBHUL)",
+    "lastUpdated": "20 August 2025, 21:10"
+  },
+  {
+    "mrn": "25GBJ2PDMOI3BDXRGS",
+    "portOfEntry": "SOUTHAMPTON (GBSOU)",
+    "lastUpdated": "20 August 2025, 16:20"
+  },
+  {
+    "mrn": "25GBKO2A1KYEV2QAI",
+    "portOfEntry": "TEESPORT (GBTEE)",
+    "lastUpdated": "20 August 2025, 11:30"
+  },
+  {
+    "mrn": "25GBWUQUXW0BJ114JW",
+    "portOfEntry": "SEVINGTON (GBSEV)",
+    "lastUpdated": "20 August 2025, 06:40"
+  },
+  {
+    "mrn": "25GBOT5QHBIJ90W07",
+    "portOfEntry": "SEVINGTON (GBSEV)",
+    "lastUpdated": "20 August 2025, 01:50"
+  },
+  {
+    "mrn": "25GB4XVYRGVVXO6S",
+    "portOfEntry": "TEESPORT (GBTEE)",
+    "lastUpdated": "19 August 2025, 21:00"
+  },
+  {
+    "mrn": "25GBU3Z4GY0ZN8KV5",
+    "portOfEntry": "HARWICH (GBHRW)",
+    "lastUpdated": "19 August 2025, 16:10"
+  },
+  {
+    "mrn": "25GBIXR6ZCV6U8L8",
+    "portOfEntry": "SOUTHAMPTON (GBSOU)",
+    "lastUpdated": "19 August 2025, 11:20"
+  },
+  {
+    "mrn": "25GBS4ORAEJF0QXW",
+    "portOfEntry": "SEVINGTON (GBSEV)",
+    "lastUpdated": "19 August 2025, 06:30"
+  },
+  {
+    "mrn": "25GB3ZSC7X2P2FNV",
+    "portOfEntry": "TEESPORT (GBTEE)",
+    "lastUpdated": "19 August 2025, 01:40"
+  },
+  {
+    "mrn": "25GBNH8PELYCIU2IBO",
+    "portOfEntry": "DOVER (GBDVR)",
+    "lastUpdated": "18 August 2025, 20:50"
+  },
+  {
+    "mrn": "25GB7UG531ILXKA9B",
+    "portOfEntry": "SOUTHAMPTON (GBSOU)",
+    "lastUpdated": "18 August 2025, 16:00"
+  },
+  {
+    "mrn": "25GBDKVY6MCZNI5VG7",
+    "portOfEntry": "FELIXSTOWE (GBFXT)",
+    "lastUpdated": "18 August 2025, 11:10"
+  },
+  {
+    "mrn": "25GBIG4XDS19NWNJ",
+    "portOfEntry": "PORTSMOUTH (GBPMH)",
+    "lastUpdated": "18 August 2025, 06:20"
+  },
+  {
+    "mrn": "25GBZ9OIABIRHAC25",
+    "portOfEntry": "PORTSMOUTH (GBPMH)",
+    "lastUpdated": "18 August 2025, 01:30"
+  },
+  {
+    "mrn": "25GBVWC33SIDQS8W",
+    "portOfEntry": "SOUTHAMPTON (GBSOU)",
+    "lastUpdated": "17 August 2025, 20:41"
+  },
+  {
+    "mrn": "25GBGFU2KIJ4261DM6",
+    "portOfEntry": "LIVERPOOL (GBLIV)",
+    "lastUpdated": "17 August 2025, 15:51"
+  },
+  {
+    "mrn": "25GBJNCCBO6XL401",
+    "portOfEntry": "HULL (GBHUL)",
+    "lastUpdated": "17 August 2025, 11:01"
+  },
+  {
+    "mrn": "25GB2A1MICU5U8OMGK",
+    "portOfEntry": "PLYMOUTH (GBPLY)",
+    "lastUpdated": "17 August 2025, 06:11"
+  },
+  {
+    "mrn": "25GB1T5ANW5ARHUD",
+    "portOfEntry": "FELIXSTOWE (GBFXT)",
+    "lastUpdated": "17 August 2025, 01:21"
+  },
+  {
+    "mrn": "25GBTRZDMXIC9PH1",
+    "portOfEntry": "GRANGEMOUTH (GBGRG)",
+    "lastUpdated": "16 August 2025, 20:31"
+  },
+  {
+    "mrn": "25GBHDQ37BO8R0HXGS",
+    "portOfEntry": "LIVERPOOL (GBLIV)",
+    "lastUpdated": "16 August 2025, 15:41"
+  },
+  {
+    "mrn": "25GBWPIMP9JC8UUPF",
+    "portOfEntry": "HARWICH (GBHRW)",
+    "lastUpdated": "16 August 2025, 10:51"
+  },
+  {
+    "mrn": "25GBK2YYBQU2E6QJ4G",
+    "portOfEntry": "GATWICK (GBLGW)",
+    "lastUpdated": "16 August 2025, 06:01"
+  },
+  {
+    "mrn": "25GB7NUFE80BXAKAX",
+    "portOfEntry": "IMMINGHAM (GBIMM)",
+    "lastUpdated": "16 August 2025, 01:11"
+  },
+  {
+    "mrn": "25GB303G1J1DCYYU",
+    "portOfEntry": "PLYMOUTH (GBPLY)",
+    "lastUpdated": "15 August 2025, 20:21"
+  },
+  {
+    "mrn": "25GBVFF698EHYLQZ",
+    "portOfEntry": "GATWICK (GBLGW)",
+    "lastUpdated": "15 August 2025, 15:31"
+  },
+  {
+    "mrn": "25GBSCWC2GDMHIL4Z7",
+    "portOfEntry": "TEESPORT (GBTEE)",
+    "lastUpdated": "15 August 2025, 10:41"
+  },
+  {
+    "mrn": "25GBQOEJBNQXE947R",
+    "portOfEntry": "SEVINGTON (GBSEV)",
+    "lastUpdated": "15 August 2025, 05:51"
+  },
+  {
+    "mrn": "25GBOB1MCAGUDU9FV",
+    "portOfEntry": "DOVER (GBDVR)",
+    "lastUpdated": "15 August 2025, 01:01"
+  },
+  {
+    "mrn": "25GB2L52U4S5RO0P",
+    "portOfEntry": "PLYMOUTH (GBPLY)",
+    "lastUpdated": "14 August 2025, 20:12"
+  },
+  {
+    "mrn": "25GB51QES59L2IECX0",
+    "portOfEntry": "TEESPORT (GBTEE)",
+    "lastUpdated": "14 August 2025, 15:22"
+  },
+  {
+    "mrn": "25GBEJ5ZUGDJFZFIA",
+    "portOfEntry": "TEESPORT (GBTEE)",
+    "lastUpdated": "14 August 2025, 10:32"
+  },
+  {
+    "mrn": "25GBIKS3WJM91R4FVA",
+    "portOfEntry": "IMMINGHAM (GBIMM)",
+    "lastUpdated": "14 August 2025, 05:42"
+  },
+  {
+    "mrn": "25GBEVQKR2VFQ8USSP",
+    "portOfEntry": "PLYMOUTH (GBPLY)",
+    "lastUpdated": "14 August 2025, 00:52"
+  },
+  {
+    "mrn": "25GB1DMR9QDDCJ1BU",
+    "portOfEntry": "GRANGEMOUTH (GBGRG)",
+    "lastUpdated": "13 August 2025, 20:02"
+  },
+  {
+    "mrn": "25GBX5NRIBCIN1GM1",
+    "portOfEntry": "TEESPORT (GBTEE)",
+    "lastUpdated": "13 August 2025, 15:12"
+  },
+  {
+    "mrn": "25GBMCGBSUBM71WSSO",
+    "portOfEntry": "GRANGEMOUTH (GBGRG)",
+    "lastUpdated": "13 August 2025, 10:22"
+  },
+  {
+    "mrn": "25GBGW6H4X1BU4JEL",
+    "portOfEntry": "PORTSMOUTH (GBPMH)",
+    "lastUpdated": "13 August 2025, 05:32"
+  },
+  {
+    "mrn": "25GBUYCUMB9S6S9T6",
+    "portOfEntry": "FELIXSTOWE (GBFXT)",
+    "lastUpdated": "13 August 2025, 00:42"
+  },
+  {
+    "mrn": "25GB5Z6X8BEX5ZV8FF",
+    "portOfEntry": "FELIXSTOWE (GBFXT)",
+    "lastUpdated": "12 August 2025, 19:52"
+  },
+  {
+    "mrn": "25GBZLFCL7E5RJA54W",
+    "portOfEntry": "GRANGEMOUTH (GBGRG)",
+    "lastUpdated": "12 August 2025, 15:02"
+  },
+  {
+    "mrn": "25GBBN8E3IKGIJSZ",
+    "portOfEntry": "TEESPORT (GBTEE)",
+    "lastUpdated": "12 August 2025, 10:12"
+  },
+  {
+    "mrn": "25GBEG3LIQB7677R",
+    "portOfEntry": "PORTSMOUTH (GBPMH)",
+    "lastUpdated": "12 August 2025, 05:22"
+  },
+  {
+    "mrn": "25GBFRSNPRQWA7PN",
+    "portOfEntry": "SEVINGTON (GBSEV)",
+    "lastUpdated": "12 August 2025, 00:32"
+  },
+  {
+    "mrn": "25GBCHMJDGZYX1BU8",
+    "portOfEntry": "FELIXSTOWE (GBFXT)",
+    "lastUpdated": "11 August 2025, 19:43"
+  },
+  {
+    "mrn": "25GBCUHHVXYJOMWQP",
+    "portOfEntry": "GRANGEMOUTH (GBGRG)",
+    "lastUpdated": "11 August 2025, 14:53"
+  },
+  {
+    "mrn": "25GBIRI5V7BFA7M56",
+    "portOfEntry": "PLYMOUTH (GBPLY)",
+    "lastUpdated": "11 August 2025, 10:03"
+  },
+  {
+    "mrn": "25GBOCN1C1158BXGO",
+    "portOfEntry": "HARWICH (GBHRW)",
+    "lastUpdated": "11 August 2025, 05:13"
+  },
+  {
+    "mrn": "25GB3UZSPLJJJWWL",
+    "portOfEntry": "PORTSMOUTH (GBPMH)",
+    "lastUpdated": "11 August 2025, 00:23"
+  },
+  {
+    "mrn": "25GBY8JEFJW9WUH1BR",
+    "portOfEntry": "DOVER (GBDVR)",
+    "lastUpdated": "10 August 2025, 19:33"
+  },
+  {
+    "mrn": "25GBIL3GRT6AE5ZGKR",
+    "portOfEntry": "PORTSMOUTH (GBPMH)",
+    "lastUpdated": "10 August 2025, 14:43"
+  },
+  {
+    "mrn": "25GBPUUIA3IK9DWMBW",
+    "portOfEntry": "DOVER (GBDVR)",
+    "lastUpdated": "10 August 2025, 09:53"
+  },
+  {
+    "mrn": "25GB9651HHDD1VKT",
+    "portOfEntry": "PLYMOUTH (GBPLY)",
+    "lastUpdated": "10 August 2025, 05:03"
+  },
+  {
+    "mrn": "25GBVG3QOLD1LMDVM",
+    "portOfEntry": "IMMINGHAM (GBIMM)",
+    "lastUpdated": "10 August 2025, 00:13"
+  },
+  {
+    "mrn": "25GBR87XQ6J6SFF37",
+    "portOfEntry": "DOVER (GBDVR)",
+    "lastUpdated": "9 August 2025, 19:23"
+  },
+  {
+    "mrn": "25GBTI3TBTLP3IUNA",
+    "portOfEntry": "HULL (GBHUL)",
+    "lastUpdated": "9 August 2025, 14:33"
+  },
+  {
+    "mrn": "25GBPHGUL3AE5O7P6",
+    "portOfEntry": "HULL (GBHUL)",
+    "lastUpdated": "9 August 2025, 09:43"
+  },
+  {
+    "mrn": "25GBLE91K216QH2XI2",
+    "portOfEntry": "HULL (GBHUL)",
+    "lastUpdated": "9 August 2025, 04:53"
+  },
+  {
+    "mrn": "25GBC68FHHC0N1S5",
+    "portOfEntry": "GATWICK (GBLGW)",
+    "lastUpdated": "9 August 2025, 00:03"
+  },
+  {
+    "mrn": "25GB1NFRACDK7QEPC",
+    "portOfEntry": "LIVERPOOL (GBLIV)",
+    "lastUpdated": "8 August 2025, 19:14"
+  },
+  {
+    "mrn": "25GBG132RHIJTUZ21",
+    "portOfEntry": "FELIXSTOWE (GBFXT)",
+    "lastUpdated": "8 August 2025, 14:24"
+  },
+  {
+    "mrn": "25GBCSBTXL4K3SJL0",
+    "portOfEntry": "HULL (GBHUL)",
+    "lastUpdated": "8 August 2025, 09:34"
+  },
+  {
+    "mrn": "25GBT0VQ4QH6SUO1",
+    "portOfEntry": "HARWICH (GBHRW)",
+    "lastUpdated": "8 August 2025, 04:44"
+  },
+  {
+    "mrn": "25GBG8O7FC4E3O0L",
+    "portOfEntry": "GRANGEMOUTH (GBGRG)",
+    "lastUpdated": "7 August 2025, 23:54"
+  },
+  {
+    "mrn": "25GBVWPWCC75N3M3RO",
+    "portOfEntry": "HARWICH (GBHRW)",
+    "lastUpdated": "7 August 2025, 19:04"
+  },
+  {
+    "mrn": "25GBSB6QTSRXJ1EZ",
+    "portOfEntry": "FELIXSTOWE (GBFXT)",
+    "lastUpdated": "7 August 2025, 14:14"
+  },
+  {
+    "mrn": "25GBT6MWPHUK13PN",
+    "portOfEntry": "TEESPORT (GBTEE)",
+    "lastUpdated": "7 August 2025, 09:24"
+  },
+  {
+    "mrn": "25GBP5UMD6ZN9NRWG",
+    "portOfEntry": "PLYMOUTH (GBPLY)",
+    "lastUpdated": "7 August 2025, 04:34"
+  },
+  {
+    "mrn": "25GB2FDML9RJ2DE8YF",
+    "portOfEntry": "HULL (GBHUL)",
+    "lastUpdated": "6 August 2025, 23:44"
+  },
+  {
+    "mrn": "25GBULF03A5S1M23OF",
+    "portOfEntry": "HARWICH (GBHRW)",
+    "lastUpdated": "6 August 2025, 18:54"
+  },
+  {
+    "mrn": "25GBY5WXUX3HUPBA",
+    "portOfEntry": "GRANGEMOUTH (GBGRG)",
+    "lastUpdated": "6 August 2025, 14:04"
+  },
+  {
+    "mrn": "25GBWP2XHDBNBY2JM",
+    "portOfEntry": "IMMINGHAM (GBIMM)",
+    "lastUpdated": "6 August 2025, 09:14"
+  },
+  {
+    "mrn": "25GBOHYUEL54JQ578T",
+    "portOfEntry": "PLYMOUTH (GBPLY)",
+    "lastUpdated": "6 August 2025, 04:24"
+  },
+  {
+    "mrn": "25GBVIDBVOXNS3NTU3",
+    "portOfEntry": "GRANGEMOUTH (GBGRG)",
+    "lastUpdated": "5 August 2025, 23:34"
+  },
+  {
+    "mrn": "25GBZ9M2XTU5XWW6",
+    "portOfEntry": "GRANGEMOUTH (GBGRG)",
+    "lastUpdated": "5 August 2025, 18:45"
+  },
+  {
+    "mrn": "25GB3R8EU5QOT1UU1F",
+    "portOfEntry": "DOVER (GBDVR)",
+    "lastUpdated": "5 August 2025, 13:55"
+  },
+  {
+    "mrn": "25GBN1O1CY8KTWCX",
+    "portOfEntry": "LIVERPOOL (GBLIV)",
+    "lastUpdated": "5 August 2025, 09:05"
+  },
+  {
+    "mrn": "25GBBSNU285YZRFYB",
+    "portOfEntry": "GRANGEMOUTH (GBGRG)",
+    "lastUpdated": "5 August 2025, 04:15"
+  },
+  {
+    "mrn": "25GB3QAKD8ZZ9NFN8",
+    "portOfEntry": "SEVINGTON (GBSEV)",
+    "lastUpdated": "4 August 2025, 23:25"
+  },
+  {
+    "mrn": "25GB7LHIMOWZ08UEG",
+    "portOfEntry": "FELIXSTOWE (GBFXT)",
+    "lastUpdated": "4 August 2025, 18:35"
+  },
+  {
+    "mrn": "25GBS3PJQ7DUIFO9Q",
+    "portOfEntry": "DOVER (GBDVR)",
+    "lastUpdated": "4 August 2025, 13:45"
+  },
+  {
+    "mrn": "25GB3T59NN65KVJH",
+    "portOfEntry": "PORTSMOUTH (GBPMH)",
+    "lastUpdated": "4 August 2025, 08:55"
+  },
+  {
+    "mrn": "25GBOD0MJPTTN2SOS",
+    "portOfEntry": "PORTSMOUTH (GBPMH)",
+    "lastUpdated": "4 August 2025, 04:05"
+  },
+  {
+    "mrn": "25GBEUTDSN2J9CY5ZS",
+    "portOfEntry": "FELIXSTOWE (GBFXT)",
+    "lastUpdated": "3 August 2025, 23:15"
+  },
+  {
+    "mrn": "25GBQEPMV8AGXWRP1",
+    "portOfEntry": "DOVER (GBDVR)",
+    "lastUpdated": "3 August 2025, 18:25"
+  },
+  {
+    "mrn": "25GBQ0Z7O1H9OL992",
+    "portOfEntry": "PORTSMOUTH (GBPMH)",
+    "lastUpdated": "3 August 2025, 13:35"
+  },
+  {
+    "mrn": "25GBP7QP48D1INCT9",
+    "portOfEntry": "SEVINGTON (GBSEV)",
+    "lastUpdated": "3 August 2025, 08:45"
+  },
+  {
+    "mrn": "25GBLNZSJE2IGGVVG",
+    "portOfEntry": "PORTSMOUTH (GBPMH)",
+    "lastUpdated": "3 August 2025, 03:55"
+  },
+  {
+    "mrn": "25GBKDNLPJ9HV521FC",
+    "portOfEntry": "GATWICK (GBLGW)",
+    "lastUpdated": "2 August 2025, 23:06"
+  },
+  {
+    "mrn": "25GB1GW9N4NPD0QWA",
+    "portOfEntry": "TEESPORT (GBTEE)",
+    "lastUpdated": "2 August 2025, 18:16"
+  },
+  {
+    "mrn": "25GB2KIAP7WC8JRR",
+    "portOfEntry": "SEVINGTON (GBSEV)",
+    "lastUpdated": "2 August 2025, 13:26"
   }
 ]
