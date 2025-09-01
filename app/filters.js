@@ -1,97 +1,89 @@
+// app/filters.js
 // For guidance on how to create filters see:
 // https://prototype-kit.service.gov.uk/docs/filters
-//
 
 const govukPrototypeKit = require('govuk-prototype-kit');
 const addFilter = govukPrototypeKit.views.addFilter;
 
-// Add your filters here
+// Helper to format "D Month YYYY, HH:MM" in en-GB
+function formatGB(date) {
+  const d = new Intl.DateTimeFormat('en-GB', {
+    year: 'numeric', month: 'long', day: 'numeric'
+  }).format(date);
 
-// Filter for chedTime (2 days ago, 3 hours earlier)
-addFilter('chedTime', function() {
-    try {
-        const today = new Date();
-        // Subtract 2 days from the current date
-        const twoDaysLater = new Date(today.setDate(today.getDate() - 2));
-        // Subtract 3 hours from the current time
-        twoDaysLater.setHours(twoDaysLater.getHours() - 3);
+  const t = new Intl.DateTimeFormat('en-GB', {
+    hour: '2-digit', minute: '2-digit'
+  }).format(date);
 
-        // Format the date
-        const formattedDate = new Intl.DateTimeFormat('en-GB', { year: 'numeric', month: 'long', day: 'numeric' }).format(twoDaysLater);
-        // Format the time
-        const formattedTime = new Intl.DateTimeFormat('en-GB', { hour: '2-digit', minute: '2-digit' }).format(twoDaysLater);
+  return `${d}, ${t}`;
+}
 
-        // Combine date and time with a comma
-        return `${formattedDate}, ${formattedTime}`;
-    } catch (error) {
-        return error.message.split(':')[0];
-    }
+/* ------------------------- Filters ------------------------- */
+
+// 1) 1,234 formatting
+addFilter('commas', (input) => {
+  const n = Number(input);
+  return Number.isFinite(n) ? n.toLocaleString('en-GB') : (input ?? '');
 });
 
+// 2) chedTime — now minus 2 days and 3 hours
+addFilter('chedTime', function () {
+  try {
+    const d = new Date();
+    d.setDate(d.getDate() - 2);   // -2 days
+    d.setHours(d.getHours() - 3); // -3 hours
+    return formatGB(d);
+  } catch (error) {
+    return (error?.message || 'Error').split(':')[0];
+  }
+});
+
+// 3) mrnTime — now minus 1 day and 1 hour
+addFilter('mrnTime', function () {
+  try {
+    const d = new Date();
+    d.setDate(d.getDate() - 1);   // -1 day
+    d.setHours(d.getHours() - 1); // -1 hour
+    return formatGB(d);
+  } catch (error) {
+    return (error?.message || 'Error').split(':')[0];
+  }
+});
+
+// 4) ipaffsTime — default 1 hour 20 minutes ago, or accept an offset string
+//    Examples: {{ "" | ipaffsTime }}        -> 1hr 20min ago
+//              {{ "" | ipaffsTime("-30") }} -> 30min ago
+//              {{ "" | ipaffsTime("-30min") }}
+//              {{ "" | ipaffsTime("-2hr") }}  (or "-2hrs", "-2hour", "-2hours")
+//              {{ "" | ipaffsTime("+15min") }} (future, for testing)
+addFilter('ipaffsTime', function (offsetStr) {
+  try {
+    const d = new Date();
+    let offsetMinutes = -80; // default = 1hr 20min ago
+
+    if (typeof offsetStr === 'string' && offsetStr.trim()) {
+      const m = offsetStr.trim().match(/^([+-]?)(\d+)(?:\s*)(min|hr|hrs|hour|hours)?$/i);
+      if (m) {
+        let [, sign, value, unit] = m;
+        let minutes = parseInt(value, 10);
+        if (unit && !/min/i.test(unit)) minutes *= 60; // treat as hours
+        if (sign === '-') minutes = -minutes;
+        if (sign === '+') minutes = +minutes;
+        offsetMinutes = minutes;
+      }
+    }
+
+    d.setMinutes(d.getMinutes() + offsetMinutes);
+    return formatGB(d);
+  } catch (error) {
+    return (error?.message || 'Error').split(':')[0];
+  }
+});
+
+/* ----------------------------------------------------------- */
+
+// The Prototype Kit will load this file. We register filters above via addFilter.
+// Returning an empty object keeps compatibility with older setups.
 module.exports = function (env) {
-  const filters = {};
-
-  filters.commas = (n) => {
-    const num = Number(n || 0);
-    return Number.isFinite(num) ? num.toLocaleString('en-GB') : n;
-  };
-
-  return filters;
+  return {};
 };
-
-// Filter for mrnTime (1 day ago, 1 hour earlier)
-addFilter('mrnTime', function() {
-    try {
-        const today = new Date();
-        // Subtract 1 day from the current date
-        const oneDayEarlier = new Date(today.setDate(today.getDate() - 1));
-        // Subtract 1 hour from the current time
-        oneDayEarlier.setHours(oneDayEarlier.getHours() - 1);
-
-        // Format the date
-        const formattedDate = new Intl.DateTimeFormat('en-GB', { year: 'numeric', month: 'long', day: 'numeric' }).format(oneDayEarlier);
-        // Format the time
-        const formattedTime = new Intl.DateTimeFormat('en-GB', { hour: '2-digit', minute: '2-digit' }).format(oneDayEarlier);
-
-        // Combine date and time with a comma
-        return `${formattedDate}, ${formattedTime}`;
-    } catch (error) {
-        return error.message.split(':')[0];
-    }
-});
-
-// Filter for IPAFS time (1 hour and 20min earlier)
-addFilter('ipaffsTime', function(offsetStr) {
-    try {
-        const date = new Date();
-
-        // Default offset if none provided
-        let offsetMinutes = -80; // 1hr 20min ago
-
-        if (typeof offsetStr === 'string') {
-            const match = offsetStr.match(/([+-])(\d+)(min|hr)/);
-            if (match) {
-                const [, sign, value, unit] = match;
-                let minutes = parseInt(value, 10);
-                if (unit === 'hr') minutes *= 60;
-                offsetMinutes = (sign === '-' ? -1 : 1) * minutes;
-            }
-        }
-
-        // Apply the offset
-        date.setMinutes(date.getMinutes() + offsetMinutes);
-
-        // Format date and time
-        const formattedDate = new Intl.DateTimeFormat('en-GB', {
-            year: 'numeric', month: 'long', day: 'numeric'
-        }).format(date);
-
-        const formattedTime = new Intl.DateTimeFormat('en-GB', {
-            hour: '2-digit', minute: '2-digit'
-        }).format(date);
-
-        return `${formattedDate}, ${formattedTime}`;
-    } catch (error) {
-        return error.message.split(':')[0];
-    }
-});

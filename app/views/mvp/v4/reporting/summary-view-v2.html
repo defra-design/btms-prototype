@@ -244,21 +244,23 @@
                 <h3 class="govuk-heading-s">
                   <span class="legend-dot matches-dot"></span> Matches
                 </h3>
-                <p class="govuk-heading-m">
-                  1,302 <span class="govuk-body govuk-body-s	percentage">(95.04%)</span>
-                </p>
+        <p class="govuk-heading-m">
+            {{ data.stats.matches | default(0) | commas }}
+            <span class="govuk-body govuk-body-s percentage">({{ data.stats.matchesPct | default('0.00%') }})</span>
+          </p>
               </div>
               <div class="govuk-grid-column-one-third">
                 <h3 class="govuk-heading-s">
                   <span class="legend-dot mismatches-dot"></span> No matches
                 </h3>
-                <p class="govuk-heading-m">
-                  68 <span class="govuk-body govuk-body-s	percentage">(4.96%)</span>
-                </p>
+         <p class="govuk-heading-m">
+            {{ data.stats.noMatches | default(0) | commas }}
+            <span class="govuk-body govuk-body-s percentage">({{ data.stats.noMatchesPct | default('0.00%') }})</span>
+          </p>
               </div>
               <div class="govuk-grid-column-one-third">
                 <h3 class="govuk-heading-s">Total</h3>
-                <p class="govuk-heading-m">1,371</p>
+                <p class="govuk-heading-m">            {{ data.stats.totalLineItems | default(0) | commas }}</p>
               </div>
             </div>
 
@@ -281,21 +283,24 @@
                 <h3 class="govuk-heading-s">
                   <span class="legend-dot matches-dot"></span> Automatic
                 </h3>
-                <p class="govuk-heading-m">
-                  1,175 <span class="govuk-body govuk-body-s percentage">(98.49%)</span>
-                </p>
+        <p class="govuk-heading-m">
+            {{ data.stats.autoReleases | default(0) | commas }}
+            <span class="govuk-body govuk-body-s percentage">({{ data.stats.autoPct | default('0.00%') }})</span>
+          </p>
               </div>
               <div class="govuk-grid-column-one-third">
                 <h3 class="govuk-heading-s">
                   <span class="legend-dot mismatches-dot"></span> Manual
                 </h3>
-                <p class="govuk-heading-m">
-                  18 <span class="govuk-body govuk-body-s	percentage">(1.51%)</span>
-                </p>
+          <p class="govuk-heading-m">
+            {{ data.stats.manualReleases | default(0) | commas }}
+            <span class="govuk-body govuk-body-s percentage">({{ data.stats.manualPct | default('0.00%') }})</span>
+          </p>
               </div>
               <div class="govuk-grid-column-one-third">
                 <h3 class="govuk-heading-s">Total</h3>
-                <p class="govuk-heading-m">1,371</p>
+                <p class="govuk-heading-m">            {{ data.stats.totalReleases | default(0) | commas }}
+</p>
               </div>
             </div>
 
@@ -317,13 +322,15 @@
                   <span class="legend-dot matches-dot"></span> Unique clearances
 
                 </h3>
-                <p class="govuk-heading-m">
-                  1,371 <span class="govuk-body govuk-body-s	percentage">(66.50%)</span>
-                </p>
+            <p class="govuk-heading-m">
+            {{ data.stats.uniqueClearances | default(0) | commas }}
+            <span class="govuk-body govuk-body-s percentage">({{ data.stats.uniquePct | default('0.00%') }})</span>
+          </p>
               </div>
               <div class="govuk-grid-column-one-third">
                 <h3 class="govuk-heading-s">Total</h3>
-                <p class="govuk-heading-m">2,060</p>
+                <p class="govuk-heading-m">            {{ data.stats.totalClearanceMsgs | default(0) | commas }}
+</p>
               </div>
             </div>
 
@@ -347,33 +354,37 @@
                 <h3 class="govuk-heading-s">
                   <span class="legend-dot ched-a-dot"></span> CHED A
                 </h3>
-                <p class="govuk-heading-m">
-                  249 <span class="govuk-body govuk-body-s percentage">(3.51%)</span>
-                </p>
+       <p class="govuk-heading-m">
+            {{ data.stats.ched.A.count | default(0) | commas }}
+            <span class="govuk-body govuk-body-s percentage">({{ data.stats.ched.A.pct | default('0.00%') }})</span>
+       </p>
               </div>
               <div class="govuk-grid-column-one-quarter">
                 <h3 class="govuk-heading-s">
                   <span class="legend-dot ched-p-dot"></span> CHED P
                 </h3>
-                <p class="govuk-heading-m">
-                  5,399 <span class="govuk-body govuk-body-s percentage">(75.96%)</span>
-                </p>
+           <p class="govuk-heading-m">
+            {{ data.stats.ched.P.count | default(0) | commas }}
+            <span class="govuk-body govuk-body-s percentage">({{ data.stats.ched.P.pct | default('0.00%') }})</span>
+          </p>
               </div>
               <div class="govuk-grid-column-one-quarter">
                 <h3 class="govuk-heading-s">
                   <span class="legend-dot ched-pp-dot"></span> CHED PP
                 </h3>
                 <p class="govuk-heading-m">
-                  1,167 <span class="govuk-body govuk-body-s percentage">(16.41%)</span>
-                </p>
+            {{ data.stats.ched.PP.count | default(0) | commas }}
+            <span class="govuk-body govuk-body-s percentage">({{ data.stats.ched.PP.pct | default('0.00%') }})</span>
+          </p>
               </div>
               <div class="govuk-grid-column-one-quarter">
                 <h3 class="govuk-heading-s">
                   <span class="legend-dot ched-d-dot"></span> CHED D
                 </h3>
-                <p class="govuk-heading-m">
-                  291 <span class="govuk-body govuk-body-s percentage">(4.10%)</span>
-                </p>
+                 <p class="govuk-heading-m">
+            {{ data.stats.ched.D.count | default(0) | commas }}
+            <span class="govuk-body govuk-body-s percentage">({{ data.stats.ched.D.pct | default('0.00%') }})</span>
+          </p>
               </div>
             </div>
 
