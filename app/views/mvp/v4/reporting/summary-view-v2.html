@@ -26,15 +26,22 @@
   });
 </script>
 
-<h1 class="govuk-heading-l">{{ title }}</h1>
+<h1 id="page-top" class="govuk-heading-l" tabindex="-1">{{ title }}</h1>
 
 <div class="govuk-grid-row">
   <!-- Filters Column -->
   <div class="govuk-grid-column-one-quarter filters">
     <div class="govuk-form-group govuk-!-margin-bottom-1">
       <fieldset class="govuk-fieldset">
-        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">Filter by</legend>
-
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">Filter by date </legend>
+    <nav class="govuk-!-margin-top-1">
+      <ul class="govuk-list" id="preset-links">
+        <li><a href="#" data-range="today">Today</a></li>
+        <li><a href="#" data-range="yesterday">Yesterday</a></li>
+        <li><a href="#" data-range="last-week">Last week</a></li>
+        <li><a href="#" data-range="last-month">Last month</a></li>
+      </ul>
+    </nav>
         <!-- Start date -->
         <div class="govuk-form-group govuk-!-margin-bottom-4">
           {{ mojDatePicker({
@@ -82,7 +89,7 @@
         <div class="govuk-form-group govuk-!-margin-bottom-4" id="portOfEntry-group">
           <fieldset class="govuk-fieldset" aria-describedby="portOfEntry-hint portOfEntry-count">
             <legend class="govuk-fieldset__legend govuk-fieldset__legend--s govuk-!-font-size-16 govuk-!-margin-bottom-2">
-              Port of entry
+              Port of entry (optional)
             </legend>
 
             <div id="portOfEntry-hint" class="govuk-hint govuk-!-margin-bottom-1 govuk-!-font-size-16">
@@ -130,15 +137,7 @@
     </div>
 
     <!-- Preset date filters -->
-    <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">Filter by date</legend>
-    <nav class="govuk-!-margin-top-1">
-      <ul class="govuk-list" id="preset-links">
-        <li><a href="#" data-range="today">Today</a></li>
-        <li><a href="#" data-range="yesterday">Yesterday</a></li>
-        <li><a href="#" data-range="last-week">Last week</a></li>
-        <li><a href="#" data-range="last-month">Last month</a></li>
-      </ul>
-    </nav>
+
   </div>
 
   <!-- Main Content -->
@@ -190,44 +189,195 @@
           <div class="stat-card-container govuk-!-margin-bottom-6">
             <h2 class="govuk-heading-m">Matches</h2>
             <div class="stat-card-group">
-              {{ statCard("Matches", "1,302", "95.04%") }}
-              {{ statCard("No matches", "68", "4.96%", "", "/mvp/v4/reporting/no-matches-basic.csv", "Download CSV") }}
-              {{ statCard("Total", "1,370", "") }}
+{{ statCard("Matches", data.stats.matches | string, data.stats.matchesPct) }}
+{{ statCard("No matches", data.stats.noMatches | string, data.stats.noMatchesPct, "", "/mvp/v4/reporting/no-matches-basic.csv", "Download CSV") }}
+{{ statCard("Total", data.stats.totalLineItems | string, "") }}
             </div>
           </div>
 
           <div class="stat-card-container govuk-!-margin-bottom-6">
             <h2 class="govuk-heading-m">Releases</h2>
-            <div class="stat-card-group">
-              {{ statCard("Auto", "1,175", "98.49%", "stat-card--blue") }}
-              {{ statCard("Manual", "18", "1.51%", "", "/mvp/v4/reporting/manual-release.csv", "Download CSV") }}
-              {{ statCard("Total", "1,193", "", "stat-card--blue") }}
-            </div>
-          </div>
+<div class="stat-card-group">
+{# Releases #}
+{{ statCard("Auto", data.stats.autoReleases | string, data.stats.autoPct, "stat-card--blue") }}
+{{ statCard("Manual", data.stats.manualReleases | string, data.stats.manualPct, "stat-card--blue", "/mvp/v4/reporting/manual-release.csv", "Download CSV") }}
+{{ statCard("Total", data.stats.totalReleases | string, "", "stat-card--blue") }}
+
+</div></div>
 
           <div class="stat-card-container govuk-!-margin-bottom-6">
             <h2 class="govuk-heading-m">Unique clearance requests</h2>
             <p class="govuk-!-font-size-16">Each clearance request is a message from CDS to BTMS about an MRN. An MRN can have multiple requests if updated. ‘Total’ counts all messages. ‘Unique’ counts distinct MRNs.</p>
             <div class="stat-card-group">
-              {{ statCard("Unique clearances", "1,371", "66.50%") }}
-              {{ statCard("Total", "2,060") }}
+{{ statCard("Unique clearances", data.stats.uniqueClearances | string, data.stats.uniquePct) }}
+{{ statCard("Total", data.stats.totalClearanceMsgs | string) }}
             </div>
           </div>
 
           <div class="stat-card-container govuk-!-margin-bottom-6">
             <h2 class="govuk-heading-m">Pre-notifications by CHED type</h2>
             <div class="stat-card-group">
-              {{ statCard("CHED A", "249", "3.52%", "stat-card--blue") }}
-              {{ statCard("CHED P", "5,399", "75.98%", "stat-card--blue") }}
-              {{ statCard("CHED PP", "1,167", "16.40%", "stat-card--blue") }}
-              {{ statCard("CHED D", "291", "4.10%", "stat-card--blue") }}
+{{ statCard("CHED A", data.stats.ched.A.count | string, data.stats.ched.A.pct, "stat-card--blue") }}
+{{ statCard("CHED P", data.stats.ched.P.count | string, data.stats.ched.P.pct, "stat-card--blue") }}
+{{ statCard("CHED PP", data.stats.ched.PP.count | string, data.stats.ched.PP.pct, "stat-card--blue") }}
+{{ statCard("CHED D", data.stats.ched.D.count | string, data.stats.ched.D.pct, "stat-card--blue") }}
             </div>
           </div>
         </div>
 
-        <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="chart">
-          <div class="govuk-body">Charts would render here.</div>
+    <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="chart">
+
+        <div class="govuk-grid-row charts govuk-!-margin-bottom-4">
+          <div class="govuk-grid-column-full chart">
+
+            <h2 class="govuk-heading-m">Matches</h2>
+
+            <div class="btms-chart-container ">
+              <canvas id="matchesChart" width="600" height="400"></canvas>
+            </div>
+
+            <div class="govuk-grid-row btms-stats">
+              <div class="govuk-grid-column-one-third">
+                <h3 class="govuk-heading-s">
+                  <span class="legend-dot matches-dot"></span> Matches
+                </h3>
+                <p class="govuk-heading-m">
+                  1,302 <span class="govuk-body govuk-body-s	percentage">(95.04%)</span>
+                </p>
+              </div>
+              <div class="govuk-grid-column-one-third">
+                <h3 class="govuk-heading-s">
+                  <span class="legend-dot mismatches-dot"></span> No matches
+                </h3>
+                <p class="govuk-heading-m">
+                  68 <span class="govuk-body govuk-body-s	percentage">(4.96%)</span>
+                </p>
+              </div>
+              <div class="govuk-grid-column-one-third">
+                <h3 class="govuk-heading-s">Total</h3>
+                <p class="govuk-heading-m">1,371</p>
+              </div>
+            </div>
+
+
+
+          </div>
         </div>
+
+        <div class="govuk-grid-row  charts govuk-!-margin-top-4 govuk-!-margin-bottom-4">
+          <div class="govuk-grid-column-full chart">
+
+            <h2 class="govuk-heading-m">Releases</h2>
+
+            <div class="btms-chart-container ">
+              <canvas id="btmsHourlyReleasesChart" width="600" height="400"></canvas>
+            </div>
+
+            <div class="govuk-grid-row btms-stats">
+              <div class="govuk-grid-column-one-third">
+                <h3 class="govuk-heading-s">
+                  <span class="legend-dot matches-dot"></span> Automatic
+                </h3>
+                <p class="govuk-heading-m">
+                  1,175 <span class="govuk-body govuk-body-s percentage">(98.49%)</span>
+                </p>
+              </div>
+              <div class="govuk-grid-column-one-third">
+                <h3 class="govuk-heading-s">
+                  <span class="legend-dot mismatches-dot"></span> Manual
+                </h3>
+                <p class="govuk-heading-m">
+                  18 <span class="govuk-body govuk-body-s	percentage">(1.51%)</span>
+                </p>
+              </div>
+              <div class="govuk-grid-column-one-third">
+                <h3 class="govuk-heading-s">Total</h3>
+                <p class="govuk-heading-m">1,371</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="govuk-grid-row  charts govuk-!-margin-top-4 govuk-!-margin-bottom-4">
+          <div class="govuk-grid-column-full chart">
+
+            <h2 class="govuk-heading-m">Unique clearance requests</h2>
+
+            <div class="btms-chart-container ">
+              <canvas id="uniqueRequestsChart" width="600" height="400"></canvas>
+            </div>
+
+            <div class="govuk-grid-row btms-stats">
+              <div class="govuk-grid-column-one-third">
+                <h3 class="govuk-heading-s">
+                  <span class="legend-dot matches-dot"></span> Unique clearances
+
+                </h3>
+                <p class="govuk-heading-m">
+                  1,371 <span class="govuk-body govuk-body-s	percentage">(66.50%)</span>
+                </p>
+              </div>
+              <div class="govuk-grid-column-one-third">
+                <h3 class="govuk-heading-s">Total</h3>
+                <p class="govuk-heading-m">2,060</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="govuk-grid-row charts govuk-!-margin-top-4 govuk-!-margin-bottom-4">
+          <div class="govuk-grid-column-full chart">
+
+            <h2 class="govuk-heading-m ipaafs-heading">
+              Pre-notifications by CHED type
+
+            </h2>
+
+            <div class="btms-chart-container">
+              <canvas id="chedTypesChart" width="600" height="400"></canvas>
+            </div>
+
+            <div class="govuk-grid-row btms-stats">
+              <div class="govuk-grid-column-one-quarter">
+                <h3 class="govuk-heading-s">
+                  <span class="legend-dot ched-a-dot"></span> CHED A
+                </h3>
+                <p class="govuk-heading-m">
+                  249 <span class="govuk-body govuk-body-s percentage">(3.51%)</span>
+                </p>
+              </div>
+              <div class="govuk-grid-column-one-quarter">
+                <h3 class="govuk-heading-s">
+                  <span class="legend-dot ched-p-dot"></span> CHED P
+                </h3>
+                <p class="govuk-heading-m">
+                  5,399 <span class="govuk-body govuk-body-s percentage">(75.96%)</span>
+                </p>
+              </div>
+              <div class="govuk-grid-column-one-quarter">
+                <h3 class="govuk-heading-s">
+                  <span class="legend-dot ched-pp-dot"></span> CHED PP
+                </h3>
+                <p class="govuk-heading-m">
+                  1,167 <span class="govuk-body govuk-body-s percentage">(16.41%)</span>
+                </p>
+              </div>
+              <div class="govuk-grid-column-one-quarter">
+                <h3 class="govuk-heading-s">
+                  <span class="legend-dot ched-d-dot"></span> CHED D
+                </h3>
+                <p class="govuk-heading-m">
+                  291 <span class="govuk-body govuk-body-s percentage">(4.10%)</span>
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
       </div>
     {% else %}
       <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-5">No results</p>
@@ -238,27 +388,38 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    // Safe form lookup
-    const findForm = (startEl) =>
-      document.getElementById('filter-form') || startEl.closest('form') || document.querySelector('form');
+    "use strict";
 
-    // ===== Port count (real checkboxes only) =====
-    (function setupPortCounter() {
-      const group   = document.getElementById('portOfEntry-group');
-      const boxes   = group ? group.querySelectorAll('input[name="portOfEntry"][type="checkbox"]') : [];
-      const countEl = document.getElementById('portOfEntry-count');
-      const updateCount = () => {
-        const n = Array.from(boxes).filter(b => b.checked).length;
-        if (countEl) countEl.textContent = n + ' selected';
-      };
-      boxes.forEach(b => b.addEventListener('change', updateCount));
-      updateCount();
+    // --- toggle: set true if you want presets/clear to auto-submit (page refresh)
+    const AUTO_SUBMIT = false;
+
+    const $  = (s, r = document) => r.querySelector(s);
+    const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+    const pad = n => String(n).padStart(2, '0');
+
+    const findForm = (startEl) =>
+      document.getElementById('filter-form') ||
+      (startEl && startEl.closest('form')) ||
+      document.querySelector('form');
+
+    const setActionHash = (form, hash = 'summary') => {
+      if (!form) return;
+      const base = form.action ? form.action.split('#')[0] : window.location.pathname;
+      form.action = `${base}#${hash}`;
+    };
+
+    // ---- Port counter
+    (function () {
+      const boxes   = $$('#portOfEntry-group input[name="portOfEntry"][type="checkbox"]');
+      const countEl = $('#portOfEntry-count');
+      const update  = () => { if (countEl) countEl.textContent = boxes.filter(b => b.checked).length + ' selected'; };
+      boxes.forEach(b => b.addEventListener('change', update));
+      update();
     })();
 
-    // ===== Build dynamic preset ranges and submit on click =====
-    (function setupPresets() {
-      const pad = n => String(n).padStart(2, '0');
-      const fmt = d => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+    // ---- Preset ranges (populate only unless AUTO_SUBMIT === true)
+    (function () {
+      const fmtISO = d => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
 
       const now = new Date();
       const startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0);
@@ -269,62 +430,87 @@
       const startOfLastMonth = new Date(startOfToday); startOfLastMonth.setMonth(startOfLastMonth.getMonth() - 1);
 
       const ranges = {
-        "today":      { start: startOfToday,   end: endOfToday },
-        "yesterday":  { start: startOfYesterday, end: endOfYesterday },
-        "last-week":  { start: startOfLastWeek,  end: endOfToday },
-        "last-month": { start: startOfLastMonth, end: endOfToday }
+        'today'     : { start: startOfToday,     end: endOfToday },
+        'yesterday' : { start: startOfYesterday, end: endOfYesterday },
+        'last-week' : { start: startOfLastWeek,  end: endOfToday },
+        'last-month': { start: startOfLastMonth, end: endOfToday }
       };
 
-      document.querySelectorAll('#preset-links a').forEach(link => {
+      $$('#preset-links a').forEach(link => {
         const key = link.getAttribute('data-range');
         if (!ranges[key]) return;
-        link.dataset.start = fmt(ranges[key].start);
-        link.dataset.end   = fmt(ranges[key].end);
+
+        const { start, end } = ranges[key];
+        link.dataset.start = fmtISO(start);
+        link.dataset.end   = fmtISO(end);
 
         link.addEventListener('click', e => {
           e.preventDefault();
-          const form = findForm(link);
-          const start = new Date(link.dataset.start);
-          const end   = new Date(link.dataset.end);
-          if (isNaN(start) || isNaN(end)) return;
+          const form  = findForm(link);
+          const s = new Date(link.dataset.start);
+          const t = new Date(link.dataset.end);
+          if (isNaN(s) || isNaN(t)) return;
 
           const dd = n => String(n).padStart(2, '0');
-          document.getElementById('startDate').value =
-            `${dd(start.getDate())}/${dd(start.getMonth()+1)}/${start.getFullYear()}`;
-          document.getElementById('endDate').value =
-            `${dd(end.getDate())}/${dd(end.getMonth()+1)}/${end.getFullYear()}`;
+          const dmy = d => `${dd(d.getDate())}/${dd(d.getMonth()+1)}/${d.getFullYear()}`;
+          $('#startDate') && ($('#startDate').value = dmy(s));
+          $('#endDate')   && ($('#endDate').value   = dmy(t));
+          $('[name="startTime-hour"]')   && ($('[name="startTime-hour"]').value   = dd(s.getHours()));
+          $('[name="startTime-minute"]') && ($('[name="startTime-minute"]').value = dd(s.getMinutes()));
+          $('[name="endTime-hour"]')     && ($('[name="endTime-hour"]').value     = dd(t.getHours()));
+          $('[name="endTime-minute"]')   && ($('[name="endTime-minute"]').value   = dd(t.getMinutes()));
 
-          document.querySelector('[name="startTime-hour"]').value   = dd(start.getHours());
-          document.querySelector('[name="startTime-minute"]').value = dd(start.getMinutes());
-          document.querySelector('[name="endTime-hour"]').value     = dd(end.getHours());
-          document.querySelector('[name="endTime-minute"]').value   = dd(end.getMinutes());
-
-          form && form.submit();
+          if (AUTO_SUBMIT && form) { setActionHash(form); form.submit(); }
         });
       });
     })();
 
-    // ===== Clear filters (dates + times + port checkboxes) and submit =====
-    (function setupClear() {
-      const clearLink = document.querySelector('#clear-filters a');
+    // ---- Clear filters (populate only unless AUTO_SUBMIT === true)
+    (function () {
+      const clearLink = $('#clear-filters a, #btn-clear');
       if (!clearLink) return;
+
+      const scrollToTop = () => {
+        const topEl = document.getElementById('page-top');
+        const smooth = !window.matchMedia || !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (topEl?.scrollIntoView) {
+          topEl.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start' });
+          try { topEl.focus({ preventScroll: true }); } catch (_) {}
+        } else {
+          window.scrollTo({ top: 0, left: 0, behavior: smooth ? 'smooth' : 'auto' });
+        }
+        // Keep URL hash on summary tab (optional)
+        try { history.replaceState(null, '', window.location.pathname + '#summary'); } catch (_) { window.location.hash = 'summary'; }
+      };
 
       clearLink.addEventListener('click', e => {
         e.preventDefault();
-        const form = (document.getElementById('filter-form') || document.querySelector('form'));
+        const form = findForm(clearLink);
 
-        document.getElementById('startDate').value = '';
-        document.getElementById('endDate').value   = '';
-        ['startTime-hour','startTime-minute','endTime-hour','endTime-minute']
-          .forEach(name => { const el = document.querySelector(`[name="${name}"]`); if (el) el.value = ''; });
+        // Clear fields
+        $('#startDate') && ($('#startDate').value = '');
+        $('#endDate')   && ($('#endDate').value   = '');
+        ['startTime-hour','startTime-minute','endTime-hour','endTime-minute'].forEach(n => {
+          const el = document.querySelector(`[name="${n}"]`);
+          if (el) el.value = '';
+        });
 
-        document.querySelectorAll('input[name="portOfEntry"][type="checkbox"]').forEach(b => b.checked = false);
-        const countEl = document.getElementById('portOfEntry-count');
-        if (countEl) countEl.textContent = '0 selected';
+        $$('#portOfEntry-group input[name="portOfEntry"][type="checkbox"]').forEach(b => b.checked = false);
+        $$('#portOfEntry-group input[name="portOfEntry"][type="hidden"]').forEach(h => h.disabled = true);
+        const countEl = $('#portOfEntry-count'); if (countEl) countEl.textContent = '0 selected';
 
-        form && form.submit();
+        // Scroll/focus top now
+        scrollToTop();
+
+        // If auto-submit is enabled, submit and land on #summary
+        if (AUTO_SUBMIT && form) {
+          setActionHash(form, 'summary');
+          form.submit();
+        }
       });
     })();
   });
 </script>
+
+
 {% endblock %}

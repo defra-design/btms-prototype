@@ -1,4 +1,9 @@
-{% macro statCard(label, value, percentage = "", modifier = "", href = "", linkText = "") %}
+{# includes/stat-card.njk #}
+{% macro statCard(label, value, percentage = "", modifier = "", href = "", linkText = "Download CSV") %}
+  {# normalise the value to a number (handles "1,175") #}
+  {% set valueStr = (value | string) %}
+  {% set numeric  = (valueStr | replace(",", "") | float) %}
+
   <div class="stat-card {{ modifier }}">
     <div class="stat-card__label">{{ label }}</div>
     <div class="stat-card__value-wrapper">
@@ -8,11 +13,9 @@
       {% endif %}
     </div>
 
-    {% if href %}
+    {% if href and numeric > 0 %}
       <p class="statcard-link">
-        <a href="{{ href }}" class="govuk-link" download>
-          {{ linkText or ('View ' ~ label | lower) }}
-        </a>
+        <a href="{{ href }}" class="govuk-link">{{ linkText }}</a>
       </p>
     {% endif %}
   </div>
