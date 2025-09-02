@@ -416,37 +416,50 @@ module.exports = (router) => {
   });
 
   // ----------------- CSV: No matches (respects date + ports) -----------------
-  router.get('/mvp/v4/reporting/no-matches-basic.csv', (req, res) => {
-    const seedRows = readJsonSafe('app/data/no-matches-basic-large.json');
+router.get('/mvp/v4/reporting/no-matches-basic.csv', (req, res) => {
+  const seedRows = readJsonSafe('app/data/no-matches-basic-large.json');
 
-    // default to "last month" if the user hasn't set dates
-    const range = getDateRangeFromSession(req, {
-      start: moment().subtract(1, 'month'),
-      end:   moment(),
-      label: 'last month'
-    });
-    const ports = cleanSelectedPorts(req);
-
-    // Shift to selected end time so CSV looks current for the chosen window
-    const shifted = shiftRowsToEnd(seedRows, range.end);
-
-    const rows = filterByRangeAndPorts(shifted, range, ports);
-
-    const meta = metadataLinesCSV({
-      title: 'BTMS — No matches (basic)',
-      rangeLabel: formatRangeLabel(range.start, range.end, range.usedSession, range.fallbackLabel),
-      ports
-    });
-
-    const header = joinCSV(['MRN','Port of entry','Last updated']);
-    const body = rows.map(r => joinCSV([q(r.mrn), q(r.portOfEntry), q(r.lastUpdated)])).join('\n');
-    const csv = `${meta}\n${header}\n${body}\n`;
-
-    res.setHeader('Content-Type', 'text/csv; charset=utf-8');
-    res.setHeader('Cache-Control', 'no-store');
-    res.setHeader('Content-Disposition', 'attachment; filename="no-matches.csv"');
-    res.send(withBOM(csv));
+  // default to "last month" if the user hasn't set dates
+  const range = getDateRangeFromSession(req, {
+    start: moment().subtract(1, 'month'),
+    end:   moment(),
+    label: 'last month'
   });
+
+  // still use selected ports for filtering, but not in metadata
+  const ports = cleanSelectedPorts(req);
+
+  // Shift to selected end time so CSV looks current for the chosen window
+  const shifted = shiftRowsToEnd(seedRows, range.end);
+
+  // Filter rows by range and ports
+  const rows = filterByRangeAndPorts(shifted, range, ports);
+
+  // metadata: no Ports line
+  const meta = metadataLinesCSV({
+    title: 'BTMS — No matches MRNs',
+    rangeLabel: formatRangeLabel(
+      range.start,
+      range.end,
+      range.usedSession,
+      range.fallbackLabel
+    )
+  });
+
+  const header = joinCSV(['MRN','Port of entry','Last updated']);
+  const body = rows
+    .map(r => joinCSV([q(r.mrn), q(r.portOfEntry), q(r.lastUpdated)]))
+    .join('\n');
+
+  const csv = `${meta}\n${header}\n${body}\n`;
+
+  res.setHeader('Content-Type', 'text/csv; charset=utf-8');
+  res.setHeader('Cache-Control', 'no-store');
+  res.setHeader('Content-Disposition', 'attachment; filename="no-matches.csv"');
+  res.send(withBOM(csv));
+});
+
+
 
   // ----------------- CSV: Manual releases (date ignored by default) ----------
   router.get('/mvp/v4/reporting/manual-release.csv', (req, res) => {
@@ -469,11 +482,10 @@ module.exports = (router) => {
     }
 
     const meta = metadataLinesCSV({
-      title: 'BTMS — Manual releases',
+      title: 'BTMS — Manual releases MRNs',
       rangeLabel: respectRange
         ? formatRangeLabel(range.start, range.end, range.usedSession, range.fallbackLabel)
-        : 'all dates (date filter not applied)',
-      ports
+        : 'all dates (date filter not applied)'
     });
 
     const header = joinCSV(['MRN','Port of entry','Last updated']);

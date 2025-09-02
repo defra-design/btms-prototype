@@ -159,8 +159,9 @@
           {% elif n == 3 %}{% set third = p %}{% endif %}
         {% endif %}
       {% endfor %}
+<span class="govuk-caption-m">Showing results from</span>
 
-      <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-5">
+      <h2 class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-5">
         {{ data.displayDateRange }}
         {% if n == 0 %}
           for all ports
@@ -173,7 +174,7 @@
         {% else %}
           for {{ first }}, {{ second }}, {{ third }} + {{ n - 3 }} more
         {% endif %}
-      </p>
+      </h2>
 
       <div class="govuk-tabs" data-module="govuk-tabs">
         <ul class="govuk-tabs__list">

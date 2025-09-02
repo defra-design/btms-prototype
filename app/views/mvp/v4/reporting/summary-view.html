@@ -127,10 +127,11 @@
   <div class="govuk-grid-column-three-quarters">
     {% if data.searchResults == 'true'%}
 
+<span class="govuk-caption-m">Showing results from</span>
 
-    <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-5">
-     Showing results from {{ data.displayDateRange }}
-    </p>
+    <h2 class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-5">
+     {{ data.displayDateRange }}
+    </h2>
 
     <!-- Tabs -->
     <div class="govuk-tabs" data-module="govuk-tabs">
@@ -161,6 +162,8 @@
         <!-- Releases -->
         <div class="stat-card-container govuk-!-margin-bottom-6">
           <h2 class="govuk-heading-m">Releases</h2>
+          <p class="govuk-!-font-size-16">Each clearance request is a message from CDS to BTMS about an MRN. An MRN can have multiple requests if updated. ‘Total’ counts all messages. ‘Unique’ counts distinct MRNs.</p>
+
           <!-- <p class="govuk-body">Shows the number of MRNs that were automatically or manually released by HMRC.</p> -->
           <div class="stat-card-group">
             {{ statCard("Auto", "1,175", "98.49%", "stat-card--blue") }}
