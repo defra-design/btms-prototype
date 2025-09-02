@@ -30,9 +30,21 @@
   <div class="govuk-grid-column-one-quarter filters">
     <div class="govuk-form-group govuk-!-margin-bottom-1">
       <fieldset class="govuk-fieldset">
-        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
-          Filter by
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+          Filter
         </legend>
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+      Date and time
+    </legend>
+
+    <nav class="govuk-!-margin-top-1">
+      <ul class="govuk-list" id="preset-links">
+        <li><a href="#" data-start="2025-08-15T10:00" data-end="2025-08-15T11:00">Last 1 hour</a></li>
+        <li><a href="#" data-start="2025-08-14T11:00" data-end="2025-08-15T11:00">Last 24 hours</a></li>
+        <li><a href="#" data-start="2025-08-15T11:00" data-end="2025-08-07T11:00">Last 7 days</a></li>
+        <li><a href="#" data-start="2025-08-15T11:00" data-end="2025-07-15T11:00">Last 30 days</a></li>
+      </ul>
+    </nav>
         <!-- Start date -->
         <div class="govuk-form-group govuk-!-margin-bottom-4">
           <!-- MOJ Start date picker goes here -->
@@ -91,18 +103,7 @@
 
       </fieldset>
     </div>
-    <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
-      Filter by time period
-    </legend>
 
-    <nav class="govuk-!-margin-top-1">
-      <ul class="govuk-list" id="preset-links">
-        <li><a href="#" data-start="2025-08-15T10:00" data-end="2025-08-15T11:00">Last 1 hour</a></li>
-        <li><a href="#" data-start="2025-08-14T11:00" data-end="2025-08-15T11:00">Last 24 hours</a></li>
-        <li><a href="#" data-start="2025-08-15T11:00" data-end="2025-08-07T11:00">Last 7 days</a></li>
-        <li><a href="#" data-start="2025-08-15T11:00" data-end="2025-07-15T11:00">Last 30 days</a></li>
-      </ul>
-    </nav>
   </div>
 
   <!-- Main Content -->

@@ -16,7 +16,6 @@
   .reporting .govuk-grid-column-one-quarter.filters { padding: 10px; }
   .port-scroll { max-height: 220px; overflow-y: auto; border-bottom: 1px solid #aaa9a9; padding: 5px; }
   h1:focus { outline: 0; }
-
 </style>
 
 <script>
@@ -354,10 +353,10 @@
                 <h3 class="govuk-heading-s">
                   <span class="legend-dot ched-a-dot"></span> CHED A
                 </h3>
-       <p class="govuk-heading-m">
-            {{ data.stats.ched.A.count | default(0) | commas }}
-            <span class="govuk-body govuk-body-s percentage">({{ data.stats.ched.A.pct | default('0.00%') }})</span>
-       </p>
+              <p class="govuk-heading-m">
+                    {{ data.stats.ched.A.count | default(0) | commas }}
+                    <span class="govuk-body govuk-body-s percentage">({{ data.stats.ched.A.pct | default('0.00%') }})</span>
+              </p>
               </div>
               <div class="govuk-grid-column-one-quarter">
                 <h3 class="govuk-heading-s">

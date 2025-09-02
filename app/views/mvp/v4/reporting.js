@@ -176,7 +176,7 @@ module.exports = (router) => {
         // show list of ports; and compute live stats
         req.session.data.portOptions = getUniquePorts();
 
-        // *** Change: for v2 summary, default to "last month (this time last month → now)" if the user hasn't set dates ***
+        // default to "last month" if the user hasn't set dates
         const range = getDateRangeFromSession(req, {
           start: moment().subtract(1, 'month'),
           end:   moment(),
@@ -197,11 +197,11 @@ module.exports = (router) => {
         const noMatches = filterByRangeAndPorts(noMatchesAll, range, ports);
         const manual    = filterByRangeAndPorts(manualAll,    range, ports);
 
-        // ---- SIMULATION DIALS (tweak to taste) ----
+        // ---- SIMULATION DIALS ----
         const NO_MATCH_RATE = 0.0496;         // 4.96% of line items
         const MANUAL_RATE   = 0.0151;         // 1.51% of releases
-        const UNIQUE_RATIO_INV = 1 / 0.665;   // total msgs ≈ unique / 0.665  => ~1.5037×
-        const PRENOT_PER_LINE  = 5.2;         // total prenotifications per line item
+        const UNIQUE_RATIO_INV = 1 / 0.665;   // total msgs ≈ unique / 0.665
+        const PRENOT_PER_LINE  = 5.2;         // prenotifs per line item
         const CHED = { A:0.0352, P:0.7598, PP:0.1640, D:0.0410 };
 
         // Line items: infer from real 'noMatches'
@@ -219,7 +219,7 @@ module.exports = (router) => {
         const autoPct   = totalReleases ? (autoCount   / totalReleases * 100) : 0;
         const manPct    = totalReleases ? (manualCount / totalReleases * 100) : 0;
 
-        // Unique clearance requests (keep the same ratio feel)
+        // Unique clearance requests
         const uniqueClearances = totalLineItems;
         const totalClearMsgs   = Math.round(uniqueClearances * UNIQUE_RATIO_INV);
         const uniquePct        = totalClearMsgs ? (uniqueClearances / totalClearMsgs * 100) : 0;
@@ -231,7 +231,7 @@ module.exports = (router) => {
         const chedPP = Math.round(prenotTotal * CHED.PP);
         const chedD  = Math.round(prenotTotal * CHED.D);
 
-        // Dynamic percentages from realised counts (handle zeros safely)
+        // Dynamic percentages from realised counts
         const chedTotal = chedA + chedP + chedPP + chedD;
         const fmtPct = (n, d) => (d > 0 ? (n * 100 / d).toFixed(2) + '%' : '0.00%');
 
@@ -255,7 +255,7 @@ module.exports = (router) => {
           totalClearanceMsgs: totalClearMsgs,
           uniquePct: uniquePct.toFixed(2) + '%',
 
-          // CHED breakdown (percentages now dynamic)
+          // CHED breakdown
           ched: {
             A:  { count: chedA,  pct: fmtPct(chedA,  chedTotal) },
             P:  { count: chedP,  pct: fmtPct(chedP,  chedTotal) },
@@ -265,6 +265,47 @@ module.exports = (router) => {
           }
         };
       }
+
+      // ---------- NEW: Safety defaults for v1 (and a belt-and-braces guard for v2) ----------
+      const d = req.session.data;
+      if (!d.stats) {
+        d.stats = {
+          // Matches
+          matches: 0,
+          noMatches: 0,
+          totalLineItems: 0,
+          matchesPct: '0.00%',
+          noMatchesPct: '0.00%',
+
+          // Releases
+          autoReleases: 0,
+          manualReleases: 0,
+          totalReleases: 0,
+          autoPct: '0.00%',
+          manualPct: '0.00%',
+
+          // Unique clearances
+          uniqueClearances: 0,
+          totalClearanceMsgs: 0,
+          uniquePct: '0.00%',
+
+          // CHED
+          ched: {
+            A:  { count: 0, pct: '0.00%' },
+            P:  { count: 0, pct: '0.00%' },
+            PP: { count: 0, pct: '0.00%' },
+            D:  { count: 0, pct: '0.00%' },
+            total: 0
+          }
+        };
+      }
+
+      // If no display label yet, derive one from a sensible range
+      if (!d.displayDateRange) {
+        const r = getDateRangeFromSession(req);
+        d.displayDateRange = formatRangeLabel(r.start, r.end, r.usedSession, r.fallbackLabel);
+      }
+      // --------------------------------------------------------------------------------------
 
       res.render(viewPath, { data: req.session.data });
     });
@@ -378,7 +419,7 @@ module.exports = (router) => {
   router.get('/mvp/v4/reporting/no-matches-basic.csv', (req, res) => {
     const seedRows = readJsonSafe('app/data/no-matches-basic-large.json');
 
-    // *** Change: default to "last month" if the user hasn't set dates ***
+    // default to "last month" if the user hasn't set dates
     const range = getDateRangeFromSession(req, {
       start: moment().subtract(1, 'month'),
       end:   moment(),
