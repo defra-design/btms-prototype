@@ -88,7 +88,7 @@
 
         {# -------------------- Port of entry (persist + counter) -------------------- #}
         {% set selectedPorts = data.selectedPorts or [] %}
-        <div class="govuk-form-group govuk-!-margin-bottom-4" id="portOfEntry-group">
+        <!-- <div class="govuk-form-group govuk-!-margin-bottom-4" id="portOfEntry-group">
           <fieldset class="govuk-fieldset" aria-describedby="portOfEntry-hint portOfEntry-count">
             <legend class="govuk-fieldset__legend govuk-fieldset__legend--s govuk-!-font-size-19 govuk-!-margin-bottom-2">
                Port of entry <span class="govuk-!-font-size-16">(optional)</span>
@@ -98,9 +98,7 @@
               Filter by port of entry
             </div>
 
-            <!-- <p id="portOfEntry-count" class="govuk-hint govuk-!-margin-top-0 govuk-!-margin-bottom-2 govuk-!-font-size-16" aria-live="polite">
-              {{ (selectedPorts | length) }} selected
-            </p> -->
+
 
             <div class="port-scroll">
               {{ govukCheckboxes({
@@ -125,7 +123,7 @@
               }) }}
             </div>
           </fieldset>
-        </div>
+        </div> -->
         {# ------------------ end Port of entry block ------------------ #}
 
         <!-- Update button -->
