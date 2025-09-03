@@ -5,27 +5,18 @@
 {% set showheader = true %}
 {% set bodyClasses = 'reporting' %}
 {% set hideBackLink = false %}
+{% block pageScripts %}
+<script src="/public/javascripts/matches-chart.js"></script>
+<script src="/public/javascripts/chart.js"></script>
+{% endblock %}
 
 {% block form %}
 {% from "govuk/components/checkboxes/macro.njk" import govukCheckboxes %}
 {% from "includes/stat-card.njk" import statCard %}
 {% from "includes/time-input.njk" import timeInput %}
 
-<style>
-  .govuk-checkboxes label { font-weight: 100; }
-  .reporting .govuk-grid-column-one-quarter.filters { padding: 10px; }
-  .port-scroll { max-height: 220px; overflow-y: auto; border-bottom: 1px solid #aaa9a9; padding: 5px; }
-  h1:focus { outline: 0; }
-</style>
 
-<script>
-  // Initialise MOJ Date Picker (robust to global/ESM)
-  window.GOVUKPrototypeKit?.documentReady?.(() => {
-    const Moj = window.MOJFrontend || window.moj?.Frontend || null;
-    const nodes = document.querySelectorAll('[data-module="moj-date-input"]');
-    if (Moj?.components?.DateInput) nodes.forEach(el => new Moj.components.DateInput({ el }));
-  });
-</script>
+
 
 <h1 id="page-top" class="govuk-heading-l" tabindex="-1">{{ title }}</h1>
 
@@ -36,14 +27,14 @@
       <fieldset class="govuk-fieldset">
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">Filter </legend>
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">Date and time </legend>
-    <nav class="govuk-!-margin-top-1">
-      <ul class="govuk-list" id="preset-links">
-        <li><a href="#" data-range="today">Today</a></li>
-        <li><a href="#" data-range="yesterday">Yesterday</a></li>
-        <li><a href="#" data-range="last-week">Last week</a></li>
-        <li><a href="#" data-range="last-month">Last month</a></li>
-      </ul>
-    </nav>
+        <nav class="govuk-!-margin-top-1">
+          <ul class="govuk-list" id="preset-links">
+            <li><a href="#" data-range="today">Today</a></li>
+            <li><a href="#" data-range="yesterday">Yesterday</a></li>
+            <li><a href="#" data-range="last-week">Last week</a></li>
+            <li><a href="#" data-range="last-month">Last month</a></li>
+          </ul>
+        </nav>
         <!-- Start date -->
         <div class="govuk-form-group govuk-!-margin-bottom-4">
           {{ mojDatePicker({
@@ -76,7 +67,8 @@
         </div>
 
         <!-- End time -->
-        <div class="govuk-form-group govuk-!-margin-bottom-4 govuk-!-padding-bottom-4" style="border-bottom: 1px solid #aaa9a9; ">
+        <div class="govuk-form-group govuk-!-margin-bottom-4 govuk-!-padding-bottom-4"
+          style="border-bottom: 1px solid #aaa9a9; ">
           {{ timeInput({
             id: "end-time",
             namePrefix: "endTime",
@@ -88,10 +80,11 @@
 
         {# -------------------- Port of entry (persist + counter) -------------------- #}
         {% set selectedPorts = data.selectedPorts or [] %}
-        <!-- <div class="govuk-form-group govuk-!-margin-bottom-4" id="portOfEntry-group">
+        <div class="govuk-form-group govuk-!-margin-bottom-4" id="portOfEntry-group">
           <fieldset class="govuk-fieldset" aria-describedby="portOfEntry-hint portOfEntry-count">
-            <legend class="govuk-fieldset__legend govuk-fieldset__legend--s govuk-!-font-size-19 govuk-!-margin-bottom-2">
-               Port of entry <span class="govuk-!-font-size-16">(optional)</span>
+            <legend
+              class="govuk-fieldset__legend govuk-fieldset__legend--s govuk-!-font-size-19 govuk-!-margin-bottom-2">
+              Port of entry <span class="govuk-!-font-size-16">(optional)</span>
             </legend>
 
             <div id="portOfEntry-hint" class="govuk-hint govuk-!-margin-bottom-1 govuk-!-font-size-16">
@@ -101,29 +94,30 @@
 
 
             <div class="port-scroll">
-              {{ govukCheckboxes({
-                idPrefix: "portOfEntry",
-                name: "portOfEntry",
-                classes: "govuk-checkboxes--small",
-                items: [
-                  { value: "Felixstowe (GBFXT)",  text: "Felixstowe (GBFXT)",  checked: "Felixstowe (GBFXT)"  in selectedPorts },
-                  { value: "Gatwick (GBLGW)",     text: "Gatwick (GBLGW)",     checked: "Gatwick (GBLGW)"    in selectedPorts },
-                  { value: "Portsmouth (GBPMH)",  text: "Portsmouth (GBPMH)",  checked: "Portsmouth (GBPMH)" in selectedPorts },
-                  { value: "Sevington (GBSEV)",   text: "Sevington (GBSEV)",   checked: "Sevington (GBSEV)"  in selectedPorts },
-                  { value: "Southampton (GBSOU)", text: "Southampton (GBSOU)", checked: "Southampton (GBSOU)" in selectedPorts },
-                  { value: "Plymouth (GBPLY)",    text: "Plymouth (GBPLY)",    checked: "Plymouth (GBPLY)"   in selectedPorts },
-                  { value: "Liverpool (GBLIV)",   text: "Liverpool (GBLIV)",   checked: "Liverpool (GBLIV)"  in selectedPorts },
-                  { value: "Hull (GBHUL)",        text: "Hull (GBHUL)",        checked: "Hull (GBHUL)"       in selectedPorts },
-                  { value: "Immingham (GBIMM)",   text: "Immingham (GBIMM)",   checked: "Immingham (GBIMM)"  in selectedPorts },
-                  { value: "Dover (GBDVR)",       text: "Dover (GBDVR)",       checked: "Dover (GBDVR)"      in selectedPorts },
-                  { value: "Harwich (GBHRW)",     text: "Harwich (GBHRW)",     checked: "Harwich (GBHRW)"    in selectedPorts },
-                  { value: "Teesport (GBTEE)",    text: "Teesport (GBTEE)",    checked: "Teesport (GBTEE)"   in selectedPorts },
-                  { value: "Grangemouth (GBGRG)", text: "Grangemouth (GBGRG)", checked: "Grangemouth (GBGRG)" in selectedPorts }
-                ]
-              }) }}
+      {{ govukCheckboxes({
+  idPrefix: "portOfEntry",
+  name: "portOfEntry",
+  classes: "govuk-checkboxes--small",
+  items: [
+    { value: "Felixstowe (GBFXT)",  text: "Felixstowe <span class='port-code'>(GBFXT)</span>"  | safe, checked: "Felixstowe (GBFXT)"  in selectedPorts },
+    { value: "Gatwick (GBLGW)",     text: "Gatwick <span class='port-code'>(GBLGW)</span>"     | safe, checked: "Gatwick (GBLGW)"    in selectedPorts },
+    { value: "Portsmouth (GBPMH)",  text: "Portsmouth <span class='port-code'>(GBPMH)</span>"  | safe, checked: "Portsmouth (GBPMH)" in selectedPorts },
+    { value: "Sevington (GBSEV)",   text: "Sevington <span class='port-code'>(GBSEV)</span>"   | safe, checked: "Sevington (GBSEV)"  in selectedPorts },
+    { value: "Southampton (GBSOU)", text: "Southampton <span class='port-code'>(GBSOU)</span>" | safe, checked: "Southampton (GBSOU)" in selectedPorts },
+    { value: "Plymouth (GBPLY)",    text: "Plymouth <span class='port-code'>(GBPLY)</span>"    | safe, checked: "Plymouth (GBPLY)"   in selectedPorts },
+    { value: "Liverpool (GBLIV)",   text: "Liverpool <span class='port-code'>(GBLIV)</span>"   | safe, checked: "Liverpool (GBLIV)"  in selectedPorts },
+    { value: "Hull (GBHUL)",        text: "Hull <span class='port-code'>(GBHUL)</span>"        | safe, checked: "Hull (GBHUL)"       in selectedPorts },
+    { value: "Immingham (GBIMM)",   text: "Immingham <span class='port-code'>(GBIMM)</span>"   | safe, checked: "Immingham (GBIMM)"  in selectedPorts },
+    { value: "Dover (GBDVR)",       text: "Dover <span class='port-code'>(GBDVR)</span>"       | safe, checked: "Dover (GBDVR)"      in selectedPorts },
+    { value: "Harwich (GBHRW)",     text: "Harwich <span class='port-code'>(GBHRW)</span>"     | safe, checked: "Harwich (GBHRW)"    in selectedPorts },
+    { value: "Teesport (GBTEE)",    text: "Teesport <span class='port-code'>(GBTEE)</span>"    | safe, checked: "Teesport (GBTEE)"   in selectedPorts },
+    { value: "Grangemouth (GBGRG)", text: "Grangemouth <span class='port-code'>(GBGRG)</span>" | safe, checked: "Grangemouth (GBGRG)" in selectedPorts }
+  ]
+}) }}
+
             </div>
           </fieldset>
-        </div> -->
+        </div>
         {# ------------------ end Port of entry block ------------------ #}
 
         <!-- Update button -->
@@ -144,89 +138,91 @@
   <div class="govuk-grid-column-three-quarters">
     {% if data.searchResults == 'true'%}
 
-      {# ---- CLEAN the selection for display: drop _unchecked and empties ---- #}
-      {% set raw = data.selectedPorts or [] %}
-      {% set n = 0 %}
-      {% set first = "" %}
-      {% set second = "" %}
-      {% set third = "" %}
+    {# ---- CLEAN the selection for display: drop _unchecked and empties ---- #}
+    {% set raw = data.selectedPorts or [] %}
+    {% set n = 0 %}
+    {% set first = "" %}
+    {% set second = "" %}
+    {% set third = "" %}
 
-      {% for p in raw %}
-        {% if p and p != '_unchecked' %}
-          {% set n = n + 1 %}
-          {% if n == 1 %}{% set first = p %}
-          {% elif n == 2 %}{% set second = p %}
-          {% elif n == 3 %}{% set third = p %}{% endif %}
-        {% endif %}
-      {% endfor %}
-<span class="govuk-caption-m">Showing results from</span>
+    {% for p in raw %}
+    {% if p and p != '_unchecked' %}
+    {% set n = n + 1 %}
+    {% if n == 1 %}{% set first = p %}
+    {% elif n == 2 %}{% set second = p %}
+    {% elif n == 3 %}{% set third = p %}{% endif %}
+    {% endif %}
+    {% endfor %}
+    <span class="govuk-caption-m">Showing results from</span>
 
-      <h2 class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-5">
-        {{ data.displayDateRange }}
-        {% if n == 0 %}
-          for all ports
-        {% elif n == 1 %}
-          for {{ first }}
-        {% elif n == 2 %}
-          for {{ first }}, {{ second }}
-        {% elif n == 3 %}
-          for {{ first }}, {{ second }}, {{ third }}
-        {% else %}
-          for {{ first }}, {{ second }}, {{ third }} + {{ n - 3 }} more
-        {% endif %}
-      </h2>
+    <h2 class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-5">
+      {{ data.displayDateRange }}
+      {% if n == 0 %}
+      for all ports
+      {% elif n == 1 %}
+      for {{ first }}
+      {% elif n == 2 %}
+      for {{ first }}, {{ second }}
+      {% elif n == 3 %}
+      for {{ first }}, {{ second }}, {{ third }}
+      {% else %}
+      for {{ first }}, {{ second }}, {{ third }} + {{ n - 3 }} more
+      {% endif %}
+    </h2>
 
-      <div class="govuk-tabs" data-module="govuk-tabs">
-        <ul class="govuk-tabs__list">
-          <li class="govuk-tabs__list-item govuk-tabs__list-item--selected">
-            <a class="govuk-tabs__tab" href="#summary">Summary view</a>
-          </li>
-          <li class="govuk-tabs__list-item">
-            <a class="govuk-tabs__tab" href="#chart">Chart view</a>
-          </li>
-        </ul>
+    <div class="govuk-tabs" data-module="govuk-tabs">
+      <ul class="govuk-tabs__list">
+        <li class="govuk-tabs__list-item govuk-tabs__list-item--selected">
+          <a class="govuk-tabs__tab" href="#summary">Summary view</a>
+        </li>
+        <li class="govuk-tabs__list-item">
+          <a class="govuk-tabs__tab" href="#chart">Chart view</a>
+        </li>
+      </ul>
 
-        <div class="govuk-tabs__panel" id="summary">
-          <div class="stat-card-container govuk-!-margin-bottom-6">
-            <h2 class="govuk-heading-m">Matches</h2>
-            <div class="stat-card-group">
-{{ statCard("Matches", data.stats.matches | string, data.stats.matchesPct) }}
-{{ statCard("No matches", data.stats.noMatches | string, data.stats.noMatchesPct, "", "/mvp/v4/reporting/no-matches-basic.csv", "Download CSV") }}
-{{ statCard("Total", data.stats.totalLineItems | string, "") }}
-            </div>
-          </div>
-
-          <div class="stat-card-container govuk-!-margin-bottom-6">
-            <h2 class="govuk-heading-m">Releases</h2>
-<div class="stat-card-group">
-{# Releases #}
-{{ statCard("Auto", data.stats.autoReleases | string, data.stats.autoPct, "stat-card--blue") }}
-{{ statCard("Manual", data.stats.manualReleases | string, data.stats.manualPct, "stat-card--blue", "/mvp/v4/reporting/manual-release.csv", "Download CSV") }}
-{{ statCard("Total", data.stats.totalReleases | string, "", "stat-card--blue") }}
-
-</div></div>
-
-          <div class="stat-card-container govuk-!-margin-bottom-6">
-            <h2 class="govuk-heading-m">Unique clearance requests</h2>
-            <p class="govuk-!-font-size-16">Each clearance request is a message from CDS to BTMS about an MRN. An MRN can have multiple requests if updated. ‘Total’ counts all messages. ‘Unique’ counts distinct MRNs.</p>
-            <div class="stat-card-group">
-{{ statCard("Unique clearances", data.stats.uniqueClearances | string, data.stats.uniquePct) }}
-{{ statCard("Total", data.stats.totalClearanceMsgs | string) }}
-            </div>
-          </div>
-
-          <div class="stat-card-container govuk-!-margin-bottom-6">
-            <h2 class="govuk-heading-m">Pre-notifications by CHED type</h2>
-            <div class="stat-card-group">
-{{ statCard("CHED A", data.stats.ched.A.count | string, data.stats.ched.A.pct, "stat-card--blue") }}
-{{ statCard("CHED P", data.stats.ched.P.count | string, data.stats.ched.P.pct, "stat-card--blue") }}
-{{ statCard("CHED PP", data.stats.ched.PP.count | string, data.stats.ched.PP.pct, "stat-card--blue") }}
-{{ statCard("CHED D", data.stats.ched.D.count | string, data.stats.ched.D.pct, "stat-card--blue") }}
-            </div>
+      <div class="govuk-tabs__panel" id="summary">
+        <div class="stat-card-container govuk-!-margin-bottom-6">
+          <h2 class="govuk-heading-m">Matches</h2>
+          <div class="stat-card-group">
+            {{ statCard("Matches", data.stats.matches | string, data.stats.matchesPct) }}
+            {{ statCard("No matches", data.stats.noMatches | string, data.stats.noMatchesPct, "", "/mvp/v4/reporting/no-matches-basic.csv", "Download CSV") }}
+            {{ statCard("Total", data.stats.totalLineItems | string, "") }}
           </div>
         </div>
 
-    <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="chart">
+        <div class="stat-card-container govuk-!-margin-bottom-6">
+          <h2 class="govuk-heading-m">Releases</h2>
+          <div class="stat-card-group">
+            {# Releases #}
+            {{ statCard("Auto", data.stats.autoReleases | string, data.stats.autoPct, "stat-card--blue") }}
+            {{ statCard("Manual", data.stats.manualReleases | string, data.stats.manualPct, "stat-card--blue", "/mvp/v4/reporting/manual-release.csv", "Download CSV") }}
+            {{ statCard("Total", data.stats.totalReleases | string, "", "stat-card--blue") }}
+
+          </div>
+        </div>
+
+        <div class="stat-card-container govuk-!-margin-bottom-6">
+          <h2 class="govuk-heading-m">Unique clearance requests</h2>
+          <p class="govuk-!-font-size-16">Each clearance request is a message from CDS to BTMS about an MRN. An MRN can
+            have multiple requests if updated. ‘Total’ counts all messages. ‘Unique’ counts distinct MRNs.</p>
+          <div class="stat-card-group">
+            {{ statCard("Unique clearances", data.stats.uniqueClearances | string, data.stats.uniquePct) }}
+            {{ statCard("Total", data.stats.totalClearanceMsgs | string) }}
+          </div>
+        </div>
+
+        <div class="stat-card-container govuk-!-margin-bottom-6">
+          <h2 class="govuk-heading-m">Pre-notifications by CHED type</h2>
+          <div class="stat-card-group">
+            {{ statCard("CHED A", data.stats.ched.A.count | string, data.stats.ched.A.pct, "stat-card--blue") }}
+            {{ statCard("CHED P", data.stats.ched.P.count | string, data.stats.ched.P.pct, "stat-card--blue") }}
+            {{ statCard("CHED PP", data.stats.ched.PP.count | string, data.stats.ched.PP.pct, "stat-card--blue") }}
+            {{ statCard("CHED D", data.stats.ched.D.count | string, data.stats.ched.D.pct, "stat-card--blue") }}
+          </div>
+        </div>
+      </div>
+
+      <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="chart">
 
         <div class="govuk-grid-row charts govuk-!-margin-bottom-4">
           <div class="govuk-grid-column-full chart">
@@ -242,23 +238,25 @@
                 <h3 class="govuk-heading-s">
                   <span class="legend-dot matches-dot"></span> Matches
                 </h3>
-        <p class="govuk-heading-m">
-            {{ data.stats.matches | default(0) | commas }}
-            <span class="govuk-body govuk-body-s percentage">({{ data.stats.matchesPct | default('0.00%') }})</span>
-          </p>
+                <p class="govuk-heading-m">
+                  {{ data.stats.matches | default(0) | commas }}
+                  <span
+                    class="govuk-body govuk-body-s percentage">({{ data.stats.matchesPct | default('0.00%') }})</span>
+                </p>
               </div>
               <div class="govuk-grid-column-one-third">
                 <h3 class="govuk-heading-s">
                   <span class="legend-dot mismatches-dot"></span> No matches
                 </h3>
-         <p class="govuk-heading-m">
-            {{ data.stats.noMatches | default(0) | commas }}
-            <span class="govuk-body govuk-body-s percentage">({{ data.stats.noMatchesPct | default('0.00%') }})</span>
-          </p>
+                <p class="govuk-heading-m">
+                  {{ data.stats.noMatches | default(0) | commas }}
+                  <span
+                    class="govuk-body govuk-body-s percentage">({{ data.stats.noMatchesPct | default('0.00%') }})</span>
+                </p>
               </div>
               <div class="govuk-grid-column-one-third">
                 <h3 class="govuk-heading-s">Total</h3>
-                <p class="govuk-heading-m">            {{ data.stats.totalLineItems | default(0) | commas }}</p>
+                <p class="govuk-heading-m"> {{ data.stats.totalLineItems | default(0) | commas }}</p>
               </div>
             </div>
 
@@ -281,24 +279,25 @@
                 <h3 class="govuk-heading-s">
                   <span class="legend-dot matches-dot"></span> Automatic
                 </h3>
-        <p class="govuk-heading-m">
-            {{ data.stats.autoReleases | default(0) | commas }}
-            <span class="govuk-body govuk-body-s percentage">({{ data.stats.autoPct | default('0.00%') }})</span>
-          </p>
+                <p class="govuk-heading-m">
+                  {{ data.stats.autoReleases | default(0) | commas }}
+                  <span class="govuk-body govuk-body-s percentage">({{ data.stats.autoPct | default('0.00%') }})</span>
+                </p>
               </div>
               <div class="govuk-grid-column-one-third">
                 <h3 class="govuk-heading-s">
                   <span class="legend-dot mismatches-dot"></span> Manual
                 </h3>
-          <p class="govuk-heading-m">
-            {{ data.stats.manualReleases | default(0) | commas }}
-            <span class="govuk-body govuk-body-s percentage">({{ data.stats.manualPct | default('0.00%') }})</span>
-          </p>
+                <p class="govuk-heading-m">
+                  {{ data.stats.manualReleases | default(0) | commas }}
+                  <span
+                    class="govuk-body govuk-body-s percentage">({{ data.stats.manualPct | default('0.00%') }})</span>
+                </p>
               </div>
               <div class="govuk-grid-column-one-third">
                 <h3 class="govuk-heading-s">Total</h3>
-                <p class="govuk-heading-m">            {{ data.stats.totalReleases | default(0) | commas }}
-</p>
+                <p class="govuk-heading-m"> {{ data.stats.totalReleases | default(0) | commas }}
+                </p>
               </div>
             </div>
 
@@ -320,15 +319,16 @@
                   <span class="legend-dot matches-dot"></span> Unique clearances
 
                 </h3>
-            <p class="govuk-heading-m">
-            {{ data.stats.uniqueClearances | default(0) | commas }}
-            <span class="govuk-body govuk-body-s percentage">({{ data.stats.uniquePct | default('0.00%') }})</span>
-          </p>
+                <p class="govuk-heading-m">
+                  {{ data.stats.uniqueClearances | default(0) | commas }}
+                  <span
+                    class="govuk-body govuk-body-s percentage">({{ data.stats.uniquePct | default('0.00%') }})</span>
+                </p>
               </div>
               <div class="govuk-grid-column-one-third">
                 <h3 class="govuk-heading-s">Total</h3>
-                <p class="govuk-heading-m">            {{ data.stats.totalClearanceMsgs | default(0) | commas }}
-</p>
+                <p class="govuk-heading-m"> {{ data.stats.totalClearanceMsgs | default(0) | commas }}
+                </p>
               </div>
             </div>
 
@@ -352,37 +352,41 @@
                 <h3 class="govuk-heading-s">
                   <span class="legend-dot ched-a-dot"></span> CHED A
                 </h3>
-              <p class="govuk-heading-m">
-                    {{ data.stats.ched.A.count | default(0) | commas }}
-                    <span class="govuk-body govuk-body-s percentage">({{ data.stats.ched.A.pct | default('0.00%') }})</span>
-              </p>
+                <p class="govuk-heading-m">
+                  {{ data.stats.ched.A.count | default(0) | commas }}
+                  <span
+                    class="govuk-body govuk-body-s percentage">({{ data.stats.ched.A.pct | default('0.00%') }})</span>
+                </p>
               </div>
               <div class="govuk-grid-column-one-quarter">
                 <h3 class="govuk-heading-s">
                   <span class="legend-dot ched-p-dot"></span> CHED P
                 </h3>
-           <p class="govuk-heading-m">
-            {{ data.stats.ched.P.count | default(0) | commas }}
-            <span class="govuk-body govuk-body-s percentage">({{ data.stats.ched.P.pct | default('0.00%') }})</span>
-          </p>
+                <p class="govuk-heading-m">
+                  {{ data.stats.ched.P.count | default(0) | commas }}
+                  <span
+                    class="govuk-body govuk-body-s percentage">({{ data.stats.ched.P.pct | default('0.00%') }})</span>
+                </p>
               </div>
               <div class="govuk-grid-column-one-quarter">
                 <h3 class="govuk-heading-s">
                   <span class="legend-dot ched-pp-dot"></span> CHED PP
                 </h3>
                 <p class="govuk-heading-m">
-            {{ data.stats.ched.PP.count | default(0) | commas }}
-            <span class="govuk-body govuk-body-s percentage">({{ data.stats.ched.PP.pct | default('0.00%') }})</span>
-          </p>
+                  {{ data.stats.ched.PP.count | default(0) | commas }}
+                  <span
+                    class="govuk-body govuk-body-s percentage">({{ data.stats.ched.PP.pct | default('0.00%') }})</span>
+                </p>
               </div>
               <div class="govuk-grid-column-one-quarter">
                 <h3 class="govuk-heading-s">
                   <span class="legend-dot ched-d-dot"></span> CHED D
                 </h3>
-                 <p class="govuk-heading-m">
-            {{ data.stats.ched.D.count | default(0) | commas }}
-            <span class="govuk-body govuk-body-s percentage">({{ data.stats.ched.D.pct | default('0.00%') }})</span>
-          </p>
+                <p class="govuk-heading-m">
+                  {{ data.stats.ched.D.count | default(0) | commas }}
+                  <span
+                    class="govuk-body govuk-body-s percentage">({{ data.stats.ched.D.pct | default('0.00%') }})</span>
+                </p>
               </div>
             </div>
 
@@ -390,144 +394,16 @@
         </div>
 
       </div>
-      </div>
+    </div>
     {% else %}
-      <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-5">No results</p>
-      {{ govukInsetText({ html: " To view reporting data, set the filters and select 'update'." }) }}
+    <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-5">No results</p>
+    {{ govukInsetText({ html: " To view reporting data, set the filters and select 'update'." }) }}
     {% endif %}
   </div>
 </div>
 
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    "use strict";
 
-    // --- toggle: set true if you want presets/clear to auto-submit (page refresh)
-    const AUTO_SUBMIT = false;
 
-    const $  = (s, r = document) => r.querySelector(s);
-    const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
-    const pad = n => String(n).padStart(2, '0');
-
-    const findForm = (startEl) =>
-      document.getElementById('filter-form') ||
-      (startEl && startEl.closest('form')) ||
-      document.querySelector('form');
-
-    const setActionHash = (form, hash = 'summary') => {
-      if (!form) return;
-      const base = form.action ? form.action.split('#')[0] : window.location.pathname;
-      form.action = `${base}#${hash}`;
-    };
-    // Attach to update button
-document.querySelector('button[type="submit"]').addEventListener('click', e => {
-  const form = findForm(e.target);
-  if (form) setActionHash(form, 'page-top');
-});
-
-    // ---- Port counter
-    (function () {
-      const boxes   = $$('#portOfEntry-group input[name="portOfEntry"][type="checkbox"]');
-      const countEl = $('#portOfEntry-count');
-      const update  = () => { if (countEl) countEl.textContent = boxes.filter(b => b.checked).length + ' selected'; };
-      boxes.forEach(b => b.addEventListener('change', update));
-      update();
-    })();
-
-    // ---- Preset ranges (populate only unless AUTO_SUBMIT === true)
-    (function () {
-      const fmtISO = d => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
-
-      const now = new Date();
-      const startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0);
-      const endOfToday   = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59);
-      const startOfYesterday = new Date(startOfToday); startOfYesterday.setDate(startOfYesterday.getDate() - 1);
-      const endOfYesterday   = new Date(endOfToday);   endOfYesterday.setDate(endOfYesterday.getDate() - 1);
-      const startOfLastWeek  = new Date(startOfToday); startOfLastWeek.setDate(startOfLastWeek.getDate() - 7);
-      const startOfLastMonth = new Date(startOfToday); startOfLastMonth.setMonth(startOfLastMonth.getMonth() - 1);
-
-      const ranges = {
-        'today'     : { start: startOfToday,     end: endOfToday },
-        'yesterday' : { start: startOfYesterday, end: endOfYesterday },
-        'last-week' : { start: startOfLastWeek,  end: endOfToday },
-        'last-month': { start: startOfLastMonth, end: endOfToday }
-      };
-
-      $$('#preset-links a').forEach(link => {
-        const key = link.getAttribute('data-range');
-        if (!ranges[key]) return;
-
-        const { start, end } = ranges[key];
-        link.dataset.start = fmtISO(start);
-        link.dataset.end   = fmtISO(end);
-
-        link.addEventListener('click', e => {
-          e.preventDefault();
-          const form  = findForm(link);
-          const s = new Date(link.dataset.start);
-          const t = new Date(link.dataset.end);
-          if (isNaN(s) || isNaN(t)) return;
-
-          const dd = n => String(n).padStart(2, '0');
-          const dmy = d => `${dd(d.getDate())}/${dd(d.getMonth()+1)}/${d.getFullYear()}`;
-          $('#startDate') && ($('#startDate').value = dmy(s));
-          $('#endDate')   && ($('#endDate').value   = dmy(t));
-          $('[name="startTime-hour"]')   && ($('[name="startTime-hour"]').value   = dd(s.getHours()));
-          $('[name="startTime-minute"]') && ($('[name="startTime-minute"]').value = dd(s.getMinutes()));
-          $('[name="endTime-hour"]')     && ($('[name="endTime-hour"]').value     = dd(t.getHours()));
-          $('[name="endTime-minute"]')   && ($('[name="endTime-minute"]').value   = dd(t.getMinutes()));
-
-          if (AUTO_SUBMIT && form) { setActionHash(form); form.submit(); }
-        });
-      });
-    })();
-
-    // ---- Clear filters (populate only unless AUTO_SUBMIT === true)
-    (function () {
-      const clearLink = $('#clear-filters a, #btn-clear');
-      if (!clearLink) return;
-
-      const scrollToTop = () => {
-        const topEl = document.getElementById('page-top');
-        const smooth = !window.matchMedia || !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        if (topEl?.scrollIntoView) {
-          topEl.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start' });
-          try { topEl.focus({ preventScroll: true }); } catch (_) {}
-        } else {
-          window.scrollTo({ top: 0, left: 0, behavior: smooth ? 'smooth' : 'auto' });
-        }
-        // Keep URL hash on summary tab (optional)
-        try { history.replaceState(null, '', window.location.pathname + '#summary'); } catch (_) { window.location.hash = 'summary'; }
-      };
-
-      clearLink.addEventListener('click', e => {
-        e.preventDefault();
-        const form = findForm(clearLink);
-
-        // Clear fields
-        $('#startDate') && ($('#startDate').value = '');
-        $('#endDate')   && ($('#endDate').value   = '');
-        ['startTime-hour','startTime-minute','endTime-hour','endTime-minute'].forEach(n => {
-          const el = document.querySelector(`[name="${n}"]`);
-          if (el) el.value = '';
-        });
-
-        $$('#portOfEntry-group input[name="portOfEntry"][type="checkbox"]').forEach(b => b.checked = false);
-        $$('#portOfEntry-group input[name="portOfEntry"][type="hidden"]').forEach(h => h.disabled = true);
-        const countEl = $('#portOfEntry-count'); if (countEl) countEl.textContent = '0 selected';
-
-        // Scroll/focus top now
-        scrollToTop();
-
-        // If auto-submit is enabled, submit and land on #summary
-        if (AUTO_SUBMIT && form) {
-          setActionHash(form, 'summary');
-          form.submit();
-        }
-      });
-    })();
-  });
-</script>
 
 
 {% endblock %}

@@ -21,12 +21,18 @@
     font-weight: 700;
     font-size: 16px;
   }
+  #portOfEntry-group label { font-weight: 100; }
+
 
   .govuk-label,
   .govuk-list {
     font-size: 16px;
   }
+  #portOfEntry-group .port-code {
+       font-size: 14px;
+    display: block;
 
+}
   /* Tabs panel spacing */
   .govuk-tabs__panel {
     border: none;
@@ -86,6 +92,8 @@
     font-size: 14px;
     margin-top: 2px;
   }
+  .port-scroll { max-height: 300px; overflow-y: auto; border-bottom: 1px solid #aaa9a9; padding: 5px; }
+  h1:focus { outline: 0; }
 
   /* Input look in sidebar */
   .govuk-input {
@@ -231,4 +239,7 @@
   td, th {
     font-size: 14px;
  }
+
+
+
 }

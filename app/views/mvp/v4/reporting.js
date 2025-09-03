@@ -7,36 +7,28 @@ const moment = require('moment');
 module.exports = (router) => {
   console.log('[routes] reporting.js loaded');
 
-  // ----------------- helpers -----------------
+  // ----------------- config -----------------
+  const DATA_DIR = 'app/data';
+  const FILE_NO_MATCHES_LARGE = 'no-matches-basic-large.json'; // primary seed for ports + stats
+  const FILE_NO_MATCHES_SMALL = 'no-matches-basic.json';       // used by the simple table route
+  const FILE_MANUAL          = 'manual-release.json';          // optional seed; handled if missing
+
+  // ----------------- date helpers -----------------
   const GOV_DATE_FORMATS = [
     'D MMMM YYYY, HH:mm',        // e.g. 29 August 2025, 10:59
     'D MMMM YYYY [at] h:mma',    // e.g. 29 August 2025 at 10:59am
     moment.ISO_8601
   ];
-
   const formatGovDate = m => m.format('D MMMM YYYY, HH:mm');
   const parseGovDate  = s => moment(s, GOV_DATE_FORMATS, true);
 
-  function readJsonSafe(relPath, fallback = []) {
-    try {
-      const file = path.join(process.cwd(), relPath);
-      return JSON.parse(fs.readFileSync(file, 'utf8')) || fallback;
-    } catch (e) {
-      console.error('[readJsonSafe]', relPath, e.message);
-      return fallback;
-    }
+  function toMomentFromDDMMYYYY(s) {
+    if (!s) return null;
+    const [dd, mm, yyyy] = String(s).split('/');
+    if (!dd || !mm || !yyyy) return null;
+    return moment(`${yyyy}-${mm}-${dd}`, 'YYYY-MM-DD', true);
   }
 
-  function getUniquePorts() {
-    const rows = readJsonSafe('app/data/no-matches-basic.json');
-    const ports = rows.map(r => r.portOfEntry).filter(Boolean);
-    return _.sortBy(_.uniq(ports));
-  }
-
-  /**
-   * Get date range from session. If none supplied, use a fallback window.
-   * The fallback can be passed per-call, e.g. { start: moment().subtract(1,'month'), end: moment(), label: 'last month' }.
-   */
   function getDateRangeFromSession(req, fallback = null) {
     const sd  = req.session?.data?.startDate;               // DD/MM/YYYY
     const ed  = req.session?.data?.endDate;
@@ -57,44 +49,59 @@ module.exports = (router) => {
 
     if (!usedSession) {
       const fb = fallback || {
-        start: moment().subtract(24, 'hours'),
+        start: moment().subtract(1, 'month'),
         end:   moment(),
-        label: 'last 24 hours'
+        label: 'last month'
       };
       start = fb.start.clone ? fb.start.clone() : fb.start;
       end   = fb.end.clone   ? fb.end.clone()   : fb.end;
-      return { start, end, usedSession, fallbackLabel: fb.label || 'last 24 hours' };
+      return { start, end, usedSession, fallbackLabel: fb.label || 'last month' };
     }
 
-    return { start, end, usedSession, fallbackLabel: 'last 24 hours' };
+    return { start, end, usedSession, fallbackLabel: 'last month' };
   }
 
-  function formatRangeLabel(start, end, usedSession, fallbackLabel = 'last 24 hours') {
+  function formatRangeLabel(start, end, usedSession, fallbackLabel = 'last month') {
     const left  = start.format('D MMMM YYYY [at] HH:mm');
     const right = end.format('D MMMM YYYY [at] HH:mm');
     return usedSession ? `${left} to ${right}` : `${fallbackLabel} (${left} to ${right})`;
   }
 
-  function cleanSelectedPorts(req) {
-    return (req.session?.data?.selectedPorts || [])
-      .filter(v => v && v !== '_unchecked');
+  // ----------------- data helpers -----------------
+  function readJsonSafe(relPath, fallback = []) {
+    try {
+      const file = path.join(process.cwd(), relPath);
+      return JSON.parse(fs.readFileSync(file, 'utf8')) || fallback;
+    } catch (e) {
+      console.error('[readJsonSafe]', relPath, e.message);
+      return fallback;
+    }
   }
 
-  // Shift a dataset so its latest timestamp == targetEnd
-  function shiftRowsToEnd(rows, targetEndMoment) {
-    const moments = rows
-      .map(r => parseGovDate(r.lastUpdated))
-      .filter(m => m && m.isValid());
+  function getUniquePorts() {
+    const rows = readJsonSafe(path.join(DATA_DIR, FILE_NO_MATCHES_LARGE));
+    const ports = rows.map(r => r.portOfEntry).filter(Boolean);
+    return _.sortBy(_.uniq(ports));
+  }
 
+  function cleanSelectedPorts(req) {
+    return (req.session?.data?.selectedPorts || []).filter(v => v && v !== '_unchecked');
+  }
+
+  // Shift a dataset so its latest timestamp == selected end time
+  function shiftRowsToEnd(rows, targetEndMoment) {
+    if (!rows?.length) return [];
+    const moments = rows
+      .map(r => parseGovDate(r.lastUpdated || r.updatedAt || r.timestamp || r.time))
+      .filter(m => m && m.isValid());
     if (moments.length === 0) return rows;
 
     const baseMax = moment.max(moments);
     const deltaMs = targetEndMoment.valueOf() - baseMax.valueOf();
-
     if (!Number.isFinite(deltaMs) || deltaMs === 0) return rows;
 
     return rows.map(r => {
-      const m = parseGovDate(r.lastUpdated);
+      const m = parseGovDate(r.lastUpdated || r.updatedAt || r.timestamp || r.time);
       if (!m || !m.isValid()) return r;
       const shifted = moment(m.valueOf() + deltaMs);
       return { ...r, lastUpdated: formatGovDate(shifted) };
@@ -107,21 +114,22 @@ module.exports = (router) => {
   }
 
   function filterByRangeAndPorts(rows, { start, end }, ports) {
-    const wantPorts = ports.map(p => String(p).toUpperCase());
-    const restrictPorts = wantPorts.length > 0;
-    const wanted = new Set(wantPorts);
-
+    const restrictPorts = ports?.length > 0;
+    const wanted = new Set((ports || []).map(p => String(p).toUpperCase()));
     return rows.filter(r => {
-      const okDate = inRange(r.lastUpdated, start, end);
+      const okDate = inRange(r.lastUpdated || r.updatedAt || r.timestamp || r.time, start, end);
       const okPort = !restrictPorts || wanted.has(String(r.portOfEntry).toUpperCase());
       return okDate && okPort;
     });
   }
 
-  // CSV helpers
-  const q = v => `"${String(v ?? '').replace(/"/g, '""')}"`;
+  const pct    = (n, d) => (d > 0 ? (n * 100 / d) : 0);
+  const pctStr = (n, d) => (d > 0 ? (n * 100 / d).toFixed(2) + '%' : '0.00%');
+
+  // ----------------- CSV helpers -----------------
+  const q       = v => `"${String(v ?? '').replace(/"/g, '""')}"`;
   const joinCSV = arr => arr.join(',');
-  const withBOM = s => '\uFEFF' + s; // Excel-friendly UTF-8
+  const withBOM = s => '\uFEFF' + s; // Excel UTF-8 BOM
 
   function metadataLinesCSV({ title, rangeLabel, ports }) {
     const portsLabel = (ports && ports.length) ? ports.join('; ') : 'All ports';
@@ -133,13 +141,15 @@ module.exports = (router) => {
     ].join('\n');
   }
 
-  // ----------------- summary register -----------------
-  const registerSummary = ({ viewPath, getPath, postPath, isV2 = false }) => {
+  // ----------------- summary route factory -----------------
+  function registerSummary({ viewPath, getPath, postPath }) {
+    // Store filters (dates + ports) from forms
     router.post(postPath, (req, res) => {
       req.session.data = req.session.data || {};
 
-      const rawStartDate = req.body['startDate'] || '29/08/2025';
-      const rawEndDate   = req.body['endDate']   || '30/08/2025';
+      // Dates/times
+      const rawStartDate = req.body['startDate'] || '';
+      const rawEndDate   = req.body['endDate']   || '';
       const startHour    = req.body['startTime-hour']   || '00';
       const startMinute  = req.body['startTime-minute'] || '00';
       const endHour      = req.body['endTime-hour']     || '23';
@@ -153,183 +163,139 @@ module.exports = (router) => {
       const s = moment(`${rawStartDate} ${startHour}:${startMinute}`, 'DD/MM/YYYY HH:mm');
       const e = moment(`${rawEndDate} ${endHour}:${endMinute}`,       'DD/MM/YYYY HH:mm');
 
-      const sameDay = s.isSame(e, 'day');
+      const sameDay = s.isValid() && e.isValid() && s.isSame(e, 'day');
       req.session.data.displayDateRange = sameDay
         ? `${s.format('HH:mm')} to ${e.format('HH:mm')} on ${s.format('D MMMM YYYY')}`
         : `${s.format('D MMMM YYYY')} at ${s.format('HH:mm')} to ${e.format('D MMMM YYYY')} at ${e.format('HH:mm')}`;
 
-      if (isV2) {
-        const selectedPorts = Array.isArray(req.body.portOfEntry)
-          ? req.body.portOfEntry
-          : (req.body.portOfEntry ? [req.body.portOfEntry] : []);
-        req.session.data.selectedPorts = selectedPorts.filter(v => v && v !== '_unchecked');
-      }
+      // Ports (always capture; safe if UI hidden)
+      const selectedPorts = Array.isArray(req.body.portOfEntry)
+        ? req.body.portOfEntry
+        : (req.body.portOfEntry ? [req.body.portOfEntry] : []);
+      req.session.data.selectedPorts = (selectedPorts || []).filter(v => v && v !== '_unchecked');
 
       req.session.data.searchResults = 'true';
       res.redirect(getPath);
     });
 
+    // Render with computed stats
     router.get(getPath, (req, res) => {
       req.session.data = req.session.data || {};
 
-      if (isV2) {
-        // show list of ports; and compute live stats
-        req.session.data.portOptions = getUniquePorts();
+      // Always offer ports (v1 can hide UI)
+      req.session.data.portOptions = getUniquePorts();
+      const ports = cleanSelectedPorts(req);
 
-        // default to "last month" if the user hasn't set dates
-        const range = getDateRangeFromSession(req, {
-          start: moment().subtract(1, 'month'),
-          end:   moment(),
-          label: 'last month'
-        });
+      // Default to last month if unset
+      const range = getDateRangeFromSession(req, {
+        start: moment().subtract(1, 'month'),
+        end:   moment(),
+        label: 'last month'
+      });
 
-        const ports = cleanSelectedPorts(req);
+      // Read seeds (large file for main stats; manual releases if present)
+      const noMatchesSeed = readJsonSafe(path.join(DATA_DIR, FILE_NO_MATCHES_LARGE));
+      const manualSeed    = readJsonSafe(path.join(DATA_DIR, FILE_MANUAL));
 
-        // Read seed data
-        const noMatchesSeed = readJsonSafe('app/data/no-matches-basic-large.json');
-        const manualSeed    = readJsonSafe('app/data/manual-release.json');
+      // Align timestamps to chosen end time
+      const noMatchesAll = shiftRowsToEnd(noMatchesSeed, range.end);
+      const manualAll    = shiftRowsToEnd(manualSeed,    range.end);
 
-        // SHIFT timestamps so the most recent == selected end time
-        const noMatchesAll = shiftRowsToEnd(noMatchesSeed, range.end);
-        const manualAll    = shiftRowsToEnd(manualSeed,    range.end);
+      // Apply filters (ports + date)
+      const noMatches = filterByRangeAndPorts(noMatchesAll, range, ports);
+      const manual    = filterByRangeAndPorts(manualAll,    range, ports);
 
-        // Apply filters
-        const noMatches = filterByRangeAndPorts(noMatchesAll, range, ports);
-        const manual    = filterByRangeAndPorts(manualAll,    range, ports);
+      // ---- SIMULATION DIALS ----
+      const NO_MATCH_RATE     = 0.0496;      // 4.96% of line items
+      const MANUAL_RATE       = 0.0151;      // 1.51% of releases
+      const UNIQUE_RATIO_INV  = 1 / 0.665;   // total msgs ≈ unique / 0.665
+      const PRENOT_PER_LINE   = 5.2;         // prenotifications per line item
+      const CHED = { A:0.0352, P:0.7598, PP:0.1640, D:0.0410 };
 
-        // ---- SIMULATION DIALS ----
-        const NO_MATCH_RATE = 0.0496;         // 4.96% of line items
-        const MANUAL_RATE   = 0.0151;         // 1.51% of releases
-        const UNIQUE_RATIO_INV = 1 / 0.665;   // total msgs ≈ unique / 0.665
-        const PRENOT_PER_LINE  = 5.2;         // prenotifs per line item
-        const CHED = { A:0.0352, P:0.7598, PP:0.1640, D:0.0410 };
+      // Line items from real 'noMatches'
+      const nmCount        = noMatches.length;
+      const totalLineItems = nmCount > 0 ? Math.round(nmCount / NO_MATCH_RATE) : 0;
+      const matchCount     = Math.max(totalLineItems - nmCount, 0);
+      const matchPctN      = pct(matchCount, totalLineItems);
+      const nmPctN         = pct(nmCount,    totalLineItems);
 
-        // Line items: infer from real 'noMatches'
-        const nmCount = noMatches.length;
-        const totalLineItems = nmCount > 0 ? Math.round(nmCount / NO_MATCH_RATE) : 0;
-        const matchCount     = Math.max(totalLineItems - nmCount, 0);
-        const matchPct       = totalLineItems ? (matchCount / totalLineItems * 100) : 0;
-        const nmPct          = totalLineItems ? (nmCount   / totalLineItems * 100) : 0;
+      // Releases from real 'manual'
+      const manualCount  = manual.length;
+      let totalReleases  = manualCount > 0 ? Math.round(manualCount / MANUAL_RATE) : Math.round(totalLineItems * 0.87);
+      if (totalReleases < manualCount) totalReleases = manualCount; // guard
+      const autoCount    = Math.max(totalReleases - manualCount, 0);
+      const autoPctN     = pct(autoCount,   totalReleases);
+      const manPctN      = pct(manualCount, totalReleases);
 
-        // Releases: infer from real 'manual'
-        const manualCount = manual.length;
-        let totalReleases = manualCount > 0 ? Math.round(manualCount / MANUAL_RATE) : Math.round(totalLineItems * 0.87);
-        if (totalReleases < manualCount) totalReleases = manualCount; // guard
-        const autoCount = Math.max(totalReleases - manualCount, 0);
-        const autoPct   = totalReleases ? (autoCount   / totalReleases * 100) : 0;
-        const manPct    = totalReleases ? (manualCount / totalReleases * 100) : 0;
+      // Unique clearance requests
+      const uniqueClearances = totalLineItems;
+      const totalClearMsgs   = Math.round(uniqueClearances * UNIQUE_RATIO_INV);
+      const uniquePctN       = pct(uniqueClearances, totalClearMsgs);
 
-        // Unique clearance requests
-        const uniqueClearances = totalLineItems;
-        const totalClearMsgs   = Math.round(uniqueClearances * UNIQUE_RATIO_INV);
-        const uniquePct        = totalClearMsgs ? (uniqueClearances / totalClearMsgs * 100) : 0;
+      // CHED breakdown
+      const prenotTotal = Math.round(totalLineItems * PRENOT_PER_LINE);
+      const chedA  = Math.round(prenotTotal * CHED.A);
+      const chedP  = Math.round(prenotTotal * CHED.P);
+      const chedPP = Math.round(prenotTotal * CHED.PP);
+      const chedD  = Math.round(prenotTotal * CHED.D);
+      const chedTotal = chedA + chedP + chedPP + chedD;
 
-        // Pre-notifications by CHED type (counts from ratios)
-        const prenotTotal = Math.round(totalLineItems * PRENOT_PER_LINE);
-        const chedA  = Math.round(prenotTotal * CHED.A);
-        const chedP  = Math.round(prenotTotal * CHED.P);
-        const chedPP = Math.round(prenotTotal * CHED.PP);
-        const chedD  = Math.round(prenotTotal * CHED.D);
+      req.session.data.stats = {
+        // Matches
+        matches: matchCount,
+        noMatches: nmCount,
+        totalLineItems,
+        matchesPct:  (matchPctN).toFixed(2) + '%',
+        noMatchesPct: (nmPctN).toFixed(2) + '%',
 
-        // Dynamic percentages from realised counts
-        const chedTotal = chedA + chedP + chedPP + chedD;
-        const fmtPct = (n, d) => (d > 0 ? (n * 100 / d).toFixed(2) + '%' : '0.00%');
+        // Releases
+        autoReleases:    autoCount,
+        manualReleases:  manualCount,
+        totalReleases:   totalReleases,
+        autoPct:   (autoPctN).toFixed(2) + '%',
+        manualPct: (manPctN).toFixed(2) + '%',
 
-        req.session.data.stats = {
-          // Matches block
-          matches: matchCount,
-          noMatches: nmCount,
-          totalLineItems,
-          matchesPct: matchPct.toFixed(2) + '%',
-          noMatchesPct: nmPct.toFixed(2) + '%',
+        // Unique clearances
+        uniqueClearances,
+        totalClearanceMsgs: totalClearMsgs,
+        uniquePct: (uniquePctN).toFixed(2) + '%',
 
-          // Releases block
-          autoReleases: autoCount,
-          manualReleases: manualCount,
-          totalReleases: totalReleases,
-          autoPct: autoPct.toFixed(2) + '%',
-          manualPct: manPct.toFixed(2) + '%',
+        // CHED
+        ched: {
+          A:  { count: chedA,  pct: pctStr(chedA,  chedTotal) },
+          P:  { count: chedP,  pct: pctStr(chedP,  chedTotal) },
+          PP: { count: chedPP, pct: pctStr(chedPP, chedTotal) },
+          D:  { count: chedD,  pct: pctStr(chedD,  chedTotal) },
+          total: chedTotal
+        }
+      };
 
-          // Unique clearances block
-          uniqueClearances,
-          totalClearanceMsgs: totalClearMsgs,
-          uniquePct: uniquePct.toFixed(2) + '%',
-
-          // CHED breakdown
-          ched: {
-            A:  { count: chedA,  pct: fmtPct(chedA,  chedTotal) },
-            P:  { count: chedP,  pct: fmtPct(chedP,  chedTotal) },
-            PP: { count: chedPP, pct: fmtPct(chedPP, chedTotal) },
-            D:  { count: chedD,  pct: fmtPct(chedD,  chedTotal) },
-            total: chedTotal
-          }
-        };
+      // Display range label + ensure results show
+      req.session.data.displayDateRange = formatRangeLabel(range.start, range.end, range.usedSession, range.fallbackLabel);
+      if (typeof req.session.data.searchResults === 'undefined') {
+        req.session.data.searchResults = 'true';
       }
-
-      // ---------- NEW: Safety defaults for v1 (and a belt-and-braces guard for v2) ----------
-      const d = req.session.data;
-      if (!d.stats) {
-        d.stats = {
-          // Matches
-          matches: 0,
-          noMatches: 0,
-          totalLineItems: 0,
-          matchesPct: '0.00%',
-          noMatchesPct: '0.00%',
-
-          // Releases
-          autoReleases: 0,
-          manualReleases: 0,
-          totalReleases: 0,
-          autoPct: '0.00%',
-          manualPct: '0.00%',
-
-          // Unique clearances
-          uniqueClearances: 0,
-          totalClearanceMsgs: 0,
-          uniquePct: '0.00%',
-
-          // CHED
-          ched: {
-            A:  { count: 0, pct: '0.00%' },
-            P:  { count: 0, pct: '0.00%' },
-            PP: { count: 0, pct: '0.00%' },
-            D:  { count: 0, pct: '0.00%' },
-            total: 0
-          }
-        };
-      }
-
-      // If no display label yet, derive one from a sensible range
-      if (!d.displayDateRange) {
-        const r = getDateRangeFromSession(req);
-        d.displayDateRange = formatRangeLabel(r.start, r.end, r.usedSession, r.fallbackLabel);
-      }
-      // --------------------------------------------------------------------------------------
 
       res.render(viewPath, { data: req.session.data });
     });
-  };
+  }
 
-  // v1 summary
+  // ----------------- register summary routes -----------------
   registerSummary({
     viewPath: 'mvp/v4/reporting/summary-view',
     getPath:  '/mvp/v4/reporting/summary-view',
-    postPath: '/mvp/v4/reporting/summary-view',
-    isV2: false
+    postPath: '/mvp/v4/reporting/summary-view'
   });
 
-  // v2 summary
   registerSummary({
     viewPath: 'mvp/v4/reporting/summary-view-v2',
     getPath:  '/mvp/v4/reporting/summary-view-v2',
-    postPath: '/mvp/v4/reporting/summary-view-v2',
-    isV2: true
+    postPath: '/mvp/v4/reporting/summary-view-v2'
   });
 
   // ----------------- table routes -----------------
   router.get('/mvp/v4/reporting/no-matches', (req, res) => {
-    const file = path.join(process.cwd(), 'app', 'data', 'no-matches.json');
+    const file = path.join(process.cwd(), DATA_DIR, 'no-matches.json');
     let allRows = [];
     try {
       allRows = JSON.parse(fs.readFileSync(file, 'utf8'));
@@ -360,7 +326,7 @@ module.exports = (router) => {
   });
 
   router.get('/mvp/v4/reporting/no-matches-basic', (req, res) => {
-    const file = path.join(process.cwd(), 'app', 'data', 'no-matches-basic.json');
+    const file = path.join(process.cwd(), DATA_DIR, FILE_NO_MATCHES_SMALL);
     let raw = [];
     try {
       raw = JSON.parse(fs.readFileSync(file, 'utf8')) || [];
@@ -369,10 +335,8 @@ module.exports = (router) => {
       raw = [];
     }
 
-    // Shift to "now" for this table (so it always looks fresh)
     const shifted = shiftRowsToEnd(raw, moment());
 
-    // Normalise + sort newest first
     const rowsNormalised = shifted.map(r => ({
       mrn: r.mrn || '',
       portOfEntry: r.portOfEntry || '',
@@ -416,60 +380,52 @@ module.exports = (router) => {
   });
 
   // ----------------- CSV: No matches (respects date + ports) -----------------
-router.get('/mvp/v4/reporting/no-matches-basic.csv', (req, res) => {
-  const seedRows = readJsonSafe('app/data/no-matches-basic-large.json');
+  router.get('/mvp/v4/reporting/no-matches-basic.csv', (req, res) => {
+    const seedRows = readJsonSafe(path.join(DATA_DIR, FILE_NO_MATCHES_LARGE));
 
-  // default to "last month" if the user hasn't set dates
-  const range = getDateRangeFromSession(req, {
-    start: moment().subtract(1, 'month'),
-    end:   moment(),
-    label: 'last month'
-  });
+    const range = getDateRangeFromSession(req, {
+      start: moment().subtract(1, 'month'),
+      end:   moment(),
+      label: 'last month'
+    });
 
-  // still use selected ports for filtering, but not in metadata
-  const ports = cleanSelectedPorts(req);
-
-  // Shift to selected end time so CSV looks current for the chosen window
-  const shifted = shiftRowsToEnd(seedRows, range.end);
-
-  // Filter rows by range and ports
-  const rows = filterByRangeAndPorts(shifted, range, ports);
-
-  // metadata: no Ports line
-  const meta = metadataLinesCSV({
-    title: 'BTMS — No matches MRNs',
-    rangeLabel: formatRangeLabel(
-      range.start,
-      range.end,
-      range.usedSession,
-      range.fallbackLabel
-    )
-  });
-
-  const header = joinCSV(['MRN','Port of entry','Last updated']);
-  const body = rows
-    .map(r => joinCSV([q(r.mrn), q(r.portOfEntry), q(r.lastUpdated)]))
-    .join('\n');
-
-  const csv = `${meta}\n${header}\n${body}\n`;
-
-  res.setHeader('Content-Type', 'text/csv; charset=utf-8');
-  res.setHeader('Cache-Control', 'no-store');
-  res.setHeader('Content-Disposition', 'attachment; filename="no-matches.csv"');
-  res.send(withBOM(csv));
-});
-
-
-
-  // ----------------- CSV: Manual releases (date ignored by default) ----------
-  router.get('/mvp/v4/reporting/manual-release.csv', (req, res) => {
-    const seedRows = readJsonSafe('app/data/manual-release.json');
-
-    const respectRange = String(req.query.respectRange || '').trim() === '1';
-    const range = getDateRangeFromSession(req); // defaults to last 24h when unset
     const ports = cleanSelectedPorts(req);
 
-    // Shift to selected end time for consistency
+    const shifted = shiftRowsToEnd(seedRows, range.end);
+    const rows = filterByRangeAndPorts(shifted, range, ports);
+
+    const meta = metadataLinesCSV({
+      title: 'BTMS — No matches MRNs',
+      rangeLabel: formatRangeLabel(
+        range.start,
+        range.end,
+        range.usedSession,
+        range.fallbackLabel
+      ),
+      ports
+    });
+
+    const header = joinCSV(['MRN','Port of entry','Last updated']);
+    const body = rows
+      .map(r => joinCSV([q(r.mrn), q(r.portOfEntry), q(r.lastUpdated)]))
+      .join('\n');
+
+    const csv = `${meta}\n${header}\n${body}\n`;
+
+    res.setHeader('Content-Type', 'text/csv; charset=utf-8');
+    res.setHeader('Cache-Control', 'no-store');
+    res.setHeader('Content-Disposition', 'attachment; filename="no-matches.csv"');
+    res.send(withBOM(csv));
+  });
+
+  // ----------------- CSV: Manual releases -----------------
+  router.get('/mvp/v4/reporting/manual-release.csv', (req, res) => {
+    const seedRows = readJsonSafe(path.join(DATA_DIR, FILE_MANUAL));
+
+    const respectRange = String(req.query.respectRange || '').trim() === '1';
+    const range = getDateRangeFromSession(req);
+    const ports = cleanSelectedPorts(req);
+
     let rows = shiftRowsToEnd(seedRows, range.end);
 
     if (ports.length > 0) {
@@ -485,7 +441,8 @@ router.get('/mvp/v4/reporting/no-matches-basic.csv', (req, res) => {
       title: 'BTMS — Manual releases MRNs',
       rangeLabel: respectRange
         ? formatRangeLabel(range.start, range.end, range.usedSession, range.fallbackLabel)
-        : 'all dates (date filter not applied)'
+        : 'all dates (date filter not applied)',
+      ports
     });
 
     const header = joinCSV(['MRN','Port of entry','Last updated']);
@@ -498,7 +455,7 @@ router.get('/mvp/v4/reporting/no-matches-basic.csv', (req, res) => {
     res.send(withBOM(csv));
   });
 
-  // ----------------- Search results (kept) -----------------
+  // ----------------- Search results passthrough -----------------
   router.get('/mvp/v4/search-results', (req, res) => {
     const { mrn, cc, desc, ched, auth, updated } = req.query;
 

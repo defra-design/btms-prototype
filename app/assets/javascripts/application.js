@@ -5,7 +5,7 @@
   //tooltips
 //= require matches-chart
 
-
+import './reporting.js';
 
 
 

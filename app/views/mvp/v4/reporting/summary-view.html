@@ -7,89 +7,55 @@
 {% set hideBackLink = false %}
 
 {% block form %}
+{% from "govuk/components/checkboxes/macro.njk" import govukCheckboxes %}
 {% from "includes/stat-card.njk" import statCard %}
 {% from "includes/time-input.njk" import timeInput %}
-<script>
-  // Initialise MOJ Date Picker
-  import {
-    MOJFrontend
-  } from '@ministryofjustice/frontend';
 
-  window.GOVUKPrototypeKit.documentReady(() => {
-    const datePickers = document.querySelectorAll('[data-module="moj-date-input"]');
-    datePickers.forEach(el => new MOJFrontend.components.DateInput({
-      el
-    }));
-  });
-</script>
+{% block pageScripts %}
+<script src="/public/javascripts/matches-chart.js"></script>
+<script src="/public/javascripts/chart.js"></script>
+{% endblock %}
 
-<h1 class="govuk-heading-l">{{ title }}</h1>
+
+
+<h1 id="page-top" class="govuk-heading-l" tabindex="-1">{{ title }}</h1>
 
 <div class="govuk-grid-row">
   <!-- Filters Column -->
   <div class="govuk-grid-column-one-quarter filters">
     <div class="govuk-form-group govuk-!-margin-bottom-1">
       <fieldset class="govuk-fieldset">
-        <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
-          Filter
-        </legend>
-          <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
-      Date and time
-    </legend>
-
-    <nav class="govuk-!-margin-top-1">
-<ul class="govuk-list" id="preset-links">
-  <li>
-    <a href="#"
-       data-start="2025-09-02T00:00"
-       data-end="2025-09-02T23:59">Today</a>
-  </li>
-  <li>
-    <a href="#"
-       data-start="2025-09-01T00:00"
-       data-end="2025-09-01T23:59">Yesterday</a>
-  </li>
-  <li>
-    <a href="#"
-       data-start="2025-08-26T00:00"
-       data-end="2025-09-02T23:59">Last week</a>
-  </li>
-  <li>
-    <a href="#"
-       data-start="2025-08-02T00:00"
-       data-end="2025-09-02T23:59">Last month</a>
-  </li>
-</ul>
-
-    </nav>
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">Filter </legend>
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">Date and time </legend>
+        <nav class="govuk-!-margin-top-1">
+          <ul class="govuk-list" id="preset-links">
+            <li><a href="#" data-range="today">Today</a></li>
+            <li><a href="#" data-range="yesterday">Yesterday</a></li>
+            <li><a href="#" data-range="last-week">Last week</a></li>
+            <li><a href="#" data-range="last-month">Last month</a></li>
+          </ul>
+        </nav>
         <!-- Start date -->
         <div class="govuk-form-group govuk-!-margin-bottom-4">
-          <!-- MOJ Start date picker goes here -->
           {{ mojDatePicker({
             id: "startDate",
             name: "startDate",
             value: data.startDate or "",
-            label: {
-              text: "Start date"
-            }
+            label: { text: "Start date" }
           }) }}
         </div>
 
-
-
         <!-- End date -->
         <div class="govuk-form-group govuk-!-margin-bottom-4">
-          <!-- MOJ End date picker goes here -->
           {{ mojDatePicker({
             id: "endDate",
             name: "endDate",
             value: data.endDate or "",
-            label: {
-              text: "End date"
-            }
+            label: { text: "End date" }
           }) }}
         </div>
-        <!-- start time -->
+
+        <!-- Start time -->
         <div class="govuk-form-group govuk-!-margin-bottom-4">
           {{ timeInput({
             id: "start-time",
@@ -99,8 +65,9 @@
             minute: data.startTime and data.startTime.minute or ""
           }) }}
         </div>
+
         <!-- End time -->
-        <div class="govuk-form-group govuk-!-margin-bottom-4">
+        <div class="govuk-form-group govuk-!-margin-bottom-4 govuk-!-padding-bottom-4">
           {{ timeInput({
             id: "end-time",
             namePrefix: "endTime",
@@ -108,18 +75,20 @@
             hour: data.endTime and data.endTime.hour or "",
             minute: data.endTime and data.endTime.minute or ""
           }) }}
-
-
         </div>
 
-        <button class="govuk-button govuk-!-margin-bottom-6" data-module="govuk-button">Update</button>
+
+        <!-- Update button -->
+        <button class="govuk-button govuk-!-margin-bottom-6" data-module="govuk-button" type="submit">Update</button>
+
+        <!-- Clear filters -->
         <ul class="govuk-list" id="clear-filters">
           <li><a href="#" data-start="" data-end="">Clear filters</a></li>
-
         </ul>
-
       </fieldset>
     </div>
+
+    <!-- Preset date filters -->
 
   </div>
 
@@ -127,13 +96,38 @@
   <div class="govuk-grid-column-three-quarters">
     {% if data.searchResults == 'true'%}
 
-<span class="govuk-caption-m">Showing results from</span>
+    {# ---- CLEAN the selection for display: drop _unchecked and empties ---- #}
+    {% set raw = data.selectedPorts or [] %}
+    {% set n = 0 %}
+    {% set first = "" %}
+    {% set second = "" %}
+    {% set third = "" %}
+
+    {% for p in raw %}
+    {% if p and p != '_unchecked' %}
+    {% set n = n + 1 %}
+    {% if n == 1 %}{% set first = p %}
+    {% elif n == 2 %}{% set second = p %}
+    {% elif n == 3 %}{% set third = p %}{% endif %}
+    {% endif %}
+    {% endfor %}
+    <span class="govuk-caption-m">Showing results from</span>
 
     <h2 class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-5">
-     {{ data.displayDateRange }}
+      {{ data.displayDateRange }}
+      {% if n == 0 %}
+      for all ports
+      {% elif n == 1 %}
+      for {{ first }}
+      {% elif n == 2 %}
+      for {{ first }}, {{ second }}
+      {% elif n == 3 %}
+      for {{ first }}, {{ second }}, {{ third }}
+      {% else %}
+      for {{ first }}, {{ second }}, {{ third }} + {{ n - 3 }} more
+      {% endif %}
     </h2>
 
-    <!-- Tabs -->
     <div class="govuk-tabs" data-module="govuk-tabs">
       <ul class="govuk-tabs__list">
         <li class="govuk-tabs__list-item govuk-tabs__list-item--selected">
@@ -144,59 +138,48 @@
         </li>
       </ul>
 
-      <!-- Summary view -->
       <div class="govuk-tabs__panel" id="summary">
-
-        <!-- Matches -->
         <div class="stat-card-container govuk-!-margin-bottom-6">
           <h2 class="govuk-heading-m">Matches</h2>
-          <!-- <p class="govuk-body">Number of matching Commodity lines in the MRN vs those that couldn't be matched to an
-            IPAFFS document</p>-->
-            <div class="stat-card-group">
-              {{ statCard("Matches", "1,302", "95.04%") }}
-              {{ statCard("No matches", "68", "4.96%", "", "#") }}
-              {{ statCard("Total", "1,370", "") }}
-            </div>
+          <div class="stat-card-group">
+            {{ statCard("Matches", data.stats.matches | string, data.stats.matchesPct) }}
+            {{ statCard("No matches", data.stats.noMatches | string, data.stats.noMatchesPct, "", "/mvp/v4/reporting/no-matches-basic.csv", "Download CSV") }}
+            {{ statCard("Total", data.stats.totalLineItems | string, "") }}
+          </div>
         </div>
 
-        <!-- Releases -->
         <div class="stat-card-container govuk-!-margin-bottom-6">
           <h2 class="govuk-heading-m">Releases</h2>
-          <p class="govuk-!-font-size-16">Each clearance request is a message from CDS to BTMS about an MRN. An MRN can have multiple requests if updated. ‘Total’ counts all messages. ‘Unique’ counts distinct MRNs.</p>
-
-          <!-- <p class="govuk-body">Shows the number of MRNs that were automatically or manually released by HMRC.</p> -->
           <div class="stat-card-group">
-            {{ statCard("Auto", "1,175", "98.49%", "stat-card--blue") }}
-            {{ statCard("Manual", "18", "1.51%", "stat-card--blue") }}
-            {{ statCard("Total", "1,193", "", "stat-card--blue") }}
+            {# Releases #}
+            {{ statCard("Auto", data.stats.autoReleases | string, data.stats.autoPct, "stat-card--blue") }}
+            {{ statCard("Manual", data.stats.manualReleases | string, data.stats.manualPct, "stat-card--blue", "/mvp/v4/reporting/manual-release.csv", "Download CSV") }}
+            {{ statCard("Total", data.stats.totalReleases | string, "", "stat-card--blue") }}
+
           </div>
         </div>
 
-        <!-- Unique clearance requests -->
         <div class="stat-card-container govuk-!-margin-bottom-6">
           <h2 class="govuk-heading-m">Unique clearance requests</h2>
-          <!-- <p class="govuk-body">Shows the total number of unique clearance requests made.</p> -->
+          <p class="govuk-!-font-size-16">Each clearance request is a message from CDS to BTMS about an MRN. An MRN can
+            have multiple requests if updated. ‘Total’ counts all messages. ‘Unique’ counts distinct MRNs.</p>
           <div class="stat-card-group">
-            {{ statCard("Unique clearances", "1,371", "66.50%") }}
-            {{ statCard("Total", "2,060") }}
+            {{ statCard("Unique clearances", data.stats.uniqueClearances | string, data.stats.uniquePct) }}
+            {{ statCard("Total", data.stats.totalClearanceMsgs | string) }}
           </div>
         </div>
 
-        <!-- CHED types -->
         <div class="stat-card-container govuk-!-margin-bottom-6">
           <h2 class="govuk-heading-m">Pre-notifications by CHED type</h2>
-          <!-- <p class="govuk-body">Shows how many CHED pre-notifications were submitted through IPAFFS</p> -->
           <div class="stat-card-group">
-            {{ statCard("CHED A", "249", "3.52%", "stat-card--blue") }}
-            {{ statCard("CHED P", "5,399", "75.98%", "stat-card--blue") }}
-            {{ statCard("CHED PP", "1,167", "16.40%", "stat-card--blue") }}
-            {{ statCard("CHED D", "291", "4.10%", "stat-card--blue") }}
+            {{ statCard("CHED A", data.stats.ched.A.count | string, data.stats.ched.A.pct, "stat-card--blue") }}
+            {{ statCard("CHED P", data.stats.ched.P.count | string, data.stats.ched.P.pct, "stat-card--blue") }}
+            {{ statCard("CHED PP", data.stats.ched.PP.count | string, data.stats.ched.PP.pct, "stat-card--blue") }}
+            {{ statCard("CHED D", data.stats.ched.D.count | string, data.stats.ched.D.pct, "stat-card--blue") }}
           </div>
         </div>
-
       </div>
 
-      <!-- Chart view placeholder -->
       <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="chart">
 
         <div class="govuk-grid-row charts govuk-!-margin-bottom-4">
@@ -214,7 +197,9 @@
                   <span class="legend-dot matches-dot"></span> Matches
                 </h3>
                 <p class="govuk-heading-m">
-                  1,302 <span class="govuk-body govuk-body-s	percentage">(95.04%)</span>
+                  {{ data.stats.matches | default(0) | commas }}
+                  <span
+                    class="govuk-body govuk-body-s percentage">({{ data.stats.matchesPct | default('0.00%') }})</span>
                 </p>
               </div>
               <div class="govuk-grid-column-one-third">
@@ -222,12 +207,14 @@
                   <span class="legend-dot mismatches-dot"></span> No matches
                 </h3>
                 <p class="govuk-heading-m">
-                  68 <span class="govuk-body govuk-body-s	percentage">(4.96%)</span>
+                  {{ data.stats.noMatches | default(0) | commas }}
+                  <span
+                    class="govuk-body govuk-body-s percentage">({{ data.stats.noMatchesPct | default('0.00%') }})</span>
                 </p>
               </div>
               <div class="govuk-grid-column-one-third">
                 <h3 class="govuk-heading-s">Total</h3>
-                <p class="govuk-heading-m">1,371</p>
+                <p class="govuk-heading-m"> {{ data.stats.totalLineItems | default(0) | commas }}</p>
               </div>
             </div>
 
@@ -251,7 +238,8 @@
                   <span class="legend-dot matches-dot"></span> Automatic
                 </h3>
                 <p class="govuk-heading-m">
-                  1,175 <span class="govuk-body govuk-body-s percentage">(98.49%)</span>
+                  {{ data.stats.autoReleases | default(0) | commas }}
+                  <span class="govuk-body govuk-body-s percentage">({{ data.stats.autoPct | default('0.00%') }})</span>
                 </p>
               </div>
               <div class="govuk-grid-column-one-third">
@@ -259,12 +247,15 @@
                   <span class="legend-dot mismatches-dot"></span> Manual
                 </h3>
                 <p class="govuk-heading-m">
-                  18 <span class="govuk-body govuk-body-s	percentage">(1.51%)</span>
+                  {{ data.stats.manualReleases | default(0) | commas }}
+                  <span
+                    class="govuk-body govuk-body-s percentage">({{ data.stats.manualPct | default('0.00%') }})</span>
                 </p>
               </div>
               <div class="govuk-grid-column-one-third">
                 <h3 class="govuk-heading-s">Total</h3>
-                <p class="govuk-heading-m">1,371</p>
+                <p class="govuk-heading-m"> {{ data.stats.totalReleases | default(0) | commas }}
+                </p>
               </div>
             </div>
 
@@ -287,12 +278,15 @@
 
                 </h3>
                 <p class="govuk-heading-m">
-                  1,371 <span class="govuk-body govuk-body-s	percentage">(66.50%)</span>
+                  {{ data.stats.uniqueClearances | default(0) | commas }}
+                  <span
+                    class="govuk-body govuk-body-s percentage">({{ data.stats.uniquePct | default('0.00%') }})</span>
                 </p>
               </div>
               <div class="govuk-grid-column-one-third">
                 <h3 class="govuk-heading-s">Total</h3>
-                <p class="govuk-heading-m">2,060</p>
+                <p class="govuk-heading-m"> {{ data.stats.totalClearanceMsgs | default(0) | commas }}
+                </p>
               </div>
             </div>
 
@@ -317,7 +311,9 @@
                   <span class="legend-dot ched-a-dot"></span> CHED A
                 </h3>
                 <p class="govuk-heading-m">
-                  249 <span class="govuk-body govuk-body-s percentage">(3.51%)</span>
+                  {{ data.stats.ched.A.count | default(0) | commas }}
+                  <span
+                    class="govuk-body govuk-body-s percentage">({{ data.stats.ched.A.pct | default('0.00%') }})</span>
                 </p>
               </div>
               <div class="govuk-grid-column-one-quarter">
@@ -325,7 +321,9 @@
                   <span class="legend-dot ched-p-dot"></span> CHED P
                 </h3>
                 <p class="govuk-heading-m">
-                  5,399 <span class="govuk-body govuk-body-s percentage">(75.96%)</span>
+                  {{ data.stats.ched.P.count | default(0) | commas }}
+                  <span
+                    class="govuk-body govuk-body-s percentage">({{ data.stats.ched.P.pct | default('0.00%') }})</span>
                 </p>
               </div>
               <div class="govuk-grid-column-one-quarter">
@@ -333,7 +331,9 @@
                   <span class="legend-dot ched-pp-dot"></span> CHED PP
                 </h3>
                 <p class="govuk-heading-m">
-                  1,167 <span class="govuk-body govuk-body-s percentage">(16.41%)</span>
+                  {{ data.stats.ched.PP.count | default(0) | commas }}
+                  <span
+                    class="govuk-body govuk-body-s percentage">({{ data.stats.ched.PP.pct | default('0.00%') }})</span>
                 </p>
               </div>
               <div class="govuk-grid-column-one-quarter">
@@ -341,7 +341,9 @@
                   <span class="legend-dot ched-d-dot"></span> CHED D
                 </h3>
                 <p class="govuk-heading-m">
-                  291 <span class="govuk-body govuk-body-s percentage">(4.10%)</span>
+                  {{ data.stats.ched.D.count | default(0) | commas }}
+                  <span
+                    class="govuk-body govuk-body-s percentage">({{ data.stats.ched.D.pct | default('0.00%') }})</span>
                 </p>
               </div>
             </div>
@@ -350,77 +352,16 @@
         </div>
 
       </div>
-
     </div>
-
     {% else %}
-
-    <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-5">
-      No results
-    </p>
-    {{ govukInsetText({
-        html: " To view reporting data, set the filters and select 'update'."
-    }) }}
-
-    <script>
-      document.getElementById('toggleChart').addEventListener('click', function (e) {
-        e.preventDefault();
-        const chartDiv = document.getElementById('chartContainer');
-        chartDiv.style.display = chartDiv.style.display === 'none' ? 'block' : 'none';
-      });
-    </script>
+    <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-5">No results</p>
+    {{ govukInsetText({ html: " To view reporting data, set the filters and select 'update'." }) }}
     {% endif %}
-
   </div>
 </div>
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const presetLinks = document.querySelectorAll('#preset-links a, #clear-filters a');
-    const form = document.getElementById('filter-form');
 
-    presetLinks.forEach(link => {
-      link.addEventListener('click', e => {
-        e.preventDefault();
 
-        const startAttr = link.getAttribute('data-start');
-        const endAttr = link.getAttribute('data-end');
 
-        const pad = n => n.toString().padStart(2, '0');
 
-        if (startAttr && endAttr) {
-          const start = new Date(startAttr);
-          const end = new Date(endAttr);
 
-          if (isNaN(start.getTime()) || isNaN(end.getTime())) {
-            console.error('Invalid date format');
-            return;
-          }
-
-          // Set date fields
-          document.getElementById('startDate').value =
-            `${pad(start.getDate())}/${pad(start.getMonth() + 1)}/${start.getFullYear()}`;
-          document.getElementById('endDate').value =
-            `${pad(end.getDate())}/${pad(end.getMonth() + 1)}/${end.getFullYear()}`;
-
-          // Set time fields
-          document.querySelector('[name="startTime-hour"]').value = pad(start.getHours());
-          document.querySelector('[name="startTime-minute"]').value = pad(start.getMinutes());
-          document.querySelector('[name="endTime-hour"]').value = pad(end.getHours());
-          document.querySelector('[name="endTime-minute"]').value = pad(end.getMinutes());
-        } else {
-          // Clear all fields
-          document.getElementById('startDate').value = '';
-          document.getElementById('endDate').value = '';
-          document.querySelector('[name="startTime-hour"]').value = '';
-          document.querySelector('[name="startTime-minute"]').value = '';
-          document.querySelector('[name="endTime-hour"]').value = '';
-          document.querySelector('[name="endTime-minute"]').value = '';
-        }
-
-        // Submit the form
-        form.submit();
-      });
-    });
-  });
-</script>
 {% endblock %}
