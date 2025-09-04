@@ -477,4 +477,109 @@ module.exports = (router) => {
       }
     });
   });
+
+
+  // === Chart data endpoint (JSON) ===
+// Returns hour-bucketed series based on current filters (date/time + ports).
+router.get('/mvp/v4/reporting/chart-data.json', (req, res) => {
+  // Reuse your helpers + dials
+  const NO_MATCH_RATE     = 0.0496;      // 4.96% of line items
+  const MANUAL_RATE       = 0.0151;      // 1.51% of releases
+  const UNIQUE_RATIO_INV  = 1 / 0.665;   // total msgs ≈ unique / 0.665
+  const PRENOT_PER_LINE   = 5.2;         // prenotifications per line item
+  const CHED = { A:0.0352, P:0.7598, PP:0.1640, D:0.0410 };
+
+  const range = getDateRangeFromSession(req, {
+    start: moment().subtract(1, 'month'),
+    end:   moment(),
+    label: 'last month'
+  });
+
+  const ports = cleanSelectedPorts(req);
+
+  // Load + align data
+  const noMatchesSeed = readJsonSafe(path.join('app/data', 'no-matches-basic-large.json'));
+  const manualSeed    = readJsonSafe(path.join('app/data', 'manual-release.json'));
+
+  const noMatchesAll = shiftRowsToEnd(noMatchesSeed, range.end);
+  const manualAll    = shiftRowsToEnd(manualSeed,    range.end);
+
+  // Filter
+  const noMatches = filterByRangeAndPorts(noMatchesAll, range, ports);
+  const manual    = filterByRangeAndPorts(manualAll,    range, ports);
+
+  // Bucket function (hourly)
+  function bucketByHour(rows) {
+    const map = new Map(); // key "YYYY-MM-DD HH"
+    rows.forEach(r => {
+      const m = parseGovDate(r.lastUpdated || r.updatedAt || r.timestamp || r.time);
+      if (!m?.isValid?.()) return;
+      const key = m.format('YYYY-MM-DD HH');
+      map.set(key, (map.get(key) || 0) + 1);
+    });
+    return map;
+  }
+
+  const nmHourly    = bucketByHour(noMatches);
+  const manualHourly= bucketByHour(manual);
+
+  // Build a contiguous hourly label axis across the range (cap at 24hrs if same day; otherwise still hourly across window)
+  const labels = [];
+  const hours  = [];
+  const startH = range.start.clone().startOf('hour');
+  const endH   = range.end.clone().startOf('hour');
+  for (let t = startH.clone(); t.isSameOrBefore(endH); t.add(1, 'hour')) {
+    labels.push(t.format('HH:00'));
+    hours.push(t.format('YYYY-MM-DD HH'));
+  }
+  if (labels.length === 0) {
+    // fallback to 24hr axis if something odd
+    for (let h=0; h<24; h++) { labels.push(String(h).padStart(2,'0') + ':00'); hours.push('fake-'+String(h).padStart(2,'0')); }
+  }
+
+  // Series: noMatches per hour from actual; totalLineItems per hour via scaling; matches = total - noMatches
+  const noMatchesSeries = hours.map(h => nmHourly.get(h) || 0);
+  const totalLineItemsSeries = noMatchesSeries.map(nm => Math.round(nm / NO_MATCH_RATE));
+  const matchesSeries  = totalLineItemsSeries.map((t,i) => Math.max(t - noMatchesSeries[i], 0));
+
+  // Releases: manual per hour from data; infer total releases per hour via scaling; auto = total - manual
+  const manualSeries = hours.map(h => manualHourly.get(h) || 0);
+  const totalReleasesSeries = manualSeries.map(mn => Math.max(Math.round(mn / MANUAL_RATE), mn));
+  const autoSeries   = totalReleasesSeries.map((tr,i) => Math.max(tr - manualSeries[i], 0));
+
+  // Unique clearance requests: use totalLineItems per hour as "unique"; total msgs ≈ unique / 0.665
+  const uniqueSeries = totalLineItemsSeries;
+  const totalMsgsSeries = uniqueSeries.map(u => Math.round(u * UNIQUE_RATIO_INV));
+
+  // CHED types per hour (scaled from totalLineItems)
+  const prenotSeries = totalLineItemsSeries.map(tli => Math.round(tli * PRENOT_PER_LINE));
+  const chedASeries  = prenotSeries.map(n => Math.round(n * CHED.A));
+  const chedPSeries  = prenotSeries.map(n => Math.round(n * CHED.P));
+  const chedPPSeries = prenotSeries.map(n => Math.round(n * CHED.PP));
+  const chedDSeries  = prenotSeries.map(n => Math.round(n * CHED.D));
+
+  res.json({
+    labels,
+    series: {
+      matches: matchesSeries,
+      noMatches: noMatchesSeries,
+      releases: {
+        auto: autoSeries,
+        manual: manualSeries,
+        total: totalReleasesSeries
+      },
+      clearances: {
+        unique: uniqueSeries,
+        totalMsgs: totalMsgsSeries
+      },
+      ched: {
+        A: chedASeries,
+        P: chedPSeries,
+        PP: chedPPSeries,
+        D: chedDSeries
+      }
+    }
+  });
+});
+
 };
