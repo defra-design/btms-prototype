@@ -51,7 +51,7 @@ module.exports = (router) => {
     // Error handling
     if (!search) {
       data.error = 'true';
-      data.errorMessage = 'Enter an MRN, CHED, DUCR or GMR reference';
+      data.errorMessage = 'Enter an MRN, CHED, GMR or DUCR reference';
       data.searchTerm = '';
       data.title = '';
     } else if (
@@ -61,7 +61,7 @@ module.exports = (router) => {
       !gmrPattern.test(search)
     ) {
       data.error = 'true';
-      data.errorMessage = 'Enter an MRN, CHED, DUCR or GMR reference in the correct format';
+      data.errorMessage = 'Enter an MRN, CHED, GMR or DUCR reference in the correct format';
       data.searchTerm = search;
       data.title = '';
     } else {
