@@ -15,9 +15,6 @@
 {% from "includes/stat-card.njk" import statCard %}
 {% from "includes/time-input.njk" import timeInput %}
 
-
-
-
 <h1 id="page-top" class="govuk-heading-l" tabindex="-1">{{ title }}</h1>
 
 <div class="govuk-grid-row">
@@ -90,8 +87,6 @@
             <div id="portOfEntry-hint" class="govuk-hint govuk-!-margin-bottom-1 govuk-!-font-size-16">
               Filter by port of entry
             </div>
-
-
 
             <div class="port-scroll">
       {{ govukCheckboxes({
@@ -183,6 +178,7 @@
       <div class="govuk-tabs__panel" id="summary">
         <div class="stat-card-container govuk-!-margin-bottom-6">
           <h2 class="govuk-heading-m">Matches</h2>
+          <p class="govuk-!-font-size-16">Matches are shown by the date the MRN was created, not when the status changed. For example, an MRN created on 1 September but matched on 2 September will appear in the 1 September report.</p>
           <div class="stat-card-group">
             {{ statCard("Matches", data.stats.matches | string, data.stats.matchesPct) }}
             {{ statCard("No matches", data.stats.noMatches | string, data.stats.noMatchesPct, "", "/mvp/v4/reporting/no-matches-basic.csv", "Download CSV") }}
@@ -259,8 +255,6 @@
                 <p class="govuk-heading-m"> {{ data.stats.totalLineItems | default(0) | commas }}</p>
               </div>
             </div>
-
-
 
           </div>
         </div>
@@ -401,9 +395,5 @@
     {% endif %}
   </div>
 </div>
-
-
-
-
 
 {% endblock %}

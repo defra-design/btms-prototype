@@ -13,7 +13,6 @@
   {%- endif -%}
 {% endset -%}
 
-
 {% block beforeContent %}
 {%- if breadcrumb -%}
   {% include 'includes/breadcrumb.html' %}
@@ -21,12 +20,9 @@
   {% include 'includes/back.html' %}
 {% endblock %}
 
-
 {% block content %}
   <div class="govuk-grid-row">
     <div class="{% if not fullWidth %}govuk-grid-column-two-thirds{% else %}govuk-grid-column-full{% endif %} {{ cssClassName }}">
-
-     
 
       {% if showSubheader %}
          <span class="govuk-caption-l">{{subHeader}}</span>
@@ -41,7 +37,6 @@
       </div>
        {% endif %}
 
-
       <form {{formActionHtml | safe }} method="post" novalidate spellcheck="false">
         {% block form %}{% endblock %}
         {% if not hideButton %}
@@ -51,7 +46,6 @@
       {% endif %}
       {{ secondaryButton | safe if secondaryButton }}
       </form>
-
 
     </div>
     {% if showDetails %}

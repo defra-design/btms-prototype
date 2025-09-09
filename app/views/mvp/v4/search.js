@@ -1,66 +1,80 @@
 const _ = require('lodash');
 const moment = require('moment');
 
+// Hoist redirects so they can be reused for middleware
+const searchRedirects = {
+  '24GB0Z8WEJ9ZBTL73B': 'mrn',
+  'GMRCQP7UIYNS': 'new-layout-current',
+  '4GB335031931000-WB2408-27WWL6274S': 'ducr',
+  'CHEDP.GB.2025.5403171': 'multiple-auth',
+  '24GBDX8QQ4WWFZNAR3': 'mrn-tri-auth',
+  'CHEDPP.GB.2025.5426583': 'no-mrn',
+  '25GB0P0TEP7CZCNAR6': 'no-ched',
+  '25GB2XHHM4884KEAR1': 'scenario-1',
+  '25GB1EU8XXNPKSTAR4': 'scenario-2',
+  '25GB0KTW9JPEMO5AR0': 'scenario-3',
+  '25GB2A3YROMOM5XAR6': 'scenario-4',
+  '25GB25XEV402TZBAR5': 'gms',
+  '25GB3FJBV1UEKBDAR0': 'multiple-auth',
+  '25GB3HGVAICUT5YAR0': 'multiple-cheds-single-auth',
+  '24GBDYHR49XV9BAFS1': 'filters-v4'
+};
+
 module.exports = (router) => {
-  router.post(['/mvp/v4/search/'], (req, res, next) => {
+  // Ensure session.data exists
+  router.use((req, res, next) => {
+    req.session.data = req.session.data || {};
+    next();
+  });
+
+  router.post(['/mvp/v4/search/'], (req, res) => {
     const data = req.session.data;
-    const search = req.body['data.searchTerm'] || req.query.searchTerm;
+    const search = (req.body['data.searchTerm'] || req.query.searchTerm || '').trim();
 
     // Patterns
-    const mrnPattern = /^24GB[A-Z0-9]{12}$/;
+    const mrnPattern  = /^24GB[A-Z0-9]{12}$/;
     const chedPattern = /^(CHED(P|PP)?\.GB\.\d{4}\.\d+|GBCHD\d{4}\.\d+)$/;
     const ducrPattern = /^[A-Z0-9]{1,35}-[A-Z0-9]{1,35}$/;
+    const gmrPattern  = /^[A-Z0-9]{18}$/;   // GMR is 18 alphanumeric characters
 
     // Reset error state before processing
     delete data.error;
     delete data.errorMessage;
 
-    // Valid redirections
-    const searchRedirects = {
-      '24GB0Z8WEJ9ZBTL73B': 'mrn',
-      '4GB335031931000-WB2408-27WWL6274S': 'ducr',
-      'CHEDP.GB.2025.5403171': 'mrn-auth',
-      '24GBDX8QQ4WWFZNAR3': 'mrn-tri-auth',
-      'CHEDPP.GB.2025.5426583': 'no-mrn',
-      '25GB0P0TEP7CZCNAR6': 'no-ched',
-      '25GB2XHHM4884KEAR1': 'scenario-1',
-      '25GB1EU8XXNPKSTAR4': 'scenario-2',
-      '25GB0KTW9JPEMO5AR0': 'scenario-3',
-      '25GB2A3YROMOM5XAR6': 'scenario-4',
-      '25GB25XEV402TZBAR5': 'gms',
-      '25GB3FJBV1UEKBDAR0': 'multiple-auth',
-      '25GB3HGVAICUT5YAR0': 'multiple-cheds-single-auth',
-      '24GBDYHR49XV9BAFS1': 'filters-v4'
-    };
-
     // Redirect if recognised
     if (searchRedirects[search]) {
       data.searchTerm = search;
-      return res.redirect(searchRedirects[search]);
+      data.title = search;   // keep the code itself as the title
+      return res.redirect(`/mvp/v4/${searchRedirects[search]}`);
     }
 
     // Error handling
-    if (!search || search.trim() === '') {
+    if (!search) {
       data.error = 'true';
-      data.errorMessage = 'Enter an MRN, CHED or DUCR reference';
+      data.errorMessage = 'Enter an MRN, CHED, DUCR or GMR reference';
       data.searchTerm = '';
+      data.title = '';
     } else if (
       !mrnPattern.test(search) &&
       !chedPattern.test(search) &&
-      !ducrPattern.test(search)
+      !ducrPattern.test(search) &&
+      !gmrPattern.test(search)
     ) {
       data.error = 'true';
-      data.errorMessage = 'Enter an MRN, CHED or DUCR reference in the correct format';
+      data.errorMessage = 'Enter an MRN, CHED, DUCR or GMR reference in the correct format';
       data.searchTerm = search;
+      data.title = '';
     } else {
       data.error = 'true';
       data.errorMessage = `${search} cannot be found`;
       data.searchTerm = search;
+      data.title = '';
     }
 
     return res.redirect('search');
   });
 
+  // --- Cookie pages (unchanged) ---
   router.post(['/mvp/v4/cookies/'], (req, res) => {
     const cookies = req.body.cookies;
     res.render('mvp/v4/cookies', { cookies });
@@ -90,6 +104,7 @@ module.exports = (router) => {
     });
   });
 
+  // --- Sign-in routes (unchanged) ---
   router.post(['/mvp/v4/sign-in-choose'], (req, res) => {
     const selected = req.body.signIn;
 
@@ -120,6 +135,24 @@ module.exports = (router) => {
     }
   });
 
+  // ------------------------------------------------------------------
+  // Dynamic title/searchTerm injection for redirect targets
+  // ------------------------------------------------------------------
+  const redirectPaths = _.uniq(Object.values(searchRedirects)).map(slug => `/mvp/v4/${slug}`);
 
+  router.use(redirectPaths, (req, res, next) => {
+    const q = (req.query.q || req.session.data?.searchTerm || '').trim();
+    const sessionTitle = (req.session.data?.title || '').trim();
 
+    const title = sessionTitle || (q ? q : '');
+
+    if (title) {
+      res.locals.title = title;
+      res.locals.data = Object.assign({}, res.locals.data, {
+        title,
+        searchTerm: q
+      });
+    }
+    next();
+  });
 };

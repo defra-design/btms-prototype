@@ -16,8 +16,6 @@
 <script src="/public/javascripts/chart.js"></script>
 {% endblock %}
 
-
-
 <h1 id="page-top" class="govuk-heading-l" tabindex="-1">{{ title }}</h1>
 
 <div class="govuk-grid-row">
@@ -77,7 +75,6 @@
           }) }}
         </div>
 
-
         <!-- Update button -->
         <button class="govuk-button govuk-!-margin-bottom-6" data-module="govuk-button" type="submit">Update</button>
 
@@ -115,17 +112,7 @@
 
     <h2 class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-5">
       {{ data.displayDateRange }}
-      {% if n == 0 %}
-      for all ports
-      {% elif n == 1 %}
-      for {{ first }}
-      {% elif n == 2 %}
-      for {{ first }}, {{ second }}
-      {% elif n == 3 %}
-      for {{ first }}, {{ second }}, {{ third }}
-      {% else %}
-      for {{ first }}, {{ second }}, {{ third }} + {{ n - 3 }} more
-      {% endif %}
+
     </h2>
 
     <div class="govuk-tabs" data-module="govuk-tabs">
@@ -141,6 +128,10 @@
       <div class="govuk-tabs__panel" id="summary">
         <div class="stat-card-container govuk-!-margin-bottom-6">
           <h2 class="govuk-heading-m">Matches</h2>
+          <p class="govuk-!-font-size-16">Matches are shown by the date the MRN was created, not when the status
+            changed. For example, an MRN created on 1 September but matched on 2 September will appear in the 1
+            September report.</p>
+
           <div class="stat-card-group">
             {{ statCard("Matches", data.stats.matches | string, data.stats.matchesPct) }}
             {{ statCard("No matches", data.stats.noMatches | string, data.stats.noMatchesPct, "", "/mvp/v4/reporting/no-matches-basic.csv", "Download CSV") }}
@@ -217,8 +208,6 @@
                 <p class="govuk-heading-m"> {{ data.stats.totalLineItems | default(0) | commas }}</p>
               </div>
             </div>
-
-
 
           </div>
         </div>
@@ -359,9 +348,5 @@
     {% endif %}
   </div>
 </div>
-
-
-
-
 
 {% endblock %}
