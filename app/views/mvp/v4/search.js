@@ -35,8 +35,7 @@ module.exports = (router) => {
     const mrnPattern  = /^24GB[A-Z0-9]{12}$/;
     const chedPattern = /^(CHED(P|PP)?\.GB\.\d{4}\.\d+|GBCHD\d{4}\.\d+)$/;
     const ducrPattern = /^[A-Z0-9]{1,35}-[A-Z0-9]{1,35}$/;
-    const gmrPattern  = /^[A-Z0-9]{18}$/;   // GMR is 18 alphanumeric characters
-
+    const gmrPattern  = /^[A-Z0-9]{18}$/;
     // Reset error state before processing
     delete data.error;
     delete data.errorMessage;
