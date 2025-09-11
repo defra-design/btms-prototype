@@ -1,0 +1,33 @@
+{% extends "layouts/forms.html" %}
+{% set title = 'BTMS reporting data' %}
+{% set fullWidth = true %}
+{% set hideButton = true %}
+{% set showheader = true %}
+{% set bodyClasses = 'reporting' %}
+{% set hideBackLink = false %}
+
+{% block form %}
+{% from "includes/stat-card.njk" import statCard %}
+
+{% set d = data or {} %}
+{% set stats = d.stats or {} %}
+
+<h1 id="page-top" class="govuk-heading-l" tabindex="-1">{{ title }}</h1>
+
+<span class="govuk-caption-m">Showing results from</span>
+<h2 class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-5">
+  10 September 2025 at 00:00 to 10 September 2025 at 23:59
+
+</h2>
+
+<div class="stat-card-container govuk-!-margin-bottom-6">
+  <h2 class="govuk-heading-m">Releases</h2>
+  <div class="stat-card-group govuk-body">
+    {{ statCard("Auto",   "1174", "98.49%", "stat-card--blue") }}
+    {{ statCard("Manual", "18",   "1.51%",  "stat-card--blue") }}
+    {{ statCard("Total",  "1192", "",       "stat-card--blue") }}
+  </div>
+</div>
+
+
+{% endblock %}
