@@ -131,7 +131,9 @@
 
   <!-- Main Content -->
   <div class="govuk-grid-column-three-quarters">
-    {% if data.searchResults == 'true'%}
+  {% set hasResults = (data.searchResults == true) or (data.searchResults == 'true') %}
+
+    {% if hasResults %}
 
     {# ---- CLEAN the selection for display: drop _unchecked and empties ---- #}
     {% set raw = data.selectedPorts or [] %}
