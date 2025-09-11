@@ -1,0 +1,50 @@
+{% extends "layouts/forms.html" %}
+{% set title = 'How do you want to sign in?' %}
+{% set buttonText = 'Sign in' %}
+{% set signedIn = 'false' %}
+{% set fullWidth = false %}
+{% set hideButton = false %}
+{% set showheader = true %}
+{% set hideBackLink = true %}
+{% set showHeading = false %}
+{% set bodyClasses = 'signIn' %}
+
+
+{% block form %}
+
+  <h1 class="govuk-heading-l">
+    {{title}}
+
+  </h1>
+
+  <p class="govuk-body">
+
+{{ govukRadios({
+  name: "signIn",
+  class: "radio",
+
+  value: data.signIn,
+  items: [
+    {
+      value: "entra",
+      text: "Defra Single Sign-on",
+      hint: {
+        text: "If you have a Defra, APHA or FSA email address"
+      }
+    },
+    {
+      value: "gg",
+      text: "Government Gateway",
+      hint: {
+        text: "If you have an HMRC or PHA email address"
+      }
+    }
+  ]
+}) }}
+  </p>
+
+
+
+
+
+  {% endblock %}

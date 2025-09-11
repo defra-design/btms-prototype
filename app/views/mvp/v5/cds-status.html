@@ -1,0 +1,982 @@
+{% extends "layouts/forms.html" %}
+{% set signedIn = 'true' %}
+{% set fullWidth = true %}
+{% set hideButton = true %}
+{% set breadcrumb = true %}
+{% set showSubheader = true %}
+{% set subHeader = 'Showing result for' %}
+{% set title = '25GB3FJBV1UEKBDAR0' %}
+{% set bodyClasses = 'mrn accordion v4' %}
+{% set cssClassName = 'auth' %}
+{% set hideManageAccount = 'false' %}
+{% set showEdit = true %}
+{% set hideBackLink = true %}
+
+
+
+{% block form %}
+<style>
+  .govuk-tag {
+    font-weight: 700;
+    max-width: 180px;
+  }
+</style>
+
+<h2 class="govuk-heading-m sectionHeader">Customs declaration details</h2>
+{% include 'includes/mrn-filters.html' %}
+
+<div class="mrn-container" id="mrn-toggle">
+
+  <div class="toggle-area" data-target="commodityTable1">
+    <div class="container govuk-body">
+      <dl class="definition-list ">
+        <div class="row">
+          <dt>MRN</dt>
+          <dd>24GB0Z8WEJ9ZBTL73B</dd>
+        </div>
+        <div class="row">
+          <dt>DUCR</dt>
+          <dd class="">
+
+            4GB943952494000-BER047811B
+
+          </dd>
+        </div>
+        <div class="row">
+          <dt>CDS status</dt>
+          <dd class=""><span class="govuk-tag govuk-tag--yellow"> In progress</span> </dd>
+        </div>
+        <div class="row">
+          <dt>Last updated</dt>
+          <dd>{{ '22 May 2024' | mrnTime }}</dd>
+        </div>
+      </dl>
+      <div class="toggle-wrapper">
+        <!-- Chevron arrow wrapper -->
+        <div id="toggleArrowContainer">
+          <i id="toggleArrow" class="fas fa-chevron-down"></i>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div id="commodityTable1" class="commodity-table">
+     <table class="govuk-table data-table">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header">Item number</th>
+            <th scope="col" class="govuk-table__header">Commodity code</th>
+            <th scope="col" class="govuk-table__header">Description</th>
+            <th scope="col" class="govuk-table__header">Quantity / Weight</th>
+            <th scope="col" class="govuk-table__header">CHED reference</th>
+            <th scope="col" class="govuk-table__header">Match</th>
+            <th scope="col" class="govuk-table__header">Authority</th>
+            <th scope="col" class="govuk-table__header">Decision</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+
+
+
+          <!-- SWEET PEPPERS -->
+          <tr class="govuk-table__row match release FNAO first">
+            <td class="govuk-table__cell">1</td>
+            <td class="govuk-table__cell">0709609920</td>
+            <td class="govuk-table__cell">SWEET PEPPERS</td>
+            <td class="govuk-table__cell">4470</td>
+            <td class="govuk-table__cell split">GBCHD2025.5628254
+            </td>
+            <td class="govuk-table__cell split">
+              <strong class="govuk-tag govuk-tag--green">Yes</strong>
+            </td>
+            <td class="govuk-table__cell decision split">
+              <ul class="govuk-list">
+                <li class="PHSI">PHSI</li>
+                <li class="HMI">HMI</li>
+              </ul>
+            </td>
+            <td class="govuk-table__cell decision split">
+              <ul class="govuk-list">
+                <li class="PHSI">Release -Inspection complete </li>
+                <li class="HMI">Release -Inspection complete </li>
+              </ul>
+            </td>
+          </tr>
+          <tr class="govuk-table__row match release PHSI HMI">
+            <td class="govuk-table__cell blank-cell">1</td>
+            <td class="govuk-table__cell blank-cell">0709609920</td>
+            <td class="govuk-table__cell blank-cell">SWEET PEPPERS</td>
+            <td class="govuk-table__cell blank-cell">4470</td>
+            <td class="govuk-table__cell">GBCHD2025.5628466
+            </td>
+            <td class="govuk-table__cell">
+              <strong class="govuk-tag govuk-tag--green">Yes</strong>
+            </td>
+           <td class="govuk-table__cell decision ">
+              <ul class="govuk-list">
+                <li class="PHSI">PHSI</li>
+                <li class="HMI">HMI</li>
+              </ul>
+            </td>
+            <td class="govuk-table__cell decision">
+              <ul class="govuk-list">
+                <li class="PHSI">Release -Inspection complete </li>
+                <li class="HMI">Release -Inspection complete </li>
+              </ul>
+            </td>
+          </tr>
+          <tr class="no-match">
+            <td class="govuk-table__cell ">2</td>
+            <td class="govuk-table__cell ">0709609920</td>
+            <td class="govuk-table__cell ">CHILLI PEPPERS</td>
+            <td class="govuk-table__cell ">3600</td>
+            <td class="govuk-table__cell  " tabindex="0">
+              <span class="tooltiplink error">GBCHD2025.5764223</span>
+              <span class="tooltip" role="tooltip">
+                {{ data.noMatchContextual | safe }}
+              </span>
+            </td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--red">No</strong></td>
+            <td class="govuk-table__cell">PHSI</td>
+
+            <td class="govuk-table__cell">No match</td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+
+
+</div>
+<div class="mrn-container" id="mrn-toggle">
+
+  <div class="toggle-area" data-target="commodityTable1">
+    <div class="container govuk-body">
+      <dl class="definition-list ">
+        <div class="row">
+          <dt>MRN</dt>
+          <dd>24GB0Z8WEJ9ZBTL73B</dd>
+        </div>
+        <div class="row">
+          <dt>DUCR</dt>
+          <dd class="">
+
+            4GB943952494000-BER047811B
+
+          </dd>
+        </div>
+        <div class="row">
+          <dt>CDS status</dt>
+          <dd> <span class="govuk-tag govuk-tag--green">Finalised - Released</span> </dd>
+        </div>
+        <div class="row">
+          <dt>Last updated</dt>
+          <dd>{{ '22 May 2024' | mrnTime }}</dd>
+        </div>
+      </dl>
+      <div class="toggle-wrapper">
+        <!-- Chevron arrow wrapper -->
+        <div id="toggleArrowContainer">
+          <i id="toggleArrow" class="fas fa-chevron-down"></i>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div id="commodityTable1" class="commodity-table">
+     <table class="govuk-table data-table">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header">Item number</th>
+            <th scope="col" class="govuk-table__header">Commodity code</th>
+            <th scope="col" class="govuk-table__header">Description</th>
+            <th scope="col" class="govuk-table__header">Quantity / Weight</th>
+            <th scope="col" class="govuk-table__header">CHED reference</th>
+            <th scope="col" class="govuk-table__header">Match</th>
+            <th scope="col" class="govuk-table__header">Authority</th>
+            <th scope="col" class="govuk-table__header">Decision</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+
+
+
+          <!-- SWEET PEPPERS -->
+          <tr class="govuk-table__row match release FNAO first">
+            <td class="govuk-table__cell">1</td>
+            <td class="govuk-table__cell">0709609920</td>
+            <td class="govuk-table__cell">SWEET PEPPERS</td>
+            <td class="govuk-table__cell">4470</td>
+            <td class="govuk-table__cell split">GBCHD2025.5628254
+            </td>
+            <td class="govuk-table__cell split">
+              <strong class="govuk-tag govuk-tag--green">Yes</strong>
+            </td>
+            <td class="govuk-table__cell decision split">
+              <ul class="govuk-list">
+                <li class="PHSI">PHSI</li>
+                <li class="HMI">HMI</li>
+              </ul>
+            </td>
+            <td class="govuk-table__cell decision split">
+              <ul class="govuk-list">
+                <li class="PHSI">Release -Inspection complete </li>
+                <li class="HMI">Release -Inspection complete </li>
+              </ul>
+            </td>
+          </tr>
+          <tr class="govuk-table__row match release PHSI HMI">
+            <td class="govuk-table__cell blank-cell">1</td>
+            <td class="govuk-table__cell blank-cell">0709609920</td>
+            <td class="govuk-table__cell blank-cell">SWEET PEPPERS</td>
+            <td class="govuk-table__cell blank-cell">4470</td>
+            <td class="govuk-table__cell">GBCHD2025.5628466
+            </td>
+            <td class="govuk-table__cell">
+              <strong class="govuk-tag govuk-tag--green">Yes</strong>
+            </td>
+           <td class="govuk-table__cell decision ">
+              <ul class="govuk-list">
+                <li class="PHSI">PHSI</li>
+                <li class="HMI">HMI</li>
+              </ul>
+            </td>
+            <td class="govuk-table__cell decision">
+              <ul class="govuk-list">
+                <li class="PHSI">Release -Inspection complete </li>
+                <li class="HMI">Release -Inspection complete </li>
+              </ul>
+            </td>
+          </tr>
+
+
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+
+
+</div>
+
+<div class="mrn-container" id="mrn-toggle">
+
+  <div class="toggle-area" data-target="commodityTable1">
+    <div class="container govuk-body">
+      <dl class="definition-list ">
+        <div class="row">
+          <dt>MRN</dt>
+          <dd>24GB0Z8WEJ9ZBTL73B</dd>
+        </div>
+        <div class="row">
+          <dt>DUCR</dt>
+          <dd class="">
+
+            4GB943952494000-BER047811B
+
+          </dd>
+        </div>
+        <div class="row">
+          <dt>CDS status</dt>
+          <dd> <span class="govuk-tag govuk-tag--green">Finalised - Manually released</span> </dd>
+        </div>
+        <div class="row">
+          <dt>Last updated</dt>
+          <dd>{{ '22 May 2024' | mrnTime }}</dd>
+        </div>
+      </dl>
+      <div class="toggle-wrapper">
+        <!-- Chevron arrow wrapper -->
+        <div id="toggleArrowContainer">
+          <i id="toggleArrow" class="fas fa-chevron-down"></i>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div id="commodityTable1" class="commodity-table">
+     <table class="govuk-table data-table">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header">Item number</th>
+            <th scope="col" class="govuk-table__header">Commodity code</th>
+            <th scope="col" class="govuk-table__header">Description</th>
+            <th scope="col" class="govuk-table__header">Quantity / Weight</th>
+            <th scope="col" class="govuk-table__header">CHED reference</th>
+            <th scope="col" class="govuk-table__header">Match</th>
+            <th scope="col" class="govuk-table__header">Authority</th>
+            <th scope="col" class="govuk-table__header">Decision</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+
+
+
+          <!-- SWEET PEPPERS -->
+          <tr class="govuk-table__row match release FNAO first">
+            <td class="govuk-table__cell">1</td>
+            <td class="govuk-table__cell">0709609920</td>
+            <td class="govuk-table__cell">SWEET PEPPERS</td>
+            <td class="govuk-table__cell">4470</td>
+            <td class="govuk-table__cell split">GBCHD2025.5628254
+            </td>
+            <td class="govuk-table__cell split">
+              <strong class="govuk-tag govuk-tag--green">Yes</strong>
+            </td>
+            <td class="govuk-table__cell decision split">
+              <ul class="govuk-list">
+                <li class="PHSI">PHSI</li>
+                <li class="HMI">HMI</li>
+              </ul>
+            </td>
+            <td class="govuk-table__cell decision split">
+              <ul class="govuk-list">
+                <li class="PHSI">Release -Inspection complete </li>
+                <li class="HMI">Release -Inspection complete </li>
+              </ul>
+            </td>
+          </tr>
+          <tr class="govuk-table__row match release PHSI HMI">
+            <td class="govuk-table__cell blank-cell">1</td>
+            <td class="govuk-table__cell blank-cell">0709609920</td>
+            <td class="govuk-table__cell blank-cell">SWEET PEPPERS</td>
+            <td class="govuk-table__cell blank-cell">4470</td>
+            <td class="govuk-table__cell">GBCHD2025.5628466
+            </td>
+            <td class="govuk-table__cell">
+              <strong class="govuk-tag govuk-tag--green">Yes</strong>
+            </td>
+           <td class="govuk-table__cell decision ">
+              <ul class="govuk-list">
+                <li class="PHSI">PHSI</li>
+                <li class="HMI">HMI</li>
+              </ul>
+            </td>
+            <td class="govuk-table__cell decision">
+              <ul class="govuk-list">
+                <li class="PHSI">Hold -Awaiting decision </li>
+                <li class="HMI">Hold - Awaiting decision </li>
+              </ul>
+            </td>
+          </tr>
+
+
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+
+
+</div>
+
+<div class="mrn-container" id="mrn-toggle">
+
+  <div class="toggle-area" data-target="commodityTable1">
+    <div class="container govuk-body">
+      <dl class="definition-list ">
+        <div class="row">
+          <dt>MRN</dt>
+          <dd>24GB0Z8WEJ9ZBTL73B</dd>
+        </div>
+        <div class="row">
+          <dt>DUCR</dt>
+          <dd class="">
+
+            4GB943952494000-BER047811B
+
+          </dd>
+        </div>
+        <div class="row">
+          <dt>CDS status</dt>
+          <dd> <span class="govuk-tag govuk-tag--red">Finalised - Seized</span> </dd>
+        </div>
+        <div class="row">
+          <dt>Last updated</dt>
+          <dd>{{ '22 May 2024' | mrnTime }}</dd>
+        </div>
+      </dl>
+      <div class="toggle-wrapper">
+        <!-- Chevron arrow wrapper -->
+        <div id="toggleArrowContainer">
+          <i id="toggleArrow" class="fas fa-chevron-down"></i>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div id="commodityTable1" class="commodity-table">
+    <table class="govuk-table data-table">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header">Item number</th>
+            <th scope="col" class="govuk-table__header">Commodity code</th>
+            <th scope="col" class="govuk-table__header">Description</th>
+            <th scope="col" class="govuk-table__header">Quantity / Weight</th>
+            <th scope="col" class="govuk-table__header">CHED reference</th>
+            <th scope="col" class="govuk-table__header">Match</th>
+            <th scope="col" class="govuk-table__header">Authority</th>
+            <th scope="col" class="govuk-table__header">Decision</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+
+
+
+          <!-- SWEET PEPPERS -->
+          <tr class="govuk-table__row match release FNAO first">
+            <td class="govuk-table__cell">1</td>
+            <td class="govuk-table__cell">0709609920</td>
+            <td class="govuk-table__cell">SWEET PEPPERS</td>
+            <td class="govuk-table__cell">4470</td>
+            <td class="govuk-table__cell split">GBCHD2025.5628254
+            </td>
+            <td class="govuk-table__cell split">
+              <strong class="govuk-tag govuk-tag--green">Yes</strong>
+            </td>
+            <td class="govuk-table__cell decision split">
+              <ul class="govuk-list">
+                <li class="PHSI">PHSI</li>
+              </ul>
+            </td>
+            <td class="govuk-table__cell decision split">
+              <ul class="govuk-list">
+                <li class="PHSI">Refused - Use for other purposes </li>
+              </ul>
+            </td>
+          </tr>
+
+
+
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+
+
+</div>
+<div class="mrn-container" id="mrn-toggle">
+
+  <div class="toggle-area" data-target="commodityTable1">
+    <div class="container govuk-body">
+      <dl class="definition-list ">
+        <div class="row">
+          <dt>MRN</dt>
+          <dd>24GB0Z8WEJ9ZBTL73B</dd>
+        </div>
+        <div class="row">
+          <dt>DUCR</dt>
+          <dd class="">
+
+            4GB943952494000-BER047811B
+
+          </dd>
+        </div>
+        <div class="row">
+          <dt>CDS status</dt>
+          <dd> <span class="govuk-tag govuk-tag--red">Finalised - Destroyed</span> </dd>
+        </div>
+        <div class="row">
+          <dt>Last updated</dt>
+          <dd>{{ '22 May 2024' | mrnTime }}</dd>
+        </div>
+      </dl>
+      <div class="toggle-wrapper">
+        <!-- Chevron arrow wrapper -->
+        <div id="toggleArrowContainer">
+          <i id="toggleArrow" class="fas fa-chevron-down"></i>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div id="commodityTable1" class="commodity-table">
+   <table class="govuk-table data-table">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header">Item number</th>
+            <th scope="col" class="govuk-table__header">Commodity code</th>
+            <th scope="col" class="govuk-table__header">Description</th>
+            <th scope="col" class="govuk-table__header">Quantity / Weight</th>
+            <th scope="col" class="govuk-table__header">CHED reference</th>
+            <th scope="col" class="govuk-table__header">Match</th>
+            <th scope="col" class="govuk-table__header">Authority</th>
+            <th scope="col" class="govuk-table__header">Decision</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+
+
+
+          <!-- SWEET PEPPERS -->
+          <tr class="govuk-table__row match release FNAO first">
+            <td class="govuk-table__cell">1</td>
+            <td class="govuk-table__cell">0709609920</td>
+            <td class="govuk-table__cell">SWEET PEPPERS</td>
+            <td class="govuk-table__cell">4470</td>
+            <td class="govuk-table__cell split">GBCHD2025.5628254
+            </td>
+            <td class="govuk-table__cell split">
+              <strong class="govuk-tag govuk-tag--green">Yes</strong>
+            </td>
+            <td class="govuk-table__cell decision split">
+              <ul class="govuk-list">
+                <li class="PHSI">PHSI</li>
+              </ul>
+            </td>
+            <td class="govuk-table__cell decision split">
+              <ul class="govuk-list">
+                <li class="PHSI">Refused - Destroy </li>
+              </ul>
+            </td>
+          </tr>
+
+
+
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+
+
+</div>
+<div class="mrn-container" id="mrn-toggle">
+
+  <div class="mrn-container toggle-area" data-target="commodityTable2" data-collapsed="true">
+    <div class="container govuk-body">
+      <dl class="definition-list ">
+        <div class="row">
+          <dt>MRN</dt>
+          <dd>24GB0Z8WEJ9ZBTL353A</dd>
+        </div>
+        <div class="row">
+          <dt>DUCR</dt>
+          <dd>
+            4GB943952494000-BER047811A
+
+
+          </dd>
+        </div>
+        <div class="row">
+          <dt>CDS status</dt>
+          <dd><span class="govuk-tag govuk-tag--red">Cancelled after arrival</span></dd>
+        </div>
+        <div class="row">
+          <dt>Last updated</dt>
+          <dd>{{ '22 May 2024' | chedTime }}</dd>
+        </div>
+      </dl>
+      <div class="toggle-wrapper">
+        <!-- Chevron arrow wrapper -->
+        <div id="toggleArrowContainer">
+          <i id="toggleArrow" class="fas fa-chevron-down"></i>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div id="commodityTable2" class="commodity-table">
+      <table class="govuk-table data-table">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header">Item number</th>
+            <th scope="col" class="govuk-table__header">Commodity code</th>
+            <th scope="col" class="govuk-table__header">Description</th>
+            <th scope="col" class="govuk-table__header">Quantity / Weight</th>
+            <th scope="col" class="govuk-table__header">CHED reference</th>
+            <th scope="col" class="govuk-table__header">Match</th>
+            <th scope="col" class="govuk-table__header">Decision (authority)</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          <tr class="govuk-table__row match release POAO IUU">
+            <td class="govuk-table__cell">1</td>
+            <td class="govuk-table__cell">302499000</td>
+            <td class="govuk-table__cell">FISH 157-13722170</td>
+            <td class="govuk-table__cell">90</td>
+            <td class="govuk-table__cell">
+              <ul class="govuk-list">
+                <li>
+                  GBCHD2025.5403121
+                </li>
+
+              </ul>
+            </td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Yes</strong></td>
+            <td class="govuk-table__cell decision multi-auth">
+
+            </td>
+          </tr>
+
+          <tr class="govuk-table__row match release POAO IUU">
+            <td class="govuk-table__cell">2</td>
+            <td class="govuk-table__cell">302899090</td>
+            <td class="govuk-table__cell">FISH 157-13722170</td>
+            <td class="govuk-table__cell">1221</td>
+            <td class="govuk-table__cell">
+              <ul class="govuk-list">
+                <li>
+                  GBCHD2025.5403121
+                </li>
+
+              </ul>
+            </td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Yes</strong></td>
+            <td class="govuk-table__cell decision multi-auth">
+
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+
+
+</div>
+
+<div class="mrn-container" id="mrn-toggle">
+
+  <div class="mrn-container toggle-area" data-target="commodityTable8" data-collapsed="true">
+    <div class="container govuk-body">
+      <dl class="definition-list ">
+        <div class="row">
+          <dt>MRN</dt>
+          <dd>24GB0Z8WEJ9ZBTL353A</dd>
+        </div>
+        <div class="row">
+          <dt>DUCR</dt>
+          <dd>
+            4GB943952494000-BER047811A
+
+
+          </dd>
+        </div>
+        <div class="row">
+          <dt>CDS status</dt>
+          <dd><span class="govuk-tag govuk-tag--red">Cancelled while pre-lodged</span></dd>
+        </div>
+        <div class="row">
+          <dt>Last updated</dt>
+          <dd>{{ '22 May 2024' | chedTime }}</dd>
+        </div>
+      </dl>
+      <div class="toggle-wrapper">
+        <!-- Chevron arrow wrapper -->
+        <div id="toggleArrowContainer">
+          <i id="toggleArrow" class="fas fa-chevron-down"></i>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div id="commodityTable8" class="commodity-table">
+      <table class="govuk-table data-table">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header">Item number</th>
+            <th scope="col" class="govuk-table__header">Commodity code</th>
+            <th scope="col" class="govuk-table__header">Description</th>
+            <th scope="col" class="govuk-table__header">Quantity / Weight</th>
+            <th scope="col" class="govuk-table__header">CHED reference</th>
+            <th scope="col" class="govuk-table__header">Match</th>
+            <th scope="col" class="govuk-table__header">Decision (authority)</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          <tr class="govuk-table__row match release POAO IUU">
+            <td class="govuk-table__cell">1</td>
+            <td class="govuk-table__cell">302499000</td>
+            <td class="govuk-table__cell">FISH 157-13722170</td>
+            <td class="govuk-table__cell">90</td>
+            <td class="govuk-table__cell">
+              <ul class="govuk-list">
+                <li>
+                  GBCHD2025.5403121
+                </li>
+
+              </ul>
+            </td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Yes</strong></td>
+            <td class="govuk-table__cell decision multi-auth">
+
+            </td>
+          </tr>
+
+          <tr class="govuk-table__row match release POAO IUU">
+            <td class="govuk-table__cell">2</td>
+            <td class="govuk-table__cell">302899090</td>
+            <td class="govuk-table__cell">FISH 157-13722170</td>
+            <td class="govuk-table__cell">1221</td>
+            <td class="govuk-table__cell">
+              <ul class="govuk-list">
+                <li>
+                  GBCHD2025.5403121
+                </li>
+
+              </ul>
+            </td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Yes</strong></td>
+            <td class="govuk-table__cell decision multi-auth">
+
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+
+
+</div>
+
+<div class="mrn-container" id="mrn-toggle">
+
+  <div class="toggle-area" data-target="commodityTable1">
+    <div class="container govuk-body">
+      <dl class="definition-list ">
+        <div class="row">
+          <dt>MRN</dt>
+          <dd>24GB0Z8WEJ9ZBTL73B</dd>
+        </div>
+        <div class="row">
+          <dt>DUCR</dt>
+          <dd class="">
+
+            4GB943952494000-BER047811B
+
+          </dd>
+        </div>
+        <div class="row">
+          <dt>CDS status</dt>
+          <dd class=""> Release to King’s warehouse </dd>
+        </div>
+        <div class="row">
+          <dt>Last updated</dt>
+          <dd>{{ '22 May 2024' | mrnTime }}</dd>
+        </div>
+      </dl>
+      <div class="toggle-wrapper">
+        <!-- Chevron arrow wrapper -->
+        <div id="toggleArrowContainer">
+          <i id="toggleArrow" class="fas fa-chevron-down"></i>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div id="commodityTable1" class="commodity-table">
+      <table class="govuk-table data-table">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header">Item number</th>
+            <th scope="col" class="govuk-table__header">Commodity code</th>
+            <th scope="col" class="govuk-table__header">Description</th>
+            <th scope="col" class="govuk-table__header">Quantity / Weight</th>
+            <th scope="col" class="govuk-table__header">CHED reference</th>
+            <th scope="col" class="govuk-table__header">Match</th>
+            <th scope="col" class="govuk-table__header">Decision (authority)</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          <tr class="govuk-table__row match release POAO IUU">
+            <td class="govuk-table__cell">1</td>
+            <td class="govuk-table__cell">302499000</td>
+            <td class="govuk-table__cell">FISH 157-13722170</td>
+            <td class="govuk-table__cell">90</td>
+            <td class="govuk-table__cell">
+              <ul class="govuk-list">
+                <li>
+                  GBCHD2025.5403171
+                </li>
+                <li>
+                  GBIUU
+                </li>
+              </ul>
+            </td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Yes</strong></td>
+            <td class="govuk-table__cell decision multi-auth">
+              <ul class="govuk-list">
+                <li class="POAO">
+                  Release - Inspection complete <span>(PHA-POAO)</span>
+                </li>
+                <li class="IUU">
+                  Release - Inspection complete <span>(PHA-IUU)</span>
+                </li>
+              </ul>
+            </td>
+          </tr>
+
+          <tr class="govuk-table__row match release POAO IUU">
+            <td class="govuk-table__cell">2</td>
+            <td class="govuk-table__cell">302899090</td>
+            <td class="govuk-table__cell">FISH 157-13722170</td>
+            <td class="govuk-table__cell">1221</td>
+            <td class="govuk-table__cell">
+              <ul class="govuk-list">
+                <li>
+                  GBCHD2025.5403171
+                </li>
+                <li>
+                  GBIUU
+                </li>
+              </ul>
+            </td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Yes</strong></td>
+            <td class="govuk-table__cell decision multi-auth">
+              <ul class="govuk-list">
+                <li class="POAO">
+                  Release - Inspection complete <span>(PHA-POAO)</span>
+                </li>
+                <li class="IUU">
+                  Release - Inspection complete <span>(PHA-IUU)</span>
+                </li>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+
+
+</div>
+
+<div class="mrn-container" id="mrn-toggle">
+
+  <div class="toggle-area" data-target="commodityTable1">
+    <div class="container govuk-body">
+      <dl class="definition-list ">
+        <div class="row">
+          <dt>MRN</dt>
+          <dd>24GB0Z8WEJ9ZBTL73B</dd>
+        </div>
+        <div class="row">
+          <dt>DUCR</dt>
+          <dd class="">
+
+            4GB943952494000-BER047811B
+
+          </dd>
+        </div>
+        <div class="row">
+          <dt>CDS status</dt>
+          <dd class=""> Transferred to MSS </dd>
+        </div>
+        <div class="row">
+          <dt>Last updated</dt>
+          <dd>{{ '22 May 2024' | mrnTime }}</dd>
+        </div>
+      </dl>
+      <div class="toggle-wrapper">
+        <!-- Chevron arrow wrapper -->
+        <div id="toggleArrowContainer">
+          <i id="toggleArrow" class="fas fa-chevron-down"></i>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div id="commodityTable1" class="commodity-table">
+      <table class="govuk-table data-table">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header">Item number</th>
+            <th scope="col" class="govuk-table__header">Commodity code</th>
+            <th scope="col" class="govuk-table__header">Description</th>
+            <th scope="col" class="govuk-table__header">Quantity / Weight</th>
+            <th scope="col" class="govuk-table__header">CHED reference</th>
+            <th scope="col" class="govuk-table__header">Match</th>
+            <th scope="col" class="govuk-table__header">Decision (authority)</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          <tr class="govuk-table__row match release POAO IUU">
+            <td class="govuk-table__cell">1</td>
+            <td class="govuk-table__cell">302499000</td>
+            <td class="govuk-table__cell">FISH 157-13722170</td>
+            <td class="govuk-table__cell">90</td>
+            <td class="govuk-table__cell">
+              <ul class="govuk-list">
+                <li>
+                  GBCHD2025.5403171
+                </li>
+                <li>
+                  GBIUU
+                </li>
+              </ul>
+            </td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Yes</strong></td>
+            <td class="govuk-table__cell decision multi-auth">
+              <ul class="govuk-list">
+                <li class="POAO">
+                  Release - Inspection complete <span>(PHA-POAO)</span>
+                </li>
+                <li class="IUU">
+                  Release - Inspection complete <span>(PHA-IUU)</span>
+                </li>
+              </ul>
+            </td>
+          </tr>
+
+          <tr class="govuk-table__row match release POAO IUU">
+            <td class="govuk-table__cell">2</td>
+            <td class="govuk-table__cell">302899090</td>
+            <td class="govuk-table__cell">FISH 157-13722170</td>
+            <td class="govuk-table__cell">1221</td>
+            <td class="govuk-table__cell">
+              <ul class="govuk-list">
+                <li>
+                  GBCHD2025.5403171
+                </li>
+                <li>
+                  GBIUU
+                </li>
+              </ul>
+            </td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Yes</strong></td>
+            <td class="govuk-table__cell decision multi-auth">
+              <ul class="govuk-list">
+                <li class="POAO">
+                  Release - Inspection complete <span>(PHA-POAO)</span>
+                </li>
+                <li class="IUU">
+                  Release - Inspection complete <span>(PHA-IUU)</span>
+                </li>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+
+
+</div>
+
+
+{% endblock %}

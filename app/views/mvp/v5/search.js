@@ -27,7 +27,7 @@ module.exports = (router) => {
     next();
   });
 
-  router.post(['/mvp/v4/search/'], (req, res) => {
+  router.post(['/mvp/v5/search/'], (req, res) => {
     const data = req.session.data;
     const search = (req.body['data.searchTerm'] || req.query.searchTerm || '').trim();
 
@@ -50,7 +50,7 @@ module.exports = (router) => {
     // Error handling
     if (!search) {
       data.error = 'true';
-      data.errorMessage = 'Enter an MRN, CHED or DUCR reference';
+      data.errorMessage = 'Enter an MRN, CHED, GMR or DUCR reference';
       data.searchTerm = '';
       data.title = '';
     } else if (
@@ -60,7 +60,7 @@ module.exports = (router) => {
       !gmrPattern.test(search)
     ) {
       data.error = 'true';
-      data.errorMessage = 'Enter an MRN, CHED or DUCR reference in the correct format';
+      data.errorMessage = 'Enter an MRN, CHED, GMR or DUCR reference in the correct format';
       data.searchTerm = search;
       data.title = '';
     } else {
@@ -74,9 +74,9 @@ module.exports = (router) => {
   });
 
   // --- Cookie pages (unchanged) ---
-  router.post(['/mvp/v4/cookies/'], (req, res) => {
+  router.post(['/mvp/v5/cookies/'], (req, res) => {
     const cookies = req.body.cookies;
-    res.render('mvp/v4/cookies', { cookies });
+    res.render('mvp/v45cookies', { cookies });
   });
 
   router.post(['/mvp/v4/search-cookies', '/mvp/v4/search-cookies/'], (req, res) => {
@@ -86,10 +86,10 @@ module.exports = (router) => {
       res.cookie('cookiePreference', preference, {
         maxAge: 365 * 24 * 60 * 60 * 1000
       });
-      return res.redirect('/mvp/v4/search-cookies?confirmation=true');
+      return res.redirect('/mvp/v5/search-cookies?confirmation=true');
     }
 
-    res.redirect('/mvp/v4/search-cookies');
+    res.redirect('/mvp/v5/search-cookies');
   });
 
   router.get(['/mvp/v4/search-cookies', '/mvp/v4/search-cookies/'], (req, res) => {
@@ -104,7 +104,7 @@ module.exports = (router) => {
   });
 
   // --- Sign-in routes (unchanged) ---
-  router.post(['/mvp/v4/sign-in-choose'], (req, res) => {
+  router.post(['/mvp/v5/sign-in-choose'], (req, res) => {
     const selected = req.body.signIn;
 
     if (selected === 'entra') {
@@ -119,7 +119,7 @@ module.exports = (router) => {
     }
   });
 
-  router.post(['/mvp/v4/sign-out'], (req, res) => {
+  router.post(['/mvp/v5/sign-out'], (req, res) => {
     const selected = req.body.signIn;
 
     if (selected === 'entra') {

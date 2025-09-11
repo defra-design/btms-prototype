@@ -4,7 +4,6 @@
 {% set title = serviceName %}
 {% set footer = 'false' %}
 
-
 {% block content %}
 
 <div class="govuk-grid-row">
@@ -12,13 +11,38 @@
 
     <h1 class="govuk-heading-l">{{ title }} (BTMS)</h1>
 
-    <h2 class="govuk-heading-m">Latest MVP </h2>
+    <h2 class="govuk-heading-m">Post luanch features</h2>
     <p class="govuk-heading-s">
-      V4 (August 2025)
+      V5 (September 2025)
       <strong class="govuk-tag govuk-tag--blue"> In-progress </strong>
     </p>
+
+    <p>
+      Changes include adding GMR search and data points, and separating authority from decisions in the MRN and CHED
+      tables</p>
+
+    <ul class="govuk-list govuk-list--bullet">
+      <li><a href="/mvp/v5/search">Search page - with GMR search </a>
+        <a class=" jira" href="https://eaflood.atlassian.net/browse/CDMS-949 "> Jira CDMS-? </a><span>Error showing
+          search
+          term </span>
+      </li>
+      <li><a href="/mvp/v5/new-layout-current">Results page showing GMR data </a>
+        <a class=" jira" href="https://eaflood.atlassian.net/browse/CDMS-986 "> Jira CDMS-? </a><span>Removal of line
+          item, inclusion of auth column and CDS status hightlight </span>
+      </li>
+
+
+    </ul>
+    <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible" />
+
+    <h2 class="govuk-heading-m">BTMS launch </h2>
+    <p class="govuk-heading-s">
+      V4 (July 2025)
+      <strong class="govuk-tag govuk-tag--green"> Complete </strong>
+    </p>
     <p>New design for displaying multiple CHEDs per line item with varying match statuses and decision outcomes. </p>
-    <p>Design updates from silent runnning feedback will be included in V4 </p>
+    <p>Design updates from silent runnning feedback have been be included in V4 </p>
 
     <p class="govuk-heading-s" id="landing">Landing pages </p>
 
@@ -178,11 +202,10 @@
       <li><a href="/mvp/v4/status/status-outage-btms">Status overview - BTMS outage </a><a class=" jira"
           href="https://eaflood.atlassian.net/browse/CDMS-863 "> Jira CDMS-863 </a><span>Status page showing BTMS outage
         </span></li>
-              <li><a href="/mvp/v4/status/status-mvp">Status overview - MVP </a><a class=" jira"
-          href="https://eaflood.atlassian.net/browse/CDMS-1085 "> Jira CDMS-863 </a><span>Show last CDS messages received in the BTMS status
+      <li><a href="/mvp/v4/status/status-mvp">Status overview - MVP </a><a class=" jira"
+          href="https://eaflood.atlassian.net/browse/CDMS-1085 "> Jira CDMS-863 </a><span>
         </span></li>
     </ul>
-
 
     <p class="govuk-heading-s" id="reporting">Reporting page </p>
     <p class="govuk-body-s">Reporting lets users view BTMS data in a structured format – for example, matches vs no
@@ -196,27 +219,6 @@
           metrics </span></li>
     </ul>
 
-    <p class="govuk-heading-s" id="reporting">Design updates from UT feedback </p>
-    <p class="govuk-body-s">Updates to pages based on user feedback</p>
-    <ul class="govuk-list govuk-list--bullet">
-      <li><a href="/mvp/v4/search">Search page - error state </a>
-        <a class=" jira" href="https://eaflood.atlassian.net/browse/CDMS-949 "> Jira CDMS-949 </a><span>Error showing
-          search
-          term </span>
-      </li>
-      <li><a href="/mvp/v4/new-layout-current">Search page - Current </a>
-        <a class=" jira" href="https://eaflood.atlassian.net/browse/CDMS-986 "> Jira CDMS-986 </a><span>Removal of line
-          item, inclusion of auth column and CDS status hightlight </span>
-      </li>
-
-      <li><a href="/mvp/v4/cds-status"> CDS status colours </a>
-        <a class=" jira" href="https://eaflood.atlassian.net/browse/CDMS-985 "> Jira-985 </a><span>Update to colours to
-          put emphasis on the cds status </span>
-      </li>
-    </ul>
-
-
-
     <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible" />
 
     <h2 class="govuk-heading-m">BTMS MVPs</h2>
@@ -229,7 +231,6 @@
 
     <p>All functionalities listed below are considered <strong>stretch goals</strong>.</p>
     <p>Additional functionality includes filtering, document search, and improved authority matching.</p>
-
 
     <ul class="govuk-list govuk-list--bullet">
       <li><a href="mvp/v3/mrn-auth">Highlighting search reference </a><br /><span>Search terms are highlighted in the
@@ -330,7 +331,6 @@
         </ul>
       </div>
     </details>
-
 
     <!-- {% include "govuk-prototype-kit/includes/homepage-bottom.njk" %} -->
     <p class="govuk-heading-s">Other links</p>

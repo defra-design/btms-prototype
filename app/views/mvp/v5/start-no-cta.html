@@ -1,0 +1,37 @@
+{% extends "layouts/forms.html" %} 
+{% set title = 'Search' %} 
+{% set signedIn = 'false' %} 
+{% set fullWidth = false %} 
+{% set hideButton = true %}
+ {% set showheader = true %} 
+ {% set hideBackLink = true %} 
+ {% set hidePhaseBanner = true %} 
+ {% set bodyClasses = 'start-page' %} 
+{% set a11y = 'false' %}
+
+ {% block main %}
+<div class="govuk-grid-row background">
+  <!-- <div class="govuk-phase-banner govuk-width-container">
+    <p class="govuk-phase-banner__content">
+      <strong class="govuk-tag govuk-phase-banner__content__tag">
+        Beta
+      </strong>
+      <span class="govuk-phase-banner__text">
+        This is a new service. Help us improve it and <a class="govuk-link" href="#">give your feedback (opens in new tab)</a>.
+      </span>
+    </p>
+  </div> -->
+  <div class="govuk-width-container govuk-!-padding-top-7">
+      <h1 class="start-page-banner__text start-page-banner__heading govuk-heading-xl">{{ serviceName }}</h1>
+      <p class="start-page-banner__text start-page-banner__description govuk-body govuk-!-font-size-27">Check inspection outcomes for sanitary and phytosanitary (SPS) goods and find mismatches between customs declarations and IPAFFS pre-notifications.
+      </p>
+      <div class="start-page-banner__actions">
+    
+
+        <p class="govuk-body start-page-banner__text"></p>
+      </div>
+  </div>
+</div>
+
+
+{% endblock %}
