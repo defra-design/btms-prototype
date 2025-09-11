@@ -169,6 +169,8 @@
             {{ statCard("CHED P", data.stats.ched.P.count | string, data.stats.ched.P.pct, "stat-card--blue") }}
             {{ statCard("CHED PP", data.stats.ched.PP.count | string, data.stats.ched.PP.pct, "stat-card--blue") }}
             {{ statCard("CHED D", data.stats.ched.D.count | string, data.stats.ched.D.pct, "stat-card--blue") }}
+           {{ statCard("Total",   data.stats.ched.total    | default(0) | commas, "", "stat-card--blue") }}
+
           </div>
         </div>
       </div>
