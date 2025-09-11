@@ -430,21 +430,24 @@
 
 <style>
 /* Header grid */
-.mrn dd {
+
+.mrn .mrn-container dd {
   margin: 0.3rem 0 0 0;
   width: 170px;
 }
-.mrn .definition-list {
+.mrn  .mrn-container .definition-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(100px, 0.3fr));
   gap: 0 0; /* row-gap column-gap */
-  padding: 1em 0.5em 0 1em;
+  padding: 1em 0.5em 0em 1em;
   margin: 0;
 }
-#mrn-extra-1 {
-  padding: 0.4em 0.5em 0em 1em;
+.mrn-container #mrn-extra-1 {
+  padding: .5em 0.5em 0em 1em;
 }
-
+.mrn .mrn-container #mrn-extra-1 dd {
+  width: 170px;
+}
 
 /* Inline details toggles (independent from table chevron) */
 .details-toggle-wrapper {
