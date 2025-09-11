@@ -286,7 +286,7 @@
           </div>
         </div>
 
-        <div class="govuk-grid-row charts govuk-!-margin-top-4 govuk-!-margin-bottom-4">
+  <div class="govuk-grid-row charts govuk-!-margin-top-4 govuk-!-margin-bottom-4">
           <div class="govuk-grid-column-full chart">
 
             <h2 class="govuk-heading-m ipaafs-heading">
@@ -298,46 +298,42 @@
               <canvas id="chedTypesChart" width="600" height="400"></canvas>
             </div>
 
-            <div class="govuk-grid-row btms-stats">
-              <div class="govuk-grid-column-one-quarter">
-                <h3 class="govuk-heading-s">
-                  <span class="legend-dot ched-a-dot"></span> CHED A
-                </h3>
+            <div class="btms-stats">
+              <div>
+                <h3 class="govuk-heading-s"><span class="legend-dot ched-a-dot"></span> CHED A</h3>
                 <p class="govuk-heading-m">
                   {{ data.stats.ched.A.count | default(0) | commas }}
                   <span
                     class="govuk-body govuk-body-s percentage">({{ data.stats.ched.A.pct | default('0.00%') }})</span>
                 </p>
               </div>
-              <div class="govuk-grid-column-one-quarter">
-                <h3 class="govuk-heading-s">
-                  <span class="legend-dot ched-p-dot"></span> CHED P
-                </h3>
+              <div>
+                <h3 class="govuk-heading-s"><span class="legend-dot ched-p-dot"></span> CHED P</h3>
                 <p class="govuk-heading-m">
                   {{ data.stats.ched.P.count | default(0) | commas }}
                   <span
                     class="govuk-body govuk-body-s percentage">({{ data.stats.ched.P.pct | default('0.00%') }})</span>
                 </p>
               </div>
-              <div class="govuk-grid-column-one-quarter">
-                <h3 class="govuk-heading-s">
-                  <span class="legend-dot ched-pp-dot"></span> CHED PP
-                </h3>
+              <div>
+                <h3 class="govuk-heading-s"><span class="legend-dot ched-pp-dot"></span> CHED PP</h3>
                 <p class="govuk-heading-m">
                   {{ data.stats.ched.PP.count | default(0) | commas }}
                   <span
                     class="govuk-body govuk-body-s percentage">({{ data.stats.ched.PP.pct | default('0.00%') }})</span>
                 </p>
               </div>
-              <div class="govuk-grid-column-one-quarter">
-                <h3 class="govuk-heading-s">
-                  <span class="legend-dot ched-d-dot"></span> CHED D
-                </h3>
+              <div>
+                <h3 class="govuk-heading-s"><span class="legend-dot ched-d-dot"></span> CHED D</h3>
                 <p class="govuk-heading-m">
                   {{ data.stats.ched.D.count | default(0) | commas }}
                   <span
                     class="govuk-body govuk-body-s percentage">({{ data.stats.ched.D.pct | default('0.00%') }})</span>
                 </p>
+              </div>
+              <div>
+                <h3 class="govuk-heading-s">Total</h3>
+                <p class="govuk-heading-m">{{ data.stats.ched.total | default(0) | commas }}</p>
               </div>
             </div>
 
@@ -352,5 +348,21 @@
     {% endif %}
   </div>
 </div>
+<style>
+  /* stop overriding every grid row */
+.reporting .govuk-grid-row { /* remove display:flex here entirely */ }
 
+/* CHED strip: responsive 5-up that wraps nicely */
+.btms-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(125px, 2fr));
+  gap: 0px;
+  align-items: start;
+}
+
+.btms-stats .govuk-heading-s { margin: 8px 0 4px; font-size: 17px; }
+.btms-stats .govuk-heading-m { margin: 0; }
+.btms-stats .percentage { display: block; font-size: 14px !important; padding-top: 4px; }
+
+</style>
 {% endblock %}
