@@ -38,37 +38,40 @@
   }
 
   // ---------- error UI ----------
-// Put this in reporting.js, replacing your existing getOrCreateGroupErrorBox
-function getOrCreateGroupErrorBox(group) {
-  let box = group.querySelector('.btms-field-errors');
-  if (box) return box;
+  function getOrCreateGroupErrorBox(group) {
+    let box = group.querySelector('.btms-field-errors');
+    if (box) return box;
 
-  box = document.createElement('div');
-  box.className = 'btms-field-errors';
+    box = document.createElement('div');
+    box.className = 'btms-field-errors';
 
-  // Insert AFTER the legend/label (so the error appears under the title),
-  // matching the GOV.UK Design System examples.
-  const title =
-    group.querySelector('.govuk-fieldset__legend') ||
-    group.querySelector('.govuk-label, label');
-
-  if (title) {
-    // place immediately after the title node
-    if (title.nextSibling) {
-      title.parentNode.insertBefore(box, title.nextSibling);
-    } else {
-      title.parentNode.appendChild(box);
+    // If it's a FIELDSET, put the group error AFTER it (outside the fieldset)
+    if (group.tagName === 'FIELDSET') {
+      const wrapper = group.closest('.govuk-form-group');
+      if (wrapper) {
+        wrapper.insertBefore(box, group.nextSibling);
+      } else {
+        group.parentNode.insertBefore(box, group.nextSibling);
+      }
+      return box;
     }
-  } else {
-    // fallback – put at the top of the form group
-    group.prepend(box);
+
+    // Otherwise, place under the legend/label if present
+    const title =
+      group.querySelector('.govuk-fieldset__legend') ||
+      group.querySelector('.govuk-label, label');
+
+    if (title) {
+      if (title.nextSibling) title.parentNode.insertBefore(box, title.nextSibling);
+      else title.parentNode.appendChild(box);
+    } else {
+      group.prepend(box);
+    }
+
+    return box;
   }
 
-  return box;
-}
-
-
-  // Inline, field-specific error (used for non-empty but invalid inputs)
+  // Field-specific error (rendered inline near the input)
   function showFieldError(inputId, message) {
     const input = document.getElementById(inputId);
     if (!input) return;
@@ -97,9 +100,8 @@ function getOrCreateGroupErrorBox(group) {
     }
   }
 
-  // NEW: group-level error for time pairs (“Start time must include…”)
+  // Group-level error for time pairs (“Start time must include …”)
   function showTimeGroupError(groupId, message, highlightIds = []) {
-    // Find a sensible container (fieldset/form-group that wraps the hour+minute)
     const anchor =
       document.getElementById(groupId) ||
       document.getElementById(`${groupId}-hour`) ||
@@ -109,24 +111,22 @@ function getOrCreateGroupErrorBox(group) {
     group.classList.add('govuk-form-group--error');
 
     const stack = getOrCreateGroupErrorBox(group);
-    // Ensure only a single group message for the time pair
+
     let p = stack.querySelector(`#${groupId}-group-error`);
     if (!p) {
       p = document.createElement('p');
       p.id = `${groupId}-group-error`;
       p.className = 'govuk-error-message';
-      // Put it as the first message in the stack
       stack.prepend(p);
     }
     p.innerHTML = `<span class="govuk-visually-hidden">Error:</span> ${message}`;
 
-    // Highlight specific inputs (red border)
+    // Highlight specific inputs and associate their aria-describedby with the group error
     highlightIds.forEach(id => {
       const el = document.getElementById(id);
       if (!el) return;
       el.classList.add('govuk-input--error');
       el.setAttribute('aria-invalid', 'true');
-      // associate the group message for screen readers
       const describedBy = (el.getAttribute('aria-describedby') || '').trim().split(/\s+/).filter(Boolean);
       if (!describedBy.includes(`${groupId}-group-error`)) {
         describedBy.push(`${groupId}-group-error`);
@@ -142,7 +142,7 @@ function getOrCreateGroupErrorBox(group) {
     container.querySelector('.govuk-error-summary')?.remove();
     container.querySelectorAll('[aria-invalid="true"]').forEach(el => el.removeAttribute('aria-invalid'));
     container.querySelectorAll('[aria-describedby]').forEach(el => {
-      const ids = el.getAttribute('aria-describedby')
+      const ids = (el.getAttribute('aria-describedby') || '')
         .split(/\s+/).filter(Boolean).filter(id => !/-error$/.test(id));
       if (ids.length) el.setAttribute('aria-describedby', ids.join(' '));
       else el.removeAttribute('aria-describedby');
@@ -194,13 +194,7 @@ function getOrCreateGroupErrorBox(group) {
     return null;
   }
 
-  /**
-   * Validate a time pair.
-   * - If requireBothWhenAny === true and ANY time box anywhere is filled,
-   *   both hour & minute for this pair become required.
-   * - Returns { h, m, errors[], hBlank, mBlank }
-   *   errors contain { field: 'hour'|'minute', code: 'required'|'nan'|'range', message }
-   */
+  // ---------- time validation ----------
   function validateTimePair(hourStr, minuteStr, allow24 = true, requireBothWhenAny = false) {
     const hS = (hourStr ?? '').trim();
     const mS = (minuteStr ?? '').trim();
@@ -221,10 +215,10 @@ function getOrCreateGroupErrorBox(group) {
 
     // Non-numeric (only if provided)
     if (hProvided && !/^-?\d+$/.test(hS)) {
-      errors.push({ field: 'hour', code: 'nan', message: `Hour must be a number between 0 and ${allow24 ? 24 : 23}.` });
+      errors.push({ field: 'hour', code: 'nan', message: 'Hour must be a number' });
     }
     if (mProvided && !/^-?\d+$/.test(mS)) {
-      errors.push({ field: 'minute', code: 'nan', message: 'Minute must be a number between 0 and 59.' });
+      errors.push({ field: 'minute', code: 'nan', message: 'Minute must be a number' });
     }
 
     // Parse
@@ -233,7 +227,7 @@ function getOrCreateGroupErrorBox(group) {
 
     // Range
     if (m !== null && (m < 0 || m > 59)) {
-      errors.push({ field: 'minute', code: 'range', message: 'Minute must be a number between 0 and 59.' });
+      errors.push({ field: 'minute', code: 'range', message: 'Minute must be 59 or lower' });
     }
 
     if (h !== null) {
@@ -242,7 +236,7 @@ function getOrCreateGroupErrorBox(group) {
           errors.push({ field: 'hour', code: 'range', message: '24 is only valid with minutes set to 00.' });
         }
       } else if (h < 0 || h > 23) {
-        errors.push({ field: 'hour', code: 'range', message: `Hour must be a number between 0 and ${allow24 ? 24 : 23}.` });
+        errors.push({ field: 'hour', code: 'range', message: 'Hour must be 23 or lower.' });
       }
     }
 
@@ -401,8 +395,8 @@ function getOrCreateGroupErrorBox(group) {
         const hasStartDate = startDateStr.trim() !== '';
         const hasEndDate   = endDateStr.trim()   !== '';
 
-        if (!hasStartDate) { errors.push({ text: 'Enter a start date.', href: '#startDate' }); showFieldError('startDate', 'Enter a start date.'); }
-        if (!hasEndDate)   { errors.push({ text: 'Enter an end date.',   href: '#endDate'   }); showFieldError('endDate',   'Enter an end date.'); }
+        if (!hasStartDate) { errors.push({ text: 'Enter a start date', href: '#startDate' }); showFieldError('startDate', 'Enter a start date'); }
+        if (!hasEndDate)   { errors.push({ text: 'Enter an end date',   href: '#endDate'   }); showFieldError('endDate',   'Enter an end date'); }
 
         let startD = null, endD = null;
         if (hasStartDate) {
@@ -414,6 +408,18 @@ function getOrCreateGroupErrorBox(group) {
           if (!endD) { errors.push({ text: 'Enter a valid end date.', href: '#endDate' }); showFieldError('endDate', 'Enter a valid end date.'); }
         }
 
+        // ---- End date cannot be in the future ----
+        if (endD) {
+          const today = new Date();
+          const todayYMD = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+          const endYMD   = new Date(endD.y, endD.m - 1, endD.d);
+          if (endYMD.getTime() > todayYMD.getTime()) {
+            const msg = 'End date must be today or in the past';
+            errors.push({ text: msg, href: '#endDate' });
+            showFieldError('endDate', msg);
+          }
+        }
+
         // If ANY time box anywhere is filled, require all four.
         const anyTimeProvided =
           (startHour && startHour.trim() !== '') ||
@@ -421,17 +427,18 @@ function getOrCreateGroupErrorBox(group) {
           (endHour && endHour.trim() !== '') ||
           (endMinute && endMinute.trim() !== '');
 
+        // Tidy summary wording
         const summaryText = (scope, field, baseMsg, code) => {
           if (code === 'required') return `Enter ${scope.toLowerCase()} ${field}`;
-          if (/^Hour\b/i.test(baseMsg))   return `${scope} hour ${baseMsg.replace(/^Hour\b/i, 'must')}`;
-          if (/^Minute\b/i.test(baseMsg)) return `${scope} minutes ${baseMsg.replace(/^Minute\b/i, 'must')}`;
+          if (/^Hour\b/i.test(baseMsg))   return `${scope} hour ${baseMsg.replace(/^Hour\b:?/i, '').trim()}`;
+          if (/^Minute\b/i.test(baseMsg)) return `${scope} minutes ${baseMsg.replace(/^Minute\b:?/i, '').trim()}`;
           return `${scope} ${baseMsg}`;
         };
 
         // ---- Start time ----
         const startCheck = validateTimePair(startHour, startMinute, true, anyTimeProvided);
 
-        // Group-level message for required empties (design like GOV.UK date error)
+        // Group-level message for required empties
         const stReqHour = startCheck.errors.some(e => e.code === 'required' && e.field === 'hour');
         const stReqMin  = startCheck.errors.some(e => e.code === 'required' && e.field === 'minute');
         if (stReqHour || stReqMin) {
@@ -445,13 +452,11 @@ function getOrCreateGroupErrorBox(group) {
           ].filter(Boolean));
         }
 
-        // Still list items in summary for each missing/invalid part
+        // Still list and show field messages
         startCheck.errors.forEach(err => {
           const el = err.field === 'minute' ? startEls.minute : startEls.hour;
           if (!el) return;
           errors.push({ text: summaryText('Start time', err.field, err.message, err.code), href: `#${el.id}` });
-
-          // For non-required errors, show field-specific message
           if (err.code !== 'required') showFieldError(el.id, err.message);
         });
 
@@ -488,11 +493,16 @@ function getOrCreateGroupErrorBox(group) {
         if (startD && endD) {
           const s = toDateObj(startD, startTimeNorm);
           const t = toDateObj(endD,   endTimeNorm);
+
           if (s.getTime() > t.getTime()) {
-            const msg = 'Start must be before end.';
-            errors.push({ text: msg, href: '#startDate' });
-            showFieldError('startDate', msg);
-            showFieldError('endDate',   msg);
+            const startMsg = 'Start date must be before or the same as the end date';
+            const endMsg   = 'End date must be after or the same as the start date';
+
+            errors.push({ text: startMsg, href: '#startDate' });
+            errors.push({ text: endMsg,   href: '#endDate'   });
+
+            showFieldError('startDate', startMsg);
+            showFieldError('endDate',   endMsg);
           }
         }
 

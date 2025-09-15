@@ -1,4 +1,3 @@
-// app/routes/mvp/v4/reporting.js
 const fs = require('fs');
 const path = require('path');
 const _ = require('lodash');
@@ -124,7 +123,7 @@ module.exports = (router) => {
   }
 
   const pct    = (n, d) => (d > 0 ? (n * 100 / d) : 0);
-  const pctStr = (n, d) => (d > 0 ? (n * 100 / d).toFixed(2) + '%' : '0.00%');
+  const pctStr = (n, d) => (n > 0 && d > 0 ? (n * 100 / d).toFixed(2) + '%' : '0.00%');
 
   // ----------------- CSV helpers -----------------
   const q       = v => `"${String(v ?? '').replace(/"/g, '""')}"`;
@@ -144,60 +143,200 @@ module.exports = (router) => {
   // ----------------- summary route factory -----------------
   function registerSummary({ viewPath, getPath, postPath }) {
     // Store filters (dates + ports) from forms
-router.post(postPath, (req, res) => {
-  req.session.data = req.session.data || {};
+    router.post(postPath, (req, res) => {
+      req.session.data = req.session.data || {};
 
-  // Raw fields
-  const rawStartDate = String(req.body['startDate'] || '').trim();
-  const rawEndDate   = String(req.body['endDate']   || '').trim();
-  const startHour    = String(req.body['startTime-hour']   || '').trim();
-  const startMinute  = String(req.body['startTime-minute'] || '').trim();
-  const endHour      = String(req.body['endTime-hour']     || '').trim();
-  const endMinute    = String(req.body['endTime-minute']   || '').trim();
+      // ---- raw fields ----
+      const rawStartDate = String(req.body['startDate'] || '').trim();      // DD/MM/YYYY
+      const rawEndDate   = String(req.body['endDate']   || '').trim();
+      const startHour    = String(req.body['startTime-hour']   || '').trim();
+      const startMinute  = String(req.body['startTime-minute'] || '').trim();
+      const endHour      = String(req.body['endTime-hour']     || '').trim();
+      const endMinute    = String(req.body['endTime-minute']   || '').trim();
 
-  // Ports
-  const selectedPorts = Array.isArray(req.body.portOfEntry)
-    ? req.body.portOfEntry
-    : (req.body.portOfEntry ? [req.body.portOfEntry] : []);
-  req.session.data.selectedPorts = (selectedPorts || []).filter(v => v && v !== '_unchecked');
+      // ---- ports ----
+      const selectedPorts = Array.isArray(req.body.portOfEntry)
+        ? req.body.portOfEntry
+        : (req.body.portOfEntry ? [req.body.portOfEntry] : []);
+      req.session.data.selectedPorts = (selectedPorts || []).filter(v => v && v !== '_unchecked');
 
-  // Validate dates ONLY if both provided
-  let validDates = false;
-  if (rawStartDate && rawEndDate) {
-    const s = moment(`${rawStartDate} ${startHour || '00'}:${startMinute || '00'}`, 'DD/MM/YYYY HH:mm', true);
-    const e = moment(`${rawEndDate} ${endHour   || '23'}:${endMinute   || '59'}`,   'DD/MM/YYYY HH:mm', true);
-    if (s.isValid() && e.isValid()) {
-      validDates = true;
+      // wipe any previous validation
+      delete req.session.data.validation;
 
-      // Persist dates & times
+      // ---- helpers ----
+      const summaryErrors = [];
+      const fieldErr = {
+        startDate: [],
+        endDate: [],
+        startTime: [], // messages to stack under the Start time group
+        endTime: []    // messages to stack under the End time group
+      };
+
+      const hasAny = s => String(s || '').trim() !== '';
+
+      // time pair validator (24:00 allowed only with :00)
+      function validateTimePair(label, hStr, mStr, requireBothWhenAny) {
+        const errs = [];
+        const hProvided = hasAny(hStr);
+        const mProvided = hasAny(mStr);
+
+        // required-if-other-provided or global "any time means both parts"
+        if ((hProvided && !mProvided) || (requireBothWhenAny && !mProvided && (hProvided || mProvided))) {
+          errs.push({ field: 'minute', code: 'required', text: 'Enter minutes' });
+        }
+        if ((mProvided && !hProvided) || (requireBothWhenAny && !hProvided && (hProvided || mProvided))) {
+          errs.push({ field: 'hour', code: 'required', text: 'Enter hour' });
+        }
+
+        let h = null, m = null;
+
+        // numeric checks (only if present)
+        if (hProvided && !/^-?\d+$/.test(hStr)) {
+          errs.push({ field: 'hour', code: 'nan', text: 'Hour must be a number between 0 and 24.' });
+        }
+        if (mProvided && !/^-?\d+$/.test(mStr)) {
+          errs.push({ field: 'minute', code: 'nan', text: 'Minute must be a number between 0 and 59.' });
+        }
+
+        if (hProvided && /^\-?\d+$/.test(hStr)) h = Number(hStr);
+        if (mProvided && /^\-?\d+$/.test(mStr)) m = Number(mStr);
+
+        // range checks
+        if (m !== null && (m < 0 || m > 59)) {
+          errs.push({ field: 'minute', code: 'range', text: 'Minute must be a number between 0 and 59.' });
+        }
+        if (h !== null) {
+          if (h === 24) {
+            if (m !== 0) errs.push({ field: 'hour', code: 'range', text: '24 is only valid with minutes set to 00.' });
+          } else if (h < 0 || h > 23) {
+            errs.push({ field: 'hour', code: 'range', text: 'Hour must be a number between 0 and 24.' });
+          }
+        }
+
+        // summary text formatter
+        const fmt = (which, part, msg, code) => {
+          if (code === 'required') return `Enter ${which.toLowerCase()} ${part}`;
+          if (/^Hour\b/i.test(msg))   return `${which} hour ${msg.replace(/^Hour\b/i, 'must')}`;
+          if (/^Minute\b/i.test(msg)) return `${which} minutes ${msg.replace(/^Minute\b/i, 'must')}`;
+          return `${which} ${msg}`;
+        };
+
+        // push to field + summary collections
+        errs.forEach(er => {
+          if (label === 'Start time') fieldErr.startTime.push(er.text);
+          else fieldErr.endTime.push(er.text);
+          summaryErrors.push({
+            text: fmt(label, er.field, er.text, er.code),
+            // >>> link summary to the GROUP, not the individual inputs
+            href: (label === 'Start time') ? '#start-time-group' : '#end-time-group'
+          });
+        });
+
+        return { h, m, errors: errs };
+      }
+
+      // ---- date presence/format ----
+      const hasStartDate = hasAny(rawStartDate);
+      const hasEndDate   = hasAny(rawEndDate);
+
+      if (!hasStartDate) {
+        fieldErr.startDate.push('Enter a start date.');
+        summaryErrors.push({ text: 'Enter a start date.', href: '#startDate' });
+      }
+      if (!hasEndDate) {
+        fieldErr.endDate.push('Enter an end date.');
+        summaryErrors.push({ text: 'Enter an end date.', href: '#endDate' });
+      }
+
+      let sDate = null, eDate = null;
+      if (hasStartDate) {
+        const m = moment(rawStartDate, 'DD/MM/YYYY', true);
+        if (!m.isValid()) {
+          fieldErr.startDate.push('Enter a valid start date.');
+          summaryErrors.push({ text: 'Enter a valid start date.', href: '#startDate' });
+        } else {
+          sDate = m;
+        }
+      }
+      if (hasEndDate) {
+        const m = moment(rawEndDate, 'DD/MM/YYYY', true);
+        if (!m.isValid()) {
+          fieldErr.endDate.push('Enter a valid end date.');
+          summaryErrors.push({ text: 'Enter a valid end date.', href: '#endDate' });
+        } else {
+          eDate = m;
+        }
+      }
+
+      // ---- time validation ----
+      const anyTimeProvided =
+        hasAny(startHour) || hasAny(startMinute) || hasAny(endHour) || hasAny(endMinute);
+
+      const startTime = validateTimePair('Start time', startHour, startMinute, anyTimeProvided);
+      const endTime   = validateTimePair('End time',   endHour,   endMinute,   anyTimeProvided);
+
+      // ---- if no errors so far, build moments with sensible defaults ----
+      let startMoment = null, endMoment = null;
+      if (sDate && eDate && summaryErrors.length === 0) {
+        const sH = startTime.h === null ? 0  : startTime.h;
+        const sM = startTime.m === null ? 0  : startTime.m;
+        const eH = endTime.h   === null ? 23 : endTime.h;
+        const eM = endTime.m   === null ? 59 : endTime.m;
+
+        startMoment = moment(`${rawStartDate} ${String(sH).padStart(2,'0')}:${String(sM).padStart(2,'0')}`, 'DD/MM/YYYY HH:mm', true);
+        endMoment   = moment(`${rawEndDate} ${String(eH).padStart(2,'0')}:${String(eM).padStart(2,'0')}`,   'DD/MM/YYYY HH:mm', true);
+
+        if (!(startMoment.isValid() && endMoment.isValid())) {
+          summaryErrors.push({ text: 'Enter a valid date and time range.', href: '#startDate' });
+        } else if (startMoment.isAfter(endMoment)) {
+          fieldErr.startDate.push('Start must be before end.');
+          fieldErr.endDate.push('Start must be before end.');
+          summaryErrors.push({ text: 'Start must be before end.', href: '#startDate' });
+        }
+      }
+
+      const hasErrors = summaryErrors.length > 0;
+
+      if (hasErrors) {
+        req.session.data.validation = {
+          summary: summaryErrors,
+          fields: fieldErr
+        };
+
+        // don’t persist partial dates/times
+        delete req.session.data.startDate;
+        delete req.session.data.endDate;
+        delete req.session.data.startTime;
+        delete req.session.data.endTime;
+        delete req.session.data.displayDateRange;
+
+        // results should stay hidden after a failed submit
+        req.session.data.searchResults = false;
+        return res.redirect(getPath);
+      }
+
+      // ---- success: persist filters exactly as before ----
       req.session.data.startDate = rawStartDate;
       req.session.data.endDate   = rawEndDate;
-      req.session.data.startTime = { hour: startHour || '00', minute: startMinute || '00' };
-      req.session.data.endTime   = { hour: endHour   || '23', minute: endMinute   || '59' };
+      req.session.data.startTime = {
+        hour:   (startTime.h === null ? '00' : String(startTime.h).padStart(2,'0')),
+        minute: (startTime.m === null ? '00' : String(startTime.m).padStart(2,'0'))
+      };
+      req.session.data.endTime = {
+        hour:   (endTime.h === null ? '23' : String(endTime.h).padStart(2,'0')),
+        minute: (endTime.m === null ? '59' : String(endTime.m).padStart(2,'0'))
+      };
 
-      // Friendly label
+      const s = startMoment;
+      const e = endMoment;
       const sameDay = s.isSame(e, 'day');
       req.session.data.displayDateRange = sameDay
         ? `${s.format('HH:mm')} to ${e.format('HH:mm')} on ${s.format('D MMMM YYYY')}`
         : `${s.format('D MMMM YYYY')} at ${s.format('HH:mm')} to ${e.format('D MMMM YYYY')} at ${e.format('HH:mm')}`;
-    }
-  }
 
-  // If dates invalid/empty, wipe them completely so inputs show blank
-  if (!validDates) {
-    delete req.session.data.startDate;
-    delete req.session.data.endDate;
-    delete req.session.data.startTime;
-    delete req.session.data.endTime;
-    delete req.session.data.displayDateRange;
-  }
-
-  // Only mark results true if user actually set valid dates OR picked ports
-  const hasUserFilters = validDates || (req.session.data.selectedPorts && req.session.data.selectedPorts.length > 0);
-  req.session.data.searchResults = !!hasUserFilters;
-
-  res.redirect(getPath);
-});
+      req.session.data.searchResults = true;
+      res.redirect(getPath);
+    });
 
     // Render with computed stats (only if user has applied filters)
     router.get(getPath, (req, res) => {
@@ -218,7 +357,6 @@ router.post(postPath, (req, res) => {
       const hasUserFilters = !!(range.usedSession || (ports && ports.length > 0) || req.session.data.searchResults === true);
 
       if (!hasUserFilters) {
-        // Ensure empty state on first load (or after clear)
         req.session.data.searchResults = false;
         delete req.session.data.stats;
         delete req.session.data.displayDateRange;
@@ -605,7 +743,5 @@ router.post(postPath, (req, res) => {
       }
     });
   });
-
-
 
 };
