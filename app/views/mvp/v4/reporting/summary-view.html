@@ -39,6 +39,11 @@
             id: "startDate",
             name: "startDate",
             value: data.startDate or "",
+              hint: {
+                text: "For example, 17/5/2025."
+              },
+
+
             label: { text: "Start date" }
           }) }}
         </div>
@@ -48,6 +53,9 @@
           {{ mojDatePicker({
             id: "endDate",
             name: "endDate",
+                          hint: {
+                text: "For example, 17/5/2025."
+              },
             value: data.endDate or "",
             label: { text: "End date" }
           }) }}
@@ -98,12 +106,12 @@
   <!-- Main Content -->
   <div class="govuk-grid-column-three-quarters">
 
-{% if data.errors and data.errors.length %}
-  {{ govukErrorSummary({
+    {% if data.errors and data.errors.length %}
+    {{ govukErrorSummary({
     titleText: "There is a problem",
     errorList: data.errors
   }) }}
-{% endif %}
+    {% endif %}
 
     {% set hasResults = (data.searchResults == true) or (data.searchResults == 'true') %}
 
@@ -390,5 +398,12 @@
     font-size: 14px !important;
     padding-top: 4px;
   }
+  .govuk-hint {
+    font-size: 14px;
+    margin: 0;
+  }
+.govuk-fieldset__legend:not(.govuk-fieldset__legend--m):not(.govuk-fieldset__legend--l):not(.govuk-fieldset__legend--xl) + .govuk-hint {
+  margin-bottom: 5px;
+}
 </style>
 {% endblock %}
