@@ -443,9 +443,9 @@ module.exports = (router) => {
         }
       };
 
-      req.session.data.displayDateRange = formatRangeLabel(
-        range.start, range.end, range.usedSession, range.fallbackLabel
-      );
+  req.session.data.displayDateRange = formatRangeLabel(
+  range.start, range.end, /* usedSession */ true, range.fallbackLabel
+ );
       req.session.data.searchResults = true;
 
       res.render(viewPath, { data: req.session.data });
