@@ -286,45 +286,66 @@
     })();
 
     // ---- Preset ranges (populate fields; submit only if AUTO_SUBMIT) ----
-    (function () {
-      const now = new Date();
-      const startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0);
-      const endOfToday   = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59);
-      const startOfYesterday = new Date(startOfToday); startOfYesterday.setDate(startOfYesterday.getDate() - 1);
-      const endOfYesterday   = new Date(endOfToday);   endOfYesterday.setDate(endOfYesterday.getDate() - 1);
-      const startOfLastWeek  = new Date(startOfToday); startOfLastWeek.setDate(startOfLastWeek.getDate() - 7);
-      const startOfLastMonth = new Date(startOfToday); startOfLastMonth.setMonth(startOfLastMonth.getMonth() - 1);
+// ---- Preset ranges (rolling, GA-style) ----
+(function () {
+  const now = new Date();
+  // round "now" to minutes (inputs are minute precision)
+  const nowToMinute = new Date(
+    now.getFullYear(), now.getMonth(), now.getDate(),
+    now.getHours(), now.getMinutes()
+  );
 
-      const ranges = {
-        'today'     : { start: startOfToday,     end: endOfToday },
-        'yesterday' : { start: startOfYesterday, end: endOfYesterday },
-        'last-week' : { start: startOfLastWeek,  end: endOfToday },
-        'last-month': { start: startOfLastMonth, end: endOfToday }
-      };
+  const startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0);
 
-      $$('#preset-links a').forEach(link => {
-        const key = link.getAttribute('data-range');
-        if (!ranges[key]) return;
-        const { start, end } = ranges[key];
+  // Yesterday: 00:00 → 23:59
+  const startOfYesterday = new Date(startOfToday);
+  startOfYesterday.setDate(startOfYesterday.getDate() - 1);
+  const endOfYesterday = new Date(
+    startOfYesterday.getFullYear(), startOfYesterday.getMonth(), startOfYesterday.getDate(), 23, 59
+  );
 
-        link.addEventListener('click', (e) => {
-          e.preventDefault();
-          const form = findForm(link);
+  // Last 7 days incl. today: start 6 days ago at 00:00 → today 23:00
+  const startOfLast7 = new Date(startOfToday);
+  startOfLast7.setDate(startOfLast7.getDate() - 6);
 
-          const dmy = (d) => `${dd(d.getDate())}/${dd(d.getMonth()+1)}/${d.getFullYear()}`;
-          $('#startDate') && ($('#startDate').value = dmy(start));
-          $('#endDate')   && ($('#endDate').value   = dmy(end));
+  // Last 30 days incl. today: start 29 days ago at 00:00 → today 23:00
+  const startOfLast30 = new Date(startOfToday);
+  startOfLast30.setDate(startOfLast30.getDate() - 29);
 
-          const setIf = (sel, val) => { const el = $(sel); if (el) el.value = val; };
-          setIf('[name="startTime-hour"]',   dd(start.getHours()));
-          setIf('[name="startTime-minute"]', dd(start.getMinutes()));
-          setIf('[name="endTime-hour"]',     dd(end.getHours()));
-          setIf('[name="endTime-minute"]',   dd(end.getMinutes()));
+  // Common end for week/month presets: today at 23:00
+  const endTodayAt2300 = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59);
 
-          if (AUTO_SUBMIT && form) { setActionHash(form); form.submit(); }
-        });
-      });
-    })();
+  const ranges = {
+    'today'     : { start: startOfToday,      end: nowToMinute },     // 00:00 → now
+    'yesterday' : { start: startOfYesterday,  end: endOfYesterday },  // 00:00 → 23:59
+    'last-week' : { start: startOfLast7,      end: endTodayAt2300 },  // last 7 days incl. today → 23:00
+    'last-month': { start: startOfLast30,     end: endTodayAt2300 }   // last 30 days incl. today → 23:00
+  };
+
+  $$('#preset-links a').forEach(link => {
+    const key = link.getAttribute('data-range');
+    const r = ranges[key];
+    if (!r) return;
+
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const form = findForm(link);
+
+      const dmy = (d) => `${dd(d.getDate())}/${dd(d.getMonth()+1)}/${d.getFullYear()}`;
+      $('#startDate') && ($('#startDate').value = dmy(r.start));
+      $('#endDate')   && ($('#endDate').value   = dmy(r.end));
+
+      const setIf = (sel, val) => { const el = $(sel); if (el) el.value = val; };
+      setIf('[name="startTime-hour"]',   dd(r.start.getHours()));
+      setIf('[name="startTime-minute"]', dd(r.start.getMinutes()));
+      setIf('[name="endTime-hour"]',     dd(r.end.getHours()));
+      setIf('[name="endTime-minute"]',   dd(r.end.getMinutes()));
+
+      if (AUTO_SUBMIT && form) { setActionHash(form); form.submit(); }
+    });
+  });
+})();
+
 
     // ---- Clear filters ----
     (function () {

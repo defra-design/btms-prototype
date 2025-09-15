@@ -28,6 +28,13 @@ module.exports = (router) => {
     return moment(`${yyyy}-${mm}-${dd}`, 'YYYY-MM-DD', true);
   }
 
+  // NEW: default fallback = yesterday 00:00–23:59
+  function defaultYesterday() {
+    const start = moment().startOf('day').subtract(1, 'day'); // yesterday 00:00
+    const end   = start.clone().endOf('day');                 // yesterday 23:59:59.999
+    return { start, end, label: 'yesterday' };
+  }
+
   function getDateRangeFromSession(req, fallback = null) {
     const sd  = req.session?.data?.startDate;               // DD/MM/YYYY
     const ed  = req.session?.data?.endDate;
@@ -47,20 +54,16 @@ module.exports = (router) => {
     }
 
     if (!usedSession) {
-      const fb = fallback || {
-        start: moment().subtract(1, 'month'),
-        end:   moment(),
-        label: 'last month'
-      };
+      const fb = fallback || defaultYesterday();
       start = fb.start.clone ? fb.start.clone() : fb.start;
       end   = fb.end.clone   ? fb.end.clone()   : fb.end;
-      return { start, end, usedSession, fallbackLabel: fb.label || 'last month' };
+      return { start, end, usedSession, fallbackLabel: fb.label || 'yesterday' };
     }
 
-    return { start, end, usedSession, fallbackLabel: 'last month' };
+    return { start, end, usedSession, fallbackLabel: 'yesterday' };
   }
 
-  function formatRangeLabel(start, end, usedSession, fallbackLabel = 'last month') {
+  function formatRangeLabel(start, end, usedSession, fallbackLabel = 'yesterday') {
     const left  = start.format('D MMMM YYYY [at] HH:mm');
     const right = end.format('D MMMM YYYY [at] HH:mm');
     return usedSession ? `${left} to ${right}` : `${fallbackLabel} (${left} to ${right})`;
@@ -180,7 +183,6 @@ module.exports = (router) => {
         const hProvided = hasAny(hStr);
         const mProvided = hasAny(mStr);
 
-        // required-if-other-provided or global "any time means both parts"
         if ((hProvided && !mProvided) || (requireBothWhenAny && !mProvided && (hProvided || mProvided))) {
           errs.push({ field: 'minute', code: 'required', text: 'Enter minutes' });
         }
@@ -190,44 +192,39 @@ module.exports = (router) => {
 
         let h = null, m = null;
 
-        // numeric checks (only if present)
         if (hProvided && !/^-?\d+$/.test(hStr)) {
-          errs.push({ field: 'hour', code: 'nan', text: 'Hour must be a number between 0 and 24.' });
+          errs.push({ field: 'hour', code: 'nan', text: 'Hour must be 23 or lower.' });
         }
         if (mProvided && !/^-?\d+$/.test(mStr)) {
-          errs.push({ field: 'minute', code: 'nan', text: 'Minute must be a number between 0 and 59.' });
+          errs.push({ field: 'minute', code: 'nan', text: 'Minute must be a number.' });
         }
 
         if (hProvided && /^\-?\d+$/.test(hStr)) h = Number(hStr);
         if (mProvided && /^\-?\d+$/.test(mStr)) m = Number(mStr);
 
-        // range checks
         if (m !== null && (m < 0 || m > 59)) {
-          errs.push({ field: 'minute', code: 'range', text: 'Minute must be a number between 0 and 59.' });
+          errs.push({ field: 'minute', code: 'range', text: 'Minute must be 59 or lower.' });
         }
         if (h !== null) {
           if (h === 24) {
             if (m !== 0) errs.push({ field: 'hour', code: 'range', text: '24 is only valid with minutes set to 00.' });
           } else if (h < 0 || h > 23) {
-            errs.push({ field: 'hour', code: 'range', text: 'Hour must be a number between 0 and 24.' });
+            errs.push({ field: 'hour', code: 'range', text: 'Hour must be 23 or lower.' });
           }
         }
 
-        // summary text formatter
         const fmt = (which, part, msg, code) => {
           if (code === 'required') return `Enter ${which.toLowerCase()} ${part}`;
-          if (/^Hour\b/i.test(msg))   return `${which} hour ${msg.replace(/^Hour\b/i, 'must')}`;
-          if (/^Minute\b/i.test(msg)) return `${which} minutes ${msg.replace(/^Minute\b/i, 'must')}`;
+          if (/^Hour\b/i.test(msg))   return `${which} hour ${msg.replace(/^Hour\b/i, '').trim()}`;
+          if (/^Minute\b/i.test(msg)) return `${which} minutes ${msg.replace(/^Minute\b/i, '').trim()}`;
           return `${which} ${msg}`;
         };
 
-        // push to field + summary collections
         errs.forEach(er => {
           if (label === 'Start time') fieldErr.startTime.push(er.text);
           else fieldErr.endTime.push(er.text);
           summaryErrors.push({
             text: fmt(label, er.field, er.text, er.code),
-            // >>> link summary to the GROUP, not the individual inputs
             href: (label === 'Start time') ? '#start-time-group' : '#end-time-group'
           });
         });
@@ -268,14 +265,13 @@ module.exports = (router) => {
         }
       }
 
-      // ---- time validation ----
       const anyTimeProvided =
         hasAny(startHour) || hasAny(startMinute) || hasAny(endHour) || hasAny(endMinute);
 
       const startTime = validateTimePair('Start time', startHour, startMinute, anyTimeProvided);
       const endTime   = validateTimePair('End time',   endHour,   endMinute,   anyTimeProvided);
 
-      // ---- if no errors so far, build moments with sensible defaults ----
+      // ---- build moments with sensible defaults when possible ----
       let startMoment = null, endMoment = null;
       if (sDate && eDate && summaryErrors.length === 0) {
         const sH = startTime.h === null ? 0  : startTime.h;
@@ -289,9 +285,10 @@ module.exports = (router) => {
         if (!(startMoment.isValid() && endMoment.isValid())) {
           summaryErrors.push({ text: 'Enter a valid date and time range.', href: '#startDate' });
         } else if (startMoment.isAfter(endMoment)) {
-          fieldErr.startDate.push('Start must be before end.');
-          fieldErr.endDate.push('Start must be before end.');
-          summaryErrors.push({ text: 'Start must be before end.', href: '#startDate' });
+          fieldErr.startDate.push('Start date must be before or the same as the end date');
+          fieldErr.endDate.push('End date must be after or the same as the start date');
+          summaryErrors.push({ text: 'Start date must be before or the same as the end date', href: '#startDate' });
+          summaryErrors.push({ text: 'End date must be after or the same as the start date', href: '#endDate' });
         }
       }
 
@@ -303,14 +300,12 @@ module.exports = (router) => {
           fields: fieldErr
         };
 
-        // don’t persist partial dates/times
         delete req.session.data.startDate;
         delete req.session.data.endDate;
         delete req.session.data.startTime;
         delete req.session.data.endTime;
         delete req.session.data.displayDateRange;
 
-        // results should stay hidden after a failed submit
         req.session.data.searchResults = false;
         return res.redirect(getPath);
       }
@@ -342,19 +337,27 @@ module.exports = (router) => {
     router.get(getPath, (req, res) => {
       req.session.data = req.session.data || {};
 
-      // Always offer ports (v1 can hide UI)
+      // Always offer ports
       req.session.data.portOptions = getUniquePorts();
       const ports = cleanSelectedPorts(req);
 
-      // Build range (fallback used for labels only; we still need to know if the user set dates)
-      const range = getDateRangeFromSession(req, {
-        start: moment().subtract(1, 'month'),
-        end:   moment(),
-        label: 'last month'
-      });
+      // Build range (fallback = yesterday)
+      const range = getDateRangeFromSession(req, defaultYesterday());
 
       // Only show results if the user actually set anything
-      const hasUserFilters = !!(range.usedSession || (ports && ports.length > 0) || req.session.data.searchResults === true);
+      let hasUserFilters = !!(range.usedSession || (ports && ports.length > 0) || req.session.data.searchResults === true);
+
+      // If nothing set yet, prefill yesterday and show results immediately
+      if (!hasUserFilters) {
+        req.session.data.startDate = range.start.format('DD/MM/YYYY');
+        req.session.data.endDate   = range.end.format('DD/MM/YYYY');
+        req.session.data.startTime = { hour: '00', minute: '00' };
+        req.session.data.endTime   = { hour: '23', minute: '59' };
+
+        req.session.data.displayDateRange = formatRangeLabel(range.start, range.end, true, range.fallbackLabel);
+        req.session.data.searchResults = true;
+        hasUserFilters = true;
+      }
 
       if (!hasUserFilters) {
         req.session.data.searchResults = false;
@@ -363,7 +366,7 @@ module.exports = (router) => {
         return res.render(viewPath, { data: req.session.data });
       }
 
-      // Read seeds (large file for main stats; manual releases if present)
+      // Read seeds
       const noMatchesSeed = readJsonSafe(path.join(DATA_DIR, FILE_NO_MATCHES_LARGE));
       const manualSeed    = readJsonSafe(path.join(DATA_DIR, FILE_MANUAL));
 
@@ -392,7 +395,7 @@ module.exports = (router) => {
       // Releases from real 'manual'
       const manualCount  = manual.length;
       let totalReleases  = manualCount > 0 ? Math.round(manualCount / MANUAL_RATE) : Math.round(totalLineItems * 0.87);
-      if (totalReleases < manualCount) totalReleases = manualCount; // guard
+      if (totalReleases < manualCount) totalReleases = manualCount;
       const autoCount    = Math.max(totalReleases - manualCount, 0);
       const autoPctN     = pct(autoCount,   totalReleases);
       const manPctN      = pct(manualCount, totalReleases);
@@ -440,7 +443,6 @@ module.exports = (router) => {
         }
       };
 
-      // Display range label + ensure results show
       req.session.data.displayDateRange = formatRangeLabel(
         range.start, range.end, range.usedSession, range.fallbackLabel
       );
@@ -553,12 +555,7 @@ module.exports = (router) => {
   router.get('/mvp/v4/reporting/no-matches-basic.csv', (req, res) => {
     const seedRows = readJsonSafe(path.join(DATA_DIR, FILE_NO_MATCHES_LARGE));
 
-    const range = getDateRangeFromSession(req, {
-      start: moment().subtract(1, 'month'),
-      end:   moment(),
-      label: 'last month'
-    });
-
+    const range = getDateRangeFromSession(req, defaultYesterday());
     const ports = cleanSelectedPorts(req);
 
     const shifted = shiftRowsToEnd(seedRows, range.end);
@@ -593,7 +590,7 @@ module.exports = (router) => {
     const seedRows = readJsonSafe(path.join(DATA_DIR, FILE_MANUAL));
 
     const respectRange = String(req.query.respectRange || '').trim() === '1';
-    const range = getDateRangeFromSession(req);
+    const range = getDateRangeFromSession(req, defaultYesterday());
     const ports = cleanSelectedPorts(req);
 
     let rows = shiftRowsToEnd(seedRows, range.end);
@@ -649,7 +646,6 @@ module.exports = (router) => {
   });
 
   // === Chart data endpoint (JSON) ===
-  // Returns hour-bucketed series based on current filters (date/time + ports).
   router.get('/mvp/v4/reporting/chart-data.json', (req, res) => {
     const NO_MATCH_RATE     = 0.0496;
     const MANUAL_RATE       = 0.0151;
@@ -657,12 +653,7 @@ module.exports = (router) => {
     const PRENOT_PER_LINE   = 5.2;
     const CHED = { A:0.0352, P:0.7598, PP:0.1640, D:0.0410 };
 
-    const range = getDateRangeFromSession(req, {
-      start: moment().subtract(1, 'month'),
-      end:   moment(),
-      label: 'last month'
-    });
-
+    const range = getDateRangeFromSession(req, defaultYesterday());
     const ports = cleanSelectedPorts(req);
 
     const noMatchesSeed = readJsonSafe(path.join('app/data', 'no-matches-basic-large.json'));
@@ -717,7 +708,7 @@ module.exports = (router) => {
     const prenotSeries = totalLineItemsSeries.map(tli => Math.round(tli * PRENOT_PER_LINE));
     const chedASeries  = prenotSeries.map(n => Math.round(n * CHED.A));
     const chedPSeries  = prenotSeries.map(n => Math.round(n * CHED.P));
-    const chedPPSeries = prenotSeries.map(n => Math.round(n * CHED.PP));
+    const chedPPSeries = prenotSeries.map(n => Math.round(n * CHED.P));
     const chedDSeries  = prenotSeries.map(n => Math.round(n * CHED.D));
 
     res.json({
