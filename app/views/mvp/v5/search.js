@@ -44,7 +44,7 @@ module.exports = (router) => {
     if (searchRedirects[search]) {
       data.searchTerm = search;
       data.title = search;   // keep the code itself as the title
-      return res.redirect(`/mvp/v4/${searchRedirects[search]}`);
+      return res.redirect(`/mvp/v5/${searchRedirects[search]}`);
     }
 
     // Error handling
@@ -79,7 +79,7 @@ module.exports = (router) => {
     res.render('mvp/v45cookies', { cookies });
   });
 
-  router.post(['/mvp/v4/search-cookies', '/mvp/v4/search-cookies/'], (req, res) => {
+  router.post(['/mvp/v4/search-cookies', '/mvp/v5/search-cookies/'], (req, res) => {
     const preference = req.body.cookies;
 
     if (preference === 'Yes' || preference === 'No') {
@@ -92,7 +92,7 @@ module.exports = (router) => {
     res.redirect('/mvp/v5/search-cookies');
   });
 
-  router.get(['/mvp/v4/search-cookies', '/mvp/v4/search-cookies/'], (req, res) => {
+  router.get(['/mvp/v4/search-cookies', '/mvp/v5/search-cookies/'], (req, res) => {
     const cookies = req.cookies.cookiePreference || '';
     const showConfirmation = req.query.confirmation === 'true';
 

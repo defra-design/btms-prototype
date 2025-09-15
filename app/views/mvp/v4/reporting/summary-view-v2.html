@@ -131,6 +131,12 @@
 
   <!-- Main Content -->
   <div class="govuk-grid-column-three-quarters">
+    {% if data.errors and data.errors.length %}
+  {{ govukErrorSummary({
+    titleText: "There is a problem",
+    errorList: data.errors
+  }) }}
+{% endif %}
     {% set hasResults = (data.searchResults == true) or (data.searchResults == 'true') %}
 
     {% if hasResults %}

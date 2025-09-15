@@ -59,6 +59,9 @@
             id: "start-time",
             namePrefix: "startTime",
             label: "Start time",
+              hint: {
+                text: "For example, 16:30"
+              },
             hour: data.startTime and data.startTime.hour or "",
             minute: data.startTime and data.startTime.minute or ""
           }) }}
@@ -70,6 +73,9 @@
             id: "end-time",
             namePrefix: "endTime",
             label: "End time",
+            hint: {
+                text: "For example, 16:30"
+            },
             hour: data.endTime and data.endTime.hour or "",
             minute: data.endTime and data.endTime.minute or ""
           }) }}
@@ -91,7 +97,15 @@
 
   <!-- Main Content -->
   <div class="govuk-grid-column-three-quarters">
-   {% set hasResults = (data.searchResults == true) or (data.searchResults == 'true') %}
+
+{% if data.errors and data.errors.length %}
+  {{ govukErrorSummary({
+    titleText: "There is a problem",
+    errorList: data.errors
+  }) }}
+{% endif %}
+
+    {% set hasResults = (data.searchResults == true) or (data.searchResults == 'true') %}
 
     {% if hasResults %}
 
@@ -169,7 +183,7 @@
             {{ statCard("CHED P", data.stats.ched.P.count | string, data.stats.ched.P.pct, "stat-card--blue") }}
             {{ statCard("CHED PP", data.stats.ched.PP.count | string, data.stats.ched.PP.pct, "stat-card--blue") }}
             {{ statCard("CHED D", data.stats.ched.D.count | string, data.stats.ched.D.pct, "stat-card--blue") }}
-           {{ statCard("Total",   data.stats.ched.total    | default(0) | commas, "", "stat-card--blue") }}
+            {{ statCard("Total",   data.stats.ched.total    | default(0) | commas, "", "stat-card--blue") }}
 
           </div>
         </div>
@@ -286,7 +300,7 @@
           </div>
         </div>
 
-  <div class="govuk-grid-row charts govuk-!-margin-top-4 govuk-!-margin-bottom-4">
+        <div class="govuk-grid-row charts govuk-!-margin-top-4 govuk-!-margin-bottom-4">
           <div class="govuk-grid-column-full chart">
 
             <h2 class="govuk-heading-m ipaafs-heading">
@@ -350,19 +364,31 @@
 </div>
 <style>
   /* stop overriding every grid row */
-.reporting .govuk-grid-row { /* remove display:flex here entirely */ }
+  .reporting .govuk-grid-row {
+    /* remove display:flex here entirely */
+  }
 
-/* CHED strip: responsive 5-up that wraps nicely */
-.btms-stats {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(125px, 2fr));
-  gap: 0px;
-  align-items: start;
-}
+  /* CHED strip: responsive 5-up that wraps nicely */
+  .btms-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(125px, 2fr));
+    gap: 0px;
+    align-items: start;
+  }
 
-.btms-stats .govuk-heading-s { margin: 8px 0 4px; font-size: 17px; }
-.btms-stats .govuk-heading-m { margin: 0; }
-.btms-stats .percentage { display: block; font-size: 14px !important; padding-top: 4px; }
+  .btms-stats .govuk-heading-s {
+    margin: 8px 0 4px;
+    font-size: 17px;
+  }
 
+  .btms-stats .govuk-heading-m {
+    margin: 0;
+  }
+
+  .btms-stats .percentage {
+    display: block;
+    font-size: 14px !important;
+    padding-top: 4px;
+  }
 </style>
 {% endblock %}

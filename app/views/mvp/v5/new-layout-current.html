@@ -32,10 +32,7 @@
           <dt>GMR</dt>
           <dd>GMRCQP7UIYNS</dd>
         </div>
-        <div class="row">
-          <dt>DUCR</dt>
-          <dd>4GB943952494000-BER047811</dd>
-        </div>
+
         <div class="row">
           <dt>CDS status</dt>
           <dd><strong class="govuk-tag status govuk-tag--yellow">Current</strong></dd>
@@ -44,6 +41,7 @@
           <dt>Last updated</dt>
           <dd>{{ '22 May 2024' | mrnTime }}</dd>
         </div>
+
       </dl>
 
       <!-- TOP toggle (shown when collapsed) -->
@@ -62,6 +60,10 @@
       <!-- Extra fields inside grey header -->
       <dl id="mrn-extra-1" class="definition-list extra govuk-visually-hidden">
         <div class="row">
+          <dt>DUCR</dt>
+          <dd>4GB943952494000-BER047811</dd>
+        </div>
+        <div class="row">
           <dt>GVMS Status</dt>
           <dd>Embarked</dd>
         </div>
@@ -73,14 +75,8 @@
           <dt> </dt>
           <dd> </dd>
         </div>
-        <div class="row">
-          <dt> </dt>
-          <dd>  </dd>
-        </div>
-        <div class="row">
-          <dt> </dt>
-          <dd> </dd>
-        </div>
+
+
       </dl>
 
       <!-- BOTTOM toggle (shown when expanded) - outside the grid -->
@@ -433,7 +429,7 @@
 
 .mrn .mrn-container dd {
   margin: 0.3rem 0 0 0;
-  width: 170px;
+  /* width: 170px; */
 }
 .mrn  .mrn-container .definition-list {
   display: grid;
@@ -443,11 +439,11 @@
   margin: 0;
 }
 .mrn-container #mrn-extra-1 {
-  padding: .5em 0.5em 0em 1em;
+  padding: 1em 0.5em 0em 1em;
 }
-.mrn .mrn-container #mrn-extra-1 dd {
+/* .mrn .mrn-container #mrn-extra-1 dd {
   width: 170px;
-}
+} */
 
 /* Inline details toggles (independent from table chevron) */
 .details-toggle-wrapper {
