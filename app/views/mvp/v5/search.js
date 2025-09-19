@@ -27,7 +27,7 @@ module.exports = (router) => {
     next();
   });
 
-  router.post(['/mvp/v5/search/'], (req, res) => {
+  router.post('/mvp/v5/:page(search|search-news)/?', (req, res) => {
     const data = req.session.data;
     const search = (req.body['data.searchTerm'] || req.query.searchTerm || '').trim();
 
@@ -73,13 +73,13 @@ module.exports = (router) => {
     return res.redirect('search');
   });
 
-  // --- Cookie pages (unchanged) ---
+  // --- Cookie pages ---
   router.post(['/mvp/v5/cookies/'], (req, res) => {
     const cookies = req.body.cookies;
-    res.render('mvp/v45cookies', { cookies });
+    res.render('mvp/v5/cookies', { cookies });
   });
 
-  router.post(['/mvp/v4/search-cookies', '/mvp/v5/search-cookies/'], (req, res) => {
+  router.post(['/mvp/v5/search-cookies/'], (req, res) => {
     const preference = req.body.cookies;
 
     if (preference === 'Yes' || preference === 'No') {
@@ -92,27 +92,27 @@ module.exports = (router) => {
     res.redirect('/mvp/v5/search-cookies');
   });
 
-  router.get(['/mvp/v4/search-cookies', '/mvp/v5/search-cookies/'], (req, res) => {
+  router.get(['/mvp/v5/search-cookies/'], (req, res) => {
     const cookies = req.cookies.cookiePreference || '';
     const showConfirmation = req.query.confirmation === 'true';
 
-    res.render('mvp/v4/search-cookies', {
+    res.render('mvp/v5/search-cookies', {
       serviceName: 'Border Trade Matching Service',
       cookies,
       showConfirmation
     });
   });
 
-  // --- Sign-in routes (unchanged) ---
+  // --- Sign-in routes ---
   router.post(['/mvp/v5/sign-in-choose'], (req, res) => {
     const selected = req.body.signIn;
 
     if (selected === 'entra') {
-      res.redirect('/mvp/v4/sign-in-entra');
+      res.redirect('/mvp/v5/sign-in-entra');
     } else if (selected === 'gg') {
-      res.redirect('/mvp/v4/sign-in-gg');
+      res.redirect('/mvp/v5/sign-in-gg');
     } else {
-      res.render('mvp/v4/sign-in-choose', {
+      res.render('mvp/v5/sign-in-choose', {
         data: { signIn: '' },
         errorMessage: 'Select how you want to sign in'
       });
@@ -123,11 +123,11 @@ module.exports = (router) => {
     const selected = req.body.signIn;
 
     if (selected === 'entra') {
-      res.redirect('/mvp/v4/sign-in-entra');
+      res.redirect('/mvp/v5/sign-in-entra');
     } else if (selected === 'gg') {
-      res.redirect('/mvp/v4/sign-in-gg');
+      res.redirect('/mvp/v5/sign-in-gg');
     } else {
-      res.render('mvp/v4/sign-in-choose', {
+      res.render('mvp/v5/sign-in-choose', {
         data: { signIn: '' },
         errorMessage: 'Select how you want to sign in'
       });
@@ -137,7 +137,9 @@ module.exports = (router) => {
   // ------------------------------------------------------------------
   // Dynamic title/searchTerm injection for redirect targets
   // ------------------------------------------------------------------
-  const redirectPaths = _.uniq(Object.values(searchRedirects)).map(slug => `/mvp/v4/${slug}`);
+  const redirectPaths = _.uniq(Object.values(searchRedirects)).map(
+    slug => `/mvp/v5/${slug}`
+  );
 
   router.use(redirectPaths, (req, res, next) => {
     const q = (req.query.q || req.session.data?.searchTerm || '').trim();
