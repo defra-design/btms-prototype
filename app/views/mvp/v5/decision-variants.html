@@ -198,13 +198,13 @@
             <td class="govuk-table__cell  " tabindex="0">
               <span class="tooltiplink error">GBCHD2025.5736652</span>
               <span class="tooltip" role="tooltip">
-                {{ data.noMatchContextual | safe }}
 
+ CHED reference <strong>GBCHD2025.5736652</strong> cannot be found in IPAFFS. Please check that the reference is correct.
               </span>
             </td>
             <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--red">No</strong></td>
             <td class="govuk-table__cell">PHSI</td>
-            <td class="govuk-table__cell">No match</td>
+            <td class="govuk-table__cell">No match - CHED cannot be found</td>
           </tr>
           <tr class="no-match">
             <td class="govuk-table__cell ">6 (E71)</td>
@@ -219,7 +219,7 @@
             </td>
             <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--red">No</strong></td>
             <td class="govuk-table__cell">PHSI</td>
-            <td class="govuk-table__cell">CHED cancelled</td>
+            <td class="govuk-table__cell">No match - CHED cancelled</td>
           </tr>
           <tr class="no-match">
             <td class="govuk-table__cell ">7 (E72)</td>
@@ -235,7 +235,7 @@
             </td>
             <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--red">No</strong></td>
             <td class="govuk-table__cell">PHSI</td>
-            <td class="govuk-table__cell">CHED replaced</td>
+            <td class="govuk-table__cell">No match - CHED replaced</td>
           </tr>
 
           <tr class="no-match">
@@ -251,7 +251,7 @@
             </td>
             <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--red">No</strong></td>
             <td class="govuk-table__cell">PHSI</td>
-            <td class="govuk-table__cell">CHED deleted</td>
+            <td class="govuk-table__cell">No match - CHED deleted</td>
           </tr>
           <!-- <tr class="no-match">
             <td class="govuk-table__cell ">3</td>
@@ -330,27 +330,60 @@
               </ul>
             </td>
           </tr>
+          <tr class="no-match">
+            <td class="govuk-table__cell ">11 (83)</td>
+            <td class="govuk-table__cell">0808309090</td>
+            <td class="govuk-table__cell">PEARS</td>
+            <td class="govuk-table__cell ">56.96</td>
+            <td class="govuk-table__cell  " tabindex="0">
+             GBCHD2025.5736652
+
+            </td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--red">No</strong></td>
+            <td class="govuk-table__cell">PHSI</td>
+            <td class="govuk-table__cell">No match </td>
+          </tr>
+
+    <tr class="no-match">
+            <td class="govuk-table__cell ">12 (E84)</td>
+            <td class="govuk-table__cell">0808309090</td>
+            <td class="govuk-table__cell">PEARS</td>
+            <td class="govuk-table__cell ">56.96</td>
+            <td class="govuk-table__cell  " tabindex="0">
+              <span class="tooltiplink error">GBCHD2025.5736652</span>
+              <span class="tooltip" role="tooltip">
+               This CHED type does't match. Update the customs declaration with a new reference
+              </span>
+            </td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--red">No</strong></td>
+            <td class="govuk-table__cell">PHSI</td>
+            <td class="govuk-table__cell">No match - Incorrect CHED type</td>
+          </tr>
+
           <tr class="govuk-table__row match release hold HMI PHSI">
-            <td class="govuk-table__cell">11 (E85)</td>
+            <td class="govuk-table__cell">13 (E85)</td>
             <td class="govuk-table__cell">0808309090</td>
             <td class="govuk-table__cell">PEARS</td>
             <td class="govuk-table__cell">56.96</td>
-            <td class="govuk-table__cell">GBCHD2025.5736652</td>
+            <td class="govuk-table__cell">
+                  <span class="tooltiplink error">GBCHD2025.5736652 </span>
+                  <span class="tooltip" role="tooltip">
+                    Customs declaration states this item requires an PHSI check. IPAFFS has not provided that decision.
+                    Contact the National Clearance Hub.
+                  </span>
+
+            </td>
             <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Yes</strong></td>
             <td class="govuk-table__cell decision">
               <ul class="govuk-list">
-                <li class="PHSI error">PHSI</li>
+                <li class="PHSI ">PHSI</li>
                 <li class="HMI ">HMI</li>
               </ul>
             </td>
             <td class="govuk-table__cell decision">
               <ul class="govuk-list">
                 <li class="HMI">
-                  <span class="tooltiplink error">PHSI check not provided </span>
-                  <span class="tooltip" role="tooltip">
-                    Customs declaration states this item requires an PHSI check. IPAFFS has not provided that decision.
-                    Contact the National Clearance Hub.
-                  </span>
+                  Hold - PHSI check not provided
                 </li>
                 <li class="PHSI">Release - Inspection complete </li>
 
@@ -359,33 +392,36 @@
           </tr>
 
           <tr class="govuk-table__row match release hold HMI PHSI">
-            <td class="govuk-table__cell">12 (E86)</td>
+            <td class="govuk-table__cell">14 (E86)</td>
             <td class="govuk-table__cell">0808309090</td>
             <td class="govuk-table__cell">PEARS</td>
             <td class="govuk-table__cell">56.96</td>
-            <td class="govuk-table__cell">GBCHD2025.5736652</td>
+            <td class="govuk-table__cell">
+                 <span class="tooltiplink error">GBCHD2025.5736652</span>
+                  <span class="tooltip" role="tooltip">
+                    Customs declaration states this item requires an HMI check. IPAFFS has not provided that decision.
+                    Contact the National Clearance Hub.
+                  </span>
+            </td>
             <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Yes</strong></td>
             <td class="govuk-table__cell decision">
               <ul class="govuk-list">
                 <li class="PHSI">PHSI</li>
-                <li class="HMI error">HMI</li>
+                <li class="HMI">HMI</li>
               </ul>
             </td>
             <td class="govuk-table__cell decision">
               <ul class="govuk-list">
                 <li class="PHSI">Release - Inspection complete </li>
                 <li class="HMI">
-                  <span class="tooltiplink error">HMI check not provided</span>
-                  <span class="tooltip" role="tooltip">
-                    Customs declaration states this item requires an HMI check. IPAFFS has not provided that decision.
-                    Contact the National Clearance Hub.
-                  </span>
+                 Hold - HMI check not provided
+
                 </li>
               </ul>
             </td>
           </tr>
           <tr class="no-match">
-            <td class="govuk-table__cell ">13 (E87)</td>
+            <td class="govuk-table__cell ">15 (E87)</td>
             <td class="govuk-table__cell">0808309090</td>
             <td class="govuk-table__cell">PEARS</td>
             <td class="govuk-table__cell ">56.96</td>
@@ -398,12 +434,12 @@
               </span>
             </td>
             <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--red">No</strong></td>
-            <td class="govuk-table__cell">PHSI</td>
-            <td class="govuk-table__cell">Hold - Awaiting decision</td>
+            <td class="govuk-table__cell">HMI</td>
+            <td class="govuk-table__cell">No match - Selected for HMI GMS inspection</td>
           </tr>
 
           <tr class="govuk-table__row match release POAO">
-            <td class="govuk-table__cell">14 (E88)</td>
+            <td class="govuk-table__cell">16 (E88)</td>
             <td class="govuk-table__cell">0808309090</td>
             <td class="govuk-table__cell">PEARS</td>
             <td class="govuk-table__cell">56.96</td>
@@ -430,7 +466,21 @@
               </ul>
             </td>
           </tr>
-
+    <tr class="no-match">
+            <td class="govuk-table__cell ">17 (E99)</td>
+            <td class="govuk-table__cell">0808309090</td>
+            <td class="govuk-table__cell">PEARS</td>
+            <td class="govuk-table__cell ">56.96</td>
+            <td class="govuk-table__cell  " tabindex="0">
+              <span class="tooltiplink error">GBCHD2025.5736652</span>
+              <span class="tooltip" role="tooltip">
+               This CHED type does't match. Update the customs declaration with a new reference
+              </span>
+            </td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--red">No</strong></td>
+            <td class="govuk-table__cell">PHSI</td>
+            <td class="govuk-table__cell">No match - Unknown error</td>
+          </tr>
         </tbody>
       </table>
     </div>
