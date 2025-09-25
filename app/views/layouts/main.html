@@ -1,90 +1,44 @@
 {#
-    For guidance on how to use layouts see:
-    https://prototype-kit.service.gov.uk/docs/how-to-use-layouts
-    #}
+  For guidance on how to use layouts see:
+  https://prototype-kit.service.gov.uk/docs/how-to-use-layouts
+#}
 
-    {% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
+{% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
 
-    {% set accountLink %}
+{% block pageTitle %}
+  {% if subHeader %}{{ subHeader }} {% endif %}{{ title | safe }} - {{ serviceName | safe }}
+{% endblock %}
 
-    {%- if account == 'true' -%}
-        /user-research/mvp/
-        {%- else -%}
-        /landing-pages/interstitial
-        {%- endif -%}
-    {% endset -%}
+{% block header %}
+  {{ govukHeader({
+    homepageUrl: "/index",
+    classes: "test",
+    serviceName: serviceName,
+    serviceUrl: 'search',
+    navigation: [
+      {
+        href: "manage-account",
+        text: "Manage account",
+        classes: "test2"
+      } if hideManageAccount != 'true',
+      {
+        href: "sign-out",
+        text: "Sign out",
+        classes: "test2"
+      }
+    ] if signedIn != 'false'
+  }) }}
 
-    {% block pageTitle %}
-    {% if subHeader %}{{ subHeader }} {% endif %}{{ title | safe }} - {{ serviceName | safe }}
-    {% endblock %}
+  {% if menu %}
+    {% include 'includes/menu.html' %}
+  {% endif %}
+{% endblock %}
 
-    {% block header %}
-        {{ govukHeader({
-            homepageUrl: "/index",
-            classes: "test",
+{% block footer %}
 
-            serviceName: serviceName,
-            serviceUrl: 'search',
-            navigation: [
-                {
-                    href: "manage-account",
-                    text: "Manage account",
-                    classes: "test2"
-                } if hideManageAccount != 'true',
-                {
-                    href: "sign-out",
-                    text: "Sign out",
-                    classes: "test2"
-                }
-            ] if signedIn != 'false'
-        })
-    }}
-    <!-- {% if not hidePhaseBanner %}
+    {% include 'includes/footer.html' %}
 
-        {{ govukPhaseBanner({
-            tag: {
-            text: "Beta"},
-            html: 'This is a new service. Help us improve it and <a class="govuk-link" target="_blank" href="https://www.smartsurvey.co.uk/s/7YJV5/">give your feedback (opens in new tab)</a>.',
-            classes: 'govuk-width-container'
-        }) }}
-    {% endif %} -->
 
-    {% endblock %}
+  {{ data | log }}
 
-    {% block footer %}
-        {{ govukFooter({
-        meta: {
-            items: [
-            {
-                href: "/mvp/v4/status/status-mvp",
-                text: "CDS activity"
-            },
-                       {
-                href: "/mvp/v4/reporting/summary-view",
-                text: "BTMS reporting data"
-            },
-            {
-                href: "/mvp/v4/accessibility-statement",
-                text: "Accessibility statement"
-            },
-             {
-                href: "/mvp/v4/cookies?cookies=''",
-                text: "Cookies"
-            },
-
-            {
-                href: "/manage-prototype",
-                text: "Manage your prototype"
-            },
-                {
-                    href: "/manage-prototype/clear-data",
-                    text: "Clear data"
-                }
-            ] if footer != 'false'
-            }
-            })
-        }}
-
-        {{ data | log }}
-
-    {% endblock %}
+{% endblock %}

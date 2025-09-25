@@ -1,0 +1,49 @@
+{% extends "layouts/forms.html" %} 
+{% set title = 'BTMS status' %} 
+{% set fullWidth = true %} 
+{% set hideButton = true %} 
+  {% set hideBackLink = false %} 
+{% set showheader = true %} 
+ {% set bodyClasses = 'btmsStatus' %} 
+
+{% block form %}
+
+<h1 class="govuk-heading-l">{{title}}</h1>
+
+<p>Displays the live operational status of BTMS and it's connections to CDS and IPAFFS. </p>
+
+<table class="govuk-table table-small">
+  <thead class="govuk-table__head">
+    <tr class="govuk-table__row">
+      <th scope="col" class="govuk-table__header app-custom-class govuk-!-width-one-quarter">Service</th>
+      <th scope="col" class="govuk-table__header app-custom-class govuk-!-width-one-quarter">Status</th>
+      <th scope="col" class="govuk-table__header app-custom-class govuk-!-width-one-half">Details</th>
+    </tr>
+  </thead>
+  <tbody class="govuk-table__body">
+    <tr class="govuk-table__row ">
+        <td class="govuk-table__cell">BTMS</td>
+        <td class="govuk-table__cell status-cell">
+            <span class="status operational">Operational</span>
+        </td>
+      <td class="govuk-table__cell"> </td>
+    </tr>
+    <tr class="govuk-table__row ">
+            <td class="govuk-table__cell">CDS connection</td>
+        <td class="govuk-table__cell status-cell">
+            <span class="status operational">Operational</span>
+        </td>
+        <td class="govuk-table__cell"> </td>
+    </tr>
+    <tr class="govuk-table__row ">
+        <td class="govuk-table__cell">IPAFFS connection</td>
+        <td class="govuk-table__cell status-cell">
+            <span class="status operational">Operational</span>
+        </td>
+        <td class="govuk-table__cell"> </td>
+    </tr>
+  </tbody>
+</table>
+{% endblock %}
+
+

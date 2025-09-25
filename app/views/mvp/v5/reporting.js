@@ -455,19 +455,19 @@ module.exports = (router) => {
 
   // ----------------- register summary routes -----------------
   registerSummary({
-    viewPath: 'mvp/v4/reporting/summary-view',
-    getPath:  '/mvp/v4/reporting/summary-view',
-    postPath: '/mvp/v4/reporting/summary-view'
+    viewPath: 'mvp/v5/reporting/summary-view',
+    getPath:  '/mvp/v5/reporting/summary-view',
+    postPath: '/mvp/v5/reporting/summary-view'
   });
 
   registerSummary({
-    viewPath: 'mvp/v4/reporting/summary-view-v2',
-    getPath:  '/mvp/v4/reporting/summary-view-v2',
-    postPath: '/mvp/v4/reporting/summary-view-v2'
+    viewPath: 'mvp/v5/reporting/summary-view-v2',
+    getPath:  '/mvp/v5/reporting/summary-view-v2',
+    postPath: '/mvp/v5/reporting/summary-view-v2'
   });
 
   // ----------------- table routes -----------------
-  router.get('/mvp/v4/reporting/no-matches', (req, res) => {
+  router.get('/mvp/v5/reporting/no-matches', (req, res) => {
     const file = path.join(process.cwd(), DATA_DIR, 'no-matches.json');
     let allRows = [];
     try {
@@ -484,7 +484,7 @@ module.exports = (router) => {
     const end   = Math.min(start + pageSize, total);
     const rows  = allRows.slice(start, end);
 
-    res.render('mvp/v4/reporting/no-matches', {
+    res.render('mvp/v5/reporting/no-matches', {
       rows,
       total,
       pagination: {
@@ -498,7 +498,7 @@ module.exports = (router) => {
     });
   });
 
-  router.get('/mvp/v4/reporting/no-matches-basic', (req, res) => {
+  router.get('/mvp/v5/reporting/no-matches-basic', (req, res) => {
     const file = path.join(process.cwd(), DATA_DIR, FILE_NO_MATCHES_SMALL);
     let raw = [];
     try {
@@ -541,7 +541,7 @@ module.exports = (router) => {
       window: Array.from({ length: pages }, (_, i) => i + 1)
     };
 
-    res.render('mvp/v4/reporting/no-matches-basic', {
+    res.render('mvp/v5/reporting/no-matches-basic', {
       rows,
       total,
       pagination,
@@ -553,7 +553,7 @@ module.exports = (router) => {
   });
 
   // ----------------- CSV: No matches (respects date + ports) -----------------
-  router.get('/mvp/v4/reporting/no-matches-basic.csv', (req, res) => {
+  router.get('/mvp/v5/reporting/no-matches-basic.csv', (req, res) => {
     const seedRows = readJsonSafe(path.join(DATA_DIR, FILE_NO_MATCHES_LARGE));
 
     const range = getDateRangeFromSession(req, defaultYesterday());
@@ -587,7 +587,7 @@ module.exports = (router) => {
   });
 
   // ----------------- CSV: Manual releases -----------------
-  router.get('/mvp/v4/reporting/manual-release.csv', (req, res) => {
+  router.get('/mvp/v5/reporting/manual-release.csv', (req, res) => {
     const seedRows = readJsonSafe(path.join(DATA_DIR, FILE_MANUAL));
 
     const respectRange = String(req.query.respectRange || '').trim() === '1';
@@ -624,7 +624,7 @@ module.exports = (router) => {
   });
 
   // ----------------- Search results passthrough -----------------
-  router.get('/mvp/v4/search-results', (req, res) => {
+  router.get('/mvp/v5/search-results', (req, res) => {
     const { mrn, cc, desc, ched, auth, updated } = req.query;
 
     let displayUpdated = '';
@@ -633,7 +633,7 @@ module.exports = (router) => {
       displayUpdated = m.isValid() ? m.format('D MMMM YYYY, HH:mm') : updated;
     }
 
-    res.render('mvp/v4/search-results', {
+    res.render('mvp/v5/search-results', {
       title: mrn || 'Search results',
       headerLastUpdated: displayUpdated,
       line: {
@@ -647,7 +647,7 @@ module.exports = (router) => {
   });
 
   // === Chart data endpoint (JSON) ===
-  router.get('/mvp/v4/reporting/chart-data.json', (req, res) => {
+  router.get('/mvp/v5/reporting/chart-data.json', (req, res) => {
     const NO_MATCH_RATE     = 0.0496;
     const MANUAL_RATE       = 0.0151;
     const UNIQUE_RATIO_INV  = 1 / 0.665;

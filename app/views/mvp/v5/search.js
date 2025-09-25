@@ -27,6 +27,29 @@ module.exports = (router) => {
     next();
   });
 
+  // --------------------------------------------
+  // Set currentPage for nav highlighting
+  // --------------------------------------------
+  router.use('/mvp/v5', (req, res, next) => {
+    // Example: req.path = "/reporting/summary-view"
+    const seg = req.path
+      .replace(/\/+$/, '')         // strip trailing slash
+      .split('/')                  // ["", "reporting", "summary-view"]
+      .filter(Boolean)[0] || null; // "reporting"
+
+    // Keys must match what you use in the Nunjucks checks
+    const allowed = new Set(['search', 'reporting', 'cds-status']);
+    res.locals.currentPage = allowed.has(seg) ? seg : null;
+
+    // Debug if needed:
+    // console.log('[nav]', { path: req.path, currentPage: res.locals.currentPage });
+
+    next();
+  });
+
+  // --------------------------------------------
+  // Search redirect handling
+  // --------------------------------------------
   router.post('/mvp/v5/:page(search|search-news)/?', (req, res) => {
     const data = req.session.data;
     const search = (req.body['data.searchTerm'] || req.query.searchTerm || '').trim();
@@ -36,18 +59,16 @@ module.exports = (router) => {
     const chedPattern = /^(CHED(P|PP)?\.GB\.\d{4}\.\d+|GBCHD\d{4}\.\d+)$/;
     const ducrPattern = /^[A-Z0-9]{1,35}-[A-Z0-9]{1,35}$/;
     const gmrPattern  = /^[A-Z0-9]{18}$/;
-    // Reset error state before processing
+
     delete data.error;
     delete data.errorMessage;
 
-    // Redirect if recognised
     if (searchRedirects[search]) {
       data.searchTerm = search;
-      data.title = search;   // keep the code itself as the title
+      data.title = search;
       return res.redirect(`/mvp/v5/${searchRedirects[search]}`);
     }
 
-    // Error handling
     if (!search) {
       data.error = 'true';
       data.errorMessage = 'Enter an MRN, CHED, GMR or DUCR reference';
@@ -81,14 +102,12 @@ module.exports = (router) => {
 
   router.post(['/mvp/v5/search-cookies/'], (req, res) => {
     const preference = req.body.cookies;
-
     if (preference === 'Yes' || preference === 'No') {
       res.cookie('cookiePreference', preference, {
         maxAge: 365 * 24 * 60 * 60 * 1000
       });
       return res.redirect('/mvp/v5/search-cookies?confirmation=true');
     }
-
     res.redirect('/mvp/v5/search-cookies');
   });
 
@@ -106,7 +125,6 @@ module.exports = (router) => {
   // --- Sign-in routes ---
   router.post(['/mvp/v5/sign-in-choose'], (req, res) => {
     const selected = req.body.signIn;
-
     if (selected === 'entra') {
       res.redirect('/mvp/v5/sign-in-entra');
     } else if (selected === 'gg') {
@@ -121,7 +139,6 @@ module.exports = (router) => {
 
   router.post(['/mvp/v5/sign-out'], (req, res) => {
     const selected = req.body.signIn;
-
     if (selected === 'entra') {
       res.redirect('/mvp/v5/sign-in-entra');
     } else if (selected === 'gg') {
@@ -134,9 +151,9 @@ module.exports = (router) => {
     }
   });
 
-  // ------------------------------------------------------------------
-  // Dynamic title/searchTerm injection for redirect targets
-  // ------------------------------------------------------------------
+  // --------------------------------------------
+  // Dynamic title injection for redirect targets
+  // --------------------------------------------
   const redirectPaths = _.uniq(Object.values(searchRedirects)).map(
     slug => `/mvp/v5/${slug}`
   );
@@ -144,9 +161,7 @@ module.exports = (router) => {
   router.use(redirectPaths, (req, res, next) => {
     const q = (req.query.q || req.session.data?.searchTerm || '').trim();
     const sessionTitle = (req.session.data?.title || '').trim();
-
     const title = sessionTitle || (q ? q : '');
-
     if (title) {
       res.locals.title = title;
       res.locals.data = Object.assign({}, res.locals.data, {

@@ -285,67 +285,65 @@
       update();
     })();
 
-    // ---- Preset ranges (populate fields; submit only if AUTO_SUBMIT) ----
-// ---- Preset ranges (rolling, GA-style) ----
-(function () {
-  const now = new Date();
-  // round "now" to minutes (inputs are minute precision)
-  const nowToMinute = new Date(
-    now.getFullYear(), now.getMonth(), now.getDate(),
-    now.getHours(), now.getMinutes()
-  );
+    // ---- Preset ranges (rolling, GA-style) ----
+    (function () {
+      const now = new Date();
+      // round "now" to minutes (inputs are minute precision)
+      const nowToMinute = new Date(
+        now.getFullYear(), now.getMonth(), now.getDate(),
+        now.getHours(), now.getMinutes()
+      );
 
-  const startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0);
+      const startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0);
 
-  // Yesterday: 00:00 → 23:59
-  const startOfYesterday = new Date(startOfToday);
-  startOfYesterday.setDate(startOfYesterday.getDate() - 1);
-  const endOfYesterday = new Date(
-    startOfYesterday.getFullYear(), startOfYesterday.getMonth(), startOfYesterday.getDate(), 23, 59
-  );
+      // Yesterday: 00:00 → 23:59
+      const startOfYesterday = new Date(startOfToday);
+      startOfYesterday.setDate(startOfYesterday.getDate() - 1);
+      const endOfYesterday = new Date(
+        startOfYesterday.getFullYear(), startOfYesterday.getMonth(), startOfYesterday.getDate(), 23, 59
+      );
 
-  // Last 7 days incl. today: start 6 days ago at 00:00 → today 23:00
-  const startOfLast7 = new Date(startOfToday);
-  startOfLast7.setDate(startOfLast7.getDate() - 6);
+      // Last 7 days incl. today: start 6 days ago at 00:00 → today 23:59
+      const startOfLast7 = new Date(startOfToday);
+      startOfLast7.setDate(startOfLast7.getDate() - 6);
 
-  // Last 30 days incl. today: start 29 days ago at 00:00 → today 23:00
-  const startOfLast30 = new Date(startOfToday);
-  startOfLast30.setDate(startOfLast30.getDate() - 29);
+      // Last 30 days incl. today: start 29 days ago at 00:00 → today 23:59
+      const startOfLast30 = new Date(startOfToday);
+      startOfLast30.setDate(startOfLast30.getDate() - 29);
 
-  // Common end for week/month presets: today at 23:00
-  const endTodayAt2300 = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59);
+      // Common end for week/month presets: today at 23:59
+      const endTodayAt2359 = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59);
 
-  const ranges = {
-    'today'     : { start: startOfToday,      end: nowToMinute },     // 00:00 → now
-    'yesterday' : { start: startOfYesterday,  end: endOfYesterday },  // 00:00 → 23:59
-    'last-week' : { start: startOfLast7,      end: endTodayAt2300 },  // last 7 days incl. today → 23:00
-    'last-month': { start: startOfLast30,     end: endTodayAt2300 }   // last 30 days incl. today → 23:00
-  };
+      const ranges = {
+        'today'     : { start: startOfToday,      end: nowToMinute },     // 00:00 → now
+        'yesterday' : { start: startOfYesterday,  end: endOfYesterday },  // 00:00 → 23:59
+        'last-week' : { start: startOfLast7,      end: endTodayAt2359 },  // last 7 days incl. today → 23:59
+        'last-month': { start: startOfLast30,     end: endTodayAt2359 }   // last 30 days incl. today → 23:59
+      };
 
-  $$('#preset-links a').forEach(link => {
-    const key = link.getAttribute('data-range');
-    const r = ranges[key];
-    if (!r) return;
+      $$('#preset-links a').forEach(link => {
+        const key = link.getAttribute('data-range');
+        const r = ranges[key];
+        if (!r) return;
 
-    link.addEventListener('click', (e) => {
-      e.preventDefault();
-      const form = findForm(link);
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const form = findForm(link);
 
-      const dmy = (d) => `${dd(d.getDate())}/${dd(d.getMonth()+1)}/${d.getFullYear()}`;
-      $('#startDate') && ($('#startDate').value = dmy(r.start));
-      $('#endDate')   && ($('#endDate').value   = dmy(r.end));
+          const dmy = (d) => `${dd(d.getDate())}/${dd(d.getMonth()+1)}/${d.getFullYear()}`;
+          $('#startDate') && ($('#startDate').value = dmy(r.start));
+          $('#endDate')   && ($('#endDate').value   = dmy(r.end));
 
-      const setIf = (sel, val) => { const el = $(sel); if (el) el.value = val; };
-      setIf('[name="startTime-hour"]',   dd(r.start.getHours()));
-      setIf('[name="startTime-minute"]', dd(r.start.getMinutes()));
-      setIf('[name="endTime-hour"]',     dd(r.end.getHours()));
-      setIf('[name="endTime-minute"]',   dd(r.end.getMinutes()));
+          const setIf = (sel, val) => { const el = $(sel); if (el) el.value = val; };
+          setIf('[name="startTime-hour"]',   dd(r.start.getHours()));
+          setIf('[name="startTime-minute"]', dd(r.start.getMinutes()));
+          setIf('[name="endTime-hour"]',     dd(r.end.getHours()));
+          setIf('[name="endTime-minute"]',   dd(r.end.getMinutes()));
 
-      if (AUTO_SUBMIT && form) { setActionHash(form); form.submit(); }
-    });
-  });
-})();
-
+          if (AUTO_SUBMIT && form) { setActionHash(form); form.submit(); }
+        });
+      });
+    })();
 
     // ---- Clear filters ----
     (function () {
@@ -547,11 +545,95 @@
       if (saved && location.hash !== saved) location.hash = saved;
     })();
 
-    // ---- Optional MOJ DateInput ----
-    window.GOVUKPrototypeKit?.documentReady?.(() => {
-      const Moj = window.MOJFrontend || window.moj?.Frontend || null;
-      const nodes = document.querySelectorAll('[data-module="moj-date-input"]');
-      if (Moj?.components?.DateInput) nodes.forEach(el => new Moj.components.DateInput({ el }));
+    // ---- Limit date pickers to last 4 months (incl. today) & initialise MOJ DatePicker ----
+    (function () {
+      // today at 00:00
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+
+      // 4 calendar months ago (same day-of-month; Date handles wrap)
+      const min = new Date(today.getFullYear(), today.getMonth() - 4, today.getDate());
+
+      const p2  = n => String(n).padStart(2, '0');
+      const ymd = d => `${d.getFullYear()}-${p2(d.getMonth() + 1)}-${p2(d.getDate())}`;
+      const minStr = ymd(min);
+      const maxStr = ymd(today);
+
+      // Apply min/max to inputs (helps both native & MOJ)
+      ['startDate', 'endDate'].forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.setAttribute('min', minStr);
+        el.setAttribute('max', maxStr);
+        el.setAttribute('data-min-date', minStr);
+        el.setAttribute('data-max-date', maxStr);
+      });
+      // ---- Limit date pickers to last 4 months (incl. today) ----
+(function () {
+  // today @ 00:00
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  // four calendar months back from today
+  const min = new Date(today.getFullYear(), today.getMonth() - 4, today.getDate());
+
+  const p2  = n => String(n).padStart(2, '0');
+  const ymd = d => `${d.getFullYear()}-${p2(d.getMonth() + 1)}-${p2(d.getDate())}`;
+
+  const minStr = ymd(min);
+  const maxStr = ymd(today);
+
+  // Apply to inputs (helps native pickers and gives hints to MOJ)
+  ['startDate', 'endDate'].forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.setAttribute('min', minStr);
+    el.setAttribute('max', maxStr);
+    el.setAttribute('data-min-date', minStr);
+    el.setAttribute('data-max-date', maxStr);
+    // prevent typing a date outside range
+    el.addEventListener('change', () => {
+      const [dd, mm, yyyy] = (el.value || '').split('/');
+      if (!dd || !mm || !yyyy) return;
+      const typed = new Date(+yyyy, +mm - 1, +dd);
+      if (typed < min) el.value = `${p2(min.getDate())}/${p2(min.getMonth()+1)}/${min.getFullYear()}`;
+      if (typed > today) el.value = `${p2(today.getDate())}/${p2(today.getMonth()+1)}/${today.getFullYear()}`;
     });
+  });
+
+  // Initialise MOJ DatePicker if present (blocks selecting outside range)
+  const Moj = window.MOJFrontend || window.moj?.Frontend || null;
+  const pickerRoots = document.querySelectorAll('[data-module="moj-date-picker"]');
+  if (Moj?.components?.DatePicker && pickerRoots.length) {
+    pickerRoots.forEach(el => {
+      new Moj.components.DatePicker({
+        el,
+        minDate: minStr,      // YYYY-MM-DD
+        maxDate: maxStr
+      });
+    });
+  }
+})();
+
+
+      // Initialise MOJ DatePicker if present (blocks navigating before min / after max)
+      const Moj = window.MOJFrontend || window.moj?.Frontend || null;
+      const pickerNodes = document.querySelectorAll('[data-module="moj-date-picker"]');
+      if (Moj?.components?.DatePicker && pickerNodes.length) {
+        pickerNodes.forEach(el => {
+          new Moj.components.DatePicker({
+            el,
+            minDate: minStr,  // YYYY-MM-DD
+            maxDate: maxStr
+          });
+        });
+      } else {
+        // Fallback: if only DateInput is available, initialise it so typed values still get parsed.
+        const inputNodes = document.querySelectorAll('[data-module="moj-date-input"]');
+        if (Moj?.components?.DateInput && inputNodes.length) {
+          inputNodes.forEach(el => new Moj.components.DateInput({ el }));
+        }
+      }
+    })();
   });
 })();

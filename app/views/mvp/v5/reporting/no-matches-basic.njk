@@ -1,0 +1,80 @@
+{% extends "layouts/forms.html" %}
+{% set title = 'BTMS reporting data' %}
+{% set fullWidth = true %}
+{% set hideButton = true %}
+{% set showHeader = true %}
+{% set bodyClasses = 'mrn-list' %}
+{% set hideBackLink = false %}
+
+{% block beforeContent %}
+  {{ govukBackLink({ text: "Back to reporting", href: "/mvp/v4/reporting/summary-view" }) }}
+{% endblock %}
+
+{% block content %}
+  {% set count = total or (rows | length) %}
+
+  <h1 class="govuk-heading-l">
+    Showing {{ count }} MRN{% if count != 1 %}s{% endif %}
+  </h1>
+
+  {% if displayRange %}
+    <p class="govuk-hint">{{ displayRange }}</p>
+  {% endif %}
+
+  {% if count == 0 %}
+    <p class="govuk-body">No MRNs found.</p>
+  {% else %}
+    <table class="govuk-table">
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th scope="col" class="govuk-table__header">MRN</th>
+          <th scope="col" class="govuk-table__header">Port of entry</th>
+          <th scope="col" class="govuk-table__header">Last updated</th>
+        </tr>
+      </thead>
+      <tbody class="govuk-table__body">
+        {% for row in rows %}
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">
+              <a class="govuk-link"
+                 href="/mvp/v4/search-results?mrn={{ row.mrn | urlencode }}&updated={{ row.lastUpdated | urlencode }}"
+                 target="_blank" rel="noopener noreferrer">
+                {{ row.mrn }}
+              </a>
+            </td>
+            <td class="govuk-table__cell">{{ row.portOfEntry or '—' }}</td>
+            <td class="govuk-table__cell">{{ row.lastUpdated or '—' }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    {% if pagination and pagination.pages > 1 %}
+      <nav class="govuk-pagination" role="navigation" aria-label="results">
+        <ul class="govuk-pagination__list">
+          {% if pagination.prev %}
+            <li class="govuk-pagination__prev">
+              <a class="govuk-link govuk-pagination__link" href="?page={{ pagination.prev }}" rel="prev">Previous</a>
+            </li>
+          {% endif %}
+
+          {% for p in pagination.window %}
+            <li class="govuk-pagination__item{% if p == pagination.page %} govuk-pagination__item--current{% endif %}">
+              {% if p == pagination.page %}
+                <span class="govuk-pagination__link">{{ p }}</span>
+              {% else %}
+                <a class="govuk-link govuk-pagination__link" href="?page={{ p }}">{{ p }}</a>
+              {% endif %}
+            </li>
+          {% endfor %}
+
+          {% if pagination.next %}
+            <li class="govuk-pagination__next">
+              <a class="govuk-link govuk-pagination__link" href="?page={{ pagination.next }}" rel="next">Next</a>
+            </li>
+          {% endif %}
+        </ul>
+      </nav>
+    {% endif %}
+  {% endif %}
+{% endblock %}

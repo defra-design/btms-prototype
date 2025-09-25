@@ -102,15 +102,19 @@
 
     <h2>Sign in</h2>
 
-    <label for="email">Email, phone, or Skype</label>
-    <input type="text" id="email" name="email">
+    <!-- Form wrapper so we can post the input -->
+    <form action="search" method="post">
+      <label for="email">Email, phone, or Skype</label>
+      <input type="text" id="email" name="email">
+  <input type="hidden" name="hideManageAccount" value="false">
 
-    <a class="link" href="#">Can’t access your account?</a>
+      <a class="link" href="#">Can’t access your account?</a>
 
-<div class="buttons">
-<a href="#" onclick="history.back(); return false;" class="button back">Back</a>
-  <a href="search-internal" class="button next">Next</a>
-</div>
+      <div class="buttons">
+        <button type="button" class="button back" onclick="history.back()">Back</button>
+        <button type="submit" class="button next">Next</button>
+      </div>
+    </form>
   </div>
 
   <div class="options">
