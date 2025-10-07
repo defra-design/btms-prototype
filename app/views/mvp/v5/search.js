@@ -4,7 +4,7 @@ const moment = require('moment');
 // Hoist redirects so they can be reused for middleware
 const searchRedirects = {
   '24GB0Z8WEJ9ZBTL73B': 'mrn',
-  'GMRCQP7UIYNS': 'new-layout-current',
+  'GMRCQP7UIYNS': 'gmr-interstitial',
   '4GB335031931000-WB2408-27WWL6274S': 'ducr',
   'CHEDP.GB.2025.5403171': 'multiple-auth',
   '24GBDX8QQ4WWFZNAR3': 'mrn-tri-auth',
@@ -171,4 +171,21 @@ module.exports = (router) => {
     }
     next();
   });
+
+
+  // app/routes.js
+module.exports = router => {
+  router.get('/new-layout-current', (req, res) => {
+    const fallback = '25GB3FJBV1UEKBDAR0'
+    const mrn = (req.query.mrn || req.session.data.title || req.session.data.mrn || fallback).trim()
+
+    // keep it in session "data" so Nunjucks `data.*` can use it
+    req.session.data.mrn = mrn
+    req.session.data.title = mrn
+
+    // also pass directly (optional)
+    res.render('new-layout-current', { title: mrn })
+  })
+}
+
 };

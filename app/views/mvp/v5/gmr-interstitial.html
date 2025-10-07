@@ -1,0 +1,139 @@
+{% extends "layouts/forms.html" %}
+{% set title = 'Search' %}
+{% set fullWidth = true %}
+{% set hideButton = true %}
+{% set menu = true %}
+{% set bodyClasses = 'btmsStatus v4' %}
+{% set hideBackLink = true %}
+{% set showSubheader = true %}
+{% set subHeader = 'Showing result for' %}
+{% set title = 'GMRCQP7UIYNS' %}
+{% set menu = true %}
+
+{% block form %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-three-quarters">
+
+    <h2 class="govuk-heading-m">Vehicle details</h2>
+
+    <dl class="govuk-summary-list">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">VRN</dt>
+        <dd class="govuk-summary-list__value">
+          <span class="number-plate number-plate--rear" aria-label="Vehicle registration number HX66 BVL">HX66 BVL</span>
+        </dd>
+      </div>
+
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">TRN</dt>
+        <dd class="govuk-summary-list__value">
+          <span class="number-plate number-plate--front" aria-label="Trailer registration number HX66 BVL">HX66 BVL</span>
+        </dd>
+      </div>
+    </dl>
+
+  </div>
+</div>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+
+    <h3 class="govuk-heading-m govuk-!-margin-top-3">MRNs</h3>
+    <p class="govuk-!-margin-bottom-2">Showing 6 MRNs that include this GMR</p>
+
+    <table class="govuk-table app-mrn-table govuk-!-margin-top-2">
+      <caption class="govuk-visually-hidden">MRNs linked to this GMR and their CDS status</caption>
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th scope="col" class="govuk-table__header">MRN</th>
+          <th scope="col" class="govuk-table__header">BTMS decision</th>
+          <th scope="col" class="govuk-table__header">CDS status</th>
+        </tr>
+      </thead>
+      <tbody class="govuk-table__body">
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell">
+            <a href="new-layout-current?mrn=25GB9LQ7X2MZ4H8R1K">25GB9LQ7X2MZ4H8R1K</a>
+          </td>
+          <td class="govuk-table__cell">No match</td>
+          <td class="govuk-table__cell"><span class="govuk-tag govuk-tag--yellow">In progress</span></td>
+        </tr>
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell">
+            <a href="new-layout-current?mrn=25GB9TR8W5AZ1D4X9J">25GB9TR8W5AZ1D4X9J</a>
+          </td>
+          <td class="govuk-table__cell">Release – Inspection(s) complete</td>
+          <td class="govuk-table__cell"><span class="govuk-tag govuk-tag--yellow">In progress</span></td>
+        </tr>
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell">
+            <a href="new-layout-current?mrn=25GB7KP3Q9LC2F5R8M">25GB7KP3Q9LC2F5R8M</a>
+          </td>
+          <td class="govuk-table__cell">Release – Inspection(s) complete</td>
+          <td class="govuk-table__cell"><span class="govuk-tag govuk-tag--green">Finalised – Released</span></td>
+        </tr>
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell">
+            <a href="new-layout-current?mrn=25GB4VN6T1XZ7B3Q5L">25GB4VN6T1XZ7B3Q5L</a>
+          </td>
+          <td class="govuk-table__cell">Hold – Awaiting decision</td>
+          <td class="govuk-table__cell"><span class="govuk-tag govuk-tag--yellow">In progress</span></td>
+        </tr>
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell">
+            <span class="tooltiplink error" tabindex="0" aria-describedby="gmr-tip-1">25GB8HF2M6YR9J1P0C</span>
+            <span id="gmr-tip-1" class="tooltip" role="tooltip">
+              This GMR cannot be found in BTMS. The GMR may not have SPS goods associated with it or the SPS goods associated with it have not triggered a HMRC risk rule.
+            </span>
+          </td>
+          <td class="govuk-table__cell">Unknown</td>
+          <td class="govuk-table__cell"><span class="govuk-tag govuk-tag--grey">Unknown</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>
+
+<style>
+  /* Number plate token */
+  .number-plate {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    padding: .25rem .6rem;
+    border: 2px solid #0b0c0c;
+    border-radius: 4px;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+
+  /* Ensure GOV.UK tags aren’t capped */
+  .govuk-tag {
+    font-weight: 700;
+    max-width: none !important;
+    font-size: 16px !important;
+  }
+
+  .tooltip { font-size: 14px !important; }
+
+  /* Force MRN table to use 16px text size */
+  .app-mrn-table .govuk-table__header,
+  .app-mrn-table .govuk-table__cell,
+  .app-mrn-table .govuk-table__caption {
+    font-size: 16px !important;
+    line-height: 1.5;
+  }
+
+  /* Rear plate (yellow) and front plate (white) */
+  .number-plate--rear  { background: #ffdf00; color: #0b0c0c; }
+  .number-plate--front { background: #ffffff; color: #0b0c0c; }
+
+  .govuk-summary-list__value .number-plate { margin-top: .1rem; }
+</style>
+
+{% endblock %}
