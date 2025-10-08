@@ -1,14 +1,13 @@
 {% extends "layouts/forms.html" %}
 {% set title = 'Search' %}
 {% set fullWidth = true %}
-{% set hideButton = true %}
-{% set menu = true %}
 {% set bodyClasses = 'btmsStatus v4' %}
 {% set hideBackLink = true %}
 {% set showSubheader = true %}
 {% set subHeader = 'Showing result for' %}
 {% set title = 'GMRCQP7UIYNS' %}
 {% set menu = true %}
+{% set hideButton = true %}
 
 {% block form %}
 
@@ -59,18 +58,25 @@
           <td class="govuk-table__cell">No match</td>
           <td class="govuk-table__cell"><span class="govuk-tag govuk-tag--yellow">In progress</span></td>
         </tr>
+                <tr class="govuk-table__row">
+          <td class="govuk-table__cell">
+            <a href="new-layout-current?mrn=25GB3FJBV1UEKBDAR0">25GB3FJBV1UEKBDAR0</a>
+          </td>
+          <td class="govuk-table__cell">Refuse - Destroy</td>
+          <td class="govuk-table__cell"><span class="govuk-tag govuk-tag--red">Finalised – Destroyed</span></td>
+        </tr>
         <tr class="govuk-table__row">
           <td class="govuk-table__cell">
             <a href="new-layout-current?mrn=25GB9TR8W5AZ1D4X9J">25GB9TR8W5AZ1D4X9J</a>
           </td>
-          <td class="govuk-table__cell">Release – Inspection(s) complete</td>
+          <td class="govuk-table__cell">Release – Inspections complete</td>
           <td class="govuk-table__cell"><span class="govuk-tag govuk-tag--yellow">In progress</span></td>
         </tr>
         <tr class="govuk-table__row">
           <td class="govuk-table__cell">
             <a href="new-layout-current?mrn=25GB7KP3Q9LC2F5R8M">25GB7KP3Q9LC2F5R8M</a>
           </td>
-          <td class="govuk-table__cell">Release – Inspection(s) complete</td>
+          <td class="govuk-table__cell">Release – Inspections complete</td>
           <td class="govuk-table__cell"><span class="govuk-tag govuk-tag--green">Finalised – Released</span></td>
         </tr>
         <tr class="govuk-table__row">
@@ -84,7 +90,13 @@
           <td class="govuk-table__cell">
             <span class="tooltiplink error" tabindex="0" aria-describedby="gmr-tip-1">25GB8HF2M6YR9J1P0C</span>
             <span id="gmr-tip-1" class="tooltip" role="tooltip">
-              This GMR cannot be found in BTMS. The GMR may not have SPS goods associated with it or the SPS goods associated with it have not triggered a HMRC risk rule.
+This MRN cannot be found in BTMS. The MRN may not have SPS goods associated with it or HMRC have not sent details of this MRN to BTMS.
+
+
+
+
+
+
             </span>
           </td>
           <td class="govuk-table__cell">Unknown</td>
@@ -95,6 +107,8 @@
 
   </div>
 </div>
+
+
 
 <style>
   /* Number plate token */
