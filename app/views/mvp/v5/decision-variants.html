@@ -157,7 +157,7 @@
               </ul>
             </td>
           </tr>
-          <tr class="govuk-table__row match release POAO">
+          <tr class="govuk-table__row match hold PHSI">
             <td class="govuk-table__cell">4</td>
             <td class="govuk-table__cell">0808309090</td>
             <td class="govuk-table__cell">PEARS</td>
@@ -199,7 +199,6 @@
             <td class="govuk-table__cell  " tabindex="0">
               <span class="tooltiplink error">GBCHD2025.5736652</span>
               <span class="tooltip" role="tooltip">
-
                 CHED reference <strong>GBCHD2025.5736652</strong> cannot be found in IPAFFS. Check that the reference is
                 correct.
               </span>
@@ -270,7 +269,7 @@
             <td class="govuk-table__cell">PHSI</td>
             <td class="govuk-table__cell">Hold - Invalid CHED reference</td>
           </tr> -->
-          <tr class="govuk-table__row match release POAO">
+          <tr class="govuk-table__row match hold POAO">
             <td class="govuk-table__cell">9 (E74)</td>
             <td class="govuk-table__cell">0808309090</td>
             <td class="govuk-table__cell">PEARS</td>
@@ -302,7 +301,7 @@
               </ul>
             </td>
           </tr>
-          <tr class="govuk-table__row match release POAO">
+          <tr class="no-match">
             <td class="govuk-table__cell">10 (E75)</td>
             <td class="govuk-table__cell">0808309090</td>
             <td class="govuk-table__cell">PEARS</td>
@@ -326,7 +325,7 @@
             </td>
             <td class="govuk-table__cell decision">
               <ul class="govuk-list">
-                <li class="POAO">
+                <li class="">
                   No match - Split consignment
                 </li>
               </ul>
@@ -380,7 +379,7 @@
             <td class="govuk-table__cell">No match - Incorrect CHED type</td>
           </tr>
 
-          <tr class="govuk-table__row match release hold HMI PHSI">
+          <tr class="govuk-table__row match hold HMI PHSI">
             <td class="govuk-table__cell">14 (E85)</td>
             <td class="govuk-table__cell">0808309090</td>
             <td class="govuk-table__cell">PEARS</td>
@@ -411,7 +410,7 @@
             </td>
           </tr>
 
-          <tr class="govuk-table__row match release hold HMI PHSI">
+          <tr class="govuk-table__row match hold HMI PHSI">
             <td class="govuk-table__cell">15 (E86)</td>
             <td class="govuk-table__cell">0808309090</td>
             <td class="govuk-table__cell">PEARS</td>
@@ -440,7 +439,7 @@
               </ul>
             </td>
           </tr>
-          <tr class="no-match">
+          <tr class="no-match HMI">
             <td class="govuk-table__cell ">16 (E87)</td>
             <td class="govuk-table__cell">0808309090</td>
             <td class="govuk-table__cell">PEARS</td>
@@ -455,11 +454,11 @@
               </span>
             </td>
             <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--red">No</strong></td>
-            <td class="govuk-table__cell">HMI</td>
+            <td class="govuk-table__cell HMI">HMI</td>
             <td class="govuk-table__cell">No match - Selected for HMI GMS inspection</td>
           </tr>
 
-          <tr class="govuk-table__row match release POAO">
+          <tr class="govuk-table__row match hold PHSI">
             <td class="govuk-table__cell">17 (E88)</td>
             <td class="govuk-table__cell">0808309090</td>
             <td class="govuk-table__cell">PEARS</td>
@@ -487,7 +486,7 @@
               </ul>
             </td>
           </tr>
-          <tr class="no-match">
+          <tr class="no-match PHSI">
             <td class="govuk-table__cell ">19 (E99)</td>
             <td class="govuk-table__cell">0808309090</td>
             <td class="govuk-table__cell">PEARS</td>
@@ -499,7 +498,12 @@
               </span>
             </td>
             <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--red">No</strong></td>
-            <td class="govuk-table__cell">PHSI</td>
+            <td class="govuk-table__cell">
+               <ul class="govuk-list">
+                <li class="PHSI">
+                  PHSI
+                </li>
+              </ul></td>
             <td class="govuk-table__cell">No match - Unknown error</td>
           </tr>
         </tbody>
