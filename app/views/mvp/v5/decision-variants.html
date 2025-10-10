@@ -72,7 +72,7 @@
         </thead>
         <tbody class="govuk-table__body ">
 
-          <tr class="govuk-table__row match release POAO">
+          <tr class="govuk-table__row match release PHSI">
             <td class="govuk-table__cell">1</td>
             <td class="govuk-table__cell">0808309090</td>
             <td class="govuk-table__cell">PEARS</td>
@@ -100,7 +100,7 @@
               </ul>
             </td>
           </tr>
-          <tr class="govuk-table__row match release POAO">
+          <tr class="govuk-table__row match release IUU">
             <td class="govuk-table__cell">2</td>
             <td class="govuk-table__cell">0808309090</td>
             <td class="govuk-table__cell">PEARS</td>
@@ -122,14 +122,14 @@
             </td>
             <td class="govuk-table__cell decision">
               <ul class="govuk-list">
-                <li class="POAO">
+                <li class="IUU">
                   Release - IUU inspection complete
                 </li>
               </ul>
             </td>
           </tr>
 
-          <tr class="govuk-table__row match refused POAO">
+          <tr class="govuk-table__row match refused PHSI">
             <td class="govuk-table__cell">3</td>
             <td class="govuk-table__cell">0808309090</td>
             <td class="govuk-table__cell">PEARS</td>
@@ -169,16 +169,13 @@
 
             </td>
             <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Yes</strong></td>
-            <td class="govuk-table__cell decision">
+            <td class="govuk-table__cell decision phsi">
 
                   PHSI
             </td>
             <td class="govuk-table__cell decision">
-              <ul class="govuk-list">
-                <li class="POAO">
+
                   Hold - Awaiting decision
-                </li>
-              </ul>
             </td>
           </tr>
 
@@ -379,7 +376,7 @@
             <td class="govuk-table__cell decision">
               <ul class="govuk-list">
                 <li class="PHSI ">PHSI</li>
-                <li class="HMI ">HMI</li>
+                <li class="HMI test">HMI</li>
               </ul>
             </td>
             <td class="govuk-table__cell decision">
@@ -393,7 +390,7 @@
             </td>
           </tr>
 
-          <tr class="govuk-table__row match hold HMI PHSI">
+          <tr class="govuk-table__row match hold hmi phsi">
             <td class="govuk-table__cell">15 (E86)</td>
             <td class="govuk-table__cell">0808309090</td>
             <td class="govuk-table__cell">PEARS</td>
@@ -408,7 +405,7 @@
             <td class="govuk-table__cell decision">
               <ul class="govuk-list">
                 <li class="PHSI">PHSI</li>
-                <li class="HMI">HMI</li>
+                <li class="HMI test">HMI</li>
               </ul>
             </td>
             <td class="govuk-table__cell decision">
@@ -568,5 +565,9 @@
     });
   });
 </script> -->
+
+<style>
+  .filtered-decision-hold li.test  {display:none}
+</style>
 
 {% endblock %}
