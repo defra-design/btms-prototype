@@ -33,9 +33,9 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
 function applyMrnFilters() {
-  const matchValue = matchFilter?.value ?? "show-all";         // "show-all" | "match" | "no-match"
-  const decisionValue = decisionFilter?.value ?? "show-all";   // "show-all" | "release" | "hold" | "refused"
-  const authValue = authFilter?.value ?? "show-all";           // "show-all" | authority code
+  const matchValue = matchFilter?.value ?? "show-all";
+  const decisionValue = decisionFilter?.value ?? "show-all";
+  const authValue = authFilter?.value ?? "show-all";
 
   mrnContainers.forEach(container => {
     const table = container.querySelector(".govuk-table");
@@ -48,8 +48,6 @@ function applyMrnFilters() {
     const noDataMsg = ensureNoDataMsg(container, "There are no items that match the filters selected.");
 
     rows.forEach(row => {
-      // Only check decision items in the last decision <td>
-      const decisionItems = row.querySelectorAll("td.decision:last-child li");
       let matches = true;
 
       // Reset filter classes
@@ -63,48 +61,174 @@ function applyMrnFilters() {
         "filtered-auth-POAO","filtered-auth-IUU","filtered-auth-APHA"
       );
 
-      // Match filter (row has "match" or "no-match")
+      // Match filter
       if (matchValue !== "show-all") {
         row.classList.add(`filtered-match-${matchValue}`);
-        matches = matchValue === "match"
+        const isMatch = matchValue === "match"
           ? row.classList.contains("match")
           : row.classList.contains("no-match");
+        if (!isMatch) matches = false;
       }
 
-      // Decision filter (row has "release" | "hold" | "refused")
-      if (matches && decisionValue !== "show-all") {
-        row.classList.add(`filtered-decision-${decisionValue}`);
-        if (!row.classList.contains(decisionValue)) matches = false;
-      }
+      // For rows with multiple authority/decision pairs, we'll check visibility at the list item level
+      // Skip row-level decision and authority checks if the row has list items
+      const decisionCells = row.querySelectorAll("td.decision");
+      const authorityCell = decisionCells[0]; // First .decision cell is Authority
+      const decisionCell = decisionCells[decisionCells.length - 1]; // Last .decision cell is Decision
 
-      // Authority filter (row must have an authority somewhere)
-      if (matches && authValue !== "show-all") {
-        row.classList.add(`filtered-auth-${authValue}`);
-        const hasAuth =
-          row.classList.contains(authValue) ||
-          Array.from(row.querySelectorAll("td.decision")).some(td =>
-            td.classList.contains(authValue) || includesCI(td.textContent, authValue)
+      const authorityItems = authorityCell ? authorityCell.querySelectorAll("li") : [];
+      const decisionItems = decisionCell ? decisionCell.querySelectorAll("li") : [];
+
+      const hasListItems = decisionItems.length > 0;
+
+      // Only do row-level filtering if there are NO list items
+      if (!hasListItems) {
+        // Decision filter - check both row classes AND text content
+        if (matches && decisionValue !== "show-all") {
+          row.classList.add(`filtered-decision-${decisionValue}`);
+
+          const decisionText = Array.from(decisionCells)
+            .map(cell => cell.textContent.toLowerCase())
+            .join(" ");
+
+          let hasDecision = false;
+
+          if (decisionValue === "release") {
+            hasDecision = row.classList.contains("release") ||
+                         decisionText.includes("release");
+          } else if (decisionValue === "hold") {
+            hasDecision = row.classList.contains("hold") ||
+                         decisionText.includes("hold") ||
+                         decisionText.includes("awaiting");
+          } else if (decisionValue === "refused") {
+            hasDecision = row.classList.contains("refused") ||
+                         decisionText.includes("refused") ||
+                         decisionText.includes("refuse");
+          }
+
+          if (!hasDecision) matches = false;
+        }
+
+        // Authority filter - check row classes, cell classes, AND text content
+        if (matches && authValue !== "show-all") {
+          row.classList.add(`filtered-auth-${authValue}`);
+
+          const hasRowClass = row.classList.contains(authValue) ||
+                             row.classList.contains(authValue.toUpperCase());
+
+          const hasAuthInText = Array.from(decisionCells).some(cell =>
+            includesCI(cell.textContent, authValue)
           );
-        if (!hasAuth) matches = false;
+
+          if (!hasRowClass && !hasAuthInText) {
+            matches = false;
+          }
+        }
       }
 
-      // Per-LI visibility inside decision cells
-      decisionItems.forEach(li => {
-        const matchesAuth = authValue === "show-all"
-          || li.classList.contains(authValue)
-          || includesCI(li.textContent, authValue);
+      // Handle visibility of decision and authority list items
+      if (hasListItems && authorityItems.length > 0) {
+        let anyVisibleDecision = false;
 
-        const matchesDecision = decisionValue === "show-all"
-          || li.classList.contains(decisionValue)
-          || includesCI(li.textContent, decisionValue)
-          || (decisionValue === "refused" && includesCI(li.textContent, "refuse")); // tolerate "Refuse" vs "Refused"
+        // Process each decision item and its corresponding authority item
+        decisionItems.forEach((decisionLi, index) => {
+          let showLi = true;
 
-        li.style.display = (matchesAuth && matchesDecision) ? "" : "none";
-      });
+          // Get corresponding authority item (they should match by index)
+          const authorityLi = authorityItems[index];
 
-      const anyVisibleDecision = Array.from(decisionItems).some(li => li.style.display !== "none");
+          // Check authority match - must check the authority cell, not the decision cell
+          if (authValue !== "show-all") {
+            let liMatchesAuth = false;
 
-      if (matches && (!decisionItems.length || anyVisibleDecision)) {
+            // Check the corresponding authority list item
+            if (authorityLi) {
+              liMatchesAuth =
+                authorityLi.classList.contains(authValue) ||
+                authorityLi.classList.contains(authValue.toUpperCase()) ||
+                includesCI(authorityLi.textContent, authValue);
+            }
+
+            // Also check the decision li classes (for backwards compatibility)
+            if (!liMatchesAuth) {
+              liMatchesAuth =
+                decisionLi.classList.contains(authValue) ||
+                decisionLi.classList.contains(authValue.toUpperCase());
+            }
+
+            if (!liMatchesAuth) showLi = false;
+          }
+
+          // Check decision match for this li
+          if (showLi && decisionValue !== "show-all") {
+            const liText = decisionLi.textContent.toLowerCase();
+            let liMatchesDecision = false;
+
+            if (decisionValue === "release") {
+              liMatchesDecision = liText.includes("release");
+            } else if (decisionValue === "hold") {
+              liMatchesDecision = liText.includes("hold") || liText.includes("awaiting");
+            } else if (decisionValue === "refused") {
+              liMatchesDecision = liText.includes("refuse");
+            }
+
+            if (!liMatchesDecision) showLi = false;
+          }
+
+          // Hide/show both decision and authority list items together
+          decisionLi.style.display = showLi ? "" : "none";
+          if (authorityLi) {
+            authorityLi.style.display = showLi ? "" : "none";
+          }
+
+          if (showLi) anyVisibleDecision = true;
+        });
+
+        // If filtering decisions/authority and no decision items are visible, hide the row
+        if ((authValue !== "show-all" || decisionValue !== "show-all") && !anyVisibleDecision) {
+          matches = false;
+        }
+      } else if (hasListItems) {
+        // Handle case where there are decision items but no authority items (shouldn't happen in your HTML)
+        let anyVisibleDecision = false;
+
+        decisionItems.forEach(li => {
+          let showLi = true;
+
+          if (authValue !== "show-all") {
+            const liMatchesAuth =
+              li.classList.contains(authValue) ||
+              li.classList.contains(authValue.toUpperCase()) ||
+              includesCI(li.textContent, authValue);
+            if (!liMatchesAuth) showLi = false;
+          }
+
+          if (showLi && decisionValue !== "show-all") {
+            const liText = li.textContent.toLowerCase();
+            let liMatchesDecision = false;
+
+            if (decisionValue === "release") {
+              liMatchesDecision = liText.includes("release");
+            } else if (decisionValue === "hold") {
+              liMatchesDecision = liText.includes("hold") || liText.includes("awaiting");
+            } else if (decisionValue === "refused") {
+              liMatchesDecision = liText.includes("refuse");
+            }
+
+            if (!liMatchesDecision) showLi = false;
+          }
+
+          li.style.display = showLi ? "" : "none";
+          if (showLi) anyVisibleDecision = true;
+        });
+
+        if ((authValue !== "show-all" || decisionValue !== "show-all") && !anyVisibleDecision) {
+          matches = false;
+        }
+      }
+
+      // Show/hide the row
+      if (matches) {
         row.style.display = "";
         visibleRowFound = true;
       } else {
@@ -112,12 +236,13 @@ function applyMrnFilters() {
       }
     });
 
-    // Only reveal .blank-cell when "no-match" is selected
+    // Show/hide blank cells for no-match rows
     const showBlank = matchValue === "no-match";
     container.querySelectorAll(".blank-cell").forEach(cell => {
       cell.style.color = showBlank ? "" : "transparent";
     });
 
+    // Show/hide table header and no data message
     if (tableHead) tableHead.style.display = visibleRowFound ? "" : "none";
     noDataMsg.style.display = visibleRowFound ? "none" : "block";
   });
@@ -125,9 +250,9 @@ function applyMrnFilters() {
   // Toggle "clear filters" link
   if (clearFiltersLink) {
     clearFiltersLink.style.display =
-      (matchFilter && matchFilter.value !== "show-all")
-      || (decisionFilter && decisionFilter.value !== "show-all")
-      || (authFilter && authFilter.value !== "show-all")
+      (matchFilter && matchFilter.value !== "show-all") ||
+      (decisionFilter && decisionFilter.value !== "show-all") ||
+      (authFilter && authFilter.value !== "show-all")
         ? "inline-block" : "none";
   }
 }

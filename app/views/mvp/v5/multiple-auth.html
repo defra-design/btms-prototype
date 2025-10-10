@@ -11,6 +11,7 @@
 {% set hideManageAccount = 'false' %}
 {% set showEdit = true %}
 {% set hideBackLink = true %}
+{% set menu = true %}
 
 {% block form %}
 
@@ -26,9 +27,9 @@
         <div class="row">
           <dt>MRN</dt>
           <dd>
-            <strong class="govuk-tag govuk-tag--yellow">
+
               {{ title }}
-            </strong>
+
           </dd>
         </div>
         <div class="row">
@@ -37,7 +38,7 @@
         </div>
         <div class="row">
           <dt>CDS status</dt>
-          <dd>Current</dd>
+          <dd><strong class="govuk-tag govuk-tag--yellow">In progress</strong></dd>
         </div>
         <div class="row">
           <dt>Last updated</dt>
