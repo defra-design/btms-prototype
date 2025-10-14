@@ -5,6 +5,7 @@ const moment = require('moment');
 const searchRedirects = {
   '24GB0Z8WEJ9ZBTL73B': 'mrn',
   'GMRCQP7UIYNS': 'gmr-interstitial',
+  'GMR8X9J2T4KL': 'gmr-v1',
   '4GB335031931000-WB2408-27WWL6274S': 'ducr',
   'CHEDP.GB.2025.5403171': 'multiple-auth',
   '24GBDX8QQ4WWFZNAR3': 'mrn-tri-auth',

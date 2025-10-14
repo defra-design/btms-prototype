@@ -3,8 +3,12 @@
 
 
 <div class="govuk-width-container">
-        {{ govukBackLink({
-    href: "/mvp/v5/gmr-interstitial"
-  }) }}
+   {{ backLink({
+      "href": "javascript:history.go(-1)",
+      html: backText if backText else 'Change my previous answer'
+    }) }}
 </div>
 {% endif %}
+
+
+
