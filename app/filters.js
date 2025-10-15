@@ -57,11 +57,9 @@ addFilter('mrnTime', function () {
 //              {{ "" | ipaffsTime("-2hr") }}  (or "-2hrs", "-2hour", "-2hours")
 //              {{ "" | ipaffsTime("+15min") }} (future, for testing)
 addFilter('ipaffsTime', function (value, offsetStr) {
-  const arg = (typeof offsetStr !== 'undefined') ? offsetStr : value; // support both call styles
+  const arg = (typeof offsetStr !== 'undefined') ? offsetStr : value;
   try {
-    const d = new Date();
     let offsetMinutes = -80;
-
     if (typeof arg === 'string' && arg.trim()) {
       const m = arg.trim().match(/^([+-]?)(\d+)(?:\s*)(min|hr|hrs|hour|hours)?$/i);
       if (m) {
@@ -74,12 +72,24 @@ addFilter('ipaffsTime', function (value, offsetStr) {
       }
     }
 
-    d.setMinutes(d.getMinutes() + offsetMinutes);
-    return formatGB(d);
+    const d = new Date();
+    d.setUTCMinutes(d.getUTCMinutes() + offsetMinutes);
+
+    // Format explicitly in UK time (no seconds)
+    return new Intl.DateTimeFormat('en-GB', {
+      timeZone: 'Europe/London',
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit'
+    }).format(d);
+
   } catch (e) {
     return (e?.message || 'Error').split(':')[0];
   }
 });
+
 
 
 /* ----------------------------------------------------------- */
