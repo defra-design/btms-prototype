@@ -1,3 +1,6 @@
+Here’s your updated template with the new content (including the new **Reporting** section) using GOV.UK headings and lists:
+
+```njk
 {% extends "layouts/forms.html" %}
 {% set title = 'BTMS user guide' %}
 {% set fullWidth = false %}
@@ -9,10 +12,12 @@
 
 {% block form %}
 <h2 class="govuk-heading-m">Search</h2>
-<ul class="govuk-list govuk-list--bullet">
-  <li>You can search by using just the last 7 digits of a CHED reference as well as by the other methods listed on the search page.</li>
-  <li>Search results will only cover the last 4 months.</li>
-</ul>
+<p class="govuk-body">
+  You can search by using just the last 7 digits of a CHED reference as well as by the other methods listed on the search page.
+</p>
+<p class="govuk-body">
+  Search results will only cover the last 4 months.
+</p>
 
 <h2 class="govuk-heading-m">Results page</h2>
 <ul class="govuk-list govuk-list--bullet">
@@ -22,16 +27,31 @@
 </ul>
 
 <h2 class="govuk-heading-m">Latest activity</h2>
-<ul class="govuk-list govuk-list--bullet">
-  <li>This page shows the date and time that the last customs declaration and finalisation messages were received from CDS.</li>
-  <li>This is intended to help you identify that BTMS is working as it should and there are no problems.</li>
-</ul>
+<p class="govuk-body">
+  This page shows the date and time that the last customs declaration and finalisation messages were received from CDS.
+</p>
+<p class="govuk-body">
+  This is intended to help you identify that BTMS is working as it should and there are no problems.
+</p>
 
 <h2 class="govuk-heading-m">Account management</h2>
-<p>If a colleague needs access to BTMS:</p>
+<p class="govuk-body">If a colleague needs access to BTMS:</p>
 <ul class="govuk-list govuk-list--bullet">
   <li>For colleagues with Defra, APHA or FSA email addresses, they should request BTMS access through the My IT portal.</li>
   <li>For colleagues with HMRC or PHA email addresses, they should ask their local BTMS administrator to grant access.</li>
 </ul>
 
+<h2 class="govuk-heading-m">Reporting</h2>
+<p class="govuk-body">
+  The reporting page gives insight and a breakdown of the data in BTMS over your chosen time period. It provides detail on:
+</p>
+<ul class="govuk-list govuk-list--bullet">
+  <li><strong>Matches:</strong> Shown by the date the MRN was created, not when the status changed. For example, an MRN created on 1 September but matched on 2 September will appear in the 1 September report.</li>
+  <li><strong>Releases:</strong> Shows the breakdown of automatic and manual releases.</li>
+  <li><strong>Unique clearance requests:</strong> Each clearance request is a message from CDS to BTMS about an MRN. An MRN can have multiple requests if updated. ‘Total’ counts all messages. ‘Unique’ counts distinct MRNs.</li>
+  <li><strong>Pre-notifications by CHED type:</strong> Shows the breakdown by CHED type.</li>
+</ul>
+<p class="govuk-body">
+  You can view the data for a specific time period by using the filters. There is also a chart view of the data.
+</p>
 {% endblock %}
