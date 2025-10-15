@@ -27,14 +27,20 @@
             </a>
           </li>
 
-          <li class="govuk-service-navigation__item {{ 'govuk-service-navigation__item--active' if currentPage == 'cds-status' }}">
+          <li class="govuk-service-navigation__item {{ 'govuk-service-navigation__item--active' if currentPage == 'latest-activity' }}">
             <a class="govuk-service-navigation__link"
-               href="/mvp/v5/cds-status"
-               {% if currentPage == 'cds-status' %}aria-current="true"{% endif %}>
+               href="/mvp/v5/latest-activity"
+               {% if currentPage == 'latest-activity' %}aria-current="true"{% endif %}>
                Latest activity
             </a>
           </li>
-
+        <li class="govuk-service-navigation__item {{ 'govuk-service-navigation__item--active' if currentPage == 'user-guide' }}">
+            <a class="govuk-service-navigation__link"
+               href="/mvp/v5/user-guide"
+               {% if currentPage == 'user-guide' %}aria-current="true"{% endif %}>
+               User guide
+            </a>
+          </li>
           {# --- Right-aligned account actions --- #}
           {% set _hideManageAccount = (data.hideManageAccount or hideManageAccount or 'false') %}
 

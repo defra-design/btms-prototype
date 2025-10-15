@@ -1,0 +1,37 @@
+{% extends "layouts/forms.html" %}
+{% set title = 'BTMS user guide' %}
+{% set fullWidth = false %}
+{% set hideButton = true %}
+{% set menu = true %}
+{% set bodyClasses = 'btmsStatus' %}
+{% set hideBackLink = true %}
+{% set menu = true %}
+
+{% block form %}
+<h2 class="govuk-heading-m">Search</h2>
+<ul class="govuk-list govuk-list--bullet">
+  <li>You can search by using just the last 7 digits of a CHED reference as well as by the other methods listed on the search page.</li>
+  <li>Search results will only cover the last 4 months.</li>
+</ul>
+
+<h2 class="govuk-heading-m">Results page</h2>
+<ul class="govuk-list govuk-list--bullet">
+  <li>When a reference is in red and has a dash underline it means if you hover your cursor over it, you’ll find more information about the reference.</li>
+  <li>On customs declaration results you can use the filters at the top to make the search results more specific. You can filter by matches, authority and decision.</li>
+  <li>On IPAFFS notification (CHED) results you can filter by authority.</li>
+</ul>
+
+<h2 class="govuk-heading-m">Latest activity</h2>
+<ul class="govuk-list govuk-list--bullet">
+  <li>This page shows the date and time that the last customs declaration and finalisation messages were received from CDS.</li>
+  <li>This is intended to help you identify that BTMS is working as it should and there are no problems.</li>
+</ul>
+
+<h2 class="govuk-heading-m">Account management</h2>
+<p>If a colleague needs access to BTMS:</p>
+<ul class="govuk-list govuk-list--bullet">
+  <li>For colleagues with Defra, APHA or FSA email addresses, they should request BTMS access through the My IT portal.</li>
+  <li>For colleagues with HMRC or PHA email addresses, they should ask their local BTMS administrator to grant access.</li>
+</ul>
+
+{% endblock %}

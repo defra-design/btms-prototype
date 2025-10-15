@@ -56,17 +56,18 @@ addFilter('mrnTime', function () {
 //              {{ "" | ipaffsTime("-30min") }}
 //              {{ "" | ipaffsTime("-2hr") }}  (or "-2hrs", "-2hour", "-2hours")
 //              {{ "" | ipaffsTime("+15min") }} (future, for testing)
-addFilter('ipaffsTime', function (offsetStr) {
+addFilter('ipaffsTime', function (value, offsetStr) {
+  const arg = (typeof offsetStr !== 'undefined') ? offsetStr : value; // support both call styles
   try {
     const d = new Date();
-    let offsetMinutes = -80; // default = 1hr 20min ago
+    let offsetMinutes = -80;
 
-    if (typeof offsetStr === 'string' && offsetStr.trim()) {
-      const m = offsetStr.trim().match(/^([+-]?)(\d+)(?:\s*)(min|hr|hrs|hour|hours)?$/i);
+    if (typeof arg === 'string' && arg.trim()) {
+      const m = arg.trim().match(/^([+-]?)(\d+)(?:\s*)(min|hr|hrs|hour|hours)?$/i);
       if (m) {
-        let [, sign, value, unit] = m;
-        let minutes = parseInt(value, 10);
-        if (unit && !/min/i.test(unit)) minutes *= 60; // treat as hours
+        let [, sign, v, unit] = m;
+        let minutes = parseInt(v, 10);
+        if (unit && !/min/i.test(unit)) minutes *= 60;
         if (sign === '-') minutes = -minutes;
         if (sign === '+') minutes = +minutes;
         offsetMinutes = minutes;
@@ -75,10 +76,11 @@ addFilter('ipaffsTime', function (offsetStr) {
 
     d.setMinutes(d.getMinutes() + offsetMinutes);
     return formatGB(d);
-  } catch (error) {
-    return (error?.message || 'Error').split(':')[0];
+  } catch (e) {
+    return (e?.message || 'Error').split(':')[0];
   }
 });
+
 
 /* ----------------------------------------------------------- */
 

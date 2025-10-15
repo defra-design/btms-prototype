@@ -39,7 +39,7 @@ module.exports = (router) => {
       .filter(Boolean)[0] || null; // "reporting"
 
     // Keys must match what you use in the Nunjucks checks
-    const allowed = new Set(['search', 'reporting', 'cds-status']);
+    const allowed = new Set(['search', 'reporting', 'latest-activity', 'user-guide']);
     res.locals.currentPage = allowed.has(seg) ? seg : null;
 
     // Debug if needed:
@@ -172,6 +172,8 @@ module.exports = (router) => {
     }
     next();
   });
+
+
 
 
   // app/routes.js
