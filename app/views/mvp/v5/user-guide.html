@@ -1,6 +1,3 @@
-Here’s your updated template with the new content (including the new **Reporting** section) using GOV.UK headings and lists:
-
-```njk
 {% extends "layouts/forms.html" %}
 {% set title = 'BTMS user guide' %}
 {% set fullWidth = false %}
@@ -8,7 +5,6 @@ Here’s your updated template with the new content (including the new **Reporti
 {% set menu = true %}
 {% set bodyClasses = 'btmsStatus' %}
 {% set hideBackLink = true %}
-{% set menu = true %}
 
 {% block form %}
 <h2 class="govuk-heading-m">Search</h2>
@@ -25,13 +21,9 @@ Here’s your updated template with the new content (including the new **Reporti
   <li>On customs declaration results you can use the filters at the top to make the search results more specific. You can filter by matches, authority and decision.</li>
   <li>On IPAFFS notification (CHED) results you can filter by authority.</li>
 </ul>
-
-
-
-
 <h2 class="govuk-heading-m">Reporting</h2>
 <p class="govuk-body">
-  The reporting page gives insight and a breakdown of the data in BTMS over your chosen time period. It provides detail on:
+  The reporting page gives insight and a breakdown of the data in BTMS over your chosen dates. It provides detail on:
 </p>
 <ul class="govuk-list govuk-list--bullet">
   <li><strong>Matches:</strong> Shown by the date the MRN was created, not when the status changed. For example, an MRN created on 1 September but matched on 2 September will appear in the 1 September report.</li>
@@ -39,16 +31,16 @@ Here’s your updated template with the new content (including the new **Reporti
   <li><strong>Unique clearance requests:</strong> Each clearance request is a message from CDS to BTMS about an MRN. An MRN can have multiple requests if updated. ‘Total’ counts all messages. ‘Unique’ counts distinct MRNs.</li>
   <li><strong>Pre-notifications by CHED type:</strong> Shows the breakdown by CHED type.</li>
 </ul>
-<p class="govuk-body">
-  You can view the data for a specific time period by using the filters. There is also a chart view of the data.
-</p>
 
 <h2 class="govuk-heading-m">Latest activity</h2>
 <p class="govuk-body">
-  This page shows the date and time that the last customs declaration and finalisation messages were received from CDS.
+  This page shows the date and time that BTMS last sent and received messages between IPAFFS and CDS.
 </p>
 <p class="govuk-body">
   This is intended to help you identify that BTMS is working as it should and there are no problems.
+</p>
+<p class="govuk-body">
+  You’ll need to refresh your page to make sure that you’re seeing accurate times for the latest messages.
 </p>
 
 
@@ -59,4 +51,6 @@ Here’s your updated template with the new content (including the new **Reporti
   <li>For colleagues with Defra, APHA or FSA email addresses, they should request BTMS access through the My IT portal.</li>
   <li>For colleagues with HMRC or PHA email addresses, they should ask their local BTMS administrator to grant access.</li>
 </ul>
+
+
 {% endblock %}
