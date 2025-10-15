@@ -5,7 +5,7 @@
 {% set menu = true %}
 {% set showheader = true %}
 {% set bodyClasses = 'reporting' %}
-{% set hideBackLink = false %}
+{% set hideBackLink = true %}
 
 {% block form %}
 {% from "govuk/components/checkboxes/macro.njk" import govukCheckboxes %}
@@ -62,41 +62,12 @@
           }) }}
         </div>
 
-        <!-- Start time -->
-        <div class="govuk-form-group govuk-!-margin-bottom-4">
-          {{ timeInput({
-            id: "start-time",
-            namePrefix: "startTime",
-            label: "Start time",
-              hint: {
-                text: "For example, 16:30"
-              },
-            hour: data.startTime and data.startTime.hour or "",
-            minute: data.startTime and data.startTime.minute or ""
-          }) }}
-        </div>
 
-        <!-- End time -->
-        <div class="govuk-form-group govuk-!-margin-bottom-4 govuk-!-padding-bottom-4">
-          {{ timeInput({
-            id: "end-time",
-            namePrefix: "endTime",
-            label: "End time",
-            hint: {
-                text: "For example, 16:30"
-            },
-            hour: data.endTime and data.endTime.hour or "",
-            minute: data.endTime and data.endTime.minute or ""
-          }) }}
-        </div>
 
         <!-- Update button -->
         <button class="govuk-button govuk-!-margin-bottom-6" data-module="govuk-button" type="submit">Update</button>
 
-        <!-- Clear filters -->
-        <ul class="govuk-list" id="clear-filters">
-          <li><a href="#" data-start="" data-end="">Clear filters</a></li>
-        </ul>
+
       </fieldset>
     </div>
 
