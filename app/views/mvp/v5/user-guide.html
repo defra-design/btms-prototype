@@ -1,3 +1,6 @@
+Here’s that same content expressed in GOV.UK-style Nunjucks template code, with the headings and lists correctly structured and the section order matching your markdown:
+
+```njk
 {% extends "layouts/forms.html" %}
 {% set title = 'BTMS user guide' %}
 {% set fullWidth = false %}
@@ -21,6 +24,7 @@
   <li>On customs declaration results you can use the filters at the top to make the search results more specific. You can filter by matches, authority and decision.</li>
   <li>On IPAFFS notification (CHED) results you can filter by authority.</li>
 </ul>
+
 <h2 class="govuk-heading-m">Reporting</h2>
 <p class="govuk-body">
   The reporting page gives insight and a breakdown of the data in BTMS over your chosen dates. It provides detail on:
@@ -31,18 +35,16 @@
   <li><strong>Unique clearance requests:</strong> Each clearance request is a message from CDS to BTMS about an MRN. An MRN can have multiple requests if updated. ‘Total’ counts all messages. ‘Unique’ counts distinct MRNs.</li>
   <li><strong>Pre-notifications by CHED type:</strong> Shows the breakdown by CHED type.</li>
 </ul>
+<p class="govuk-body">
+  You can view the data for a specific dates by using the filters. There is also a chart view of the data.
+</p>
 
 <h2 class="govuk-heading-m">Latest activity</h2>
-<p class="govuk-body">
-  This page shows the date and time that BTMS last sent and received messages between IPAFFS and CDS.
-</p>
-<p class="govuk-body">
-  This is intended to help you identify that BTMS is working as it should and there are no problems.
-</p>
-<p class="govuk-body">
-  You’ll need to refresh your page to make sure that you’re seeing accurate times for the latest messages.
-</p>
-
+<ul class="govuk-list govuk-list--bullet">
+  <li>This page shows the date and time that BTMS last sent and received messages between IPAFFS and CDS.</li>
+  <li>This is intended to help you identify that BTMS is working as it should and there are no problems.</li>
+  <li>You’ll need to refresh your page to make sure that you’re seeing accurate times for the latest messages.</li>
+</ul>
 
 
 <h2 class="govuk-heading-m">Account management</h2>
@@ -51,6 +53,4 @@
   <li>For colleagues with Defra, APHA or FSA email addresses, they should request BTMS access through the My IT portal.</li>
   <li>For colleagues with HMRC or PHA email addresses, they should ask their local BTMS administrator to grant access.</li>
 </ul>
-
-
 {% endblock %}
