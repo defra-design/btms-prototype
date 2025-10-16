@@ -377,5 +377,123 @@
 .govuk-fieldset__legend:not(.govuk-fieldset__legend--m):not(.govuk-fieldset__legend--l):not(.govuk-fieldset__legend--xl) + .govuk-hint {
   margin-bottom: 5px;
 }
+.btms-dataset-hidden { opacity: .45; text-decoration: line-through; }
+
 </style>
+
+<script>
+  // === Click the coloured dot/heading to toggle the matching dataset ===
+(function enableDatasetToggles() {
+  // Container with your charts panel
+  const panel = document.getElementById('chart');
+  if (!panel) return;
+
+  // Make any heading with a .legend-dot act as a toggle
+  panel.querySelectorAll('.chart h3 .legend-dot').forEach(dot => {
+    const heading = dot.closest('h3');
+    if (!heading) return;
+
+    // the dataset label is the text content of the heading (e.g. "Matches", "Manual", "CHED P")
+    const label = heading.textContent.trim();
+
+    // a11y: make it focusable/clickable
+    heading.setAttribute('tabindex', '0');
+    heading.setAttribute('role', 'button');
+    heading.setAttribute('aria-pressed', 'true');
+    heading.style.cursor = 'pointer';
+
+    // find the canvas for this chart
+    const chartEl = heading.closest('.chart')?.querySelector('canvas');
+    if (!chartEl) return;
+
+    const clickToggle = (e) => {
+      // only react to click/Enter/Space
+      if (e.type === 'keydown' && !['Enter',' '].includes(e.key)) return;
+
+      const chart = Chart.getChart(chartEl); // works in Chart.js v3+
+      if (!chart) return;
+
+      const idx = chart.data.datasets.findIndex(d => (d.label || '').trim() === label);
+      if (idx === -1) {
+        console.warn('Dataset not found for label:', label);
+        return;
+      }
+
+      const meta = chart.getDatasetMeta(idx);
+      const willHide = meta.hidden === null ? true : !meta.hidden;
+
+      meta.hidden = willHide;
+      chart.update();
+
+      // visual state + a11y feedback
+      heading.classList.toggle('btms-dataset-hidden', willHide);
+      heading.setAttribute('aria-pressed', String(!willHide));
+    };
+
+    heading.addEventListener('click', clickToggle);
+    heading.addEventListener('keydown', clickToggle);
+  });
+})();
+window.GOVUKPrototypeKit.documentReady(() => {
+  const list = document.querySelector('#preset-links');
+  if (!list) return;
+
+  // Helpers
+  const fmt = d => d.toLocaleDateString('en-GB'); // dd/mm/yyyy
+  const startOfDay = d => new Date(d.getFullYear(), d.getMonth(), d.getDate(), 0, 0, 0);
+  const endOfDay   = d => new Date(d.getFullYear(), d.getMonth(), d.getDate(), 23, 59, 0);
+
+  function rangeFor(key) {
+    const now = new Date();
+    let start, end;
+
+    switch (key) {
+      case 'today':
+        start = startOfDay(now);
+        end   = endOfDay(now);
+        break;
+      case 'yesterday': {
+        const y = new Date(now);
+        y.setDate(y.getDate() - 1);
+        start = startOfDay(y);
+        end   = endOfDay(y);
+        break;
+      }
+      case 'last-week': {
+        end   = endOfDay(now);
+        const s = new Date(end);
+        s.setDate(s.getDate() - 6); // inclusive 7 days
+        start = startOfDay(s);
+        break;
+      }
+      case 'last-month': {
+        end   = endOfDay(now);
+        const s = new Date(end);
+        s.setMonth(s.getMonth() - 1);
+        start = startOfDay(s);
+        break;
+      }
+      default:
+        return null;
+    }
+    return { start: fmt(start), end: fmt(end) };
+  }
+
+  // Turn each preset into a working link
+  list.querySelectorAll('a[data-range]').forEach(a => {
+    const key = a.getAttribute('data-range');
+    const rng = rangeFor(key);
+    if (!rng) return;
+
+    const url = new URL(window.location.href);
+    url.searchParams.set('startDate', rng.start);
+    url.searchParams.set('endDate',   rng.end);
+    url.searchParams.set('searchResults', 'true');
+
+    // Set the href so it navigates directly (works with middle-click too)
+    a.setAttribute('href', url.pathname + '?' + url.searchParams.toString());
+  });
+});
+
+</script>
 {% endblock %}
