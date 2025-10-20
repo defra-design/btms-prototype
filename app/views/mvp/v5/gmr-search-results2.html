@@ -12,10 +12,11 @@
 {% set cssClassName = 'auth' %}
 {% set hideManageAccount = 'false' %}
 {% set showEdit = true %}
-{% set hideBackLink = false %}
+{% set hideBackLink = true %}
 {% set backText = 'Back to GMR results' %}
 
 {% block form %}
+<p>Included in <a href="/mvp/v5/gmr-v1">GMRA00002KW2</a> </p>
 
 <h2 class="govuk-heading-m sectionHeader">{{ data.Cds | safe }}</h2>
 
