@@ -40,11 +40,7 @@
             id: "startDate",
             name: "startDate",
             value: data.startDate or "",
-              hint: {
-                text: "For example, 17/5/2025."
-              },
-
-
+              hint: { text: "For example, 17/5/2025." },
             label: { text: "Start date" }
           }) }}
         </div>
@@ -54,35 +50,26 @@
           {{ mojDatePicker({
             id: "endDate",
             name: "endDate",
-                          hint: {
-                text: "For example, 17/5/2025."
-              },
+            hint: { text: "For example, 17/5/2025." },
             value: data.endDate or "",
             label: { text: "End date" }
           }) }}
         </div>
 
-
-
         <!-- Update button -->
         <button class="govuk-button govuk-!-margin-bottom-6" data-module="govuk-button" type="submit">Update</button>
-
-
       </fieldset>
     </div>
-
-    <!-- Preset date filters -->
-
   </div>
 
   <!-- Main Content -->
   <div class="govuk-grid-column-three-quarters">
 
     {% if data.errors and data.errors.length %}
-    {{ govukErrorSummary({
-    titleText: "There is a problem",
-    errorList: data.errors
-  }) }}
+      {{ govukErrorSummary({
+        titleText: "There is a problem",
+        errorList: data.errors
+      }) }}
     {% endif %}
 
     {% set hasResults = (data.searchResults == true) or (data.searchResults == 'true') %}
@@ -97,18 +84,17 @@
     {% set third = "" %}
 
     {% for p in raw %}
-    {% if p and p != '_unchecked' %}
-    {% set n = n + 1 %}
-    {% if n == 1 %}{% set first = p %}
-    {% elif n == 2 %}{% set second = p %}
-    {% elif n == 3 %}{% set third = p %}{% endif %}
-    {% endif %}
+      {% if p and p != '_unchecked' %}
+        {% set n = n + 1 %}
+        {% if n == 1 %}{% set first = p %}
+        {% elif n == 2 %}{% set second = p %}
+        {% elif n == 3 %}{% set third = p %}{% endif %}
+      {% endif %}
     {% endfor %}
-    <span class="govuk-caption-m">Showing results from</span>
 
+    <span class="govuk-caption-m">Showing results from</span>
     <h2 class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-5">
       {{ data.displayDateRange }}
-
     </h2>
 
     <div class="govuk-tabs" data-module="govuk-tabs">
@@ -139,11 +125,9 @@
         <div class="stat-card-container govuk-!-margin-bottom-6">
           <h2 class="govuk-heading-m">Releases</h2>
           <div class="stat-card-group">
-            {# Releases #}
             {{ statCard("Auto", data.stats.autoReleases | string, data.stats.autoPct, "stat-card--blue") }}
             {{ statCard("Manual", data.stats.manualReleases | string, data.stats.manualPct, "stat-card--blue", "/mvp/v4/reporting/manual-release.csv", "Download CSV") }}
             {{ statCard("Total", data.stats.totalReleases | string, "", "stat-card--blue") }}
-
           </div>
         </div>
 
@@ -165,20 +149,18 @@
             {{ statCard("CHED PP", data.stats.ched.PP.count | string, data.stats.ched.PP.pct, "stat-card--blue") }}
             {{ statCard("CHED D", data.stats.ched.D.count | string, data.stats.ched.D.pct, "stat-card--blue") }}
             {{ statCard("Total",   data.stats.ched.total    | default(0) | commas, "", "stat-card--blue") }}
-
           </div>
         </div>
       </div>
 
       <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="chart">
         <p class="govuk-body-s  govuk-!-margin-bottom-5">
-  Select the coloured labels under each chart to hide or show their lines. For example, selecting the <span class="legend-dot matches-dot"></span><strong>'Matches'</strong>
-  label below the chart will show and hide that line.
-</p>
+          Select the coloured labels under each chart to hide or show their lines. For example, selecting the <span class="legend-dot matches-dot"></span><strong>'Matches'</strong>
+          label below the chart will show and hide that line.
+        </p>
+
         <div class="govuk-grid-row charts govuk-!-margin-bottom-4">
-
           <div class="govuk-grid-column-full chart">
-
             <h2 class="govuk-heading-m">Matches</h2>
 
             <div class="btms-chart-container ">
@@ -188,36 +170,33 @@
             <div class="govuk-grid-row btms-stats">
               <div class="govuk-grid-column-one-third">
                 <h3 class="govuk-heading-s">
-                  <span class="legend-dot matches-dot"></span> Matches
+                  <span class="legend-dot matches-dot"></span>Matches
                 </h3>
                 <p class="govuk-heading-m">
                   {{ data.stats.matches | default(0) | commas }}
-                  <span
-                    class="govuk-body govuk-body-s percentage">({{ data.stats.matchesPct | default('0.00%') }})</span>
+                  <span class="govuk-body govuk-body-s percentage">({{ data.stats.matchesPct | default('0.00%') }})</span>
                 </p>
               </div>
               <div class="govuk-grid-column-one-third">
                 <h3 class="govuk-heading-s">
-                  <span class="legend-dot mismatches-dot"></span> No matches
+                  <span class="legend-dot mismatches-dot"></span>No matches
                 </h3>
                 <p class="govuk-heading-m">
                   {{ data.stats.noMatches | default(0) | commas }}
-                  <span
-                    class="govuk-body govuk-body-s percentage">({{ data.stats.noMatchesPct | default('0.00%') }})</span>
+                  <span class="govuk-body govuk-body-s percentage">({{ data.stats.noMatchesPct | default('0.00%') }})</span>
                 </p>
               </div>
               <div class="govuk-grid-column-one-third">
                 <h3 class="govuk-heading-s">Total</h3>
-                <p class="govuk-heading-m"> {{ data.stats.totalLineItems | default(0) | commas }}</p>
+                <p class="govuk-heading-m">{{ data.stats.totalLineItems | default(0) | commas }}</p>
               </div>
             </div>
 
           </div>
         </div>
 
-        <div class="govuk-grid-row  charts govuk-!-margin-top-4 govuk-!-margin-bottom-4">
+        <div class="govuk-grid-row charts govuk-!-margin-top-4 govuk-!-margin-bottom-4">
           <div class="govuk-grid-column-full chart">
-
             <h2 class="govuk-heading-m">Releases</h2>
 
             <div class="btms-chart-container ">
@@ -227,7 +206,7 @@
             <div class="govuk-grid-row btms-stats">
               <div class="govuk-grid-column-one-third">
                 <h3 class="govuk-heading-s">
-                  <span class="legend-dot matches-dot"></span> Automatic
+                  <span class="legend-dot matches-dot"></span>Automatic
                 </h3>
                 <p class="govuk-heading-m">
                   {{ data.stats.autoReleases | default(0) | commas }}
@@ -236,49 +215,16 @@
               </div>
               <div class="govuk-grid-column-one-third">
                 <h3 class="govuk-heading-s">
-                  <span class="legend-dot mismatches-dot"></span> Manual
+                  <span class="legend-dot mismatches-dot"></span>Manual
                 </h3>
                 <p class="govuk-heading-m">
                   {{ data.stats.manualReleases | default(0) | commas }}
-                  <span
-                    class="govuk-body govuk-body-s percentage">({{ data.stats.manualPct | default('0.00%') }})</span>
+                  <span class="govuk-body govuk-body-s percentage">({{ data.stats.manualPct | default('0.00%') }})</span>
                 </p>
               </div>
               <div class="govuk-grid-column-one-third">
                 <h3 class="govuk-heading-s">Total</h3>
-                <p class="govuk-heading-m"> {{ data.stats.totalReleases | default(0) | commas }}
-                </p>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-        <div class="govuk-grid-row  charts govuk-!-margin-top-4 govuk-!-margin-bottom-4">
-          <div class="govuk-grid-column-full chart">
-
-            <h2 class="govuk-heading-m">Unique clearance requests</h2>
-
-            <div class="btms-chart-container ">
-              <canvas id="uniqueRequestsChart" width="600" height="400"></canvas>
-            </div>
-
-            <div class="govuk-grid-row btms-stats">
-              <div class="govuk-grid-column-one-third">
-                <h3 class="govuk-heading-s">
-                  <span class="legend-dot matches-dot"></span> Unique clearances
-
-                </h3>
-                <p class="govuk-heading-m">
-                  {{ data.stats.uniqueClearances | default(0) | commas }}
-                  <span
-                    class="govuk-body govuk-body-s percentage">({{ data.stats.uniquePct | default('0.00%') }})</span>
-                </p>
-              </div>
-              <div class="govuk-grid-column-one-third">
-                <h3 class="govuk-heading-s">Total</h3>
-                <p class="govuk-heading-m"> {{ data.stats.totalClearanceMsgs | default(0) | commas }}
-                </p>
+                <p class="govuk-heading-m">{{ data.stats.totalReleases | default(0) | commas }}</p>
               </div>
             </div>
 
@@ -287,11 +233,35 @@
 
         <div class="govuk-grid-row charts govuk-!-margin-top-4 govuk-!-margin-bottom-4">
           <div class="govuk-grid-column-full chart">
+            <h2 class="govuk-heading-m">Unique clearance requests</h2>
 
-            <h2 class="govuk-heading-m ipaafs-heading">
-              Pre-notifications by CHED type
+            <div class="btms-chart-container ">
+              <canvas id="uniqueRequestsChart" width="600" height="400"></canvas>
+            </div>
 
-            </h2>
+            <div class="govuk-grid-row btms-stats">
+              <div class="govuk-grid-column-one-third">
+                <!-- Note: plain-label prevents blue/underline styling -->
+                <h3 class="govuk-heading-s plain-label">
+                  <span class="legend-dot matches-dot"></span>Unique clearances
+                </h3>
+                <p class="govuk-heading-m">
+                  {{ data.stats.uniqueClearances | default(0) | commas }}
+                  <span class="govuk-body govuk-body-s percentage">({{ data.stats.uniquePct | default('0.00%') }})</span>
+                </p>
+              </div>
+              <div class="govuk-grid-column-one-third">
+                <h3 class="govuk-heading-s">Total</h3>
+                <p class="govuk-heading-m">{{ data.stats.totalClearanceMsgs | default(0) | commas }}</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="govuk-grid-row charts govuk-!-margin-top-4 govuk-!-margin-bottom-4">
+          <div class="govuk-grid-column-full chart">
+            <h2 class="govuk-heading-m ipaafs-heading">Pre-notifications by CHED type</h2>
 
             <div class="btms-chart-container">
               <canvas id="chedTypesChart" width="600" height="400"></canvas>
@@ -299,35 +269,31 @@
 
             <div class="btms-stats">
               <div>
-                <h3 class="govuk-heading-s"><span class="legend-dot ched-a-dot"></span> CHED A</h3>
+                <h3 class="govuk-heading-s"><span class="legend-dot ched-a-dot"></span>CHED A</h3>
                 <p class="govuk-heading-m">
                   {{ data.stats.ched.A.count | default(0) | commas }}
-                  <span
-                    class="govuk-body govuk-body-s percentage">({{ data.stats.ched.A.pct | default('0.00%') }})</span>
+                  <span class="govuk-body govuk-body-s percentage">({{ data.stats.ched.A.pct | default('0.00%') }})</span>
                 </p>
               </div>
               <div>
-                <h3 class="govuk-heading-s"><span class="legend-dot ched-p-dot"></span> CHED P</h3>
+                <h3 class="govuk-heading-s"><span class="legend-dot ched-p-dot"></span>CHED P</h3>
                 <p class="govuk-heading-m">
                   {{ data.stats.ched.P.count | default(0) | commas }}
-                  <span
-                    class="govuk-body govuk-body-s percentage">({{ data.stats.ched.P.pct | default('0.00%') }})</span>
+                  <span class="govuk-body govuk-body-s percentage">({{ data.stats.ched.P.pct | default('0.00%') }})</span>
                 </p>
               </div>
               <div>
-                <h3 class="govuk-heading-s"><span class="legend-dot ched-pp-dot"></span> CHED PP</h3>
+                <h3 class="govuk-heading-s"><span class="legend-dot ched-pp-dot"></span>CHED PP</h3>
                 <p class="govuk-heading-m">
                   {{ data.stats.ched.PP.count | default(0) | commas }}
-                  <span
-                    class="govuk-body govuk-body-s percentage">({{ data.stats.ched.PP.pct | default('0.00%') }})</span>
+                  <span class="govuk-body govuk-body-s percentage">({{ data.stats.ched.PP.pct | default('0.00%') }})</span>
                 </p>
               </div>
               <div>
-                <h3 class="govuk-heading-s"><span class="legend-dot ched-d-dot"></span> CHED D</h3>
+                <h3 class="govuk-heading-s"><span class="legend-dot ched-d-dot"></span>CHED D</h3>
                 <p class="govuk-heading-m">
                   {{ data.stats.ched.D.count | default(0) | commas }}
-                  <span
-                    class="govuk-body govuk-body-s percentage">({{ data.stats.ched.D.pct | default('0.00%') }})</span>
+                  <span class="govuk-body govuk-body-s percentage">({{ data.stats.ched.D.pct | default('0.00%') }})</span>
                 </p>
               </div>
               <div>
@@ -342,18 +308,17 @@
       </div>
     </div>
     {% else %}
-    <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-5">No results</p>
-    {{ govukInsetText({ html: " To view reporting data, set the filters and select 'update'." }) }}
+      <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-5">No results</p>
+      {{ govukInsetText({ html: " To view reporting data, set the filters and select 'update'." }) }}
     {% endif %}
   </div>
 </div>
+
 <style>
   /* stop overriding every grid row */
-  .reporting .govuk-grid-row {
-    /* remove display:flex here entirely */
-  }
+  .reporting .govuk-grid-row { /* intentionally empty */ }
 
-  /* CHED strip: responsive 5-up that wraps nicely */
+  /* CHED strip: responsive grid that wraps nicely */
   .btms-stats {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(125px, 2fr));
@@ -361,147 +326,139 @@
     align-items: start;
   }
 
-  .btms-stats .govuk-heading-s {
-    margin: 8px 0 4px;
-    font-size: 17px;
-  }
-
-  .btms-stats .govuk-heading-m {
-    margin: 0;
-  }
+  .btms-stats .govuk-heading-s { margin: 8px 0 4px; font-size: 17px; }
+  .btms-stats .govuk-heading-m { margin: 0; }
 
   .btms-stats .percentage {
     display: block;
     font-size: 14px !important;
     padding-top: 4px;
   }
-  .govuk-hint {
-    font-size: 14px;
-    margin: 0;
-  }
-.govuk-fieldset__legend:not(.govuk-fieldset__legend--m):not(.govuk-fieldset__legend--l):not(.govuk-fieldset__legend--xl) + .govuk-hint {
-  margin-bottom: 5px;
-}
-.btms-dataset-hidden { opacity: .45; text-decoration: line-through; }
 
-.reporting .matches-dot {
-    margin-top:5px
-}
+  .govuk-hint { font-size: 14px; margin: 0; }
+  .govuk-fieldset__legend:not(.govuk-fieldset__legend--m):not(.govuk-fieldset__legend--l):not(.govuk-fieldset__legend--xl) + .govuk-hint { margin-bottom: 5px; }
+
+  .btms-dataset-hidden { opacity: .45; text-decoration: line-through; }
+  .reporting .matches-dot { margin-top:5px }
+
+  /* Make only clickable legend headings look like GOV.UK links.
+     We EXCLUDE .plain-label (used for 'Unique clearances'). */
+  .chart h3:has(.legend-dot):not(.plain-label) {
+    color: #1d70b8;                 /* GOV.UK link blue */
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 2px;
+    cursor: pointer;
+  }
+  .chart h3:has(.legend-dot):not(.plain-label):hover,
+  .chart h3:has(.legend-dot):not(.plain-label):focus {
+    color: #003078;                 /* darker GOV.UK blue */
+    text-decoration-thickness: 3px; /* thick underline on hover/focus */
+  }
 </style>
 
 <script>
   // === Click the coloured dot/heading to toggle the matching dataset ===
-(function enableDatasetToggles() {
-  // Container with your charts panel
-  const panel = document.getElementById('chart');
-  if (!panel) return;
+  (function enableDatasetToggles() {
+    const panel = document.getElementById('chart');
+    if (!panel) return;
 
-  // Make any heading with a .legend-dot act as a toggle
-  panel.querySelectorAll('.chart h3 .legend-dot').forEach(dot => {
-    const heading = dot.closest('h3');
-    if (!heading) return;
+    panel.querySelectorAll('.chart h3 .legend-dot').forEach(dot => {
+      const heading = dot.closest('h3');
+      if (!heading) return;
 
-    // the dataset label is the text content of the heading (e.g. "Matches", "Manual", "CHED P")
-    const label = heading.textContent.trim();
+      const label = heading.textContent.trim();
+      heading.setAttribute('tabindex', '0');
+      heading.setAttribute('role', 'button');
+      heading.setAttribute('aria-pressed', 'true');
+      heading.style.cursor = 'pointer';
 
-    // a11y: make it focusable/clickable
-    heading.setAttribute('tabindex', '0');
-    heading.setAttribute('role', 'button');
-    heading.setAttribute('aria-pressed', 'true');
-    heading.style.cursor = 'pointer';
+      const chartEl = heading.closest('.chart')?.querySelector('canvas');
+      if (!chartEl) return;
 
-    // find the canvas for this chart
-    const chartEl = heading.closest('.chart')?.querySelector('canvas');
-    if (!chartEl) return;
+      const clickToggle = (e) => {
+        if (e.type === 'keydown' && !['Enter',' '].includes(e.key)) return;
 
-    const clickToggle = (e) => {
-      // only react to click/Enter/Space
-      if (e.type === 'keydown' && !['Enter',' '].includes(e.key)) return;
+        const chart = Chart.getChart(chartEl);
+        if (!chart) return;
 
-      const chart = Chart.getChart(chartEl); // works in Chart.js v3+
-      if (!chart) return;
+        const idx = chart.data.datasets.findIndex(d => (d.label || '').trim() === label);
+        if (idx === -1) {
+          console.warn('Dataset not found for label:', label);
+          return;
+        }
 
-      const idx = chart.data.datasets.findIndex(d => (d.label || '').trim() === label);
-      if (idx === -1) {
-        console.warn('Dataset not found for label:', label);
-        return;
+        const meta = chart.getDatasetMeta(idx);
+        const willHide = meta.hidden === null ? true : !meta.hidden;
+
+        meta.hidden = willHide;
+        chart.update();
+
+        heading.classList.toggle('btms-dataset-hidden', willHide);
+        heading.setAttribute('aria-pressed', String(!willHide));
+      };
+
+      heading.addEventListener('click', clickToggle);
+      heading.addEventListener('keydown', clickToggle);
+    });
+  })();
+
+  window.GOVUKPrototypeKit.documentReady(() => {
+    const list = document.querySelector('#preset-links');
+    if (!list) return;
+
+    const fmt = d => d.toLocaleDateString('en-GB'); // dd/mm/yyyy
+    const startOfDay = d => new Date(d.getFullYear(), d.getMonth(), d.getDate(), 0, 0, 0);
+    const endOfDay   = d => new Date(d.getFullYear(), d.getMonth(), d.getDate(), 23, 59, 0);
+
+    function rangeFor(key) {
+      const now = new Date();
+      let start, end;
+
+      switch (key) {
+        case 'today':
+          start = startOfDay(now);
+          end   = endOfDay(now);
+          break;
+        case 'yesterday': {
+          const y = new Date(now);
+          y.setDate(y.getDate() - 1);
+          start = startOfDay(y);
+          end   = endOfDay(y);
+          break;
+        }
+        case 'last-week': {
+          end   = endOfDay(now);
+          const s = new Date(end);
+          s.setDate(s.getDate() - 6); // inclusive 7 days
+          start = startOfDay(s);
+          break;
+        }
+        case 'last-month': {
+          end   = endOfDay(now);
+          const s = new Date(end);
+          s.setMonth(s.getMonth() - 1);
+          start = startOfDay(s);
+          break;
+        }
+        default:
+          return null;
       }
-
-      const meta = chart.getDatasetMeta(idx);
-      const willHide = meta.hidden === null ? true : !meta.hidden;
-
-      meta.hidden = willHide;
-      chart.update();
-
-      // visual state + a11y feedback
-      heading.classList.toggle('btms-dataset-hidden', willHide);
-      heading.setAttribute('aria-pressed', String(!willHide));
-    };
-
-    heading.addEventListener('click', clickToggle);
-    heading.addEventListener('keydown', clickToggle);
-  });
-})();
-window.GOVUKPrototypeKit.documentReady(() => {
-  const list = document.querySelector('#preset-links');
-  if (!list) return;
-
-  // Helpers
-  const fmt = d => d.toLocaleDateString('en-GB'); // dd/mm/yyyy
-  const startOfDay = d => new Date(d.getFullYear(), d.getMonth(), d.getDate(), 0, 0, 0);
-  const endOfDay   = d => new Date(d.getFullYear(), d.getMonth(), d.getDate(), 23, 59, 0);
-
-  function rangeFor(key) {
-    const now = new Date();
-    let start, end;
-
-    switch (key) {
-      case 'today':
-        start = startOfDay(now);
-        end   = endOfDay(now);
-        break;
-      case 'yesterday': {
-        const y = new Date(now);
-        y.setDate(y.getDate() - 1);
-        start = startOfDay(y);
-        end   = endOfDay(y);
-        break;
-      }
-      case 'last-week': {
-        end   = endOfDay(now);
-        const s = new Date(end);
-        s.setDate(s.getDate() - 6); // inclusive 7 days
-        start = startOfDay(s);
-        break;
-      }
-      case 'last-month': {
-        end   = endOfDay(now);
-        const s = new Date(end);
-        s.setMonth(s.getMonth() - 1);
-        start = startOfDay(s);
-        break;
-      }
-      default:
-        return null;
+      return { start: fmt(start), end: fmt(end) };
     }
-    return { start: fmt(start), end: fmt(end) };
-  }
 
-  // Turn each preset into a working link
-  list.querySelectorAll('a[data-range]').forEach(a => {
-    const key = a.getAttribute('data-range');
-    const rng = rangeFor(key);
-    if (!rng) return;
+    list.querySelectorAll('a[data-range]').forEach(a => {
+      const key = a.getAttribute('data-range');
+      const rng = rangeFor(key);
+      if (!rng) return;
 
-    const url = new URL(window.location.href);
-    url.searchParams.set('startDate', rng.start);
-    url.searchParams.set('endDate',   rng.end);
-    url.searchParams.set('searchResults', 'true');
+      const url = new URL(window.location.href);
+      url.searchParams.set('startDate', rng.start);
+      url.searchParams.set('endDate',   rng.end);
+      url.searchParams.set('searchResults', 'true');
 
-    // Set the href so it navigates directly (works with middle-click too)
-    a.setAttribute('href', url.pathname + '?' + url.searchParams.toString());
+      a.setAttribute('href', url.pathname + '?' + url.searchParams.toString());
+    });
   });
-});
-
 </script>
 {% endblock %}
