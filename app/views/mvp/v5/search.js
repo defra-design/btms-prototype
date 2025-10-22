@@ -191,4 +191,18 @@ module.exports = router => {
   })
 }
 
+
+// app/routes/mvp/v5/gmr-v1.js
+
+module.exports = router => {
+  router.get('/gmr-v1', (req, res) => {
+    const trn = (req.query.trn || 'DC17 PPL').toUpperCase();
+
+    // trnState supports: exists / na (not available). Default = exists.
+    const raw = (req.query.trnState || 'exists').toLowerCase();
+    const trnState = raw === 'na' || raw === 'notavailable' ? 'na' : 'exists';
+
+    res.render('mvp/v5/gmr-gmr-v1', { trn, trnState });
+  });
+};
 };
