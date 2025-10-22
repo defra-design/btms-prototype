@@ -41,6 +41,13 @@
                User guide
             </a>
           </li>
+                <li class="govuk-service-navigation__item {{ 'govuk-service-navigation__item--active' if currentPage == 'admin-view' }}">
+            <a class="govuk-service-navigation__link"
+               href="/mvp/v5/admin-view"
+               {% if currentPage == 'admin-view' %}aria-current="true"{% endif %}>
+               Admin view
+            </a>
+          </li>
           {# --- Right-aligned account actions --- #}
           {% set _hideManageAccount = (data.hideManageAccount or hideManageAccount or 'false') %}
 

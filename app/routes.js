@@ -6,6 +6,9 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 
+
+
+
 // Add your routes here
 require('./views/mvp/v1/search')(router)
 require('./views/mvp/v2/search')(router)
@@ -14,3 +17,4 @@ require('./views/mvp/v4/search')(router)
 require('./views/mvp/v4/reporting')(router)
 require('./views/mvp/v5/search')(router)
 require('./views/mvp/v5/reporting')(router)
+require('./views/mvp/v5/admin-view')(router)

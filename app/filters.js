@@ -90,6 +90,18 @@ addFilter('ipaffsTime', function (value, offsetStr) {
   }
 });
 
+// app/filters.js
+module.exports = function (env) {
+  function pretty(obj) {
+    return JSON.stringify(obj, null, 2)
+      .replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+  env.addGlobal('renderJsonLines', function (obj) {
+    const lines = pretty(obj).split('\n');
+    const li = lines.map(l => `<li><code>${l || ' '}</code></li>`).join('');
+    return `<ol class="codeblock">${li}</ol>`;
+  });
+};
 
 
 /* ----------------------------------------------------------- */

@@ -1,0 +1,148 @@
+[
+  {
+    "id": "a6b7e2c7a7f47cd59d94d97",
+    "etag": "68e7c6e72a9f7fdc53a550e4",
+    "created": "2025-10-09T14:30:07.968Z",
+    "updated": "2025-10-09T14:30:07.968Z",
+    "resourceId": "25GBB6DSB14ECR4AR9",
+    "resourceType": "CustomsDeclaration",
+    "subResourceType": "ClearanceRequest",
+    "operation": "Created",
+    "message": {
+      "movementReferenceNumber": "25GBB6DSB14ECR4AR9",
+      "clearanceRequest": {
+        "externalCorrelationId": "2304293",
+        "messageSentAt": "2025-10-09T14:30:07Z",
+        "externalVersion": 1,
+        "previousExternalVersion": null,
+        "declarationUcr": "5GB938581482000-LHR81328A",
+        "declarationPartNumber": null,
+        "declarationType": "S",
+        "arrivesAt": null,
+        "submitterTurn": null,
+        "declarantId": "GB938581482000",
+        "declarantName": "GB938581482000",
+        "dispatchCountryCode": "ZA",
+        "goodsLocationCode": "LHRLHRLHR",
+        "masterUcr": "HEUB12517104986",
+        "commodities": [
+          {
+            "itemNumber": 1,
+            "customsProcedureCode": "4000F15",
+            "taricCommodityCode": "3507909090",
+            "goodsDescription": "ALBUMINOIDAL SUBSTANCES, MODIFIED STARCHES, GLUES, ENZYMES",
+            "consigneeId": "GB625129846000",
+            "consigneeName": "GB625129846000",
+            "netMass": 0.919,
+            "supplementaryUnits": 0,
+            "thirdQuantity": null,
+            "documents": [
+              {
+                "documentCode": "N853",
+                "documentReference": "GBCHD2025.6679908",
+                "documentStatus": "AE",
+                "documentControl": "P",
+                "documentQuantity": null
+              }
+            ],
+            "checks": [
+              {
+                "checkCode": "H222",
+                "departmentCode": "PHA"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "clearanceDecision": null,
+    "finalisation": null,
+    "externalErrors": null,
+    "tags": [
+      "68e7c6e72a9f7fdc53a550e4"
+    ],
+    "timestamp": "2025-10-09T14:30:07.968Z",
+    "published": "2025-10-09T14:30:07.988Z"
+  },
+  {
+    "id": "e49e2fcf97fd16442b40e88b6",
+    "etag": "68e7c6e72a9f7fdc53a553e2",
+    "created": "2025-10-16T11:56:33.505Z",
+    "updated": "2025-10-16T11:56:33.505Z",
+    "resourceId": "25GBB6DSB14ECR4AR9",
+    "resourceType": "CustomsDeclaration",
+    "subResourceType": "ClearanceDecision",
+    "operation": "Updated",
+    "message": {
+      "movementReferenceNumber": "25GBB6DSB14ECR4AR9",
+      "clearanceDecision": {
+        "correlationId": "17606157930587674797",
+        "created": "2025-10-16T11:56:33.505Z",
+        "externalVersionNumber": 1,
+        "decisionNumber": 1,
+        "sourceVersion": null,
+        "items": [
+          {
+            "itemNumber": 1,
+            "checks": [
+              {
+                "checkCode": "H222",
+                "decisionCode": "C03",
+                "decisionsValidUntil": null,
+                "decisionReasons": [],
+                "decisionInternalFurtherDetail": null
+              }
+            ]
+          }
+        ],
+        "results": [
+          {
+            "itemNumber": 1,
+            "importPreNotification": "CHEDP.GB.2025.6679908",
+            "documentReference": "GBCHD2025.6679908",
+            "documentCode": "N853",
+            "checkCode": "H222",
+            "decisionCode": "C03",
+            "decisionReason": null,
+            "internalDecisionCode": null
+          }
+        ]
+      }
+    },
+    "finalisation": null,
+    "externalErrors": null,
+    "tags": [
+      "68e7c6e72a9f7fdc53a553e2"
+    ],
+    "timestamp": "2025-10-16T11:56:33.576Z",
+    "published": "2025-10-16T11:56:33.585Z"
+  },
+  {
+    "id": "5d48f29f7fd91dc50d5aa4df",
+    "etag": "68e7c6e72a9f7fdc53a556c3",
+    "created": "2025-10-16T12:08:10.682Z",
+    "updated": "2025-10-16T12:08:10.682Z",
+    "resourceId": "25GBB6DSB14ECR4AR9",
+    "resourceType": "CustomsDeclaration",
+    "subResourceType": "Finalisation",
+    "operation": "Updated",
+    "message": {
+      "movementReferenceNumber": "25GBB6DSB14ECR4AR9",
+      "finalisation": {
+        "externalCorrelationId": "2329058",
+        "messageSentAt": "2025-10-16T12:08:10Z",
+        "externalVersion": 1,
+        "decisionNumber": null,
+        "finalState": "0",
+        "isManualRelease": true
+      }
+    },
+    "clearanceDecision": null,
+    "externalErrors": null,
+    "tags": [
+      "68e7c6e72a9f7fdc53a556c3"
+    ],
+    "timestamp": "2025-10-16T12:08:10.654Z",
+    "published": "2025-10-16T12:08:10.732Z"
+  }
+]
