@@ -108,19 +108,26 @@
 
 <style>
   /* Number plate token */
-  .number-plate {
-    display: inline-flex;
-    align-items: center;
-    gap: .4rem;
-    padding: .25rem .6rem;
-    border: 2px solid #0b0c0c;
-    border-radius: 4px;
-    font-weight: 700;
-    letter-spacing: .06em;
-    text-transform: uppercase;
-    line-height: 1.2;
-    white-space: nowrap;
-  }
+/* Number plate token */
+.number-plate {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;   /* centre text inside */
+  gap: .4rem;
+  padding: .25rem .6rem;
+  border: 2px solid #0b0c0c;
+  border-radius: 4px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  line-height: 1.2;
+  white-space: nowrap;
+
+  /* lock VRN and TRN to the same width */
+  width: 120px;   /* adjust this so it fits the longest reg */
+  text-align: center;
+}
+
 
   /* Ensure GOV.UK tags aren’t capped */
   .govuk-tag {
