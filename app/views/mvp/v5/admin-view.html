@@ -21,24 +21,23 @@
         </p>
       {% endif %}
 
-      {# forms.html wraps this block with <form method="post" action="/mvp/v5/admin-view"> #}
-      <div class="govuk-input-wrapper" style="position:relative;display:flex;align-items:center;">
-        <input
-          class="govuk-input"
-          id="searchTerm"
-          name="data.searchTerm"
-          type="text"
-          value="{{ data.searchTerm or '' }}"
-          autocomplete="off"
-          spellcheck="false"
-        />
-        <button type="submit" class="btms-search__button" aria-label="Search">
-          <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-            <circle cx="10" cy="10" r="8" stroke="#fff" stroke-width="2"></circle>
-            <line x1="15" y1="15" x2="22" y2="22" stroke="#fff" stroke-width="2"></line>
-          </svg>
-        </button>
-      </div>
+<div class="govuk-input-wrapper" style="position:relative;display:flex;align-items:center;">
+  <input
+    class="govuk-input"
+    id="searchTerm"
+    name="searchTerm"
+    type="text"
+    value="{{ data['searchTerm'] | default('') }}"
+    autocomplete="off"
+    spellcheck="false"
+  />
+  <button type="submit" class="btms-search__button" aria-label="Search">
+    <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <circle cx="10" cy="10" r="8" stroke="#fff" stroke-width="2"></circle>
+      <line x1="15" y1="15" x2="22" y2="22" stroke="#fff" stroke-width="2"></line>
+    </svg>
+  </button>
+</div>
 
 
     </div>
@@ -93,7 +92,7 @@
 .codeblock li {
   counter-increment: line;
   display: grid;
-  grid-template-columns: 3ch 1fr;  /* gutter width for numbers */
+  grid-template-columns: 3ch 1fr;
   gap: 1ch;
   line-height: 1.4;
 }
@@ -102,15 +101,14 @@
 .codeblock li::before {
   content: counter(line);
   text-align: right;
-  color: #505a5f;                  /* govuk-secondary-text-colour */
+  color: #505a5f;
   user-select: none;
 }
 
-/* Optional token colours (only used if your helper adds spans) */
-.json-key     { color: #1d70b8; }  /* GOV.UK blue */
-.json-string  { color: #00703c; }  /* GOV.UK green */
-.json-number  { color: #5694ca; }  /* light blue */
-.json-boolean { color: #f47738; }  /* orange */
+.json-key     { color: #1d70b8; }
+.json-string  { color: #00703c; }
+.json-number  { color: #5694ca; }
+.json-boolean { color: #f47738; }
 .json-null    { color: #0b0c0c; font-style: italic; }
 
     .govuk-frontend-supported .govuk-tabs__panel {
