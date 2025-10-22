@@ -29,9 +29,12 @@
           name="data.searchTerm"
           type="text"
           value="{{ data.searchTerm or '' }}"
-          autocomplete="off"
           spellcheck="false"
         />
+           <button type="button" id="clearButton" class="clear-search" onclick="clearSearch()"
+                style="color:#1d70b8; position: absolute; right: 60px; background: none; border: none; font-size: 30px; cursor: pointer;">
+          &times;
+        </button>
         <button type="submit" class="btms-search__button" aria-label="Search">
           <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
             <circle cx="10" cy="10" r="8" stroke="#fff" stroke-width="2"></circle>
@@ -126,4 +129,31 @@
     padding: 0px 0px;
   }
 </style>
+
+<script>
+  //clear search
+document.addEventListener('DOMContentLoaded', function () {
+
+  const input = document.getElementById('searchTerm');
+  const clearButton = document.getElementById('clearButton');
+
+  function toggleClearButton() {
+    clearButton.style.display = input.value.trim() ? 'block' : 'none';
+  }
+
+  input.addEventListener('input', toggleClearButton);
+  clearButton.addEventListener('click', function () {
+    input.value = '';
+    toggleClearButton();
+    input.focus();
+  });
+
+  toggleClearButton(); // Ensure correct initial state
+});
+document.addEventListener("DOMContentLoaded", function () {
+  setTimeout(function () {
+      document.getElementById("searchTerm").focus();
+  }, 100); // Small delay to ensure rendering is complete
+});
+</script>
 {% endblock %}
