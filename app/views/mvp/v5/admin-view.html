@@ -21,13 +21,14 @@
         </p>
       {% endif %}
 
+      {# forms.html wraps this block with <form method="post" action="/mvp/v5/admin-view"> #}
       <div class="govuk-input-wrapper" style="position:relative;display:flex;align-items:center;">
         <input
           class="govuk-input"
           id="searchTerm"
-          name="searchTerm"
+          name="data.searchTerm"
           type="text"
-          value="{{ data['searchTerm'] | default('') }}"
+          value="{{ data.searchTerm or '' }}"
           autocomplete="off"
           spellcheck="false"
         />
@@ -38,6 +39,8 @@
           </svg>
         </button>
       </div>
+
+
     </div>
   </div>
 
@@ -63,10 +66,9 @@
       </section>
     </div>
   {% endif %}
-
-  {% if notFound %}
-    <p class="govuk-!-margin-top-2">No results found for that reference.</p>
-  {% endif %}
+    {% if notFound %}
+        <p class=" govuk-!-margin-top-2">No results found for that reference.</p>
+      {% endif %}
 {% endblock %}
 
 {% block pageScripts %}

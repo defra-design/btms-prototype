@@ -249,6 +249,18 @@ module.exports = (router) => {
                   }
                 ]
               }
+            ],
+            results: [
+              {
+                itemNumber: 1,
+                importPreNotification: "CHEDP.GB.2025.6679908",
+                documentReference: "GBCHD2025.6679908",
+                documentCode: "N853",
+                checkCode: "H222",
+                decisionCode: "H01",
+                decisionReason: null,
+                internalDecisionCode: null
+              }
             ]
           },
           Finalisation: null,
@@ -651,7 +663,107 @@ module.exports = (router) => {
           id: 'BA058/07'
         },
         estimatedJourneyTimeInMinutes: null,
-        responsibleForTransport: null
+        responsibleForTransport: null,
+        veterinaryInformation: {
+          establishmentsOfOriginExternalReference: null,
+          establishmentsOfOrigins: [
+            {
+              id: '1c1982ef-8cd2-3455-7f70-bb6a3a5cb15d',
+              name: 'BBI Enzymes (Pty) Ltd',
+              country: 'ZA',
+              types: ['Category 3', 'Category 2'],
+              approvalNumber: 'ZA 28/125',
+              section: 'Plants or establishments manufacturing intermediate products'
+            }
+          ],
+          veterinaryDocument: null,
+          veterinaryDocumentIssuedOn: null,
+          accompanyingDocumentNumbers: null,
+          accompanyingDocuments: [
+            {
+              documentType: 'commercialInvoice',
+              documentReference: 'SO-S10525-001373',
+              documentIssuedOn: '2025-09-26',
+              attachmentId: '43eff3ed-6afa-4218-8eb3-b9575f00d5f3',
+              attachmentFilename: 'Shipping docs S2075H39 .pdf',
+              attachmentContentType: 'application/pdf',
+              uploadUserId: '8e3205a9-3844-eb11-a812-000d3a267bf8',
+              uploadOrganisationId: '9d3205a9-3844-eb11-a812-000d3a267bf8',
+              externalReference: null
+            },
+            {
+              documentType: 'airWaybill',
+              documentReference: '125-17104986',
+              documentIssuedOn: '2025-10-06',
+              attachmentId: '15428666-48bd-424e-a285-035cb673b5d4',
+              attachmentFilename: 'HAWB_LR_JAE5053 (2).pdf',
+              attachmentContentType: 'application/pdf',
+              uploadUserId: '8e3205a9-3844-eb11-a812-000d3a267bf8',
+              uploadOrganisationId: '9d3205a9-3844-eb11-a812-000d3a267bf8',
+              externalReference: null
+            },
+            {
+              documentType: 'other',
+              documentReference: '5000158207-10',
+              documentIssuedOn: '2025-10-10',
+              attachmentId: '233402bf-f596-45a6-8acb-2637ec324d6e',
+              attachmentFilename: 'CHEDP.GB.2025.6679908-c.pdf',
+              attachmentContentType: 'application/pdf',
+              uploadUserId: '8e3205a9-3844-eb11-a812-000d3a267bf8',
+              uploadOrganisationId: '9d3205a9-3844-eb11-a812-000d3a267bf8',
+              externalReference: null
+            },
+            {
+              documentType: 'latestVeterinaryHealthCertificate',
+              documentReference: '5000158207-10',
+              documentIssuedOn: '2025-10-10',
+              attachmentId: null,
+              attachmentFilename: null,
+              attachmentContentType: null,
+              uploadUserId: null,
+              uploadOrganisationId: null,
+              externalReference: null
+            }
+          ],
+          catchCertificateAttachments: null,
+          identificationDetails: null
+        },
+        importerLocalReferenceNumber: null,
+        route: null,
+        sealsContainers: null,
+        storeTransporterContact: null,
+        submittedOn: '2025-10-16T11:52:34.654Z',
+        submittedBy: {
+          displayName: 'Redacted Data',
+          userId: '8e3205a9-3844-eb11-a812-000d3a267bf8',
+          isControlUser: null
+        },
+        consignmentValidations: null,
+        complexCommoditySelected: true,
+        portOfEntry: 'GBLHRE',
+        portOfExit: null,
+        exitedPortOfOn: null,
+        contactDetails: {
+          name: 'Redacted Data',
+          telephone: 'Redacted Data',
+          email: 'Redacted Data',
+          agent: null
+        },
+        nominatedContacts: [
+          {
+            name: 'Redacted Data',
+            email: 'Redacted Data',
+            telephone: 'Redacted Data'
+          }
+        ],
+        originalEstimatedOn: null,
+        billingInformation: null,
+        isChargeable: null,
+        wasChargeable: null,
+        commonUserCharge: null,
+        provideCtcMrn: 'NO',
+        arrivesAt: '2025-10-08T04:59:00',
+        departedOn: '2025-10-07T17:00:00'
       },
       decisionBy: {
         displayName: 'Redacted Data',
@@ -662,28 +774,117 @@ module.exports = (router) => {
       partTwo: {
         decision: {
           consignmentAcceptable: true,
+          notAcceptableAction: null,
+          notAcceptableActionDestructionReason: null,
+          notAcceptableActionEntryRefusalReason: null,
+          notAcceptableActionQuarantineImposedReason: null,
+          notAcceptableActionSpecialTreatmentReason: null,
+          notAcceptableActionIndustrialProcessingReason: null,
+          notAcceptableActionReDispatchReason: null,
+          notAcceptableActionUseForOtherPurposesReason: null,
+          notAcceptableDestructionReason: null,
+          notAcceptableActionOtherReason: null,
+          notAcceptableActionByDate: null,
+          chedppNotAcceptableReasons: null,
+          notAcceptableReasons: null,
+          notAcceptableCountry: null,
+          notAcceptableEstablishment: null,
+          notAcceptableOtherReason: null,
+          detailsOfControlledDestinations: null,
+          specificWarehouseNonConformingConsignment: null,
+          temporaryDeadline: null,
           decision: 'Acceptable for Internal Market',
-          freeCirculationPurpose: 'Technical Use'
+          freeCirculationPurpose: 'Technical Use',
+          definitiveImportPurpose: null,
+          ifChanneledOption: null,
+          customWarehouseRegisteredNumber: null,
+          freeWarehouseRegisteredNumber: null,
+          shipName: null,
+          shipPortOfExit: null,
+          shipSupplierRegisteredNumber: null,
+          transhipmentBip: null,
+          transhipmentThirdCountry: null,
+          transitExitBip: null,
+          transitThirdCountry: null,
+          transitDestinationThirdCountry: null,
+          temporaryExitBip: null,
+          horseReentry: null,
+          transhipmentEuOrThirdCountry: null
         },
         consignmentCheck: {
+          euStandard: null,
+          additionalGuarantees: null,
+          documentCheckAdditionalDetails: null,
           documentCheckResult: 'Satisfactory',
+          nationalRequirements: null,
+          identityCheckDone: null,
           identityCheckType: 'Not Done',
           identityCheckResult: 'Not Done',
           identityCheckNotDoneReason: 'Reduced checks regime',
+          physicalCheckDone: null,
           physicalCheckResult: 'Not Done',
-          physicalCheckNotDoneReason: 'Reduced checks regime'
+          physicalCheckNotDoneReason: 'Reduced checks regime',
+          physicalCheckOtherText: null,
+          welfareCheck: null,
+          numberOfAnimalsChecked: null,
+          laboratoryCheckDone: null,
+          laboratoryCheckResult: null
         },
+        impactOfTransportOnAnimals: null,
+        laboratoryTestsRequired: false,
+        laboratoryTests: null,
+        resealedContainersIncluded: false,
+        resealedContainers: null,
+        resealedContainersMappings: null,
+        controlAuthority: {
+          officialVeterinarian: {
+            firstName: 'Redacted Data',
+            lastName: 'Redacted Data',
+            email: 'Redacted Data',
+            phone: 'Redacted Data',
+            fax: null,
+            signed: '2025-10-16T11:56:33.240904566'
+          },
+          customsReferenceNo: null,
+          containerResealed: null,
+          newSealNumber: null,
+          iuuFishingReference: null,
+          iuuCheckRequired: null,
+          iuuOption: null
+        },
+        controlledDestination: null,
         bipLocalReferenceNumber: 'HH/25/41/133',
+        signedOnBehalfOf: null,
+        onwardTransportation: null,
+        consignmentValidations: null,
         checkedOn: '2025-10-16T12:56:00Z',
-        inspectionRequired: 'Not required'
+        accompanyingDocuments: null,
+        commodityChecks: null,
+        phsiAutoCleared: null,
+        hmiAutoCleared: null,
+        inspectionRequired: 'Not required',
+        inspectionOverride: null,
+        autoClearedOn: null
       },
       partThree: {
-        sealCheckRequired: false
+        controlStatus: null,
+        control: null,
+        consignmentValidations: null,
+        sealCheckRequired: false,
+        sealCheck: null,
+        sealCheckOverride: null
       },
+      officialVeterinarian: null,
+      consignmentValidations: null,
+      agencyOrganisationId: null,
       riskDecisionLockedOn: '2025-10-08T01:59:00Z',
       isRiskDecisionLocked: true,
       isAutoClearanceExempted: true,
+      isBulkUploadInProgress: null,
+      requestId: null,
       isCdsFullMatched: true,
+      chedTypeVersion: 1,
+      isGMRMatched: null,
       created: '2025-10-06T14:58:47.082Z',
       updated: '2025-10-16T11:56:33.387Z'
     }
@@ -714,65 +915,13 @@ module.exports = (router) => {
     next();
   });
 
-  // ---- helper: render page for a given search term (used by GET & POST) ----
-  function renderForSearch(res, search) {
-    // --- MRN path ---
-    if (mrnPattern.test(search)) {
-      if (search !== KNOWN_MRN) {
-        return res.render('mvp/v5/admin-view', {
-          data: { searchTerm: search, error: true, errorMessage: `${search} cannot be found` },
-          hasResults: false
-        });
-      }
-      const mrnHtml = renderJsonLinesHTML(MRN_INFO);
-      const messagesHtml = renderJsonLinesHTML({ posts: MRN_MESSAGES });
-      return res.render('mvp/v5/admin-view', {
-        data: { searchTerm: search },
-        hasResults: true,
-        primaryTabLabel: 'MRN information',
-        mrnHtml,
-        messagesHtml
-      });
-    }
-
-    // --- CHED path ---
-    if (chedPattern.test(search)) {
-      if (!KNOWN_CHEDS.includes(search)) {
-        return res.render('mvp/v5/admin-view', {
-          data: { searchTerm: search, error: true, errorMessage: `${search} cannot be found` },
-          hasResults: false
-        });
-      }
-      const chedHtml = renderJsonLinesHTML(CHED_INFO);
-      const messagesHtml = renderJsonLinesHTML({ posts: CHED_MESSAGES });
-      return res.render('mvp/v5/admin-view', {
-        data: { searchTerm: search },
-        hasResults: true,
-        primaryTabLabel: 'CHED information',
-        mrnHtml: chedHtml,
-        messagesHtml
-      });
-    }
-
-    // Fallback: format error (not MRN/CHED shapes)
-    return res.render('mvp/v5/admin-view', {
-      data: { searchTerm: search, error: true, errorMessage: 'Enter an MRN or CHED in the correct format' },
-      hasResults: false
-    });
-  }
-
-  // GET: empty page OR handle ?searchTerm=...
+  // GET: empty page
   router.get('/mvp/v5/admin-view', (req, res) => {
-    const search = (req.query.searchTerm || '').trim().toUpperCase();
-    if (search) {
-      return renderForSearch(res, search);
-    }
     res.render('mvp/v5/admin-view', {
       data: { searchTerm: '' },
       hasResults: false
     });
   });
-
 
 
   // POST: run search and render
@@ -787,47 +936,47 @@ module.exports = (router) => {
     }
 
     // --- MRN path ---
-    // --- MRN path ---
-    if (mrnPattern.test(search)) {
-      if (search !== KNOWN_MRN) {
-        return res.render('mvp/v5/admin-view', {
-          data: { searchTerm: search, error: true, errorMessage: `${search} cannot be found` },
-          hasResults: false
-        });
-      }
+// --- MRN path ---
+if (mrnPattern.test(search)) {
+  if (search !== KNOWN_MRN) {
+    return res.render('mvp/v5/admin-view', {
+      data: { searchTerm: search, error: true, errorMessage: `${search} cannot be found` },
+      hasResults: false
+    });
+  }
 
-      const mrnHtml = renderJsonLinesHTML(MRN_INFO);
-      const messagesHtml = renderJsonLinesHTML({ posts: MRN_MESSAGES });
+  const mrnHtml = renderJsonLinesHTML(MRN_INFO);
+  const messagesHtml = renderJsonLinesHTML({ posts: MRN_MESSAGES });
 
-      return res.render('mvp/v5/admin-view', {
-        data: { searchTerm: search },
-        hasResults: true,
-        primaryTabLabel: 'MRN information',
-        mrnHtml,
-        messagesHtml
-      });
-    }
+  return res.render('mvp/v5/admin-view', {
+    data: { searchTerm: search },
+    hasResults: true,
+    primaryTabLabel: 'MRN information',
+    mrnHtml,
+    messagesHtml
+  });
+}
 
-    // --- CHED path ---
-    if (chedPattern.test(search)) {
-      if (!KNOWN_CHEDS.includes(search)) {
-        return res.render('mvp/v5/admin-view', {
-          data: { searchTerm: search, error: true, errorMessage: `${search} cannot be found` },
-          hasResults: false
-        });
-      }
+// --- CHED path ---
+if (chedPattern.test(search)) {
+  if (!KNOWN_CHEDS.includes(search)) {
+    return res.render('mvp/v5/admin-view', {
+      data: { searchTerm: search, error: true, errorMessage: `${search} cannot be found` },
+      hasResults: false
+    });
+  }
 
-      const chedHtml = renderJsonLinesHTML(CHED_INFO);
-      const messagesHtml = renderJsonLinesHTML({ posts: CHED_MESSAGES });
+  const chedHtml = renderJsonLinesHTML(CHED_INFO);
+  const messagesHtml = renderJsonLinesHTML({ posts: CHED_MESSAGES });
 
-      return res.render('mvp/v5/admin-view', {
-        data: { searchTerm: search },
-        hasResults: true,
-        primaryTabLabel: 'CHED information',
-        mrnHtml: chedHtml,
-        messagesHtml
-      });
-    }
+  return res.render('mvp/v5/admin-view', {
+    data: { searchTerm: search },
+    hasResults: true,
+    primaryTabLabel: 'CHED information',
+    mrnHtml: chedHtml,
+    messagesHtml
+  });
+}
 
 
     // Fallback: format error (not MRN/CHED shapes)
