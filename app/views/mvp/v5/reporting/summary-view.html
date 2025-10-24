@@ -209,7 +209,7 @@
             </div>
           </div>
 
-          <!-- Unique clearance requests (NOW WITH TOGGLE) -->
+          <!-- Unique clearance requests -->
           <div class="govuk-grid-row charts govuk-!-margin-bottom-4">
             <div class="govuk-grid-column-full chart">
               <h2 class="govuk-heading-m">Unique clearance requests</h2>
@@ -371,26 +371,19 @@
   #cb-ched-d:checked + label::before { background-color:#f47738; border-color:#f47738; }
   #cb-ched-d:checked + label::after { border-color:#fff; }
 
-  /* NEW: Unique clearances checkbox styling (blue) */
   #cb-unique + label::before { border-color:#1d70b8; }
   #cb-unique:checked + label::before { background-color:#1d70b8; border-color:#1d70b8; }
   #cb-unique:checked + label::after { border-color:#fff; }
 
-  /* Focus: remove grey halo; underline only the heading */
-  .govuk-checkboxes__input:focus + .govuk-checkboxes__label::before { box-shadow:none !important; outline:none !important; }
+  .govuk-checkboxes__input:focus + .govuk-checkboxes__label::before {
+    box-shadow: 0 0 0 4px #fd0; /* GOV.UK focus color */
+    outline: 3px solid transparent; /* keeps shape consistent */
+  }
 
-
-  .reporting .btms-stats .govuk-heading-s { margin: 4px 0 8px 0; font-size: 18px; white-space: nowrap;  }
+  .reporting .btms-stats .govuk-heading-s { margin: 4px 0 8px 0; font-size: 18px; white-space: nowrap; }
   .reporting .btms-stats .total { margin: 10px 0 8px 0; font-size: 18px; }
-  .reporting .btms-stats .percentage {
-    display: block;
-    font-size: 14px !important;
-    padding-top: 0px;
-}
-.govuk-hint{
-      font-size: 14px !important;
-
-}
+  .reporting .btms-stats .percentage { display: block; font-size: 14px !important; padding-top: 0px; }
+  .govuk-hint { font-size: 14px !important; }
 </style>
 
 <script>
@@ -430,8 +423,17 @@
       bind('cb-ched-p','chedTypesChart','CHED P');
       bind('cb-ched-pp','chedTypesChart','CHED PP');
       bind('cb-ched-d','chedTypesChart','CHED D');
-      /* NEW: wire up Unique clearances toggle */
       bind('cb-unique','uniqueRequestsChart','Unique clearances');
+
+      /* ENTER-KEY FIX: when a chart legend checkbox has focus, Enter toggles it (doesn't submit form) */
+      document.querySelectorAll('.charts .govuk-checkboxes__input').forEach(cb => {
+        cb.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter') {
+            e.preventDefault();   // stop form submission + page jump
+            cb.click();           // toggle + fire 'change' so your bind() updates the chart
+          }
+        });
+      });
     });
 
     const list = document.querySelector('#preset-links');
