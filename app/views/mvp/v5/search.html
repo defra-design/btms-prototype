@@ -40,11 +40,10 @@
           <span class="govuk-visually-hidden">Error:</span> {{ data.errorMessage }}
         </p>
       {% endif %}
-      <div class="govuk-input-wrapper" style="position: relative; display: flex; align-items: center;">
+      <div class="govuk-input-wrapper search">
         <input class="govuk-input" id="searchTerm" name="data.searchTerm" type="text"
                value="{{ data.searchTerm }}" oninput="toggleClearButton()" style="padding-right: 30px;" />
-        <button type="button" id="clearButton" class="clear-search" onclick="clearSearch()"
-                style="color:#1d70b8; position: absolute; right: 60px; background: none; border: none; font-size: 30px; cursor: pointer;">
+        <button type="button" id="clearButton" class="clear-search" onclick="clearSearch()">
           &times;
         </button>
         <button type="submit" class="btms-search__button">

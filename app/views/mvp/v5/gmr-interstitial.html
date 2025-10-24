@@ -8,6 +8,7 @@
 {% set title = 'GMRCQP7UIYNS' %}
 {% set menu = true %}
 {% set hideButton = true %}
+{% set bodyClasses = 'gmr' %}
 
 {% block form %}
 
@@ -121,55 +122,5 @@
 
 
 
-<style>
-  /* Number plate token */
-  .number-plate {
-    display: inline-flex;
-    align-items: center;
-    gap: .4rem;
-    padding: .25rem .6rem;
-    border: 2px solid #0b0c0c;
-    border-radius: 4px;
-    font-weight: 700;
-    letter-spacing: .06em;
-    text-transform: uppercase;
-    line-height: 1.2;
-    white-space: nowrap;
-  }
-
-  /* Ensure GOV.UK tags aren’t capped */
-  .govuk-tag {
-    font-weight: 700;
-    max-width: none !important;
-    font-size: 16px !important;
-  }
-
-  .tooltip {
-    font-size: 14px !important;
-  }
-
-  /* Force MRN table to use 16px text size */
-  .app-mrn-table .govuk-table__header,
-  .app-mrn-table .govuk-table__cell,
-  .app-mrn-table .govuk-table__caption {
-    font-size: 16px !important;
-    line-height: 1.5;
-  }
-
-  /* Rear plate (yellow) and front plate (white) */
-  .number-plate--front {
-    background: #ffdf00;
-    color: #0b0c0c;
-  }
-
-  .number-plate--rear {
-    background: #ffffff;
-    color: #0b0c0c;
-  }
-
-  .govuk-summary-list__value .number-plate {
-    margin-top: .1rem;
-  }
-</style>
 
 {% endblock %}

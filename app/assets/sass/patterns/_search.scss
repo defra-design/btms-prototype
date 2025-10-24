@@ -1,78 +1,101 @@
 .search-container {
-    background: #f3f2f1;
-    padding: 40px;
-    padding: 40px;
-  }
-  .govuk-input-wrapper {
-    display: flex;
-    align-items: center;
-    position: relative; /* Add this */
-  }
-  
+  background: #f3f2f1;
+  padding: 40px;
+  padding: 40px;
+}
 
-  .govuk-input {
-    flex: 1;
-    height: 50px;
-    padding: 0 10px;
-    font-size: 1rem;
-    border: 2px solid #0b0c0c;
-    border-right: none;
-    box-sizing: border-box;
+.govuk-input-wrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
+  /* Add this */
+}
+
+#search {
+  position: relative;
+  display: flex;
+  align-items: center
+}
+
+.clear-search {
+  color: #1d70b8;
+  position: absolute;
+  right: 60px;
+  background: none;
+  border: none;
+  font-size: 30px;
+  cursor: pointer
+}
+
+.govuk-input {
+  flex: 1;
+  height: 50px;
+  padding: 0 10px;
+  font-size: 1rem;
+  border: 2px solid #0b0c0c;
+  border-right: none;
+  box-sizing: border-box;
+}
+
+.btms-search__button {
+  width: 50px;
+  height: 50px;
+  background-color: #1d70b8;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.btms-search__button:hover {
+  background-color: #207dce;
+}
+
+.btms-search__button svg {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 2;
+}
+
+.btms-clear__button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: #666;
+  position: absolute;
+  right: 60px;
+  /* Adjust based on input field padding */
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.btms-clear__button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: #666;
+  position: absolute;
+  right: 60px;
+  /* Adjust based on input field padding */
+  top: 50%;
+  transform: translateY(-50%);
+  display: none;
+  /* Hide by default */
+
+}
+
+@media screen and (max-width: 767px) {
+  /* Styles here apply only on screens 767px wide or smaller (most phones) */
+
+  .search-container {
+    padding: 10px;
   }
 
-  .btms-search__button {
-    width: 50px;
-    height: 50px;
-    background-color: #1d70b8;
-    border: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
+  .search-hint li {
+    font-size: 14px !important;
   }
 
-  .btms-search__button:hover {
-    background-color: #207dce;
-  }
-
-  .btms-search__button svg {
-    fill: none;
-    stroke: #fff;
-    stroke-width: 2;
-  }
-  .btms-clear__button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 18px;
-    color: #666;
-    position: absolute;
-    right: 60px; /* Adjust based on input field padding */
-    top: 50%;
-    transform: translateY(-50%);
-  }
-  .btms-clear__button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 18px;
-    color: #666;
-    position: absolute;
-    right: 60px; /* Adjust based on input field padding */
-    top: 50%;
-    transform: translateY(-50%);
-    display: none; /* Hide by default */
-    
-  }
-    
-   @media screen and (max-width: 767px) {
-    /* Styles here apply only on screens 767px wide or smaller (most phones) */
-
-    .search-container{
-      padding: 10px;
-    }
-    .search-hint li {
-      font-size: 14px!important;
-    }
-
-  }
+}

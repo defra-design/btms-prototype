@@ -1,5 +1,4 @@
 {% extends "layouts/forms.html" %}
-{% set title = 'Search by MRN, CHED or DUCR' %}
 {% set signedIn = 'true' %}
 {% set menu = true %}
 {% set fullWidth = true %}
@@ -7,6 +6,7 @@
 {% set showheader = true %}
 {% set hideBackLink = true %}
 {% set hideManageAccount = 'false' %}
+{% set bodyClasses = 'admin' %}
 
 {% block form %}
   <div class="govuk-form-group search-container">
@@ -21,8 +21,7 @@
         </p>
       {% endif %}
 
-      {# forms.html wraps this block with <form method="post" action="/mvp/v5/admin-view"> #}
-      <div class="govuk-input-wrapper" style="position:relative;display:flex;align-items:center;">
+      <div class="govuk-input-wrapper">
         <input
           class="govuk-input"
           id="searchTerm"
@@ -31,8 +30,7 @@
           value="{{ data.searchTerm or '' }}"
           spellcheck="false"
         />
-           <button type="button" id="clearButton" class="clear-search" onclick="clearSearch()"
-                style="color:#1d70b8; position: absolute; right: 60px; background: none; border: none; font-size: 30px; cursor: pointer;">
+           <button type="button" id="clearButton" class="clear-search" onclick="clearSearch()">
           &times;
         </button>
         <button type="submit" class="btms-search__button" aria-label="Search">
@@ -69,91 +67,6 @@
       </section>
     </div>
   {% endif %}
-    {% if notFound %}
-        <p class=" govuk-!-margin-top-2">No results found for that reference.</p>
-      {% endif %}
+
 {% endblock %}
 
-{% block pageScripts %}
-<style>
-  /* Frame */
-  .codeframe {
-    padding: 10px 1px;
-    overflow: auto;
-  }
-
-  /* Line-numbered JSON list using counters (robust against resets) */
-  .codeblock {
-    margin: 0;
-    padding: 8px 4px;
-    font-size: 14px;
-    white-space: pre;
-    color: #0b0c0c;                  /* govuk-text-colour */
-    list-style: none;                /* hide default bullets/numbers */
-    counter-reset: line;
-  }
-
-  .codeblock li {
-    counter-increment: line;
-    display: grid;
-    grid-template-columns: 3ch 1fr;  /* adjust if >999 lines */
-    gap: 1ch;
-    line-height: 1.4;
-  }
-
-  /* The actual line number */
-  .codeblock li::before {
-    content: counter(line);
-    text-align: right;
-    color: #505a5f;
-    user-select: none;
-
-    /* Make numbers equal width */
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-                 "Liberation Mono", "Courier New", monospace;
-    font-variant-numeric: tabular-nums;
-    font-feature-settings: "tnum" 1;
-
-    display: block;
-    width: 3ch;   /* matches grid column */
-  }
-
-  .json-key     { color: #1d70b8; }
-  .json-string  { color: #00703c; }
-  .json-number  { color: #5694ca; }
-  .json-boolean { color: #f47738; }
-  .json-null    { color: #0b0c0c; font-style: italic; }
-
-  .govuk-frontend-supported .govuk-tabs__panel {
-    margin-bottom: 0;
-    padding: 0px 0px;
-  }
-</style>
-
-<script>
-  //clear search
-document.addEventListener('DOMContentLoaded', function () {
-
-  const input = document.getElementById('searchTerm');
-  const clearButton = document.getElementById('clearButton');
-
-  function toggleClearButton() {
-    clearButton.style.display = input.value.trim() ? 'block' : 'none';
-  }
-
-  input.addEventListener('input', toggleClearButton);
-  clearButton.addEventListener('click', function () {
-    input.value = '';
-    toggleClearButton();
-    input.focus();
-  });
-
-  toggleClearButton(); // Ensure correct initial state
-});
-document.addEventListener("DOMContentLoaded", function () {
-  setTimeout(function () {
-      document.getElementById("searchTerm").focus();
-  }, 100); // Small delay to ensure rendering is complete
-});
-</script>
-{% endblock %}

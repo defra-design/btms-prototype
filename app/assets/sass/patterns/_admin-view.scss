@@ -1,0 +1,68 @@
+  .admin {
+
+    .codeframe {
+      padding: 10px 1px;
+      overflow: auto;
+    }
+
+    .codeblock {
+      margin: 0;
+      padding: 8px 4px;
+      font-size: 14px;
+      white-space: pre;
+      color: #0b0c0c;
+      list-style: none;
+      counter-reset: line;
+    }
+
+    .codeblock li {
+      counter-increment: line;
+      display: grid;
+      grid-template-columns: 3ch 1fr;
+      line-height: 1.4;
+    }
+
+    /* The actual line number */
+    .codeblock li::before {
+      content: counter(line);
+      text-align: right;
+      color: #505a5f;
+      user-select: none;
+
+      /* Make numbers equal width */
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+        "Liberation Mono", "Courier New", monospace;
+      font-variant-numeric: tabular-nums;
+      font-feature-settings: "tnum"1;
+
+      display: block;
+      width: 3ch;
+      /* matches grid column */
+    }
+
+    .json-key {
+      color: #1d70b8;
+    }
+
+    .json-string {
+      color: #00703c;
+    }
+
+    .json-number {
+      color: #5694ca;
+    }
+
+    .json-boolean {
+      color: #f47738;
+    }
+
+    .json-null {
+      color: #0b0c0c;
+      font-style: italic;
+    }
+
+    .govuk-frontend-supported .govuk-tabs__panel {
+      margin-bottom: 0;
+      padding: 0px 0px;
+    }
+  }
