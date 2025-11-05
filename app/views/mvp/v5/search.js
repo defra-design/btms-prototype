@@ -1,7 +1,6 @@
 const _ = require('lodash');
 const moment = require('moment');
 
-// Hoist redirects so they can be reused for middleware
 const searchRedirects = {
   '24GB0Z8WEJ9ZBTL73B': 'mrn',
   'GMRCQP7UIYNS': 'gmr-interstitial',
@@ -22,44 +21,26 @@ const searchRedirects = {
 };
 
 module.exports = (router) => {
-  // Ensure session.data exists
   router.use((req, res, next) => {
     req.session.data = req.session.data || {};
     next();
   });
 
-  // --------------------------------------------
-  // Set currentPage for nav highlighting
-  // --------------------------------------------
   router.use('/mvp/v5', (req, res, next) => {
-    // Example: req.path = "/reporting/summary-view"
-    const seg = req.path
-      .replace(/\/+$/, '')         // strip trailing slash
-      .split('/')                  // ["", "reporting", "summary-view"]
-      .filter(Boolean)[0] || null; // "reporting"
-
-    // Keys must match what you use in the Nunjucks checks
-    const allowed = new Set(['search', 'reporting', 'latest-activity','admin-view' ,'user-guide']);
+    const seg = req.path.replace(/\/+$/, '').split('/').filter(Boolean)[0] || null;
+    const allowed = new Set(['search', 'reporting', 'latest-activity', 'admin-view', 'user-guide']);
     res.locals.currentPage = allowed.has(seg) ? seg : null;
-
-    // Debug if needed:
-    // console.log('[nav]', { path: req.path, currentPage: res.locals.currentPage });
-
     next();
   });
 
-  // --------------------------------------------
-  // Search redirect handling
-  // --------------------------------------------
   router.post('/mvp/v5/:page(search|search-news)/?', (req, res) => {
     const data = req.session.data;
     const search = (req.body['data.searchTerm'] || req.query.searchTerm || '').trim();
 
-    // Patterns
-    const mrnPattern  = /^24GB[A-Z0-9]{12}$/;
+    const mrnPattern = /^24GB[A-Z0-9]{12}$/;
     const chedPattern = /^(CHED(P|PP)?\.GB\.\d{4}\.\d+|GBCHD\d{4}\.\d+)$/;
     const ducrPattern = /^[A-Z0-9]{1,35}-[A-Z0-9]{1,35}$/;
-    const gmrPattern  = /^[A-Z0-9]{18}$/;
+    const gmrPattern = /^[A-Z0-9]{18}$/;
 
     delete data.error;
     delete data.errorMessage;
@@ -95,7 +76,6 @@ module.exports = (router) => {
     return res.redirect('search');
   });
 
-  // --- Cookie pages ---
   router.post(['/mvp/v5/cookies/'], (req, res) => {
     const cookies = req.body.cookies;
     res.render('mvp/v5/cookies', { cookies });
@@ -115,7 +95,6 @@ module.exports = (router) => {
   router.get(['/mvp/v5/search-cookies/'], (req, res) => {
     const cookies = req.cookies.cookiePreference || '';
     const showConfirmation = req.query.confirmation === 'true';
-
     res.render('mvp/v5/search-cookies', {
       serviceName: 'Border Trade Matching Service',
       cookies,
@@ -123,7 +102,6 @@ module.exports = (router) => {
     });
   });
 
-  // --- Sign-in routes ---
   router.post(['/mvp/v5/sign-in-choose'], (req, res) => {
     const selected = req.body.signIn;
     if (selected === 'entra') {
@@ -152,9 +130,6 @@ module.exports = (router) => {
     }
   });
 
-  // --------------------------------------------
-  // Dynamic title injection for redirect targets
-  // --------------------------------------------
   const redirectPaths = _.uniq(Object.values(searchRedirects)).map(
     slug => `/mvp/v5/${slug}`
   );
@@ -173,25 +148,13 @@ module.exports = (router) => {
     next();
   });
 
-
-
-
-  // app/routes.js
-module.exports = router => {
-  router.get('/new-layout-current', (req, res) => {
-    const fallback = '25GB3FJBV1UEKBDAR0'
-    const mrn = (req.query.mrn || req.session.data.title || req.session.data.mrn || fallback).trim()
-
-    // keep it in session "data" so Nunjucks `data.*` can use it
-    req.session.data.mrn = mrn
-    req.session.data.title = mrn
-
-    // also pass directly (optional)
-    res.render('new-layout-current', { title: mrn })
-  })
-}
-
-
-
-
+  module.exports = router => {
+    router.get('/new-layout-current', (req, res) => {
+      const fallback = '25GB3FJBV1UEKBDAR0';
+      const mrn = (req.query.mrn || req.session.data.title || req.session.data.mrn || fallback).trim();
+      req.session.data.mrn = mrn;
+      req.session.data.title = mrn;
+      res.render('new-layout-current', { title: mrn });
+    });
+  };
 };
