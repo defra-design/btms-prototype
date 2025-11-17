@@ -10,15 +10,7 @@
 {% set hideManageAccount = 'false' %}
 {% set bodyClasses = 'admin' %}
 
-{% block head %}
 <style>
-  .search-box {
-    display: flex;
-    gap: 10px;
-    align-items: flex-start;
-    margin-bottom: 30px;
-  }
-
   .moj-timeline {
     margin-top: 0;
   }
@@ -43,16 +35,7 @@
   .moj-timeline__description .govuk-tag {
     margin-right: 10px;
   }
-
-  .timeline-section {
-    margin-bottom: 40px;
-  }
-
-  .timeline-section:last-child {
-    margin-bottom: 0;
-  }
 </style>
-{% endblock %}
 
 {% block form %}
 
@@ -71,18 +54,26 @@
       </p>
     {% endif %}
 
-    <div class="search-box">
+    <div class="govuk-input-wrapper">
       <input
-        class="govuk-input govuk-input--width-20"
+        class="govuk-input"
         id="searchTerm"
         name="data.searchTerm"
         type="text"
-        value="{{ data.searchTerm }}"
-        autocomplete="off">
-      <button type="submit" class="govuk-button" data-module="govuk-button">
-        Search
+        value="{{ data.searchTerm or '' }}"
+        spellcheck="false"
+      />
+      <button type="button" id="clearButton" class="clear-search" onclick="clearSearch()">
+        &times;
+      </button>
+      <button type="submit" class="btms-search__button" aria-label="Search">
+        <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <circle cx="10" cy="10" r="8" stroke="#fff" stroke-width="2"></circle>
+          <line x1="15" y1="15" x2="22" y2="22" stroke="#fff" stroke-width="2"></line>
+        </svg>
       </button>
     </div>
+
   </div>
 </div>
 
