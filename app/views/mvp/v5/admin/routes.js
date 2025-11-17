@@ -46,6 +46,57 @@ module.exports = (router) => {
     // 1. Clearance Request
     if (mrnData.clearanceRequest) {
       const cr = mrnData.clearanceRequest;
+      
+      // Build commodities HTML
+      let commoditiesHtml = '';
+      if (cr.commodities && cr.commodities.length > 0) {
+        commoditiesHtml = cr.commodities.map((item, idx) => {
+          const docs = item.documents?.map(d => 
+            `<li><strong>${d.documentCode}</strong>: ${d.documentReference} (${d.documentStatus})</li>`
+          ).join('') || '<li>None</li>';
+          
+          const checks = item.checks?.map(c => 
+            `<li><strong>${c.checkCode}</strong> - ${c.departmentCode}</li>`
+          ).join('') || '<li>None</li>';
+          
+          return `
+            <div class="govuk-!-margin-bottom-4" style="padding: 15px; background: #f8f8f8; border-left: 3px solid #b1b4b6;">
+              <h4 class="govuk-heading-s govuk-!-margin-bottom-2">Item ${item.itemNumber}</h4>
+              <dl class="govuk-summary-list govuk-summary-list--no-border">
+                <div class="govuk-summary-list__row">
+                  <dt class="govuk-summary-list__key">Commodity Code</dt>
+                  <dd class="govuk-summary-list__value">${item.taricCommodityCode}</dd>
+                </div>
+                <div class="govuk-summary-list__row">
+                  <dt class="govuk-summary-list__key">Description</dt>
+                  <dd class="govuk-summary-list__value">${item.goodsDescription}</dd>
+                </div>
+                <div class="govuk-summary-list__row">
+                  <dt class="govuk-summary-list__key">Net Mass</dt>
+                  <dd class="govuk-summary-list__value">${item.netMass}kg</dd>
+                </div>
+                <div class="govuk-summary-list__row">
+                  <dt class="govuk-summary-list__key">Origin</dt>
+                  <dd class="govuk-summary-list__value">${item.originCountryCode}</dd>
+                </div>
+                <div class="govuk-summary-list__row">
+                  <dt class="govuk-summary-list__key">Procedure Code</dt>
+                  <dd class="govuk-summary-list__value">${item.customsProcedureCode}</dd>
+                </div>
+                <div class="govuk-summary-list__row">
+                  <dt class="govuk-summary-list__key">Consignee</dt>
+                  <dd class="govuk-summary-list__value">${item.consigneeName}</dd>
+                </div>
+              </dl>
+              <p class="govuk-body-s govuk-!-font-weight-bold govuk-!-margin-bottom-1">Documents:</p>
+              <ul class="govuk-list govuk-list--bullet">${docs}</ul>
+              <p class="govuk-body-s govuk-!-font-weight-bold govuk-!-margin-bottom-1">Checks Required:</p>
+              <ul class="govuk-list govuk-list--bullet">${checks}</ul>
+            </div>
+          `;
+        }).join('');
+      }
+      
       timeline.push({
         label: { text: 'Declaration submitted to CDS' },
         html: `
@@ -68,10 +119,35 @@ module.exports = (router) => {
               <dd class="govuk-summary-list__value">${cr.dispatchCountryCode || 'N/A'}</dd>
             </div>
             <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">Goods Location</dt>
+              <dd class="govuk-summary-list__value">${cr.goodsLocationCode || 'N/A'}</dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">Master UCR</dt>
+              <dd class="govuk-summary-list__value">${cr.masterUcr || 'N/A'}</dd>
+            </div>
+            <div class="govuk-summary-list__row">
               <dt class="govuk-summary-list__key">Correlation ID</dt>
               <dd class="govuk-summary-list__value">${cr.externalCorrelationId || 'N/A'}</dd>
             </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">Version</dt>
+              <dd class="govuk-summary-list__value">${cr.externalVersion || 'N/A'}</dd>
+            </div>
           </dl>
+          
+          ${commoditiesHtml ? `
+          <details class="govuk-details govuk-!-margin-top-3" data-module="govuk-details">
+            <summary class="govuk-details__summary">
+              <span class="govuk-details__summary-text">
+                View commodity details (${cr.commodities?.length || 0} item(s))
+              </span>
+            </summary>
+            <div class="govuk-details__text">
+              ${commoditiesHtml}
+            </div>
+          </details>
+          ` : ''}
         `,
         datetime: {
           timestamp: cr.messageSentAt || new Date().toISOString(),
@@ -101,6 +177,46 @@ module.exports = (router) => {
         tagText = 'C03 - Release';
       }
       
+      // Build decision items HTML
+      let itemsHtml = '';
+      if (cd.items && cd.items.length > 0) {
+        itemsHtml = cd.items.map((item, idx) => {
+          const checksHtml = item.checks?.map(c => {
+            let checkTagClass = 'govuk-tag--blue';
+            let checkDecisionText = c.decisionCode || 'N/A';
+            
+            if (c.decisionCode === 'H01') {
+              checkTagClass = 'govuk-tag--red';
+              checkDecisionText = 'H01 - Hold';
+            } else if (c.decisionCode === 'C03') {
+              checkTagClass = 'govuk-tag--green';
+              checkDecisionText = 'C03 - Release';
+            }
+            
+            return `
+              <li>
+                <strong>${c.checkCode}</strong> 
+                <strong class="govuk-tag ${checkTagClass}">${checkDecisionText}</strong>
+                ${c.decisionReasons && c.decisionReasons.length > 0 ? `
+                  <p class="govuk-body-s govuk-!-margin-top-1">Reasons:</p>
+                  <ul class="govuk-list govuk-list--bullet">
+                    ${c.decisionReasons.map(r => `<li>${r}</li>`).join('')}
+                  </ul>
+                ` : ''}
+              </li>
+            `;
+          }).join('') || '<li>No checks</li>';
+          
+          return `
+            <div class="govuk-!-margin-bottom-3" style="padding: 15px; background: #f8f8f8; border-left: 3px solid #b1b4b6;">
+              <h4 class="govuk-heading-s govuk-!-margin-bottom-2">Item ${item.itemNumber}</h4>
+              <p class="govuk-body-s govuk-!-font-weight-bold govuk-!-margin-bottom-1">Check decisions:</p>
+              <ul class="govuk-list govuk-list--bullet">${checksHtml}</ul>
+            </div>
+          `;
+        }).join('');
+      }
+      
       timeline.push({
         label: { text: label },
         html: `
@@ -121,10 +237,31 @@ module.exports = (router) => {
               <dd class="govuk-summary-list__value">${result?.checkCode || 'N/A'}</dd>
             </div>
             <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">Decision Valid From</dt>
+              <dd class="govuk-summary-list__value">${result?.validFrom ? new Date(result.validFrom).toLocaleString('en-GB') : 'N/A'}</dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">Decision Valid Until</dt>
+              <dd class="govuk-summary-list__value">${result?.validUntil ? new Date(result.validUntil).toLocaleString('en-GB') : 'N/A'}</dd>
+            </div>
+            <div class="govuk-summary-list__row">
               <dt class="govuk-summary-list__key">Correlation ID</dt>
               <dd class="govuk-summary-list__value">${cd.correlationId || 'N/A'}</dd>
             </div>
           </dl>
+          
+          ${itemsHtml ? `
+          <details class="govuk-details govuk-!-margin-top-3" data-module="govuk-details">
+            <summary class="govuk-details__summary">
+              <span class="govuk-details__summary-text">
+                View decision items (${cd.items?.length || 0} item(s))
+              </span>
+            </summary>
+            <div class="govuk-details__text">
+              ${itemsHtml}
+            </div>
+          </details>
+          ` : ''}
         `,
         datetime: {
           timestamp: cd.created || new Date().toISOString(),
