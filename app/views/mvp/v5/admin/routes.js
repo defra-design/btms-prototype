@@ -1,4 +1,4 @@
-// app/views/mvp/v5/admin-view.js
+// app/views/mvp/v5/admin/view.js
 module.exports = (router) => {
   // Known references for the prototype
   const KNOWN_MRN  = '25GBB6DSB14ECR4AR9';
@@ -916,20 +916,72 @@ module.exports = (router) => {
   });
 
   // GET: empty page
-  router.get('/mvp/v5/admin-view', (req, res) => {
-    res.render('mvp/v5/admin-view', {
-      data: { searchTerm: '' },
+  router.get('/mvp/v5/admin/view', (req, res) => {
+    const search = (req.query.searchTerm || '').trim().toUpperCase();
+    
+    if (!search) {
+      return res.render('mvp/v5/admin/view', {
+        data: { searchTerm: '' },
+        hasResults: false
+      });
+    }
+
+    // --- MRN path ---
+    if (mrnPattern.test(search)) {
+      if (search !== KNOWN_MRN) {
+        return res.render('mvp/v5/admin/view', {
+          data: { searchTerm: search, error: true, errorMessage: `${search} cannot be found` },
+          hasResults: false
+        });
+      }
+
+      const mrnHtml = renderJsonLinesHTML(MRN_INFO);
+      const messagesHtml = renderJsonLinesHTML({ posts: MRN_MESSAGES });
+
+      return res.render('mvp/v5/admin/view', {
+        data: { searchTerm: search },
+        hasResults: true,
+        primaryTabLabel: 'MRN information',
+        mrnHtml,
+        messagesHtml
+      });
+    }
+
+    // --- CHED path ---
+    if (chedPattern.test(search)) {
+      if (!KNOWN_CHEDS.includes(search)) {
+        return res.render('mvp/v5/admin/view', {
+          data: { searchTerm: search, error: true, errorMessage: `${search} cannot be found` },
+          hasResults: false
+        });
+      }
+
+      const chedHtml = renderJsonLinesHTML(CHED_INFO);
+      const messagesHtml = renderJsonLinesHTML({ posts: CHED_MESSAGES });
+
+      return res.render('mvp/v5/admin/view', {
+        data: { searchTerm: search },
+        hasResults: true,
+        primaryTabLabel: 'CHED information',
+        mrnHtml: chedHtml,
+        messagesHtml
+      });
+    }
+
+    // Fallback: format error
+    return res.render('mvp/v5/admin/view', {
+      data: { searchTerm: search, error: true, errorMessage: 'Enter an MRN or CHED in the correct format' },
       hasResults: false
     });
   });
 
 
   // POST: run search and render
-  router.post('/mvp/v5/admin-view', (req, res) => {
+  router.post('/mvp/v5/admin/view', (req, res) => {
     const search = (req.body['data.searchTerm'] || '').trim().toUpperCase();
 
     if (!search) {
-      return res.render('mvp/v5/admin-view', {
+      return res.render('mvp/v5/admin/view', {
         data: { searchTerm: '', error: true, errorMessage: 'Enter an MRN, CHED, GMR or DUCR reference' },
         hasResults: false
       });
@@ -939,7 +991,7 @@ module.exports = (router) => {
 // --- MRN path ---
 if (mrnPattern.test(search)) {
   if (search !== KNOWN_MRN) {
-    return res.render('mvp/v5/admin-view', {
+    return res.render('mvp/v5/admin/view', {
       data: { searchTerm: search, error: true, errorMessage: `${search} cannot be found` },
       hasResults: false
     });
@@ -948,7 +1000,7 @@ if (mrnPattern.test(search)) {
   const mrnHtml = renderJsonLinesHTML(MRN_INFO);
   const messagesHtml = renderJsonLinesHTML({ posts: MRN_MESSAGES });
 
-  return res.render('mvp/v5/admin-view', {
+  return res.render('mvp/v5/admin/view', {
     data: { searchTerm: search },
     hasResults: true,
     primaryTabLabel: 'MRN information',
@@ -960,7 +1012,7 @@ if (mrnPattern.test(search)) {
 // --- CHED path ---
 if (chedPattern.test(search)) {
   if (!KNOWN_CHEDS.includes(search)) {
-    return res.render('mvp/v5/admin-view', {
+    return res.render('mvp/v5/admin/view', {
       data: { searchTerm: search, error: true, errorMessage: `${search} cannot be found` },
       hasResults: false
     });
@@ -969,7 +1021,7 @@ if (chedPattern.test(search)) {
   const chedHtml = renderJsonLinesHTML(CHED_INFO);
   const messagesHtml = renderJsonLinesHTML({ posts: CHED_MESSAGES });
 
-  return res.render('mvp/v5/admin-view', {
+  return res.render('mvp/v5/admin/view', {
     data: { searchTerm: search },
     hasResults: true,
     primaryTabLabel: 'CHED information',
@@ -980,7 +1032,7 @@ if (chedPattern.test(search)) {
 
 
     // Fallback: format error (not MRN/CHED shapes)
-    return res.render('mvp/v5/admin-view', {
+    return res.render('mvp/v5/admin/view', {
       data: { searchTerm: search, error: true, errorMessage: 'Enter an MRN or CHED in the correct format' },
       hasResults: false
     });

@@ -28,7 +28,7 @@ module.exports = (router) => {
 
   router.use('/mvp/v5', (req, res, next) => {
     const seg = req.path.replace(/\/+$/, '').split('/').filter(Boolean)[0] || null;
-    const allowed = new Set(['search', 'reporting', 'latest-activity', 'admin-view', 'user-guide']);
+    const allowed = new Set(['search', 'reporting', 'latest-activity', 'admin', 'user-guide']);
     res.locals.currentPage = allowed.has(seg) ? seg : null;
     next();
   });
