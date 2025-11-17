@@ -1,12 +1,14 @@
-{% extends "layouts/main.html" %}
+{% extends "layouts/forms.html" %}
 {% from "moj/components/timeline/macro.njk" import mojTimeline %}
 
 {% set signedIn = 'true' %}
 {% set menu = true %}
 {% set fullWidth = true %}
+{% set hideButton = true %}
+{% set showheader = true %}
 {% set hideBackLink = true %}
 {% set hideManageAccount = 'false' %}
-{% set title = 'Admin View V2' %}
+{% set bodyClasses = 'admin' %}
 
 {% block head %}
 <style>
@@ -52,38 +54,37 @@
 </style>
 {% endblock %}
 
-{% block content %}
+{% block form %}
 
-<div class="govuk-grid-row">
-  <div class="govuk-grid-column-full">
-
-    <h1 class="govuk-heading-l">
+<div class="govuk-form-group search-container">
+  <h1 class="govuk-label-wrapper">
+    <label class="govuk-label govuk-label--l" for="searchTerm">
       <span class="govuk-caption-l">Version 2</span>
       Search for an MRN or CHED
-    </h1>
+    </label>
+  </h1>
 
-    <form method="post" action="/mvp/v5/admin/view-v2" novalidate>
-      <div class="govuk-form-group{% if data.error %} govuk-form-group--error{% endif %}">
-        {% if data.error %}
-          <p class="govuk-error-message">
-            <span class="govuk-visually-hidden">Error:</span> {{ data.errorMessage }}
-          </p>
-        {% endif %}
+  <div class="govuk-form-group{% if data.error %} govuk-form-group--error{% endif %}">
+    {% if data.error %}
+      <p class="govuk-error-message">
+        <span class="govuk-visually-hidden">Error:</span> {{ data.errorMessage }}
+      </p>
+    {% endif %}
 
-        <div class="search-box">
-          <input
-            class="govuk-input govuk-input--width-20"
-            id="searchTerm"
-            name="data.searchTerm"
-            type="text"
-            value="{{ data.searchTerm }}"
-            autocomplete="off">
-          <button type="submit" class="govuk-button" data-module="govuk-button">
-            Search
-          </button>
-        </div>
-      </div>
-    </form>
+    <div class="search-box">
+      <input
+        class="govuk-input govuk-input--width-20"
+        id="searchTerm"
+        name="data.searchTerm"
+        type="text"
+        value="{{ data.searchTerm }}"
+        autocomplete="off">
+      <button type="submit" class="govuk-button" data-module="govuk-button">
+        Search
+      </button>
+    </div>
+  </div>
+</div>
 
     {% if hasResults %}
       <div class="govuk-tabs govuk-!-margin-top-6" data-module="govuk-tabs">
@@ -127,9 +128,6 @@
         </section>
       </div>
     {% endif %}
-
-  </div>
-</div>
 
 {% endblock %}
 
