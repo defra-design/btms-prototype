@@ -37,6 +37,261 @@ module.exports = (router) => {
     return `<ol class="codeblock">${lis}</ol>`;
   }
 
+  // ---- Helper: Format MRN data for timeline ----
+  function formatMrnForTimeline(mrnData) {
+    if (!mrnData) return [];
+    
+    const timeline = [];
+    
+    // 1. Clearance Request
+    if (mrnData.clearanceRequest) {
+      const cr = mrnData.clearanceRequest;
+      timeline.push({
+        label: { text: 'Declaration submitted to CDS' },
+        html: `
+          <p class="govuk-body">Customs declaration created with ${cr.commodities?.length || 0} commodity item(s).</p>
+          <dl class="govuk-summary-list govuk-summary-list--no-border">
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">DUCR</dt>
+              <dd class="govuk-summary-list__value">${cr.declarationUcr || 'N/A'}</dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">Declaration Type</dt>
+              <dd class="govuk-summary-list__value">${cr.declarationType || 'N/A'}</dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">Declarant</dt>
+              <dd class="govuk-summary-list__value">${cr.declarantId || 'N/A'}</dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">Dispatch Country</dt>
+              <dd class="govuk-summary-list__value">${cr.dispatchCountryCode || 'N/A'}</dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">Correlation ID</dt>
+              <dd class="govuk-summary-list__value">${cr.externalCorrelationId || 'N/A'}</dd>
+            </div>
+          </dl>
+        `,
+        datetime: {
+          timestamp: cr.messageSentAt || new Date().toISOString(),
+          type: 'datetime'
+        },
+        byline: { text: 'Trader via CDS' }
+      });
+    }
+    
+    // 2. Clearance Decision
+    if (mrnData.clearanceDecision) {
+      const cd = mrnData.clearanceDecision;
+      const result = cd.results?.[0];
+      const decisionCode = result?.decisionCode;
+      
+      let label = 'Decision issued';
+      let tagClass = 'govuk-tag--blue';
+      let tagText = decisionCode || 'Unknown';
+      
+      if (decisionCode === 'H01') {
+        label = 'Hold decision issued';
+        tagClass = 'govuk-tag--red';
+        tagText = 'H01 - Hold';
+      } else if (decisionCode === 'C03') {
+        label = 'Release decision issued';
+        tagClass = 'govuk-tag--green';
+        tagText = 'C03 - Release';
+      }
+      
+      timeline.push({
+        label: { text: label },
+        html: `
+          <p class="govuk-body">
+            <strong class="govuk-tag ${tagClass}">${tagText}</strong>
+          </p>
+          <dl class="govuk-summary-list govuk-summary-list--no-border">
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">Decision Number</dt>
+              <dd class="govuk-summary-list__value">${cd.decisionNumber || 'N/A'}</dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">CHED Reference</dt>
+              <dd class="govuk-summary-list__value">${result?.importPreNotification || 'N/A'}</dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">Check Code</dt>
+              <dd class="govuk-summary-list__value">${result?.checkCode || 'N/A'}</dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">Correlation ID</dt>
+              <dd class="govuk-summary-list__value">${cd.correlationId || 'N/A'}</dd>
+            </div>
+          </dl>
+        `,
+        datetime: {
+          timestamp: cd.created || new Date().toISOString(),
+          type: 'datetime'
+        },
+        byline: { text: 'BTMS Decision Service' }
+      });
+    }
+    
+    // 3. Finalisation
+    if (mrnData.finalisation) {
+      const fin = mrnData.finalisation;
+      const finalState = fin.finalState === '0' ? 'Released' : fin.finalState;
+      
+      timeline.push({
+        label: { text: 'Declaration finalised' },
+        html: `
+          <p class="govuk-body">
+            <strong class="govuk-tag govuk-tag--green">${finalState}</strong>
+            ${fin.isManualRelease ? '<strong class="govuk-tag govuk-tag--blue">Manual Release</strong>' : ''}
+          </p>
+          <dl class="govuk-summary-list govuk-summary-list--no-border">
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">Correlation ID</dt>
+              <dd class="govuk-summary-list__value">${fin.externalCorrelationId || 'N/A'}</dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">Message Sent</dt>
+              <dd class="govuk-summary-list__value">${fin.messageSentAt ? fin.messageSentAt.replace('T', ' at ').replace('Z', '') : 'N/A'}</dd>
+            </div>
+          </dl>
+        `,
+        datetime: {
+          timestamp: fin.messageSentAt || new Date().toISOString(),
+          type: 'datetime'
+        },
+        byline: { text: 'HMRC CDS' }
+      });
+    }
+    
+    return timeline;
+  }
+
+  // ---- Helper: Format messages for timeline ----
+  function formatMessagesForTimeline(messages) {
+    if (!messages || !Array.isArray(messages)) return [];
+    
+    // Sort by created date descending (newest first)
+    const sorted = [...messages].sort((a, b) => {
+      const dateA = new Date(a.created || a.message?.resource?.Created || 0);
+      const dateB = new Date(b.created || b.message?.resource?.Created || 0);
+      return dateB - dateA;
+    });
+    
+    return sorted.map((msg) => {
+      let label = 'Message received';
+      let byline = 'System';
+      let content = '';
+      
+      const created = msg.created || msg.message?.resource?.Created || new Date().toISOString();
+      const subType = msg.subResourceType;
+      const operation = msg.operation;
+      
+      // Build label
+      if (subType === 'ClearanceRequest') {
+        label = 'Declaration submitted';
+        byline = 'Trader via CDS';
+        
+        const cr = msg.message?.resource?.ClearanceRequest;
+        if (cr) {
+          content = `
+            <dl class="govuk-summary-list govuk-summary-list--no-border">
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">Operation</dt>
+                <dd class="govuk-summary-list__value"><strong class="govuk-tag govuk-tag--blue">${operation}</strong></dd>
+              </div>
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">DUCR</dt>
+                <dd class="govuk-summary-list__value">${cr.declarationUcr || 'N/A'}</dd>
+              </div>
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">Correlation ID</dt>
+                <dd class="govuk-summary-list__value">${cr.externalCorrelationId || 'N/A'}</dd>
+              </div>
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">Commodities</dt>
+                <dd class="govuk-summary-list__value">${cr.commodities?.length || 0} item(s)</dd>
+              </div>
+            </dl>
+          `;
+        }
+      } else if (subType === 'ClearanceDecision') {
+        label = 'Decision updated';
+        byline = 'BTMS Decision Service';
+        
+        const cd = msg.message?.resource?.ClearanceDecision;
+        if (cd) {
+          const result = cd.results?.[0];
+          const decisionCode = result?.decisionCode || cd.items?.[0]?.checks?.[0]?.decisionCode;
+          
+          let tagClass = 'govuk-tag--blue';
+          let tagText = decisionCode || 'Unknown';
+          
+          if (decisionCode === 'H01') {
+            tagClass = 'govuk-tag--red';
+            tagText = 'H01 - Hold';
+          } else if (decisionCode === 'C03') {
+            tagClass = 'govuk-tag--green';
+            tagText = 'C03 - Release';
+          }
+          
+          content = `
+            <p class="govuk-body">
+              <strong class="govuk-tag ${tagClass}">${tagText}</strong>
+              <strong class="govuk-tag govuk-tag--grey">${operation}</strong>
+            </p>
+            <dl class="govuk-summary-list govuk-summary-list--no-border">
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">Decision Number</dt>
+                <dd class="govuk-summary-list__value">${cd.decisionNumber || 'N/A'}</dd>
+              </div>
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">CHED Reference</dt>
+                <dd class="govuk-summary-list__value">${result?.importPreNotification || 'N/A'}</dd>
+              </div>
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">Correlation ID</dt>
+                <dd class="govuk-summary-list__value">${cd.correlationId || 'N/A'}</dd>
+              </div>
+            </dl>
+          `;
+        }
+      } else if (subType === 'Finalisation') {
+        label = 'Declaration finalised';
+        byline = 'HMRC CDS';
+        
+        const fin = msg.message?.resource?.Finalisation;
+        if (fin) {
+          const finalState = fin.finalState === '0' ? 'Released' : fin.finalState;
+          content = `
+            <p class="govuk-body">
+              <strong class="govuk-tag govuk-tag--green">${finalState}</strong>
+              ${fin.isManualRelease ? '<strong class="govuk-tag govuk-tag--blue">Manual Release</strong>' : ''}
+              <strong class="govuk-tag govuk-tag--grey">${operation}</strong>
+            </p>
+            <dl class="govuk-summary-list govuk-summary-list--no-border">
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">Correlation ID</dt>
+                <dd class="govuk-summary-list__value">${fin.externalCorrelationId || 'N/A'}</dd>
+              </div>
+            </dl>
+          `;
+        }
+      }
+      
+      return {
+        label: { text: label },
+        html: content,
+        datetime: {
+          timestamp: created,
+          type: 'datetime'
+        },
+        byline: { text: byline }
+      };
+    });
+  }
+
   // ---- Demo payloads (swap for real lookup later) ----
 
   // MRN demo
@@ -1033,6 +1288,128 @@ if (chedPattern.test(search)) {
 
     // Fallback: format error (not MRN/CHED shapes)
     return res.render('mvp/v5/admin/view', {
+      data: { searchTerm: search, error: true, errorMessage: 'Enter an MRN or CHED in the correct format' },
+      hasResults: false
+    });
+  });
+
+  // ==================== V2 ROUTES (Timeline View) ====================
+
+  // GET: V2 timeline view
+  router.get('/mvp/v5/admin/view-v2', (req, res) => {
+    const search = (req.query.searchTerm || '').trim().toUpperCase();
+    
+    if (!search) {
+      return res.render('mvp/v5/admin/view-v2', {
+        data: { searchTerm: '' },
+        hasResults: false
+      });
+    }
+
+    // --- MRN path ---
+    if (mrnPattern.test(search)) {
+      if (search !== KNOWN_MRN) {
+        return res.render('mvp/v5/admin/view-v2', {
+          data: { searchTerm: search, error: true, errorMessage: `${search} cannot be found` },
+          hasResults: false
+        });
+      }
+
+      const mrnTimeline = formatMrnForTimeline(MRN_INFO);
+      const messagesTimeline = formatMessagesForTimeline(MRN_MESSAGES);
+
+      return res.render('mvp/v5/admin/view-v2', {
+        data: { searchTerm: search },
+        hasResults: true,
+        primaryTabLabel: 'MRN information',
+        mrnTimeline,
+        messagesTimeline
+      });
+    }
+
+    // --- CHED path ---
+    if (chedPattern.test(search)) {
+      if (!KNOWN_CHEDS.includes(search)) {
+        return res.render('mvp/v5/admin/view-v2', {
+          data: { searchTerm: search, error: true, errorMessage: `${search} cannot be found` },
+          hasResults: false
+        });
+      }
+
+      // For CHED, we don't have detailed breakdown data, so just show messages
+      const messagesTimeline = formatMessagesForTimeline(CHED_MESSAGES);
+
+      return res.render('mvp/v5/admin/view-v2', {
+        data: { searchTerm: search },
+        hasResults: true,
+        primaryTabLabel: 'CHED information',
+        mrnTimeline: [],
+        messagesTimeline
+      });
+    }
+
+    // Fallback: format error
+    return res.render('mvp/v5/admin/view-v2', {
+      data: { searchTerm: search, error: true, errorMessage: 'Enter an MRN or CHED in the correct format' },
+      hasResults: false
+    });
+  });
+
+  // POST: V2 search and render
+  router.post('/mvp/v5/admin/view-v2', (req, res) => {
+    const search = (req.body['data.searchTerm'] || '').trim().toUpperCase();
+
+    if (!search) {
+      return res.render('mvp/v5/admin/view-v2', {
+        data: { searchTerm: '', error: true, errorMessage: 'Enter an MRN, CHED, GMR or DUCR reference' },
+        hasResults: false
+      });
+    }
+
+    // --- MRN path ---
+    if (mrnPattern.test(search)) {
+      if (search !== KNOWN_MRN) {
+        return res.render('mvp/v5/admin/view-v2', {
+          data: { searchTerm: search, error: true, errorMessage: `${search} cannot be found` },
+          hasResults: false
+        });
+      }
+
+      const mrnTimeline = formatMrnForTimeline(MRN_INFO);
+      const messagesTimeline = formatMessagesForTimeline(MRN_MESSAGES);
+
+      return res.render('mvp/v5/admin/view-v2', {
+        data: { searchTerm: search },
+        hasResults: true,
+        primaryTabLabel: 'MRN information',
+        mrnTimeline,
+        messagesTimeline
+      });
+    }
+
+    // --- CHED path ---
+    if (chedPattern.test(search)) {
+      if (!KNOWN_CHEDS.includes(search)) {
+        return res.render('mvp/v5/admin/view-v2', {
+          data: { searchTerm: search, error: true, errorMessage: `${search} cannot be found` },
+          hasResults: false
+        });
+      }
+
+      // For CHED, we don't have detailed breakdown data, so just show messages
+      const messagesTimeline = formatMessagesForTimeline(CHED_MESSAGES);
+
+      return res.render('mvp/v5/admin/view-v2', {
+        data: { searchTerm: search },
+        hasResults: true,
+        primaryTabLabel: 'CHED information',
+        mrnTimeline: [],
+        messagesTimeline
+      });
+    }
+
+    // Fallback: format error
+    return res.render('mvp/v5/admin/view-v2', {
       data: { searchTerm: search, error: true, errorMessage: 'Enter an MRN or CHED in the correct format' },
       hasResults: false
     });
