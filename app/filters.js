@@ -56,24 +56,53 @@ addFilter('mrnTime', function () {
 //              {{ "" | ipaffsTime("-30min") }}
 //              {{ "" | ipaffsTime("-2hr") }}  (or "-2hrs", "-2hour", "-2hours")
 //              {{ "" | ipaffsTime("+15min") }} (future, for testing)
+//              {{ "" | ipaffsTime("-2min:30") }} -> 2min 30sec ago (for seconds control)
+//              {{ "" | ipaffsTime("-2min:51") }} -> 2min 51sec ago
 addFilter('ipaffsTime', function (value, offsetStr) {
   const arg = (typeof offsetStr !== 'undefined') ? offsetStr : value;
   try {
     let offsetMinutes = -80;
+    let offsetSeconds = 0;
+    let secondsExplicitlySet = false;
+    
     if (typeof arg === 'string' && arg.trim()) {
-      const m = arg.trim().match(/^([+-]?)(\d+)(?:\s*)(min|hr|hrs|hour|hours)?$/i);
-      if (m) {
-        let [, sign, v, unit] = m;
+      // Check for format with seconds: "-2min:30" or "-2:30"
+      const withSeconds = arg.trim().match(/^([+-]?)(\d+)(?:min)?:(\d+)$/i);
+      if (withSeconds) {
+        let [, sign, v, secs] = withSeconds;
         let minutes = parseInt(v, 10);
-        if (unit && !/min/i.test(unit)) minutes *= 60;
-        if (sign === '-') minutes = -minutes;
-        if (sign === '+') minutes = +minutes;
-        offsetMinutes = minutes;
+        let seconds = parseInt(secs, 10);
+        if (sign === '-') {
+          offsetMinutes = -minutes;
+          offsetSeconds = -seconds;
+        } else {
+          offsetMinutes = +minutes;
+          offsetSeconds = +seconds;
+        }
+        secondsExplicitlySet = true;
+      } else {
+        // Original format without seconds
+        const m = arg.trim().match(/^([+-]?)(\d+)(?:\s*)(min|hr|hrs|hour|hours)?$/i);
+        if (m) {
+          let [, sign, v, unit] = m;
+          let minutes = parseInt(v, 10);
+          if (unit && !/min/i.test(unit)) minutes *= 60;
+          if (sign === '-') minutes = -minutes;
+          if (sign === '+') minutes = +minutes;
+          offsetMinutes = minutes;
+        }
       }
     }
 
     const d = new Date();
     d.setUTCMinutes(d.getUTCMinutes() + offsetMinutes);
+    
+    // If seconds weren't explicitly specified, randomize them (0-59)
+    if (!secondsExplicitlySet) {
+      offsetSeconds = Math.floor(Math.random() * 60);
+    }
+    
+    d.setUTCSeconds(d.getUTCSeconds() + offsetSeconds);
 
     // Format explicitly in UK time with seconds (GOV.UK format: DD Month YYYY, HH:MM:SS)
     const formatter = new Intl.DateTimeFormat('en-GB', {
