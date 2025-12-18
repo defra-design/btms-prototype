@@ -3,12 +3,12 @@
 
 module.exports = (router) => {
   
-  // Helper function to format dates for display (DD Month YYYY, HH:MM)
+  // Helper function to format dates for display (DD Month YYYY, HH:MM:SS)
   // Converts UTC dates to UK timezone for display
   function formatDateForDisplay(dateString) {
     try {
       const date = new Date(dateString);
-      // Format in UK timezone using Intl.DateTimeFormat
+      // Format in UK timezone using Intl.DateTimeFormat with seconds
       const formatter = new Intl.DateTimeFormat('en-GB', {
         timeZone: 'Europe/London',
         year: 'numeric',
@@ -16,6 +16,7 @@ module.exports = (router) => {
         day: '2-digit',
         hour: '2-digit',
         minute: '2-digit',
+        second: '2-digit',
         hour12: false
       });
       
@@ -25,8 +26,9 @@ module.exports = (router) => {
       const year = parts.find(p => p.type === 'year').value;
       const hour = parts.find(p => p.type === 'hour').value;
       const minute = parts.find(p => p.type === 'minute').value;
+      const second = parts.find(p => p.type === 'second').value;
       
-      return `${day} ${month} ${year}, ${hour}:${minute}`;
+      return `${day} ${month} ${year}, ${hour}:${minute}:${second}`;
     } catch (e) {
       return dateString;
     }
@@ -38,264 +40,504 @@ module.exports = (router) => {
       title: 'Finalisation',
       version: 2,
       cdsStatus: 'Finalised - Released',
-      created: '2025-11-06T09:24:00Z',
+      created: '2025-11-06T09:24:20Z',
       hasDetails: false
     },
     {
       title: 'Clearance decision',
       decision: '6',
-      cdsStatus: 'In progress - CDS',
-      created: '2025-11-06T09:13:00Z',
+      cdsStatus: 'In progress - Awaiting CDS',
+      created: '2025-11-06T09:13:48Z',
       hasDetails: true,
       detailsHtml: `
-        <h3 class="govuk-heading-m govuk-!-margin-top-0">Item 1 - Sweet pepper</h3>
-        <p class="commodity-code"><strong>Commodity code:</strong> 1601009999</p>
-        <table class="govuk-table">
-          <thead class="govuk-table__head">
-            <tr class="govuk-table__row">
-              <th scope="col" class="govuk-table__header">CHED reference</th>
-              <th scope="col" class="govuk-table__header">Check code</th>
-              <th scope="col" class="govuk-table__header">Authority</th>
-              <th scope="col" class="govuk-table__header">Decision code</th>
-              <th scope="col" class="govuk-table__header">Decision</th>
-            </tr>
-          </thead>
-          <tbody class="govuk-table__body">
-            <tr class="govuk-table__row">
-              <td class="govuk-table__cell">GBCHD2025.6802963</td>
-              <td class="govuk-table__cell">H223</td>
-              <td class="govuk-table__cell">FNAO</td>
-              <td class="govuk-table__cell">H01</td>
-              <td class="govuk-table__cell">Hold - Awaiting decision</td>
-            </tr>
-            <tr class="govuk-table__row">
-              <td class="govuk-table__cell">GBCHD2025.6801816</td>
-              <td class="govuk-table__cell">H218</td>
-              <td class="govuk-table__cell">HMI-SMS</td>
-              <td class="govuk-table__cell">H02</td>
-              <td class="govuk-table__cell">Hold - To be inspected</td>
-            </tr>
-            <tr class="govuk-table__row">
-              <td class="govuk-table__cell">GBCHD2025.6801816</td>
-              <td class="govuk-table__cell">H219</td>
-              <td class="govuk-table__cell">PHSI</td>
-              <td class="govuk-table__cell">H02</td>
-              <td class="govuk-table__cell">Hold - To be inspected</td>
-            </tr>
-          </tbody>
-        </table>
-        <h3 class="govuk-heading-m govuk-!-margin-top-4">Item 4 - Pomegranate</h3>
-        <p class="commodity-code"><strong>Commodity code:</strong> 0810907530</p>
-        <table class="govuk-table">
-          <thead class="govuk-table__head">
-            <tr class="govuk-table__row">
-              <th scope="col" class="govuk-table__header">CHED reference</th>
-              <th scope="col" class="govuk-table__header">Check code</th>
-              <th scope="col" class="govuk-table__header">Authority</th>
-              <th scope="col" class="govuk-table__header">Decision code</th>
-              <th scope="col" class="govuk-table__header">Decision</th>
-            </tr>
-          </thead>
-          <tbody class="govuk-table__body">
-            <tr class="govuk-table__row">
-              <td class="govuk-table__cell">GBCHD2025.6803042</td>
-              <td class="govuk-table__cell">H223</td>
-              <td class="govuk-table__cell">FNAO</td>
-              <td class="govuk-table__cell">H01</td>
-              <td class="govuk-table__cell">Hold - Awaiting decision</td>
-            </tr>
-          </tbody>
-        </table>
-        <h3 class="govuk-heading-m govuk-!-margin-top-4">Item 5 - Table grapes</h3>
-        <p class="commodity-code"><strong>Commodity code:</strong> 0806101090</p>
-        <table class="govuk-table">
-          <thead class="govuk-table__head">
-            <tr class="govuk-table__row">
-              <th scope="col" class="govuk-table__header">CHED reference</th>
-              <th scope="col" class="govuk-table__header">Check code</th>
-              <th scope="col" class="govuk-table__header">Authority</th>
-              <th scope="col" class="govuk-table__header">Decision code</th>
-              <th scope="col" class="govuk-table__header">Decision</th>
-            </tr>
-          </thead>
-          <tbody class="govuk-table__body">
-            <tr class="govuk-table__row">
-              <td class="govuk-table__cell">GBCHD2025.6801816</td>
-              <td class="govuk-table__cell">H218</td>
-              <td class="govuk-table__cell">HMI-SMS</td>
-              <td class="govuk-table__cell">H02</td>
-              <td class="govuk-table__cell">Hold - To be inspected</td>
-            </tr>
-            <tr class="govuk-table__row">
-              <td class="govuk-table__cell">GBCHD2025.6801816</td>
-              <td class="govuk-table__cell">H219</td>
-              <td class="govuk-table__cell">PHSI</td>
-              <td class="govuk-table__cell">H02</td>
-              <td class="govuk-table__cell">Hold - To be inspected</td>
-            </tr>
-          </tbody>
-        </table>
-        <h3 class="govuk-heading-m govuk-!-margin-top-4">Item 7 - Chilli peppers</h3>
-        <p class="commodity-code"><strong>Commodity code:</strong> 0709609920</p>
-        <table class="govuk-table">
-          <thead class="govuk-table__head">
-            <tr class="govuk-table__row">
-              <th scope="col" class="govuk-table__header">CHED reference</th>
-              <th scope="col" class="govuk-table__header">Check code</th>
-              <th scope="col" class="govuk-table__header">Authority</th>
-              <th scope="col" class="govuk-table__header">Decision code</th>
-              <th scope="col" class="govuk-table__header">Decision</th>
-            </tr>
-          </thead>
-          <tbody class="govuk-table__body">
-            <tr class="govuk-table__row">
-              <td class="govuk-table__cell">GBCHD2025.6802963</td>
-              <td class="govuk-table__cell">H223</td>
-              <td class="govuk-table__cell">FNAO</td>
-              <td class="govuk-table__cell">H01</td>
-              <td class="govuk-table__cell">Hold - Awaiting decision</td>
-            </tr>
-            <tr class="govuk-table__row">
-              <td class="govuk-table__cell">GBCHD2025.6801816</td>
-              <td class="govuk-table__cell">H219</td>
-              <td class="govuk-table__cell">PHSI</td>
-              <td class="govuk-table__cell">H02</td>
-              <td class="govuk-table__cell">Hold - To be inspected</td>
-            </tr>
-          </tbody>
-        </table>
-        <h3 class="govuk-heading-m govuk-!-margin-top-4">Item 8 - Pears</h3>
-        <p class="commodity-code"><strong>Commodity code:</strong> 0808309090</p>
-        <table class="govuk-table">
-          <thead class="govuk-table__head">
-            <tr class="govuk-table__row">
-              <th scope="col" class="govuk-table__header">CHED reference</th>
-              <th scope="col" class="govuk-table__header">Check code</th>
-              <th scope="col" class="govuk-table__header">Authority</th>
-              <th scope="col" class="govuk-table__header">Decision code</th>
-              <th scope="col" class="govuk-table__header">Decision</th>
-            </tr>
-          </thead>
-          <tbody class="govuk-table__body">
-            <tr class="govuk-table__row">
-              <td class="govuk-table__cell">GBCHD2025.6801816</td>
-              <td class="govuk-table__cell">H218</td>
-              <td class="govuk-table__cell">HMI-SMS</td>
-              <td class="govuk-table__cell">H02</td>
-              <td class="govuk-table__cell">Hold - To be inspected</td>
-            </tr>
-            <tr class="govuk-table__row">
-              <td class="govuk-table__cell">GBCHD2025.6801816</td>
-              <td class="govuk-table__cell">H219</td>
-              <td class="govuk-table__cell">PHSI</td>
-              <td class="govuk-table__cell">H02</td>
-              <td class="govuk-table__cell">Hold - To be inspected</td>
-            </tr>
-          </tbody>
-        </table>
-        <h3 class="govuk-heading-m govuk-!-margin-top-4">Item 9 - Corn</h3>
-        <p class="commodity-code"><strong>Commodity code:</strong> 0709996090</p>
-        <table class="govuk-table">
-          <thead class="govuk-table__head">
-            <tr class="govuk-table__row">
-              <th scope="col" class="govuk-table__header">CHED reference</th>
-              <th scope="col" class="govuk-table__header">Check code</th>
-              <th scope="col" class="govuk-table__header">Authority</th>
-              <th scope="col" class="govuk-table__header">Decision code</th>
-              <th scope="col" class="govuk-table__header">Decision</th>
-            </tr>
-          </thead>
-          <tbody class="govuk-table__body">
-            <tr class="govuk-table__row">
-              <td class="govuk-table__cell">GBCHD2025.6801816</td>
-              <td class="govuk-table__cell">H219</td>
-              <td class="govuk-table__cell">PHSI</td>
-              <td class="govuk-table__cell">H02</td>
-              <td class="govuk-table__cell">Hold - To be inspected</td>
-            </tr>
-          </tbody>
-        </table>
-        <h3 class="govuk-heading-m govuk-!-margin-top-4">Item 10 - Egg plant</h3>
-        <p class="commodity-code"><strong>Commodity code:</strong> 0709300005</p>
-        <table class="govuk-table">
-          <thead class="govuk-table__head">
-            <tr class="govuk-table__row">
-              <th scope="col" class="govuk-table__header">CHED reference</th>
-              <th scope="col" class="govuk-table__header">Check code</th>
-              <th scope="col" class="govuk-table__header">Authority</th>
-              <th scope="col" class="govuk-table__header">Decision code</th>
-              <th scope="col" class="govuk-table__header">Decision</th>
-            </tr>
-          </thead>
-          <tbody class="govuk-table__body">
-            <tr class="govuk-table__row">
-              <td class="govuk-table__cell">GBCHD2025.6801816</td>
-              <td class="govuk-table__cell">H219</td>
-              <td class="govuk-table__cell">PHSI</td>
-              <td class="govuk-table__cell">H02</td>
-              <td class="govuk-table__cell">Hold - To be inspected</td>
-            </tr>
-          </tbody>
-        </table>
-        <h3 class="govuk-heading-m govuk-!-margin-top-4">Item 14 - Carrot</h3>
-        <p class="commodity-code"><strong>Commodity code:</strong> 0709300005</p>
-        <table class="govuk-table">
-          <thead class="govuk-table__head">
-            <tr class="govuk-table__row">
-              <th scope="col" class="govuk-table__header">CHED reference</th>
-              <th scope="col" class="govuk-table__header">Check code</th>
-              <th scope="col" class="govuk-table__header">Authority</th>
-              <th scope="col" class="govuk-table__header">Decision code</th>
-              <th scope="col" class="govuk-table__header">Decision</th>
-            </tr>
-          </thead>
-          <tbody class="govuk-table__body">
-            <tr class="govuk-table__row">
-              <td class="govuk-table__cell">GBCHD2025.6801816</td>
-              <td class="govuk-table__cell">H219</td>
-              <td class="govuk-table__cell">PHSI</td>
-              <td class="govuk-table__cell">H02</td>
-              <td class="govuk-table__cell">Hold - To be inspected</td>
-            </tr>
-          </tbody>
-        </table>
-        <h3 class="govuk-heading-m govuk-!-margin-top-4">Item 15 - Raddish</h3>
-        <p class="commodity-code"><strong>Commodity code:</strong> 0709300005</p>
-        <table class="govuk-table">
-          <thead class="govuk-table__head">
-            <tr class="govuk-table__row">
-              <th scope="col" class="govuk-table__header">CHED reference</th>
-              <th scope="col" class="govuk-table__header">Check code</th>
-              <th scope="col" class="govuk-table__header">Authority</th>
-              <th scope="col" class="govuk-table__header">Decision code</th>
-              <th scope="col" class="govuk-table__header">Decision</th>
-            </tr>
-          </thead>
-          <tbody class="govuk-table__body">
-            <tr class="govuk-table__row">
-              <td class="govuk-table__cell">GBCHD2025.6801816</td>
-              <td class="govuk-table__cell">H219</td>
-              <td class="govuk-table__cell">PHSI</td>
-              <td class="govuk-table__cell">H02</td>
-              <td class="govuk-table__cell">Hold - To be inspected</td>
-            </tr>
-          </tbody>
-        </table>
-      `
-    },
+      <h3 class="govuk-heading-m govuk-!-margin-top-0">Item 1 - Sweet pepper</h3>
+      <p class="commodity-code"><strong>Commodity code:</strong> 1601009999</p>
+      <table class="govuk-table">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header">CHED reference</th>
+            <th scope="col" class="govuk-table__header">Check code</th>
+            <th scope="col" class="govuk-table__header">Authority</th>
+            <th scope="col" class="govuk-table__header">Decision code</th>
+            <th scope="col" class="govuk-table__header">Decision</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">GBCHD2025.6802963</td>
+            <td class="govuk-table__cell">H223</td>
+            <td class="govuk-table__cell">FNAO</td>
+            <td class="govuk-table__cell">C03</td>
+            <td class="govuk-table__cell">Release - Inspection Complete</td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">GBCHD2025.6801816</td>
+            <td class="govuk-table__cell">H218</td>
+            <td class="govuk-table__cell">HMI-SMS</td>
+            <td class="govuk-table__cell">C03</td>
+            <td class="govuk-table__cell">Release - Inspection Complete</td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">GBCHD2025.6801816</td>
+            <td class="govuk-table__cell">H219</td>
+            <td class="govuk-table__cell">PHSI</td>
+            <td class="govuk-table__cell">C03</td>
+            <td class="govuk-table__cell">Release - Inspection Complete</td>
+          </tr>
+        </tbody>
+      </table>
+      <h3 class="govuk-heading-m govuk-!-margin-top-4">Item 4 - Pomegranate</h3>
+      <p class="commodity-code"><strong>Commodity code:</strong> 0810907530</p>
+      <table class="govuk-table">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header">CHED reference</th>
+            <th scope="col" class="govuk-table__header">Check code</th>
+            <th scope="col" class="govuk-table__header">Authority</th>
+            <th scope="col" class="govuk-table__header">Decision code</th>
+            <th scope="col" class="govuk-table__header">Decision</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">GBCHD2025.6803042</td>
+            <td class="govuk-table__cell">H223</td>
+            <td class="govuk-table__cell">FNAO</td>
+            <td class="govuk-table__cell">C03</td>
+            <td class="govuk-table__cell">Release - Inspection Complete</td>
+          </tr>
+        </tbody>
+      </table>
+      <h3 class="govuk-heading-m govuk-!-margin-top-4">Item 5 - Table grapes</h3>
+      <p class="commodity-code"><strong>Commodity code:</strong> 0806101090</p>
+      <table class="govuk-table">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header">CHED reference</th>
+            <th scope="col" class="govuk-table__header">Check code</th>
+            <th scope="col" class="govuk-table__header">Authority</th>
+            <th scope="col" class="govuk-table__header">Decision code</th>
+            <th scope="col" class="govuk-table__header">Decision</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">GBCHD2025.6801816</td>
+            <td class="govuk-table__cell">H218</td>
+            <td class="govuk-table__cell">HMI-SMS</td>
+            <td class="govuk-table__cell">C03</td>
+            <td class="govuk-table__cell">Release - Inspection Complete</td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">GBCHD2025.6801816</td>
+            <td class="govuk-table__cell">H219</td>
+            <td class="govuk-table__cell">PHSI</td>
+            <td class="govuk-table__cell">C03</td>
+            <td class="govuk-table__cell">Release - Inspection Complete</td>
+          </tr>
+        </tbody>
+      </table>
+      <h3 class="govuk-heading-m govuk-!-margin-top-4">Item 7 - Chilli peppers</h3>
+      <p class="commodity-code"><strong>Commodity code:</strong> 0709609920</p>
+      <table class="govuk-table">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header">CHED reference</th>
+            <th scope="col" class="govuk-table__header">Check code</th>
+            <th scope="col" class="govuk-table__header">Authority</th>
+            <th scope="col" class="govuk-table__header">Decision code</th>
+            <th scope="col" class="govuk-table__header">Decision</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">GBCHD2025.6802963</td>
+            <td class="govuk-table__cell">H223</td>
+            <td class="govuk-table__cell">FNAO</td>
+            <td class="govuk-table__cell">C03</td>
+            <td class="govuk-table__cell">Release - Inspection Complete</td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">GBCHD2025.6801816</td>
+            <td class="govuk-table__cell">H219</td>
+            <td class="govuk-table__cell">PHSI</td>
+            <td class="govuk-table__cell">C03</td>
+            <td class="govuk-table__cell">Release - Inspection Complete</td>
+          </tr>
+        </tbody>
+      </table>
+      <h3 class="govuk-heading-m govuk-!-margin-top-4">Item 8 - Pears</h3>
+      <p class="commodity-code"><strong>Commodity code:</strong> 0808309090</p>
+      <table class="govuk-table">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header">CHED reference</th>
+            <th scope="col" class="govuk-table__header">Check code</th>
+            <th scope="col" class="govuk-table__header">Authority</th>
+            <th scope="col" class="govuk-table__header">Decision code</th>
+            <th scope="col" class="govuk-table__header">Decision</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">GBCHD2025.6801816</td>
+            <td class="govuk-table__cell">H218</td>
+            <td class="govuk-table__cell">HMI-SMS</td>
+            <td class="govuk-table__cell">C03</td>
+            <td class="govuk-table__cell">Release - Inspection Complete</td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">GBCHD2025.6801816</td>
+            <td class="govuk-table__cell">H219</td>
+            <td class="govuk-table__cell">PHSI</td>
+            <td class="govuk-table__cell">C03</td>
+            <td class="govuk-table__cell">Release - Inspection Complete</td>
+          </tr>
+        </tbody>
+      </table>
+      <h3 class="govuk-heading-m govuk-!-margin-top-4">Item 9 - Corn</h3>
+      <p class="commodity-code"><strong>Commodity code:</strong> 0709996090</p>
+      <table class="govuk-table">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header">CHED reference</th>
+            <th scope="col" class="govuk-table__header">Check code</th>
+            <th scope="col" class="govuk-table__header">Authority</th>
+            <th scope="col" class="govuk-table__header">Decision code</th>
+            <th scope="col" class="govuk-table__header">Decision</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">GBCHD2025.6801816</td>
+            <td class="govuk-table__cell">H219</td>
+            <td class="govuk-table__cell">PHSI</td>
+            <td class="govuk-table__cell">C03</td>
+            <td class="govuk-table__cell">Release - Inspection Complete</td>
+          </tr>
+        </tbody>
+      </table>
+      <h3 class="govuk-heading-m govuk-!-margin-top-4">Item 10 - Egg plant</h3>
+      <p class="commodity-code"><strong>Commodity code:</strong> 0709300005</p>
+      <table class="govuk-table">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header">CHED reference</th>
+            <th scope="col" class="govuk-table__header">Check code</th>
+            <th scope="col" class="govuk-table__header">Authority</th>
+            <th scope="col" class="govuk-table__header">Decision code</th>
+            <th scope="col" class="govuk-table__header">Decision</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">GBCHD2025.6801816</td>
+            <td class="govuk-table__cell">H219</td>
+            <td class="govuk-table__cell">PHSI</td>
+            <td class="govuk-table__cell">C03</td>
+            <td class="govuk-table__cell">Release - Inspection Complete</td>
+          </tr>
+        </tbody>
+      </table>
+      <h3 class="govuk-heading-m govuk-!-margin-top-4">Item 14 - Carrot</h3>
+      <p class="commodity-code"><strong>Commodity code:</strong> 0709300005</p>
+      <table class="govuk-table">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header">CHED reference</th>
+            <th scope="col" class="govuk-table__header">Check code</th>
+            <th scope="col" class="govuk-table__header">Authority</th>
+            <th scope="col" class="govuk-table__header">Decision code</th>
+            <th scope="col" class="govuk-table__header">Decision</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">GBCHD2025.6801816</td>
+            <td class="govuk-table__cell">H219</td>
+            <td class="govuk-table__cell">PHSI</td>
+              <td class="govuk-table__cell">C03</td>
+            <td class="govuk-table__cell">Release - Inspection Complete</td>
+          </tr>
+        </tbody>
+      </table>
+      <h3 class="govuk-heading-m govuk-!-margin-top-4">Item 15 - Raddish</h3>
+      <p class="commodity-code"><strong>Commodity code:</strong> 0709300005</p>
+      <table class="govuk-table">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header">CHED reference</th>
+            <th scope="col" class="govuk-table__header">Check code</th>
+            <th scope="col" class="govuk-table__header">Authority</th>
+            <th scope="col" class="govuk-table__header">Decision code</th>
+            <th scope="col" class="govuk-table__header">Decision</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">GBCHD2025.6801816</td>
+            <td class="govuk-table__cell">H219</td>
+            <td class="govuk-table__cell">PHSI</td>
+               <td class="govuk-table__cell">C03</td>
+            <td class="govuk-table__cell">Release - Inspection Complete</td>
+          </tr>
+        </tbody>
+      </table>
+    `
+  },
     {
       title: 'CHEDPP GB 2025.6801816',
       chedStatus: 'Valid',
       decision: 'Acceptable for Internal Market',
-      created: '2025-11-06T09:15:00Z',
+      created: '2025-11-06T09:13:46Z',
       hasDetails: false
     },
     {
       title: 'Clearance decision',
       decision: '5',
       cdsStatus: 'In progress - Awaiting IPAFFS',
-
-      created: '2025-11-05T19:09:00Z',
+      created: '2025-11-05T19:09:24Z',
+      hasDetails: true,
+      detailsHtml: `
+      <h3 class="govuk-heading-m govuk-!-margin-top-0">Item 1 - Sweet pepper</h3>
+      <p class="commodity-code"><strong>Commodity code:</strong> 1601009999</p>
+      <table class="govuk-table">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header">CHED reference</th>
+            <th scope="col" class="govuk-table__header">Check code</th>
+            <th scope="col" class="govuk-table__header">Authority</th>
+            <th scope="col" class="govuk-table__header">Decision code</th>
+            <th scope="col" class="govuk-table__header">Decision</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">GBCHD2025.6802963</td>
+            <td class="govuk-table__cell">H223</td>
+            <td class="govuk-table__cell">FNAO</td>
+            <td class="govuk-table__cell">C03</td>
+            <td class="govuk-table__cell">Release - Inspection Complete</td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">GBCHD2025.6801816</td>
+            <td class="govuk-table__cell">H218</td>
+            <td class="govuk-table__cell">HMI-SMS</td>
+            <td class="govuk-table__cell">H02</td>
+            <td class="govuk-table__cell">Hold - To be inspected</td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">GBCHD2025.6801816</td>
+            <td class="govuk-table__cell">H219</td>
+            <td class="govuk-table__cell">PHSI</td>
+            <td class="govuk-table__cell">H02</td>
+            <td class="govuk-table__cell">Hold - To be inspected</td>
+          </tr>
+        </tbody>
+      </table>
+      <h3 class="govuk-heading-m govuk-!-margin-top-4">Item 4 - Pomegranate</h3>
+      <p class="commodity-code"><strong>Commodity code:</strong> 0810907530</p>
+      <table class="govuk-table">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header">CHED reference</th>
+            <th scope="col" class="govuk-table__header">Check code</th>
+            <th scope="col" class="govuk-table__header">Authority</th>
+            <th scope="col" class="govuk-table__header">Decision code</th>
+            <th scope="col" class="govuk-table__header">Decision</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">GBCHD2025.6803042</td>
+            <td class="govuk-table__cell">H223</td>
+            <td class="govuk-table__cell">FNAO</td>
+            <td class="govuk-table__cell">C03</td>
+            <td class="govuk-table__cell">Release - Inspection Complete</td>
+          </tr>
+        </tbody>
+      </table>
+      <h3 class="govuk-heading-m govuk-!-margin-top-4">Item 5 - Table grapes</h3>
+      <p class="commodity-code"><strong>Commodity code:</strong> 0806101090</p>
+      <table class="govuk-table">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header">CHED reference</th>
+            <th scope="col" class="govuk-table__header">Check code</th>
+            <th scope="col" class="govuk-table__header">Authority</th>
+            <th scope="col" class="govuk-table__header">Decision code</th>
+            <th scope="col" class="govuk-table__header">Decision</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">GBCHD2025.6801816</td>
+            <td class="govuk-table__cell">H218</td>
+            <td class="govuk-table__cell">HMI-SMS</td>
+            <td class="govuk-table__cell">H02</td>
+            <td class="govuk-table__cell">Hold - Awaiting decision</td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">GBCHD2025.6801816</td>
+            <td class="govuk-table__cell">H219</td>
+            <td class="govuk-table__cell">PHSI</td>
+            <td class="govuk-table__cell">H02</td>
+            <td class="govuk-table__cell">Hold - To be inspected</td>
+          </tr>
+        </tbody>
+      </table>
+      <h3 class="govuk-heading-m govuk-!-margin-top-4">Item 7 - Chilli peppers</h3>
+      <p class="commodity-code"><strong>Commodity code:</strong> 0709609920</p>
+      <table class="govuk-table">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header">CHED reference</th>
+            <th scope="col" class="govuk-table__header">Check code</th>
+            <th scope="col" class="govuk-table__header">Authority</th>
+            <th scope="col" class="govuk-table__header">Decision code</th>
+            <th scope="col" class="govuk-table__header">Decision</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">GBCHD2025.6802963</td>
+            <td class="govuk-table__cell">H223</td>
+            <td class="govuk-table__cell">FNAO</td>
+            <td class="govuk-table__cell">C03</td>
+            <td class="govuk-table__cell">Release - Inspection Complete</td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">GBCHD2025.6801816</td>
+            <td class="govuk-table__cell">H219</td>
+            <td class="govuk-table__cell">PHSI</td>
+            <td class="govuk-table__cell">H02</td>
+            <td class="govuk-table__cell">Hold - To be inspected</td>
+          </tr>
+        </tbody>
+      </table>
+      <h3 class="govuk-heading-m govuk-!-margin-top-4">Item 8 - Pears</h3>
+      <p class="commodity-code"><strong>Commodity code:</strong> 0808309090</p>
+      <table class="govuk-table">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header">CHED reference</th>
+            <th scope="col" class="govuk-table__header">Check code</th>
+            <th scope="col" class="govuk-table__header">Authority</th>
+            <th scope="col" class="govuk-table__header">Decision code</th>
+            <th scope="col" class="govuk-table__header">Decision</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">GBCHD2025.6801816</td>
+            <td class="govuk-table__cell">H218</td>
+            <td class="govuk-table__cell">HMI-SMS</td>
+            <td class="govuk-table__cell">H02</td>
+            <td class="govuk-table__cell">Hold - To be inspected</td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">GBCHD2025.6801816</td>
+            <td class="govuk-table__cell">H219</td>
+            <td class="govuk-table__cell">PHSI</td>
+            <td class="govuk-table__cell">H02</td>
+            <td class="govuk-table__cell">Hold - To be inspected</td>
+          </tr>
+        </tbody>
+      </table>
+      <h3 class="govuk-heading-m govuk-!-margin-top-4">Item 9 - Corn</h3>
+      <p class="commodity-code"><strong>Commodity code:</strong> 0709996090</p>
+      <table class="govuk-table">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header">CHED reference</th>
+            <th scope="col" class="govuk-table__header">Check code</th>
+            <th scope="col" class="govuk-table__header">Authority</th>
+            <th scope="col" class="govuk-table__header">Decision code</th>
+            <th scope="col" class="govuk-table__header">Decision</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">GBCHD2025.6801816</td>
+            <td class="govuk-table__cell">H219</td>
+            <td class="govuk-table__cell">PHSI</td>
+            <td class="govuk-table__cell">H02</td>
+            <td class="govuk-table__cell">Hold - To be inspected</td>
+          </tr>
+        </tbody>
+      </table>
+      <h3 class="govuk-heading-m govuk-!-margin-top-4">Item 10 - Egg plant</h3>
+      <p class="commodity-code"><strong>Commodity code:</strong> 0709300005</p>
+      <table class="govuk-table">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header">CHED reference</th>
+            <th scope="col" class="govuk-table__header">Check code</th>
+            <th scope="col" class="govuk-table__header">Authority</th>
+            <th scope="col" class="govuk-table__header">Decision code</th>
+            <th scope="col" class="govuk-table__header">Decision</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">GBCHD2025.6801816</td>
+            <td class="govuk-table__cell">H219</td>
+            <td class="govuk-table__cell">PHSI</td>
+            <td class="govuk-table__cell">H02</td>
+            <td class="govuk-table__cell">Hold - To be inspected</td>
+          </tr>
+        </tbody>
+      </table>
+      <h3 class="govuk-heading-m govuk-!-margin-top-4">Item 14 - Carrot</h3>
+      <p class="commodity-code"><strong>Commodity code:</strong> 0709300005</p>
+      <table class="govuk-table">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header">CHED reference</th>
+            <th scope="col" class="govuk-table__header">Check code</th>
+            <th scope="col" class="govuk-table__header">Authority</th>
+            <th scope="col" class="govuk-table__header">Decision code</th>
+            <th scope="col" class="govuk-table__header">Decision</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">GBCHD2025.6801816</td>
+            <td class="govuk-table__cell">H219</td>
+            <td class="govuk-table__cell">PHSI</td>
+            <td class="govuk-table__cell">H02</td>
+            <td class="govuk-table__cell">Hold - To be inspected</td>
+          </tr>
+        </tbody>
+      </table>
+      <h3 class="govuk-heading-m govuk-!-margin-top-4">Item 15 - Raddish</h3>
+      <p class="commodity-code"><strong>Commodity code:</strong> 0709300005</p>
+      <table class="govuk-table">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header">CHED reference</th>
+            <th scope="col" class="govuk-table__header">Check code</th>
+            <th scope="col" class="govuk-table__header">Authority</th>
+            <th scope="col" class="govuk-table__header">Decision code</th>
+            <th scope="col" class="govuk-table__header">Decision</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">GBCHD2025.6801816</td>
+            <td class="govuk-table__cell">H219</td>
+            <td class="govuk-table__cell">PHSI</td>
+            <td class="govuk-table__cell">H02</td>
+            <td class="govuk-table__cell">Hold - To be inspected</td>
+          </tr>
+        </tbody>
+      </table>
+    `
+  },
+    {
+      title: 'Clearance request',
+      version: 2,
+      created: '2025-11-05T19:09:24Z',
       hasDetails: true,
       detailsHtml: `
         <h3 class="govuk-heading-m govuk-!-margin-top-0">Item 1 - Sweet pepper</h3>
@@ -306,8 +548,6 @@ module.exports = (router) => {
               <th scope="col" class="govuk-table__header">CHED reference</th>
               <th scope="col" class="govuk-table__header">Check code</th>
               <th scope="col" class="govuk-table__header">Authority</th>
-              <th scope="col" class="govuk-table__header">Decision code</th>
-              <th scope="col" class="govuk-table__header">Decision</th>
             </tr>
           </thead>
           <tbody class="govuk-table__body">
@@ -315,26 +555,20 @@ module.exports = (router) => {
               <td class="govuk-table__cell">GBCHD2025.6802963</td>
               <td class="govuk-table__cell">H223</td>
               <td class="govuk-table__cell">FNAO</td>
-              <td class="govuk-table__cell">H01</td>
-              <td class="govuk-table__cell">Hold - Awaiting decision</td>
             </tr>
             <tr class="govuk-table__row">
               <td class="govuk-table__cell">GBCHD2025.6801816</td>
               <td class="govuk-table__cell">H218</td>
               <td class="govuk-table__cell">HMI-SMS</td>
-              <td class="govuk-table__cell">H02</td>
-              <td class="govuk-table__cell">Hold - To be inspected</td>
             </tr>
             <tr class="govuk-table__row">
               <td class="govuk-table__cell">GBCHD2025.6801816</td>
               <td class="govuk-table__cell">H219</td>
               <td class="govuk-table__cell">PHSI</td>
-              <td class="govuk-table__cell">H02</td>
-              <td class="govuk-table__cell">Hold - To be inspected</td>
             </tr>
           </tbody>
         </table>
-        <h3 class="govuk-heading-m govuk-!-margin-top-4">Item 4 - Pomegranate</h3>
+        <h3 class="govuk-heading-s govuk-!-margin-top-4">Item 4 - Pomegranate</h3>
         <p class="commodity-code"><strong>Commodity code:</strong> 0810907530</p>
         <table class="govuk-table">
           <thead class="govuk-table__head">
@@ -342,8 +576,6 @@ module.exports = (router) => {
               <th scope="col" class="govuk-table__header">CHED reference</th>
               <th scope="col" class="govuk-table__header">Check code</th>
               <th scope="col" class="govuk-table__header">Authority</th>
-              <th scope="col" class="govuk-table__header">Decision code</th>
-              <th scope="col" class="govuk-table__header">Decision</th>
             </tr>
           </thead>
           <tbody class="govuk-table__body">
@@ -351,12 +583,10 @@ module.exports = (router) => {
               <td class="govuk-table__cell">GBCHD2025.6803042</td>
               <td class="govuk-table__cell">H223</td>
               <td class="govuk-table__cell">FNAO</td>
-              <td class="govuk-table__cell">H01</td>
-              <td class="govuk-table__cell">Hold - Awaiting decision</td>
             </tr>
           </tbody>
         </table>
-        <h3 class="govuk-heading-m govuk-!-margin-top-4">Item 5 - Table grapes</h3>
+        <h3 class="govuk-heading-s govuk-!-margin-top-4">Item 5 - Table grapes</h3>
         <p class="commodity-code"><strong>Commodity code:</strong> 0806101090</p>
         <table class="govuk-table">
           <thead class="govuk-table__head">
@@ -364,8 +594,6 @@ module.exports = (router) => {
               <th scope="col" class="govuk-table__header">CHED reference</th>
               <th scope="col" class="govuk-table__header">Check code</th>
               <th scope="col" class="govuk-table__header">Authority</th>
-              <th scope="col" class="govuk-table__header">Decision code</th>
-              <th scope="col" class="govuk-table__header">Decision</th>
             </tr>
           </thead>
           <tbody class="govuk-table__body">
@@ -373,19 +601,15 @@ module.exports = (router) => {
               <td class="govuk-table__cell">GBCHD2025.6801816</td>
               <td class="govuk-table__cell">H218</td>
               <td class="govuk-table__cell">HMI-SMS</td>
-              <td class="govuk-table__cell">H02</td>
-              <td class="govuk-table__cell">Hold - To be inspected</td>
             </tr>
             <tr class="govuk-table__row">
               <td class="govuk-table__cell">GBCHD2025.6801816</td>
               <td class="govuk-table__cell">H219</td>
               <td class="govuk-table__cell">PHSI</td>
-              <td class="govuk-table__cell">H02</td>
-              <td class="govuk-table__cell">Hold - To be inspected</td>
             </tr>
           </tbody>
         </table>
-        <h3 class="govuk-heading-m govuk-!-margin-top-4">Item 7 - Chilli peppers</h3>
+        <h3 class="govuk-heading-s govuk-!-margin-top-4">Item 7 - Chilli peppers</h3>
         <p class="commodity-code"><strong>Commodity code:</strong> 0709609920</p>
         <table class="govuk-table">
           <thead class="govuk-table__head">
@@ -393,8 +617,6 @@ module.exports = (router) => {
               <th scope="col" class="govuk-table__header">CHED reference</th>
               <th scope="col" class="govuk-table__header">Check code</th>
               <th scope="col" class="govuk-table__header">Authority</th>
-              <th scope="col" class="govuk-table__header">Decision code</th>
-              <th scope="col" class="govuk-table__header">Decision</th>
             </tr>
           </thead>
           <tbody class="govuk-table__body">
@@ -402,19 +624,15 @@ module.exports = (router) => {
               <td class="govuk-table__cell">GBCHD2025.6802963</td>
               <td class="govuk-table__cell">H223</td>
               <td class="govuk-table__cell">FNAO</td>
-              <td class="govuk-table__cell">H01</td>
-              <td class="govuk-table__cell">Hold - Awaiting decision</td>
             </tr>
             <tr class="govuk-table__row">
               <td class="govuk-table__cell">GBCHD2025.6801816</td>
               <td class="govuk-table__cell">H219</td>
               <td class="govuk-table__cell">PHSI</td>
-              <td class="govuk-table__cell">H02</td>
-              <td class="govuk-table__cell">Hold - To be inspected</td>
             </tr>
           </tbody>
         </table>
-        <h3 class="govuk-heading-m govuk-!-margin-top-4">Item 8 - Pears</h3>
+        <h3 class="govuk-heading-s govuk-!-margin-top-4">Item 8 - Pears</h3>
         <p class="commodity-code"><strong>Commodity code:</strong> 0808309090</p>
         <table class="govuk-table">
           <thead class="govuk-table__head">
@@ -422,8 +640,6 @@ module.exports = (router) => {
               <th scope="col" class="govuk-table__header">CHED reference</th>
               <th scope="col" class="govuk-table__header">Check code</th>
               <th scope="col" class="govuk-table__header">Authority</th>
-              <th scope="col" class="govuk-table__header">Decision code</th>
-              <th scope="col" class="govuk-table__header">Decision</th>
             </tr>
           </thead>
           <tbody class="govuk-table__body">
@@ -431,19 +647,15 @@ module.exports = (router) => {
               <td class="govuk-table__cell">GBCHD2025.6801816</td>
               <td class="govuk-table__cell">H218</td>
               <td class="govuk-table__cell">HMI-SMS</td>
-              <td class="govuk-table__cell">H02</td>
-              <td class="govuk-table__cell">Hold - To be inspected</td>
             </tr>
             <tr class="govuk-table__row">
               <td class="govuk-table__cell">GBCHD2025.6801816</td>
               <td class="govuk-table__cell">H219</td>
               <td class="govuk-table__cell">PHSI</td>
-              <td class="govuk-table__cell">H02</td>
-              <td class="govuk-table__cell">Hold - To be inspected</td>
             </tr>
           </tbody>
         </table>
-        <h3 class="govuk-heading-m govuk-!-margin-top-4">Item 9 - Corn</h3>
+        <h3 class="govuk-heading-s govuk-!-margin-top-4">Item 9 - Corn</h3>
         <p class="commodity-code"><strong>Commodity code:</strong> 0709996090</p>
         <table class="govuk-table">
           <thead class="govuk-table__head">
@@ -451,8 +663,6 @@ module.exports = (router) => {
               <th scope="col" class="govuk-table__header">CHED reference</th>
               <th scope="col" class="govuk-table__header">Check code</th>
               <th scope="col" class="govuk-table__header">Authority</th>
-              <th scope="col" class="govuk-table__header">Decision code</th>
-              <th scope="col" class="govuk-table__header">Decision</th>
             </tr>
           </thead>
           <tbody class="govuk-table__body">
@@ -460,12 +670,10 @@ module.exports = (router) => {
               <td class="govuk-table__cell">GBCHD2025.6801816</td>
               <td class="govuk-table__cell">H219</td>
               <td class="govuk-table__cell">PHSI</td>
-              <td class="govuk-table__cell">H02</td>
-              <td class="govuk-table__cell">Hold - To be inspected</td>
             </tr>
           </tbody>
         </table>
-        <h3 class="govuk-heading-m govuk-!-margin-top-4">Item 10 - Egg plant</h3>
+        <h3 class="govuk-heading-s govuk-!-margin-top-4">Item 10 - Egg plant</h3>
         <p class="commodity-code"><strong>Commodity code:</strong> 0709300005</p>
         <table class="govuk-table">
           <thead class="govuk-table__head">
@@ -473,8 +681,6 @@ module.exports = (router) => {
               <th scope="col" class="govuk-table__header">CHED reference</th>
               <th scope="col" class="govuk-table__header">Check code</th>
               <th scope="col" class="govuk-table__header">Authority</th>
-              <th scope="col" class="govuk-table__header">Decision code</th>
-              <th scope="col" class="govuk-table__header">Decision</th>
             </tr>
           </thead>
           <tbody class="govuk-table__body">
@@ -482,12 +688,10 @@ module.exports = (router) => {
               <td class="govuk-table__cell">GBCHD2025.6801816</td>
               <td class="govuk-table__cell">H219</td>
               <td class="govuk-table__cell">PHSI</td>
-              <td class="govuk-table__cell">H02</td>
-              <td class="govuk-table__cell">Hold - To be inspected</td>
             </tr>
           </tbody>
         </table>
-        <h3 class="govuk-heading-m govuk-!-margin-top-4">Item 14 - Carrot</h3>
+        <h3 class="govuk-heading-s govuk-!-margin-top-4">Item 14 - Carrot</h3>
         <p class="commodity-code"><strong>Commodity code:</strong> 0709300005</p>
         <table class="govuk-table">
           <thead class="govuk-table__head">
@@ -495,8 +699,6 @@ module.exports = (router) => {
               <th scope="col" class="govuk-table__header">CHED reference</th>
               <th scope="col" class="govuk-table__header">Check code</th>
               <th scope="col" class="govuk-table__header">Authority</th>
-              <th scope="col" class="govuk-table__header">Decision code</th>
-              <th scope="col" class="govuk-table__header">Decision</th>
             </tr>
           </thead>
           <tbody class="govuk-table__body">
@@ -504,12 +706,10 @@ module.exports = (router) => {
               <td class="govuk-table__cell">GBCHD2025.6801816</td>
               <td class="govuk-table__cell">H219</td>
               <td class="govuk-table__cell">PHSI</td>
-              <td class="govuk-table__cell">H02</td>
-              <td class="govuk-table__cell">Hold - To be inspected</td>
             </tr>
           </tbody>
         </table>
-        <h3 class="govuk-heading-m govuk-!-margin-top-4">Item 15 - Raddish</h3>
+        <h3 class="govuk-heading-s govuk-!-margin-top-4">Item 15 - Raddish</h3>
         <p class="commodity-code"><strong>Commodity code:</strong> 0709300005</p>
         <table class="govuk-table">
           <thead class="govuk-table__head">
@@ -517,8 +717,6 @@ module.exports = (router) => {
               <th scope="col" class="govuk-table__header">CHED reference</th>
               <th scope="col" class="govuk-table__header">Check code</th>
               <th scope="col" class="govuk-table__header">Authority</th>
-              <th scope="col" class="govuk-table__header">Decision code</th>
-              <th scope="col" class="govuk-table__header">Decision</th>
             </tr>
           </thead>
           <tbody class="govuk-table__body">
@@ -526,25 +724,16 @@ module.exports = (router) => {
               <td class="govuk-table__cell">GBCHD2025.6801816</td>
               <td class="govuk-table__cell">H219</td>
               <td class="govuk-table__cell">PHSI</td>
-              <td class="govuk-table__cell">H02</td>
-              <td class="govuk-table__cell">Hold - To be inspected</td>
             </tr>
           </tbody>
         </table>
       `
-    },
-    {
-      title: 'Clearance request',
-      version: 2,
-      created: '2025-11-05T19:09:00Z',
-      hasDetails: true,
-      detailsHtml: '<p>Additional details about this clearance request would appear here.</p>'
     },
     {
       title: 'Clearance decision',
       decision: '4',
       cdsStatus: 'In progress - Awaiting IPAFFS',
-      created: '2025-11-03T17:16:00Z',
+      created: '2025-11-03T18:16:10Z',
       hasDetails: true,
       detailsHtml: `
         <h3 class="govuk-heading-m govuk-!-margin-top-0">Item 1 - Sweet pepper</h3>
@@ -564,8 +753,8 @@ module.exports = (router) => {
               <td class="govuk-table__cell">GBCHD2025.6802963</td>
               <td class="govuk-table__cell">H223</td>
               <td class="govuk-table__cell">FNAO</td>
-              <td class="govuk-table__cell">H01</td>
-              <td class="govuk-table__cell">Hold - Awaiting decision</td>
+              <td class="govuk-table__cell">C03</td>
+              <td class="govuk-table__cell">Release - Inspection Complete</td>
             </tr>
             <tr class="govuk-table__row">
               <td class="govuk-table__cell">GBCHD2025.6801816</td>
@@ -600,8 +789,8 @@ module.exports = (router) => {
               <td class="govuk-table__cell">GBCHD2025.6803042</td>
               <td class="govuk-table__cell">H223</td>
               <td class="govuk-table__cell">FNAO</td>
-              <td class="govuk-table__cell">H01</td>
-              <td class="govuk-table__cell">Hold - Awaiting decision</td>
+              <td class="govuk-table__cell">C03</td>
+              <td class="govuk-table__cell">Release - Inspection Complete</td>
             </tr>
           </tbody>
         </table>
@@ -623,7 +812,7 @@ module.exports = (router) => {
               <td class="govuk-table__cell">H218</td>
               <td class="govuk-table__cell">HMI-SMS</td>
               <td class="govuk-table__cell">H02</td>
-              <td class="govuk-table__cell">Hold - To be inspected</td>
+              <td class="govuk-table__cell">Hold - Awaiting decision</td>
             </tr>
             <tr class="govuk-table__row">
               <td class="govuk-table__cell">GBCHD2025.6801816</td>
@@ -651,8 +840,8 @@ module.exports = (router) => {
               <td class="govuk-table__cell">GBCHD2025.6802963</td>
               <td class="govuk-table__cell">H223</td>
               <td class="govuk-table__cell">FNAO</td>
-              <td class="govuk-table__cell">H01</td>
-              <td class="govuk-table__cell">Hold - Awaiting decision</td>
+              <td class="govuk-table__cell">C03</td>
+              <td class="govuk-table__cell">Release - Inspection Complete</td>
             </tr>
             <tr class="govuk-table__row">
               <td class="govuk-table__cell">GBCHD2025.6801816</td>
@@ -783,280 +972,282 @@ module.exports = (router) => {
       `
     },
     {
-      title: 'CHEDD.GB.2025.6803042',
+      title: 'CHEDD.GB.2025.6802963',
       chedStatus: 'Valid',
       decision: 'Acceptable for Internal Market',
-      created: '2025-11-03T18:35:00Z',
+      created: '2025-11-03T18:16:10Z',
       hasDetails: false
     },
     {
       title: 'CHEDD.GB.2025.6802963',
       chedStatus: 'In progress',
       decision: 'Acceptable for Internal Market',
-      created: '2025-11-03T18:10:00Z',
+      created: '2025-11-03T18:10:25Z',
       hasDetails: false
-    },
-    {
-      title: 'CHEDD.GB.2025.6803042',
-      chedStatus: 'Valid',
-      decision: 'Acceptable for Internal Market',
-      created: '2025-11-03T18:05:00Z',
-      hasDetails: false
-    },
-    {
-      title: 'CHEDD.GB.2025.6803042',
-      chedStatus: 'In progress',
-      decision: 'Acceptable for Internal Market',
-      created: '2025-11-03T17:59:00Z',
-      hasDetails: false
-    },
-    {
-      title: 'Clearance decision',
-      decision: '2',
-      cdsStatus: 'In progress - Awaiting IPAFFS',
-      created: '2025-09-03T15:17:00Z',
-      hasDetails: true,
-      detailsHtml: `
-        <h3 class="govuk-heading-m govuk-!-margin-top-0">Item 1 - Sweet pepper</h3>
-        <p class="commodity-code"><strong>Commodity code:</strong> 1601009999</p>
-        <table class="govuk-table">
-          <thead class="govuk-table__head">
-            <tr class="govuk-table__row">
-              <th scope="col" class="govuk-table__header">CHED reference</th>
-              <th scope="col" class="govuk-table__header">Check code</th>
-              <th scope="col" class="govuk-table__header">Authority</th>
-              <th scope="col" class="govuk-table__header">Decision code</th>
-              <th scope="col" class="govuk-table__header">Decision</th>
-            </tr>
-          </thead>
-          <tbody class="govuk-table__body">
-            <tr class="govuk-table__row">
-              <td class="govuk-table__cell">GBCHD2025.6802963</td>
-              <td class="govuk-table__cell">H223</td>
-              <td class="govuk-table__cell">FNAO</td>
-              <td class="govuk-table__cell">H01</td>
-              <td class="govuk-table__cell">Hold - Awaiting decision</td>
-            </tr>
-            <tr class="govuk-table__row">
-              <td class="govuk-table__cell">GBCHD2025.6801816</td>
-              <td class="govuk-table__cell">H218</td>
-              <td class="govuk-table__cell">HMI-SMS</td>
-              <td class="govuk-table__cell">H02</td>
-              <td class="govuk-table__cell">Hold - To be inspected</td>
-            </tr>
-            <tr class="govuk-table__row">
-              <td class="govuk-table__cell">GBCHD2025.6801816</td>
-              <td class="govuk-table__cell">H219</td>
-              <td class="govuk-table__cell">PHSI</td>
-              <td class="govuk-table__cell">H02</td>
-              <td class="govuk-table__cell">Hold - To be inspected</td>
-            </tr>
-          </tbody>
-        </table>
-        <h3 class="govuk-heading-m govuk-!-margin-top-4">Item 4 - Pomegranate</h3>
-        <p class="commodity-code"><strong>Commodity code:</strong> 0810907530</p>
-        <table class="govuk-table">
-          <thead class="govuk-table__head">
-            <tr class="govuk-table__row">
-              <th scope="col" class="govuk-table__header">CHED reference</th>
-              <th scope="col" class="govuk-table__header">Check code</th>
-              <th scope="col" class="govuk-table__header">Authority</th>
-              <th scope="col" class="govuk-table__header">Decision code</th>
-              <th scope="col" class="govuk-table__header">Decision</th>
-            </tr>
-          </thead>
-          <tbody class="govuk-table__body">
-            <tr class="govuk-table__row">
-              <td class="govuk-table__cell">GBCHD2025.6803042</td>
-              <td class="govuk-table__cell">H223</td>
-              <td class="govuk-table__cell">FNAO</td>
-              <td class="govuk-table__cell">H01</td>
-              <td class="govuk-table__cell">Hold - Awaiting decision</td>
-            </tr>
-          </tbody>
-        </table>
-        <h3 class="govuk-heading-m govuk-!-margin-top-4">Item 5 - Table grapes</h3>
-        <p class="commodity-code"><strong>Commodity code:</strong> 0806101090</p>
-        <table class="govuk-table">
-          <thead class="govuk-table__head">
-            <tr class="govuk-table__row">
-              <th scope="col" class="govuk-table__header">CHED reference</th>
-              <th scope="col" class="govuk-table__header">Check code</th>
-              <th scope="col" class="govuk-table__header">Authority</th>
-              <th scope="col" class="govuk-table__header">Decision code</th>
-              <th scope="col" class="govuk-table__header">Decision</th>
-            </tr>
-          </thead>
-          <tbody class="govuk-table__body">
-            <tr class="govuk-table__row">
-              <td class="govuk-table__cell">GBCHD2025.6801816</td>
-              <td class="govuk-table__cell">H218</td>
-              <td class="govuk-table__cell">HMI-SMS</td>
-              <td class="govuk-table__cell">H02</td>
-              <td class="govuk-table__cell">Hold - To be inspected</td>
-            </tr>
-            <tr class="govuk-table__row">
-              <td class="govuk-table__cell">GBCHD2025.6801816</td>
-              <td class="govuk-table__cell">H219</td>
-              <td class="govuk-table__cell">PHSI</td>
-              <td class="govuk-table__cell">H02</td>
-              <td class="govuk-table__cell">Hold - To be inspected</td>
-            </tr>
-          </tbody>
-        </table>
-        <h3 class="govuk-heading-m govuk-!-margin-top-4">Item 7 - Chilli peppers</h3>
-        <p class="commodity-code"><strong>Commodity code:</strong> 0709609920</p>
-        <table class="govuk-table">
-          <thead class="govuk-table__head">
-            <tr class="govuk-table__row">
-              <th scope="col" class="govuk-table__header">CHED reference</th>
-              <th scope="col" class="govuk-table__header">Check code</th>
-              <th scope="col" class="govuk-table__header">Authority</th>
-              <th scope="col" class="govuk-table__header">Decision code</th>
-              <th scope="col" class="govuk-table__header">Decision</th>
-            </tr>
-          </thead>
-          <tbody class="govuk-table__body">
-            <tr class="govuk-table__row">
-              <td class="govuk-table__cell">GBCHD2025.6802963</td>
-              <td class="govuk-table__cell">H223</td>
-              <td class="govuk-table__cell">FNAO</td>
-              <td class="govuk-table__cell">H01</td>
-              <td class="govuk-table__cell">Hold - Awaiting decision</td>
-            </tr>
-            <tr class="govuk-table__row">
-              <td class="govuk-table__cell">GBCHD2025.6801816</td>
-              <td class="govuk-table__cell">H219</td>
-              <td class="govuk-table__cell">PHSI</td>
-              <td class="govuk-table__cell">H02</td>
-              <td class="govuk-table__cell">Hold - To be inspected</td>
-            </tr>
-          </tbody>
-        </table>
-        <h3 class="govuk-heading-m govuk-!-margin-top-4">Item 8 - Pears</h3>
-        <p class="commodity-code"><strong>Commodity code:</strong> 0808309090</p>
-        <table class="govuk-table">
-          <thead class="govuk-table__head">
-            <tr class="govuk-table__row">
-              <th scope="col" class="govuk-table__header">CHED reference</th>
-              <th scope="col" class="govuk-table__header">Check code</th>
-              <th scope="col" class="govuk-table__header">Authority</th>
-              <th scope="col" class="govuk-table__header">Decision code</th>
-              <th scope="col" class="govuk-table__header">Decision</th>
-            </tr>
-          </thead>
-          <tbody class="govuk-table__body">
-            <tr class="govuk-table__row">
-              <td class="govuk-table__cell">GBCHD2025.6801816</td>
-              <td class="govuk-table__cell">H218</td>
-              <td class="govuk-table__cell">HMI-SMS</td>
-              <td class="govuk-table__cell">H02</td>
-              <td class="govuk-table__cell">Hold - To be inspected</td>
-            </tr>
-            <tr class="govuk-table__row">
-              <td class="govuk-table__cell">GBCHD2025.6801816</td>
-              <td class="govuk-table__cell">H219</td>
-              <td class="govuk-table__cell">PHSI</td>
-              <td class="govuk-table__cell">H02</td>
-              <td class="govuk-table__cell">Hold - To be inspected</td>
-            </tr>
-          </tbody>
-        </table>
-        <h3 class="govuk-heading-m govuk-!-margin-top-4">Item 9 - Corn</h3>
-        <p class="commodity-code"><strong>Commodity code:</strong> 0709996090</p>
-        <table class="govuk-table">
-          <thead class="govuk-table__head">
-            <tr class="govuk-table__row">
-              <th scope="col" class="govuk-table__header">CHED reference</th>
-              <th scope="col" class="govuk-table__header">Check code</th>
-              <th scope="col" class="govuk-table__header">Authority</th>
-              <th scope="col" class="govuk-table__header">Decision code</th>
-              <th scope="col" class="govuk-table__header">Decision</th>
-            </tr>
-          </thead>
-          <tbody class="govuk-table__body">
-            <tr class="govuk-table__row">
-              <td class="govuk-table__cell">GBCHD2025.6801816</td>
-              <td class="govuk-table__cell">H219</td>
-              <td class="govuk-table__cell">PHSI</td>
-              <td class="govuk-table__cell">H02</td>
-              <td class="govuk-table__cell">Hold - To be inspected</td>
-            </tr>
-          </tbody>
-        </table>
-        <h3 class="govuk-heading-m govuk-!-margin-top-4">Item 10 - Egg plant</h3>
-        <p class="commodity-code"><strong>Commodity code:</strong> 0709300005</p>
-        <table class="govuk-table">
-          <thead class="govuk-table__head">
-            <tr class="govuk-table__row">
-              <th scope="col" class="govuk-table__header">CHED reference</th>
-              <th scope="col" class="govuk-table__header">Check code</th>
-              <th scope="col" class="govuk-table__header">Authority</th>
-              <th scope="col" class="govuk-table__header">Decision code</th>
-              <th scope="col" class="govuk-table__header">Decision</th>
-            </tr>
-          </thead>
-          <tbody class="govuk-table__body">
-            <tr class="govuk-table__row">
-              <td class="govuk-table__cell">GBCHD2025.6801816</td>
-              <td class="govuk-table__cell">H219</td>
-              <td class="govuk-table__cell">PHSI</td>
-              <td class="govuk-table__cell">H02</td>
-              <td class="govuk-table__cell">Hold - To be inspected</td>
-            </tr>
-          </tbody>
-        </table>
-        <h3 class="govuk-heading-m govuk-!-margin-top-4">Item 14 - Carrot</h3>
-        <p class="commodity-code"><strong>Commodity code:</strong> 0709300005</p>
-        <table class="govuk-table">
-          <thead class="govuk-table__head">
-            <tr class="govuk-table__row">
-              <th scope="col" class="govuk-table__header">CHED reference</th>
-              <th scope="col" class="govuk-table__header">Check code</th>
-              <th scope="col" class="govuk-table__header">Authority</th>
-              <th scope="col" class="govuk-table__header">Decision code</th>
-              <th scope="col" class="govuk-table__header">Decision</th>
-            </tr>
-          </thead>
-          <tbody class="govuk-table__body">
-            <tr class="govuk-table__row">
-              <td class="govuk-table__cell">GBCHD2025.6801816</td>
-              <td class="govuk-table__cell">H219</td>
-              <td class="govuk-table__cell">PHSI</td>
-              <td class="govuk-table__cell">H02</td>
-              <td class="govuk-table__cell">Hold - To be inspected</td>
-            </tr>
-          </tbody>
-        </table>
-        <h3 class="govuk-heading-m govuk-!-margin-top-4">Item 15 - Raddish</h3>
-        <p class="commodity-code"><strong>Commodity code:</strong> 0709300005</p>
-        <table class="govuk-table">
-          <thead class="govuk-table__head">
-            <tr class="govuk-table__row">
-              <th scope="col" class="govuk-table__header">CHED reference</th>
-              <th scope="col" class="govuk-table__header">Check code</th>
-              <th scope="col" class="govuk-table__header">Authority</th>
-              <th scope="col" class="govuk-table__header">Decision code</th>
-              <th scope="col" class="govuk-table__header">Decision</th>
-            </tr>
-          </thead>
-          <tbody class="govuk-table__body">
-            <tr class="govuk-table__row">
-              <td class="govuk-table__cell">GBCHD2025.6801816</td>
-              <td class="govuk-table__cell">H219</td>
-              <td class="govuk-table__cell">PHSI</td>
-              <td class="govuk-table__cell">H02</td>
-              <td class="govuk-table__cell">Hold - To be inspected</td>
-            </tr>
-          </tbody>
-        </table>
-      `
     },
     {
       title: 'Clearance decision',
       decision: '3',
       cdsStatus: 'In progress - Awaiting IPAFFS',
-      created: '2025-09-03T17:05:00Z',
+      created: '2025-11-03T17:05:55Z',
+      hasDetails: true,
+      detailsHtml: `
+        <h3 class="govuk-heading-m govuk-!-margin-top-0">Item 1 - Sweet pepper</h3>
+        <p class="commodity-code"><strong>Commodity code:</strong> 1601009999</p>
+        <table class="govuk-table">
+          <thead class="govuk-table__head">
+            <tr class="govuk-table__row">
+              <th scope="col" class="govuk-table__header">CHED reference</th>
+              <th scope="col" class="govuk-table__header">Check code</th>
+              <th scope="col" class="govuk-table__header">Authority</th>
+              <th scope="col" class="govuk-table__header">Decision code</th>
+              <th scope="col" class="govuk-table__header">Decision</th>
+            </tr>
+          </thead>
+          <tbody class="govuk-table__body">
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">GBCHD2025.6802963</td>
+              <td class="govuk-table__cell">H223</td>
+              <td class="govuk-table__cell">FNAO</td>
+              <td class="govuk-table__cell">H01</td>
+              <td class="govuk-table__cell">Hold - Awaiting decision</td>
+            </tr>
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">GBCHD2025.6801816</td>
+              <td class="govuk-table__cell">H218</td>
+              <td class="govuk-table__cell">HMI-SMS</td>
+              <td class="govuk-table__cell">H02</td>
+              <td class="govuk-table__cell">Hold - To be inspected</td>
+            </tr>
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">GBCHD2025.6801816</td>
+              <td class="govuk-table__cell">H219</td>
+              <td class="govuk-table__cell">PHSI</td>
+              <td class="govuk-table__cell">H02</td>
+              <td class="govuk-table__cell">Hold - To be inspected</td>
+            </tr>
+          </tbody>
+        </table>
+        <h3 class="govuk-heading-m govuk-!-margin-top-4">Item 4 - Pomegranate</h3>
+        <p class="commodity-code"><strong>Commodity code:</strong> 0810907530</p>
+        <table class="govuk-table">
+          <thead class="govuk-table__head">
+            <tr class="govuk-table__row">
+              <th scope="col" class="govuk-table__header">CHED reference</th>
+              <th scope="col" class="govuk-table__header">Check code</th>
+              <th scope="col" class="govuk-table__header">Authority</th>
+              <th scope="col" class="govuk-table__header">Decision code</th>
+              <th scope="col" class="govuk-table__header">Decision</th>
+            </tr>
+          </thead>
+          <tbody class="govuk-table__body">
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">GBCHD2025.6803042</td>
+              <td class="govuk-table__cell">H223</td>
+              <td class="govuk-table__cell">FNAO</td>
+              <td class="govuk-table__cell">C03</td>
+              <td class="govuk-table__cell">Release - Inspection Complete</td>
+            </tr>
+          </tbody>
+        </table>
+        <h3 class="govuk-heading-m govuk-!-margin-top-4">Item 5 - Table grapes</h3>
+        <p class="commodity-code"><strong>Commodity code:</strong> 0806101090</p>
+        <table class="govuk-table">
+          <thead class="govuk-table__head">
+            <tr class="govuk-table__row">
+              <th scope="col" class="govuk-table__header">CHED reference</th>
+              <th scope="col" class="govuk-table__header">Check code</th>
+              <th scope="col" class="govuk-table__header">Authority</th>
+              <th scope="col" class="govuk-table__header">Decision code</th>
+              <th scope="col" class="govuk-table__header">Decision</th>
+            </tr>
+          </thead>
+          <tbody class="govuk-table__body">
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">GBCHD2025.6801816</td>
+              <td class="govuk-table__cell">H218</td>
+              <td class="govuk-table__cell">HMI-SMS</td>
+              <td class="govuk-table__cell">H02</td>
+              <td class="govuk-table__cell">Hold - Awaiting decision</td>
+            </tr>
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">GBCHD2025.6801816</td>
+              <td class="govuk-table__cell">H219</td>
+              <td class="govuk-table__cell">PHSI</td>
+              <td class="govuk-table__cell">H02</td>
+              <td class="govuk-table__cell">Hold - To be inspected</td>
+            </tr>
+          </tbody>
+        </table>
+        <h3 class="govuk-heading-m govuk-!-margin-top-4">Item 7 - Chilli peppers</h3>
+        <p class="commodity-code"><strong>Commodity code:</strong> 0709609920</p>
+        <table class="govuk-table">
+          <thead class="govuk-table__head">
+            <tr class="govuk-table__row">
+              <th scope="col" class="govuk-table__header">CHED reference</th>
+              <th scope="col" class="govuk-table__header">Check code</th>
+              <th scope="col" class="govuk-table__header">Authority</th>
+              <th scope="col" class="govuk-table__header">Decision code</th>
+              <th scope="col" class="govuk-table__header">Decision</th>
+            </tr>
+          </thead>
+          <tbody class="govuk-table__body">
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">GBCHD2025.6802963</td>
+              <td class="govuk-table__cell">H223</td>
+              <td class="govuk-table__cell">FNAO</td>
+              <td class="govuk-table__cell">C03</td>
+              <td class="govuk-table__cell">Release - Inspection Complete</td>
+            </tr>
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">GBCHD2025.6801816</td>
+              <td class="govuk-table__cell">H219</td>
+              <td class="govuk-table__cell">PHSI</td>
+              <td class="govuk-table__cell">H02</td>
+              <td class="govuk-table__cell">Hold - To be inspected</td>
+            </tr>
+          </tbody>
+        </table>
+        <h3 class="govuk-heading-m govuk-!-margin-top-4">Item 8 - Pears</h3>
+        <p class="commodity-code"><strong>Commodity code:</strong> 0808309090</p>
+        <table class="govuk-table">
+          <thead class="govuk-table__head">
+            <tr class="govuk-table__row">
+              <th scope="col" class="govuk-table__header">CHED reference</th>
+              <th scope="col" class="govuk-table__header">Check code</th>
+              <th scope="col" class="govuk-table__header">Authority</th>
+              <th scope="col" class="govuk-table__header">Decision code</th>
+              <th scope="col" class="govuk-table__header">Decision</th>
+            </tr>
+          </thead>
+          <tbody class="govuk-table__body">
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">GBCHD2025.6801816</td>
+              <td class="govuk-table__cell">H218</td>
+              <td class="govuk-table__cell">HMI-SMS</td>
+              <td class="govuk-table__cell">H02</td>
+              <td class="govuk-table__cell">Hold - To be inspected</td>
+            </tr>
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">GBCHD2025.6801816</td>
+              <td class="govuk-table__cell">H219</td>
+              <td class="govuk-table__cell">PHSI</td>
+              <td class="govuk-table__cell">H02</td>
+              <td class="govuk-table__cell">Hold - To be inspected</td>
+            </tr>
+          </tbody>
+        </table>
+        <h3 class="govuk-heading-m govuk-!-margin-top-4">Item 9 - Corn</h3>
+        <p class="commodity-code"><strong>Commodity code:</strong> 0709996090</p>
+        <table class="govuk-table">
+          <thead class="govuk-table__head">
+            <tr class="govuk-table__row">
+              <th scope="col" class="govuk-table__header">CHED reference</th>
+              <th scope="col" class="govuk-table__header">Check code</th>
+              <th scope="col" class="govuk-table__header">Authority</th>
+              <th scope="col" class="govuk-table__header">Decision code</th>
+              <th scope="col" class="govuk-table__header">Decision</th>
+            </tr>
+          </thead>
+          <tbody class="govuk-table__body">
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">GBCHD2025.6801816</td>
+              <td class="govuk-table__cell">H219</td>
+              <td class="govuk-table__cell">PHSI</td>
+              <td class="govuk-table__cell">H02</td>
+              <td class="govuk-table__cell">Hold - To be inspected</td>
+            </tr>
+          </tbody>
+        </table>
+        <h3 class="govuk-heading-m govuk-!-margin-top-4">Item 10 - Egg plant</h3>
+        <p class="commodity-code"><strong>Commodity code:</strong> 0709300005</p>
+        <table class="govuk-table">
+          <thead class="govuk-table__head">
+            <tr class="govuk-table__row">
+              <th scope="col" class="govuk-table__header">CHED reference</th>
+              <th scope="col" class="govuk-table__header">Check code</th>
+              <th scope="col" class="govuk-table__header">Authority</th>
+              <th scope="col" class="govuk-table__header">Decision code</th>
+              <th scope="col" class="govuk-table__header">Decision</th>
+            </tr>
+          </thead>
+          <tbody class="govuk-table__body">
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">GBCHD2025.6801816</td>
+              <td class="govuk-table__cell">H219</td>
+              <td class="govuk-table__cell">PHSI</td>
+              <td class="govuk-table__cell">H02</td>
+              <td class="govuk-table__cell">Hold - To be inspected</td>
+            </tr>
+          </tbody>
+        </table>
+        <h3 class="govuk-heading-m govuk-!-margin-top-4">Item 14 - Carrot</h3>
+        <p class="commodity-code"><strong>Commodity code:</strong> 0709300005</p>
+        <table class="govuk-table">
+          <thead class="govuk-table__head">
+            <tr class="govuk-table__row">
+              <th scope="col" class="govuk-table__header">CHED reference</th>
+              <th scope="col" class="govuk-table__header">Check code</th>
+              <th scope="col" class="govuk-table__header">Authority</th>
+              <th scope="col" class="govuk-table__header">Decision code</th>
+              <th scope="col" class="govuk-table__header">Decision</th>
+            </tr>
+          </thead>
+          <tbody class="govuk-table__body">
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">GBCHD2025.6801816</td>
+              <td class="govuk-table__cell">H219</td>
+              <td class="govuk-table__cell">PHSI</td>
+              <td class="govuk-table__cell">H02</td>
+              <td class="govuk-table__cell">Hold - To be inspected</td>
+            </tr>
+          </tbody>
+        </table>
+        <h3 class="govuk-heading-m govuk-!-margin-top-4">Item 15 - Raddish</h3>
+        <p class="commodity-code"><strong>Commodity code:</strong> 0709300005</p>
+        <table class="govuk-table">
+          <thead class="govuk-table__head">
+            <tr class="govuk-table__row">
+              <th scope="col" class="govuk-table__header">CHED reference</th>
+              <th scope="col" class="govuk-table__header">Check code</th>
+              <th scope="col" class="govuk-table__header">Authority</th>
+              <th scope="col" class="govuk-table__header">Decision code</th>
+              <th scope="col" class="govuk-table__header">Decision</th>
+            </tr>
+          </thead>
+          <tbody class="govuk-table__body">
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">GBCHD2025.6801816</td>
+              <td class="govuk-table__cell">H219</td>
+              <td class="govuk-table__cell">PHSI</td>
+              <td class="govuk-table__cell">H02</td>
+              <td class="govuk-table__cell">Hold - To be inspected</td>
+            </tr>
+          </tbody>
+        </table>
+      `
+    },
+    {
+      title: 'CHEDD.GB.2025.6803042',
+      chedStatus: 'Valid',
+      decision: 'Acceptable for Internal Market',
+      created: '2025-11-03T18:05:54Z',
+      hasDetails: false
+    },
+    {
+      title: 'CHEDD.GB.2025.6803042',
+      chedStatus: 'In progress',
+      decision: 'Acceptable for Internal Market',
+      created: '2025-11-03T17:59:14Z',
+      hasDetails: false
+    },
+ 
+ 
+    {
+      title: 'Clearance decision',
+      decision: '2',
+      cdsStatus: 'In progress - Awaiting IPAFFS',
+      created: '2025-11-03T15:17:55Z',
       hasDetails: true,
       detailsHtml: `
         <h3 class="govuk-heading-m govuk-!-margin-top-0">Item 1 - Sweet pepper</h3>
@@ -1135,7 +1326,7 @@ module.exports = (router) => {
               <td class="govuk-table__cell">H218</td>
               <td class="govuk-table__cell">HMI-SMS</td>
               <td class="govuk-table__cell">H02</td>
-              <td class="govuk-table__cell">Hold - To be inspected</td>
+              <td class="govuk-table__cell">Hold - Awaiting decision</td>
             </tr>
             <tr class="govuk-table__row">
               <td class="govuk-table__cell">GBCHD2025.6801816</td>
@@ -1163,8 +1354,8 @@ module.exports = (router) => {
               <td class="govuk-table__cell">GBCHD2025.6802963</td>
               <td class="govuk-table__cell">H223</td>
               <td class="govuk-table__cell">FNAO</td>
-              <td class="govuk-table__cell">H01</td>
-              <td class="govuk-table__cell">Hold - Awaiting decision</td>
+              <td class="govuk-table__cell">C03</td>
+              <td class="govuk-table__cell">Release - Inspection Complete</td>
             </tr>
             <tr class="govuk-table__row">
               <td class="govuk-table__cell">GBCHD2025.6801816</td>
@@ -1298,21 +1489,21 @@ module.exports = (router) => {
       title: 'CHEDD.GB.2025.6802999',
       chedStatus: 'Valid',
       decision: 'Acceptable for Internal Market',
-      created: '2025-11-03T15:17:00Z',
+      created: '2025-11-03T15:17:55Z',
       hasDetails: false
     },
     {
       title: 'CHEDD.GB.2025.6802999',
       chedStatus: 'In progress',
       decision: 'Acceptable for Internal Market',
-      created: '2025-11-03T15:09:00Z',
+      created: '2025-11-03T15:09:49Z',
       hasDetails: false
     },
     {
       title: 'Clearance decision',
       decision: '1',
       cdsStatus: 'In progress - Awaiting IPAFFS',
-      created: '2025-09-03T14:56:00Z',
+      created: '2025-11-03T14:56:19Z',
       hasDetails: true,
       detailsHtml: `
         <h3 class="govuk-heading-m govuk-!-margin-top-0">Item 1 - Sweet pepper</h3>
@@ -1553,7 +1744,7 @@ module.exports = (router) => {
     {
       title: 'Clearance request',
       version: 1,
-      created: '2025-11-03T14:56:00Z',
+      created: '2025-11-03T14:56:19Z',
       hasDetails: true,
       detailsHtml: `
         <h3 class="govuk-heading-m govuk-!-margin-top-0">Item 1 - Sweet pepper</h3>
@@ -1746,62 +1937,91 @@ module.exports = (router) => {
       `
     },
     {
-      title: 'CHEDD.GB.2025.6801816',
-      chedStatus: 'In progress',
+      title: 'CHEDPP GB 2025.6801816',
+      chedStatus: 'Submitted',
       decision: 'Hold - Awaiting Decision',
-      created: '2025-11-03T14:52:00Z',
+      created: '2025-11-03T14:52:53Z',
       hasDetails: false
     },
     {
       title: 'CHEDD.GB.2025.6803042',
       chedStatus: 'Submitted',
       decision: 'Acceptable for Internal Market',
-      created: '2025-11-03T14:43:00Z',
+      created: '2025-11-03T14:43:37Z',
       hasDetails: false
     },
     {
       title: 'CHEDD.GB.2025.6803042',
       chedStatus: 'Submitted',
       decision: 'Hold - Awaiting Decision',
-      created: '2025-11-03T14:43:00Z',
+      created: '2025-11-03T14:43:37Z',
       hasDetails: false
     },
     {
       title: 'CHEDD.GB.2025.6802999',
       chedStatus: 'Submitted',
       decision: 'Hold - Awaiting Decision',
-      created: '2025-11-03T14:40:00Z',
+      created: '2025-11-03T14:40:33Z',
       hasDetails: false
     },
     {
       title: 'CHEDD.GB.2025.6802963',
       chedStatus: 'Submitted',
       decision: 'Acceptable for Internal Market',
-      created: '2025-11-03T14:37:00Z',
+      created: '2025-11-03T14:37:17Z',
       hasDetails: false
     },
     {
       title: 'CHEDD.GB.2025.6802963',
       chedStatus: 'Submitted',
       decision: 'Hold - Awaiting Decision',
-      created: '2025-11-03T14:37:00Z',
+      created: '2025-11-03T14:37:16Z',
       hasDetails: false
     },
     {
       title: 'CHEDPP GB 2025.6801816',
       chedStatus: 'Submitted',
       decision: 'Hold - Awaiting Decision',
-      created: '2025-11-03T12:28:00Z',
+      created: '2025-11-03T12:28:46Z',
       hasDetails: false
     }
   ];
 
   // GET: Consignment timeline page
-  router.get('/mvp/v5/consignment-timeline', (req, res) => {
+  router.get('/mvp/v5/timeline/consignment-timeline', (req, res) => {
     const mrn = req.query.mrn || '25GBC64QCLFMUHPAR2';
     const eventType = req.query.eventType || req.session.data?.eventType || 'all';
+    // Always show newest to oldest (descending order)
     const sortBy = req.query.sortBy || req.session.data?.sortBy || 'descending';
 
+    // Process timeline events using helper function
+    const filteredEvents = processTimelineEvents(eventType, sortBy);
+
+    res.render('mvp/v5/timeline/consignment-timeline', {
+      mrn,
+      timelineEvents: filteredEvents,
+      data: {
+        eventType,
+        sortBy
+      }
+    });
+  });
+
+  // POST: Handle filter changes
+  router.post('/mvp/v5/timeline/consignment-timeline', (req, res) => {
+    const eventType = req.body.eventType || 'all';
+    const sortBy = req.body.sortBy || 'descending';
+    const mrn = req.body.mrn || req.query.mrn || '25GBC64QCLFMUHPAR2';
+
+    req.session.data = req.session.data || {};
+    req.session.data.eventType = eventType;
+    req.session.data.sortBy = sortBy;
+
+    res.redirect(`/mvp/v5/timeline/consignment-timeline?mrn=${encodeURIComponent(mrn)}&eventType=${eventType}&sortBy=${sortBy}`);
+  });
+
+  // Helper function to process timeline events (used by both routes)
+  function processTimelineEvents(eventType, sortBy) {
     // Filter events by type
     let filteredEvents = SAMPLE_TIMELINE_EVENTS;
     if (eventType !== 'all') {
@@ -1821,51 +2041,61 @@ module.exports = (router) => {
     }));
 
     // Always sort by created time (descending = newest first, ascending = oldest first)
+    // Secondary sort by title to ensure consistent ordering when timestamps are identical
     filteredEvents.sort((a, b) => {
       const dateA = new Date(a.created).getTime();
       const dateB = new Date(b.created).getTime();
-      return sortBy === 'ascending' ? dateA - dateB : dateB - dateA;
-    });
-
-    res.render('mvp/v5/timeline/consignment-timeline', {
-      mrn,
-      timelineEvents: filteredEvents,
-      data: {
-        eventType,
-        sortBy
+      
+      // Primary sort by date
+      if (dateA !== dateB) {
+        return sortBy === 'ascending' ? dateA - dateB : dateB - dateA;
       }
+      
+      // Secondary sort by title for events with identical timestamps
+      return a.title.localeCompare(b.title);
     });
-  });
 
-  // POST: Handle filter changes
-  router.post('/mvp/v5/consignment-timeline', (req, res) => {
-    const eventType = req.body.eventType || 'all';
-    const sortBy = req.body.sortBy || 'descending';
-    const mrn = req.body.mrn || req.query.mrn || '25GBC64QCLFMUHPAR2';
+    return filteredEvents;
+  }
 
-    req.session.data = req.session.data || {};
-    req.session.data.eventType = eventType;
-    req.session.data.sortBy = sortBy;
-
-    res.redirect(`/mvp/v5/consignment-timeline?mrn=${encodeURIComponent(mrn)}&eventType=${eventType}&sortBy=${sortBy}`);
-  });
-
-  // GET: Search results timeline page
+  // GET: Search results timeline page (now includes timeline data)
   router.get('/mvp/v5/timeline/search-results-timeline', (req, res) => {
     const q = (req.query.q || req.session.data?.searchTerm || '').trim();
     const sessionTitle = (req.session.data?.title || '').trim();
     const title = sessionTitle || (q ? q : '25GBC64QCLFMUHPAR2');
+    const eventType = req.query.eventType || req.session.data?.eventType || 'all';
+    const sortBy = req.query.sortBy || req.session.data?.sortBy || 'descending';
     
     req.session.data = req.session.data || {};
     req.session.data.title = title;
     req.session.data.searchTerm = q || title;
     req.session.data.Cds = req.session.data.Cds || 'Customs declaration details';
     req.session.data.Ipaffs = req.session.data.Ipaffs || 'IPAFFS pre-notification (CHED) details';
+    req.session.data.eventType = eventType;
+    req.session.data.sortBy = sortBy;
+
+    // Process timeline events
+    const timelineEvents = processTimelineEvents(eventType, sortBy);
 
     res.render('mvp/v5/timeline/search-results-timeline', {
       title,
+      mrn: title,
+      timelineEvents,
       data: req.session.data
     });
+  });
+
+  // POST: Handle filter changes on search results page
+  router.post('/mvp/v5/timeline/search-results-timeline', (req, res) => {
+    const eventType = req.body.eventType || 'all';
+    const sortBy = req.body.sortBy || 'descending';
+    const mrn = req.body.mrn || req.query.mrn || req.session.data?.title || '25GBC64QCLFMUHPAR2';
+
+    req.session.data = req.session.data || {};
+    req.session.data.eventType = eventType;
+    req.session.data.sortBy = sortBy;
+
+    res.redirect(`/mvp/v5/timeline/search-results-timeline?q=${encodeURIComponent(mrn)}&eventType=${eventType}&sortBy=${sortBy}`);
   });
 };
 

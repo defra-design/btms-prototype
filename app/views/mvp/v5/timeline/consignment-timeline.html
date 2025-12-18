@@ -2,16 +2,35 @@
 {% from "moj/components/timeline/macro.njk" import mojTimeline %}
 {% from "govuk/components/select/macro.njk" import govukSelect %}
 {% from "govuk/components/details/macro.njk" import govukDetails %}
+{% from "govuk/components/breadcrumbs/macro.njk" import govukBreadcrumbs %}
 {% set signedIn = 'true' %}
 {% set hideButton = true %}
-{% set showheader = true %}
-{% set cssClassName = 'auth' %}
+{% set title = mrn or '25GBC64QCLFMUHPAR2' %}
+{% set subHeader = 'Showing consignment timeline for' %}
+{% set showSubheader = true %}
+{% set cssClassName = 'timeline' %}
 {% set hideManageAccount = 'false' %}
-{% set hideBackLink = false %}
+{% set hideBackLink = true %}
 {% set menu = true %}
-{% set searchLinkHref = '../search' %}
-{% set backText = 'Back to ' + (mrn or '25GBC64QCLFMUHPAR2') %}
 {% set fullWidth = true %}
+
+{% block beforeContent %}
+{{ govukBreadcrumbs({
+  items: [
+    {
+      text: "Search",
+      href: "../search"
+    },
+    {
+      text: mrn or '25GBC64QCLFMUHPAR2',
+      href: "search-results-timeline?q=" + (mrn or '25GBC64QCLFMUHPAR2')
+    },
+    {
+      text: "Consignment timeline"
+    }
+  ]
+}) }}
+{% endblock %}
 
 {% block form %}
 
@@ -98,10 +117,40 @@
     font-weight: 400 !important;
   }
 
-  /* Tables in details section should be 14px and 3/4 width */
+  /* Tables in details section should be 14px and full width with fixed column layout */
   .moj-timeline__description .govuk-details__text .govuk-table {
     font-size: 14px !important;
-    width: 75%;
+    width: 100%;
+    table-layout: fixed;
+  }
+  
+  /* Fixed column widths for consistent layout - 5 column tables (decisions) */
+  .moj-timeline__description .govuk-details__text .govuk-table th:nth-child(1),
+  .moj-timeline__description .govuk-details__text .govuk-table td:nth-child(1) {
+    width: 25%; /* CHED reference */
+  }
+  .moj-timeline__description .govuk-details__text .govuk-table th:nth-child(2),
+  .moj-timeline__description .govuk-details__text .govuk-table td:nth-child(2) {
+    width: 12%; /* Check code */
+  }
+  .moj-timeline__description .govuk-details__text .govuk-table th:nth-child(3),
+  .moj-timeline__description .govuk-details__text .govuk-table td:nth-child(3) {
+    width: 15%; /* Authority */
+  }
+  .moj-timeline__description .govuk-details__text .govuk-table th:nth-child(4),
+  .moj-timeline__description .govuk-details__text .govuk-table td:nth-child(4) {
+    width: 12%; /* Decision code */
+  }
+  .moj-timeline__description .govuk-details__text .govuk-table th:nth-child(5),
+  .moj-timeline__description .govuk-details__text .govuk-table td:nth-child(5) {
+    width: 36%; /* Decision */
+  }
+  
+  /* Ensure text wraps in cells to prevent column expansion */
+  .moj-timeline__description .govuk-details__text .govuk-table td {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
   }
   .moj-timeline__description .govuk-details__text .govuk-table *,
   .moj-timeline__description .govuk-details__text .govuk-table th,
@@ -128,11 +177,6 @@
 </style>
 
 
-<div class="govuk-grid-row">
-  <div class="govuk-grid-column-full">
-    
-    <p class="govuk-caption-l govuk-!-margin-bottom-1">Consignment timeline for</p>
-    <h1 class="govuk-heading-l govuk-!-margin-bottom-6">{{ mrn or '25GBC64QCLFMUHPAR2' }}</h1>
 
     <form method="post">
       <input type="hidden" name="mrn" value="{{ mrn or '25GBC64QCLFMUHPAR2' }}">
@@ -217,7 +261,7 @@
               {% if event.cdsStatus %}
                 <div class="timeline-detail-row">
                   <span class="timeline-detail-label">CDS status</span>
-                  <span class="govuk-tag {% if event.cdsStatus === 'Finalised - Released' %}govuk-tag--green{% elif event.cdsStatus === 'In progress - CDS' or event.cdsStatus === 'In progress - Awaiting IPAFFS' %}govuk-tag--yellow{% endif %}">
+                  <span class="govuk-tag {% if event.cdsStatus === 'Finalised - Released' %}govuk-tag--green{% elif event.cdsStatus === 'In progress - CDS' or event.cdsStatus === 'In progress - Awaiting CDS' or event.cdsStatus === 'In progress - Awaiting IPAFFS' %}govuk-tag--yellow{% endif %}">
                     {{ event.cdsStatus }}
                   </span>
                 </div>
@@ -269,8 +313,7 @@
       </div>
     {% endif %}
 
-  </div>
-</div>
+
 
 {% endblock %}
 
