@@ -75,15 +75,27 @@ addFilter('ipaffsTime', function (value, offsetStr) {
     const d = new Date();
     d.setUTCMinutes(d.getUTCMinutes() + offsetMinutes);
 
-    // Format explicitly in UK time (no seconds)
-    return new Intl.DateTimeFormat('en-GB', {
+    // Format explicitly in UK time with seconds (GOV.UK format: DD Month YYYY, HH:MM:SS)
+    const formatter = new Intl.DateTimeFormat('en-GB', {
       timeZone: 'Europe/London',
       year: 'numeric',
-      month: '2-digit',
+      month: 'long',
       day: '2-digit',
       hour: '2-digit',
-      minute: '2-digit'
-    }).format(d);
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false
+    });
+    
+    const parts = formatter.formatToParts(d);
+    const day = parts.find(p => p.type === 'day').value;
+    const month = parts.find(p => p.type === 'month').value;
+    const year = parts.find(p => p.type === 'year').value;
+    const hour = parts.find(p => p.type === 'hour').value;
+    const minute = parts.find(p => p.type === 'minute').value;
+    const second = parts.find(p => p.type === 'second').value;
+    
+    return `${day} ${month} ${year}, ${hour}:${minute}:${second}`;
 
   } catch (e) {
     return (e?.message || 'Error').split(':')[0];

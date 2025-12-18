@@ -128,6 +128,17 @@ function applyMrnFilters() {
 
       // Handle visibility of decision and authority list items
       if (hasListItems && authorityItems.length > 0) {
+        // For continuation rows, check row-level authority class first
+        // This prevents showing continuation rows with wrong authority (e.g., PHSI row when filtering HMI)
+        if (row.classList.contains("item-continuation") && authValue !== "show-all") {
+          const rowAuthClasses = ['FNAO', 'HMI', 'PHSI', 'POAO', 'IUU', 'APHA'];
+          const rowAuthClass = rowAuthClasses.find(authClass => row.classList.contains(authClass));
+          // If row has an authority class that doesn't match the filter, hide the row
+          if (rowAuthClass && rowAuthClass.toUpperCase() !== authValue.toUpperCase()) {
+            matches = false;
+          }
+        }
+
         let anyVisibleDecision = false;
 
         // Process each decision item and its corresponding authority item

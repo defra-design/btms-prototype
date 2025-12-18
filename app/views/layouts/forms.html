@@ -27,7 +27,7 @@
           <div class="headerh1" >
             <h1 class="govuk-heading-l">{{ title | safe }}</h1>
             {% if showEdit %}
-            <a class="searchLink" href="search?searchTerm=">Search again</a>
+            <a class="searchLink" href="{{ searchLinkHref if searchLinkHref else 'search' }}">Search again</a>
 
           {% endif %}
         </div>

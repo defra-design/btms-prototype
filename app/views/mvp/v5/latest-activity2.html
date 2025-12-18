@@ -15,26 +15,14 @@
   <thead class="govuk-table__head">
     <tr class="govuk-table__row">
       <th scope="col" class="govuk-table__header">Message type</th>
-      <th scope="col" class="govuk-table__header govuk-table__header--numeric">Last updated</th>
+      <th scope="col" class="govuk-table__header govuk-table__header--numeric">Last sent</th>
     </tr>
   </thead>
   <tbody class="govuk-table__body">
     <tr class="govuk-table__row">
-      <td class="govuk-table__cell">
-        Decision sent<br>
-        <span class="govuk-body-s govuk-!-font-weight-regular govuk-!-colour-secondary" style="font-size: 14px;">CDS to BTMS</span>
-      </td>
+      <td class="govuk-table__cell">Decision</td>
       <td class="govuk-table__cell govuk-table__cell--numeric">
-        <time datetime="2024-10-13T13:08:51+01:00">{{ '' | ipaffsTime('-2min') }}</time>
-      </td>
-    </tr>
-    <tr class="govuk-table__row">
-      <td class="govuk-table__cell">
-        Decision acknowledgement<br>
-        <span class="govuk-body-s govuk-!-font-weight-regular govuk-!-colour-secondary" style="font-size: 14px;">BTMS to CDS</span>
-      </td>
-      <td class="govuk-table__cell govuk-table__cell--numeric">
-        <time datetime="2024-10-13T13:08:59+01:00">{{ '' | ipaffsTime('-3min') }}</time>
+        {{ '' | ipaffsTime('0min') }}
       </td>
     </tr>
   </tbody>

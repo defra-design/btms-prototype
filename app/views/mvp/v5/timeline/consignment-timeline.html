@@ -1,0 +1,276 @@
+{% extends "layouts/forms.html" %}
+{% from "moj/components/timeline/macro.njk" import mojTimeline %}
+{% from "govuk/components/select/macro.njk" import govukSelect %}
+{% from "govuk/components/details/macro.njk" import govukDetails %}
+{% set signedIn = 'true' %}
+{% set hideButton = true %}
+{% set showheader = true %}
+{% set cssClassName = 'auth' %}
+{% set hideManageAccount = 'false' %}
+{% set hideBackLink = false %}
+{% set menu = true %}
+{% set searchLinkHref = '../search' %}
+{% set backText = 'Back to ' + (mrn or '25GBC64QCLFMUHPAR2') %}
+{% set fullWidth = true %}
+
+{% block form %}
+
+<style>
+  .govuk-details {
+    margin-top: 20px !important;
+    margin-bottom: 0 !important;
+  }
+
+  .moj-timeline__description .govuk-summary-list {
+    margin-bottom: 0;
+  }
+
+  /* Timeline title is 19px */
+  .moj-timeline__title,
+  .moj-timeline__title * {
+    font-size: 19px !important;
+  }
+
+  /* Ensure ALL timeline description text is 16px */
+
+  .moj-timeline__description,
+  .moj-timeline__description *,
+  .moj-timeline__description .govuk-body,
+  .moj-timeline__description .govuk-body *,
+  .moj-timeline__description time,
+  .moj-timeline__description span,
+  .moj-timeline__description strong,
+  .moj-timeline__description .govuk-tag {
+    font-size: 16px !important;
+    margin-right: 10px;
+  }
+
+  .moj-timeline__description .govuk-details__summary,
+  .moj-timeline__description .govuk-details__summary * {
+    font-size: 16px !important;
+  }
+
+  .timeline-filters {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .timeline-filters .govuk-form-group {
+    margin-bottom: 0;
+  }
+
+  .version-tag {
+    background-color: #EEEFEF;
+    color: #383F43;
+    padding: 2px 5px;
+    font-size: 16px !important;
+    font-weight: 300;
+    border-radius: 3px;
+  }
+
+  .timeline-detail-row {
+    margin-bottom: 0px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 0;
+  }
+
+  .timeline-detail-row:not(:first-child) {
+    margin-top: 10px;
+  }
+
+  .timeline-detail-row * {
+    font-size: 16px !important;
+  }
+
+  .timeline-detail-label {
+    width: 100px;
+    font-size: 16px !important;
+    font-weight: 700;
+    flex-shrink: 0;
+    color: #0B0C0C;
+  }
+
+  .moj-timeline__description .govuk-tag {
+    margin-right: 0;
+    font-weight: 400 !important;
+  }
+
+  /* Tables in details section should be 14px and 3/4 width */
+  .moj-timeline__description .govuk-details__text .govuk-table {
+    font-size: 14px !important;
+    width: 75%;
+  }
+  .moj-timeline__description .govuk-details__text .govuk-table *,
+  .moj-timeline__description .govuk-details__text .govuk-table th,
+  .moj-timeline__description .govuk-details__text .govuk-table td {
+    font-size: 14px !important;
+  }
+
+  /* Commodity code text should be 14px */
+  .moj-timeline__description .govuk-details__text .commodity-code,
+  .moj-timeline__description .govuk-details__text .commodity-code strong {
+    font-size: 14px !important;
+  }
+
+  /* Item headings should be 16px */
+  .moj-timeline__description .govuk-details__text h3.govuk-heading-m {
+    font-size: 16px !important;
+  }
+
+  /* Paragraph spacing in details section */
+  .moj-timeline__description .govuk-details__text p {
+    margin-top: 0;
+    margin-bottom: 8px;
+  }
+</style>
+
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    
+    <p class="govuk-caption-l govuk-!-margin-bottom-1">Consignment timeline for</p>
+    <h1 class="govuk-heading-l govuk-!-margin-bottom-6">{{ mrn or '25GBC64QCLFMUHPAR2' }}</h1>
+
+    <form method="post">
+      <input type="hidden" name="mrn" value="{{ mrn or '25GBC64QCLFMUHPAR2' }}">
+      
+      <div class="timeline-filters">
+        {{ govukSelect({
+          id: "eventType",
+          name: "eventType",
+          label: {
+            text: "Event type",
+            classes: "govuk-label--s"
+          },
+          items: [
+            {
+              value: "all",
+              text: "Show all",
+              selected: not data.eventType or data.eventType === 'all'
+            },
+            {
+              value: "finalisation",
+              text: "Finalisation",
+              selected: data.eventType === 'finalisation'
+            },
+            {
+              value: "clearance-decision",
+              text: "Clearance decision",
+              selected: data.eventType === 'clearance-decision'
+            },
+            {
+              value: "clearance-request",
+              text: "Clearance request",
+              selected: data.eventType === 'clearance-request'
+            },
+            {
+              value: "ched",
+              text: "CHED",
+              selected: data.eventType === 'ched'
+            }
+          ],
+          attributes: {
+            onchange: "this.form.submit()"
+          }
+        }) }}
+
+        {{ govukSelect({
+          id: "sortBy",
+          name: "sortBy",
+          label: {
+            text: "Sort by",
+            classes: "govuk-label--s"
+          },
+          items: [
+            {
+              value: "descending",
+              text: "Descending",
+              selected: not data.sortBy or data.sortBy === 'descending'
+            },
+            {
+              value: "ascending",
+              text: "Ascending",
+              selected: data.sortBy === 'ascending'
+            }
+          ],
+          attributes: {
+            onchange: "this.form.submit()"
+          }
+        }) }}
+      </div>
+    </form>
+
+    {% if timelineEvents and timelineEvents.length > 0 %}
+      <div class="moj-timeline">
+        {% for event in timelineEvents %}
+          <div class="moj-timeline__item">
+            <div class="moj-timeline__header">
+              <h2 class="moj-timeline__title">
+                {{ event.title }}
+              </h2>
+            </div>
+            
+            <div class="moj-timeline__description">
+              {% if event.cdsStatus %}
+                <div class="timeline-detail-row">
+                  <span class="timeline-detail-label">CDS status</span>
+                  <span class="govuk-tag {% if event.cdsStatus === 'Finalised - Released' %}govuk-tag--green{% elif event.cdsStatus === 'In progress - CDS' or event.cdsStatus === 'In progress - Awaiting IPAFFS' %}govuk-tag--yellow{% endif %}">
+                    {{ event.cdsStatus }}
+                  </span>
+                </div>
+              {% endif %}
+
+              {% if event.version and not event.chedStatus %}
+                <div class="timeline-detail-row">
+                  <span class="timeline-detail-label">Version</span>
+                  <span>{{ event.version }}</span>
+                </div>
+              {% endif %}
+
+              {% if event.chedStatus %}
+                <div class="timeline-detail-row">
+                  <span class="timeline-detail-label">CHED status</span>
+                  <span class="govuk-tag {% if event.chedStatus === 'Valid' %}govuk-tag--green{% elif event.chedStatus === 'In progress' or event.chedStatus === 'Submitted' %}govuk-tag--yellow{% endif %}">
+                    {{ event.chedStatus }}
+                  </span>
+                </div>
+              {% endif %}
+
+              {% if event.decision %}
+                <div class="timeline-detail-row">
+                  <span class="timeline-detail-label">Decision</span>
+                  <span>{{ event.decision }}</span>
+                </div>
+              {% endif %}
+
+              {% if event.created %}
+                <div class="timeline-detail-row">
+                  <span class="timeline-detail-label">Created</span>
+                  <time datetime="{{ event.created }}">{{ event.createdFormatted }}</time>
+                </div>
+              {% endif %}
+
+              {% if event.hasDetails %}
+                {{ govukDetails({
+                  summaryText: "More details",
+                  html: event.detailsHtml | safe
+                }) }}
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="govuk-inset-text">
+        <p class="govuk-body">No timeline events found.</p>
+      </div>
+    {% endif %}
+
+  </div>
+</div>
+
+{% endblock %}
+
