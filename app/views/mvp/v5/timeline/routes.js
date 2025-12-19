@@ -1987,6 +1987,36 @@ module.exports = (router) => {
     }
   ];
 
+  // Helper function to get timeline events based on MRN or page type
+  // Add your timeline data constants here, then map them below
+  function getTimelineEventsForMrn(mrn, pageType) {
+    // Map MRNs to their specific timeline event arrays
+    // You can add new MRNs and their corresponding event arrays here
+    
+    const timelineDataMap = {
+      // Example: Map specific MRNs to their timeline data
+      // '25GBBVWP03XACE8ARO': CANCELLED_MRN_TIMELINE_EVENTS,
+      // '25GBCLNTWCC1FN7ARO': MANUAL_RELEASE_TIMELINE_EVENTS,
+      
+      // Or map by page type if different pages need different data
+      // 'cancel': CANCELLED_MRN_TIMELINE_EVENTS,
+      // 'timeline': SAMPLE_TIMELINE_EVENTS,
+    };
+    
+    // First check for MRN-specific mapping
+    if (timelineDataMap[mrn]) {
+      return timelineDataMap[mrn];
+    }
+    
+    // Then check for page-type-specific mapping
+    if (timelineDataMap[pageType]) {
+      return timelineDataMap[pageType];
+    }
+    
+    // Default to sample events
+    return SAMPLE_TIMELINE_EVENTS;
+  }
+
   // GET: Consignment timeline page
   router.get('/mvp/v5/timeline/consignment-timeline', (req, res) => {
     const mrn = req.query.mrn || '25GBC64QCLFMUHPAR2';
@@ -2021,11 +2051,14 @@ module.exports = (router) => {
   });
 
   // Helper function to process timeline events (used by both routes)
-  function processTimelineEvents(eventType, sortBy) {
+  function processTimelineEvents(eventType, sortBy, eventsArray = null) {
+    // Use provided events array or default to SAMPLE_TIMELINE_EVENTS
+    const sourceEvents = eventsArray || SAMPLE_TIMELINE_EVENTS;
+    
     // Filter events by type
-    let filteredEvents = SAMPLE_TIMELINE_EVENTS;
+    let filteredEvents = sourceEvents;
     if (eventType !== 'all') {
-      filteredEvents = SAMPLE_TIMELINE_EVENTS.filter(event => {
+      filteredEvents = sourceEvents.filter(event => {
         if (eventType === 'finalisation') return event.title === 'Finalisation';
         if (eventType === 'clearance-decision') return event.title === 'Clearance decision';
         if (eventType === 'clearance-request') return event.title === 'Clearance request';
@@ -2080,8 +2113,11 @@ module.exports = (router) => {
     const availableMrns = [title, '25GBC64QCLFMUHPAR2', '25GBC64QCLFMUHPAR3', '25GBC64QCLFMUHPAR4'];
     req.session.data.availableMrns = availableMrns;
 
-    // Process timeline events
-    const timelineEvents = processTimelineEvents(eventType, sortBy);
+    // Get timeline events specific to this MRN/page type
+    const eventsForThisPage = getTimelineEventsForMrn(title, 'timeline');
+    
+    // Process timeline events with the specific data
+    const timelineEvents = processTimelineEvents(eventType, sortBy, eventsForThisPage);
 
     res.render('mvp/v5/timeline/search-results-timeline', {
       title,
@@ -2122,8 +2158,11 @@ module.exports = (router) => {
     req.session.data.eventType = eventType;
     req.session.data.sortBy = sortBy;
 
-    // Process timeline events
-    const timelineEvents = processTimelineEvents(eventType, sortBy);
+    // Get timeline events specific to this MRN/page type
+    const eventsForThisPage = getTimelineEventsForMrn(title, 'cancel');
+    
+    // Process timeline events with the specific data
+    const timelineEvents = processTimelineEvents(eventType, sortBy, eventsForThisPage);
 
     res.render('mvp/v5/timeline/search-results-cancel', {
       title,
