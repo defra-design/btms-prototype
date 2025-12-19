@@ -2065,6 +2065,7 @@ module.exports = (router) => {
     const title = sessionTitle || (q ? q : '25GBC64QCLFMUHPAR2');
     const eventType = req.query.eventType || req.session.data?.eventType || 'all';
     const sortBy = req.query.sortBy || req.session.data?.sortBy || 'descending';
+    const mrnFilter = req.query.mrnFilter || req.session.data?.mrnFilter || title;
     
     req.session.data = req.session.data || {};
     req.session.data.title = title;
@@ -2073,6 +2074,11 @@ module.exports = (router) => {
     req.session.data.Ipaffs = req.session.data.Ipaffs || 'IPAFFS pre-notification (CHED) details';
     req.session.data.eventType = eventType;
     req.session.data.sortBy = sortBy;
+    req.session.data.mrnFilter = mrnFilter;
+
+    // Sample list of MRNs (can be replaced with actual data source)
+    const availableMrns = [title, '25GBC64QCLFMUHPAR2', '25GBC64QCLFMUHPAR3', '25GBC64QCLFMUHPAR4'];
+    req.session.data.availableMrns = availableMrns;
 
     // Process timeline events
     const timelineEvents = processTimelineEvents(eventType, sortBy);
@@ -2089,13 +2095,54 @@ module.exports = (router) => {
   router.post('/mvp/v5/timeline/search-results-timeline', (req, res) => {
     const eventType = req.body.eventType || 'all';
     const sortBy = req.body.sortBy || 'descending';
+    const mrnFilter = req.body.mrnFilter || req.query.mrnFilter || req.session.data?.title || '25GBC64QCLFMUHPAR2';
     const mrn = req.body.mrn || req.query.mrn || req.session.data?.title || '25GBC64QCLFMUHPAR2';
 
     req.session.data = req.session.data || {};
     req.session.data.eventType = eventType;
     req.session.data.sortBy = sortBy;
+    req.session.data.mrnFilter = mrnFilter;
 
-    res.redirect(`/mvp/v5/timeline/search-results-timeline?q=${encodeURIComponent(mrn)}&eventType=${eventType}&sortBy=${sortBy}`);
+    res.redirect(`/mvp/v5/timeline/search-results-timeline?q=${encodeURIComponent(mrnFilter)}&eventType=${eventType}&sortBy=${sortBy}&mrnFilter=${encodeURIComponent(mrnFilter)}`);
+  });
+
+  // GET: Search results cancel page (based on image design)
+  router.get('/mvp/v5/timeline/search-results-cancel', (req, res) => {
+    const q = (req.query.q || req.session.data?.searchTerm || '').trim();
+    const sessionTitle = (req.session.data?.title || '').trim();
+    const title = sessionTitle || (q ? q : '25GBCLNTWCC1FN7ARO');
+    const eventType = req.query.eventType || req.session.data?.eventType || 'all';
+    const sortBy = req.query.sortBy || req.session.data?.sortBy || 'descending';
+    
+    req.session.data = req.session.data || {};
+    req.session.data.title = title;
+    req.session.data.searchTerm = q || title;
+    req.session.data.Cds = req.session.data.Cds || 'Customs declaration details';
+    req.session.data.Ipaffs = req.session.data.Ipaffs || 'IPAFFS notification (CHED) details';
+    req.session.data.eventType = eventType;
+    req.session.data.sortBy = sortBy;
+
+    // Process timeline events
+    const timelineEvents = processTimelineEvents(eventType, sortBy);
+
+    res.render('mvp/v5/timeline/search-results-cancel', {
+      title,
+      timelineEvents,
+      data: req.session.data
+    });
+  });
+
+  // POST: Handle filter changes on search results cancel page
+  router.post('/mvp/v5/timeline/search-results-cancel', (req, res) => {
+    const eventType = req.body.eventType || 'all';
+    const sortBy = req.body.sortBy || 'descending';
+    const mrn = req.body.mrn || req.query.mrn || req.session.data?.title || '25GBCLNTWCC1FN7ARO';
+
+    req.session.data = req.session.data || {};
+    req.session.data.eventType = eventType;
+    req.session.data.sortBy = sortBy;
+
+    res.redirect(`/mvp/v5/timeline/search-results-cancel?q=${encodeURIComponent(mrn)}&eventType=${eventType}&sortBy=${sortBy}`);
   });
 };
 

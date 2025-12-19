@@ -17,6 +17,8 @@ const searchRedirects = {
   '25GB25XEV402TZBAR5': 'gms',
   '25GB3FJBV1UEKBDAR0': 'timeline/search-results-timeline',
   '25GBC64QCLFMUHPAR2': 'timeline/search-results-timeline',
+  '25GBCLNTWCC1FN7ARO': 'timeline/search-results-cancel',
+  '25GBBVWP03XACE8ARO': 'timeline/search-results-cancel',
   '25GB3HGVAICUT5YAR0': 'multiple-cheds-single-auth',
   '24GBDYHR49XV9BAFS1': 'filters-v4'
 };

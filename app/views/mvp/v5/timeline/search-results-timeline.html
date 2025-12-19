@@ -10,7 +10,7 @@
 {% set subHeader = 'Showing result for' %}
 {% set title = title or '25GBC64QCLFMUHPAR2' %}
 {% set bodyClasses = 'mrn accordion v4' %}
-{% set cssClassName = 'auth' %}
+{% set cssClassName = 'timeline' %}
 {% set hideManageAccount = 'false' %}
 {% set showEdit = true %}
 {% set hideBackLink = true %}
@@ -813,172 +813,6 @@
 
   <!-- TIMELINE TAB -->
   <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="timeline">
-    <style>
-      .govuk-details {
-        margin-top: 20px !important;
-        margin-bottom: 0 !important;
-      }
-
-      .moj-timeline__description .govuk-summary-list {
-        margin-bottom: 0;
-      }
-
-      /* Timeline title is 19px */
-      .moj-timeline__title,
-      .moj-timeline__title * {
-        font-size: 19px !important;
-      }
-
-      /* Ensure ALL timeline description text is 16px */
-      .moj-timeline__description,
-      .moj-timeline__description *,
-      .moj-timeline__description .govuk-body,
-      .moj-timeline__description .govuk-body *,
-      .moj-timeline__description time,
-      .moj-timeline__description span,
-      .moj-timeline__description strong,
-      .moj-timeline__description .govuk-tag {
-        font-size: 16px !important;
-        margin-right: 10px;
-      }
-
-      .moj-timeline__description .govuk-details__summary,
-      .moj-timeline__description .govuk-details__summary * {
-        font-size: 16px !important;
-      }
-
-      .timeline-filters {
-        display: flex;
-        gap: 16px;
-        margin-bottom: 20px;
-      }
-
-      .timeline-filters .govuk-form-group {
-        margin-bottom: 0;
-      }
-
-      .version-tag {
-        background-color: #EEEFEF;
-        color: #383F43;
-        padding: 2px 5px;
-        font-size: 16px !important;
-        font-weight: 300;
-        border-radius: 3px;
-      }
-
-      .timeline-detail-row {
-        margin-bottom: 0px;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        margin-top: 0;
-      }
-
-      .timeline-detail-row:not(:first-child) {
-        margin-top: 10px;
-      }
-
-      .timeline-detail-row * {
-        font-size: 16px !important;
-      }
-
-      .timeline-detail-label {
-        width: 100px;
-        font-size: 16px !important;
-        font-weight: 700;
-        flex-shrink: 0;
-        color: #0B0C0C;
-      }
-
-      .moj-timeline__description .govuk-tag {
-        margin-right: 0;
-        font-weight: 400 !important;
-      }
-
-      /* Tables in details section should be 14px and full width with fixed column layout */
-      .moj-timeline__description .govuk-details__text .govuk-table {
-        font-size: 14px !important;
-        width: 100%;
-        table-layout: fixed;
-      }
-      
-      /* Fixed column widths for consistent layout - 5 column tables (decisions) */
-      .moj-timeline__description .govuk-details__text .govuk-table th:nth-child(1),
-      .moj-timeline__description .govuk-details__text .govuk-table td:nth-child(1) {
-        width: 25%; /* CHED reference */
-      }
-      .moj-timeline__description .govuk-details__text .govuk-table th:nth-child(2),
-      .moj-timeline__description .govuk-details__text .govuk-table td:nth-child(2) {
-        width: 12%; /* Check code */
-      }
-      .moj-timeline__description .govuk-details__text .govuk-table th:nth-child(3),
-      .moj-timeline__description .govuk-details__text .govuk-table td:nth-child(3) {
-        width: 15%; /* Authority */
-      }
-      .moj-timeline__description .govuk-details__text .govuk-table th:nth-child(4),
-      .moj-timeline__description .govuk-details__text .govuk-table td:nth-child(4) {
-        width: 12%; /* Decision code */
-      }
-      .moj-timeline__description .govuk-details__text .govuk-table th:nth-child(5),
-      .moj-timeline__description .govuk-details__text .govuk-table td:nth-child(5) {
-        width: 36%; /* Decision */
-      }
-      
-      /* Ensure text wraps in cells to prevent column expansion */
-      .moj-timeline__description .govuk-details__text .govuk-table td {
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-        white-space: normal;
-      }
-      .moj-timeline__description .govuk-details__text .govuk-table *,
-      .moj-timeline__description .govuk-details__text .govuk-table th,
-      .moj-timeline__description .govuk-details__text .govuk-table td {
-        font-size: 14px !important;
-      }
-
-      /* Commodity code text should be 14px */
-      .moj-timeline__description .govuk-details__text .commodity-code,
-      .moj-timeline__description .govuk-details__text .commodity-code strong {
-        font-size: 14px !important;
-      }
-
-      /* Item headings should be 16px */
-      .moj-timeline__description .govuk-details__text h3.govuk-heading-m {
-        font-size: 16px !important;
-      }
-
-      /* Paragraph spacing in details section */
-      .moj-timeline__description .govuk-details__text p {
-        margin-top: 0;
-        margin-bottom: 8px;
-      }
-  .govuk-frontend-supported .govuk-tabs__panel {
-    padding: 0;
-    padding-top: 30px;
-    border: none;
-
-  
-  }
-  .govuk-frontend-supported .govuk-tabs__list { 
-  }
-
-
-  .moj-timeline__description .govuk-table__header, .moj-timeline__description .govuk-table__cell {
-    padding: 10px 20px 10px 0;
-    border-bottom: 1px solid #b1b4b6;
-  }
-
-  .moj-timeline__description .govuk-table__body tr:last-of-type td {
-    border-bottom: 1px solid #b1b4b6;
-    margin-bottom: 20px;
-
-  }
-  .sectionHeader {
-    border-bottom: none!important;
-    padding: 16px 0 16px 0!important;
-  }
-    </style>
-
     <form method="post">
       <input type="hidden" name="mrn" value="{{ title }}">
       
@@ -1032,12 +866,12 @@
           items: [
             {
               value: "descending",
-              text: "Descending",
+              text: "Newest to oldest",
               selected: not data.sortBy or data.sortBy === 'descending'
             },
             {
               value: "ascending",
-              text: "Ascending",
+              text: "Oldest to newest",
               selected: data.sortBy === 'ascending'
             }
           ],
