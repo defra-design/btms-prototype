@@ -2110,14 +2110,60 @@ module.exports = (router) => {
       cdsStatus: 'In progress - Awaiting IPAFFS',
       match: 'No',
       created: '2025-10-31T00:44:46.111Z',
-      hasDetails: false
+      hasDetails: true,
+      detailsHtml: `
+        <h3 class="govuk-heading-m govuk-!-margin-top-0">Item 2 - MISO PASTE</h3>
+        <p class="commodity-code"><strong>Commodity code:</strong> 2103909089</p>
+        <table class="govuk-table">
+          <thead class="govuk-table__head">
+            <tr class="govuk-table__row">
+              <th scope="col" class="govuk-table__header">CHED reference</th>
+              <th scope="col" class="govuk-table__header">Check code</th>
+              <th scope="col" class="govuk-table__header">Authority</th>
+              <th scope="col" class="govuk-table__header">Decision code</th>
+              <th scope="col" class="govuk-table__header">Match</th>
+              <th scope="col" class="govuk-table__header">Decision</th>
+            </tr>
+          </thead>
+          <tbody class="govuk-table__body">
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">GBCHD2025.6769491</td>
+              <td class="govuk-table__cell">H222</td>
+              <td class="govuk-table__cell">POAO</td>
+              <td class="govuk-table__cell">X00</td>
+              <td class="govuk-table__cell"><span class="govuk-tag govuk-tag--red">No</span></td>
+              <td class="govuk-table__cell">No match - Incorrect CHED type</td>
+            </tr>
+          </tbody>
+        </table>
+      `
     },
     {
       title: 'Clearance request',
       version: 2,
       cdsStatus: 'In progress - Awaiting trader',
       created: '2025-10-31T00:44:45.996Z',
-      hasDetails: false
+      hasDetails: true,
+      detailsHtml: `
+        <h3 class="govuk-heading-m govuk-!-margin-top-0">Item 2 - MISO PASTE</h3>
+        <p class="commodity-code"><strong>Commodity code:</strong> 2103909089</p>
+        <table class="govuk-table">
+          <thead class="govuk-table__head">
+            <tr class="govuk-table__row">
+              <th scope="col" class="govuk-table__header">CHED reference</th>
+              <th scope="col" class="govuk-table__header">Check code</th>
+              <th scope="col" class="govuk-table__header">Authority</th>
+            </tr>
+          </thead>
+          <tbody class="govuk-table__body">
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">GBCHD2025.6769491</td>
+              <td class="govuk-table__cell">H222</td>
+              <td class="govuk-table__cell">POAO</td>
+            </tr>
+          </tbody>
+        </table>
+      `
     },
     {
       title: 'CHEDD.GB.2025.6769491',
