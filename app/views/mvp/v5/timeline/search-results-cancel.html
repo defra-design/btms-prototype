@@ -1,13 +1,15 @@
 {% extends "layouts/forms.html" %}
 {% from "govuk/components/select/macro.njk" import govukSelect %}
+{% from "govuk/components/details/macro.njk" import govukDetails %}
 {% set signedIn = 'true' %}
 {% set fullWidth = true %}
 {% set hideButton = true %}
 {% set breadcrumb = true %}
 {% set showSubheader = true %}
 {% set subHeader = 'Showing result for' %}
-{% set title = title or '25GBCLNTWCC1FN7ARO' %}
+{% set title = title or '25GBCLNTWCC1FN7AR0' %}
 {% set bodyClasses = 'mrn accordion v4 timeline' %}
+{% set cssClassName = 'timeline' %}
 {% set hideManageAccount = 'false' %}
 {% set showEdit = true %}
 {% set hideBackLink = true %}
@@ -78,7 +80,7 @@
       <dl class="definition-list">
         <div class="row">
           <dt>MRN</dt>
-          <dd>25GBCLNTWCC1FN7ARO</dd>
+          <dd>25GBCLNTWCC1FN7AR0</dd>
         </div>
         <div class="row">
           <dt>DUCR</dt>
@@ -145,7 +147,7 @@
       <dl class="definition-list">
         <div class="row">
           <dt>MRN</dt>
-          <dd>25GBBVWP03XACE8ARO</dd>
+          <dd>25GBBVWP03XACE8AR0</dd>
         </div>
         <div class="row">
           <dt>DUCR</dt>
@@ -282,5 +284,178 @@
     </table>
   </div>
 </div>
+
+  </div> <!-- End Summary tab panel -->
+
+  <!-- TIMELINE TAB -->
+  <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="timeline">
+    <form method="post">
+      <input type="hidden" name="mrn" value="{{ title }}">
+      
+      <div class="timeline-filters">
+        {{ govukSelect({
+          id: "mrnFilter",
+          name: "mrnFilter",
+          label: {
+            text: "MRN",
+            classes: "govuk-label--s"
+          },
+          items: [
+            {
+              value: "25GBCLNTWCC1FN7AR0",
+              text: "25GBCLNTWCC1FN7AR0",
+              selected: (data.mrnFilter or title) === '25GBCLNTWCC1FN7AR0'
+            },
+            {
+              value: "25GBBVWP03XACE8AR0",
+              text: "25GBBVWP03XACE8AR0",
+              selected: (data.mrnFilter or title) === '25GBBVWP03XACE8AR0'
+            }
+          ],
+          attributes: {
+            onchange: "this.form.submit()"
+          }
+        }) }}
+
+        {{ govukSelect({
+          id: "eventType",
+          name: "eventType",
+          label: {
+            text: "Event type",
+            classes: "govuk-label--s"
+          },
+          items: [
+            {
+              value: "all",
+              text: "Show all",
+              selected: not data.eventType or data.eventType === 'all'
+            },
+            {
+              value: "finalisation",
+              text: "Finalisation",
+              selected: data.eventType === 'finalisation'
+            },
+            {
+              value: "clearance-decision",
+              text: "Clearance decision",
+              selected: data.eventType === 'clearance-decision'
+            },
+            {
+              value: "clearance-request",
+              text: "Clearance request",
+              selected: data.eventType === 'clearance-request'
+            },
+            {
+              value: "ched",
+              text: "CHED",
+              selected: data.eventType === 'ched'
+            }
+          ],
+          attributes: {
+            onchange: "this.form.submit()"
+          }
+        }) }}
+
+        {{ govukSelect({
+          id: "sortBy",
+          name: "sortBy",
+          label: {
+            text: "Sort by",
+            classes: "govuk-label--s"
+          },
+          items: [
+            {
+              value: "descending",
+              text: "Newest to oldest",
+              selected: not data.sortBy or data.sortBy === 'descending'
+            },
+            {
+              value: "ascending",
+              text: "Oldest to newest",
+              selected: data.sortBy === 'ascending'
+            }
+          ],
+          attributes: {
+            onchange: "this.form.submit()"
+          }
+        }) }}
+      </div>
+    </form>
+
+    {% if timelineEvents and timelineEvents.length > 0 %}
+      <div class="moj-timeline">
+        {% for event in timelineEvents %}
+          <div class="moj-timeline__item">
+            <div class="moj-timeline__header">
+              <h2 class="moj-timeline__title">
+                {{ event.title }}
+              </h2>
+            </div>
+            
+            <div class="moj-timeline__description">
+              {% if event.cdsStatus %}
+                <div class="timeline-detail-row">
+                  <span class="timeline-detail-label">CDS status</span>
+                  <span class="govuk-tag {% if event.cdsStatus === 'Finalised - Released' or event.cdsStatus === 'Finalised - Manually released' %}govuk-tag--green{% elif event.cdsStatus === 'Finalised - Cancelled after arrival' %}govuk-tag--red{% elif event.cdsStatus === 'In progress - CDS' or event.cdsStatus === 'In progress - Awaiting CDS' or event.cdsStatus === 'In progress - Awaiting IPAFFS' or event.cdsStatus === 'In progress - Awaiting trader' %}govuk-tag--yellow{% endif %}">
+                    {{ event.cdsStatus }}
+                  </span>
+                </div>
+              {% endif %}
+
+              {% if event.version and not event.chedStatus and event.title !== 'Clearance decision' %}
+                <div class="timeline-detail-row">
+                  <span class="timeline-detail-label">Version</span>
+                  <span>{{ event.version }}</span>
+                </div>
+              {% endif %}
+
+              {% if event.match %}
+                <div class="timeline-detail-row">
+                  <span class="timeline-detail-label">Match</span>
+                  <span class="govuk-tag govuk-tag--red">{{ event.match }}</span>
+                </div>
+              {% endif %}
+
+              {% if event.chedStatus %}
+                <div class="timeline-detail-row">
+                  <span class="timeline-detail-label">CHED status</span>
+                  <span class="govuk-tag {% if event.chedStatus === 'Valid' %}govuk-tag--green{% elif event.chedStatus === 'In progress' or event.chedStatus === 'Submitted' %}govuk-tag--yellow{% endif %}">
+                    {{ event.chedStatus }}
+                  </span>
+                </div>
+              {% endif %}
+
+              {% if event.decision %}
+                <div class="timeline-detail-row">
+                  <span class="timeline-detail-label">Decision</span>
+                  {% set decisionValue = event.decision|replace('Decision ', '') %}
+                  <span>{{ decisionValue }}</span>
+                </div>
+              {% endif %}
+
+              {% if event.created %}
+                <div class="timeline-detail-row">
+                  <span class="timeline-detail-label">Created</span>
+                  <time datetime="{{ event.created }}">{{ event.createdFormatted }}</time>
+                </div>
+              {% endif %}
+
+              {% if event.hasDetails %}
+                {{ govukDetails({
+                  summaryText: "More details",
+                  html: event.detailsHtml | safe
+                }) }}
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="govuk-inset-text">
+        <p class="govuk-body">No timeline events found.</p>
+      </div>
+    {% endif %}
+  </div> <!-- End Timeline tab panel -->
+</div> <!-- End govuk-tabs -->
 
 {% endblock %}

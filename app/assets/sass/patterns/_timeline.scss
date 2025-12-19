@@ -91,26 +91,36 @@
     table-layout: fixed;
   }
   
-  /* Fixed column widths for consistent layout - 5 column tables (decisions) */
+  /* Fixed column widths for consistent layout - 6 column tables (with Match column) */
   .moj-timeline__description .govuk-details__text .govuk-table th:nth-child(1),
   .moj-timeline__description .govuk-details__text .govuk-table td:nth-child(1) {
-    width: 25%; /* CHED reference */
+    width: 20%; /* CHED reference */
   }
   .moj-timeline__description .govuk-details__text .govuk-table th:nth-child(2),
   .moj-timeline__description .govuk-details__text .govuk-table td:nth-child(2) {
-    width: 12%; /* Check code */
+    width: 10%; /* Check code */
   }
   .moj-timeline__description .govuk-details__text .govuk-table th:nth-child(3),
   .moj-timeline__description .govuk-details__text .govuk-table td:nth-child(3) {
-    width: 15%; /* Authority */
+    width: 12%; /* Authority */
   }
   .moj-timeline__description .govuk-details__text .govuk-table th:nth-child(4),
   .moj-timeline__description .govuk-details__text .govuk-table td:nth-child(4) {
-    width: 12%; /* Decision code */
+    width: 10%; /* Decision code */
   }
   .moj-timeline__description .govuk-details__text .govuk-table th:nth-child(5),
   .moj-timeline__description .govuk-details__text .govuk-table td:nth-child(5) {
-    width: 36%; /* Decision */
+    width: 10%; /* Match */
+  }
+  .moj-timeline__description .govuk-details__text .govuk-table th:nth-child(6),
+  .moj-timeline__description .govuk-details__text .govuk-table td:nth-child(6) {
+    width: 38%; /* Decision */
+  }
+  
+  /* Override for 5 column tables (without Match column) - more specific selector */
+  .moj-timeline__description .govuk-details__text .govuk-table th:nth-child(5):last-child,
+  .moj-timeline__description .govuk-details__text .govuk-table td:nth-child(5):last-child {
+    width: 36% !important; /* Decision (when it's the 5th and last column) */
   }
   
   /* Ensure text wraps in cells to prevent column expansion */

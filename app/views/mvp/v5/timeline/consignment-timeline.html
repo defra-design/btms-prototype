@@ -267,7 +267,7 @@
                 </div>
               {% endif %}
 
-              {% if event.version and not event.chedStatus %}
+              {% if event.version and not event.chedStatus and event.title !== 'Clearance decision' %}
                 <div class="timeline-detail-row">
                   <span class="timeline-detail-label">Version</span>
                   <span>{{ event.version }}</span>
@@ -286,7 +286,8 @@
               {% if event.decision %}
                 <div class="timeline-detail-row">
                   <span class="timeline-detail-label">Decision</span>
-                  <span>{{ event.decision }}</span>
+                  {% set decisionValue = event.decision|replace('Decision ', '') %}
+                  <span>{{ decisionValue }}</span>
                 </div>
               {% endif %}
 
