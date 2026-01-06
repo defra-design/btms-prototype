@@ -18,7 +18,8 @@ const searchRedirects = {
   '25GBC64QCLFMUHPAR2': 'timeline/search-results-timeline',
   '25GBCLNTWCC1FN7AR0': 'timeline/search-results-cancel',
   '25GB3HGVAICUT5YAR0': 'multiple-cheds-single-auth',
-  '24GBDYHR49XV9BAFS1': 'filters-v4'
+  '24GBDYHR49XV9BAFS1': 'filters-v4',
+  'GMRA00002TT2': 'timeline/gmr'
 };
 
 module.exports = (router) => {
@@ -54,7 +55,7 @@ module.exports = (router) => {
 
     if (!search) {
       data.error = 'true';
-      data.errorMessage = 'Enter an MRN, CHED, GMR or DUCR reference';
+      data.errorMessage = 'Enter an MRN, CHED or GMR reference';
       data.searchTerm = '';
       data.title = '';
     } else if (
@@ -64,7 +65,7 @@ module.exports = (router) => {
       !gmrPattern.test(search)
     ) {
       data.error = 'true';
-      data.errorMessage = 'Enter an MRN, CHED, GMR or DUCR reference in the correct format';
+      data.errorMessage = 'Enter an MRN, CHED or GMR reference in the correct format';
       data.searchTerm = search;
       data.title = '';
     } else {

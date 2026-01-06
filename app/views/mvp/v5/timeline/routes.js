@@ -2000,7 +2000,6 @@ module.exports = (router) => {
       title: 'Clearance decision',
       decision: '1',
       cdsStatus: 'In progress - Awaiting IPAFFS',
-      match: 'No',
       created: '2025-11-14T11:47:28.433Z',
       hasDetails: true,
       detailsHtml: `
@@ -2013,7 +2012,6 @@ module.exports = (router) => {
               <th scope="col" class="govuk-table__header">Check code</th>
               <th scope="col" class="govuk-table__header">Authority</th>
               <th scope="col" class="govuk-table__header">Decision code</th>
-              <th scope="col" class="govuk-table__header">Match</th>
               <th scope="col" class="govuk-table__header">Decision</th>
             </tr>
           </thead>
@@ -2023,8 +2021,7 @@ module.exports = (router) => {
               <td class="govuk-table__cell">H222</td>
               <td class="govuk-table__cell">POAO</td>
               <td class="govuk-table__cell">X00</td>
-              <td class="govuk-table__cell"><span class="govuk-tag govuk-tag--red">No</span></td>
-              <td class="govuk-table__cell">No match - Incorrect CHED type</td>
+              <td class="govuk-table__cell">Incorrect CHED type</td>
             </tr>
           </tbody>
         </table>
@@ -2108,7 +2105,6 @@ module.exports = (router) => {
       version: 2,
       decision: '2',
       cdsStatus: 'In progress - Awaiting IPAFFS',
-      match: 'No',
       created: '2025-10-31T00:44:46.111Z',
       hasDetails: true,
       detailsHtml: `
@@ -2121,7 +2117,6 @@ module.exports = (router) => {
               <th scope="col" class="govuk-table__header">Check code</th>
               <th scope="col" class="govuk-table__header">Authority</th>
               <th scope="col" class="govuk-table__header">Decision code</th>
-              <th scope="col" class="govuk-table__header">Match</th>
               <th scope="col" class="govuk-table__header">Decision</th>
             </tr>
           </thead>
@@ -2131,8 +2126,7 @@ module.exports = (router) => {
               <td class="govuk-table__cell">H222</td>
               <td class="govuk-table__cell">POAO</td>
               <td class="govuk-table__cell">X00</td>
-              <td class="govuk-table__cell"><span class="govuk-tag govuk-tag--red">No</span></td>
-              <td class="govuk-table__cell">No match - Incorrect CHED type</td>
+              <td class="govuk-table__cell">Incorrect CHED type</td>
             </tr>
           </tbody>
         </table>
@@ -2177,7 +2171,6 @@ module.exports = (router) => {
       version: 1,
       decision: 'Decision 1',
       cdsStatus: 'In progress - Awaiting IPAFFS',
-      match: 'No',
       created: '2025-10-27T11:13:49.226Z',
       hasDetails: true,
       detailsHtml: `
@@ -2190,7 +2183,6 @@ module.exports = (router) => {
               <th scope="col" class="govuk-table__header">Check code</th>
               <th scope="col" class="govuk-table__header">Authority</th>
               <th scope="col" class="govuk-table__header">Decision code</th>
-              <th scope="col" class="govuk-table__header">Match</th>
               <th scope="col" class="govuk-table__header">Decision</th>
             </tr>
           </thead>
@@ -2200,8 +2192,7 @@ module.exports = (router) => {
               <td class="govuk-table__cell">H222</td>
               <td class="govuk-table__cell">POAO</td>
               <td class="govuk-table__cell">X00</td>
-              <td class="govuk-table__cell"><span class="govuk-tag govuk-tag--red">No</span></td>
-              <td class="govuk-table__cell">No match - Incorrect CHED type</td>
+              <td class="govuk-table__cell">Incorrect CHED type</td>
             </tr>
           </tbody>
         </table>
@@ -2250,6 +2241,157 @@ module.exports = (router) => {
     }
   ];
 
+  // Timeline events for MRN 25GBDD03IWJ3IHIAR1 (Latest page)
+  const LATEST_TIMELINE_EVENTS = [
+    {
+      title: 'Clearance request - processing error',
+      version: 2,
+      errorCode: 'ALVSVAL401',
+      errorMessage: 'Error Description: The Entry Reference was not recognised. HMRC is unable to process the decision notification',
+      created: '2025-12-04T19:07:47Z',
+      hasDetails: false
+    },
+    {
+      title: 'Clearance decision',
+      decision: '2',
+      cdsStatus: 'In progress - Awaiting CDS',
+      created: '2025-12-04T19:07:46Z',
+      hasDetails: true,
+      detailsHtml: `
+        <p class="govuk-body">Decision details for clearance decision 2</p>
+      `
+    },
+    {
+      title: 'Clearance request',
+      version: 2,
+      created: '2025-12-04T19:07:46Z',
+      hasDetails: true,
+      detailsHtml: `
+        <p class="govuk-body">Clearance request version 2 details</p>
+      `
+    },
+    {
+      title: 'Clearance request - processing error',
+      version: 2,
+      errorCode: 'ALVSVAL401',
+      errorMessage: 'EntryReference 25GBDD03IWJ3IHIAR1 EntryVersionNumber 2. This has already been replaced by a later version of the import declaration. Your request with correlation ID 2517565 has been terminated.',
+      created: '2025-12-04T12:50:47Z',
+      hasDetails: false
+    },
+    {
+      title: 'Clearance decision',
+      decision: '1',
+      cdsStatus: 'In progress - Awaiting IPAFFS',
+      created: '2025-12-03T15:00:29Z',
+      hasDetails: true,
+      detailsHtml: `
+        <p class="govuk-body">Decision details for clearance decision 1</p>
+      `
+    },
+    {
+      title: 'Clearance request',
+      version: 1,
+      created: '2025-12-03T15:00:29Z',
+      hasDetails: true,
+      detailsHtml: `
+        <p class="govuk-body">Clearance request version 1 details</p>
+      `
+    },
+    {
+      title: 'CHEDPP.GB.2025.5627759',
+      chedStatus: 'Valid',
+      decision: 'Auto cleared',
+      created: '2025-12-03T15:00:09Z',
+      hasDetails: false
+    },
+    {
+      title: 'CHEDPP.GB.2025.5627759',
+      chedStatus: 'In progress',
+      decision: 'Auto cleared',
+      created: '2025-12-03T14:58:00Z',
+      hasDetails: false
+    },
+    {
+      title: 'CHEDPP.GB.2025.5627759',
+      chedStatus: 'Submitted',
+      decision: 'Auto cleared',
+      created: '2025-12-03T14:53:53Z',
+      hasDetails: false
+    },
+    {
+      title: 'CHEDPP.GB.2025.5627759',
+      chedStatus: 'Submitted',
+      decision: 'Auto cleared',
+      created: '2025-12-03T14:53:52Z',
+      hasDetails: false
+    }
+  ];
+
+  // Custom timeline events for MRN 25GBC64QCLFMUHPAR2 (not shared)
+  const CUSTOM_TIMELINE_EVENTS_25GBC64QCLFMUHPAR2 = [
+    {
+      title: 'Finalisation',
+      version: 2,
+      cdsStatus: 'Finalised - Released',
+      created: '2025-11-06T09:24:20Z',
+      hasDetails: false
+    },
+    {
+      title: 'Clearance decision',
+      decision: '6',
+      cdsStatus: 'In progress - Awaiting CDS',
+      created: '2025-11-06T09:13:48Z',
+      hasDetails: true,
+      detailsHtml: `
+        <h3 class="govuk-heading-m govuk-!-margin-top-0">Item 1 - Sweet pepper</h3>
+        <p class="commodity-code"><strong>Commodity code:</strong> 0709601000</p>
+        <table class="govuk-table">
+          <thead class="govuk-table__head">
+            <tr class="govuk-table__row">
+              <th scope="col" class="govuk-table__header">CHED reference</th>
+              <th scope="col" class="govuk-table__header">Check code</th>
+              <th scope="col" class="govuk-table__header">Authority</th>
+              <th scope="col" class="govuk-table__header">Decision code</th>
+              <th scope="col" class="govuk-table__header">Decision</th>
+            </tr>
+          </thead>
+          <tbody class="govuk-table__body">
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">GBCHD2025.6801816</td>
+              <td class="govuk-table__cell">H218</td>
+              <td class="govuk-table__cell">HMI-SMS</td>
+              <td class="govuk-table__cell">C03</td>
+              <td class="govuk-table__cell">Release - Inspection Complete</td>
+            </tr>
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">GBCHD2025.6801816</td>
+              <td class="govuk-table__cell">H219</td>
+              <td class="govuk-table__cell">PHSI</td>
+              <td class="govuk-table__cell">C03</td>
+              <td class="govuk-table__cell">Release - Inspection Complete</td>
+            </tr>
+          </tbody>
+        </table>
+      `
+    },
+    {
+      title: 'Clearance request',
+      version: 2,
+      created: '2025-11-06T09:13:46Z',
+      hasDetails: true,
+      detailsHtml: `
+        <p class="govuk-body">Clearance request version 2 details</p>
+      `
+    },
+    {
+      title: 'CHEDPP.GB.2025.6801816',
+      chedStatus: 'Valid',
+      decision: 'Compliant',
+      created: '2025-11-06T09:13:00Z',
+      hasDetails: false
+    }
+  ];
+
   // Helper function to get timeline events based on MRN or page type
   // Add your timeline data constants here, then map them below
   function getTimelineEventsForMrn(mrn, pageType) {
@@ -2260,9 +2402,13 @@ module.exports = (router) => {
       // Map specific MRNs to their timeline data
       '25GBBVWP03XACE8AR0': CANCELLED_TIMELINE_EVENTS,
       '25GBCLNTWCC1FN7AR0': MANUAL_RELEASE_TIMELINE_EVENTS,
+      '25GBDD03IWJ3IHIAR1': LATEST_TIMELINE_EVENTS,
+      '25GBC64QCLFMUHPAR2': CUSTOM_TIMELINE_EVENTS_25GBC64QCLFMUHPAR2,
       // Handle legacy variants with 'O' instead of '0'
       '25GBBVWP03XACE8ARO': CANCELLED_TIMELINE_EVENTS,
       '25GBCLNTWCC1FN7ARO': MANUAL_RELEASE_TIMELINE_EVENTS,
+      '25GBDD03IWJ3IHIARO': LATEST_TIMELINE_EVENTS,
+      '25GBC64QCLFMUHPARO': CUSTOM_TIMELINE_EVENTS_25GBC64QCLFMUHPAR2,
     };
     
     // First check for MRN-specific mapping
@@ -2323,7 +2469,7 @@ module.exports = (router) => {
       filteredEvents = sourceEvents.filter(event => {
         if (eventType === 'finalisation') return event.title === 'Finalisation';
         if (eventType === 'clearance-decision') return event.title === 'Clearance decision';
-        if (eventType === 'clearance-request') return event.title === 'Clearance request';
+        if (eventType === 'clearance-request') return event.title === 'Clearance request' || event.title === 'Clearance request - processing error';
         if (eventType === 'ched' || eventType === 'ipaffs-pre-notification') return event.title.startsWith('CHED');
         return true;
       });
@@ -2357,7 +2503,8 @@ module.exports = (router) => {
   router.get('/mvp/v5/timeline/search-results-timeline', (req, res) => {
     const q = (req.query.q || req.session.data?.searchTerm || '').trim();
     const sessionTitle = (req.session.data?.title || '').trim();
-    const title = sessionTitle || (q ? q : '25GBC64QCLFMUHPAR2');
+    // Prioritize query parameter over session data to ensure correct MRN
+    const title = (q ? q : sessionTitle) || '25GBC64QCLFMUHPAR2';
     const eventType = req.query.eventType || req.session.data?.eventType || 'all';
     const sortBy = req.query.sortBy || req.session.data?.sortBy || 'descending';
     const mrnFilter = req.query.mrnFilter || req.session.data?.mrnFilter || title;
@@ -2402,6 +2549,51 @@ module.exports = (router) => {
     req.session.data.mrnFilter = mrnFilter;
 
     res.redirect(`/mvp/v5/timeline/search-results-timeline?q=${encodeURIComponent(mrnFilter)}&eventType=${eventType}&sortBy=${sortBy}&mrnFilter=${encodeURIComponent(mrnFilter)}`);
+  });
+
+  // GET: Search results latest page
+  router.get('/mvp/v5/timeline/search-results-latest', (req, res) => {
+    // Prioritize query parameter q, then mrn, then session data
+    const q = (req.query.q || '').trim();
+    const mrnParam = (req.query.mrn || '').trim();
+    const sessionTitle = (req.session.data?.title || '').trim();
+    // Use query parameter first, then mrn param, then session, then default
+    const title = q || mrnParam || sessionTitle || '25GBDD03IWJ3IHIAR1';
+    const eventType = req.query.eventType || req.session.data?.eventType || 'all';
+    const sortBy = req.query.sortBy || req.session.data?.sortBy || 'descending';
+    
+    req.session.data = req.session.data || {};
+    req.session.data.title = title;
+    req.session.data.searchTerm = q || title;
+    req.session.data.Cds = req.session.data.Cds || 'Customs declaration details';
+    req.session.data.Ipaffs = req.session.data.Ipaffs || 'IPAFFS pre-notification (CHED) details';
+    req.session.data.eventType = eventType;
+    req.session.data.sortBy = sortBy;
+
+    // Get timeline events for the Latest tab - use the title (MRN) to look up correct data
+    const eventsForThisPage = getTimelineEventsForMrn(title, 'latest');
+    const timelineEvents = processTimelineEvents(eventType, sortBy, eventsForThisPage);
+
+    res.render('mvp/v5/timeline/search-results-latest', {
+      title,
+      mrn: title,
+      timelineEvents,
+      data: req.session.data
+    });
+  });
+
+  // POST: Handle filter changes on search results latest page
+  router.post('/mvp/v5/timeline/search-results-latest', (req, res) => {
+    const eventType = req.body.eventType || 'all';
+    const sortBy = req.body.sortBy || 'descending';
+    const mrn = req.body.mrn || req.query.mrn || req.session.data?.title || '25GBC64QCLFMUHPAR2';
+
+    req.session.data = req.session.data || {};
+    req.session.data.eventType = eventType;
+    req.session.data.sortBy = sortBy;
+    req.session.data.title = mrn;
+
+    res.redirect(`/mvp/v5/timeline/search-results-latest?q=${encodeURIComponent(mrn)}&eventType=${eventType}&sortBy=${sortBy}`);
   });
 
   // GET: Search results cancel page (based on image design)
@@ -2456,6 +2648,21 @@ module.exports = (router) => {
     req.session.data.title = mrnFilter;
 
     res.redirect(`/mvp/v5/timeline/search-results-cancel?mrnFilter=${encodeURIComponent(mrnFilter)}&eventType=${eventType}&sortBy=${sortBy}`);
+  });
+
+  // GET: GMR page
+  router.get('/mvp/v5/timeline/gmr', (req, res) => {
+    const gmr = req.query.gmr || req.session.data?.title || 'GMRA00002TT2';
+    const q = (req.query.q || req.session.data?.searchTerm || gmr).trim();
+    
+    req.session.data = req.session.data || {};
+    req.session.data.title = gmr;
+    req.session.data.searchTerm = q;
+
+    res.render('mvp/v5/timeline/gmr', {
+      title: gmr,
+      data: req.session.data
+    });
   });
 };
 

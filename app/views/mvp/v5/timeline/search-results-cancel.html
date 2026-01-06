@@ -7,7 +7,7 @@
 {% set breadcrumb = true %}
 {% set showSubheader = true %}
 {% set subHeader = 'Showing result for' %}
-{% set title = title or '25GBCLNTWCC1FN7AR0' %}
+{% set title = '25GBCLNTWCC1FN7AR0' %}
 {% set bodyClasses = 'mrn accordion v4 timeline' %}
 {% set cssClassName = 'timeline' %}
 {% set hideManageAccount = 'false' %}
@@ -22,7 +22,7 @@
 <div class="govuk-tabs" data-module="govuk-tabs">
   <ul class="govuk-tabs__list">
     <li class="govuk-tabs__list-item govuk-tabs__list-item--selected">
-      <a class="govuk-tabs__tab" href="#summary">Summary</a>
+      <a class="govuk-tabs__tab" href="#summary">Latest</a>
     </li>
     <li class="govuk-tabs__list-item">
       <a class="govuk-tabs__tab" href="#timeline">Timeline</a>
@@ -83,9 +83,13 @@
           <dd>25GBCLNTWCC1FN7AR0</dd>
         </div>
         <div class="row">
-          <dt>DUCR</dt>
-          <dd>5GB263722112000-FSI25100097</dd>
-        </div>
+          <dt>GMR</dt>
+          <dd>
+            <a href="gmr">
+              <span>GMRA00002TT2</span>
+            </a>
+
+          </dd>        </div>
         <div class="row">
           <dt>CDS status</dt>
           <dd><span class="govuk-tag govuk-tag--green">Finalised - Manually released</span></dd>
@@ -151,7 +155,9 @@
         </div>
         <div class="row">
           <dt>DUCR</dt>
-          <dd>5GB263722112000-FSI25100097</dd>
+          <dd>    <a href="gmr">
+            <span>GMRA00002TT2</span>
+          </a></dd>
         </div>
         <div class="row">
           <dt>CDS status</dt>

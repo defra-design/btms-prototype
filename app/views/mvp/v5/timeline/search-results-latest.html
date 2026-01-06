@@ -1,0 +1,665 @@
+{% extends "layouts/forms.html" %}
+{% from "moj/components/timeline/macro.njk" import mojTimeline %}
+{% from "govuk/components/select/macro.njk" import govukSelect %}
+{% from "govuk/components/details/macro.njk" import govukDetails %}
+{% set signedIn = 'true' %}
+{% set fullWidth = true %}
+{% set hideButton = true %}
+{% set breadcrumb = true %}
+{% set showSubheader = true %}
+{% set subHeader = 'Showing result for' %}
+{% set title = '25GBDD03IWJ3IHIAR1' %}
+{% set bodyClasses = 'mrn accordion v4' %}
+{% set cssClassName = 'timeline' %}
+{% set hideManageAccount = 'false' %}
+{% set showEdit = true %}
+{% set hideBackLink = true %}
+{% set showMenu = true %}
+{% set searchLinkHref = '../search' %}
+{% set menu = true %}
+
+{% block form %}
+
+<div class="govuk-tabs" data-module="govuk-tabs">
+  <ul class="govuk-tabs__list">
+    <li class="govuk-tabs__list-item govuk-tabs__list-item--selected">
+      <a class="govuk-tabs__tab" href="#latest">Latest</a>
+    </li>
+    <li class="govuk-tabs__list-item">
+      <a class="govuk-tabs__tab" href="#timeline">Timeline</a>
+    </li>
+  </ul>
+
+  <!-- LATEST TAB -->
+  <div class="govuk-tabs__panel" id="latest">
+    <!-- GMR Section -->
+    <h3 class="govuk-heading-m sectionHeader">{{ data.Cds | safe }}</h3>
+    {% include 'includes/mrn-filters.html' %}
+
+    <div class="mrn-container" id="mrn-toggle">
+      <div class="toggle-area" data-target="gmrDetails">
+        <div class="container govuk-body">
+          <dl class="definition-list">
+            <div class="row">
+              <dt>MRN</dt>
+              <dd>{{ title }}</dd>
+            </div>
+            <div class="row">
+              <dt>GMR</dt>
+              <dd>
+                <a href="gmr">
+                  <span>GMRA00002TT2</span>
+                </a>
+              </dd>
+            </div>
+            <div class="row">
+              <dt>CDS status</dt>
+              <dd><span class="govuk-tag govuk-tag--yellow">In progress - Awaiting CDS</span></dd>
+            </div>
+            <div class="row">
+              <dt>Last updated</dt>
+              <dd>4 December 2025, 19:07</dd>
+            </div>
+          </dl>
+          <div class="toggle-wrapper">
+            <div id="toggleArrowContainer">
+              <i id="toggleArrow" class="fas fa-chevron-up"></i>
+            </div>
+          </div>
+        </div>
+
+        <div id="gmrDetails" class="commodity-table">
+          <table class="govuk-table data-table">
+            <thead class="govuk-table__head">
+              <tr class="govuk-table__row">
+                <th scope="col" class="govuk-table__header">Item number</th>
+                <th scope="col" class="govuk-table__header">Commodity code</th>
+                <th scope="col" class="govuk-table__header">Description</th>
+                <th scope="col" class="govuk-table__header">Quantity / Weight</th>
+                <th scope="col" class="govuk-table__header">CHED reference</th>
+                <th scope="col" class="govuk-table__header">Match</th>
+                <th scope="col" class="govuk-table__header">Authority</th>
+                <th scope="col" class="govuk-table__header">Decision</th>
+              </tr>
+            </thead>
+            <tbody class="govuk-table__body">
+              <tr class="match PHSI">
+                <td class="govuk-table__cell">1</td>
+                <td class="govuk-table__cell">0709601000</td>
+                <td class="govuk-table__cell">SWEET PEPPER</td>
+                <td class="govuk-table__cell">2025</td>
+                <td class="govuk-table__cell">GBCHD2025.6801816</td>
+                <td class="govuk-table__cell"><span class="govuk-tag govuk-tag--green">Yes</span></td>
+                <td class="govuk-table__cell decision">
+                  <ul class="govuk-list">
+                    <li class="PHSI">PHSI</li>
+                  </ul>
+                </td>
+                <td class="govuk-table__cell decision">
+                  <ul class="govuk-list">
+                    <li class="PHSI">Release - Inspection complete</li>
+                  </ul>
+                </td>
+              </tr>
+              <tr class="match PHSI">
+                <td class="govuk-table__cell">2</td>
+                <td class="govuk-table__cell">0806101090</td>
+                <td class="govuk-table__cell">TABLE GRAPES</td>
+                <td class="govuk-table__cell">2660</td>
+                <td class="govuk-table__cell">GBCHD2025.6801816</td>
+                <td class="govuk-table__cell"><span class="govuk-tag govuk-tag--green">Yes</span></td>
+                <td class="govuk-table__cell decision">
+                  <ul class="govuk-list">
+                    <li class="PHSI">PHSI</li>
+                  </ul>
+                </td>
+                <td class="govuk-table__cell decision">
+                  <ul class="govuk-list">
+                    <li class="PHSI">Release - Inspection complete</li>
+                  </ul>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- CHED Section -->
+    <h3 class="govuk-heading-m sectionHeader ched-header">{{ data.Ipaffs | safe }}</h3>
+    {% include 'includes/ched-filters.html' %}
+
+    <div class="ched-container toggle-area" data-target="chedDetails">
+      <div class="container govuk-body">
+        <dl class="definition-list">
+          <div class="row">
+            <dt>CHED reference</dt>
+            <dd>
+              <a href="https://ipaffs-prototype.herokuapp.com/part-2/chedp-landbridge/00-ched-overview" target="_blank" aria-label="CHEDPP.GB.2025.5627759 (opens in new tab)">
+                <span>CHEDPP.GB.2025.5627759</span>
+              </a>
+              <i class="fas fa-external-link-alt" aria-hidden="true"></i>
+            </dd>
+          </div>
+          <div class="row">
+            <dt>CHED Status</dt>
+            <dd>Valid</dd>
+          </div>
+          <div class="row">
+            <dt>Last updated</dt>
+            <dd>3 December 2025, 15:00</dd>
+          </div>
+        </dl>
+        <div class="toggle-wrapper">
+          <div id="toggleArrowContainer">
+            <i id="toggleArrow" class="fas fa-chevron-up"></i>
+          </div>
+        </div>
+      </div>
+
+      <div id="chedDetails" class="commodity-table">
+        <table class="govuk-table data-table">
+          <thead class="govuk-table__head">
+            <tr class="govuk-table__row">
+              <th scope="col" class="govuk-table__header">Item number</th>
+              <th scope="col" class="govuk-table__header">Commodity code</th>
+              <th scope="col" class="govuk-table__header">Description</th>
+              <th scope="col" class="govuk-table__header">Quantity / Weight</th>
+              <th scope="col" class="govuk-table__header">Authority</th>
+              <th scope="col" class="govuk-table__header">Decision</th>
+            </tr>
+          </thead>
+          <tbody class="govuk-table__body">
+            <tr class="govuk-table__row PHSI">
+              <td class="govuk-table__cell">1</td>
+              <td class="govuk-table__cell">0709609920</td>
+              <td class="govuk-table__cell">Capsicum annuum</td>
+              <td class="govuk-table__cell">2143</td>
+              <td class="govuk-table__cell decision">
+                <ul class="govuk-list">
+                  <li>PHSI</li>
+                </ul>
+              </td>
+              <td class="govuk-table__cell decision">
+                <ul class="govuk-list">
+                  <li>Auto cleared</li>
+                </ul>
+              </td>
+            </tr>
+            <tr class="govuk-table__row PHSI">
+              <td class="govuk-table__cell">2</td>
+              <td class="govuk-table__cell">07096010</td>
+              <td class="govuk-table__cell">Capsicum annuum</td>
+              <td class="govuk-table__cell">2025</td>
+              <td class="govuk-table__cell decision">
+                <ul class="govuk-list">
+                  <li>PHSI</li>
+                </ul>
+              </td>
+              <td class="govuk-table__cell decision">
+                <ul class="govuk-list">
+                  <li>Auto cleared</li>
+                </ul>
+              </td>
+            </tr>
+            <tr class="govuk-table__row PHSI">
+              <td class="govuk-table__cell">3</td>
+              <td class="govuk-table__cell">0806101090</td>
+              <td class="govuk-table__cell">Vitis vinifera</td>
+              <td class="govuk-table__cell">2660</td>
+              <td class="govuk-table__cell decision">
+                <ul class="govuk-list">
+                  <li>PHSI</li>
+                </ul>
+              </td>
+              <td class="govuk-table__cell decision">
+                <ul class="govuk-list">
+                  <li>Auto cleared</li>
+                </ul>
+              </td>
+            </tr>
+            <tr class="govuk-table__row PHSI">
+              <td class="govuk-table__cell">4</td>
+              <td class="govuk-table__cell">0808309090</td>
+              <td class="govuk-table__cell">Pyrus cordata</td>
+              <td class="govuk-table__cell">195</td>
+              <td class="govuk-table__cell decision">
+                <ul class="govuk-list">
+                  <li>PHSI</li>
+                </ul>
+              </td>
+              <td class="govuk-table__cell decision">
+                <ul class="govuk-list">
+                  <li>Auto cleared</li>
+                </ul>
+              </td>
+            </tr>
+            <tr class="govuk-table__row PHSI">
+              <td class="govuk-table__cell">5</td>
+              <td class="govuk-table__cell">0709996090</td>
+              <td class="govuk-table__cell">Zea mays</td>
+              <td class="govuk-table__cell">263</td>
+              <td class="govuk-table__cell decision">
+                <ul class="govuk-list">
+                  <li>PHSI</li>
+                </ul>
+              </td>
+              <td class="govuk-table__cell decision">
+                <ul class="govuk-list">
+                  <li>Auto cleared</li>
+                </ul>
+              </td>
+            </tr>
+            <tr class="govuk-table__row PHSI">
+              <td class="govuk-table__cell">6</td>
+              <td class="govuk-table__cell">07093000</td>
+              <td class="govuk-table__cell">Solanum melongena</td>
+              <td class="govuk-table__cell">360</td>
+              <td class="govuk-table__cell decision">
+                <ul class="govuk-list">
+                  <li>PHSI</li>
+                </ul>
+              </td>
+              <td class="govuk-table__cell decision">
+                <ul class="govuk-list">
+                  <li>Auto cleared</li>
+                </ul>
+              </td>
+            </tr>
+            <tr class="govuk-table__row PHSI">
+              <td class="govuk-table__cell">7</td>
+              <td class="govuk-table__cell">0706100010</td>
+              <td class="govuk-table__cell">Daucus carota subsp. sativus</td>
+              <td class="govuk-table__cell">50</td>
+              <td class="govuk-table__cell decision">
+                <ul class="govuk-list">
+                  <li>PHSI</li>
+                </ul>
+              </td>
+              <td class="govuk-table__cell decision">
+                <ul class="govuk-list">
+                  <li>Auto cleared</li>
+                </ul>
+              </td>
+            </tr>
+            <tr class="govuk-table__row PHSI">
+              <td class="govuk-table__cell">8</td>
+              <td class="govuk-table__cell">07069090</td>
+              <td class="govuk-table__cell">Raphanus sativus</td>
+              <td class="govuk-table__cell">200</td>
+              <td class="govuk-table__cell decision">
+                <ul class="govuk-list">
+                  <li>PHSI</li>
+                </ul>
+              </td>
+              <td class="govuk-table__cell decision">
+                <ul class="govuk-list">
+                  <li>Auto cleared</li>
+                </ul>
+              </td>
+            </tr>
+            <tr class="govuk-table__row PHSI">
+              <td class="govuk-table__cell">9</td>
+              <td class="govuk-table__cell">0810907530</td>
+              <td class="govuk-table__cell">Punica granatum</td>
+              <td class="govuk-table__cell">4425</td>
+              <td class="govuk-table__cell decision">
+                <ul class="govuk-list">
+                  <li>PHSI</li>
+                </ul>
+              </td>
+              <td class="govuk-table__cell decision">
+                <ul class="govuk-list">
+                  <li>Auto cleared</li>
+                </ul>
+              </td>
+            </tr>
+            <tr class="govuk-table__row PHSI">
+              <td class="govuk-table__cell">10</td>
+              <td class="govuk-table__cell">0709601000</td>
+              <td class="govuk-table__cell">Capsicum annuum</td>
+              <td class="govuk-table__cell">2025</td>
+              <td class="govuk-table__cell decision">
+                <ul class="govuk-list">
+                  <li>PHSI</li>
+                </ul>
+              </td>
+              <td class="govuk-table__cell decision">
+                <ul class="govuk-list">
+                  <li>Auto cleared</li>
+                </ul>
+              </td>
+            </tr>
+            <tr class="govuk-table__row PHSI">
+              <td class="govuk-table__cell">11</td>
+              <td class="govuk-table__cell">0806101090</td>
+              <td class="govuk-table__cell">Vitis vinifera</td>
+              <td class="govuk-table__cell">2660</td>
+              <td class="govuk-table__cell decision">
+                <ul class="govuk-list">
+                  <li>PHSI</li>
+                </ul>
+              </td>
+              <td class="govuk-table__cell decision">
+                <ul class="govuk-list">
+                  <li>Auto cleared</li>
+                </ul>
+              </td>
+            </tr>
+            <tr class="govuk-table__row PHSI">
+              <td class="govuk-table__cell">12</td>
+              <td class="govuk-table__cell">0808309090</td>
+              <td class="govuk-table__cell">Pyrus cordata</td>
+              <td class="govuk-table__cell">195</td>
+              <td class="govuk-table__cell decision">
+                <ul class="govuk-list">
+                  <li>PHSI</li>
+                </ul>
+              </td>
+              <td class="govuk-table__cell decision">
+                <ul class="govuk-list">
+                  <li>Auto cleared</li>
+                </ul>
+              </td>
+            </tr>
+            <tr class="govuk-table__row PHSI">
+              <td class="govuk-table__cell">13</td>
+              <td class="govuk-table__cell">0709996090</td>
+              <td class="govuk-table__cell">Zea mays</td>
+              <td class="govuk-table__cell">263</td>
+              <td class="govuk-table__cell decision">
+                <ul class="govuk-list">
+                  <li>PHSI</li>
+                </ul>
+              </td>
+              <td class="govuk-table__cell decision">
+                <ul class="govuk-list">
+                  <li>Auto cleared</li>
+                </ul>
+              </td>
+            </tr>
+            <tr class="govuk-table__row PHSI">
+              <td class="govuk-table__cell">14</td>
+              <td class="govuk-table__cell">07093000</td>
+              <td class="govuk-table__cell">Solanum melongena</td>
+              <td class="govuk-table__cell">360</td>
+              <td class="govuk-table__cell decision">
+                <ul class="govuk-list">
+                  <li>PHSI</li>
+                </ul>
+              </td>
+              <td class="govuk-table__cell decision">
+                <ul class="govuk-list">
+                  <li>Auto cleared</li>
+                </ul>
+              </td>
+            </tr>
+            <tr class="govuk-table__row PHSI">
+              <td class="govuk-table__cell">15</td>
+              <td class="govuk-table__cell">0706100010</td>
+              <td class="govuk-table__cell">Daucus carota subsp. sativus</td>
+              <td class="govuk-table__cell">50</td>
+              <td class="govuk-table__cell decision">
+                <ul class="govuk-list">
+                  <li>PHSI</li>
+                </ul>
+              </td>
+              <td class="govuk-table__cell decision">
+                <ul class="govuk-list">
+                  <li>Auto cleared</li>
+                </ul>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div> <!-- End Latest tab panel -->
+
+  <!-- TIMELINE TAB -->
+  <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="timeline">
+    <style>
+      .govuk-details {
+        margin-top: 20px !important;
+        margin-bottom: 0 !important;
+      }
+
+      .moj-timeline__description .govuk-summary-list {
+        margin-bottom: 0;
+      }
+
+      /* Timeline title is 19px */
+      .moj-timeline__title,
+      .moj-timeline__title * {
+        font-size: 19px !important;
+        font-weight: 700 !important;
+      }
+      
+      /* Make processing error titles red - override any other color rules */
+      .moj-timeline__item .moj-timeline__header h2.moj-timeline__title.govuk-!-color-red,
+      .moj-timeline__item .moj-timeline__header h2.processing-error-title,
+      h2.processing-error-title {
+        color: #d4351c !important;
+      }
+
+      /* Ensure ALL timeline description text is 16px */
+      .moj-timeline__description,
+      .moj-timeline__description *,
+      .moj-timeline__description .govuk-body,
+      .moj-timeline__description .govuk-body *,
+      .moj-timeline__description time,
+      .moj-timeline__description span,
+      .moj-timeline__description strong,
+      .moj-timeline__description .govuk-tag {
+        font-size: 16px !important;
+        margin-right: 10px;
+      }
+
+      .moj-timeline__description .govuk-details__summary,
+      .moj-timeline__description .govuk-details__summary * {
+        font-size: 16px !important;
+      }
+
+      .timeline-filters {
+        display: flex;
+        gap: 16px;
+        margin-bottom: 20px;
+      }
+
+      .timeline-filters .govuk-form-group {
+        margin-bottom: 0;
+      }
+
+      .timeline-detail-row {
+        margin-bottom: 0px;
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
+        margin-top: 0;
+      }
+
+      .timeline-detail-row:not(:first-child) {
+        margin-top: 10px;
+      }
+
+      .timeline-detail-row * {
+        font-size: 16px !important;
+      }
+
+      .timeline-detail-label {
+        width: 100px;
+        font-size: 16px !important;
+        font-weight: 700;
+        flex-shrink: 0;
+        color: #0B0C0C;
+      }
+
+      .moj-timeline__description .govuk-tag {
+        margin-right: 0;
+        font-weight: 400 !important;
+      }
+
+
+      /* Set timeline tab panel width to 75% */
+      #timeline {
+        width: 75%;
+      }
+    </style>
+
+    <form method="post">
+      <input type="hidden" name="mrn" value="{{ title }}">
+      
+      <div class="timeline-filters">
+        {{ govukSelect({
+          id: "eventType",
+          name: "eventType",
+          label: {
+            text: "Event type",
+            classes: "govuk-label--s"
+          },
+          items: [
+            {
+              value: "all",
+              text: "Show all",
+              selected: not data.eventType or data.eventType === 'all'
+            },
+            {
+              value: "finalisation",
+              text: "Finalisation",
+              selected: data.eventType === 'finalisation'
+            },
+            {
+              value: "clearance-decision",
+              text: "Clearance decision",
+              selected: data.eventType === 'clearance-decision'
+            },
+            {
+              value: "clearance-request",
+              text: "Clearance request",
+              selected: data.eventType === 'clearance-request'
+            },
+            {
+              value: "ched",
+              text: "CHED",
+              selected: data.eventType === 'ched'
+            }
+          ],
+          attributes: {
+            onchange: "this.form.submit()"
+          }
+        }) }}
+
+        {{ govukSelect({
+          id: "sortBy",
+          name: "sortBy",
+          label: {
+            text: "Sort by",
+            classes: "govuk-label--s"
+          },
+          items: [
+            {
+              value: "descending",
+              text: "Descending",
+              selected: not data.sortBy or data.sortBy === 'descending'
+            },
+            {
+              value: "ascending",
+              text: "Ascending",
+              selected: data.sortBy === 'ascending'
+            }
+          ],
+          attributes: {
+            onchange: "this.form.submit()"
+          }
+        }) }}
+      </div>
+    </form>
+
+    {% if timelineEvents and timelineEvents.length > 0 %}
+      <div class="moj-timeline">
+        {% for event in timelineEvents %}
+          <div class="moj-timeline__item">
+            <div class="moj-timeline__header">
+              <h2 class="moj-timeline__title {% if event.title === 'Clearance request - processing error' %}govuk-!-color-red processing-error-title{% endif %}" {% if event.title === 'Clearance request - processing error' %}style="color: #d4351c !important;"{% endif %}>
+                {{ event.title }}
+              </h2>
+            </div>
+            
+            <div class="moj-timeline__description">
+              {% if event.cdsStatus %}
+                <div class="timeline-detail-row">
+                  <span class="timeline-detail-label">CDS status</span>
+                  <span class="govuk-tag {% if event.cdsStatus === 'Finalised - Released' %}govuk-tag--green{% elif event.cdsStatus === 'In progress - CDS' or event.cdsStatus === 'In progress - Awaiting CDS' or event.cdsStatus === 'In progress - Awaiting IPAFFS' %}govuk-tag--yellow{% endif %}">
+                    {{ event.cdsStatus }}
+                  </span>
+                </div>
+              {% endif %}
+
+              {% if event.version and event.title !== 'Clearance decision' %}
+                <div class="timeline-detail-row">
+                  <span class="timeline-detail-label">Version</span>
+                  <span>{{ event.version }}</span>
+                </div>
+              {% endif %}
+
+              {% if event.errorCode %}
+                <div class="timeline-detail-row">
+                  <span class="timeline-detail-label">Error</span>
+                  <span>{{ event.errorCode }}</span>
+                </div>
+              {% endif %}
+
+              {% if event.errorMessage %}
+                <div class="timeline-detail-row">
+                  <span class="timeline-detail-label">Message</span>
+                  <span>{{ event.errorMessage }}</span>
+                </div>
+              {% endif %}
+
+              {% if event.chedStatus %}
+                <div class="timeline-detail-row">
+                  <span class="timeline-detail-label">CHED status</span>
+                  {% if event.chedStatus === 'Valid' %}
+                    <span class="govuk-tag govuk-tag--green">{{ event.chedStatus }}</span>
+                  {% elif event.chedStatus === 'In progress' %}
+                    <span class="govuk-tag govuk-tag--yellow">{{ event.chedStatus }}</span>
+                  {% else %}
+                    <span>{{ event.chedStatus }}</span>
+                  {% endif %}
+                </div>
+              {% endif %}
+
+              {% if event.decision %}
+                <div class="timeline-detail-row">
+                  <span class="timeline-detail-label">Decision</span>
+                  <span>{{ event.decision }}</span>
+                </div>
+              {% endif %}
+
+              {% if event.created %}
+                <div class="timeline-detail-row">
+                  <span class="timeline-detail-label">Created</span>
+                  <time datetime="{{ event.created }}">{{ event.createdFormatted }}</time>
+                </div>
+              {% endif %}
+
+              {% if event.hasDetails %}
+                {{ govukDetails({
+                  summaryText: "► More details",
+                  html: event.detailsHtml | safe
+                }) }}
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="govuk-inset-text">
+        <p class="govuk-body">No timeline events found.</p>
+      </div>
+    {% endif %}
+  </div> <!-- End Timeline tab panel -->
+</div> <!-- End govuk-tabs -->
+
+{% endblock %}

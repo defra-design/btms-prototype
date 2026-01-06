@@ -153,10 +153,17 @@
 }
 .govuk-tag {
   max-width: 240px;
+  font-weight: 400;
 }
 .govuk-tag--yellow {
-  font-weight: 700;
+  font-weight: 400;
   max-width: fit-content;
+}
+.govuk-tag--green {
+  font-weight: 400;
+}
+.govuk-tag--red {
+  font-weight: 400;
 }
 
 .status {
@@ -203,4 +210,30 @@
   .govuk-footer__crown {
     margin-bottom: 0;
   }
+}
+
+// Latest activity detail rows styling
+.latest-details {
+  padding-top: 15px;
+}
+
+.latest-detail-row {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #b1b4b6;
+  gap: 20px;
+  
+  &:last-child {
+    border-bottom: none;
+  }
+  
+  .govuk-tag {
+    margin-right: 0;
+  }
+}
+
+.latest-detail-text {
+  color: #6b7280;
+  flex: 1;
 }
