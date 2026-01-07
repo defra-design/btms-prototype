@@ -24,10 +24,10 @@
 
 <div class="govuk-tabs" data-module="govuk-tabs">
   <ul class="govuk-tabs__list">
-    <li class="govuk-tabs__list-item govuk-tabs__list-item--selected">
+    <li class="govuk-tabs__list-item">
       <a class="govuk-tabs__tab" href="#summary">Latest</a>
     </li>
-    <li class="govuk-tabs__list-item">
+    <li class="govuk-tabs__list-item govuk-tabs__list-item--selected">
       <a class="govuk-tabs__tab" href="#timeline">Timeline</a>
     </li>
   </ul>
@@ -817,8 +817,370 @@
   </div> <!-- End Summary tab panel -->
 
   <!-- TIMELINE TAB -->
-  <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="timeline">
-    <form method="post">
+  <div class="govuk-tabs__panel" id="timeline">
+    <!-- Timeline data embedded directly in this template for 25GBC64QCLFMUHPAR2 -->
+    <script>
+      // Sample timeline events matching the screen design
+      const timelineData = [
+        {
+          title: 'Finalisation',
+          version: 2,
+          cdsStatus: 'Finalised - Released',
+          created: '2025-11-06T09:24:20Z',
+          hasDetails: false
+        },
+        {
+          title: 'Clearance decision',
+          decision: '5',
+          cdsStatus: 'In progress - Awaiting CDS',
+          created: '2025-11-06T09:13:48Z',
+          hasDetails: true,
+          detailsHtml: ''
+        },
+        {
+          title: 'CHEDPP.GB.2025.6801816',
+          chedStatus: 'Valid',
+          decision: 'Acceptable for Internal Market',
+          created: '2025-11-06T05:13:46Z',
+          hasDetails: false
+        },
+        {
+          title: 'Clearance decision',
+          decision: '3',
+          cdsStatus: 'In progress - Awaiting IPAFFS',
+          created: '2025-11-05T19:09:24Z',
+          hasDetails: true,
+          detailsHtml: ''
+        },
+        {
+          title: 'Clearance request',
+          version: 2,
+          created: '2025-11-05T19:09:24Z',
+          hasDetails: true,
+          detailsHtml: ''
+        },
+        {
+          title: 'CHEDD.GB.2025.6802963',
+          chedStatus: 'Valid',
+          decision: 'Acceptable for Internal Market',
+          created: '2025-11-03T18:16:10Z',
+          hasDetails: false
+        },
+        {
+          title: 'Clearance decision',
+          decision: '4',
+          cdsStatus: 'In progress - Awaiting IPAFFS',
+          created: '2025-11-03T18:16:10Z',
+          hasDetails: true,
+          detailsHtml: ''
+        },
+        {
+          title: 'CHEDD.GB.2025.6802963',
+          chedStatus: 'In progress',
+          decision: 'Acceptable for Internal Market',
+          created: '2025-11-03T18:10:25Z',
+          hasDetails: false
+        },
+        {
+          title: 'CHEDD.GB.2025.6803042',
+          chedStatus: 'Valid',
+          decision: 'Acceptable for Internal Market',
+          created: '2025-11-03T18:05:54Z',
+          hasDetails: false
+        },
+        {
+          title: 'CHEDD.GB.2025.6803042',
+          chedStatus: 'In progress',
+          decision: 'Acceptable for Internal Market',
+          created: '2025-11-03T17:59:14Z',
+          hasDetails: false
+        },
+        {
+          title: 'Clearance decision',
+          decision: '3',
+          cdsStatus: 'In progress - Awaiting IPAFFS',
+          created: '2025-11-03T17:05:50Z',
+          hasDetails: true,
+          detailsHtml: ''
+        },
+        {
+          title: 'CHEDD.GB.2025.6802999',
+          chedStatus: 'Valid',
+          decision: 'Acceptable for Internal Market',
+          created: '2025-11-03T15:17:55Z',
+          hasDetails: false
+        },
+        {
+          title: 'Clearance decision',
+          decision: '2',
+          cdsStatus: 'In progress - Awaiting IPAFFS',
+          created: '2025-11-03T15:17:50Z',
+          hasDetails: true,
+          detailsHtml: ''
+        },
+        {
+          title: 'CHEDD.GB.2025.6802999',
+          chedStatus: 'In progress',
+          decision: 'Acceptable for Internal Market',
+          created: '2025-11-03T15:09:49Z',
+          hasDetails: false
+        },
+        {
+          title: 'Clearance decision',
+          decision: '1',
+          cdsStatus: 'In progress - Awaiting IPAFFS',
+          created: '2025-11-03T14:56:19Z',
+          hasDetails: true,
+          detailsHtml: ''
+        },
+        {
+          title: 'Clearance request',
+          version: 1,
+          created: '2025-11-03T14:56:19Z',
+          hasDetails: true,
+          detailsHtml: ''
+        },
+        {
+          title: 'CHEDPP.GB.2025.6801816',
+          chedStatus: 'Submitted',
+          decision: 'Hold - Awaiting Decision',
+          created: '2025-11-03T14:52:53Z',
+          hasDetails: false
+        },
+        {
+          title: 'CHEDD.GB.2025.6803042',
+          chedStatus: 'Submitted',
+          decision: 'Acceptable for Internal Market',
+          created: '2025-11-03T14:43:37Z',
+          hasDetails: false
+        },
+        {
+          title: 'CHEDD.GB.2025.6803042',
+          chedStatus: 'Submitted',
+          decision: 'Hold - Awaiting Decision',
+          created: '2025-11-03T14:43:37Z',
+          hasDetails: false
+        },
+        {
+          title: 'CHEDD.GB.2025.6802999',
+          chedStatus: 'Submitted',
+          decision: 'Hold - Awaiting Decision',
+          created: '2025-11-03T14:40:33Z',
+          hasDetails: false
+        },
+        {
+          title: 'CHEDD.GB.2025.6802963',
+          chedStatus: 'Submitted',
+          decision: 'Acceptable for Internal Market',
+          created: '2025-11-03T14:32:17Z',
+          hasDetails: false
+        },
+        {
+          title: 'CHEDD.GB.2025.6802963',
+          chedStatus: 'Submitted',
+          decision: 'Hold - Awaiting Decision',
+          created: '2025-11-03T14:37:16Z',
+          hasDetails: false
+        },
+        {
+          title: 'CHEDPP.GB.2025.6801816',
+          chedStatus: 'Submitted',
+          decision: 'Hold - Awaiting Decision',
+          created: '2025-11-03T12:28:46Z',
+          hasDetails: false
+        }
+      ];
+
+      // Format date for display (DD Month YYYY, HH:MM:SS)
+      function formatDateForDisplay(dateString) {
+        try {
+          const date = new Date(dateString);
+          const formatter = new Intl.DateTimeFormat('en-GB', {
+            timeZone: 'Europe/London',
+            year: 'numeric',
+            month: 'long',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: false
+          });
+          const parts = formatter.formatToParts(date);
+          const day = parts.find(p => p.type === 'day').value;
+          const month = parts.find(p => p.type === 'month').value;
+          const year = parts.find(p => p.type === 'year').value;
+          const hour = parts.find(p => p.type === 'hour').value;
+          const minute = parts.find(p => p.type === 'minute').value;
+          const second = parts.find(p => p.type === 'second').value;
+          return `${day} ${month} ${year}, ${hour}:${minute}:${second}`;
+        } catch (e) {
+          return dateString;
+        }
+      }
+
+      // Process timeline events
+      function processTimelineEvents(eventType, sortBy) {
+        let filteredEvents = timelineData;
+        
+        // Filter by event type
+        if (eventType !== 'all') {
+          filteredEvents = timelineData.filter(event => {
+            if (eventType === 'finalisation') return event.title === 'Finalisation';
+            if (eventType === 'clearance-decision') return event.title === 'Clearance decision';
+            if (eventType === 'clearance-request') return event.title === 'Clearance request' || event.title === 'Clearance request - processing error';
+            if (eventType === 'ched') return event.title.startsWith('CHED');
+            return true;
+          });
+        }
+
+        // Format dates
+        filteredEvents = filteredEvents.map(event => ({
+          ...event,
+          createdFormatted: formatDateForDisplay(event.created)
+        }));
+
+        // Sort by date
+        filteredEvents.sort((a, b) => {
+          const dateA = new Date(a.created).getTime();
+          const dateB = new Date(b.created).getTime();
+          if (dateA !== dateB) {
+            return sortBy === 'ascending' ? dateA - dateB : dateB - dateA;
+          }
+          return a.title.localeCompare(b.title);
+        });
+
+        return filteredEvents;
+      }
+
+      // Render timeline
+      function renderTimeline(events) {
+        const container = document.getElementById('timeline-container');
+        if (!container) return;
+
+        if (events.length === 0) {
+          container.innerHTML = '<div class="govuk-inset-text"><p class="govuk-body">No timeline events found.</p></div>';
+          return;
+        }
+
+        let html = '<div class="moj-timeline">';
+        events.forEach(event => {
+          html += `<div class="moj-timeline__item">
+            <div class="moj-timeline__header">
+              <h2 class="moj-timeline__title">${event.title}</h2>
+            </div>
+            <div class="moj-timeline__description">`;
+
+          if (event.cdsStatus) {
+            let tagClass = '';
+            if (event.cdsStatus === 'Finalised - Released' || event.cdsStatus === 'Enroul - In transit') tagClass = 'govuk-tag--green';
+            else if (event.cdsStatus.includes('In progress') || event.cdsStatus.includes('Hold')) tagClass = 'govuk-tag--yellow';
+            html += `<div class="timeline-detail-row">
+              <span class="timeline-detail-label">CDS status</span>
+              <span class="govuk-tag ${tagClass}">${event.cdsStatus}</span>
+            </div>`;
+          }
+
+          if (event.chedStatus) {
+            let tagClass = '';
+            if (event.chedStatus === 'Valid') tagClass = 'govuk-tag--green';
+            else if (event.chedStatus === 'In progress') tagClass = 'govuk-tag--yellow';
+            else if (event.chedStatus === 'Submitted') tagClass = 'govuk-tag--blue';
+            html += `<div class="timeline-detail-row">
+              <span class="timeline-detail-label">CHED status</span>
+              <span class="govuk-tag ${tagClass}">${event.chedStatus}</span>
+            </div>`;
+          }
+
+          if (event.gmrStatus) {
+            html += `<div class="timeline-detail-row">
+              <span class="timeline-detail-label">GMR status</span>
+              <span class="govuk-tag govuk-tag--green">${event.gmrStatus}</span>
+            </div>`;
+          }
+
+          if (event.decision) {
+            html += `<div class="timeline-detail-row">
+              <span class="timeline-detail-label">Decision</span>
+              <span class="govuk-body">${event.decision}</span>
+            </div>`;
+          }
+
+          if (event.version) {
+            html += `<div class="timeline-detail-row">
+              <span class="timeline-detail-label">Version</span>
+              <span class="govuk-body">${event.version}</span>
+            </div>`;
+          }
+
+          if (event.error) {
+            html += `<div class="timeline-detail-row">
+              <span class="timeline-detail-label">Error</span>
+              <span class="govuk-body govuk-!-font-weight-bold">${event.error}</span>
+            </div>`;
+          }
+
+          if (event.message) {
+            html += `<div class="timeline-detail-row">
+              <span class="timeline-detail-label">Message</span>
+              <span class="govuk-body">${event.message}</span>
+            </div>`;
+          }
+
+          html += `<div class="timeline-detail-row">
+            <span class="timeline-detail-label">Created</span>
+            <span class="govuk-body">${event.createdFormatted || formatDateForDisplay(event.created)}</span>
+          </div>`;
+
+          if (event.hasDetails && event.detailsHtml) {
+            html += `<details class="govuk-details govuk-!-margin-top-3">
+              <summary class="govuk-details__summary">
+                <span class="govuk-details__summary-text">View details</span>
+              </summary>
+              <div class="govuk-details__text">
+                ${event.detailsHtml}
+              </div>
+            </details>`;
+          }
+
+          html += `</div>
+          </div>`;
+        });
+        html += '</div>';
+        container.innerHTML = html;
+      }
+
+      // Initialize timeline
+      function initializeTimeline() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const eventType = urlParams.get('eventType') || 'all';
+        const sortBy = urlParams.get('sortBy') || 'descending';
+        
+        const events = processTimelineEvents(eventType, sortBy);
+        renderTimeline(events);
+      }
+
+      // Handle filter changes
+      function handleFilterChange() {
+        const eventType = document.getElementById('eventType')?.value || 'all';
+        const sortBy = document.getElementById('sortBy')?.value || 'descending';
+        
+        const events = processTimelineEvents(eventType, sortBy);
+        renderTimeline(events);
+        
+        // Update URL without reload
+        const url = new URL(window.location);
+        url.searchParams.set('eventType', eventType);
+        url.searchParams.set('sortBy', sortBy);
+        window.history.pushState({}, '', url);
+      }
+
+      // Initialize on page load
+      document.addEventListener('DOMContentLoaded', function() {
+        initializeTimeline();
+      });
+    </script>
+
+    <form onsubmit="event.preventDefault(); handleFilterChange(); return false;">
       <input type="hidden" name="mrn" value="{{ title }}">
       
       <div class="timeline-filters">
@@ -857,7 +1219,7 @@
             }
           ],
           attributes: {
-            onchange: "this.form.submit()"
+            onchange: "handleFilterChange()"
           }
         }) }}
 
@@ -881,80 +1243,16 @@
             }
           ],
           attributes: {
-            onchange: "this.form.submit()"
+            onchange: "handleFilterChange()"
           }
         }) }}
       </div>
     </form>
 
-    {% if timelineEvents and timelineEvents.length > 0 %}
-      <div class="moj-timeline">
-        {% for event in timelineEvents %}
-          <div class="moj-timeline__item">
-            <div class="moj-timeline__header">
-              <h2 class="moj-timeline__title">
-                {{ event.title }}
-              </h2>
-            </div>
-            
-            <div class="moj-timeline__description">
-              {% if event.cdsStatus %}
-                <div class="timeline-detail-row">
-                  <span class="timeline-detail-label">CDS status</span>
-                  <span class="govuk-tag {% if event.cdsStatus === 'Finalised - Released' %}govuk-tag--green{% elif event.cdsStatus === 'In progress - CDS' or event.cdsStatus === 'In progress - Awaiting CDS' or event.cdsStatus === 'In progress - Awaiting IPAFFS' %}govuk-tag--yellow{% endif %}">
-                    {{ event.cdsStatus }}
-                  </span>
-                </div>
-              {% endif %}
-
-              {% if event.version and not event.chedStatus and event.title !== 'Clearance decision' %}
-                <div class="timeline-detail-row">
-                  <span class="timeline-detail-label">Version</span>
-                  <span>{{ event.version }}</span>
-                </div>
-              {% endif %}
-
-              {% if event.chedStatus %}
-                <div class="timeline-detail-row">
-                  <span class="timeline-detail-label">CHED status</span>
-                  <span class="govuk-tag {% if event.chedStatus === 'Valid' %}govuk-tag--green{% elif event.chedStatus === 'In progress' or event.chedStatus === 'Submitted' %}govuk-tag--yellow{% endif %}">
-                    {{ event.chedStatus }}
-                  </span>
-                </div>
-              {% endif %}
-
-              {% if event.decision %}
-                <div class="timeline-detail-row">
-                  <span class="timeline-detail-label">Decision</span>
-                  {% set decisionValue = event.decision|replace('Decision ', '') %}
-                  <span>{{ decisionValue }}</span>
-                </div>
-              {% endif %}
-
-              {% if event.created %}
-                <div class="timeline-detail-row">
-                  <span class="timeline-detail-label">Created</span>
-                  <time datetime="{{ event.created }}">{{ event.createdFormatted }}</time>
-                </div>
-              {% endif %}
-
-              {% if event.hasDetails %}
-                {{ govukDetails({
-                  summaryText: "More details",
-                  html: event.detailsHtml | safe
-                }) }}
-              {% endif %}
-            </div>
-          </div>
-        {% endfor %}
-      </div>
-    {% else %}
-      <div class="govuk-inset-text">
-        <p class="govuk-body">No timeline events found.</p>
-      </div>
-    {% endif %}
+    <div id="timeline-container">
+      <!-- Timeline will be rendered here by JavaScript -->
+    </div>
   </div> <!-- End Timeline tab panel -->
 </div> <!-- End govuk-tabs -->
 
 {% endblock %}
-

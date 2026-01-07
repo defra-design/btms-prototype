@@ -2380,7 +2380,29 @@ module.exports = (router) => {
       created: '2025-11-06T09:13:46Z',
       hasDetails: true,
       detailsHtml: `
-        <p class="govuk-body">Clearance request version 2 details</p>
+        <h3 class="govuk-heading-m govuk-!-margin-top-0">Item 1 - Sweet pepper</h3>
+        <p class="commodity-code"><strong>Commodity code:</strong> 0709601000</p>
+        <table class="govuk-table">
+          <thead class="govuk-table__head">
+            <tr class="govuk-table__row">
+              <th scope="col" class="govuk-table__header">CHED reference</th>
+              <th scope="col" class="govuk-table__header">Check code</th>
+              <th scope="col" class="govuk-table__header">Authority</th>
+            </tr>
+          </thead>
+          <tbody class="govuk-table__body">
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">GBCHD2025.6801816</td>
+              <td class="govuk-table__cell">H218</td>
+              <td class="govuk-table__cell">HMI-SMS</td>
+            </tr>
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">GBCHD2025.6801816</td>
+              <td class="govuk-table__cell">H219</td>
+              <td class="govuk-table__cell">PHSI</td>
+            </tr>
+          </tbody>
+        </table>
       `
     },
     {
@@ -2432,8 +2454,11 @@ module.exports = (router) => {
     // Always show newest to oldest (descending order)
     const sortBy = req.query.sortBy || req.session.data?.sortBy || 'descending';
 
-    // Process timeline events using helper function
-    const filteredEvents = processTimelineEvents(eventType, sortBy);
+    // Get timeline events specific to this MRN
+    const eventsForThisMrn = getTimelineEventsForMrn(mrn, 'consignment-timeline');
+    
+    // Process timeline events using helper function with MRN-specific data
+    const filteredEvents = processTimelineEvents(eventType, sortBy, eventsForThisMrn);
 
     res.render('mvp/v5/timeline/consignment-timeline', {
       mrn,
@@ -2469,7 +2494,7 @@ module.exports = (router) => {
       filteredEvents = sourceEvents.filter(event => {
         if (eventType === 'finalisation') return event.title === 'Finalisation';
         if (eventType === 'clearance-decision') return event.title === 'Clearance decision';
-        if (eventType === 'clearance-request') return event.title === 'Clearance request' || event.title === 'Clearance request - processing error';
+        if (eventType === 'clearance-request') return event.title === 'Clearance request' || event.title === 'Error';
         if (eventType === 'ched' || eventType === 'ipaffs-pre-notification') return event.title.startsWith('CHED');
         return true;
       });
@@ -2501,15 +2526,20 @@ module.exports = (router) => {
 
   // GET: Search results timeline page (now includes timeline data)
   router.get('/mvp/v5/timeline/search-results-timeline', (req, res) => {
-    const q = (req.query.q || req.session.data?.searchTerm || '').trim();
-    const sessionTitle = (req.session.data?.title || '').trim();
-    // Prioritize query parameter over session data to ensure correct MRN
-    const title = (q ? q : sessionTitle) || '25GBC64QCLFMUHPAR2';
+    // Always prioritize query parameters - don't use session data for MRN/title
+    const q = (req.query.q || '').trim();
+    const mrnParam = (req.query.mrn || '').trim();
+    const mrnFilterParam = (req.query.mrnFilter || '').trim();
+    // Only use session as fallback if no query params provided
+    const sessionTitle = (!q && !mrnParam && !mrnFilterParam) ? (req.session.data?.title || '').trim() : '';
+    // Use query parameter first, then session fallback, then default
+    const title = q || mrnParam || mrnFilterParam || sessionTitle || '25GBC64QCLFMUHPAR2';
     const eventType = req.query.eventType || req.session.data?.eventType || 'all';
     const sortBy = req.query.sortBy || req.session.data?.sortBy || 'descending';
-    const mrnFilter = req.query.mrnFilter || req.session.data?.mrnFilter || title;
+    const mrnFilter = mrnFilterParam || title;
     
     req.session.data = req.session.data || {};
+    // Always update session with current values to keep it in sync
     req.session.data.title = title;
     req.session.data.searchTerm = q || title;
     req.session.data.Cds = req.session.data.Cds || 'Customs declaration details';
@@ -2553,16 +2583,18 @@ module.exports = (router) => {
 
   // GET: Search results latest page
   router.get('/mvp/v5/timeline/search-results-latest', (req, res) => {
-    // Prioritize query parameter q, then mrn, then session data
+    // Always prioritize query parameters - don't use session data for MRN/title
     const q = (req.query.q || '').trim();
     const mrnParam = (req.query.mrn || '').trim();
-    const sessionTitle = (req.session.data?.title || '').trim();
-    // Use query parameter first, then mrn param, then session, then default
+    // Only use session as fallback if no query params provided
+    const sessionTitle = (!q && !mrnParam) ? (req.session.data?.title || '').trim() : '';
+    // Use query parameter first, then session fallback, then default
     const title = q || mrnParam || sessionTitle || '25GBDD03IWJ3IHIAR1';
     const eventType = req.query.eventType || req.session.data?.eventType || 'all';
     const sortBy = req.query.sortBy || req.session.data?.sortBy || 'descending';
     
     req.session.data = req.session.data || {};
+    // Always update session with current values to keep it in sync
     req.session.data.title = title;
     req.session.data.searchTerm = q || title;
     req.session.data.Cds = req.session.data.Cds || 'Customs declaration details';
