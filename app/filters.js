@@ -50,7 +50,28 @@ addFilter('mrnTime', function () {
   }
 });
 
-// 4) ipaffsTime — default 1 hour 20 minutes ago, or accept an offset string
+// 4) currentYear2 — returns 2-digit current year (e.g., "25", "26")
+//    Example: {{ "" | currentYear2 }} -> "25" (in 2025), "26" (in 2026)
+addFilter('currentYear2', function () {
+  try {
+    const year = new Date().getFullYear();
+    return year.toString().slice(-2); // Get last 2 digits
+  } catch (error) {
+    return (error?.message || 'Error').split(':')[0];
+  }
+});
+
+// 5) currentYear4 — returns 4-digit current year (e.g., "2025", "2026")
+//    Example: {{ "" | currentYear4 }} -> "2025" (in 2025), "2026" (in 2026)
+addFilter('currentYear4', function () {
+  try {
+    return new Date().getFullYear().toString();
+  } catch (error) {
+    return (error?.message || 'Error').split(':')[0];
+  }
+});
+
+// 6) ipaffsTime — default 1 hour 20 minutes ago, or accept an offset string
 //    Examples: {{ "" | ipaffsTime }}        -> 1hr 20min ago
 //              {{ "" | ipaffsTime("-30") }} -> 30min ago
 //              {{ "" | ipaffsTime("-30min") }}
