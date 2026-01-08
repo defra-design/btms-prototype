@@ -2,7 +2,10 @@
   "scripts": {
     "dev": "govuk-prototype-kit dev",
     "serve": "govuk-prototype-kit serve",
-    "start": "govuk-prototype-kit start"
+    "start": "govuk-prototype-kit start",
+    "spellcheck": "cspell \"app/**/*.{html,js}\"",
+    "spellcheck:html": "cspell \"app/views/**/*.html\"",
+    "spellcheck:fix": "cspell \"app/**/*.{html,js}\" --no-progress"
   },
   "dependencies": {
     "@govuk-prototype-kit/common-templates": "2.0.1",
@@ -14,5 +17,8 @@
     "jquery": "3.7.1",
     "lodash": "^4.17.21",
     "moment": "^2.30.1"
+  },
+  "devDependencies": {
+    "cspell": "^9.4.0"
   }
 }

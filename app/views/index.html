@@ -42,9 +42,9 @@
             search
             term </span>
         </li>
-        <li><a href="/mvp/v5/gmr-v1">Interitital page results page showing GMR data </a>
+        <li><a href="/mvp/v5/gmr-v1">Interstitial page results page showing GMR data </a>
           <a class=" jira" href="https://eaflood.atlassian.net/browse/CDMS-1135 "> Jira CDMS-1135 </a><span>Page includes
-            GMR data such as VRN, TRN and asscociated MRNs </span>
+            GMR data such as VRN, TRN and associated MRNs </span>
         </li>
       </ul>
       <p class="govuk-heading-xs">
@@ -62,7 +62,7 @@
         </li>
         <li><a href="/mvp/v5/search-news">Search page concept showing news </a>
           <a class=" jira" href="https://eaflood.atlassian.net/browse/CDMS-986 "> Jira CDMS-? </a><span>A way to
-            showcase the lastest changes and updates to BTMS </span>
+            showcase the latest changes and updates to BTMS </span>
         </li>
         <li><a href="/mvp/v5/reporting/summary-view#chart">Toggle functionality for chart view </a>
           <a class=" jira" href="https://eaflood.atlassian.net/browse/CDMS-986 "> Jira CDMS-? </a><span>Chart JS
@@ -77,19 +77,22 @@
       </p>
       <ul class="govuk-list govuk-list--bullet">
         <li><a href="/mvp/v5/timeline/search-results-timeline?q=25GBC64QCLFMUHPAR2">Happy path </a>
-          <span> 1 mrn to many cheds. CDS status: Finalised released. </span>
+          <span> 1 MRN to many CHEDS.  </span>
+          <span>  CDS status: Finalised released. </span>
           <span> Search for MRN: 25GBC64QCLFMUHPAR2</span>
         </li>
         <li><a href="/mvp/v5/timeline/search-results-cancel?q=25GBCLNTWCC1FN7AR0">Unhappy path 1  </a>
-          <span>Cancelled ched. CDS status:Manually released.  </span>
+          <span>Cancelled ched and then new ched manually released due to No match - Incorrect CHED type.  </span>
+          <span>CDS status:Manually released.  </span>
           <span>Search for MRN: 25GBCLNTWCC1FN7AR0</span>
         </li>
         <li><a href="/mvp/v5/timeline/search-results-latest?q=25GBDD03IWJ3IHIAR1">Unhappy path 2 
         </a>
-          <span>Error with wrong Clearance request messages being sent by CDS causing progress to stop. CDS status: In progress - Awaiting CDS.</span>
+          <span>Error with wrong Clearance request messages being sent by CDS causing progress to stop. </span>
+          <span>CDS status: In progress - Awaiting CDS.</span>
       <span> Search for MRN: 25GBDD03IWJ3IHIAR1</span>
         </li>
-        <li><a href="/mvp/v5/timeline/gmr?gmr=GMRA00002TT2">GMR page - showing timeline serch results </a>
+        <li><a href="/mvp/v5/timeline/gmr?gmr=GMRA00002TT2">GMR page - showing timeline search results </a>
           <span>GMR details page showing movement reference information and associated MRNs. <br>Search for GMR: GMRA00002TT2 </span>
         </li>
      
@@ -102,7 +105,7 @@
         <strong class="govuk-tag govuk-tag--green"> Complete </strong>
       </p>
       <p>New design for displaying multiple CHEDs per line item with varying match statuses and decision outcomes. </p>
-      <p>Design updates from silent runnning feedback have been be included in V4 </p>
+      <p>Design updates from silent running feedback have been be included in V4 </p>
 
       <p class="govuk-heading-s" id="landing">Landing pages </p>
 
@@ -121,7 +124,7 @@
             href="https://eaflood.atlassian.net/browse/CDMS-923"> Jira CDMS-923</a><span>Sign in page for both entra and
             GG users</span></li>
         <li><a href="/mvp/v4/manage-account">Defra manage account (external user)</a> <a class="jira"
-            href="https://eaflood.atlassian.net/browse/CDMS-665"> Jira CDMS-665</a><span>From the BTSM header external
+            href="https://eaflood.atlassian.net/browse/CDMS-665"> Jira CDMS-665</a><span>From the BTMS header external
             users can access their Defra Account</span></li>
         <li><a href="/mvp/v4/ducr">Account header (GG user)</a> <a class="jira"
             href="https://eaflood.atlassian.net/browse/CDMS-665"> Jira CDMS-665</a><span>Header includes signout and
@@ -171,11 +174,11 @@
         <li><a href="/mvp/v4/multiple-cheds-single-auth">MRN line items referenced by many cheds and single authority
           </a><a class=" jira" href="https://eaflood.atlassian.net/browse/CDMS-398"> Jira CDMS-398 </a><span>This
             scenario
-            cover cases when a MRN line item has multiple DOC references but a single authority </span></li>
+            covers cases when a MRN line item has multiple DOC references but a single authority </span></li>
         <li><a href="/mvp/v4/multiple-auth-dual">MRN line item referenced by 2 CHEDs and CHEDs have 2 authorities each
           </a><a class=" jira" href="https://eaflood.atlassian.net/browse/CDMS-398"> Jira CDMS-398 </a><span>This
             scenario
-            cover cases when a MRN line item has multiple DOC references but a single authority </span></li>
+            covers cases when a MRN line item has multiple DOC references but a single authority </span></li>
       </ul>
       <ul class="govuk-list govuk-list--bullet govuk-!-padding-top-4">
         <li><a href="/mvp/v4/finalised">Finalised state</a> <a class=" jira"
@@ -185,7 +188,7 @@
         <li><a href="mvp/v4/search?searchTerm=4GB335031931000-WB2408-27WWL6274S">Adding DUCR to search and the results
           </a><a class=" jira" href="https://eaflood.atlassian.net/browse/CDMS-392"> Jira CDMS-392 </a><a class=" jira"
             href="https://eaflood.atlassian.net/browse/CDMS-403"> Jira CDMS-403 </a><span>includes clear search-term
-            functionality and displaying DURC on the search results </span></li>
+            functionality and displaying DUCR on the search results </span></li>
 
         <li><a href="/mvp/v4/gms">GMS risk</a> <a class=" jira" href="https://eaflood.atlassian.net/browse/CDMS-641">
             Jira
@@ -213,8 +216,8 @@
             to
             CDS & CHED tables - match (MRN), decision (MRN) and authority (MRN & CHED)</span></li>
         <li><a href="/mvp/v4/gms">Accordion functionality </a> <a class=" jira"
-            href="https://eaflood.atlassian.net/browse/CDMS-426"> Jira CDMS-426 </a><span>MRNS tables are placed withing
-            collapsable accordians - closed by default for cancelled,replaced or deleted states</span></li>
+            href="https://eaflood.atlassian.net/browse/CDMS-426"> Jira CDMS-426 </a><span>MRNs tables are placed within
+            collapsible accordions - closed by default for cancelled,replaced or deleted states</span></li>
 
       </ul>
       <p class="govuk-heading-xs" id="no-mrn">Error states on search results </p>
@@ -332,7 +335,7 @@
             -
             access to CHED results page on IPAFFS</span></li>
         <li><a href="/mvp/v3/scenario-5">GMS request</a> <br /><span>When a GSM product is selected for SPS
-            inpection</span></li>
+            inspection</span></li>
       </ul>
       <details class="govuk-details">
         <summary class="govuk-details__summary">
@@ -341,7 +344,7 @@
           </span>
         </summary>
         <div class="govuk-details__text">
-          <h2 class="govuk-heading-s">Accodion patterns</h2>
+          <h2 class="govuk-heading-s">Accordion patterns</h2>
           <ul class="govuk-list govuk-list--bullet">
             <li><a href="/mvp/v3/filters-v1">v1 Show hide button inline </a> <br /><span>This pattern uses the <a
                   href="https://design-system.service.gov.uk/components/accordion/">gov accordion pattern</a></span>
@@ -379,7 +382,7 @@
           </span>
         </summary>
         <div class="govuk-details__text">
-          <h2 class="govuk-heading-s">Several senarios comparing BTMS with ALVS</h2>
+          <h2 class="govuk-heading-s">Several scenarios comparing BTMS with ALVS</h2>
           <p>The scenarios can be viewed on <a
               href="https://app.mural.co/t/coredefra2548/m/coredefra2548/1733133878208/d32436d81e5757dae6357bcb22b6f133b33d59fa?wid=0-1742479359839">MURAL
               alongside</a> the comparisons with ALVS.</p>
