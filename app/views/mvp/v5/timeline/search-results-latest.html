@@ -437,7 +437,7 @@
       }
       
       /* Make processing error titles red - override any other color rules */
-      .moj-timeline__item .moj-timeline__header h2.moj-timeline__title.govuk-!-color-red,
+      .moj-timeline__item .moj-timeline__header 
       .moj-timeline__item .moj-timeline__header h2.processing-error-title,
       h2.processing-error-title {
         color: #d4351c !important;
@@ -514,8 +514,8 @@
         {
           title: 'Error',
           version: 'Clearance request 2',
-          error: 'ALVSVAL401 - CDS to BTMS',
-          message: 'Error Description: The Entry Reference was not recognised. HMRC is unable to process the decision notification',
+          error: 'HMRCVAL101 - CDS to BTMS',
+          message: 'The Entry Reference was not recognised. HMRC is unable to process the decision notification',
           created: '2025-12-04T19:07:47Z',
           hasDetails: false
         },
@@ -525,20 +525,102 @@
           cdsStatus: 'In progress - Awaiting CDS',
           created: '2025-12-04T19:07:46Z',
           hasDetails: true,
-          detailsHtml: '<p class="govuk-body">Decision details for clearance decision 2</p>'
+          detailsHtml: `
+            <h3 class="govuk-heading-m govuk-!-margin-top-0">Item 3 - Cyclamen pers. Windbell, Primula Acaulis Grp gemengd</h3>
+            <p class="commodity-code"><strong>Commodity code:</strong> 0602904800</p>
+            <table class="govuk-table">
+              <thead class="govuk-table__head">
+                <tr class="govuk-table__row">
+                  <th scope="col" class="govuk-table__header">CHED reference</th>
+                  <th scope="col" class="govuk-table__header">Check code</th>
+                  <th scope="col" class="govuk-table__header">Authority</th>
+                  <th scope="col" class="govuk-table__header">Decision code</th>
+                  <th scope="col" class="govuk-table__header">Decision</th>
+                </tr>
+              </thead>
+              <tbody class="govuk-table__body">
+                <tr class="govuk-table__row">
+                  <td class="govuk-table__cell">GBCHD2025.5627759</td>
+                  <td class="govuk-table__cell">H219</td>
+                  <td class="govuk-table__cell">PHSI</td>
+                  <td class="govuk-table__cell">C03</td>
+                  <td class="govuk-table__cell">Release - Inspection Complete</td>
+                </tr>
+              </tbody>
+            </table>
+            <h3 class="govuk-heading-m govuk-!-margin-top-4">Item 5 - Picea glauca Conica</h3>
+            <p class="commodity-code"><strong>Commodity code:</strong> 0602904800</p>
+            <table class="govuk-table">
+              <thead class="govuk-table__head">
+                <tr class="govuk-table__row">
+                  <th scope="col" class="govuk-table__header">CHED reference</th>
+                  <th scope="col" class="govuk-table__header">Check code</th>
+                  <th scope="col" class="govuk-table__header">Authority</th>
+                  <th scope="col" class="govuk-table__header">Decision code</th>
+                  <th scope="col" class="govuk-table__header">Decision</th>
+                </tr>
+              </thead>
+              <tbody class="govuk-table__body">
+                <tr class="govuk-table__row">
+                  <td class="govuk-table__cell">GBCHD2025.5627759</td>
+                  <td class="govuk-table__cell">H219</td>
+                  <td class="govuk-table__cell">PHSI</td>
+                  <td class="govuk-table__cell">C03</td>
+                  <td class="govuk-table__cell">Release - Inspection Complete</td>
+                </tr>
+              </tbody>
+            </table>
+          `
         },
         {
           title: 'Clearance request',
           version: 2,
           created: '2025-12-04T19:07:45Z',
           hasDetails: true,
-          detailsHtml: '<p class="govuk-body">Clearance request version 2 details</p>'
+          detailsHtml: `
+            <h3 class="govuk-heading-m govuk-!-margin-top-0">Item 3 - Cyclamen pers. Windbell, Primula Acaulis Grp gemengd</h3>
+            <p class="commodity-code"><strong>Commodity code:</strong> 0602904800</p>
+            <table class="govuk-table">
+              <thead class="govuk-table__head">
+                <tr class="govuk-table__row">
+                  <th scope="col" class="govuk-table__header">CHED reference</th>
+                  <th scope="col" class="govuk-table__header">Check code</th>
+                  <th scope="col" class="govuk-table__header">Authority</th>
+                </tr>
+              </thead>
+              <tbody class="govuk-table__body">
+                <tr class="govuk-table__row">
+                  <td class="govuk-table__cell">GBCHD2025.5627759</td>
+                  <td class="govuk-table__cell">H219</td>
+                  <td class="govuk-table__cell">PHSI</td>
+                </tr>
+              </tbody>
+            </table>
+            <h3 class="govuk-heading-m govuk-!-margin-top-4">Item 5 - Picea glauca Conica</h3>
+            <p class="commodity-code"><strong>Commodity code:</strong> 0602109000</p>
+            <table class="govuk-table">
+              <thead class="govuk-table__head">
+                <tr class="govuk-table__row">
+                  <th scope="col" class="govuk-table__header">CHED reference</th>
+                  <th scope="col" class="govuk-table__header">Check code</th>
+                  <th scope="col" class="govuk-table__header">Authority</th>
+                </tr>
+              </thead>
+              <tbody class="govuk-table__body">
+                <tr class="govuk-table__row">
+                  <td class="govuk-table__cell">GBCHD2025.5627759</td>
+                    <td class="govuk-table__cell">H219</td>
+                  <td class="govuk-table__cell">PHSI</td>
+                </tr>
+              </tbody>
+            </table>
+          `
         },
         {
           title: 'Error',
           version: 'Clearance request 2',
           error: 'ALVSVAL401 - BTMS to CDS',
-          message: 'EntryReference 25GBDD03IWJ3IHIAR1 EntryVersionNumber 2. This has already been replaced by a later version of the import declaration. Your request with correlation ID 2517565 has been terminated.',
+          message: 'The finalised state was received for EntryReference 25GBDD03IWJ3IHIAR1 EntryVersionNumber 2. This has already been replaced by a later version of the import declaration. Your request with correlation ID 2517565 has been terminated.',
           created: '2025-12-04T12:50:47Z',
           hasDetails: false
         },
@@ -548,14 +630,96 @@
           cdsStatus: 'In progress - Awaiting IPAFFS',
           created: '2025-12-03T15:00:29Z',
           hasDetails: true,
-          detailsHtml: '<p class="govuk-body">Decision details for clearance decision 1</p>'
+          detailsHtml: `
+            <h3 class="govuk-heading-m govuk-!-margin-top-0">Item 3 - Cyclamen pers. Windbell, Primula Acaulis Grp gemengd</h3>
+            <p class="commodity-code"><strong>Commodity code:</strong> 0602904800</p>
+            <table class="govuk-table">
+              <thead class="govuk-table__head">
+                <tr class="govuk-table__row">
+                  <th scope="col" class="govuk-table__header">CHED reference</th>
+                  <th scope="col" class="govuk-table__header">Check code</th>
+                  <th scope="col" class="govuk-table__header">Authority</th>
+                  <th scope="col" class="govuk-table__header">Decision code</th>
+                  <th scope="col" class="govuk-table__header">Decision</th>
+                </tr>
+              </thead>
+              <tbody class="govuk-table__body">
+                <tr class="govuk-table__row">
+                  <td class="govuk-table__cell">GBCHD2025.5627759</td>
+                  <td class="govuk-table__cell">H219</td>
+                  <td class="govuk-table__cell">PHSI</td>
+                  <td class="govuk-table__cell">C03</td>
+                  <td class="govuk-table__cell">Release - Inspection Complete</td>
+                </tr>
+              </tbody>
+            </table>
+            <h3 class="govuk-heading-m govuk-!-margin-top-4">Item 5 - Picea glauca Conica</h3>
+            <p class="commodity-code"><strong>Commodity code:</strong> 0602904800</p>
+            <table class="govuk-table">
+              <thead class="govuk-table__head">
+                <tr class="govuk-table__row">
+                  <th scope="col" class="govuk-table__header">CHED reference</th>
+                  <th scope="col" class="govuk-table__header">Check code</th>
+                  <th scope="col" class="govuk-table__header">Authority</th>
+                  <th scope="col" class="govuk-table__header">Decision code</th>
+                  <th scope="col" class="govuk-table__header">Decision</th>
+                </tr>
+              </thead>
+              <tbody class="govuk-table__body">
+                <tr class="govuk-table__row">
+                  <td class="govuk-table__cell">GBCHD2025.5627759</td>
+                  <td class="govuk-table__cell">H219</td>
+                  <td class="govuk-table__cell">PHSI</td>
+                  <td class="govuk-table__cell">C03</td>
+                  <td class="govuk-table__cell">Release - Inspection Complete</td>
+                </tr>
+              </tbody>
+            </table>
+          `
         },
         {
           title: 'Clearance request',
           version: 1,
           created: '2025-12-03T15:00:29Z',
           hasDetails: true,
-          detailsHtml: '<p class="govuk-body">Clearance request version 1 details</p>'
+          detailsHtml: `
+            <h3 class="govuk-heading-m govuk-!-margin-top-0">Item 3 - Cyclamen pers. Windbell, Primula Acaulis Grp gemengd</h3>
+            <p class="commodity-code"><strong>Commodity code:</strong> 0602904800</p>
+            <table class="govuk-table">
+              <thead class="govuk-table__head">
+                <tr class="govuk-table__row">
+                  <th scope="col" class="govuk-table__header">CHED reference</th>
+                  <th scope="col" class="govuk-table__header">Check code</th>
+                  <th scope="col" class="govuk-table__header">Authority</th>
+                </tr>
+              </thead>
+              <tbody class="govuk-table__body">
+                <tr class="govuk-table__row">
+                  <td class="govuk-table__cell">GBCHD2025.5627759</td>
+                  <td class="govuk-table__cell">H219</td>
+                  <td class="govuk-table__cell">PHSI</td>
+                </tr>
+              </tbody>
+            </table>
+            <h3 class="govuk-heading-m govuk-!-margin-top-4">Item 5 - Picea glauca Conica</h3>
+            <p class="commodity-code"><strong>Commodity code:</strong> 0602109000</p>
+            <table class="govuk-table">
+              <thead class="govuk-table__head">
+                <tr class="govuk-table__row">
+                  <th scope="col" class="govuk-table__header">CHED reference</th>
+                  <th scope="col" class="govuk-table__header">Check code</th>
+                  <th scope="col" class="govuk-table__header">Authority</th>
+                </tr>
+              </thead>
+              <tbody class="govuk-table__body">
+                <tr class="govuk-table__row">
+                  <td class="govuk-table__cell">GBCHD2025.5627759</td>
+                    <td class="govuk-table__cell">H219</td>
+                  <td class="govuk-table__cell">PHSI</td>
+                </tr>
+              </tbody>
+            </table>
+          `
         },
         {
           title: 'CHEDPP.GB.2025.5627759',
