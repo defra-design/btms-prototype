@@ -277,7 +277,7 @@
               {% if event.chedStatus %}
                 <div class="timeline-detail-row">
                   <span class="timeline-detail-label">CHED status</span>
-                  <span class="govuk-tag {% if event.chedStatus === 'Valid' %}govuk-tag--green{% elif event.chedStatus === 'In progress' or event.chedStatus === 'Submitted' %}govuk-tag--yellow{% endif %}">
+                  <span class="govuk-tag {% if event.chedStatus === 'Valid' %}govuk-tag--green{% elif event.chedStatus === 'In progress' %}govuk-tag--yellow{% elif event.chedStatus === 'Submitted' %}govuk-tag--grey{% endif %}">
                     {{ event.chedStatus }}
                   </span>
                 </div>
