@@ -505,6 +505,14 @@
       #timeline {
         width: 75%;
       }
+      .subheader {
+        font-size: 14px; 
+        padding-top: 5px;
+        color: #505a5f;
+      }
+      .moj-timeline__description{
+        margin-top: 15px;
+      }
     </style>
 
     <!-- Timeline data embedded directly in this template -->
@@ -512,15 +520,14 @@
       // Timeline events data for 25GBDD03IWJ3IHIAR1
       const timelineData = [
         {
-          title: 'Error',
-          version: 'Clearance request 2',
+          title: 'Processing error - CDS to BTMS',
           error: 'HMRCVAL101 - CDS to BTMS',
-          message: 'The Entry Reference was not recognised. HMRC is unable to process the decision notification',
+          message: 'The Entry Reference was not recognised. HMRC is unable to process the decision notification.',
           created: '2025-12-04T19:07:47Z',
           hasDetails: false
         },
         {
-          title: 'Clearance decision',
+          title: 'Clearance decision - BTMS to CDS',
           decision: '2',
           cdsStatus: 'In progress - Awaiting CDS',
           created: '2025-12-04T19:07:46Z',
@@ -573,7 +580,7 @@
           `
         },
         {
-          title: 'Clearance request',
+          title: 'Clearance request - CDS to BTMS',
           version: 2,
           created: '2025-12-04T19:07:45Z',
           hasDetails: true,
@@ -617,15 +624,14 @@
           `
         },
         {
-          title: 'Error',
-          version: 'Clearance request 2',
-          error: 'ALVSVAL401 - BTMS to CDS',
-          message: 'The finalised state was received for EntryReference 25GBDD03IWJ3IHIAR1 EntryVersionNumber 2. This has already been replaced by a later version of the import declaration. Your request with correlation ID 2517565 has been terminated.',
+          title: 'Processing error - BTMS to CDS',
+          error: 'ALVSVAL401',
+          message: 'A finalisation was received for 25GBDD03IWJ3IHIAR1 with an EntryVersionNumber 2 but the EntryVersionNumber does not match the last Clearance Request BTMS received. BTMS will not process this finalisation.',
           created: '2025-12-04T12:50:47Z',
           hasDetails: false
         },
         {
-          title: 'Clearance decision',
+          title: 'Clearance decision - BTMS to CDS',
           decision: '1',
           cdsStatus: 'In progress - Awaiting IPAFFS',
           created: '2025-12-03T15:00:29Z',
@@ -678,7 +684,7 @@
           `
         },
         {
-          title: 'Clearance request',
+          title: 'Clearance request - CDS to BTMS',
           version: 1,
           created: '2025-12-03T15:00:29Z',
           hasDetails: true,
@@ -722,21 +728,21 @@
           `
         },
         {
-          title: 'CHEDPP.GB.2025.5627759',
+          title: 'CHEDPP.GB.2025.5627759  - IPAFFS to BTMS',
           chedStatus: 'Valid',
           decision: 'Auto cleared',
           created: '2025-12-03T15:00:09Z',
           hasDetails: false
         },
         {
-          title: 'CHEDPP.GB.2025.5627759',
+          title: 'CHEDPP.GB.2025.5627759  - IPAFFS to BTMS',
           chedStatus: 'In progress',
           decision: 'Auto cleared',
           created: '2025-12-03T14:58:00Z',
           hasDetails: false
         },
         {
-          title: 'CHEDPP.GB.2025.5627759',
+          title: 'CHEDPP.GB.2025.5627759 - IPAFFS to BTMS',
           chedStatus: 'Submitted',
           decision: 'Auto cleared',
           created: '2025-12-03T14:53:53Z',
@@ -778,10 +784,12 @@
         // Filter by event type
         if (eventType !== 'all') {
           filteredEvents = timelineData.filter(event => {
-            if (eventType === 'finalisation') return event.title === 'Finalisation';
-            if (eventType === 'clearance-decision') return event.title === 'Clearance decision';
-            if (eventType === 'clearance-request') return event.title === 'Clearance request';
-            if (eventType === 'error') return event.title === 'Error';
+            // Get main title (before " - ") for filtering
+            const mainTitle = event.title.split(' - ')[0];
+            if (eventType === 'finalisation') return mainTitle === 'Finalisation';
+            if (eventType === 'clearance-decision') return mainTitle === 'Clearance decision';
+            if (eventType === 'clearance-request') return mainTitle === 'Clearance request';
+            if (eventType === 'error') return mainTitle === 'Error' || mainTitle === 'Processing error';
             if (eventType === 'ched') return event.title.startsWith('CHED');
             return true;
           });
@@ -818,13 +826,24 @@
 
         let html = '<div class="moj-timeline">';
         events.forEach(event => {
-          const isError = event.title === 'Error';
+          // Split title by " - " to separate main title from subheader
+          const titleParts = event.title.split(' - ');
+          const mainTitle = titleParts[0];
+          const subheader = titleParts.length > 1 ? titleParts[1] : null;
+          // Check if this is an error (Error or Processing error)
+          const isError = mainTitle === 'Error' || mainTitle === 'Processing error';
+          
           html += `<div class="moj-timeline__item">
             <div class="moj-timeline__header">
               <h2 class="moj-timeline__title ${isError ? 'govuk-!-color-red processing-error-title' : ''}" ${isError ? 'style="color: #d4351c !important;"' : ''}>
-                ${event.title}
-              </h2>
-            </div>
+                ${mainTitle}
+              </h2>`;
+          
+          if (subheader) {
+            html += `<p class="govuk-body govuk-!-margin-bottom-0 subheader" >${subheader}</p>`;
+          }
+          
+          html += `</div>
             <div class="moj-timeline__description">`;
 
           if (event.cdsStatus) {

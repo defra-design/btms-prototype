@@ -295,57 +295,67 @@
 
   <!-- TIMELINE TAB -->
   <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="timeline">
+    <style>
+      .subheader {
+        font-size: 14px; 
+        padding-top: 5px;
+        color: #505a5f;
+      }
+      .moj-timeline__description{
+        margin-top: 15px;
+      }
+    </style>
     <!-- Timeline data embedded directly in this template - supports multiple MRNs -->
     <script>
       // Timeline events data mapped by MRN
       const timelineDataByMrn = {
         '25GBCLNTWCC1FN7AR0': [
           {
-            title: 'Finalisation',
+            title: 'Finalisation - CDS to BTMS',
             version: 1,
             cdsStatus: 'Finalised - Manually released',
             created: '2025-11-14T15:19:17Z',
             hasDetails: false
           },
           {
-            title: 'Clearance decision',
+            title: 'Clearance decision - BTMS to CDS',
             decision: '1',
-            cdsStatus: 'In progress - Awaiting IPAFFS',
+            cdsStatus: 'In progress - Awaiting trader',
             created: '2025-11-14T11:47:28.433Z',
             hasDetails: true,
             detailsHtml: '<h3 class="govuk-heading-m govuk-!-margin-top-0">Item 2 - MISO PASTE</h3><p class="commodity-code"><strong>Commodity code:</strong> 2103909089</p><table class="govuk-table"><thead class="govuk-table__head"><tr class="govuk-table__row"><th scope="col" class="govuk-table__header">CHED reference</th><th scope="col" class="govuk-table__header">Check code</th><th scope="col" class="govuk-table__header">Authority</th><th scope="col" class="govuk-table__header">Decision code</th><th scope="col" class="govuk-table__header">Decision</th></tr></thead><tbody class="govuk-table__body"><tr class="govuk-table__row"><td class="govuk-table__cell">GBCHD2025.6769491</td><td class="govuk-table__cell">H222</td><td class="govuk-table__cell">POAO</td><td class="govuk-table__cell">X00</td><td class="govuk-table__cell">Incorrect CHED type</td></tr></tbody></table>'
           },
           {
-            title: 'Clearance request',
+            title: 'Clearance request - CDS to BTMS',
             version: 1,
-            cdsStatus: 'In progress - Awaiting IPAFFS',
+            cdsStatus: 'In progress - Awaiting trader',
             created: '2025-11-14T11:47:28.285Z',
             hasDetails: true,
             detailsHtml: '<h3 class="govuk-heading-m govuk-!-margin-top-0">Item 2 - MISO PASTE</h3><p class="commodity-code"><strong>Commodity code:</strong> 2103909089</p><table class="govuk-table"><thead class="govuk-table__head"><tr class="govuk-table__row"><th scope="col" class="govuk-table__header">CHED reference</th><th scope="col" class="govuk-table__header">Check code</th><th scope="col" class="govuk-table__header">Authority</th></tr></thead><tbody class="govuk-table__body"><tr class="govuk-table__row"><td class="govuk-table__cell">GBCHD2025.6769491</td><td class="govuk-table__cell">H222</td><td class="govuk-table__cell">POAO</td></tr></tbody></table>'
           },
           {
-            title: 'CHEDD.GB.2025.6769491',
+            title: 'CHEDD.GB.2025.6769491 - IPAFFS to BTMS',
             chedStatus: 'Valid',
             decision: 'Acceptable for Internal Market',
             created: '2025-11-11T15:35:35Z',
             hasDetails: false
           },
           {
-            title: 'CHEDD.GB.2025.6769491',
+            title: 'CHEDD.GB.2025.6769491 - IPAFFS to BTMS',
             chedStatus: 'In progress',
             decision: 'Acceptable for Internal Market',
             created: '2025-10-29T15:46:31Z',
             hasDetails: false
           },
           {
-            title: 'CHEDD.GB.2025.6769491',
+            title: 'CHEDD.GB.2025.6769491 - IPAFFS to BTMS',
             chedStatus: 'Submitted',
             decision: 'Acceptable for Internal Market',
             created: '2025-10-27T11:09:54Z',
             hasDetails: false
           },
           {
-            title: 'CHEDD.GB.2025.6769491',
+            title: 'CHEDD.GB.2025.6769491 - IPAFFS to BTMS',
             chedStatus: 'Submitted',
             decision: 'Hold - Awaiting Decision',
             created: '2025-10-27T11:09:42Z',
@@ -354,30 +364,30 @@
         ],
         '25GBBVWP03XACE8AR0': [
           {
-            title: 'Finalisation',
+            title: 'Finalisation - CDS to BTMS',
             version: 1,
             cdsStatus: 'Finalised - Cancelled after arrival',
             created: '2025-11-14T11:44:07.762Z',
             hasDetails: false
           },
           {
-            title: 'CHEDD.GB.2025.6769491',
+            title: 'CHEDD.GB.2025.6769491 - IPAFFS to BTMS',
             chedStatus: 'Valid',
             decision: 'Acceptable for Internal Market',
             created: '2025-11-11T15:35:35Z',
             hasDetails: false
           },
           {
-            title: 'Clearance decision',
+            title: 'Clearance decision - BTMS to CDS',
             version: 2,
             decision: '2',
-            cdsStatus: 'In progress - Awaiting IPAFFS',
+            cdsStatus: 'In progress - Awaiting trader',
             created: '2025-10-31T00:44:46.111Z',
             hasDetails: true,
             detailsHtml: '<h3 class="govuk-heading-m govuk-!-margin-top-0">Item 2 - MISO PASTE</h3><p class="commodity-code"><strong>Commodity code:</strong> 2103909089</p><table class="govuk-table"><thead class="govuk-table__head"><tr class="govuk-table__row"><th scope="col" class="govuk-table__header">CHED reference</th><th scope="col" class="govuk-table__header">Check code</th><th scope="col" class="govuk-table__header">Authority</th><th scope="col" class="govuk-table__header">Decision code</th><th scope="col" class="govuk-table__header">Decision</th></tr></thead><tbody class="govuk-table__body"><tr class="govuk-table__row"><td class="govuk-table__cell">GBCHD2025.6769491</td><td class="govuk-table__cell">H222</td><td class="govuk-table__cell">POAO</td><td class="govuk-table__cell">X00</td><td class="govuk-table__cell">Incorrect CHED type</td></tr></tbody></table>'
           },
           {
-            title: 'Clearance request',
+            title: 'Clearance request - CDS to BTMS',
             version: 2,
             cdsStatus: 'In progress - Awaiting trader',
             created: '2025-10-31T00:44:45.996Z',
@@ -385,38 +395,38 @@
             detailsHtml: '<h3 class="govuk-heading-m govuk-!-margin-top-0">Item 2 - MISO PASTE</h3><p class="commodity-code"><strong>Commodity code:</strong> 2103909089</p><table class="govuk-table"><thead class="govuk-table__head"><tr class="govuk-table__row"><th scope="col" class="govuk-table__header">CHED reference</th><th scope="col" class="govuk-table__header">Check code</th><th scope="col" class="govuk-table__header">Authority</th></tr></thead><tbody class="govuk-table__body"><tr class="govuk-table__row"><td class="govuk-table__cell">GBCHD2025.6769491</td><td class="govuk-table__cell">H222</td><td class="govuk-table__cell">POAO</td></tr></tbody></table>'
           },
           {
-            title: 'CHEDD.GB.2025.6769491',
+            title: 'CHEDD.GB.2025.6769491 - IPAFFS to BTMS',
             chedStatus: 'In progress',
             decision: 'Acceptable for Internal Market',
             created: '2025-10-29T15:46:31Z',
             hasDetails: false
           },
           {
-            title: 'Clearance decision',
+            title: 'Clearance decision - BTMS to CDS',
             version: 1,
             decision: 'Decision 1',
-            cdsStatus: 'In progress - Awaiting IPAFFS',
+            cdsStatus: 'In progress - Awaiting trader',
             created: '2025-10-27T11:13:49.226Z',
             hasDetails: true,
             detailsHtml: '<h3 class="govuk-heading-m govuk-!-margin-top-0">Item 2 - MISO PASTE</h3><p class="commodity-code"><strong>Commodity code:</strong> 2103909089</p><table class="govuk-table"><thead class="govuk-table__head"><tr class="govuk-table__row"><th scope="col" class="govuk-table__header">CHED reference</th><th scope="col" class="govuk-table__header">Check code</th><th scope="col" class="govuk-table__header">Authority</th><th scope="col" class="govuk-table__header">Decision code</th><th scope="col" class="govuk-table__header">Decision</th></tr></thead><tbody class="govuk-table__body"><tr class="govuk-table__row"><td class="govuk-table__cell">GBCHD2025.6769491</td><td class="govuk-table__cell">H222</td><td class="govuk-table__cell">POAO</td><td class="govuk-table__cell">X00</td><td class="govuk-table__cell">Incorrect CHED type</td></tr></tbody></table>'
           },
           {
-            title: 'Clearance request',
+            title: 'Clearance request - CDS to BTMS',
             version: 1,
-            cdsStatus: 'In progress - Awaiting IPAFFS',
+            cdsStatus: 'In progress - Awaiting trader',
             created: '2025-10-27T11:13:49.113Z',
             hasDetails: true,
             detailsHtml: '<h3 class="govuk-heading-m govuk-!-margin-top-0">Item 2 - MISO PASTE</h3><p class="commodity-code"><strong>Commodity code:</strong> 2103909089</p><table class="govuk-table"><thead class="govuk-table__head"><tr class="govuk-table__row"><th scope="col" class="govuk-table__header">CHED reference</th><th scope="col" class="govuk-table__header">Check code</th><th scope="col" class="govuk-table__header">Authority</th></tr></thead><tbody class="govuk-table__body"><tr class="govuk-table__row"><td class="govuk-table__cell">GBCHD2025.6769491</td><td class="govuk-table__cell">H222</td><td class="govuk-table__cell">POAO</td></tr></tbody></table>'
           },
           {
-            title: 'CHEDD.GB.2025.6769491',
+            title: 'CHEDD.GB.2025.6769491 - IPAFFS to BTMS',
             chedStatus: 'Submitted',
             decision: 'Acceptable for Internal Market',
             created: '2025-10-27T11:09:54Z',
             hasDetails: false
           },
           {
-            title: 'CHEDD.GB.2025.6769491',
+            title: 'CHEDD.GB.2025.6769491 - IPAFFS to BTMS',
             chedStatus: 'Submitted',
             decision: 'Hold - Awaiting Decision',
             created: '2025-10-27T11:09:42Z',
@@ -465,9 +475,12 @@
         // Filter by event type
         if (eventType !== 'all') {
           filteredEvents = filteredEvents.filter(event => {
-            if (eventType === 'finalisation') return event.title === 'Finalisation';
-            if (eventType === 'clearance-decision') return event.title === 'Clearance decision';
-            if (eventType === 'clearance-request') return event.title === 'Clearance request' || event.title === 'Clearance request - processing error';
+            // Get main title (before " - ") for filtering
+            const mainTitle = event.title.split(' - ')[0];
+            if (eventType === 'finalisation') return mainTitle === 'Finalisation';
+            if (eventType === 'clearance-decision') return mainTitle === 'Clearance decision';
+            if (eventType === 'clearance-request') return mainTitle === 'Clearance request';
+            if (eventType === 'error') return mainTitle === 'Error' || mainTitle === 'Processing error';
             if (eventType === 'ched') return event.title.startsWith('CHED');
             return true;
           });
@@ -504,10 +517,24 @@
 
         let html = '<div class="moj-timeline">';
         events.forEach(event => {
+          // Split title by " - " to separate main title from subheader
+          const titleParts = event.title.split(' - ');
+          const mainTitle = titleParts[0];
+          const subheader = titleParts.length > 1 ? titleParts[1] : null;
+          // Check if this is an error (Error or Processing error)
+          const isError = mainTitle === 'Error' || mainTitle === 'Processing error';
+          
           html += `<div class="moj-timeline__item">
             <div class="moj-timeline__header">
-              <h2 class="moj-timeline__title">${event.title}</h2>
-            </div>
+              <h2 class="moj-timeline__title ${isError ? 'govuk-!-color-red processing-error-title' : ''}" ${isError ? 'style="color: #d4351c !important;"' : ''}>
+                ${mainTitle}
+              </h2>`;
+          
+          if (subheader) {
+            html += `<p class="govuk-body govuk-!-margin-bottom-0 subheader" >${subheader}</p>`;
+          }
+          
+          html += `</div>
             <div class="moj-timeline__description">`;
 
           if (event.cdsStatus) {
