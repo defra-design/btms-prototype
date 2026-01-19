@@ -536,7 +536,7 @@
       // Timeline events data for 25GBDD03IWJ3IHIAR1
       const timelineData = [
         {
-          title: 'Processing error - CDS to BTMS',
+          title: 'CDS processing error - CDS to BTMS',
           error: 'HMRCVAL101',
           message: 'The Entry Reference was not recognised. HMRC is unable to process the decision notification.',
           created: '2025-12-04T19:07:47Z',
@@ -640,7 +640,7 @@
           `
         },
         {
-          title: 'Processing error - BTMS to CDS',
+          title: 'BTMS processing error - BTMS to CDS',
           error: 'ALVSVAL401',
           message: 'A finalisation was received for 25GBDD03IWJ3IHIAR1 with an EntryVersionNumber 2 but the EntryVersionNumber does not match the last Clearance Request BTMS received. BTMS will not process this finalisation.',
           created: '2025-12-04T12:50:47Z',
@@ -805,7 +805,7 @@
             if (eventType === 'finalisation') return mainTitle === 'CDS finalisation';
             if (eventType === 'clearance-decision') return mainTitle === 'BTMS decision';
             if (eventType === 'clearance-request') return mainTitle === 'CDS decision request';
-            if (eventType === 'error') return mainTitle === 'Error' || mainTitle === 'Processing error';
+            if (eventType === 'error') return mainTitle === 'Error' || mainTitle === 'CDS processing error' || mainTitle === 'BTMS processing error';
             if (eventType === 'ched') return event.title.startsWith('CHED');
             return true;
           });
@@ -847,7 +847,7 @@
           const mainTitle = titleParts[0];
           const subheader = titleParts.length > 1 ? titleParts[1] : null;
           // Check if this is an error (Error or Processing error)
-          const isError = mainTitle === 'Error' || mainTitle === 'Processing error';
+          const isError = mainTitle === 'Error' || mainTitle === 'CDS processing error' || mainTitle === 'BTMS processing error';
           
           html += `<div class="moj-timeline__item">
             <div class="moj-timeline__header">
