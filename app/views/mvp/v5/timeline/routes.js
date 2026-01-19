@@ -37,14 +37,14 @@ module.exports = (router) => {
   // Timeline events for MRN 25GBCLNTWCC1FN7ARO
   const MANUAL_RELEASE_TIMELINE_EVENTS = [
     {
-      title: 'Finalisation',
+      title: 'CDS finalisation',
       version: 1,
       cdsStatus: 'Finalised - Manually released',
       created: '2025-11-14T15:19:17Z',
       hasDetails: false
     },
     {
-      title: 'Clearance decision',
+      title: 'BTMS decision',
       decision: '1',
       cdsStatus: 'In progress - Awaiting IPAFFS',
       created: '2025-11-14T11:47:28.433Z',
@@ -75,7 +75,7 @@ module.exports = (router) => {
       `
     },
     {
-      title: 'Clearance request',
+      title: 'CDS decision request',
       version: 1,
       cdsStatus: 'In progress - Awaiting IPAFFS',
       created: '2025-11-14T11:47:28.285Z',
@@ -134,7 +134,7 @@ module.exports = (router) => {
   // Timeline events for MRN 25GBBVWP03XACE8ARO (Cancelled after arrival)
   const CANCELLED_TIMELINE_EVENTS = [
     {
-      title: 'Finalisation',
+      title: 'CDS finalisation',
       version: 1,
       cdsStatus: 'Finalised - Cancelled after arrival',
       created: '2025-11-14T11:44:07.762Z',
@@ -148,7 +148,7 @@ module.exports = (router) => {
       hasDetails: false
     },
     {
-      title: 'Clearance decision',
+      title: 'BTMS decision',
       version: 2,
       decision: '2',
       cdsStatus: 'In progress - Awaiting IPAFFS',
@@ -180,7 +180,7 @@ module.exports = (router) => {
       `
     },
     {
-      title: 'Clearance request',
+      title: 'CDS decision request',
       version: 2,
       cdsStatus: 'In progress - Awaiting trader',
       created: '2025-10-31T00:44:45.996Z',
@@ -214,7 +214,7 @@ module.exports = (router) => {
       hasDetails: false
     },
     {
-      title: 'Clearance decision',
+      title: 'BTMS decision',
       version: 1,
       decision: 'Decision 1',
       cdsStatus: 'In progress - Awaiting IPAFFS',
@@ -246,7 +246,7 @@ module.exports = (router) => {
       `
     },
     {
-      title: 'Clearance request',
+      title: 'CDS decision request',
       version: 1,
       cdsStatus: 'In progress - Awaiting IPAFFS',
       created: '2025-10-27T11:13:49.113Z',
@@ -291,7 +291,7 @@ module.exports = (router) => {
   // Timeline events for MRN 25GBDD03IWJ3IHIAR1 (Latest page)
   const LATEST_TIMELINE_EVENTS = [
     {
-      title: 'Clearance request - processing error',
+      title: 'CDS decision request - processing error',
       version: 2,
       errorCode: 'ALVSVAL401',
       errorMessage: 'Error Description: The Entry Reference was not recognised. HMRC is unable to process the decision notification',
@@ -299,7 +299,7 @@ module.exports = (router) => {
       hasDetails: false
     },
     {
-      title: 'Clearance decision',
+      title: 'BTMS decision',
       decision: '2',
       cdsStatus: 'In progress - Awaiting CDS',
       created: '2025-12-04T19:07:46Z',
@@ -309,7 +309,7 @@ module.exports = (router) => {
       `
     },
     {
-      title: 'Clearance request',
+      title: 'CDS decision request',
       version: 2,
       created: '2025-12-04T19:07:46Z',
       hasDetails: true,
@@ -318,7 +318,7 @@ module.exports = (router) => {
       `
     },
     {
-      title: 'Clearance request - processing error',
+      title: 'CDS decision request - processing error',
       version: 2,
       errorCode: 'ALVSVAL401',
       errorMessage: 'EntryReference 25GBDD03IWJ3IHIAR1 EntryVersionNumber 2. This has already been replaced by a later version of the import declaration. Your request with correlation ID 2517565 has been terminated.',
@@ -326,7 +326,7 @@ module.exports = (router) => {
       hasDetails: false
     },
     {
-      title: 'Clearance decision',
+      title: 'BTMS decision',
       decision: '1',
       cdsStatus: 'In progress - Awaiting IPAFFS',
       created: '2025-12-03T15:00:29Z',
@@ -336,7 +336,7 @@ module.exports = (router) => {
       `
     },
     {
-      title: 'Clearance request',
+      title: 'CDS decision request',
       version: 1,
       created: '2025-12-03T15:00:29Z',
       hasDetails: true,
@@ -377,14 +377,14 @@ module.exports = (router) => {
   // Custom timeline events for MRN 25GBC64QCLFMUHPAR2 (not shared)
   const CUSTOM_TIMELINE_EVENTS_25GBC64QCLFMUHPAR2 = [
     {
-      title: 'Finalisation',
+      title: 'CDS finalisation',
       version: 2,
       cdsStatus: 'Finalised - Released',
       created: '2025-11-06T09:24:20Z',
       hasDetails: false
     },
     {
-      title: 'Clearance decision',
+      title: 'BTMS decision',
       decision: '6',
       cdsStatus: 'In progress - Awaiting CDS',
       created: '2025-11-06T09:13:48Z',
@@ -422,7 +422,7 @@ module.exports = (router) => {
       `
     },
     {
-      title: 'Clearance request',
+      title: 'CDS decision request',
       version: 2,
       created: '2025-11-06T09:13:46Z',
       hasDetails: true,
@@ -539,9 +539,9 @@ module.exports = (router) => {
     let filteredEvents = sourceEvents;
     if (eventType !== 'all') {
       filteredEvents = sourceEvents.filter(event => {
-        if (eventType === 'finalisation') return event.title === 'Finalisation';
-        if (eventType === 'clearance-decision') return event.title === 'Clearance decision';
-        if (eventType === 'clearance-request') return event.title === 'Clearance request' || event.title === 'Error';
+        if (eventType === 'finalisation') return event.title === 'CDS finalisation';
+        if (eventType === 'clearance-decision') return event.title === 'BTMS decision';
+        if (eventType === 'clearance-request') return event.title === 'CDS decision request' || event.title === 'Error';
         if (eventType === 'ched' || eventType === 'ipaffs-pre-notification') return event.title.startsWith('CHED');
         return true;
       });

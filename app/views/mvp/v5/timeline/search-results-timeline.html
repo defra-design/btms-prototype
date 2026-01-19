@@ -833,14 +833,14 @@
       // Sample timeline events matching the screen design
       const timelineData = [
         {
-      title: 'Finalisation - CDS to BTMS',
+      title: 'CDS finalisation - CDS to BTMS',
       version: 2,
       cdsStatus: 'Finalised - Released',
       created: '2025-11-06T09:24:20Z',
       hasDetails: false
     },
     {
-      title: 'Clearance decision - BTMS to CDS',
+      title: 'BTMS decision - BTMS to CDS',
       decision: '6',
       cdsStatus: 'In progress - Awaiting CDS',
       created: '2025-11-06T09:13:48Z',
@@ -1089,7 +1089,7 @@
       hasDetails: false
     },
     {
-      title: 'Clearance decision - BTMS to CDS',
+      title: 'BTMS decision - BTMS to CDS',
       decision: '5',
       cdsStatus: 'In progress - Awaiting IPAFFS',
       created: '2025-11-05T19:09:24Z',
@@ -1331,7 +1331,7 @@
     `
   },
     {
-      title: 'Clearance request - CDS to BTMS',
+      title: 'CDS decision request - CDS to BTMS',
       version: 2,
       created: '2025-11-05T19:09:24Z',
       hasDetails: true,
@@ -1526,7 +1526,7 @@
       `
     },
     {
-      title: 'Clearance decision - BTMS to CDS',
+      title: 'BTMS decision - BTMS to CDS',
       decision: '4',
       cdsStatus: 'In progress - Awaiting IPAFFS',
       created: '2025-11-03T18:16:10Z',
@@ -1782,7 +1782,7 @@
       hasDetails: false
     },
     {
-      title: 'Clearance decision - BTMS to CDS',
+      title: 'BTMS decision - BTMS to CDS',
       decision: '3',
       cdsStatus: 'In progress - Awaiting IPAFFS',
       created: '2025-11-03T17:05:55Z',
@@ -2040,7 +2040,7 @@
  
  
     {
-      title: 'Clearance decision - BTMS to CDS',
+      title: 'BTMS decision - BTMS to CDS',
       decision: '2',
       cdsStatus: 'In progress - Awaiting IPAFFS',
       created: '2025-11-03T15:17:55Z',
@@ -2296,7 +2296,7 @@
       hasDetails: false
     },
     {
-      title: 'Clearance decision - BTMS to CDS',
+      title: 'BTMS decision - BTMS to CDS',
       decision: '1',
       cdsStatus: 'In progress - Awaiting IPAFFS',
       created: '2025-11-03T14:56:19Z',
@@ -2538,7 +2538,7 @@
       `
     },
     {
-      title: 'Clearance request - CDS to BTMS',
+      title: 'CDS decision request - CDS to BTMS',
       version: 1,
       created: '2025-11-03T14:56:19Z',
       hasDetails: true,
@@ -2819,9 +2819,9 @@
           filteredEvents = timelineData.filter(event => {
             // Get main title (before " - ") for filtering
             const mainTitle = event.title.split(' - ')[0];
-            if (eventType === 'finalisation') return mainTitle === 'Finalisation';
-            if (eventType === 'clearance-decision') return mainTitle === 'Clearance decision';
-            if (eventType === 'clearance-request') return mainTitle === 'Clearance request';
+            if (eventType === 'finalisation') return mainTitle === 'CDS finalisation';
+            if (eventType === 'clearance-decision') return mainTitle === 'BTMS decision';
+            if (eventType === 'clearance-request') return mainTitle === 'CDS decision request';
             if (eventType === 'error') return mainTitle === 'Error' || mainTitle === 'Processing error';
             if (eventType === 'ched') return event.title.startsWith('CHED');
             return true;
@@ -3008,17 +3008,17 @@
             },
             {
               value: "finalisation",
-              text: "Finalisation",
+              text: "CDS finalisation",
               selected: data.eventType === 'finalisation'
             },
             {
               value: "clearance-decision",
-              text: "Clearance decision",
+              text: "BTMS decision",
               selected: data.eventType === 'clearance-decision'
             },
             {
               value: "clearance-request",
-              text: "Clearance request",
+              text: "CDS decision request",
               selected: data.eventType === 'clearance-request'
             },
             {

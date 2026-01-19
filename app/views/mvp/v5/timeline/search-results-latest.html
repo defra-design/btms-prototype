@@ -86,7 +86,7 @@
               <tr class="match PHSI">
                 <td class="govuk-table__cell">3</td>
                 <td class="govuk-table__cell">0602904800</td>
-                <td class="govuk-table__cell">Cyclamen pers. Windbell</td>
+                <td class="govuk-table__cell">Cyclamen pers. Windbell, Primula Acaulis Grp gemengd</td>
                 <td class="govuk-table__cell">51.48</td>
                 <td class="govuk-table__cell">GBCHD2025.5627759</td>
                 <td class="govuk-table__cell"><span class="govuk-tag govuk-tag--green">Yes</span></td>
@@ -543,7 +543,7 @@
           hasDetails: false
         },
         {
-          title: 'Clearance decision - BTMS to CDS',
+          title: 'BTMS decision - BTMS to CDS',
           decision: '2',
           cdsStatus: 'In progress - Awaiting CDS',
           created: '2025-12-04T19:07:46Z',
@@ -596,7 +596,7 @@
           `
         },
         {
-          title: 'Clearance request - CDS to BTMS',
+          title: 'CDS decision request - CDS to BTMS',
           version: 2,
           created: '2025-12-04T19:07:45Z',
           hasDetails: true,
@@ -647,7 +647,7 @@
           hasDetails: false
         },
         {
-          title: 'Clearance decision - BTMS to CDS',
+          title: 'BTMS decision - BTMS to CDS',
           decision: '1',
           cdsStatus: 'In progress - Awaiting CDS',
           created: '2025-12-03T15:00:29Z',
@@ -700,7 +700,7 @@
           `
         },
         {
-          title: 'Clearance request - CDS to BTMS',
+          title: 'CDS decision request - CDS to BTMS',
           version: 1,
           created: '2025-12-03T15:00:29Z',
           hasDetails: true,
@@ -802,9 +802,9 @@
           filteredEvents = timelineData.filter(event => {
             // Get main title (before " - ") for filtering
             const mainTitle = event.title.split(' - ')[0];
-            if (eventType === 'finalisation') return mainTitle === 'Finalisation';
-            if (eventType === 'clearance-decision') return mainTitle === 'Clearance decision';
-            if (eventType === 'clearance-request') return mainTitle === 'Clearance request';
+            if (eventType === 'finalisation') return mainTitle === 'CDS finalisation';
+            if (eventType === 'clearance-decision') return mainTitle === 'BTMS decision';
+            if (eventType === 'clearance-request') return mainTitle === 'CDS decision request';
             if (eventType === 'error') return mainTitle === 'Error' || mainTitle === 'Processing error';
             if (eventType === 'ched') return event.title.startsWith('CHED');
             return true;
@@ -872,7 +872,7 @@
             </div>`;
           }
 
-          if (event.version && event.title !== 'Clearance decision') {
+          if (event.version && event.title !== 'BTMS decision') {
             html += `<div class="timeline-detail-row">
               <span class="timeline-detail-label">Version</span>
               <span>${event.version}</span>
@@ -989,17 +989,17 @@
             },
             {
               value: "finalisation",
-              text: "Finalisation",
+              text: "CDS finalisation",
               selected: data.eventType === 'finalisation'
             },
             {
               value: "clearance-decision",
-              text: "Clearance decision",
+              text: "BTMS decision",
               selected: data.eventType === 'clearance-decision'
             },
             {
               value: "clearance-request",
-              text: "Clearance request",
+              text: "CDS decision request",
               selected: data.eventType === 'clearance-request'
             },
             {

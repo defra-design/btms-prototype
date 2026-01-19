@@ -197,17 +197,17 @@
             },
             {
               value: "finalisation",
-              text: "Finalisation",
+              text: "CDS finalisation",
               selected: data.eventType === 'finalisation'
             },
             {
               value: "clearance-decision",
-              text: "Clearance decision",
+              text: "BTMS decision",
               selected: data.eventType === 'clearance-decision'
             },
             {
               value: "clearance-request",
-              text: "Clearance request",
+              text: "CDS decision request",
               selected: data.eventType === 'clearance-request'
             },
             {
@@ -267,7 +267,7 @@
                 </div>
               {% endif %}
 
-              {% if event.version and not event.chedStatus and event.title !== 'Clearance decision' %}
+              {% if event.version and not event.chedStatus and event.title !== 'BTMS decision' %}
                 <div class="timeline-detail-row">
                   <span class="timeline-detail-label">Version</span>
                   <span>{{ event.version }}</span>
