@@ -2908,8 +2908,11 @@
           }
 
           if (event.decision) {
+            // For BTMS decision entries, show as "Version" instead of "Decision"
+            const isBTMSDecision = mainTitle === 'BTMS decision';
+            const label = isBTMSDecision ? 'Version' : 'Decision';
             html += `<div class="timeline-detail-row">
-              <span class="timeline-detail-label">Decision</span>
+              <span class="timeline-detail-label">${label}</span>
               <span class="govuk-body">${event.decision}</span>
             </div>`;
           }

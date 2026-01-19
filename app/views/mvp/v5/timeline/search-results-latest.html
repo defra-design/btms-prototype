@@ -642,7 +642,7 @@
         {
           title: 'BTMS processing error - BTMS to CDS',
           error: 'ALVSVAL401',
-          message: 'A finalisation was received for 25GBDD03IWJ3IHIAR1 with an EntryVersionNumber 2 but the EntryVersionNumber does not match the last Clearance Request BTMS received. BTMS will not process this finalisation.',
+          message: 'A CDS finalisation message was received for <span style="font-weight: bold; margin:0">25GBDD03IWJ3IHIAR1</span> with <span style="font-weight: bold; margin:0">version number 2</span>, but this does not match the version number of the most recent CDS clearance request received by BTMS. As a result, BTMS has not processed this CDS finalisation.',
           created: '2025-12-04T12:50:47Z',
           hasDetails: false
         },
@@ -910,8 +910,11 @@
           }
 
           if (event.decision) {
+            // For BTMS decision entries, show as "Version" instead of "Decision"
+            const isBTMSDecision = mainTitle === 'BTMS decision';
+            const label = isBTMSDecision ? 'Version' : 'Decision';
             html += `<div class="timeline-detail-row">
-              <span class="timeline-detail-label">Decision</span>
+              <span class="timeline-detail-label">${label}</span>
               <span>${event.decision}</span>
             </div>`;
           }
