@@ -1,0 +1,136 @@
+{% from "govuk/components/select/macro.njk" import govukSelect %}
+
+{% set showMrnFilter = showMrnFilter | default(false) %}
+{% set showErrorFilter = showErrorFilter | default(false) %}
+{% set sortByText = sortByText | default("Newest to oldest") %}
+{% set sortByTextAscending = sortByTextAscending | default("Oldest to newest") %}
+{% set mrnOptions = mrnOptions | default([]) %}
+{% set currentMrn = currentMrn | default(title) %}
+{% set formMethod = formMethod | default("get") %}
+{% set useClientSideFiltering = useClientSideFiltering | default(true) %}
+{% set onChangeHandler = onChangeHandler | default("window.handleFilterChange()") %}
+{% set mrnValue = mrnValue | default(title) %}
+
+{% if useClientSideFiltering %}
+<form onsubmit="event.preventDefault(); window.handleFilterChange(); return false;">
+{% else %}
+<form method="{{ formMethod }}">
+{% endif %}
+  <input type="hidden" name="mrn" value="{{ mrnValue }}">
+  
+  <div class="timeline-filters">
+    {% if showMrnFilter %}
+    {{ govukSelect({
+      id: "mrnFilter",
+      name: "mrnFilter",
+      label: {
+        text: "MRN",
+        classes: "govuk-label--s"
+      },
+      items: mrnOptions,
+      attributes: {
+        onchange: onChangeHandler
+      }
+    }) }}
+    {% endif %}
+
+    {% if showErrorFilter %}
+    {% set eventTypeItems = [
+      {
+        value: "all",
+        text: "Show all",
+        selected: not data.eventType or data.eventType === 'all'
+      },
+      {
+        value: "finalisation",
+        text: "CDS finalisation",
+        selected: data.eventType === 'finalisation'
+      },
+      {
+        value: "clearance-decision",
+        text: "BTMS decision",
+        selected: data.eventType === 'clearance-decision'
+      },
+      {
+        value: "clearance-request",
+        text: "CDS decision request",
+        selected: data.eventType === 'clearance-request'
+      },
+      {
+        value: "error",
+        text: "Processing error",
+        selected: data.eventType === 'error'
+      },
+      {
+        value: "ched",
+        text: "CHED",
+        selected: data.eventType === 'ched'
+      }
+    ] %}
+    {% else %}
+    {% set eventTypeItems = [
+      {
+        value: "all",
+        text: "Show all",
+        selected: not data.eventType or data.eventType === 'all'
+      },
+      {
+        value: "finalisation",
+        text: "CDS finalisation",
+        selected: data.eventType === 'finalisation'
+      },
+      {
+        value: "clearance-decision",
+        text: "BTMS decision",
+        selected: data.eventType === 'clearance-decision'
+      },
+      {
+        value: "clearance-request",
+        text: "CDS decision request",
+        selected: data.eventType === 'clearance-request'
+      },
+      {
+        value: "ched",
+        text: "CHED",
+        selected: data.eventType === 'ched'
+      }
+    ] %}
+    {% endif %}
+    {{ govukSelect({
+      id: "eventType",
+      name: "eventType",
+      label: {
+        text: "Event type",
+        classes: "govuk-label--s"
+      },
+      items: eventTypeItems,
+      attributes: {
+        onchange: onChangeHandler
+      }
+    }) }}
+
+    {{ govukSelect({
+      id: "sortBy",
+      name: "sortBy",
+      label: {
+        text: "Sort by",
+        classes: "govuk-label--s"
+      },
+      items: [
+        {
+          value: "descending",
+          text: sortByText,
+          selected: not data.sortBy or data.sortBy === 'descending'
+        },
+        {
+          value: "ascending",
+          text: sortByTextAscending,
+          selected: data.sortBy === 'ascending'
+        }
+      ],
+      attributes: {
+        onchange: onChangeHandler
+      }
+    }) }}
+  </div>
+</form>

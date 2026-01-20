@@ -7,6 +7,7 @@
 
 import './reporting.js';
 import './filters.js';
+import './timeline.js';
 
 
 
