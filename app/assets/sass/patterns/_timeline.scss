@@ -15,7 +15,13 @@
   .moj-timeline__title,
   .moj-timeline__title * {
     font-size: 19px !important;
-    font-weight: normal !important;
+    font-weight: 700 !important;
+  }
+
+  /* Make processing error titles red - override any other color rules */
+  .moj-timeline__item .moj-timeline__header h2.processing-error-title,
+  h2.processing-error-title {
+    color: #d4351c !important;
   }
 
   /* Ensure ALL timeline description text is 16px */
@@ -39,7 +45,7 @@
   .timeline-filters {
     display: flex;
     gap: 16px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
   }
 
   .timeline-filters .govuk-form-group {
@@ -58,7 +64,7 @@
   .timeline-detail-row {
     margin-bottom: 0px;
     display: flex;
-    align-items: baseline;
+    align-items: flex-start;
     gap: 8px;
     margin-top: 0;
   }
@@ -77,6 +83,27 @@
     font-weight: 700;
     flex-shrink: 0;
     color: #0B0C0C;
+  }
+
+  /* Set timeline tab panel width to 75% and center it */
+  #timeline {
+    width: 75%;
+  }
+
+  .subheader {
+    font-size: 14px; 
+    padding-top: 5px;
+    color: #505a5f;
+  }
+
+  .moj-timeline__description {
+    margin-top: 15px;
+  }
+
+  // Additional styles from search results pages
+  .govuk-details {
+    margin-top: 20px !important;
+    margin-bottom: 0 !important;
   }
 
   p, .govuk-body, .govuk-body-m {
@@ -178,6 +205,16 @@
   }
 
   .govuk-label {
+    font-weight: 700;
+  }
+
+  .timeline-message {
+    flex: 1;
+    line-height: 1.5;
+  }
+
+  .timeline-message strong,
+  .timeline-message span[style*="font-weight: bold"] {
     font-weight: 700;
   }
 }
