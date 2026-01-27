@@ -1,0 +1,163 @@
+---
+description: Timeline page design pattern for search results pages with embedded JavaScript data
+globs: **/search-results-timeline.html
+alwaysApply: false
+---
+
+# Timeline Page Design Pattern
+
+## Template Structure
+
+### Required Imports and Variables
+```nunjucks
+{% extends "layouts/forms.html" %}
+{% from "moj/components/timeline/macro.njk" import mojTimeline %}
+{% from "govuk/components/select/macro.njk" import govukSelect %}
+{% from "govuk/components/details/macro.njk" import govukDetails %}
+{% set signedIn = 'true' %}
+{% set fullWidth = true %}
+{% set hideButton = true %}
+{% set breadcrumb = true %}
+{% set showSubheader = true %}
+{% set subHeader = 'Showing result for' %}
+{% set title = 'MRN_CODE_HERE' %}
+{% set bodyClasses = 'mrn accordion v4' %}
+{% set cssClassName = 'timeline' %}
+{% set hideManageAccount = 'false' %}
+{% set showEdit = true %}
+{% set hideBackLink = true %}
+{% set showMenu = true %}
+{% set searchLinkHref = '../search' %}
+{% set menu = true %}
+```
+
+### Tab Structure
+- Two tabs: "Latest" (summary view) and "Timeline" (timeline view)
+- Timeline tab should be selected by default: `govuk-tabs__list-item--selected`
+- Latest tab contains MRN containers and CHED sections
+- Timeline tab contains JavaScript data and timeline container
+
+## Timeline Data Structure
+
+### JavaScript Data Format
+```javascript
+<script>
+  window.timelineData = [
+    {
+      title: 'Event Title - Subheader',  // Split by " - " for main title and subheader
+      version: 2,                        // Optional: version number (not shown for BTMS decision)
+      cdsStatus: 'Finalised - Released', // Optional: CDS status (shows as colored tag)
+      chedStatus: 'Valid',               // Optional: CHED status (shows as colored tag)
+      decision: '6',                     // Optional: Decision (shows as "Version" for BTMS decision, "Decision" otherwise)
+      created: '2025-11-06T09:24:20Z',  // Required: ISO timestamp (YYYY-MM-DDTHH:mm:ssZ)
+      hasDetails: true,                  // Boolean: whether to show expandable details
+      detailsHtml: `                     // Required if hasDetails: true - HTML string
+        <h3 class="govuk-heading-m govuk-!-margin-top-0">Item 1 - Name</h3>
+        <p class="commodity-code"><strong>Commodity code:</strong> 1234567890</p>
+        <table class="govuk-table">
+          <!-- Table structure -->
+        </table>
+      `
+    }
+  ];
+</script>
+```
+
+### Timeline Tab Structure
+```nunjucks
+<!-- TIMELINE TAB -->
+<div class="govuk-tabs__panel" id="timeline">
+  <script>
+    window.timelineData = [ /* array of events */ ];
+  </script>
+  
+  {% include 'includes/timeline-filters.html' %}
+  
+  <div id="timeline-container">
+    <!-- Timeline will be rendered here by JavaScript -->
+  </div>
+</div>
+```
+
+## Details HTML Structure
+
+When `hasDetails: true`, the `detailsHtml` must contain:
+
+### Item Headings
+- First item: `<h3 class="govuk-heading-m govuk-!-margin-top-0">Item X - Name</h3>`
+- Subsequent items: `<h3 class="govuk-heading-m govuk-!-margin-top-4">` or `<h3 class="govuk-heading-s govuk-!-margin-top-4">`
+
+### Commodity Code
+```html
+<p class="commodity-code"><strong>Commodity code:</strong> CODE</p>
+```
+
+### Table Columns
+- Always include: CHED reference, Check code, Authority
+- Sometimes include: Decision code, Decision (for BTMS decision events)
+- Use GOV.UK table structure with proper `<thead>` and `<tbody>`
+
+### Example Details HTML
+```html
+<h3 class="govuk-heading-m govuk-!-margin-top-0">Item 1 - Sweet pepper</h3>
+<p class="commodity-code"><strong>Commodity code:</strong> 1601009999</p>
+<table class="govuk-table">
+  <thead class="govuk-table__head">
+    <tr class="govuk-table__row">
+      <th scope="col" class="govuk-table__header">CHED reference</th>
+      <th scope="col" class="govuk-table__header">Check code</th>
+      <th scope="col" class="govuk-table__header">Authority</th>
+      <th scope="col" class="govuk-table__header">Decision code</th>
+      <th scope="col" class="govuk-table__header">Decision</th>
+    </tr>
+  </thead>
+  <tbody class="govuk-table__body">
+    <tr class="govuk-table__row">
+      <td class="govuk-table__cell">GBCHD2025.6802963</td>
+      <td class="govuk-table__cell">H223</td>
+      <td class="govuk-table__cell">FNAO</td>
+      <td class="govuk-table__cell">C03</td>
+      <td class="govuk-table__cell">Release - Inspection Complete</td>
+    </tr>
+  </tbody>
+</table>
+```
+
+## Event Title Patterns
+
+- CDS events: `'CDS finalisation - CDS to BTMS'`, `'CDS decision request - CDS to BTMS'`
+- BTMS events: `'BTMS decision - BTMS to CDS'`
+- CHED events: `'CHEDPP GB 2025.6801816 - IPAFFS to BTMS'`, `'CHEDD.GB.2025.6803042 - IPAFFS to BTMS'`
+- Error events: `'Error - Description'`, `'CDS processing error - Description'`
+
+## Status Tag Colors
+
+### CDS Status
+- Green: `'Finalised - Released'`, `'Finalised - Manually released'`
+- Red: `'Finalised - Cancelled after arrival'`
+- Yellow: Contains `'In progress'` or `'Hold'`
+
+### CHED Status
+- Green: `'Valid'`
+- Yellow: `'In progress'`
+- Grey: `'Submitted'`
+
+## Important Notes
+
+1. **Dates**: Must be ISO format `'2025-11-06T09:24:20Z'` (JavaScript formats for display)
+2. **Table Structure**: Always use GOV.UK table classes and proper semantic HTML
+3. **Details Expandable**: Only show if `hasDetails: true` and `detailsHtml` is provided
+4. **Filtering**: Timeline filters are included via `includes/timeline-filters.html`
+5. **JavaScript**: Auto-initializes from `window.timelineData` on page load via `timeline.js`
+6. **Decision Field**: For BTMS decision events, `decision` shows as "Version" label, otherwise shows as "Decision" label
+7. **Version Field**: Not displayed for BTMS decision events (decision field is used instead)
+
+## Common Mistakes to Avoid
+
+- ❌ Missing `window.timelineData` assignment
+- ❌ Incorrect date format (must be ISO)
+- ❌ Missing `timeline-container` div
+- ❌ Incorrect heading classes in detailsHtml
+- ❌ Missing `timeline-filters.html` include
+- ❌ Wrong table structure (missing thead/tbody)
+- ❌ Forgetting to set Timeline tab as selected by default

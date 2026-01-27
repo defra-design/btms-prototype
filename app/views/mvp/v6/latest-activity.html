@@ -1,0 +1,85 @@
+{% extends "layouts/forms.html" %}
+{% set title = 'Latest activity' %}
+{% set fullWidth = false %}
+{% set hideButton = true %}
+{% set menu = true %}
+{% set bodyClasses = 'btmsStatus' %}
+{% set hideBackLink = true %}
+{% set menu = true %}
+
+{% block form %}
+<p class="govuk-body">Latest messages received and sent by BTMS.  </p>
+
+<table class="govuk-table">
+  <caption class="govuk-table__caption govuk-table__caption--m">BTMS</caption>
+  <thead class="govuk-table__head">
+    <tr class="govuk-table__row">
+      <th scope="col" class="govuk-table__header">Message type</th>
+      <th scope="col" class="govuk-table__header govuk-table__header--numeric">Last updated</th>
+    </tr>
+  </thead>
+  <tbody class="govuk-table__body">
+    <tr class="govuk-table__row">
+      <td class="govuk-table__cell">
+        Decision created<br>
+        <span class="govuk-body-s govuk-!-font-weight-regular govuk-!-colour-secondary" style="font-size: 14px;">BTMS </span>
+      </td>
+      <td class="govuk-table__cell govuk-table__cell--numeric">
+        <time datetime="2024-10-13T13:08:51+01:00">{{ '' | ipaffsTime('-2min') }}</time>
+      </td>
+    </tr>
+    <tr class="govuk-table__row">
+      <td class="govuk-table__cell">
+        Decision sent<br>
+        <span class="govuk-body-s govuk-!-font-weight-regular govuk-!-colour-secondary" style="font-size: 14px;">BTMS to CDS</span>
+      </td>
+      <td class="govuk-table__cell govuk-table__cell--numeric">
+        <time datetime="2024-10-13T13:08:59+01:00">{{ '' | ipaffsTime('-3min') }}</time>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="govuk-table govuk-!-margin-top-6">
+  <caption class="govuk-table__caption govuk-table__caption--m">CDS</caption>
+  <thead class="govuk-table__head">
+    <tr class="govuk-table__row">
+      <th scope="col" class="govuk-table__header">Message type</th>
+      <th scope="col" class="govuk-table__header govuk-table__header--numeric">Last received</th>
+    </tr>
+  </thead>
+  <tbody class="govuk-table__body">
+    <tr class="govuk-table__row">
+      <td class="govuk-table__cell">Clearance request</td>
+      <td class="govuk-table__cell govuk-table__cell--numeric">
+        <time datetime="2024-10-13T13:01:00+01:00">{{ '' | ipaffsTime('-1min') }}</time>
+      </td>
+    </tr>
+    <tr class="govuk-table__row">
+      <td class="govuk-table__cell">Finalisation</td>
+      <td class="govuk-table__cell govuk-table__cell--numeric">
+        <time datetime="2024-10-13T13:02:00+01:00">{{ '' | ipaffsTime('-2min') }}</time>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="govuk-table govuk-!-margin-top-6">
+  <caption class="govuk-table__caption govuk-table__caption--m">IPAFFS</caption>
+  <thead class="govuk-table__head">
+    <tr class="govuk-table__row">
+      <th scope="col" class="govuk-table__header">Message type</th>
+      <th scope="col" class="govuk-table__header govuk-table__header--numeric">Last received</th>
+    </tr>
+  </thead>
+  <tbody class="govuk-table__body">
+    <tr class="govuk-table__row">
+      <td class="govuk-table__cell">Notification</td>
+      <td class="govuk-table__cell govuk-table__cell--numeric">
+        <time datetime="2024-10-13T13:05:00+01:00">{{ '' | ipaffsTime('-15min') }}</time>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+{% endblock %}

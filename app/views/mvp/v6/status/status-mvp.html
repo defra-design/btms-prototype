@@ -1,0 +1,33 @@
+{% extends "layouts/forms.html" %}
+{% set title = 'Customs Declaration Service (CDS) activity' %}
+{% set fullWidth = false %}
+{% set hideButton = true %}
+{% set bodyClasses = 'btmsStatus' %}
+{% set hideBackLink = false %}
+
+{% block form %}
+<p>This shows when BTMS received the last customs declaration and finalisation messages from CDS. </p>
+<table class="govuk-table table-small">
+  <thead class="govuk-table__head">
+    <tr class="govuk-table__row">
+      <th scope="col" class="govuk-table__header app-custom-class govuk-!-width-one-quarter">CDS message</th>
+      <th scope="col" class="govuk-table__header app-custom-class govuk-!-width-one-quarter">Last received </th>
+    </tr>
+  </thead>
+  <tbody class="govuk-table__body">
+    <tr class="govuk-table__row ">
+      <td class="govuk-table__cell">Customs declaration</td>
+
+      <td class="govuk-table__cell"> {{ '-5min' | ipaffsTime }}</td>
+    </tr>
+    <tr class="govuk-table__row ">
+      <td class="govuk-table__cell">Finalisation</td>
+
+      <td class="govuk-table__cell">
+        <strong class="govuk-body"> {{ '-2min' | ipaffsTime }}</strong><br>
+      </td>
+    </tr>
+
+  </tbody>
+</table>
+{% endblock %}

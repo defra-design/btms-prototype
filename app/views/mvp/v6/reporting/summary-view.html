@@ -1,0 +1,464 @@
+{% extends "layouts/forms.html" %}
+{% set title = 'BTMS reporting data' %}
+{% set fullWidth = true %}
+{% set hideButton = true %}
+{% set menu = true %}
+{% set showheader = true %}
+{% set bodyClasses = 'reporting' %}
+{% set hideBackLink = true %}
+
+{% block form %}
+{% from "includes/stat-card.njk" import statCard %}
+
+{% block pageScripts %}
+  <script src="/public/javascripts/matches-chart.js"></script>
+  <script src="/public/javascripts/chart.js"></script>
+{% endblock %}
+
+<h1 id="page-top" class="govuk-heading-l" tabindex="-1">{{ title }}</h1>
+
+<div class="govuk-grid-row">
+  <!-- Filters -->
+  <div class="govuk-grid-column-one-quarter filters">
+    <div class="govuk-form-group govuk-!-margin-bottom-1">
+      <fieldset class="govuk-fieldset">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">Filter</legend>
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">Date and time</legend>
+
+        <nav class="govuk-!-margin-top-1">
+          <ul class="govuk-list" id="preset-links">
+            <li><a href="#" data-range="today">Today</a></li>
+            <li><a href="#" data-range="yesterday">Yesterday</a></li>
+            <li><a href="#" data-range="last-week">Last week</a></li>
+            <li><a href="#" data-range="last-month">Last month</a></li>
+          </ul>
+        </nav>
+
+        <div class="govuk-form-group govuk-!-margin-bottom-4">
+          {{ mojDatePicker({
+            id: "startDate",
+            name: "startDate",
+            value: data.startDate or "",
+            hint: { text: "For example, 17/5/2025." },
+            label: { text: "Start date" }
+          }) }}
+        </div>
+
+        <div class="govuk-form-group govuk-!-margin-bottom-4">
+          {{ mojDatePicker({
+            id: "endDate",
+            name: "endDate",
+            value: data.endDate or "",
+            hint: { text: "For example, 17/5/2025." },
+            label: { text: "End date" }
+          }) }}
+        </div>
+
+        <button class="govuk-button govuk-!-margin-bottom-6" data-module="govuk-button" type="submit">Update</button>
+      </fieldset>
+    </div>
+  </div>
+
+  <!-- Main -->
+  <div class="govuk-grid-column-three-quarters">
+
+    {% set hasResults = (data.searchResults == true) or (data.searchResults == 'true') %}
+    {% if hasResults %}
+
+      <span class="govuk-caption-m">Showing results from</span>
+      <h2 class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-5">{{ data.displayDateRange }}</h2>
+
+      <div class="govuk-tabs" data-module="govuk-tabs">
+        <ul class="govuk-tabs__list">
+          <li class="govuk-tabs__list-item govuk-tabs__list-item--selected">
+            <a class="govuk-tabs__tab" href="#summary">Summary view</a>
+          </li>
+          <li class="govuk-tabs__list-item">
+            <a class="govuk-tabs__tab" href="#chart">Chart view</a>
+          </li>
+        </ul>
+
+        <!-- SUMMARY -->
+        <div class="govuk-tabs__panel" id="summary">
+          <div class="stat-card-container govuk-!-margin-bottom-6">
+            <h2 class="govuk-heading-m">Matches</h2>
+            <div class="stat-card-group">
+              {{ statCard("Matches", data.stats.matches | string, data.stats.matchesPct) }}
+              {{ statCard("No matches", data.stats.noMatches | string, data.stats.noMatchesPct) }}
+              {{ statCard("Total", data.stats.totalLineItems | string, "") }}
+            </div>
+          </div>
+
+          <div class="stat-card-container govuk-!-margin-bottom-6">
+            <h2 class="govuk-heading-m">Releases</h2>
+            <div class="stat-card-group">
+              {{ statCard("Auto", data.stats.autoReleases | string, data.stats.autoPct, "stat-card--blue") }}
+              {{ statCard("Manual", data.stats.manualReleases | string, data.stats.manualPct, "stat-card--blue") }}
+              {{ statCard("Total", data.stats.totalReleases | string, "", "stat-card--blue") }}
+            </div>
+          </div>
+
+          <div class="stat-card-container govuk-!-margin-bottom-6">
+            <h2 class="govuk-heading-m">Unique clearance requests</h2>
+            <div class="stat-card-group">
+              {{ statCard("Unique clearances", data.stats.uniqueClearances | string, data.stats.uniquePct) }}
+              {{ statCard("Total", data.stats.totalClearanceMsgs | string) }}
+            </div>
+          </div>
+
+          <div class="stat-card-container govuk-!-margin-bottom-6">
+            <h2 class="govuk-heading-m">Pre-notifications by CHED type</h2>
+            <div class="stat-card-group">
+              {{ statCard("CHED A", data.stats.ched.A.count | string, data.stats.ched.A.pct, "stat-card--blue") }}
+              {{ statCard("CHED P", data.stats.ched.P.count | string, data.stats.ched.P.pct, "stat-card--blue") }}
+              {{ statCard("CHED PP", data.stats.ched.PP.count | string, data.stats.ched.PP.pct, "stat-card--blue") }}
+              {{ statCard("CHED D", data.stats.ched.D.count | string, data.stats.ched.D.pct, "stat-card--blue") }}
+              {{ statCard("Total",   data.stats.ched.total | default(0) | commas, "", "stat-card--blue") }}
+            </div>
+          </div>
+        </div>
+
+        <!-- CHARTS -->
+        <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="chart">
+
+          <!-- Matches -->
+          <div class="govuk-grid-row charts govuk-!-margin-bottom-4">
+            <div class="govuk-grid-column-full chart">
+              <h2 class="govuk-heading-m">Matches</h2>
+
+              <div class="btms-chart-container">
+                <canvas id="matchesChart"></canvas>
+              </div>
+
+              <div class="btms-stats btms-stats--3">
+                <div>
+                  <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
+                    <div class="govuk-checkboxes__item">
+                      <input class="govuk-checkboxes__input" id="cb-matches" type="checkbox" checked>
+                      <label class="govuk-label govuk-checkboxes__label btms-color-matches" for="cb-matches">
+                        <h3 class="govuk-heading-s">Matches</h3>
+                        <p class="govuk-heading-m">{{ data.stats.matches | default(0) | commas }}</p>
+                      </label>
+                    </div>
+                  </div>
+                  <span class="govuk-body govuk-body-s percentage">({{ data.stats.matchesPct | default('0.00%') }})</span>
+                </div>
+
+                <div>
+                  <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
+                    <div class="govuk-checkboxes__item">
+                      <input class="govuk-checkboxes__input" id="cb-no-matches" type="checkbox" checked>
+                      <label class="govuk-label govuk-checkboxes__label btms-color-no-matches" for="cb-no-matches">
+                        <h3 class="govuk-heading-s">No matches</h3>
+                        <p class="govuk-heading-m">{{ data.stats.noMatches | default(0) | commas }}</p>
+                      </label>
+                    </div>
+                  </div>
+                  <span class="govuk-body govuk-body-s percentage">({{ data.stats.noMatchesPct | default('0.00%') }})</span>
+                </div>
+
+                <div>
+                  <h3 class="govuk-heading-s total">Total</h3>
+                  <p class="govuk-heading-m">{{ data.stats.totalLineItems | default(0) | commas }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Releases -->
+          <div class="govuk-grid-row charts govuk-!-margin-bottom-4">
+            <div class="govuk-grid-column-full chart">
+              <h2 class="govuk-heading-m">Releases</h2>
+
+              <div class="btms-chart-container">
+                <canvas id="btmsHourlyReleasesChart"></canvas>
+              </div>
+
+              <div class="btms-stats btms-stats--3">
+                <div>
+                  <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
+                    <div class="govuk-checkboxes__item">
+                      <input class="govuk-checkboxes__input" id="cb-auto" type="checkbox" checked>
+                      <label class="govuk-label govuk-checkboxes__label btms-color-auto" for="cb-auto">
+                        <h3 class="govuk-heading-s">Automatic</h3>
+                        <p class="govuk-heading-m">{{ data.stats.autoReleases | default(0) | commas }}</p>
+                      </label>
+                    </div>
+                  </div>
+                  <span class="govuk-body govuk-body-s percentage">({{ data.stats.autoPct | default('0.00%') }})</span>
+                </div>
+
+                <div>
+                  <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
+                    <div class="govuk-checkboxes__item">
+                      <input class="govuk-checkboxes__input" id="cb-manual" type="checkbox" checked>
+                      <label class="govuk-label govuk-checkboxes__label btms-color-manual" for="cb-manual">
+                        <h3 class="govuk-heading-s">Manual</h3>
+                        <p class="govuk-heading-m">{{ data.stats.manualReleases | default(0) | commas }}</p>
+                      </label>
+                    </div>
+                  </div>
+                  <span class="govuk-body govuk-body-s percentage">({{ data.stats.manualPct | default('0.00%') }})</span>
+                </div>
+
+                <div>
+                  <h3 class="govuk-heading-s total">Total</h3>
+                  <p class="govuk-heading-m">{{ data.stats.totalReleases | default(0) | commas }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Unique clearance requests -->
+          <div class="govuk-grid-row charts govuk-!-margin-bottom-4">
+            <div class="govuk-grid-column-full chart">
+              <h2 class="govuk-heading-m">Unique clearance requests</h2>
+
+              <div class="btms-chart-container">
+                <canvas id="uniqueRequestsChart"></canvas>
+              </div>
+
+              <div class="btms-stats btms-stats--3 uc">
+                <div>
+                  <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
+                    <div class="govuk-checkboxes__item">
+                      <input class="govuk-checkboxes__input" id="cb-unique" type="checkbox" checked>
+                      <label class="govuk-label govuk-checkboxes__label btms-color-auto" for="cb-unique">
+                        <h3 class="govuk-heading-s">Unique clearances</h3>
+                        <p class="govuk-heading-m">
+                          {{ data.stats.uniqueClearances | default(0) | commas }}
+                        </p>
+                      </label>
+                    </div>
+                  </div>
+                  <span class="govuk-body govuk-body-s percentage">({{ data.stats.uniquePct | default('0.00%') }})</span>
+                </div>
+                <div>
+                  <h3 class="govuk-heading-s">Total</h3>
+                  <p class="govuk-heading-m">{{ data.stats.totalClearanceMsgs | default(0) | commas }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CHED types -->
+          <div class="govuk-grid-row charts govuk-!-margin-bottom-4">
+            <div class="govuk-grid-column-full chart">
+              <h2 class="govuk-heading-m ipaafs-heading">Pre-notifications by CHED type</h2>
+
+              <div class="btms-chart-container">
+                <canvas id="chedTypesChart"></canvas>
+              </div>
+
+              <div class="btms-stats btms-stats--5">
+                <div>
+                  <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
+                    <div class="govuk-checkboxes__item">
+                      <input class="govuk-checkboxes__input" id="cb-ched-a" type="checkbox" checked>
+                      <label class="govuk-label govuk-checkboxes__label btms-color-ched-a" for="cb-ched-a">
+                        <h3 class="govuk-heading-s">CHED A</h3>
+                        <p class="govuk-heading-m">{{ data.stats.ched.A.count | default(0) | commas }}</p>
+                      </label>
+                    </div>
+                  </div>
+                  <span class="govuk-body govuk-body-s percentage">({{ data.stats.ched.A.pct | default('0.00%') }})</span>
+                </div>
+
+                <div>
+                  <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
+                    <div class="govuk-checkboxes__item">
+                      <input class="govuk-checkboxes__input" id="cb-ched-p" type="checkbox" checked>
+                      <label class="govuk-label govuk-checkboxes__label btms-color-ched-p" for="cb-ched-p">
+                        <h3 class="govuk-heading-s">CHED P</h3>
+                        <p class="govuk-heading-m">{{ data.stats.ched.P.count | default(0) | commas }}</p>
+                      </label>
+                    </div>
+                  </div>
+                  <span class="govuk-body govuk-body-s percentage">({{ data.stats.ched.P.pct | default('0.00%') }})</span>
+                </div>
+
+                <div>
+                  <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
+                    <div class="govuk-checkboxes__item">
+                      <input class="govuk-checkboxes__input" id="cb-ched-pp" type="checkbox" checked>
+                      <label class="govuk-label govuk-checkboxes__label btms-color-ched-pp" for="cb-ched-pp">
+                        <h3 class="govuk-heading-s">CHED PP</h3>
+                        <p class="govuk-heading-m">{{ data.stats.ched.PP.count | default(0) | commas }}</p>
+                      </label>
+                    </div>
+                  </div>
+                  <span class="govuk-body govuk-body-s percentage">({{ data.stats.ched.PP.pct | default('0.00%') }})</span>
+                </div>
+
+                <div>
+                  <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
+                    <div class="govuk-checkboxes__item">
+                      <input class="govuk-checkboxes__input" id="cb-ched-d" type="checkbox" checked>
+                      <label class="govuk-label govuk-checkboxes__label btms-color-ched-d" for="cb-ched-d">
+                        <h3 class="govuk-heading-s">CHED D</h3>
+                        <p class="govuk-heading-m">{{ data.stats.ched.D.count | default(0) | commas }}</p>
+                      </label>
+                    </div>
+                  </div>
+                  <span class="govuk-body govuk-body-s percentage">({{ data.stats.ched.D.pct | default('0.00%') }})</span>
+                </div>
+
+                <div>
+                  <h3 class="govuk-heading-s total">Total</h3>
+                  <p class="govuk-heading-m">{{ data.stats.ched.total | default(0) | commas }}</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div> <!-- /#chart -->
+      </div> <!-- /.govuk-tabs -->
+
+    {% else %}
+      <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-5">No results</p>
+      {{ govukInsetText({ html: "To view reporting data, set the filters and select 'update'." }) }}
+    {% endif %}
+  </div>
+</div>
+
+<style>
+  /* Keep charts same size as your original */
+  .btms-chart-container { position: relative; max-width: 720px; margin: 0 0 16px 0; }
+  .btms-chart-container canvas { width: 100% !important; height: auto !important; }
+
+  /* Legend rows */
+  .btms-stats { display: grid; gap: 12px 24px; align-items: start; margin-top: 8px; }
+  .btms-stats--3 { grid-template-columns: repeat(3, minmax(180px, 1fr)); }
+  .btms-stats--5 { grid-template-columns: repeat(5, minmax(140px, 1fr)); }
+
+  .btms-stats .govuk-heading-s { margin: 0 0 4px; font-size: 18px; }
+  .btms-stats .govuk-heading-m { margin: 0; }
+  .btms-stats .percentage { display: block; margin-left: 36px; font-size: 14px !important; padding-top: 4px; }
+
+  /* Dataset colours for text */
+  .btms-color-matches { color:#1d70b8; }
+  .btms-color-no-matches { color:#28a197; }
+  .btms-color-auto { color:#1d70b8; }
+  .btms-color-manual { color:#28a197; }
+  .btms-color-ched-a { color:#d4356c; }
+  .btms-color-ched-p { color:#007f7f; }
+  .btms-color-ched-pp { color:#5694ca; }
+  .btms-color-ched-d { color:#f47738; }
+
+  /* Colour checkbox box + keep white tick */
+  #cb-matches + label::before { border-color:#1d70b8; }
+  #cb-matches:checked + label::before { background-color:#1d70b8; border-color:#1d70b8; }
+  #cb-matches:checked + label::after { border-color:#fff; }
+  #cb-no-matches + label::before { border-color:#28a197; }
+  #cb-no-matches:checked + label::before { background-color:#28a197; border-color:#28a197; }
+  #cb-no-matches:checked + label::after { border-color:#fff; }
+  #cb-auto + label::before { border-color:#1d70b8; }
+  #cb-auto:checked + label::before { background-color:#1d70b8; border-color:#1d70b8; }
+  #cb-auto:checked + label::after { border-color:#fff; }
+  #cb-manual + label::before { border-color:#28a197; }
+  #cb-manual:checked + label::before { background-color:#28a197; border-color:#28a197; }
+  #cb-manual:checked + label::after { border-color:#fff; }
+  #cb-ched-a + label::before { border-color:#d4356c; }
+  #cb-ched-a:checked + label::before { background-color:#d4356c; border-color:#d4356c; }
+  #cb-ched-a:checked + label::after { border-color:#fff; }
+  #cb-ched-p + label::before { border-color:#007f7f; }
+  #cb-ched-p:checked + label::before { background-color:#007f7f; border-color:#007f7f; }
+  #cb-ched-p:checked + label::after { border-color:#fff; }
+  #cb-ched-pp + label::before { border-color:#5694ca; }
+  #cb-ched-pp:checked + label::before { background-color:#5694ca; border-color:#5694ca; }
+  #cb-ched-pp:checked + label::after { border-color:#fff; }
+  #cb-ched-d + label::before { border-color:#f47738; }
+  #cb-ched-d:checked + label::before { background-color:#f47738; border-color:#f47738; }
+  #cb-ched-d:checked + label::after { border-color:#fff; }
+
+  #cb-unique + label::before { border-color:#1d70b8; }
+  #cb-unique:checked + label::before { background-color:#1d70b8; border-color:#1d70b8; }
+  #cb-unique:checked + label::after { border-color:#fff; }
+
+  .govuk-checkboxes__input:focus + .govuk-checkboxes__label::before {
+    box-shadow: 0 0 0 4px #fd0; /* GOV.UK focus color */
+    outline: 3px solid transparent; /* keeps shape consistent */
+  }
+
+  .reporting .btms-stats .govuk-heading-s { margin: 4px 0 8px 0; font-size: 18px; white-space: nowrap; }
+  .reporting .btms-stats .total { margin: 10px 0 8px 0; font-size: 18px; }
+  .reporting .btms-stats .percentage { display: block; font-size: 14px !important; padding-top: 0px; }
+  .govuk-hint { font-size: 14px !important; }
+</style>
+
+<script>
+  (function(){
+    function chartByCanvas(id){
+      const el = document.getElementById(id);
+      return el ? Chart.getChart(el) : null;
+    }
+    function setHiddenByLabel(chart,label,isHidden){
+      if(!chart) return;
+      const idx = chart.data.datasets.findIndex(d => (d.label || '').trim().toLowerCase() === label.trim().toLowerCase());
+      if (idx === -1) return;
+      chart.getDatasetMeta(idx).hidden = isHidden;
+      chart.update();
+    }
+    function bind(cbId, canvasId, label){
+      const cb = document.getElementById(cbId);
+      if(!cb) return;
+      function tryBind(){
+        const c = chartByCanvas(canvasId);
+        if(!c) return false;
+        setHiddenByLabel(c, label, !cb.checked);
+        cb.addEventListener('change', ()=> setHiddenByLabel(chartByCanvas(canvasId), label, !cb.checked));
+        return true;
+      }
+      if(!tryBind()){
+        let n=0; const t=setInterval(()=>{ n++; if(tryBind() || n>40) clearInterval(t); }, 100);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', function(){
+      bind('cb-matches','matchesChart','Matches');
+      bind('cb-no-matches','matchesChart','No matches');
+      bind('cb-auto','btmsHourlyReleasesChart','Automatic');
+      bind('cb-manual','btmsHourlyReleasesChart','Manual');
+      bind('cb-ched-a','chedTypesChart','CHED A');
+      bind('cb-ched-p','chedTypesChart','CHED P');
+      bind('cb-ched-pp','chedTypesChart','CHED PP');
+      bind('cb-ched-d','chedTypesChart','CHED D');
+      bind('cb-unique','uniqueRequestsChart','Unique clearances');
+
+      /* ENTER-KEY FIX: when a chart legend checkbox has focus, Enter toggles it (doesn't submit form) */
+      document.querySelectorAll('.charts .govuk-checkboxes__input').forEach(cb => {
+        cb.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter') {
+            e.preventDefault();   // stop form submission + page jump
+            cb.click();           // toggle + fire 'change' so your bind() updates the chart
+          }
+        });
+      });
+    });
+
+    const list = document.querySelector('#preset-links');
+    if(list){
+      const fmt = d => d.toLocaleDateString('en-GB');
+      const startOfDay = d => new Date(d.getFullYear(), d.getMonth(), d.getDate(), 0, 0, 0);
+      const endOfDay   = d => new Date(d.getFullYear(), d.getMonth(), d.getDate(), 23, 59, 0);
+      function rangeFor(key){
+        const now = new Date(); let start,end;
+        if (key==='today'){ start=startOfDay(now); end=endOfDay(now); }
+        else if (key==='yesterday'){ const y=new Date(now); y.setDate(y.getDate()-1); start=startOfDay(y); end=endOfDay(y); }
+        else if (key==='last-week'){ end=endOfDay(now); const s=new Date(end); s.setDate(s.getDate()-6); start=startOfDay(s); }
+        else if (key==='last-month'){ end=endOfDay(now); const s=new Date(end); s.setMonth(s.getMonth()-1); start=startOfDay(s); }
+        else return null;
+        return { start: fmt(start), end: fmt(end) };
+      }
+      list.querySelectorAll('a[data-range]').forEach(a=>{
+        const rng = rangeFor(a.getAttribute('data-range')); if(!rng) return;
+        const url = new URL(window.location.href);
+        url.searchParams.set('startDate', rng.start);
+        url.searchParams.set('endDate',   rng.end);
+        url.searchParams.set('searchResults', 'true');
+        a.setAttribute('href', url.pathname + '?' + url.searchParams.toString());
+      });
+    }
+  })();
+</script>
+{% endblock %}

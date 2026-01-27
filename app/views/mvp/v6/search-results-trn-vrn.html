@@ -1,0 +1,130 @@
+{% extends "layouts/forms.html" %}
+{% from "govuk/components/table/macro.njk" import govukTable %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/checkboxes/macro.njk" import govukCheckboxes %}
+{% set signedIn = 'true' %}
+{% set menu = true %}
+{% set fullWidth = true %}
+{% set hideButton = true %}
+{% set breadcrumb = true %}
+{% set showSubheader = true %}
+{% set subHeader = 'Search results' %}
+{% set title = 'Search results' %}
+{% set hideManageAccount = 'false' %}
+{% set hideBackLink = false %}
+{% set backText = 'Back to search' %}
+{% set backHref = '/mvp/v6/search' %}
+
+{% block form %}
+
+{% from "govuk/components/error-summary/macro.njk" import govukErrorSummary %}
+
+{% if data.errorList %}
+  {{ govukErrorSummary({
+    titleText: "There is a problem",
+    errorList: data.errorList
+  }) }}
+{% endif %}
+
+{% if data.searchTerm %}
+  <p class="govuk-body">
+    <strong>Search term:</strong> {{ data.searchTerm }}
+  </p>
+{% endif %}
+
+<div class="govuk-form-group {% if data.errors and data.errors.selectedItems %}govuk-form-group--error{% endif %}">
+  <h2 class="govuk-heading-m">Select the items you want to view</h2>
+  
+  {% if data.errors and data.errors.selectedItems %}
+    <p id="selectedItems-error" class="govuk-error-message">
+      <span class="govuk-visually-hidden">Error:</span> {{ data.errors.selectedItems }}
+    </p>
+  {% endif %}
+  
+  <form method="post" action="/mvp/v6/search-results-trn-vrn">
+    <table class="govuk-table {% if data.errors and data.errors.selectedItems %}govuk-table--error{% endif %}" id="search-results-table">
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th scope="col" class="govuk-table__header" style="width: 50px;">
+            <span class="govuk-visually-hidden">Select</span>
+          </th>
+          <th scope="col" class="govuk-table__header">Ref</th>
+          <th scope="col" class="govuk-table__header">VRN</th>
+          <th scope="col" class="govuk-table__header">TRN</th>
+          <th scope="col" class="govuk-table__header">Status</th>
+          <th scope="col" class="govuk-table__header">Last updated</th>
+        </tr>
+      </thead>
+      <tbody class="govuk-table__body">
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell">
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="select-1" name="selectedItems" type="checkbox" value="GMRA00002KW2">
+              <label class="govuk-label govuk-checkboxes__label" for="select-1">
+                <span class="govuk-visually-hidden">Select GMRA00002KW2</span>
+              </label>
+            </div>
+          </td>
+          <td class="govuk-table__cell">
+            <a href="/mvp/v6/gmr-v1">GMRA00002KW2</a>
+          </td>
+          <td class="govuk-table__cell">AB12 CDE</td>
+          <td class="govuk-table__cell">TRN123456</td>
+          <td class="govuk-table__cell">
+            <strong class="govuk-tag govuk-tag--green">Complete</strong>
+          </td>
+          <td class="govuk-table__cell">22 May 2024</td>
+        </tr>
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell">
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="select-2" name="selectedItems" type="checkbox" value="GMRA00002TT2">
+              <label class="govuk-label govuk-checkboxes__label" for="select-2">
+                <span class="govuk-visually-hidden">Select GMRA00002TT2</span>
+              </label>
+            </div>
+          </td>
+          <td class="govuk-table__cell">
+            <a href="/mvp/v6/timeline/gmr?gmr=GMRA00002TT2">GMRA00002TT2</a>
+          </td>
+          <td class="govuk-table__cell">XY34 ZAB</td>
+          <td class="govuk-table__cell">TRN789012</td>
+          <td class="govuk-table__cell">
+            <strong class="govuk-tag govuk-tag--yellow">In progress</strong>
+          </td>
+          <td class="govuk-table__cell">4 December 2025</td>
+        </tr>
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell">
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="select-3" name="selectedItems" type="checkbox" value="GMRA00003ABC">
+              <label class="govuk-label govuk-checkboxes__label" for="select-3">
+                <span class="govuk-visually-hidden">Select GMRA00003ABC</span>
+              </label>
+            </div>
+          </td>
+          <td class="govuk-table__cell">
+            <a href="/mvp/v6/gmr-v1">GMRA00003ABC</a>
+          </td>
+          <td class="govuk-table__cell">MN56 PQR</td>
+          <td class="govuk-table__cell">TRN345678</td>
+          <td class="govuk-table__cell">
+            <strong class="govuk-tag govuk-tag--blue">Pending</strong>
+          </td>
+          <td class="govuk-table__cell">1 December 2025</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="govuk-button-group" style="margin-top: 30px;">
+      {{ govukButton({
+        text: "Continue",
+        name: "action",
+        value: "continue"
+      }) }}
+      <a href="/mvp/v6/search" class="govuk-link">Cancel</a>
+    </div>
+  </form>
+</div>
+
+{% endblock %}

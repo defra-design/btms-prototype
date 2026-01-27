@@ -15,11 +15,30 @@
     white-space: nowrap;
     width: 100px;
     text-align: center;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+
+    // Link styling for number plates
+    &:hover {
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+    }
+
+    &:focus {
+      outline: 3px solid #ffdd00;
+      outline-offset: 2px;
+    }
   }
 
   .govuk-summary-list__key,
   .govuk-summary-list__value {
     font-size: 16px;
+  }
+
+  @media (min-width: 40.0625em) {
+    .govuk-summary-list__key {
+      width: 42%;
+    }
   }
 
   .govuk-tag {
@@ -36,6 +55,11 @@
   .app-mrn-table .govuk-table__caption {
     font-size: 16px !important;
     line-height: 1.5;
+  }
+
+  // Always show underline on links in MRN table
+  .app-mrn-table a {
+    text-decoration: underline;
   }
 
   .number-plate--front {

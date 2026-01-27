@@ -1,0 +1,450 @@
+{% extends "layouts/forms.html" %}
+{% from "govuk/components/select/macro.njk" import govukSelect %}
+{% from "govuk/components/details/macro.njk" import govukDetails %}
+{% set signedIn = 'true' %}
+{% set fullWidth = true %}
+{% set hideButton = true %}
+{% set breadcrumb = true %}
+{% set showSubheader = true %}
+{% set subHeader = 'Showing result for' %}
+{% set title = '25GBCLNTWCC1FN7AR0' %}
+{% set bodyClasses = 'mrn accordion v4 timeline' %}
+{% set cssClassName = 'timeline' %}
+{% set hideManageAccount = 'false' %}
+{% set showEdit = true %}
+{% set hideBackLink = true %}
+{% set showMenu = true %}
+{% set searchLinkHref = '../search' %}
+{% set menu = true %}
+
+{% block form %}
+
+<div class="govuk-tabs" data-module="govuk-tabs">
+  <ul class="govuk-tabs__list">
+    <li class="govuk-tabs__list-item govuk-tabs__list-item--selected">
+      <a class="govuk-tabs__tab" href="#summary">Latest</a>
+    </li>
+    <li class="govuk-tabs__list-item">
+      <a class="govuk-tabs__tab" href="#timeline">Timeline</a>
+    </li>
+  </ul>
+
+  <!-- SUMMARY TAB -->
+  <div class="govuk-tabs__panel" id="summary">
+    <!-- Customs declaration details section -->
+    <h2 class="govuk-heading-m sectionHeader">{{ data.Cds | safe }}</h2>
+
+<!-- Filters for Customs declarations -->
+<div class="inline-form-group">
+  <div class="govuk-form-group">
+    <label class="govuk-label" for="match">Match</label>
+    <select class="govuk-select" id="match" name="match">
+      <option value="show-all" selected>Show all</option>
+      <option value="match">Yes</option>
+      <option value="noMatch">No</option>
+    </select>
+  </div>
+
+  <div class="govuk-form-group">
+    <label class="govuk-label" for="decision">Decision</label>
+    <select class="govuk-select" id="decision" name="decision">
+      <option value="show-all" selected>Show all</option>
+      <option value="hold">Hold</option>
+      <option value="refused">Refused</option>
+      <option value="release">Release</option>
+    </select>
+  </div>
+
+  <div class="govuk-form-group">
+    <label class="govuk-label" for="auth">Authority</label>
+    <select class="govuk-select" id="auth" name="auth">
+      <option value="show-all" selected>Show all</option>
+      <option value="APHA">APHA</option>
+      <option value="FNAO">FNAO</option>
+      <option value="HMI">HMI-SMS</option>
+      <option value="IUU">IUU</option>
+      <option value="PHSI">PHSI</option>
+      <option value="POAO">POAO</option>
+    </select>
+  </div>
+
+  <div class="govuk-form-group">
+    <a href="#" data-clear="mrn" class="clear-filter">Clear Filters</a>
+  </div>
+</div>
+
+<!-- Customs Declaration Entry 1 -->
+<div class="mrn-container" id="mrn-toggle-1">
+  <div class="toggle-area" data-target="commodityTable1">
+    <div class="container govuk-body">
+      <dl class="definition-list">
+        <div class="row">
+          <dt>MRN</dt>
+          <dd>25GBCLNTWCC1FN7AR0</dd>
+        </div>
+        <div class="row">
+          <dt>GMR</dt>
+          <dd>
+            <a href="gmr">
+              <span>GMRA00002TT2</span>
+            </a>
+
+          </dd>        </div>
+        <div class="row">
+          <dt>CDS status</dt>
+          <dd><span class="govuk-tag govuk-tag--green">Finalised - Manually released</span></dd>
+        </div>
+        <div class="row">
+          <dt>Last updated</dt>
+          <dd>14 November 2025, 15:19</dd>
+        </div>
+      </dl>
+      <div class="toggle-wrapper">
+        <div id="toggleArrowContainer">
+          <i id="toggleArrow" class="fas fa-chevron-up"></i>
+        </div>
+      </div>
+    </div>
+
+    <div id="commodityTable1" class="commodity-table">
+      <table class="govuk-table data-table">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header">Item number</th>
+            <th scope="col" class="govuk-table__header">Commodity code</th>
+            <th scope="col" class="govuk-table__header">Description</th>
+            <th scope="col" class="govuk-table__header">Quantity / Weight</th>
+            <th scope="col" class="govuk-table__header">CHED reference</th>
+            <th scope="col" class="govuk-table__header">Match</th>
+            <th scope="col" class="govuk-table__header">Authority</th>
+            <th scope="col" class="govuk-table__header">Decision</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          <tr class="govuk-table__row no-match">
+            <td class="govuk-table__cell">2</td>
+            <td class="govuk-table__cell">2103909089</td>
+            <td class="govuk-table__cell">MISO PASTE</td>
+            <td class="govuk-table__cell">1200</td>
+            <td class="govuk-table__cell" tabindex="0">
+              <span class="tooltiplink error">GBCHD2025.6769491</span>
+              <span class="tooltip" role="tooltip">
+                Create a new IPAFFS notification for the correct CHED type. Reference the new CHED on the customs declaration.              </span>
+            </td>
+            <td class="govuk-table__cell">
+              <strong class="govuk-tag govuk-tag--red">No</strong>
+            </td>
+            <td class="govuk-table__cell">POAO</td>
+            <td class="govuk-table__cell">No match - Incorrect CHED type
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Customs Declaration Entry 2 -->
+<div class="mrn-container" id="mrn-toggle-2">
+  <div class="toggle-area" data-target="commodityTable2" data-collapsed="true">
+    <div class="container govuk-body">
+      <dl class="definition-list">
+        <div class="row">
+          <dt>MRN</dt>
+          <dd>25GBBVWP03XACE8AR0</dd>
+        </div>
+        <div class="row">
+          <dt>GMR</dt>
+          <dd>    <a href="gmr">
+            <span>GMRA00002TT2</span>
+          </a></dd>
+        </div>
+        <div class="row">
+          <dt>CDS status</dt>
+          <dd><span class="govuk-tag govuk-tag--red">Finalised - Cancelled after arrival</span></dd>
+        </div>
+        <div class="row">
+          <dt>Last updated</dt>
+          <dd>14 November 2025, 11:44</dd>
+        </div>
+      </dl>
+      <div class="toggle-wrapper">
+        <div id="toggleArrowContainer">
+          <i id="toggleArrow" class="fas fa-chevron-up"></i>
+        </div>
+      </div>
+    </div>
+
+    <div id="commodityTable2" class="commodity-table">
+      <table class="govuk-table data-table">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header">Item number</th>
+            <th scope="col" class="govuk-table__header">Commodity code</th>
+            <th scope="col" class="govuk-table__header">Description</th>
+            <th scope="col" class="govuk-table__header">Quantity / Weight</th>
+            <th scope="col" class="govuk-table__header">CHED reference</th>
+            <th scope="col" class="govuk-table__header">Match</th>
+            <th scope="col" class="govuk-table__header">Authority</th>
+            <th scope="col" class="govuk-table__header">Decision</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          <tr class="govuk-table__row no-match">
+            <td class="govuk-table__cell">2</td>
+            <td class="govuk-table__cell">2103909089</td>
+            <td class="govuk-table__cell">MISO PASTE</td>
+            <td class="govuk-table__cell">1200</td>
+            <td class="govuk-table__cell" tabindex="0">
+              <span class="tooltiplink error">CHEDD.GB.2025.6769491</span>
+              <span class="tooltip" role="tooltip">
+                Create a new IPAFFS notification for the correct CHED type. Reference the new CHED on the customs declaration.              </span>
+            </td>
+            <td class="govuk-table__cell">
+              <strong class="govuk-tag govuk-tag--red">No</strong>
+            </td>
+            <td class="govuk-table__cell">POAO</td>
+            <td class="govuk-table__cell">No match - Incorrect CHED type
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- IPAFFS notification (CHED) details section -->
+<h2 class="govuk-heading-m sectionHeader" style="margin-top: 40px;">{{ data.Ipaffs | safe }}</h2>
+
+<!-- Filter for IPAFFS -->
+<div class="inline-form-group">
+  <div class="govuk-form-group">
+    <label class="govuk-label" for="ipaffs-auth">Authority</label>
+    <select class="govuk-select" id="ipaffs-auth" name="ipaffs-auth">
+      <option value="show-all" selected>Show all</option>
+      <option value="APHA">APHA</option>
+      <option value="FNAO">FNAO</option>
+      <option value="HMI">HMI-SMS</option>
+      <option value="IUU">IUU</option>
+      <option value="PHSI">PHSI</option>
+      <option value="POAO">POAO</option>
+    </select>
+  </div>
+
+  <div class="govuk-form-group">
+    <a href="#" data-clear="ched" class="clear-filter">Clear Filters</a>
+  </div>
+</div>
+
+<!-- IPAFFS CHED Entry -->
+<div class="ched-container toggle-area" data-target="commodityTableChed1">
+  <div class="container govuk-body">
+    <dl class="definition-list">
+      <div class="row">
+        <dt>CHED reference</dt>
+        <dd>
+          <a href="https://ipaffs-prototype.herokuapp.com/part-2/chedp-landbridge/00-ched-overview" target="_blank">
+            <span>CHEDD.GB.2025.6769491</span>
+          </a>
+          <i class="fas fa-external-link-alt"></i>
+        </dd>
+      </div>
+      <div class="row">
+        <dt>CHED Status</dt>
+        <dd><span class="govuk-tag govuk-tag--green">Valid</span></dd>
+      </div>
+      <div class="row">
+        <dt>Last updated</dt>
+        <dd>11 November 2025, 15:35</dd>
+      </div>
+    </dl>
+    <div class="toggle-wrapper">
+      <div id="toggleArrowContainer">
+        <i id="toggleArrow" class="fas fa-chevron-up"></i>
+      </div>
+    </div>
+  </div>
+
+  <div id="commodityTableChed1" class="commodity-table">
+    <table class="govuk-table data-table">
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th scope="col" class="govuk-table__header">Item number</th>
+          <th scope="col" class="govuk-table__header">Commodity code</th>
+          <th scope="col" class="govuk-table__header">Description</th>
+          <th scope="col" class="govuk-table__header">Quantity / Weight</th>
+          <th scope="col" class="govuk-table__header">Authority</th>
+          <th scope="col" class="govuk-table__header">Decision</th>
+        </tr>
+      </thead>
+      <tbody class="govuk-table__body">
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell">1</td>
+          <td class="govuk-table__cell">21039090</td>
+          <td class="govuk-table__cell">Other</td>
+          <td class="govuk-table__cell">1200</td>
+          <td class="govuk-table__cell">FNAO</td>
+          <td class="govuk-table__cell">Acceptable for Internal Market</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+  </div> <!-- End Summary tab panel -->
+
+  <!-- TIMELINE TAB -->
+  <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="timeline">
+    <!-- Timeline data embedded directly in this template - supports multiple MRNs -->
+    <script>
+      // Timeline events data mapped by MRN
+      window.timelineDataByMrn = {
+        '25GBCLNTWCC1FN7AR0': [
+          {
+            title: 'CDS finalisation - CDS to BTMS',
+            version: 1,
+            cdsStatus: 'Finalised - Manually released',
+            created: '2025-11-14T15:19:17Z',
+            hasDetails: false
+          },
+          {
+            title: 'BTMS decision - BTMS to CDS',
+            decision: '1',
+            cdsStatus: 'In progress - Awaiting trader',
+            created: '2025-11-14T11:47:28.433Z',
+            hasDetails: true,
+            detailsHtml: '<h3 class="govuk-heading-m govuk-!-margin-top-0">Item 2 - MISO PASTE</h3><p class="commodity-code"><strong>Commodity code:</strong> 2103909089</p><table class="govuk-table"><thead class="govuk-table__head"><tr class="govuk-table__row"><th scope="col" class="govuk-table__header">CHED reference</th><th scope="col" class="govuk-table__header">Check code</th><th scope="col" class="govuk-table__header">Authority</th><th scope="col" class="govuk-table__header">Decision code</th><th scope="col" class="govuk-table__header">Decision</th></tr></thead><tbody class="govuk-table__body"><tr class="govuk-table__row"><td class="govuk-table__cell">GBCHD2025.6769491</td><td class="govuk-table__cell">H222</td><td class="govuk-table__cell">POAO</td><td class="govuk-table__cell">X00</td><td class="govuk-table__cell">Incorrect CHED type</td></tr></tbody></table>'
+          },
+          {
+            title: 'CDS decision request - CDS to BTMS',
+            version: 1,
+            created: '2025-11-14T11:47:28.285Z',
+            hasDetails: true,
+            detailsHtml: '<h3 class="govuk-heading-m govuk-!-margin-top-0">Item 2 - MISO PASTE</h3><p class="commodity-code"><strong>Commodity code:</strong> 2103909089</p><table class="govuk-table"><thead class="govuk-table__head"><tr class="govuk-table__row"><th scope="col" class="govuk-table__header">CHED reference</th><th scope="col" class="govuk-table__header">Check code</th><th scope="col" class="govuk-table__header">Authority</th></tr></thead><tbody class="govuk-table__body"><tr class="govuk-table__row"><td class="govuk-table__cell">GBCHD2025.6769491</td><td class="govuk-table__cell">H222</td><td class="govuk-table__cell">POAO</td></tr></tbody></table>'
+          },
+          {
+            title: 'CHEDD.GB.2025.6769491 - IPAFFS to BTMS',
+            chedStatus: 'Valid',
+            decision: 'Acceptable for Internal Market',
+            created: '2025-11-11T15:35:35Z',
+            hasDetails: false
+          },
+          {
+            title: 'CHEDD.GB.2025.6769491 - IPAFFS to BTMS',
+            chedStatus: 'In progress',
+            decision: 'Acceptable for Internal Market',
+            created: '2025-10-29T15:46:31Z',
+            hasDetails: false
+          },
+          {
+            title: 'CHEDD.GB.2025.6769491 - IPAFFS to BTMS',
+            chedStatus: 'Submitted',
+            decision: 'Acceptable for Internal Market',
+            created: '2025-10-27T11:09:54Z',
+            hasDetails: false
+          },
+          {
+            title: 'CHEDD.GB.2025.6769491 - IPAFFS to BTMS',
+            chedStatus: 'Submitted',
+            decision: 'Hold - Awaiting Decision',
+            created: '2025-10-27T11:09:42Z',
+            hasDetails: false
+          }
+        ],
+        '25GBBVWP03XACE8AR0': [
+          {
+            title: 'CDS finalisation - CDS to BTMS',
+            version: 1,
+            cdsStatus: 'Finalised - Cancelled after arrival',
+            created: '2025-11-14T11:44:07.762Z',
+            hasDetails: false
+          },
+          {
+            title: 'CHEDD.GB.2025.6769491 - IPAFFS to BTMS',
+            chedStatus: 'Valid',
+            decision: 'Acceptable for Internal Market',
+            created: '2025-11-11T15:35:35Z',
+            hasDetails: false
+          },
+          {
+            title: 'BTMS decision - BTMS to CDS',
+            version: 2,
+            decision: '2',
+            cdsStatus: 'In progress - Awaiting trader',
+            created: '2025-10-31T00:44:46.111Z',
+            hasDetails: true,
+            detailsHtml: '<h3 class="govuk-heading-m govuk-!-margin-top-0">Item 2 - MISO PASTE</h3><p class="commodity-code"><strong>Commodity code:</strong> 2103909089</p><table class="govuk-table"><thead class="govuk-table__head"><tr class="govuk-table__row"><th scope="col" class="govuk-table__header">CHED reference</th><th scope="col" class="govuk-table__header">Check code</th><th scope="col" class="govuk-table__header">Authority</th><th scope="col" class="govuk-table__header">Decision code</th><th scope="col" class="govuk-table__header">Decision</th></tr></thead><tbody class="govuk-table__body"><tr class="govuk-table__row"><td class="govuk-table__cell">GBCHD2025.6769491</td><td class="govuk-table__cell">H222</td><td class="govuk-table__cell">POAO</td><td class="govuk-table__cell">X00</td><td class="govuk-table__cell">Incorrect CHED type</td></tr></tbody></table>'
+          },
+          {
+            title: 'CDS decision request - CDS to BTMS',
+            version: 2,
+            cdsStatus: 'In progress - Awaiting trader',
+            created: '2025-10-31T00:44:45.996Z',
+            hasDetails: true,
+            detailsHtml: '<h3 class="govuk-heading-m govuk-!-margin-top-0">Item 2 - MISO PASTE</h3><p class="commodity-code"><strong>Commodity code:</strong> 2103909089</p><table class="govuk-table"><thead class="govuk-table__head"><tr class="govuk-table__row"><th scope="col" class="govuk-table__header">CHED reference</th><th scope="col" class="govuk-table__header">Check code</th><th scope="col" class="govuk-table__header">Authority</th></tr></thead><tbody class="govuk-table__body"><tr class="govuk-table__row"><td class="govuk-table__cell">GBCHD2025.6769491</td><td class="govuk-table__cell">H222</td><td class="govuk-table__cell">POAO</td></tr></tbody></table>'
+          },
+          {
+            title: 'CHEDD.GB.2025.6769491 - IPAFFS to BTMS',
+            chedStatus: 'In progress',
+            decision: 'Acceptable for Internal Market',
+            created: '2025-10-29T15:46:31Z',
+            hasDetails: false
+          },
+          {
+            title: 'BTMS decision - BTMS to CDS',
+            version: 1,
+            decision: 'Decision 1',
+            cdsStatus: 'In progress - Awaiting trader',
+            created: '2025-10-27T11:13:49.226Z',
+            hasDetails: true,
+            detailsHtml: '<h3 class="govuk-heading-m govuk-!-margin-top-0">Item 2 - MISO PASTE</h3><p class="commodity-code"><strong>Commodity code:</strong> 2103909089</p><table class="govuk-table"><thead class="govuk-table__head"><tr class="govuk-table__row"><th scope="col" class="govuk-table__header">CHED reference</th><th scope="col" class="govuk-table__header">Check code</th><th scope="col" class="govuk-table__header">Authority</th><th scope="col" class="govuk-table__header">Decision code</th><th scope="col" class="govuk-table__header">Decision</th></tr></thead><tbody class="govuk-table__body"><tr class="govuk-table__row"><td class="govuk-table__cell">GBCHD2025.6769491</td><td class="govuk-table__cell">H222</td><td class="govuk-table__cell">POAO</td><td class="govuk-table__cell">X00</td><td class="govuk-table__cell">Incorrect CHED type</td></tr></tbody></table>'
+          },
+          {
+            title: 'CDS decision request - CDS to BTMS',
+            version: 1,
+            cdsStatus: 'In progress - Awaiting trader',
+            created: '2025-10-27T11:13:49.113Z',
+            hasDetails: true,
+            detailsHtml: '<h3 class="govuk-heading-m govuk-!-margin-top-0">Item 2 - MISO PASTE</h3><p class="commodity-code"><strong>Commodity code:</strong> 2103909089</p><table class="govuk-table"><thead class="govuk-table__head"><tr class="govuk-table__row"><th scope="col" class="govuk-table__header">CHED reference</th><th scope="col" class="govuk-table__header">Check code</th><th scope="col" class="govuk-table__header">Authority</th></tr></thead><tbody class="govuk-table__body"><tr class="govuk-table__row"><td class="govuk-table__cell">GBCHD2025.6769491</td><td class="govuk-table__cell">H222</td><td class="govuk-table__cell">POAO</td></tr></tbody></table>'
+          },
+          {
+            title: 'CHEDD.GB.2025.6769491 - IPAFFS to BTMS',
+            chedStatus: 'Submitted',
+            decision: 'Acceptable for Internal Market',
+            created: '2025-10-27T11:09:54Z',
+            hasDetails: false
+          },
+          {
+            title: 'CHEDD.GB.2025.6769491 - IPAFFS to BTMS',
+            chedStatus: 'Submitted',
+            decision: 'Hold - Awaiting Decision',
+            created: '2025-10-27T11:09:42Z',
+            hasDetails: false
+          }
+        ]
+      };
+      window.defaultMrn = '25GBCLNTWCC1FN7AR0';
+    </script>
+
+    {% set showMrnFilter = true %}
+    {% set mrnOptions = [
+      {
+        value: "25GBCLNTWCC1FN7AR0",
+        text: "25GBCLNTWCC1FN7AR0",
+        selected: (data.mrnFilter or title) === '25GBCLNTWCC1FN7AR0'
+      },
+      {
+        value: "25GBBVWP03XACE8AR0",
+        text: "25GBBVWP03XACE8AR0",
+        selected: (data.mrnFilter or title) === '25GBBVWP03XACE8AR0'
+      }
+    ] %}
+    {% include 'includes/timeline-filters.html' %}
+
+    <div id="timeline-container">
+      <!-- Timeline will be rendered here by JavaScript -->
+    </div>
+  </div> <!-- End Timeline tab panel -->
+</div> <!-- End govuk-tabs -->
+
+{% endblock %}

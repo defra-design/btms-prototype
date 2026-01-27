@@ -1,0 +1,245 @@
+{% extends "layouts/forms.html" %}
+{% set signedIn = 'true' %}
+{% set fullWidth = true %}
+{% set hideButton = true %}
+{% set breadcrumb = true %}
+{% set showSubheader = true %}
+{% set subHeader = 'Showing result for' %}
+{% set title = data.mrn or data.title or data.searchTerm or '25GB4VN6T1XZ7B3Q5L' %}
+{% set menu = true %}
+
+{% set bodyClasses = 'mrn accordion v4' %}
+{% set cssClassName = 'auth' %}
+{% set hideManageAccount = 'false' %}
+{% set showEdit = true %}
+{% set hideBackLink = true %}
+{% set backText = 'Back to GMR results' %}
+
+{% block form %}
+<p>Included in <a href="/mvp/v6/gmr-v1">GMRA00002KW2</a> </p>
+&nbsp;
+
+<h2 class="govuk-heading-m sectionHeader">{{ data.Cds | safe }}</h2>
+
+{% include 'includes/mrn-filters.html' %}
+
+<div class="mrn-container" id="mrn-toggle">
+
+  <div class="toggle-area" data-target="commodityTable3">
+    <div class="container govuk-body">
+      <dl class="definition-list">
+        <div class="row">
+          <dt>MRN</dt>
+          <dd id="mrn-display">25GB4VN6T1XZ7B3Q5L</dd>
+        </div>
+        <div class="row">
+          <dt>DUCR</dt>
+          <dd>5GB430849786000-HSC25A316UK</dd>
+        </div>
+
+        <div class="row">
+          <dt>CDS status</dt>
+          <dd>
+            <strong id="cds-status-tag" class="govuk-tag status govuk-tag--yellow">In progress - Awaiting
+              IPAFFS</strong>
+          </dd>
+        </div>
+        <div class="row">
+          <dt>Last updated</dt>
+          <dd id="last-updated">{{ '22 May 2024' | mrnTime }}</dd>
+        </div>
+      </dl>
+
+
+
+
+      <div class="details-toggle-wrapper details-toggle-wrapper--bottom">
+      </div>
+
+      <div class="toggle-wrapper">
+        <div id="toggleArrowContainer">
+          <i id="toggleArrow" class="fas fa-chevron-down"></i>
+        </div>
+      </div>
+    </div>
+
+    <div id="commodityTable3" class="commodity-table">
+      <table class="govuk-table data-table">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header">Item number</th>
+            <th scope="col" class="govuk-table__header">Commodity code</th>
+            <th scope="col" class="govuk-table__header">Description</th>
+            <th scope="col" class="govuk-table__header">Quantity / Weight</th>
+            <th scope="col" class="govuk-table__header">CHED reference</th>
+            <th scope="col" class="govuk-table__header">Match</th>
+            <th scope="col" class="govuk-table__header">Authority</th>
+            <th scope="col" class="govuk-table__header">Decision</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+
+
+          <tr class="govuk-table__row match hold  APHA	">
+            <td class="govuk-table__cell">1</td>
+            <td class="govuk-table__cell">0101210000</td>
+            <td class="govuk-table__cell">
+    <span>LOT 1447 24 CHESTNUT FIL…</span>
+              <span class="tooltip" role="tooltip">
+                LOT 1447 24 CHESTNUT FILLY SPACE BLUES X FIRE HEROINE 372IRE45414150T
+
+
+              </span>
+
+            </td>
+            <td class="govuk-table__cell">1</td>
+            <td class="govuk-table__cell">GBCHD2025.6689162</td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Yes</strong></td>
+            <td class="govuk-table__cell decision">
+              <ul class="govuk-list">
+                <li class="APHA	">APHA	</li>
+              </ul>
+            </td>
+            <td class="govuk-table__cell decision">
+              <ul class="govuk-list">
+                <li class="APHA">Hold - Awaiting decision
+ </li>
+
+              </ul>
+            </td>
+          </tr>
+
+
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+</div>
+
+<h2 class="govuk-heading-m sectionHeader ched-header">{{ data.Ipaffs | safe }}</h2>
+{% include 'includes/ched-filters.html' %}
+<div class="ched-container toggle-area" data-target="commodityTable5">
+  <div class="container govuk-body">
+    <dl class="definition-list ">
+      <div class="row">
+        <dt>CHED reference</dt>
+        <dd>
+          <a href="https://ipaffs-prototype.herokuapp.com/part-2/chedp-landbridge/00-ched-overview" target="_blank">
+            <span>CHEDA.GB.2025.6689162</span>
+          </a>
+          <i class="fas fa-external-link-alt"></i>
+        </dd>
+      </div>
+      <div class="row">
+        <dt>CHED Status</dt>
+        <dd>In progress</dd>
+      </div>
+
+      <div class="row">
+        <dt>Last updated</dt>
+        <dd>{{ '22 May 2024' | chedTime }}</dd>
+      </div>
+    </dl>
+    <div class="toggle-wrapper">
+      <div id="toggleArrowContainer">
+        <i id="toggleArrow" class="fas fa-chevron-down"></i>
+      </div>
+    </div>
+  </div>
+
+  <div id="commodityTable5" class="commodity-table">
+    <table class="govuk-table data-table">
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th scope="col" class="govuk-table__header">Item number</th>
+          <th scope="col" class="govuk-table__header">Commodity code</th>
+          <th scope="col" class="govuk-table__header">Description</th>
+          <th scope="col" class="govuk-table__header">Quantity / Weight</th>
+          <th scope="col" class="govuk-table__header">Authority</th>
+          <th scope="col" class="govuk-table__header">Decision</th>
+        </tr>
+      </thead>
+      <tbody class="govuk-table__body">
+
+
+
+
+        <tr class="govuk-table__row PHSI HMI">
+          <td class="govuk-table__cell">1</td>
+          <td class="govuk-table__cell">0101</td>
+          <td class="govuk-table__cell">Equus caballus	</td>
+          <td class="govuk-table__cell">2</td>
+          <td class="govuk-table__cell decision">
+            <ul class="govuk-list">
+              <li class="APHA">APHA</li>
+            </ul>
+          </td>
+          <td class="govuk-table__cell decision">
+            <ul class="govuk-list">
+              <li class="APHA">Decision not given</li>
+            </ul>
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<style>
+  /* Header grid */
+  .mrn .mrn-container dd {
+    margin: 0.3rem 0 0 0;
+  }
+
+  .mrn .mrn-container .definition-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 0.3fr));
+    gap: 0 0;
+    padding: 1em 0.5em 0em 1em;
+    margin: 0;
+  }
+
+  .mrn-container #mrn-extra-1 {
+    padding: 1em 0.5em 0em 1em;
+  }
+
+  /* Inline details toggles */
+  .details-toggle-wrapper {
+    display: inline-flex;
+    align-items: center;
+    gap: 0;
+    padding: 0.3em 0.8em 0.5em;
+  }
+
+  .details-toggle,
+  .mrn .fas {
+    color: #1d70b8;
+    margin-left: 4px;
+  }
+
+  .details-toggle-wrapper--bottom {
+    margin-top: 0.6em;
+  }
+
+  .details-toggle {
+    border: 0;
+    padding: 0;
+    background: none;
+    cursor: pointer;
+  }
+
+  .details-chevron {
+    transition: transform .2s ease;
+  }
+
+  .details-chevron.is-open {
+    transform: rotate(180deg);
+  }
+</style>
+
+
+
+{% endblock %}

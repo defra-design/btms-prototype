@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Microsoft Sign In</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to bottom right, #e6ecf3, #f1f3ee);
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .signin-box {
+      background: white;
+      padding: 40px;
+      border-radius: 4px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      width: 340px;
+    }
+
+    .logo {
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .logo span {
+      color: #0078D4;
+    }
+
+    h2 {
+      margin: 0 0 10px 0;
+      font-size: 1.5em;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 8px;
+      margin: 10px 0 5px;
+      border: 1px solid #999;
+      border-radius: 2px;
+    }
+
+    .link {
+      font-size: 0.9em;
+      color: #0067b8;
+      text-decoration: none;
+    }
+
+    .buttons {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .button {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 2px;
+      cursor: pointer;
+      font-size: 1em;
+    }
+
+    .back {
+      background-color: #e6e6e6;
+      color: #000;
+    }
+
+    .next {
+      background-color: #0067b8;
+      color: white;
+    }
+
+    .options {
+      margin-top: 20px;
+      background: white;
+      border: 1px solid #ccc;
+      padding: 10px;
+      width: 340px;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+
+    .options img {
+      height: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="signin-box">
+    <div class="logo">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" alt="Microsoft Logo" width="120">
+    </div>
+
+    <h2>Sign in</h2>
+
+    <!-- Form wrapper so we can post the input -->
+    <form action="search" method="post">
+      <label for="email">Email, phone, or Skype</label>
+      <input type="text" id="email" name="email">
+  <input type="hidden" name="hideManageAccount" value="false">
+
+      <a class="link" href="#">Can’t access your account?</a>
+
+      <div class="buttons">
+        <button type="button" class="button back" onclick="history.back()">Back</button>
+        <button type="submit" class="button next">Next</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="options">
+    🔍 Sign-in options
+  </div>
+
+</body>
+</html>

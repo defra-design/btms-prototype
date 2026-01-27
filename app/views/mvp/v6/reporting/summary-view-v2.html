@@ -1,0 +1,423 @@
+{% extends "layouts/forms.html" %}
+{% set title = 'BTMS reporting data' %}
+{% set fullWidth = true %}
+{% set hideButton = true %}
+{% set showheader = true %}
+{% set bodyClasses = 'reporting' %}
+{% set hideBackLink = false %}
+{% block pageScripts %}
+<script src="/public/javascripts/matches-chart.js"></script>
+<script src="/public/javascripts/chart.js"></script>
+{% endblock %}
+
+{% block form %}
+{% from "govuk/components/checkboxes/macro.njk" import govukCheckboxes %}
+{% from "includes/stat-card.njk" import statCard %}
+{% from "includes/time-input.njk" import timeInput %}
+
+<h1 id="page-top" class="govuk-heading-l" tabindex="-1">{{ title }}</h1>
+
+<div class="govuk-grid-row">
+  <!-- Filters Column -->
+  <div class="govuk-grid-column-one-quarter filters">
+    <div class="govuk-form-group govuk-!-margin-bottom-1">
+      <fieldset class="govuk-fieldset">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">Filter </legend>
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">Date and time </legend>
+        <nav class="govuk-!-margin-top-1">
+          <ul class="govuk-list" id="preset-links">
+            <li><a href="#" data-range="today">Today</a></li>
+            <li><a href="#" data-range="yesterday">Yesterday</a></li>
+            <li><a href="#" data-range="last-week">Last week</a></li>
+            <li><a href="#" data-range="last-month">Last month</a></li>
+          </ul>
+        </nav>
+        <!-- Start date -->
+        <div class="govuk-form-group govuk-!-margin-bottom-4">
+          {{ mojDatePicker({
+            id: "startDate",
+            name: "startDate",
+            value: data.startDate or "",
+            label: { text: "Start date" }
+          }) }}
+        </div>
+
+        <!-- End date -->
+        <div class="govuk-form-group govuk-!-margin-bottom-4">
+          {{ mojDatePicker({
+            id: "endDate",
+            name: "endDate",
+            value: data.endDate or "",
+            label: { text: "End date" }
+          }) }}
+        </div>
+
+        <!-- Start time -->
+        <div class="govuk-form-group govuk-!-margin-bottom-4">
+          {{ timeInput({
+            id: "start-time",
+            namePrefix: "startTime",
+            label: "Start time",
+            hour: data.startTime and data.startTime.hour or "",
+            minute: data.startTime and data.startTime.minute or ""
+          }) }}
+        </div>
+
+        <!-- End time -->
+        <div class="govuk-form-group govuk-!-margin-bottom-4 govuk-!-padding-bottom-4"
+          style="border-bottom: 1px solid #aaa9a9; ">
+          {{ timeInput({
+            id: "end-time",
+            namePrefix: "endTime",
+            label: "End time",
+            hour: data.endTime and data.endTime.hour or "",
+            minute: data.endTime and data.endTime.minute or ""
+          }) }}
+        </div>
+
+        {# -------------------- Port of entry (persist + counter) -------------------- #}
+        {% set selectedPorts = data.selectedPorts or [] %}
+        <div class="govuk-form-group govuk-!-margin-bottom-4" id="portOfEntry-group">
+          <fieldset class="govuk-fieldset" aria-describedby="portOfEntry-hint portOfEntry-count">
+            <legend
+              class="govuk-fieldset__legend govuk-fieldset__legend--s govuk-!-font-size-19 govuk-!-margin-bottom-2">
+              Port of entry <span class="govuk-!-font-size-16">(optional)</span>
+            </legend>
+
+            <div id="portOfEntry-hint" class="govuk-hint govuk-!-margin-bottom-1 govuk-!-font-size-16">
+              Filter by port of entry
+            </div>
+
+            <div class="port-scroll">
+              {{ govukCheckboxes({
+  idPrefix: "portOfEntry",
+  name: "portOfEntry",
+  classes: "govuk-checkboxes--small",
+  items: [
+    { value: "Felixstowe (GBFXT)",  text: "Felixstowe <span class='port-code'>(GBFXT)</span>"  | safe, checked: "Felixstowe (GBFXT)"  in selectedPorts },
+    { value: "Gatwick (GBLGW)",     text: "Gatwick <span class='port-code'>(GBLGW)</span>"     | safe, checked: "Gatwick (GBLGW)"    in selectedPorts },
+    { value: "Portsmouth (GBPMH)",  text: "Portsmouth <span class='port-code'>(GBPMH)</span>"  | safe, checked: "Portsmouth (GBPMH)" in selectedPorts },
+    { value: "Sevington (GBSEV)",   text: "Sevington <span class='port-code'>(GBSEV)</span>"   | safe, checked: "Sevington (GBSEV)"  in selectedPorts },
+    { value: "Southampton (GBSOU)", text: "Southampton <span class='port-code'>(GBSOU)</span>" | safe, checked: "Southampton (GBSOU)" in selectedPorts },
+    { value: "Plymouth (GBPLY)",    text: "Plymouth <span class='port-code'>(GBPLY)</span>"    | safe, checked: "Plymouth (GBPLY)"   in selectedPorts },
+    { value: "Liverpool (GBLIV)",   text: "Liverpool <span class='port-code'>(GBLIV)</span>"   | safe, checked: "Liverpool (GBLIV)"  in selectedPorts },
+    { value: "Hull (GBHUL)",        text: "Hull <span class='port-code'>(GBHUL)</span>"        | safe, checked: "Hull (GBHUL)"       in selectedPorts },
+    { value: "Immingham (GBIMM)",   text: "Immingham <span class='port-code'>(GBIMM)</span>"   | safe, checked: "Immingham (GBIMM)"  in selectedPorts },
+    { value: "Dover (GBDVR)",       text: "Dover <span class='port-code'>(GBDVR)</span>"       | safe, checked: "Dover (GBDVR)"      in selectedPorts },
+    { value: "Harwich (GBHRW)",     text: "Harwich <span class='port-code'>(GBHRW)</span>"     | safe, checked: "Harwich (GBHRW)"    in selectedPorts },
+    { value: "Teesport (GBTEE)",    text: "Teesport <span class='port-code'>(GBTEE)</span>"    | safe, checked: "Teesport (GBTEE)"   in selectedPorts },
+    { value: "Grangemouth (GBGRG)", text: "Grangemouth <span class='port-code'>(GBGRG)</span>" | safe, checked: "Grangemouth (GBGRG)" in selectedPorts }
+  ]
+}) }}
+
+            </div>
+          </fieldset>
+        </div>
+        {# ------------------ end Port of entry block ------------------ #}
+
+        <!-- Update button -->
+        <button class="govuk-button govuk-!-margin-bottom-6" data-module="govuk-button" type="submit">Update</button>
+
+        <!-- Clear filters -->
+        <ul class="govuk-list" id="clear-filters">
+          <li><a href="#" data-start="" data-end="">Clear filters</a></li>
+        </ul>
+      </fieldset>
+    </div>
+
+    <!-- Preset date filters -->
+
+  </div>
+
+  <!-- Main Content -->
+  <div class="govuk-grid-column-three-quarters">
+    {% if data.errors and data.errors.length %}
+  {{ govukErrorSummary({
+    titleText: "There is a problem",
+    errorList: data.errors
+  }) }}
+{% endif %}
+    {% set hasResults = (data.searchResults == true) or (data.searchResults == 'true') %}
+
+    {% if hasResults %}
+
+    {# ---- CLEAN the selection for display: drop _unchecked and empties ---- #}
+    {% set raw = data.selectedPorts or [] %}
+    {% set n = 0 %}
+    {% set first = "" %}
+    {% set second = "" %}
+    {% set third = "" %}
+
+    {% for p in raw %}
+    {% if p and p != '_unchecked' %}
+    {% set n = n + 1 %}
+    {% if n == 1 %}{% set first = p %}
+    {% elif n == 2 %}{% set second = p %}
+    {% elif n == 3 %}{% set third = p %}{% endif %}
+    {% endif %}
+    {% endfor %}
+    <span class="govuk-caption-m">Showing results from</span>
+
+    <h2 class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-5">
+      {{ data.displayDateRange }}
+      {% if n == 0 %}
+      for all ports
+      {% elif n == 1 %}
+      for {{ first }}
+      {% elif n == 2 %}
+      for {{ first }}, {{ second }}
+      {% elif n == 3 %}
+      for {{ first }}, {{ second }}, {{ third }}
+      {% else %}
+      for {{ first }}, {{ second }}, {{ third }} + {{ n - 3 }} more
+      {% endif %}
+    </h2>
+
+    <div class="govuk-tabs" data-module="govuk-tabs">
+      <ul class="govuk-tabs__list">
+        <li class="govuk-tabs__list-item govuk-tabs__list-item--selected">
+          <a class="govuk-tabs__tab" href="#summary">Summary view</a>
+        </li>
+        <li class="govuk-tabs__list-item">
+          <a class="govuk-tabs__tab" href="#chart">Chart view</a>
+        </li>
+      </ul>
+
+      <div class="govuk-tabs__panel" id="summary">
+        <div class="stat-card-container govuk-!-margin-bottom-6">
+          <h2 class="govuk-heading-m">Matches</h2>
+          <p class="govuk-!-font-size-16">Matches are shown by the date the MRN was created, not when the status
+            changed. For example, an MRN created on 1 September but matched on 2 September will appear in the 1
+            September report.</p>
+          <div class="stat-card-group">
+            {{ statCard("Matches", data.stats.matches | string, data.stats.matchesPct) }}
+            {{ statCard("No matches", data.stats.noMatches | string, data.stats.noMatchesPct, "", "/mvp/v4/reporting/no-matches-basic.csv", "Download CSV") }}
+            {{ statCard("Total", data.stats.totalLineItems | string, "") }}
+          </div>
+        </div>
+
+        <div class="stat-card-container govuk-!-margin-bottom-6">
+          <h2 class="govuk-heading-m">Releases</h2>
+          <div class="stat-card-group">
+            {# Releases #}
+            {{ statCard("Auto", data.stats.autoReleases | string, data.stats.autoPct, "stat-card--blue") }}
+            {{ statCard("Manual", data.stats.manualReleases | string, data.stats.manualPct, "stat-card--blue", "/mvp/v4/reporting/manual-release.csv", "Download CSV") }}
+            {{ statCard("Total", data.stats.totalReleases | string, "", "stat-card--blue") }}
+
+          </div>
+        </div>
+
+        <div class="stat-card-container govuk-!-margin-bottom-6">
+          <h2 class="govuk-heading-m">Unique clearance requests</h2>
+          <p class="govuk-!-font-size-16">Each clearance request is a message from CDS to BTMS about an MRN. An MRN can
+            have multiple requests if updated. ‘Total’ counts all messages. ‘Unique’ counts distinct MRNs.</p>
+          <div class="stat-card-group">
+            {{ statCard("Unique clearances", data.stats.uniqueClearances | string, data.stats.uniquePct) }}
+            {{ statCard("Total", data.stats.totalClearanceMsgs | string) }}
+          </div>
+        </div>
+
+        <div class="stat-card-container govuk-!-margin-bottom-6">
+          <h2 class="govuk-heading-m">Pre-notifications by CHED type</h2>
+          <div class="stat-card-group">
+            {{ statCard("CHED A", data.stats.ched.A.count | string, data.stats.ched.A.pct, "stat-card--blue") }}
+            {{ statCard("CHED P", data.stats.ched.P.count | string, data.stats.ched.P.pct, "stat-card--blue") }}
+            {{ statCard("CHED PP", data.stats.ched.PP.count | string, data.stats.ched.PP.pct, "stat-card--blue") }}
+            {{ statCard("CHED D", data.stats.ched.D.count | string, data.stats.ched.D.pct, "stat-card--blue") }}
+            {{ statCard("Total",   data.stats.ched.total    | default(0) | commas, "", "stat-card--blue") }}
+
+          </div>
+        </div>
+      </div>
+
+      <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="chart">
+
+        <div class="govuk-grid-row charts govuk-!-margin-bottom-4">
+          <div class="govuk-grid-column-full chart">
+
+            <h2 class="govuk-heading-m">Matches</h2>
+
+            <div class="btms-chart-container ">
+              <canvas id="matchesChart" width="600" height="400"></canvas>
+            </div>
+
+            <div class="govuk-grid-row btms-stats">
+              <div class="govuk-grid-column-one-third">
+                <h3 class="govuk-heading-s">
+                  <span class="legend-dot matches-dot"></span> Matches
+                </h3>
+                <p class="govuk-heading-m">
+                  {{ data.stats.matches | default(0) | commas }}
+                  <span
+                    class="govuk-body govuk-body-s percentage">({{ data.stats.matchesPct | default('0.00%') }})</span>
+                </p>
+              </div>
+              <div class="govuk-grid-column-one-third">
+                <h3 class="govuk-heading-s">
+                  <span class="legend-dot mismatches-dot"></span> No matches
+                </h3>
+                <p class="govuk-heading-m">
+                  {{ data.stats.noMatches | default(0) | commas }}
+                  <span
+                    class="govuk-body govuk-body-s percentage">({{ data.stats.noMatchesPct | default('0.00%') }})</span>
+                </p>
+              </div>
+              <div class="govuk-grid-column-one-third">
+                <h3 class="govuk-heading-s">Total</h3>
+                <p class="govuk-heading-m"> {{ data.stats.totalLineItems | default(0) | commas }}</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="govuk-grid-row  charts govuk-!-margin-top-4 govuk-!-margin-bottom-4">
+          <div class="govuk-grid-column-full chart">
+
+            <h2 class="govuk-heading-m">Releases</h2>
+
+            <div class="btms-chart-container ">
+              <canvas id="btmsHourlyReleasesChart" width="600" height="400"></canvas>
+            </div>
+
+            <div class="govuk-grid-row btms-stats">
+              <div class="govuk-grid-column-one-third">
+                <h3 class="govuk-heading-s">
+                  <span class="legend-dot matches-dot"></span> Automatic
+                </h3>
+                <p class="govuk-heading-m">
+                  {{ data.stats.autoReleases | default(0) | commas }}
+                  <span class="govuk-body govuk-body-s percentage">({{ data.stats.autoPct | default('0.00%') }})</span>
+                </p>
+              </div>
+              <div class="govuk-grid-column-one-third">
+                <h3 class="govuk-heading-s">
+                  <span class="legend-dot mismatches-dot"></span> Manual
+                </h3>
+                <p class="govuk-heading-m">
+                  {{ data.stats.manualReleases | default(0) | commas }}
+                  <span
+                    class="govuk-body govuk-body-s percentage">({{ data.stats.manualPct | default('0.00%') }})</span>
+                </p>
+              </div>
+              <div class="govuk-grid-column-one-third">
+                <h3 class="govuk-heading-s">Total</h3>
+                <p class="govuk-heading-m"> {{ data.stats.totalReleases | default(0) | commas }}
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="govuk-grid-row  charts govuk-!-margin-top-4 govuk-!-margin-bottom-4">
+          <div class="govuk-grid-column-full chart">
+
+            <h2 class="govuk-heading-m">Unique clearance requests</h2>
+
+            <div class="btms-chart-container ">
+              <canvas id="uniqueRequestsChart" width="600" height="400"></canvas>
+            </div>
+
+            <div class="govuk-grid-row btms-stats">
+              <div class="govuk-grid-column-one-third">
+                <h3 class="govuk-heading-s">
+                  <span class="legend-dot matches-dot"></span> Unique clearances
+
+                </h3>
+                <p class="govuk-heading-m">
+                  {{ data.stats.uniqueClearances | default(0) | commas }}
+                  <span
+                    class="govuk-body govuk-body-s percentage">({{ data.stats.uniquePct | default('0.00%') }})</span>
+                </p>
+              </div>
+              <div class="govuk-grid-column-one-third">
+                <h3 class="govuk-heading-s">Total</h3>
+                <p class="govuk-heading-m"> {{ data.stats.totalClearanceMsgs | default(0) | commas }}
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="govuk-grid-row charts govuk-!-margin-top-4 govuk-!-margin-bottom-4">
+          <div class="govuk-grid-column-full chart">
+
+            <h2 class="govuk-heading-m ipaafs-heading">
+              Pre-notifications by CHED type
+
+            </h2>
+
+            <div class="btms-chart-container">
+              <canvas id="chedTypesChart" width="600" height="400"></canvas>
+            </div>
+
+            <div class="btms-stats">
+              <div>
+                <h3 class="govuk-heading-s"><span class="legend-dot ched-a-dot"></span> CHED A</h3>
+                <p class="govuk-heading-m">
+                  {{ data.stats.ched.A.count | default(0) | commas }}
+                  <span
+                    class="govuk-body govuk-body-s percentage">({{ data.stats.ched.A.pct | default('0.00%') }})</span>
+                </p>
+              </div>
+              <div>
+                <h3 class="govuk-heading-s"><span class="legend-dot ched-p-dot"></span> CHED P</h3>
+                <p class="govuk-heading-m">
+                  {{ data.stats.ched.P.count | default(0) | commas }}
+                  <span
+                    class="govuk-body govuk-body-s percentage">({{ data.stats.ched.P.pct | default('0.00%') }})</span>
+                </p>
+              </div>
+              <div>
+                <h3 class="govuk-heading-s"><span class="legend-dot ched-pp-dot"></span> CHED PP</h3>
+                <p class="govuk-heading-m">
+                  {{ data.stats.ched.PP.count | default(0) | commas }}
+                  <span
+                    class="govuk-body govuk-body-s percentage">({{ data.stats.ched.PP.pct | default('0.00%') }})</span>
+                </p>
+              </div>
+              <div>
+                <h3 class="govuk-heading-s"><span class="legend-dot ched-d-dot"></span> CHED D</h3>
+                <p class="govuk-heading-m">
+                  {{ data.stats.ched.D.count | default(0) | commas }}
+                  <span
+                    class="govuk-body govuk-body-s percentage">({{ data.stats.ched.D.pct | default('0.00%') }})</span>
+                </p>
+              </div>
+              <div>
+                <h3 class="govuk-heading-s">Total</h3>
+                <p class="govuk-heading-m">{{ data.stats.ched.total | default(0) | commas }}</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+    {% else %}
+    <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-5">No results</p>
+    {{ govukInsetText({ html: " To view reporting data, set the filters and select 'update'." }) }}
+    {% endif %}
+  </div>
+</div>
+<style>
+  /* stop overriding every grid row */
+.reporting .govuk-grid-row { /* remove display:flex here entirely */ }
+
+/* CHED strip: responsive 5-up that wraps nicely */
+.btms-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(125px, 2fr));
+  gap: 0px;
+  align-items: start;
+}
+
+.btms-stats .govuk-heading-s { margin: 8px 0 4px; font-size: 17px; }
+.btms-stats .govuk-heading-m { margin: 0; }
+.btms-stats .percentage { display: block; font-size: 14px !important; padding-top: 4px; }
+
+</style>
+{% endblock %}

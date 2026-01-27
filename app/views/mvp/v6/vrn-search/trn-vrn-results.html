@@ -1,0 +1,58 @@
+{% extends "layouts/forms.html" %}
+{% set fullWidth = true %}
+{% set bodyClasses = 'btmsStatus v4 gmr' %}
+{% set hideBackLink = true %}
+{% set backText = 'Back to search' %}
+{% set backHref = '/mvp/v6/search' %}
+{% set showSubheader = true %}
+{% set subHeader = 'Search results for' %}
+{% set title = data.searchTerm or 'HX66 BVL' %}
+{% set menu = true %}
+{% set hideButton = true %}
+{% set signedIn = 'true' %}
+
+{% block form %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+
+    <h2 class="govuk-heading-m">Linked GMRs</h2>
+
+    <table class="govuk-table app-mrn-table govuk-!-margin-top-2">
+      <caption class="govuk-visually-hidden">GMRs linked to {{ data.searchTerm or 'HX66 BVL' }} and their details</caption>
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th scope="col" class="govuk-table__header">GMR</th>
+          <th scope="col" class="govuk-table__header">Linked declarations</th>
+          <th scope="col" class="govuk-table__header">Arrival date</th>
+        </tr>
+      </thead>
+      <tbody class="govuk-table__body">
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell">
+            <a href="/mvp/v6/vrn-search/gmr?gmr=GMRA00002TT2">GMRA00002TT2</a>
+          </td>
+          <td class="govuk-table__cell">3</td>
+          <td class="govuk-table__cell">23 January 2026, 12:23</td>
+        </tr>
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell">
+            <a href="#">GMRA00002KW2</a>
+          </td>
+          <td class="govuk-table__cell">2</td>
+          <td class="govuk-table__cell">10 January 2026, 09:27</td>
+        </tr>
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell">
+            <a href="#">GMRA0000TT1</a>
+          </td>
+          <td class="govuk-table__cell">3</td>
+          <td class="govuk-table__cell">1 January 2026, 19:01</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,126 @@
+{% extends "layouts/forms.html" %}
+{% set title = 'Search' %}
+{% set fullWidth = true %}
+{% set bodyClasses = 'btmsStatus v4' %}
+{% set hideBackLink = true %}
+{% set showSubheader = true %}
+{% set subHeader = 'Showing result for' %}
+{% set title = 'GMRCQP7UIYNS' %}
+{% set menu = true %}
+{% set hideButton = true %}
+{% set bodyClasses = 'gmr' %}
+
+{% block form %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-three-quarters">
+
+    <h2 class="govuk-heading-m">Vehicle details</h2>
+
+    <dl class="govuk-summary-list">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">VRN</dt>
+        <dd class="govuk-summary-list__value">
+          <span class="number-plate number-plate--rear" aria-label="Vehicle registration number HX66 BVL">HX66
+            BVL</span>
+        </dd>
+      </div>
+
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">TRN</dt>
+        <dd class="govuk-summary-list__value">
+          <span class="number-plate number-plate--front" aria-label="Trailer registration number HX66 BVL">DC17
+            PPL</span>
+        </dd>
+      </div>
+    </dl>
+
+  </div>
+</div>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+
+    <h3 class="govuk-heading-m govuk-!-margin-top-3">Linked customs declarations</h3>
+
+    <table class="govuk-table app-mrn-table govuk-!-margin-top-2">
+      <caption class="govuk-visually-hidden">MRNs linked to this GMR and their CDS status</caption>
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th scope="col" class="govuk-table__header">MRN</th>
+          <th scope="col" class="govuk-table__header">BTMS decision</th>
+          <th scope="col" class="govuk-table__header">CDS status</th>
+        </tr>
+      </thead>
+      <tbody class="govuk-table__body">
+
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell">
+            <a href="new-layout-current?mrn=25GB3FJBV1UEKBDAR0">25GB3FJBV1UEKBDAR0</a>
+          </td>
+          <td class="govuk-table__cell">Refuse - Not acceptable</td>
+          <td class="govuk-table__cell"><span class="govuk-tag govuk-tag--red">Finalised – Destroyed</span></td>
+        </tr>
+      <tr class="govuk-table__row">
+          <td class="govuk-table__cell">
+            <a href="gmr-search-results?mrn=25GB9LQ7X2MZ4H8R1K">25GB9LQ7X2MZ4H8R1K</a>
+          </td>
+          <td class="govuk-table__cell">No match - CHED cannot be found</td>
+          <td class="govuk-table__cell"><span class="govuk-tag govuk-tag--yellow">In progress - Awaiting trader</span></td>
+        </tr>
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell">
+            <a href="gmr-search-results2?mrn=25GB4VN6T1XZ7B3Q5L">25GB4VN6T1XZ7B3Q5L</a>
+          </td>
+          <td class="govuk-table__cell">Hold – Awaiting decision</td>
+          <td class="govuk-table__cell"><span class="govuk-tag govuk-tag--yellow">In progress - Awaiting IPAFFS </span></td>
+        </tr>
+                <tr class="govuk-table__row">
+          <td class="govuk-table__cell">
+            <a href="gmr-search-results2?mrn=25GB4VN6T1XZ7B3Q5L">25GB4VN6T1XZ7B3Q5L</a>
+          </td>
+          <td class="govuk-table__cell">Hold – Awaiting decision</td>
+          <td class="govuk-table__cell"><span class="govuk-tag govuk-tag--yellow">In progress - Awaiting CDS </span></td>
+        </tr>
+                        <tr class="govuk-table__row">
+          <td class="govuk-table__cell">
+            <a href="gmr-search-results2?mrn=25GB4VN6T1XZ7B3Q5L">25GB4VN6T1XZ7B3Q5L</a>
+          </td>
+          <td class="govuk-table__cell">Hold – Awaiting decision</td>
+          <td class="govuk-table__cell"><span class="govuk-tag govuk-tag--yellow">In progress </span></td>
+        </tr>
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell">
+            <a href="new-layout-current?mrn=25GB7KP3Q9LC2F5R8M">25GB7KP3Q9LC2F5R8M</a>
+          </td>
+          <td class="govuk-table__cell">Release – Inspections complete</td>
+          <td class="govuk-table__cell"><span class="govuk-tag govuk-tag--green">Finalised – Released</span></td>
+        </tr>
+
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell">
+            <span class="tooltiplink error" tabindex="0" aria-describedby="gmr-tip-1">25GB8HF2M6YR9J1P0C</span>
+            <span id="gmr-tip-1" class="tooltip" role="tooltip">
+              This MRN cannot be found in BTMS. The MRN may not have SPS goods associated with it or HMRC have not sent
+              details of this MRN to BTMS.
+
+
+
+
+
+
+            </span>
+          </td>
+          <td class="govuk-table__cell">Unknown</td>
+          <td class="govuk-table__cell"><span class="govuk-tag govuk-tag--grey">Unknown</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>
+
+
+
+
+{% endblock %}

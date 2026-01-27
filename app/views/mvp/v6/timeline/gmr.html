@@ -1,0 +1,105 @@
+{% extends "layouts/forms.html" %}
+{% set fullWidth = true %}
+{% set bodyClasses = 'btmsStatus v4' %}
+{% set hideBackLink = true %}
+{% set showSubheader = true %}
+{% set subHeader = 'Showing result for' %}
+{% set title = 'GMRA00002TT2' %}
+{% set menu = true %}
+{% set hideButton = true %}
+{% set bodyClasses = 'gmr' %}
+
+
+{% block form %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-three-quarters">
+
+    <h2 class="govuk-heading-m">Vehicle details</h2>
+
+    <dl class="govuk-summary-list">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Vehicle Registration Number (VRN)
+</dt>
+        <dd class="govuk-summary-list__value">
+          <span class="number-plate number-plate--rear" aria-label="Vehicle registration number BD23 KXY">BD23
+            KXY</span>
+        </dd>
+      </div>
+
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Trailer Registration Number (TRN)</dt>
+        <dd class="govuk-summary-list__value">
+          <span class="number-plate number-plate--front" aria-label="Trailer registration number YK23 ABC">YK23
+            ABC</span>
+        </dd>
+      </div>
+    </dl>
+
+  </div>
+</div>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+
+    <h3 class="govuk-heading-m govuk-!-margin-top-3">Linked customs declarations</h3>
+    <!-- <p class="govuk-!-margin-bottom-2">Showing 4 MRNs that include this GMR</p> -->
+
+    <table class="govuk-table app-mrn-table govuk-!-margin-top-2">
+      <caption class="govuk-visually-hidden">MRNs linked to this GMR and their CDS status</caption>
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th scope="col" class="govuk-table__header">MRN</th>
+          <th scope="col" class="govuk-table__header">CDS status</th>
+          <th scope="col" class="govuk-table__header">BTMS decision</th>
+        </tr>
+      </thead>
+      <tbody class="govuk-table__body">
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell">
+            <a href="search-results-latest">25GBDD03IWJ3IHIAR1</a>
+          </td>
+          <td class="govuk-table__cell"><span class="govuk-tag govuk-tag--yellow">In progress - Awaiting CDS</span>
+          </td>
+          <td class="govuk-table__cell">No match - CHED cannot be found</td>
+
+        </tr>
+
+
+  
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell">
+            <a href="search-results-timeline">25GBC64QCLFMUHPAR2</a>
+          </td>
+          <td class="govuk-table__cell"><span class="govuk-tag govuk-tag--green">Finalised - Released</span></td>
+          <td class="govuk-table__cell">Release - Inspection Complete</td>
+
+        </tr>
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell">
+            <a href="search-results-cancel">25GBCLNTWCC1FN7AR0</a>
+          </td>
+          <td class="govuk-table__cell"><span class="govuk-tag govuk-tag--green">Finalised - Manually released</span></td>
+          <td class="govuk-table__cell">No match - Incorrect CHED type</td>
+
+        </tr>
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell">
+            <a href="search-results-cancel">25GBBVWP03XACE8AR0</a>
+          </td>
+          <td class="govuk-table__cell"><span class="govuk-tag govuk-tag--red">Finalised - Cancelled after arrival
+          </span></td>
+          <td class="govuk-table__cell">No match - Incorrect CHED type</td>
+
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>
+
+
+
+
+
+{% endblock %}

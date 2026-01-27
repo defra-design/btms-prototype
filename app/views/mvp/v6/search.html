@@ -1,0 +1,89 @@
+{% extends "layouts/forms.html" %}
+{% from "govuk/components/details/macro.njk" import govukDetails %}
+{% set title = 'Search' %}
+{% set signedIn = 'true' %}
+{% set menu = true %}
+{% set fullWidth = true %}
+{% set hideButton = true %}
+{% set showheader = true %}
+{% set hideBackLink = true %}
+{% set hideManageAccount = 'false' %}
+{% set hideBackLink = true %}
+
+{% block form %}
+
+  <div class="govuk-form-group search-container">
+    <h1 class="govuk-heading-l" style="border-bottom: 1px solid #b1b4b6; margin-bottom: 15px; padding-bottom: 15px;">Search</h1>
+    
+    <p class="govuk-body govuk-hint">Enter an MRN, CHED, GMR, VRN or TRN</p>
+    
+    {% set examplesHtml %}
+      <p>Examples of reference numbers:</p>
+      <ul class="govuk-list">
+        <li>MRN, {{ "" | currentYear2 }}GB3FJBV1UEKBDAR0</li>
+        <li>CHED, CHEDP.GB.{{ "" | currentYear4 }}.4433124 or GBCHD{{ "" | currentYear4 }}.4433124</li>
+        <li>GMR, GMRA00002KW2</li>
+        <li>VRN (Vehicle Registration Number) or TRN (Trailer Registration Number), HX66 BVL</li>
+      </ul>
+    {% endset %}
+    
+    {{ govukDetails({
+      summaryText: "See examples",
+      html: examplesHtml
+    }) }}
+    
+    <div class="govuk-form-group {% if data.error %}govuk-form-group--error{% endif %}" style="margin-top: 30px;">
+      {% if data.error %}
+        <p id="searchTerm-error" class="govuk-error-message">
+          <span class="govuk-visually-hidden">Error:</span> {{ data.errorMessage }}
+        </p>
+      {% endif %}
+      <div class="govuk-input-wrapper search">
+        <input class="govuk-input {% if data.error %}govuk-input--error{% endif %}" 
+               id="searchTerm" 
+               name="data.searchTerm" 
+               type="text"
+               value="{{ data.searchTerm }}" 
+               oninput="toggleClearButton()" 
+               style="padding-right: 30px;"
+               {% if data.error %}aria-describedby="searchTerm-error"{% endif %} />
+        <button type="button" id="clearButton" class="clear-search" onclick="clearSearch()" style="display: none;">
+          &times;
+        </button>
+        <button type="submit" class="btms-search__button">
+          <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <circle cx="10" cy="10" r="8" stroke="#ffffff" stroke-width="2"></circle>
+            <line x1="15" y1="15" x2="22" y2="22" stroke="#ffffff" stroke-width="2"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+<style>
+  .govuk-details__text {
+    font-size: 16px;
+    background-color: #fff;
+    padding: 15px;
+    margin-top: 10px;
+  }
+  .govuk-details__text p {
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+  .govuk-details__text ul {
+    font-size: 16px;
+  }
+  .govuk-details__text li {
+    font-size: 16px;
+  }
+  /* Remove any double underline - let GOV.UK Design System handle the styling */
+  .govuk-details__summary {
+    text-decoration: none;
+  }
+  .govuk-details__summary-text {
+    text-decoration: underline;
+  }
+</style>
+
+{% endblock %}

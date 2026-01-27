@@ -5,7 +5,7 @@
 module.exports = (router) => {
   
   // GET: Search results timeline page
-  router.get('/mvp/v5/timeline/search-results-timeline', (req, res) => {
+  router.get('/mvp/v6/timeline/search-results-timeline', (req, res) => {
     // Always prioritize query parameters - don't use session data for MRN/title
     const q = (req.query.q || '').trim();
     const mrnParam = (req.query.mrn || '').trim();
@@ -32,7 +32,7 @@ module.exports = (router) => {
     const availableMrns = [title, '25GBC64QCLFMUHPAR2', '25GBC64QCLFMUHPAR3', '25GBC64QCLFMUHPAR4'];
     req.session.data.availableMrns = availableMrns;
 
-    res.render('mvp/v5/timeline/search-results-timeline', {
+    res.render('mvp/v6/timeline/search-results-timeline', {
       title,
       mrn: title,
       data: req.session.data
@@ -40,7 +40,7 @@ module.exports = (router) => {
   });
 
   // POST: Handle filter changes on search results page
-  router.post('/mvp/v5/timeline/search-results-timeline', (req, res) => {
+  router.post('/mvp/v6/timeline/search-results-timeline', (req, res) => {
     const eventType = req.body.eventType || 'all';
     const sortBy = req.body.sortBy || 'descending';
     const mrnFilter = req.body.mrnFilter || req.query.mrnFilter || req.session.data?.title || '25GBC64QCLFMUHPAR2';
@@ -51,11 +51,11 @@ module.exports = (router) => {
     req.session.data.sortBy = sortBy;
     req.session.data.mrnFilter = mrnFilter;
 
-    res.redirect(`/mvp/v5/timeline/search-results-timeline?q=${encodeURIComponent(mrnFilter)}&eventType=${eventType}&sortBy=${sortBy}&mrnFilter=${encodeURIComponent(mrnFilter)}`);
+    res.redirect(`/mvp/v6/timeline/search-results-timeline?q=${encodeURIComponent(mrnFilter)}&eventType=${eventType}&sortBy=${sortBy}&mrnFilter=${encodeURIComponent(mrnFilter)}`);
   });
 
   // GET: Search results latest page
-  router.get('/mvp/v5/timeline/search-results-latest', (req, res) => {
+  router.get('/mvp/v6/timeline/search-results-latest', (req, res) => {
     // Always prioritize query parameters - don't use session data for MRN/title
     const q = (req.query.q || '').trim();
     const mrnParam = (req.query.mrn || '').trim();
@@ -75,7 +75,7 @@ module.exports = (router) => {
     req.session.data.eventType = eventType;
     req.session.data.sortBy = sortBy;
 
-    res.render('mvp/v5/timeline/search-results-latest', {
+    res.render('mvp/v6/timeline/search-results-latest', {
       title,
       mrn: title,
       data: req.session.data
@@ -83,7 +83,7 @@ module.exports = (router) => {
   });
 
   // POST: Handle filter changes on search results latest page
-  router.post('/mvp/v5/timeline/search-results-latest', (req, res) => {
+  router.post('/mvp/v6/timeline/search-results-latest', (req, res) => {
     const eventType = req.body.eventType || 'all';
     const sortBy = req.body.sortBy || 'descending';
     const mrn = req.body.mrn || req.query.mrn || req.session.data?.title || '25GBC64QCLFMUHPAR2';
@@ -93,11 +93,11 @@ module.exports = (router) => {
     req.session.data.sortBy = sortBy;
     req.session.data.title = mrn;
 
-    res.redirect(`/mvp/v5/timeline/search-results-latest?q=${encodeURIComponent(mrn)}&eventType=${eventType}&sortBy=${sortBy}`);
+    res.redirect(`/mvp/v6/timeline/search-results-latest?q=${encodeURIComponent(mrn)}&eventType=${eventType}&sortBy=${sortBy}`);
   });
 
   // GET: Search results cancel page
-  router.get('/mvp/v5/timeline/search-results-cancel', (req, res) => {
+  router.get('/mvp/v6/timeline/search-results-cancel', (req, res) => {
     const q = (req.query.q || req.session.data?.searchTerm || '').trim();
     const mrnFilter = req.query.mrnFilter || req.session.data?.mrnFilter || '25GBCLNTWCC1FN7AR0';
     // Use mrnFilter as the primary title source, ignore session title from other pages
@@ -120,7 +120,7 @@ module.exports = (router) => {
       { value: '25GBBVWP03XACE8AR0', text: '25GBBVWP03XACE8AR0' }
     ];
 
-    res.render('mvp/v5/timeline/search-results-cancel', {
+    res.render('mvp/v6/timeline/search-results-cancel', {
       title,
       availableMrns,
       data: req.session.data
@@ -128,7 +128,7 @@ module.exports = (router) => {
   });
 
   // POST: Handle filter changes on search results cancel page
-  router.post('/mvp/v5/timeline/search-results-cancel', (req, res) => {
+  router.post('/mvp/v6/timeline/search-results-cancel', (req, res) => {
     const eventType = req.body.eventType || 'all';
     const sortBy = req.body.sortBy || 'descending';
     const mrnFilter = req.body.mrnFilter || req.query.mrnFilter || req.session.data?.mrnFilter || '25GBCLNTWCC1FN7AR0';
@@ -140,11 +140,11 @@ module.exports = (router) => {
     req.session.data.mrnFilter = mrnFilter;
     req.session.data.title = mrnFilter;
 
-    res.redirect(`/mvp/v5/timeline/search-results-cancel?mrnFilter=${encodeURIComponent(mrnFilter)}&eventType=${eventType}&sortBy=${sortBy}`);
+    res.redirect(`/mvp/v6/timeline/search-results-cancel?mrnFilter=${encodeURIComponent(mrnFilter)}&eventType=${eventType}&sortBy=${sortBy}`);
   });
 
   // GET: GMR page
-  router.get('/mvp/v5/timeline/gmr', (req, res) => {
+  router.get('/mvp/v6/timeline/gmr', (req, res) => {
     const gmr = req.query.gmr || req.session.data?.title || 'GMRA00002TT2';
     const q = (req.query.q || req.session.data?.searchTerm || gmr).trim();
     
@@ -152,7 +152,7 @@ module.exports = (router) => {
     req.session.data.title = gmr;
     req.session.data.searchTerm = q;
 
-    res.render('mvp/v5/timeline/gmr', {
+    res.render('mvp/v6/timeline/gmr', {
       title: gmr,
       data: req.session.data
     });
