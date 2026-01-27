@@ -15,24 +15,10 @@
   <div class="govuk-form-group search-container">
     <h1 class="govuk-heading-l" style="border-bottom: 1px solid #b1b4b6; margin-bottom: 15px; padding-bottom: 15px;">Search</h1>
     
-    <p class="govuk-body govuk-hint">Enter an MRN, CHED, GMR, VRN or TRN</p>
-    
-    {% set examplesHtml %}
-      <p>Examples of reference numbers:</p>
-      <ul class="govuk-list">
-        <li>MRN, {{ "" | currentYear2 }}GB3FJBV1UEKBDAR0</li>
-        <li>CHED, CHEDP.GB.{{ "" | currentYear4 }}.4433124 or GBCHD{{ "" | currentYear4 }}.4433124</li>
-        <li>GMR, GMRA00002KW2</li>
-        <li>VRN (Vehicle Registration Number) or TRN (Trailer Registration Number), HX66 BVL</li>
-      </ul>
-    {% endset %}
-    
-    {{ govukDetails({
-      summaryText: "See examples",
-      html: examplesHtml
-    }) }}
-    
-    <div class="govuk-form-group {% if data.error %}govuk-form-group--error{% endif %}" style="margin-top: 30px;">
+    <div class="govuk-form-group {% if data.error %}govuk-form-group--error{% endif %}">
+      <label class="govuk-label" for="searchTerm">
+        Enter an MRN, CHED, GMR, VRN or TRN
+      </label>
       {% if data.error %}
         <p id="searchTerm-error" class="govuk-error-message">
           <span class="govuk-visually-hidden">Error:</span> {{ data.errorMessage }}
@@ -58,6 +44,20 @@
         </button>
       </div>
     </div>
+    
+    {% set examplesHtml %}
+      <ul class="govuk-list">
+        <li>MRN, {{ "" | currentYear2 }}GB3FJBV1UEKBDAR0</li>
+        <li>CHED, CHEDP.GB.{{ "" | currentYear4 }}.4433124 or GBCHD{{ "" | currentYear4 }}.4433124</li>
+        <li>GMR, GMRA00002KW2</li>
+        <li>VRN (Vehicle Registration Number) or TRN (Trailer Registration Number), HX66 BVL</li>
+      </ul>
+    {% endset %}
+    
+    {{ govukDetails({
+      summaryText: "See search examples",
+      html: examplesHtml
+    }) }}
   </div>
 
 <style>
@@ -83,6 +83,10 @@
   }
   .govuk-details__summary-text {
     text-decoration: underline;
+  }
+  .govuk-details {
+    margin-top: 20px;
+    margin-bottom: 0px;
   }
 </style>
 
