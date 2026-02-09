@@ -243,6 +243,83 @@ module.exports = (router) => {
     return res.redirect('/mvp/v6/gmr-v1');
   });
 
+  // GET: Plums declaration details page
+  router.get('/mvp/v6/level-2/plums-declaration-details', (req, res) => {
+    // Always prioritize query parameters - don't use session data for search term
+    const q = (req.query.q || '').trim();
+    
+    req.session.data = req.session.data || {};
+    
+    // If query parameter exists, use it and clear any old searchTerm
+    // Otherwise use session fallback, then default
+    const searchTerm = q || (req.session.data?.searchTerm || '').trim() || '26GB150YG6RW3LRAR5';
+    
+    // Always update session with current values to keep it in sync
+    req.session.data.searchTerm = searchTerm;
+    req.session.data.title = searchTerm;
+    req.session.data.Cds = req.session.data.Cds || 'Customs declaration details';
+    req.session.data.Ipaffs = req.session.data.Ipaffs || 'IPAFFS notification (CHED) details';
+
+    res.render('mvp/v6/level-2/plums-declaration-details', {
+      title: searchTerm,
+      data: req.session.data
+    });
+  });
+
+  // GET: Strawberries declaration details page (timeline version)
+  router.get('/mvp/v6/level-2/strawberries-declaration-details', (req, res) => {
+    const q = (req.query.q || '').trim();
+    
+    req.session.data = req.session.data || {};
+    const searchTerm = q || (req.session.data?.searchTerm || '').trim() || '25GB4VN6T1XZ7B3Q5L';
+    
+    req.session.data.searchTerm = searchTerm;
+    req.session.data.title = searchTerm;
+    req.session.data.Cds = req.session.data.Cds || 'Customs declaration details';
+    req.session.data.Ipaffs = req.session.data.Ipaffs || 'IPAFFS notification (CHED) details';
+
+    res.render('mvp/v6/level-2/strawberries-declaration-details', {
+      title: searchTerm,
+      data: req.session.data
+    });
+  });
+
+  // GET: Watermelons declaration details page
+  router.get('/mvp/v6/level-2/watermelons-declaration-details', (req, res) => {
+    const q = (req.query.q || '').trim();
+    
+    req.session.data = req.session.data || {};
+    const searchTerm = q || (req.session.data?.searchTerm || '').trim() || '26GB16ICKGJAY5MAR4';
+    
+    req.session.data.searchTerm = searchTerm;
+    req.session.data.title = searchTerm;
+    req.session.data.Cds = req.session.data.Cds || 'Customs declaration details';
+    req.session.data.Ipaffs = req.session.data.Ipaffs || 'IPAFFS notification (CHED) details';
+
+    res.render('mvp/v6/level-2/watermelons-declaration-details', {
+      title: searchTerm,
+      data: req.session.data
+    });
+  });
+
+  // GET: Enhanced search results page with summary statistics and improved error visibility
+  router.get('/mvp/v6/vrn-search/search-results-enhanced', (req, res) => {
+    const q = (req.query.q || '').trim();
+    
+    req.session.data = req.session.data || {};
+    const searchTerm = q || (req.session.data?.searchTerm || '').trim() || '25GB39TWY8009YRAR9';
+    
+    req.session.data.searchTerm = searchTerm;
+    req.session.data.title = searchTerm;
+    req.session.data.Cds = req.session.data.Cds || 'Customs declaration details';
+    req.session.data.Ipaffs = req.session.data.Ipaffs || 'IPAFFS notification (CHED) details';
+
+    res.render('mvp/v6/vrn-search/search-results-enhanced', {
+      title: searchTerm,
+      data: req.session.data
+    });
+  });
+
   const redirectPaths = _.uniq(Object.values(searchRedirects)).map(
     slug => `/mvp/v6/${slug}`
   );
