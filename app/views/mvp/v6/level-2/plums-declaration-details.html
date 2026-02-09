@@ -138,9 +138,10 @@
         <thead class="govuk-table__head">
           <tr class="govuk-table__row">
             <th scope="col" class="govuk-table__header">Item number</th>
-            <th scope="col" class="govuk-table__header">Commodity code</th>
             <th scope="col" class="govuk-table__header">Description</th>
             <th scope="col" class="govuk-table__header">Quantity / Weight</th>
+            <th scope="col" class="govuk-table__header">Commodity code</th>
+
             <th scope="col" class="govuk-table__header">CHED reference</th>
             <th scope="col" class="govuk-table__header">Authority</th>
             <th scope="col" class="govuk-table__header">Decision</th>
@@ -151,11 +152,8 @@
             <td class="govuk-table__cell">1</td>
             <td class="govuk-table__cell">NECTARINES</td>
             <td class="govuk-table__cell">21420</td>
-            <td class="govuk-table__cell split" tabindex="0">
-              <span class="tooltiplink error">0809303000</span>
-              <span class="tooltip" role="tooltip">
-                Commodity code 0603141000 cannot be found in IPAFFS. Check that the code is correct.
-              </span>
+            <td class="govuk-table__cell split error" tabindex="0">0809303000
+          
             </td>            
             <td class="govuk-table__cell split">GBCHD2026.7181331</td>
             <td class="govuk-table__cell decision split">
@@ -165,7 +163,11 @@
             </td>
             <td class="govuk-table__cell decision split">
               <ul class="govuk-list">
-                <li class="HMI-SMS">No match - Incorrect commodity code</li>
+                <li class="HMI-SMS">
+                  <span class="tooltiplink error">No match - Incorrect commodity code</span>
+                  <span class="tooltip" role="tooltip">
+                    Commodity code <strong>0603141000</strong> cannot be found in IPAFFS. Check that the code is correct.
+                  </span></li>
               </ul>
             </td>
           </tr>
@@ -173,11 +175,8 @@
             <td class="govuk-table__cell blank-cell"></td>
             <td class="govuk-table__cell blank-cell"></td>
             <td class="govuk-table__cell blank-cell"></td>
-            <td class="govuk-table__cell split" tabindex="0">
-              <span class="tooltiplink error">0809303000</span>
-              <span class="tooltip" role="tooltip">
-                Commodity code 0603141000 cannot be found in IPAFFS. Check that the code is correct.
-              </span>
+            <td class="govuk-table__cell split error" tabindex="0">0809303000
+       
             </td>          
             <td class="govuk-table__cell split">GBCHD2026.7181331</td>
             <td class="govuk-table__cell decision split">
@@ -187,7 +186,11 @@
             </td>
             <td class="govuk-table__cell decision split">
               <ul class="govuk-list">
-                <li class="PHSI">No match - Incorrect commodity code</li>
+                <li class="PHSI">
+                  <span class="tooltiplink error">No match - Incorrect commodity code</span>
+                  <span class="tooltip" role="tooltip">
+                    Commodity code <strong>0603141000 </strong> cannot be found in IPAFFS. Check that the code is correct.
+                  </span></li>
               </ul>
             </td>
           </tr>

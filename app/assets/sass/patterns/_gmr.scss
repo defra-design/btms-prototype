@@ -15,13 +15,11 @@
     white-space: nowrap;
     width: 100px;
     text-align: center;
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
+    text-decoration: none;
 
     // Link styling for number plates
     &:hover {
       text-decoration: underline;
-      text-decoration-thickness: 1px;
     }
 
     &:focus {
