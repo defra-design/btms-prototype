@@ -2,6 +2,7 @@
 {% from "moj/components/timeline/macro.njk" import mojTimeline %}
 {% from "govuk/components/select/macro.njk" import govukSelect %}
 {% from "govuk/components/details/macro.njk" import govukDetails %}
+{% from "govuk/components/inset-text/macro.njk" import govukInsetText %}
 {% set signedIn = 'true' %}
 {% set fullWidth = true %}
 {% set hideButton = true %}
@@ -1544,6 +1545,10 @@
     </script>
 
     {% include 'includes/timeline-filters.html' %}
+
+    {{ govukInsetText({
+      text: "The timeline includes events from the past 30 days only."
+    }) }}
 
     <div id="timeline-container">
       <!-- Timeline will be rendered here by JavaScript -->
