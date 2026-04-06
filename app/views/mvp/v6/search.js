@@ -21,6 +21,7 @@ const searchRedirects = {
   '25GB3HGVAICUT5YAR0': 'multiple-cheds-single-auth',
   '24GBDYHR49XV9BAFS1': 'filters-v4',
   'GMRA00002TT2': 'timeline/gmr',
+  'GMRA00002KW3': 'gmr-spain/gmr',
   '25GB4VN6T1XZ7B3Q5L': 'vrn-search/search-results-timeline',
   '25GBDD03IWJ3IHIAR1': 'vrn-search/search-results-timeline',
   'CHEDPP.GB.2026.7069665': 'vrn-search/search-results-timeline'

@@ -103,9 +103,10 @@ function renderTimeline(events) {
       let tagClass = '';
       if (event.cdsStatus === 'Finalised - Released' || event.cdsStatus === 'Finalised - Manually released') tagClass = 'govuk-tag--green';
       else if (event.cdsStatus === 'Finalised - Cancelled after arrival') tagClass = 'govuk-tag--red';
-      else if (event.cdsStatus.includes('In progress') || event.cdsStatus.includes('Hold')) tagClass = 'govuk-tag--yellow';
+      else if (event.cdsStatus === 'Embarked' || event.cdsStatus.includes('In progress') || event.cdsStatus.includes('Hold') || event.cdsStatus.includes('Awaiting')) tagClass = 'govuk-tag--yellow';
+      const statusLabel = event.cdsStatusLabel || 'CDS status';
       html += `<div class="timeline-detail-row">
-        <span class="timeline-detail-label">CDS status</span>
+        <span class="timeline-detail-label">${statusLabel}</span>
         <span class="govuk-tag ${tagClass}">${event.cdsStatus}</span>
       </div>`;
     }

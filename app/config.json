@@ -1,6 +1,7 @@
 {
   "serviceName": "Border Trade Matching Service",
-"plugins": {
+  "port": 3000,
+  "plugins": {
   "govuk-frontend": {
 	"rebrand": true
   }

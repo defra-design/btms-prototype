@@ -55,6 +55,38 @@
     line-height: 1.5;
   }
 
+  .app-mrn-table--fixed-columns {
+    table-layout: fixed;
+    width: 100%;
+  }
+
+  .app-mrn-table--fixed-columns .govuk-table__header,
+  .app-mrn-table--fixed-columns .govuk-table__cell {
+    overflow-wrap: break-word;
+  }
+
+  .app-mrn-table--fixed-columns .govuk-table__header:last-child,
+  .app-mrn-table--fixed-columns .govuk-table__cell:last-child {
+    overflow-wrap: normal;
+    white-space: nowrap;
+  }
+
+  .app-mrn-table--fixed-columns col:nth-child(1) {
+    width: 22%;
+  }
+
+  .app-mrn-table--fixed-columns col:nth-child(2) {
+    width: 28%;
+  }
+
+  .app-mrn-table--fixed-columns col:nth-child(3) {
+    width: 30%;
+  }
+
+  .app-mrn-table--fixed-columns col:nth-child(4) {
+    width: 20%;
+  }
+
   // Always show underline on links in MRN table
   .app-mrn-table a {
     text-decoration: underline;

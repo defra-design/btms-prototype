@@ -1,0 +1,125 @@
+{% extends "layouts/forms.html" %}
+{% set fullWidth = true %}
+{% set bodyClasses = 'btmsStatus v4 gmr' %}
+{% set hideBackLink = true %}
+{% set backText = 'Back to HX66 BVL' %}
+{% set backHref = '/mvp/v6/search' %}
+{% set showSubheader = true %}
+{% set title = 'GMRA00002KW3' %}
+{% set menu = true %}
+{% set subHeader = 'Showing result for' %}
+
+{% set hideButton = true %}
+{% set signedIn = 'true' %}
+
+{% block form %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <h2 class="govuk-heading-m govuk-!-margin-top-0">Vehicle details</h2>
+
+    <dl class="govuk-summary-list govuk-!-margin-bottom-4">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Vehicle Registration Number (VRN)</dt>
+        <dd class="govuk-summary-list__value">
+          <a href="/mvp/v6/gmr-spain/trn-vrn-results?q=HX66 BVL" class="number-plate number-plate--rear" aria-label="Vehicle registration number HX66 BVL">HX66
+            BVL</a>
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Trailer Registration Number (TRN)</dt>
+        <dd class="govuk-summary-list__value">
+          <a href="/mvp/v6/gmr-spain/trn-vrn-results?q=DC17 PPL" class="number-plate number-plate--front" aria-label="Trailer registration number DC17 PPL">DC17
+            PPL</a>
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Arrival date</dt>
+        <dd class="govuk-summary-list__value">07 January 2026, 06:11</dd>
+      </div>
+    </dl>
+
+  </div>
+</div>
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+
+    <h2 class="govuk-heading-m govuk-!-margin-top-6">UK linked customs declarations</h2>
+
+    <table class="govuk-table app-mrn-table app-mrn-table--fixed-columns govuk-!-margin-top-2">
+      <caption class="govuk-visually-hidden">UK linked customs declarations for GMRA00002KW3</caption>
+      <colgroup>
+        <col>
+        <col>
+        <col>
+        <col>
+      </colgroup>
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th scope="col" class="govuk-table__header">MRN</th>
+          <th scope="col" class="govuk-table__header">CDS status</th>
+          <th scope="col" class="govuk-table__header">BTMS decision</th>
+          <th scope="col" class="govuk-table__header">Last updated</th>
+        </tr>
+      </thead>
+      <tbody class="govuk-table__body">
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell">
+            <a href="#">25GB4VN6T1XZ7B3Q5L</a>
+          </td>
+          <td class="govuk-table__cell">
+            <strong class="govuk-tag govuk-tag--yellow">In progress - Awaiting IPAFFS</strong>
+          </td>
+          <td class="govuk-table__cell">Hold - HMI decision not provided</td>
+          <td class="govuk-table__cell">07 January 2026, 13:38</td>
+        </tr>
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell">
+            <a href="#">25GBC64QCLFMUHPAR2</a>
+          </td>
+          <td class="govuk-table__cell">
+            <strong class="govuk-tag govuk-tag--yellow">In progress - Awaiting trader</strong>
+          </td>
+          <td class="govuk-table__cell">No match - CHED cannot be found</td>
+          <td class="govuk-table__cell">07 January 2026, 09:12</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2 class="govuk-heading-m govuk-!-margin-top-6">Non UK linked customs declarations</h2>
+
+    <table class="govuk-table app-mrn-table app-mrn-table--fixed-columns govuk-!-margin-top-2">
+      <caption class="govuk-visually-hidden">Non UK linked customs declarations for GMRA00002KW3</caption>
+      <colgroup>
+        <col>
+        <col>
+        <col>
+        <col>
+      </colgroup>
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th scope="col" class="govuk-table__header">MRN</th>
+          <th scope="col" class="govuk-table__header">GVMS status</th>
+          <th scope="col" class="govuk-table__header">Country</th>
+          <th scope="col" class="govuk-table__header">Last updated</th>
+        </tr>
+      </thead>
+      <tbody class="govuk-table__body">
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell">
+            <a href="/mvp/v6/gmr-spain/search-results-timeline?mrn=25ESDD03IWJ3IHIAR4">25ESDD03IWJ3IHIAR4</a>
+          </td>
+          <td class="govuk-table__cell">
+            <strong class="govuk-tag govuk-tag--yellow">Embarked</strong>
+          </td>
+          <td class="govuk-table__cell">Spain</td>
+          <td class="govuk-table__cell">07 January 2026, 09:07</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>
+
+{% endblock %}
