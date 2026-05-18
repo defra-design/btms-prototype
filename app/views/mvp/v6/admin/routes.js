@@ -1,4 +1,9 @@
 // app/views/mvp/v6/admin/view.js
+const fs = require('fs');
+const path = require('path');
+const moment = require('moment');
+
+
 module.exports = (router) => {
   // Known references for the prototype
   const KNOWN_MRN  = '25GBB6DSB14ECR4AR9';
@@ -7,6 +12,7 @@ module.exports = (router) => {
   // Patterns
   const mrnPattern  = /^25GB[A-Z0-9]{14}$/;                                   // 18 chars total
   const chedPattern = /^(CHED(P|PP)?\.GB\.\d{4}\.\d+|GBCHD\d{4}\.\d+)$/i;      // CHEDP.GB.2025.123 / GBCHD2025.123
+
 
   // ---- helper: pretty JSON -> <ol> with line numbers + GOV.UK token colours ----
   function renderJsonLinesHTML(obj) {
@@ -1307,13 +1313,19 @@ module.exports = (router) => {
     next();
   });
 
+  router.get('/mvp/v6/admin/higher-levels-matching.csv', (req, res) => {
+    const query = new URLSearchParams(req.query).toString();
+    const target = `/mvp/v6/reporting/higher-levels-matching.csv?view=summary${query ? `&${query}` : ''}`;
+    res.redirect(302, target);
+  });
+
   // GET: empty page
   router.get('/mvp/v6/admin/view', (req, res) => {
     const search = (req.query.searchTerm || '').trim().toUpperCase();
     
     if (!search) {
       return res.render('mvp/v6/admin/view', {
-        data: { searchTerm: '' },
+        data: req.session.data || {},
         hasResults: false
       });
     }

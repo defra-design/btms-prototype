@@ -9,7 +9,7 @@
 {% set breadcrumb = true %}
 {% set showSubheader = true %}
 {% set subHeader = 'Showing result for' %}
-{% set title = '25GB4VN6T1XZ7B3Q5L' %}
+{% set title = data.searchTerm or '25GB4VN6T1XZ7B3Q5L' %}
 {% set bodyClasses = 'mrn accordion v4' %}
 {% set cssClassName = 'timeline' %}
 {% set hideManageAccount = 'false' %}
@@ -18,23 +18,35 @@
 {% set showMenu = true %}
 {% set searchLinkHref = '../search' %}
 {% set menu = true %}
+{% set activeTab = 'timeline' %}
+{% set showWatermelonsMatchingTabs = title == '26GB16ICKGJAY5MAR4' %}
 
 {% block form %}
 
+{% if showWatermelonsMatchingTabs %}
+{% include 'includes/watermelons-matching-important-banner.html' %}
+{% endif %}
 
-
+{% if showWatermelonsMatchingTabs %}
+<div class="govuk-tabs govuk-tabs--link-tabs">
+{% else %}
 <div class="govuk-tabs" data-module="govuk-tabs">
+{% endif %}
+  {% if showWatermelonsMatchingTabs %}
+  {% include 'includes/watermelons-matching-tabs.html' %}
+  {% else %}
   <ul class="govuk-tabs__list">
     <li class="govuk-tabs__list-item">
-      <a class="govuk-tabs__tab" href="#summary">Latest</a>
+      <a class="govuk-tabs__tab" href="/mvp/v6/vrn-search/watermelons-declaration-details?q={{ title | urlencode }}">Latest</a>
     </li>
     <li class="govuk-tabs__list-item govuk-tabs__list-item--selected">
       <a class="govuk-tabs__tab" href="#timeline">Timeline</a>
     </li>
   </ul>
+  {% endif %}
 
   <!-- SUMMARY TAB -->
-  <div class="govuk-tabs__panel" id="summary">
+  <div class="govuk-tabs__panel{% if showWatermelonsMatchingTabs %} govuk-!-display-none{% endif %}" id="summary">
     <h2 class="govuk-heading-m sectionHeader">{{ data.Cds | safe }}</h2>
 
 {% include 'includes/mrn-filters.html' %}

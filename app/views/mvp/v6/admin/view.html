@@ -6,67 +6,176 @@
 {% set showheader = true %}
 {% set hideBackLink = true %}
 {% set hideManageAccount = 'false' %}
-{% set bodyClasses = 'admin' %}
+{% set bodyClasses = 'admin reporting' %}
 
 {% block form %}
-  <div class="govuk-form-group search-container">
-    <h1 class="govuk-label-wrapper">
-      <label class="govuk-label govuk-label--l" for="searchTerm">Search for an MRN or CHED</label>
-    </h1>
+  <div class="govuk-tabs" data-module="govuk-tabs">
+    <ul class="govuk-tabs__list">
+      <li class="govuk-tabs__list-item govuk-tabs__list-item--selected">
+        <a class="govuk-tabs__tab" href="#dead-letters">Dead letters</a>
+      </li>
+      <li class="govuk-tabs__list-item">
+        <a class="govuk-tabs__tab" href="#messages">Messages</a>
+      </li>
+    </ul>
 
-    <div class="govuk-form-group{% if data.error %} govuk-form-group--error{% endif %}">
-      {% if data.error %}
-        <p class="govuk-error-message">
-          <span class="govuk-visually-hidden">Error:</span> {{ data.errorMessage }}
-        </p>
-      {% endif %}
+    <div class="govuk-tabs__panel" id="dead-letters">
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+      <h2 class="govuk-heading-l govuk-!-margin-top-0">Dead letter queues</h2>
+      <p class="govuk-body govuk-!-font-size-16">Current dead letter queue quantities</p>
 
-      <div class="govuk-input-wrapper">
-        <input
-          class="govuk-input"
-          id="searchTerm"
-          name="data.searchTerm"
-          type="text"
-          value="{{ data.searchTerm or '' }}"
-          spellcheck="false"
-        />
-           <button type="button" id="clearButton" class="clear-search" onclick="clearSearch()">
-          &times;
-        </button>
-        <button type="submit" class="btms-search__button" aria-label="Search">
-          <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-            <circle cx="10" cy="10" r="8" stroke="#fff" stroke-width="2"></circle>
-            <line x1="15" y1="15" x2="22" y2="22" stroke="#fff" stroke-width="2"></line>
-          </svg>
-        </button>
+      <h3 class="govuk-heading-m govuk-!-margin-bottom-2">BTMS Gateway</h3>
+      <table class="govuk-table govuk-!-margin-bottom-6">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header">Queue name</th>
+            <th scope="col" class="govuk-table__header govuk-table__header--numeric">Dead letter count</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">
+              <strong class="govuk-!-font-weight-bold">BTMS Gateway</strong><br>
+              <span class="govuk-body-s">trade_imports_data_upserted_btms-gateway-deadletter</span>
+            </td>
+            <td class="govuk-table__cell govuk-table__cell--numeric">0</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 class="govuk-heading-m govuk-!-margin-bottom-2">Processor</h3>
+      <table class="govuk-table govuk-!-margin-bottom-6">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header">Queue name</th>
+            <th scope="col" class="govuk-table__header govuk-table__header--numeric">Dead letter count</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">
+              <strong class="govuk-!-font-weight-bold">Customs Declarations Processor</strong><br>
+              <span class="govuk-body-s">trade_imports_inbound_customs_declarations_processor-deadletter.fifo</span>
+            </td>
+            <td class="govuk-table__cell govuk-table__cell--numeric">0</td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">
+              <strong class="govuk-!-font-weight-bold">Upserted Processor</strong><br>
+              <span class="govuk-body-s">trade_imports_data_upserted_processor-deadletter</span>
+            </td>
+            <td class="govuk-table__cell govuk-table__cell--numeric">0</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 class="govuk-heading-m govuk-!-margin-bottom-2">Reporting</h3>
+      <table class="govuk-table govuk-!-margin-bottom-6">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header">Queue name</th>
+            <th scope="col" class="govuk-table__header govuk-table__header--numeric">Dead letter count</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">
+              <strong class="govuk-!-font-weight-bold">Upserted Reporting API</strong><br>
+              <span class="govuk-body-s">trade_imports_data_upserted_reporting_api-deadletter</span>
+            </td>
+            <td class="govuk-table__cell govuk-table__cell--numeric">0</td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">
+              <strong class="govuk-!-font-weight-bold">Activity Reporting API</strong><br>
+              <span class="govuk-body-s">trade_imports_btms_activity_reporting_api-deadletter</span>
+            </td>
+            <td class="govuk-table__cell govuk-table__cell--numeric">0</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 class="govuk-heading-m govuk-!-margin-bottom-2">Decision Deriver</h3>
+      <table class="govuk-table">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header">Queue name</th>
+            <th scope="col" class="govuk-table__header govuk-table__header--numeric">Dead letter count</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">
+              <strong class="govuk-!-font-weight-bold">Decision Deriver</strong><br>
+              <span class="govuk-body-s">trade_imports_data_upserted_decision_deriver-deadletter</span>
+            </td>
+            <td class="govuk-table__cell govuk-table__cell--numeric">0</td>
+          </tr>
+        </tbody>
+      </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="messages">
+      <div class="govuk-form-group search-container">
+        <h1 class="govuk-label-wrapper">
+          <label class="govuk-label govuk-label--l" for="searchTerm">Search for an MRN or CHED</label>
+        </h1>
+
+        <div class="govuk-form-group{% if data.error %} govuk-form-group--error{% endif %}">
+          {% if data.error %}
+            <p class="govuk-error-message">
+              <span class="govuk-visually-hidden">Error:</span> {{ data.errorMessage }}
+            </p>
+          {% endif %}
+
+          <div class="govuk-input-wrapper">
+            <input
+              class="govuk-input"
+              id="searchTerm"
+              name="data.searchTerm"
+              type="text"
+              value="{{ data.searchTerm or '' }}"
+              spellcheck="false"
+            />
+            <button type="button" id="clearButton" class="clear-search" onclick="clearSearch()">
+              &times;
+            </button>
+            <button type="submit" class="btms-search__button" aria-label="Search">
+              <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <circle cx="10" cy="10" r="8" stroke="#fff" stroke-width="2"></circle>
+                <line x1="15" y1="15" x2="22" y2="22" stroke="#fff" stroke-width="2"></line>
+              </svg>
+            </button>
+          </div>
+        </div>
       </div>
 
+      {% if hasResults %}
+        <div class="govuk-tabs govuk-!-margin-top-6" data-module="govuk-tabs">
+          <ul class="govuk-tabs__list">
+            <li class="govuk-tabs__list-item govuk-tabs__list-item--selected">
+              <a class="govuk-tabs__tab" href="#mrn-info">
+                {{ primaryTabLabel | default('MRN information') }}
+              </a>
+            </li>
+            <li class="govuk-tabs__list-item">
+              <a class="govuk-tabs__tab" href="#all-messages">All messages</a>
+            </li>
+          </ul>
 
+          <div class="govuk-tabs__panel" id="mrn-info">
+            <div class="codeframe">{{ mrnHtml | safe }}</div>
+          </div>
+
+          <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="all-messages">
+            <div class="codeframe">{{ messagesHtml | safe }}</div>
+          </div>
+        </div>
+      {% endif %}
     </div>
+
   </div>
-
-  {% if hasResults %}
-    <div class="govuk-tabs govuk-!-margin-top-6" data-module="govuk-tabs">
-      <ul class="govuk-tabs__list">
-        <li class="govuk-tabs__list-item govuk-tabs__list-item--selected">
-          <a class="govuk-tabs__tab" href="#mrn-info">
-            {{ primaryTabLabel | default('MRN information') }}
-          </a>
-        </li>
-        <li class="govuk-tabs__list-item">
-          <a class="govuk-tabs__tab" href="#all-messages">All messages</a>
-        </li>
-      </ul>
-
-      <section class="govuk-tabs__panel" id="mrn-info">
-        <div class="codeframe">{{ mrnHtml | safe }}</div>
-      </section>
-
-      <section class="govuk-tabs__panel govuk-tabs__panel--hidden" id="all-messages">
-        <div class="codeframe">{{ messagesHtml | safe }}</div>
-      </section>
-    </div>
-  {% endif %}
-
 {% endblock %}
-

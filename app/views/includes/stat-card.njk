@@ -1,11 +1,11 @@
 {# includes/stat-card.njk #}
-{% macro statCard(label, value, percentage = "", modifier = "", href = "", linkText = "Download CSV") %}
+{% macro statCard(label, value, percentage = "", modifier = "", href = "", linkText = "Download CSV", hiddenLabel = "") %}
   {# normalise the value to a number (handles "1,175") #}
   {% set valueStr = (value | string) %}
   {% set numeric  = (valueStr | replace(",", "") | float) %}
 
   <div class="stat-card {{ modifier }}">
-    <div class="stat-card__label">{{ label }}</div>
+    <div class="stat-card__label">{{ label }}{% if hiddenLabel %}<span class="govuk-visually-hidden"> {{ hiddenLabel }}</span>{% endif %}</div>
     <div class="stat-card__value-wrapper">
       <span class="stat-card__value">{{ value }}</span>
       {% if percentage %}

@@ -17,14 +17,14 @@
   }
 
   /* Typography tweaks */
-  label {
+  label:not(.govuk-label--l):not(.govuk-label--m):not(.govuk-label--xl) {
     font-weight: 700;
     font-size: 16px;
   }
   #portOfEntry-group label { font-weight: 100; }
 
 
-  .govuk-label,
+  .govuk-label:not(.govuk-label--l):not(.govuk-label--m):not(.govuk-label--xl),
   .govuk-list {
     font-size: 16px;
   }
@@ -125,6 +125,75 @@
     margin: 0;
     margin-top: auto;
     /* pins link to bottom so numbers align across cards */
+  }
+
+  .reporting-results-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+  }
+
+  .reporting-results-header > div:first-child {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .reporting-results-header .govuk-caption-m {
+    display: block;
+    margin-bottom: 0;
+  }
+
+  .match-levels-download .govuk-button,
+  .match-levels-tab-header .govuk-button {
+    margin: 0;
+  }
+
+  .match-levels-tab-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+    width: 100%;
+  }
+
+  .match-levels-tab-header .govuk-button {
+    margin-left: auto;
+  }
+
+  .match-levels-stat-group + .match-levels-stat-group {
+    margin-top: 30px;
+  }
+
+  .match-levels-stat-group .stat-card-group {
+    margin-top: 0;
+  }
+
+  .stat-card-group--match-levels,
+  .stat-card-group--eu-row-split {
+    flex-wrap: nowrap;
+  }
+
+  .stat-card-group--match-levels .stat-card,
+  .stat-card-group--eu-row-split .stat-card {
+    flex: 1 1 0;
+    width: auto;
+    min-width: 0;
+    max-width: 200px;
+  }
+
+  @media (max-width: 768px) {
+    .stat-card-group--match-levels,
+    .stat-card-group--eu-row-split {
+      flex-wrap: wrap;
+    }
+
+    .stat-card-group--match-levels .stat-card,
+    .stat-card-group--eu-row-split .stat-card {
+      width: 100%;
+      max-width: none;
+    }
   }
 
   /* Responsive */

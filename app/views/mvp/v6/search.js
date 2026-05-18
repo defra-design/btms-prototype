@@ -22,6 +22,7 @@ const searchRedirects = {
   '24GBDYHR49XV9BAFS1': 'filters-v4',
   'GMRA00002TT2': 'timeline/gmr',
   'GMRA00002KW3': 'gmr-spain/gmr',
+  '26GB16ICKGJAY5MAR4': 'vrn-search/watermelons-declaration-details',
   '25GB4VN6T1XZ7B3Q5L': 'vrn-search/search-results-timeline',
   '25GBDD03IWJ3IHIAR1': 'vrn-search/search-results-timeline',
   'CHEDPP.GB.2026.7069665': 'vrn-search/search-results-timeline'
@@ -67,7 +68,7 @@ module.exports = (router) => {
     if (searchRedirects[search]) {
       data.searchTerm = search;
       data.title = search;
-      return res.redirect(`/mvp/v6/${searchRedirects[search]}`);
+      return res.redirect(`/mvp/v6/${searchRedirects[search]}?q=${encodeURIComponent(search)}`);
     }
 
     // Handle TRN/VRN search - redirect to TRN/VRN results page
@@ -175,8 +176,61 @@ module.exports = (router) => {
   });
 
   // GET: MRN search results page in vrn-search folder
+  router.get('/mvp/v6/vrn-search/watermelons-declaration-details', (req, res) => {
+    const explicit = (req.query.mrn || req.query.q || '').trim();
+    const mrn = explicit || '26GB16ICKGJAY5MAR4';
+
+    req.session.data = req.session.data || {};
+    req.session.data.title = mrn;
+    req.session.data.searchTerm = mrn;
+    req.session.data.Cds = req.session.data.Cds || 'Customs declaration details';
+    req.session.data.Ipaffs = req.session.data.Ipaffs || 'IPAFFS notification (CHED) details';
+
+    res.render('mvp/v6/vrn-search/watermelons-declaration-details', {
+      title: mrn,
+      data: req.session.data
+    });
+  });
+
+  router.get('/mvp/v6/vrn-search/watermelons-declaration-details-tabs', (req, res) => {
+    const explicit = (req.query.mrn || req.query.q || '').trim();
+    const mrn = explicit || '26GB16ICKGJAY5MAR4';
+
+    req.session.data = req.session.data || {};
+    req.session.data.title = mrn;
+    req.session.data.searchTerm = mrn;
+    req.session.data.Cds = req.session.data.Cds || 'Customs declaration details';
+    req.session.data.Ipaffs = req.session.data.Ipaffs || 'IPAFFS notification (CHED) details';
+
+    res.render('mvp/v6/vrn-search/watermelons-declaration-details-tabs', {
+      title: mrn,
+      data: req.session.data
+    });
+  });
+
+  router.get('/mvp/v6/vrn-search/watermelons-declaration-details-tabs-level-2', (req, res) => {
+    const explicit = (req.query.mrn || req.query.q || '').trim();
+    const mrn = explicit || '26GB16ICKGJAY5MAR4';
+
+    req.session.data = req.session.data || {};
+    req.session.data.title = mrn;
+    req.session.data.searchTerm = mrn;
+    req.session.data.Cds = req.session.data.Cds || 'Customs declaration details';
+    req.session.data.Ipaffs = req.session.data.Ipaffs || 'IPAFFS notification (CHED) details';
+
+    res.render('mvp/v6/vrn-search/watermelons-declaration-details-tabs-level-2', {
+      title: mrn,
+      data: req.session.data
+    });
+  });
+
+  router.get('/mvp/v6/vrn-search/search-results-latest', (req, res) => {
+    const query = req.url.includes('?') ? req.url.slice(req.url.indexOf('?')) : '';
+    return res.redirect(301, `/mvp/v6/vrn-search/watermelons-declaration-details${query}`);
+  });
+
   router.get('/mvp/v6/vrn-search/search-results-timeline', (req, res) => {
-    const mrn = req.query.mrn || req.query.q || req.session.data?.title || '25GBDD03IWJ3IHIAR1';
+    const mrn = req.query.mrn || req.query.q || req.session.data?.title || '25GB4VN6T1XZ7B3Q5L';
     
     req.session.data = req.session.data || {};
     req.session.data.title = mrn;

@@ -9,6 +9,7 @@
 
 {% block form %}
 {% from "includes/stat-card.njk" import statCard %}
+{% from "includes/higher-levels-matching-panels.njk" import matchLevelsTabHeader, matchLevelsSummaryPanel, matchLevelsEuRowPanel %}
 
 {% block pageScripts %}
   <script src="/public/javascripts/matches-chart.js"></script>
@@ -27,10 +28,9 @@
 
         <nav class="govuk-!-margin-top-1">
           <ul class="govuk-list" id="preset-links">
-            <li><a href="#" data-range="today">Today</a></li>
-            <li><a href="#" data-range="yesterday">Yesterday</a></li>
-            <li><a href="#" data-range="last-week">Last week</a></li>
-            <li><a href="#" data-range="last-month">Last month</a></li>
+            {% for link in data.presetLinks or [] %}
+              <li><a href="{{ link.href }}">{{ link.label }}</a></li>
+            {% endfor %}
           </ul>
         </nav>
 
@@ -54,6 +54,8 @@
           }) }}
         </div>
 
+        <input type="hidden" name="activeTab" id="activeTab" value="{{ data.activeTab or '' }}">
+
         <button class="govuk-button govuk-!-margin-bottom-6" data-module="govuk-button" type="submit">Update</button>
       </fieldset>
     </div>
@@ -64,6 +66,8 @@
 
     {% set hasResults = (data.searchResults == true) or (data.searchResults == 'true') %}
     {% if hasResults %}
+
+      {% set hasMatchLevelResults = data.matchLevelsSearchResults and data.matchLevelsStats %}
 
       <span class="govuk-caption-m">Showing results from</span>
       <h2 class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-5">{{ data.displayDateRange }}</h2>
@@ -76,6 +80,12 @@
           <li class="govuk-tabs__list-item">
             <a class="govuk-tabs__tab" href="#chart">Chart view</a>
           </li>
+          <li class="govuk-tabs__list-item">
+            <a class="govuk-tabs__tab" href="#higher-levels-of-matching">L1, L2 &amp; L3 matching</a>
+          </li>
+          <li class="govuk-tabs__list-item">
+            <a class="govuk-tabs__tab" href="#match-levels-eu-row-split">EU/RoW split</a>
+          </li>
         </ul>
 
         <!-- SUMMARY -->
@@ -84,7 +94,7 @@
             <h2 class="govuk-heading-m">Matches</h2>
             <div class="stat-card-group">
               {{ statCard("Matches", data.stats.matches | string, data.stats.matchesPct) }}
-              {{ statCard("No matches", data.stats.noMatches | string, data.stats.noMatchesPct) }}
+              {{ statCard("No matches", data.stats.noMatches | string, data.stats.noMatchesPct, "", "/mvp/v6/reporting/no-matches-basic.csv", "Download CSV") }}
               {{ statCard("Total", data.stats.totalLineItems | string, "") }}
             </div>
           </div>
@@ -93,7 +103,7 @@
             <h2 class="govuk-heading-m">Releases</h2>
             <div class="stat-card-group">
               {{ statCard("Auto", data.stats.autoReleases | string, data.stats.autoPct, "stat-card--blue") }}
-              {{ statCard("Manual", data.stats.manualReleases | string, data.stats.manualPct, "stat-card--blue") }}
+              {{ statCard("Manual", data.stats.manualReleases | string, data.stats.manualPct, "stat-card--blue", "/mvp/v6/reporting/manual-release.csv", "Download CSV") }}
               {{ statCard("Total", data.stats.totalReleases | string, "", "stat-card--blue") }}
             </div>
           </div>
@@ -312,6 +322,28 @@
             </div>
           </div>
         </div> <!-- /#chart -->
+
+        <!-- L1, L2 AND L3 MATCHING -->
+        <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="higher-levels-of-matching">
+          {% if hasMatchLevelResults %}
+            {{ matchLevelsTabHeader("Higher levels of matching", data, "/mvp/v6/reporting/higher-levels-matching.csv?view=summary") }}
+            {{ matchLevelsSummaryPanel(data) }}
+          {% else %}
+            <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-5">No results</p>
+            <p class="govuk-body">To view higher levels of matching data, set the filters and select Update.</p>
+          {% endif %}
+        </div>
+
+        <!-- EU / RoW SPLIT -->
+        <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="match-levels-eu-row-split">
+          {% if hasMatchLevelResults and data.matchLevelsEuRowStats %}
+            {{ matchLevelsTabHeader("EU and RoW split", data, "/mvp/v6/reporting/higher-levels-matching.csv?view=eu-row") }}
+            {{ matchLevelsEuRowPanel(data) }}
+          {% else %}
+            <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-5">No results</p>
+            <p class="govuk-body">To view L1, L2 and L3 matching data, set the filters and select Update.</p>
+          {% endif %}
+        </div>
       </div> <!-- /.govuk-tabs -->
 
     {% else %}
@@ -436,28 +468,49 @@
       });
     });
 
-    const list = document.querySelector('#preset-links');
-    if(list){
-      const fmt = d => d.toLocaleDateString('en-GB');
-      const startOfDay = d => new Date(d.getFullYear(), d.getMonth(), d.getDate(), 0, 0, 0);
-      const endOfDay   = d => new Date(d.getFullYear(), d.getMonth(), d.getDate(), 23, 59, 0);
-      function rangeFor(key){
-        const now = new Date(); let start,end;
-        if (key==='today'){ start=startOfDay(now); end=endOfDay(now); }
-        else if (key==='yesterday'){ const y=new Date(now); y.setDate(y.getDate()-1); start=startOfDay(y); end=endOfDay(y); }
-        else if (key==='last-week'){ end=endOfDay(now); const s=new Date(end); s.setDate(s.getDate()-6); start=startOfDay(s); }
-        else if (key==='last-month'){ end=endOfDay(now); const s=new Date(end); s.setMonth(s.getMonth()-1); start=startOfDay(s); }
-        else return null;
-        return { start: fmt(start), end: fmt(end) };
-      }
-      list.querySelectorAll('a[data-range]').forEach(a=>{
-        const rng = rangeFor(a.getAttribute('data-range')); if(!rng) return;
-        const url = new URL(window.location.href);
-        url.searchParams.set('startDate', rng.start);
-        url.searchParams.set('endDate',   rng.end);
-        url.searchParams.set('searchResults', 'true');
-        a.setAttribute('href', url.pathname + '?' + url.searchParams.toString());
+    function currentTabHash() {
+      const selected = document.querySelector('.govuk-tabs__list-item--selected a.govuk-tabs__tab');
+      return selected ? selected.getAttribute('href') : '';
+    }
+
+    function syncActiveTabField() {
+      const field = document.getElementById('activeTab');
+      if (!field) return;
+      field.value = currentTabHash() || window.location.hash || '';
+    }
+
+    function updatePresetLinkHashes() {
+      const hash = currentTabHash() || '';
+      document.querySelectorAll('#preset-links a[href]').forEach((link) => {
+        const url = new URL(link.href, window.location.origin);
+        url.hash = hash;
+        link.href = url.pathname + url.search + url.hash;
       });
+    }
+
+    const reportingTabs = document.querySelector('.govuk-tabs[data-module="govuk-tabs"]');
+    if (reportingTabs) {
+      reportingTabs.querySelectorAll('.govuk-tabs__tab').forEach((tab) => {
+        tab.addEventListener('click', () => {
+          syncActiveTabField();
+          updatePresetLinkHashes();
+        });
+      });
+    }
+
+    const updateButton = document.querySelector('.filters button[type="submit"]');
+    if (updateButton) {
+      updateButton.addEventListener('click', syncActiveTabField);
+    }
+
+    syncActiveTabField();
+    updatePresetLinkHashes();
+
+    if (window.location.hash && reportingTabs) {
+      const tabLink = reportingTabs.querySelector(`.govuk-tabs__tab[href="${window.location.hash}"]`);
+      if (tabLink) {
+        tabLink.click();
+      }
     }
   })();
 </script>

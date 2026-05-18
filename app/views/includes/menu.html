@@ -21,7 +21,7 @@
 
           <li class="govuk-service-navigation__item {{ 'govuk-service-navigation__item--active' if currentPage == 'reporting' }}">
             <a class="govuk-service-navigation__link"
-               href="/mvp/v5/reporting/summary-view"
+               href="/mvp/v6/reporting/summary-view"
                {% if currentPage == 'reporting' %}aria-current="true"{% endif %}>
               <strong class="govuk-service-navigation__active-fallback">Reporting</strong>
             </a>
@@ -29,21 +29,21 @@
 
           <li class="govuk-service-navigation__item {{ 'govuk-service-navigation__item--active' if currentPage == 'latest-activity' }}">
             <a class="govuk-service-navigation__link"
-               href="/mvp/v5/latest-activity"
+               href="/mvp/v6/latest-activity"
                {% if currentPage == 'latest-activity' %}aria-current="true"{% endif %}>
                Latest activity
             </a>
           </li>
         <!-- <li class="govuk-service-navigation__item {{ 'govuk-service-navigation__item--active' if currentPage == 'user-guide' }}">
             <a class="govuk-service-navigation__link"
-               href="/mvp/v5/user-guide"
+               href="/mvp/v6/user-guide"
                {% if currentPage == 'user-guide' %}aria-current="true"{% endif %}>
                User guide
             </a>
           </li> -->
                 <li class="govuk-service-navigation__item {{ 'govuk-service-navigation__item--active' if currentPage == 'admin' }}">
             <a class="govuk-service-navigation__link"
-               href="/mvp/v5/admin/view"
+               href="/mvp/v6/admin/view"
                {% if currentPage == 'admin' %}aria-current="true"{% endif %}>
                Admin view
             </a>
@@ -54,14 +54,14 @@
           {% if _hideManageAccount != 'true' %}
             <li class="govuk-service-navigation__item app-push-right {{ 'govuk-service-navigation__item--active' if currentPage == 'manage-account' }}">
               <a class="govuk-service-navigation__link"
-                href="/mvp/v5/manage-account"
+                href="/mvp/v6/manage-account"
                 {% if currentPage == 'manage-account' %}aria-current="true"{% endif %}>
                 Manage account
               </a>
             </li>
           {% endif %}
           <li class="govuk-service-navigation__item">
-            <a class="govuk-service-navigation__link" href="/mvp/v5/sign-out">Sign out</a>
+            <a class="govuk-service-navigation__link" href="/mvp/v6/sign-out">Sign out</a>
           </li>
         </ul>
 

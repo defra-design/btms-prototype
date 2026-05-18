@@ -2,6 +2,12 @@ const fs = require('fs');
 const path = require('path');
 const _ = require('lodash');
 const moment = require('moment');
+const {
+  attachMatchLevelsToSessionData,
+  buildMatchLevelsSummaryCsv,
+  buildMatchLevelsEuRowCsv,
+  withBOM
+} = require('../../../lib/higher-levels-matching');
 
 
 module.exports = (router) => {
@@ -145,6 +151,53 @@ module.exports = (router) => {
   }
 
   // ----------------- summary route factory -----------------
+  function safeReportingTabHash(activeTab) {
+    const hash = String(activeTab || '').trim();
+    return /^#[a-z0-9-]+$/.test(hash) ? hash : '';
+  }
+
+  function buildReportingPresetLinks(getPath, activeTab = '') {
+    const hash = safeReportingTabHash(activeTab);
+    const fmt = (m) => m.format('DD/MM/YYYY');
+    const now = moment();
+
+    const ranges = [
+      {
+        label: 'Today',
+        start: now.clone().startOf('day'),
+        end: now.clone().endOf('day')
+      },
+      {
+        label: 'Yesterday',
+        start: now.clone().subtract(1, 'day').startOf('day'),
+        end: now.clone().subtract(1, 'day').endOf('day')
+      },
+      {
+        label: 'Last week',
+        start: now.clone().subtract(6, 'days').startOf('day'),
+        end: now.clone().endOf('day')
+      },
+      {
+        label: 'Last month',
+        start: now.clone().subtract(1, 'month').startOf('day'),
+        end: now.clone().endOf('day')
+      }
+    ];
+
+    return ranges.map(({ label, start, end }) => {
+      const params = new URLSearchParams({
+        startDate: fmt(start),
+        endDate: fmt(end),
+        searchResults: 'true'
+      });
+
+      return {
+        label,
+        href: `${getPath}?${params.toString()}${hash}`
+      };
+    });
+  }
+
   function registerSummary({ viewPath, getPath, postPath }) {
     // Store filters (dates + ports) from forms
     router.post(postPath, (req, res) => {
@@ -308,7 +361,8 @@ module.exports = (router) => {
         delete req.session.data.displayDateRange;
 
         req.session.data.searchResults = false;
-        return res.redirect(getPath);
+        req.session.data.activeTab = safeReportingTabHash(req.body.activeTab);
+        return res.redirect(getPath + req.session.data.activeTab);
       }
 
       // ---- success: persist filters exactly as before ----
@@ -331,12 +385,36 @@ module.exports = (router) => {
         : `${s.format('D MMMM YYYY')} at ${s.format('HH:mm')} to ${e.format('D MMMM YYYY')} at ${e.format('HH:mm')}`;
 
       req.session.data.searchResults = true;
-      res.redirect(getPath);
+      attachMatchLevelsToSessionData(req.session.data);
+      req.session.data.activeTab = safeReportingTabHash(req.body.activeTab);
+      res.redirect(getPath + req.session.data.activeTab);
     });
 
     // Render with computed stats (only if user has applied filters)
     router.get(getPath, (req, res) => {
       req.session.data = req.session.data || {};
+
+      const queryStartDate = (req.query.startDate || '').trim();
+      const queryEndDate = (req.query.endDate || '').trim();
+      if (queryStartDate && queryEndDate) {
+        req.session.data.startDate = queryStartDate;
+        req.session.data.endDate = queryEndDate;
+        req.session.data.startTime = { hour: '00', minute: '00' };
+        req.session.data.endTime = { hour: '23', minute: '59' };
+        if (String(req.query.searchResults || '') === 'true') {
+          req.session.data.searchResults = true;
+        }
+      }
+
+      const queryTab = safeReportingTabHash(req.query.activeTab);
+      if (queryTab) {
+        req.session.data.activeTab = queryTab;
+      }
+
+      req.session.data.presetLinks = buildReportingPresetLinks(
+        getPath,
+        req.session.data.activeTab
+      );
 
       // Always offer ports
       req.session.data.portOptions = getUniquePorts();
@@ -448,10 +526,44 @@ module.exports = (router) => {
   range.start, range.end, /* usedSession */ true, range.fallbackLabel
  );
       req.session.data.searchResults = true;
+      attachMatchLevelsToSessionData(req.session.data);
+
+      if (!req.session.data.activeTab) {
+        req.session.data.activeTab = safeReportingTabHash(req.query.activeTab);
+      }
+
+      req.session.data.presetLinks = buildReportingPresetLinks(
+        getPath,
+        req.session.data.activeTab
+      );
 
       res.render(viewPath, { data: req.session.data });
     });
   }
+
+  router.get('/mvp/v6/reporting/higher-levels-matching.csv', (req, res) => {
+    const sessionData = req.session.data || {};
+    const startDate = String(req.query.startDate || sessionData.startDate || '').trim();
+    const endDate = String(req.query.endDate || sessionData.endDate || '').trim();
+    const view = String(req.query.view || 'summary').trim();
+
+    const isEuRow = view === 'eu-row';
+    const csv = isEuRow
+      ? buildMatchLevelsEuRowCsv(startDate, endDate)
+      : buildMatchLevelsSummaryCsv(startDate, endDate);
+    const filename = isEuRow
+      ? 'higher-levels-matching-eu-row.csv'
+      : 'higher-levels-matching-summary.csv';
+
+    if (!csv) {
+      return res.status(404).type('text/plain').send('No match level data for the selected date range.');
+    }
+
+    res.setHeader('Content-Type', 'text/csv; charset=utf-8');
+    res.setHeader('Cache-Control', 'no-store');
+    res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+    res.send(withBOM(csv));
+  });
 
   // ----------------- register summary routes -----------------
   registerSummary({
