@@ -23,6 +23,7 @@ const searchRedirects = {
   'GMRA00002TT2': 'timeline/gmr',
   'GMRA00002KW3': 'gmr-spain/gmr',
   '26GB16ICKGJAY5MAR4': 'vrn-search/watermelons-declaration-details',
+  '25GBDJRJCC9G1PKAR0': 'vrn-search/flowers-declaration-details-tabs',
   '25GB4VN6T1XZ7B3Q5L': 'vrn-search/search-results-timeline',
   '25GBDD03IWJ3IHIAR1': 'vrn-search/search-results-timeline',
   'CHEDPP.GB.2026.7069665': 'vrn-search/search-results-timeline'
@@ -219,6 +220,38 @@ module.exports = (router) => {
     req.session.data.Ipaffs = req.session.data.Ipaffs || 'IPAFFS notification (CHED) details';
 
     res.render('mvp/v6/vrn-search/watermelons-declaration-details-tabs-level-2', {
+      title: mrn,
+      data: req.session.data
+    });
+  });
+
+  router.get('/mvp/v6/vrn-search/flowers-declaration-details-tabs', (req, res) => {
+    const explicit = (req.query.mrn || req.query.q || '').trim();
+    const mrn = explicit || '25GBDJRJCC9G1PKAR0';
+
+    req.session.data = req.session.data || {};
+    req.session.data.title = mrn;
+    req.session.data.searchTerm = mrn;
+    req.session.data.Cds = req.session.data.Cds || 'Customs declaration details';
+    req.session.data.Ipaffs = req.session.data.Ipaffs || 'IPAFFS notification (CHED) details';
+
+    res.render('mvp/v6/vrn-search/flowers-declaration-details-tabs', {
+      title: mrn,
+      data: req.session.data
+    });
+  });
+
+  router.get('/mvp/v6/vrn-search/flowers-declaration-details-tabs-level-3', (req, res) => {
+    const explicit = (req.query.mrn || req.query.q || '').trim();
+    const mrn = explicit || '25GBDJRJCC9G1PKAR0';
+
+    req.session.data = req.session.data || {};
+    req.session.data.title = mrn;
+    req.session.data.searchTerm = mrn;
+    req.session.data.Cds = req.session.data.Cds || 'Customs declaration details';
+    req.session.data.Ipaffs = req.session.data.Ipaffs || 'IPAFFS notification (CHED) details';
+
+    res.render('mvp/v6/vrn-search/flowers-declaration-details-tabs-level-3', {
       title: mrn,
       data: req.session.data
     });

@@ -20,20 +20,29 @@
 {% set menu = true %}
 {% set activeTab = 'timeline' %}
 {% set showWatermelonsMatchingTabs = title == '26GB16ICKGJAY5MAR4' %}
+{% set showFlowersMatchingTabs = title == '25GBDJRJCC9G1PKAR0' %}
+{% set showMatchingLinkTabs = showWatermelonsMatchingTabs or showFlowersMatchingTabs %}
 
 {% block form %}
 
 {% if showWatermelonsMatchingTabs %}
 {% include 'includes/watermelons-matching-important-banner.html' %}
 {% endif %}
+{% if showFlowersMatchingTabs %}
+{% include 'includes/flowers-matching-important-banner-level-3.html' %}
+{% endif %}
 
-{% if showWatermelonsMatchingTabs %}
+{% if showMatchingLinkTabs %}
 <div class="govuk-tabs govuk-tabs--link-tabs">
 {% else %}
 <div class="govuk-tabs" data-module="govuk-tabs">
 {% endif %}
   {% if showWatermelonsMatchingTabs %}
+  {% set showLevel2Preview = true %}
+  {% set showLevel3Preview = false %}
   {% include 'includes/watermelons-matching-tabs.html' %}
+  {% elif showFlowersMatchingTabs %}
+  {% include 'includes/flowers-matching-tabs.html' %}
   {% else %}
   <ul class="govuk-tabs__list">
     <li class="govuk-tabs__list-item">
@@ -46,7 +55,7 @@
   {% endif %}
 
   <!-- SUMMARY TAB -->
-  <div class="govuk-tabs__panel{% if showWatermelonsMatchingTabs %} govuk-!-display-none{% endif %}" id="summary">
+  <div class="govuk-tabs__panel{% if showMatchingLinkTabs %} govuk-!-display-none{% endif %}" id="summary">
     <h2 class="govuk-heading-m sectionHeader">{{ data.Cds | safe }}</h2>
 
 {% include 'includes/mrn-filters.html' %}

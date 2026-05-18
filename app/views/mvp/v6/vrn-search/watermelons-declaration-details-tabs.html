@@ -19,6 +19,8 @@
 {% set menu = true %}
 
 {% set activeTab = 'latest' %}
+{% set showLevel2Preview = true %}
+{% set showLevel3Preview = false %}
 
 {% block form %}
 
@@ -42,10 +44,6 @@
         <div class="row">
           <dt>MRN</dt>
           <dd>{{ title }}</dd>
-        </div>
-        <div class="row">
-          <dt>DUCR</dt>
-          <dd>GB368424530000-FX26010665-01</dd>
         </div>
         <div class="row">
           <dt>CDS status</dt>
@@ -73,6 +71,7 @@
             <th scope="col" class="govuk-table__header">Quantity / Weight</th>
             <th scope="col" class="govuk-table__header">Commodity code</th>
             <th scope="col" class="govuk-table__header">CHED reference</th>
+            <th scope="col" class="govuk-table__header">Match</th>
             <th scope="col" class="govuk-table__header">Authority</th>
             <th scope="col" class="govuk-table__header">Decision</th>
           </tr>
@@ -84,6 +83,7 @@
             <td class="govuk-table__cell">14145</td>
             <td class="govuk-table__cell">0807190050</td>
             <td class="govuk-table__cell ">GBCHD2026.7174423</td>
+            <td class="govuk-table__cell"><span class="govuk-tag govuk-tag--green">Yes</span></td>
             <td class="govuk-table__cell decision ">
               <ul class="govuk-list">
                 <li class="PHSI">PHSI</li>
@@ -101,6 +101,7 @@
             <td class="govuk-table__cell">486818</td>
             <td class="govuk-table__cell">0807110000</td>
             <td class="govuk-table__cell">GBCHD2026.7174423</td>
+            <td class="govuk-table__cell"><span class="govuk-tag govuk-tag--green">Yes</span></td>
             <td class="govuk-table__cell decision">
               <ul class="govuk-list">
                 <li class="PHSI">PHSI</li>
@@ -118,6 +119,7 @@
             <td class="govuk-table__cell">167860</td>
             <td class="govuk-table__cell">0807190050</td>
             <td class="govuk-table__cell split">GBCHD2026.7174423</td>
+            <td class="govuk-table__cell"><span class="govuk-tag govuk-tag--green">Yes</span></td>
             <td class="govuk-table__cell decision ">
               <ul class="govuk-list">
                 <li class="PHSI">PHSI</li>

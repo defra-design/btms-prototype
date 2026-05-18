@@ -258,8 +258,15 @@ tr.filtered-match-no  .govuk-table__cell {
       }
     }
 
-    &.is-level-2-preview {
+    &.is-level-2-preview,
+    &.is-level-3-preview {
       .matching-view__today {
+        display: none;
+      }
+    }
+
+    &.is-level-3-preview {
+      .matching-view__level-2 {
         display: none;
       }
     }
@@ -268,6 +275,59 @@ tr.filtered-match-no  .govuk-table__cell {
   .govuk-tabs--link-tabs {
     .govuk-tabs__panel {
       display: block;
+    }
+  }
+
+  .tooltip--level-3 {
+    min-width: 20rem;
+    max-width: 24rem;
+    padding: 15px;
+    background-color: #fff;
+    border: 1px solid #b1b4b6;
+    font-size: 1rem;
+    line-height: 1.25;
+
+    &__title {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    &__intro {
+      margin-bottom: 12px;
+    }
+
+    &__table {
+      width: 100%;
+      margin: 0;
+      border-collapse: collapse;
+
+      th,
+      td {
+        padding: 8px 0;
+        font-weight: 400;
+        text-align: left;
+        vertical-align: top;
+        border-top: 1px solid #b1b4b6;
+      }
+
+      th {
+        padding-right: 12px;
+        white-space: nowrap;
+      }
+
+      td {
+        width: 100%;
+        text-align: right;
+      }
+    }
+
+    &__difference {
+      th,
+      td {
+        font-weight: 700;
+        border-top: 1px solid #b1b4b6;
+      }
     }
   }
 
