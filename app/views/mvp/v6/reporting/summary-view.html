@@ -39,7 +39,6 @@
             id: "startDate",
             name: "startDate",
             value: data.startDate or "",
-            hint: { text: "For example, 17/5/2025." },
             label: { text: "Start date" }
           }) }}
         </div>
@@ -49,7 +48,6 @@
             id: "endDate",
             name: "endDate",
             value: data.endDate or "",
-            hint: { text: "For example, 17/5/2025." },
             label: { text: "End date" }
           }) }}
         </div>
@@ -92,6 +90,7 @@
         <div class="govuk-tabs__panel" id="summary">
           <div class="stat-card-container govuk-!-margin-bottom-6">
             <h2 class="govuk-heading-m">Matches</h2>
+            <p class="govuk-body govuk-!-font-size-16">Matches are shown by the date the MRN was created, not when the status changed. For example, an MRN created on 1 September but matched on 2 September will appear in the 1 September report.</p>
             <div class="stat-card-group">
               {{ statCard("Matches", data.stats.matches | string, data.stats.matchesPct) }}
               {{ statCard("No matches", data.stats.noMatches | string, data.stats.noMatchesPct, "", "/mvp/v6/reporting/no-matches-basic.csv", "Download CSV") }}
@@ -110,6 +109,7 @@
 
           <div class="stat-card-container govuk-!-margin-bottom-6">
             <h2 class="govuk-heading-m">Unique clearance requests</h2>
+            <p class="govuk-body govuk-!-font-size-16">Each clearance request is a message from CDS to BTMS about an MRN. An MRN can have multiple requests if updated. 'Total' counts all messages. 'Unique' counts distinct MRNs.</p>
             <div class="stat-card-group">
               {{ statCard("Unique clearances", data.stats.uniqueClearances | string, data.stats.uniquePct) }}
               {{ statCard("Total", data.stats.totalClearanceMsgs | string) }}

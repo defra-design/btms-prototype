@@ -16,7 +16,7 @@
     {{ matchLevelDescription(1) }}
     <div class="stat-card-group stat-card-group--match-levels">
       {{ statCard("Matches", data.matchLevelsStats.level1.matches, data.matchLevelsStats.level1.matchesPct, "stat-card--grey") }}
-      {{ statCard("No matches", data.matchLevelsStats.level1.noMatches, data.matchLevelsStats.level1.noMatchesPct, "stat-card--grey") }}
+      {{ statCard("No matches", data.matchLevelsStats.level1.noMatches, data.matchLevelsStats.level1.noMatchesPct, "stat-card--blue") }}
       {{ statCard("Total", data.matchLevelsStats.level1.total, "", "stat-card--grey") }}
     </div>
   </div>
@@ -25,9 +25,9 @@
     <h3 class="govuk-heading-m">Level 2 match rates</h3>
     {{ matchLevelDescription(2) }}
     <div class="stat-card-group stat-card-group--match-levels">
-      {{ statCard("Matches", data.matchLevelsStats.level2.matches, data.matchLevelsStats.level2.matchesPct, "stat-card--blue") }}
+      {{ statCard("Matches", data.matchLevelsStats.level2.matches, data.matchLevelsStats.level2.matchesPct, "stat-card--grey") }}
       {{ statCard("No matches", data.matchLevelsStats.level2.noMatches, data.matchLevelsStats.level2.noMatchesPct, "stat-card--blue") }}
-      {{ statCard("Total", data.matchLevelsStats.level2.total, "", "stat-card--blue") }}
+      {{ statCard("Total", data.matchLevelsStats.level2.total, "", "stat-card--grey") }}
     </div>
   </div>
 
@@ -36,7 +36,7 @@
     {{ matchLevelDescription(3) }}
     <div class="stat-card-group stat-card-group--match-levels">
       {{ statCard("Matches", data.matchLevelsStats.level3.matches, data.matchLevelsStats.level3.matchesPct, "stat-card--grey") }}
-      {{ statCard("No matches", data.matchLevelsStats.level3.noMatches, data.matchLevelsStats.level3.noMatchesPct, "stat-card--grey") }}
+      {{ statCard("No matches", data.matchLevelsStats.level3.noMatches, data.matchLevelsStats.level3.noMatchesPct, "stat-card--blue") }}
       {{ statCard("Total", data.matchLevelsStats.level3.total, "", "stat-card--grey") }}
     </div>
   </div>
@@ -49,17 +49,17 @@
     <div class="match-levels-stat-group">
       <h4 class="govuk-heading-s govuk-!-margin-bottom-3">Matches</h4>
       <div class="stat-card-group stat-card-group--eu-row-split">
-        {{ statCard("EU", data.matchLevelsEuRowStats.level1.euMatches, data.matchLevelsEuRowStats.level1.euMatchesPct, "stat-card--blue", "", "", "matches") }}
-        {{ statCard("RoW", data.matchLevelsEuRowStats.level1.rowMatches, data.matchLevelsEuRowStats.level1.rowMatchesPct, "stat-card--blue", "", "", "matches") }}
-        {{ statCard("Total", data.matchLevelsEuRowStats.level1.totalMatches, data.matchLevelsEuRowStats.level1.totalMatchesPct, "stat-card--blue", "", "", "matches") }}
+        {{ statCard("EU", data.matchLevelsEuRowStats.level1.euMatches, data.matchLevelsEuRowStats.level1.euMatchesPct, "stat-card--grey", "", "", "matches") }}
+        {{ statCard("RoW", data.matchLevelsEuRowStats.level1.rowMatches, data.matchLevelsEuRowStats.level1.rowMatchesPct, "stat-card--grey", "", "", "matches") }}
+        {{ statCard("Total", data.matchLevelsEuRowStats.level1.totalMatches, data.matchLevelsEuRowStats.level1.totalMatchesPct, "stat-card--grey", "", "", "matches") }}
       </div>
     </div>
     <div class="match-levels-stat-group">
       <h4 class="govuk-heading-s govuk-!-margin-bottom-3">No matches</h4>
       <div class="stat-card-group stat-card-group--eu-row-split">
-        {{ statCard("EU", data.matchLevelsEuRowStats.level1.euNoMatches, data.matchLevelsEuRowStats.level1.euNoMatchesPct, "stat-card--grey", "", "", "no matches") }}
-        {{ statCard("RoW", data.matchLevelsEuRowStats.level1.rowNoMatches, data.matchLevelsEuRowStats.level1.rowNoMatchesPct, "stat-card--grey", "", "", "no matches") }}
-        {{ statCard("Total", data.matchLevelsEuRowStats.level1.totalNoMatches, data.matchLevelsEuRowStats.level1.totalNoMatchesPct, "stat-card--grey", "", "", "no matches") }}
+        {{ statCard("EU", data.matchLevelsEuRowStats.level1.euNoMatches, data.matchLevelsEuRowStats.level1.euNoMatchesPct, "stat-card--blue", "", "", "no matches") }}
+        {{ statCard("RoW", data.matchLevelsEuRowStats.level1.rowNoMatches, data.matchLevelsEuRowStats.level1.rowNoMatchesPct, "stat-card--blue", "", "", "no matches") }}
+        {{ statCard("Total", data.matchLevelsEuRowStats.level1.totalNoMatches, data.matchLevelsEuRowStats.level1.totalNoMatchesPct, "stat-card--blue", "", "", "no matches") }}
       </div>
     </div>
   </div>
@@ -70,17 +70,17 @@
     <div class="match-levels-stat-group">
       <h4 class="govuk-heading-s govuk-!-margin-bottom-3">Matches</h4>
       <div class="stat-card-group stat-card-group--eu-row-split">
-        {{ statCard("EU", data.matchLevelsEuRowStats.level2.euMatches, data.matchLevelsEuRowStats.level2.euMatchesPct, "stat-card--blue", "", "", "matches") }}
-        {{ statCard("RoW", data.matchLevelsEuRowStats.level2.rowMatches, data.matchLevelsEuRowStats.level2.rowMatchesPct, "stat-card--blue", "", "", "matches") }}
-        {{ statCard("Total", data.matchLevelsEuRowStats.level2.totalMatches, data.matchLevelsEuRowStats.level2.totalMatchesPct, "stat-card--blue", "", "", "matches") }}
+        {{ statCard("EU", data.matchLevelsEuRowStats.level2.euMatches, data.matchLevelsEuRowStats.level2.euMatchesPct, "stat-card--grey", "", "", "matches") }}
+        {{ statCard("RoW", data.matchLevelsEuRowStats.level2.rowMatches, data.matchLevelsEuRowStats.level2.rowMatchesPct, "stat-card--grey", "", "", "matches") }}
+        {{ statCard("Total", data.matchLevelsEuRowStats.level2.totalMatches, data.matchLevelsEuRowStats.level2.totalMatchesPct, "stat-card--grey", "", "", "matches") }}
       </div>
     </div>
     <div class="match-levels-stat-group">
       <h4 class="govuk-heading-s govuk-!-margin-bottom-3">No matches</h4>
       <div class="stat-card-group stat-card-group--eu-row-split">
-        {{ statCard("EU", data.matchLevelsEuRowStats.level2.euNoMatches, data.matchLevelsEuRowStats.level2.euNoMatchesPct, "stat-card--grey", "", "", "no matches") }}
-        {{ statCard("RoW", data.matchLevelsEuRowStats.level2.rowNoMatches, data.matchLevelsEuRowStats.level2.rowNoMatchesPct, "stat-card--grey", "", "", "no matches") }}
-        {{ statCard("Total", data.matchLevelsEuRowStats.level2.totalNoMatches, data.matchLevelsEuRowStats.level2.totalNoMatchesPct, "stat-card--grey", "", "", "no matches") }}
+        {{ statCard("EU", data.matchLevelsEuRowStats.level2.euNoMatches, data.matchLevelsEuRowStats.level2.euNoMatchesPct, "stat-card--blue", "", "", "no matches") }}
+        {{ statCard("RoW", data.matchLevelsEuRowStats.level2.rowNoMatches, data.matchLevelsEuRowStats.level2.rowNoMatchesPct, "stat-card--blue", "", "", "no matches") }}
+        {{ statCard("Total", data.matchLevelsEuRowStats.level2.totalNoMatches, data.matchLevelsEuRowStats.level2.totalNoMatchesPct, "stat-card--blue", "", "", "no matches") }}
       </div>
     </div>
   </div>
@@ -91,17 +91,17 @@
     <div class="match-levels-stat-group">
       <h4 class="govuk-heading-s govuk-!-margin-bottom-3">Matches</h4>
       <div class="stat-card-group stat-card-group--eu-row-split">
-        {{ statCard("EU", data.matchLevelsEuRowStats.level3.euMatches, data.matchLevelsEuRowStats.level3.euMatchesPct, "stat-card--blue", "", "", "matches") }}
-        {{ statCard("RoW", data.matchLevelsEuRowStats.level3.rowMatches, data.matchLevelsEuRowStats.level3.rowMatchesPct, "stat-card--blue", "", "", "matches") }}
-        {{ statCard("Total", data.matchLevelsEuRowStats.level3.totalMatches, data.matchLevelsEuRowStats.level3.totalMatchesPct, "stat-card--blue", "", "", "matches") }}
+        {{ statCard("EU", data.matchLevelsEuRowStats.level3.euMatches, data.matchLevelsEuRowStats.level3.euMatchesPct, "stat-card--grey", "", "", "matches") }}
+        {{ statCard("RoW", data.matchLevelsEuRowStats.level3.rowMatches, data.matchLevelsEuRowStats.level3.rowMatchesPct, "stat-card--grey", "", "", "matches") }}
+        {{ statCard("Total", data.matchLevelsEuRowStats.level3.totalMatches, data.matchLevelsEuRowStats.level3.totalMatchesPct, "stat-card--grey", "", "", "matches") }}
       </div>
     </div>
     <div class="match-levels-stat-group">
       <h4 class="govuk-heading-s govuk-!-margin-bottom-3">No matches</h4>
       <div class="stat-card-group stat-card-group--eu-row-split">
-        {{ statCard("EU", data.matchLevelsEuRowStats.level3.euNoMatches, data.matchLevelsEuRowStats.level3.euNoMatchesPct, "stat-card--grey", "", "", "no matches") }}
-        {{ statCard("RoW", data.matchLevelsEuRowStats.level3.rowNoMatches, data.matchLevelsEuRowStats.level3.rowNoMatchesPct, "stat-card--grey", "", "", "no matches") }}
-        {{ statCard("Total", data.matchLevelsEuRowStats.level3.totalNoMatches, data.matchLevelsEuRowStats.level3.totalNoMatchesPct, "stat-card--grey", "", "", "no matches") }}
+        {{ statCard("EU", data.matchLevelsEuRowStats.level3.euNoMatches, data.matchLevelsEuRowStats.level3.euNoMatchesPct, "stat-card--blue", "", "", "no matches") }}
+        {{ statCard("RoW", data.matchLevelsEuRowStats.level3.rowNoMatches, data.matchLevelsEuRowStats.level3.rowNoMatchesPct, "stat-card--blue", "", "", "no matches") }}
+        {{ statCard("Total", data.matchLevelsEuRowStats.level3.totalNoMatches, data.matchLevelsEuRowStats.level3.totalNoMatchesPct, "stat-card--blue", "", "", "no matches") }}
       </div>
     </div>
   </div>
