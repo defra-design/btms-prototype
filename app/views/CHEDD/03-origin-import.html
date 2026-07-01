@@ -1,0 +1,45 @@
+{% extends "CHEDD/_base.html" %}
+
+{% block content %}
+<div class="govuk-width-container">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <p class="chedd-ref">DRAFT.GB.2024.7006103 - CHEDD</p>
+      <span class="govuk-caption-l">About the consignment</span>
+      <h1 class="govuk-heading-l">Origin of the import</h1>
+
+      {{ govukSelect({
+        id: "country-origin",
+        name: "country-origin",
+        label: { text: "Country of origin", classes: "govuk-label--m" },
+        items: [{ value: "", text: "Select a country" }, { value: "austria", text: "Austria" }]
+      }) }}
+
+      <p class="govuk-body"><a href="#" class="govuk-link">If the country of origin is not listed</a></p>
+
+      {{ govukRadios({
+        name: "region-code",
+        fieldset: { legend: { text: "Does your consignment require a region code?", classes: "govuk-fieldset__legend--m" } },
+        items: [{ text: "Yes" }, { text: "No" }]
+      }) }}
+
+      {{ govukSelect({
+        id: "consigned-country",
+        name: "consigned-country",
+        label: { text: "Country from where consigned", classes: "govuk-label--m" },
+        items: [{ value: "", text: "Select a country" }, { value: "austria", text: "Austria" }]
+      }) }}
+
+      {{ govukInput({
+        label: { text: "Add a reference number for this consignment (optional)", classes: "govuk-label--m" },
+        hint: { text: "Enter any internal reference number you want to use to identify this consignment, or leave blank." },
+        id: "consignment-ref",
+        name: "consignment-ref",
+        classes: "govuk-input govuk-input--width-40"
+      }) }}
+
+      <a href="/CHEDD/06-commodity-search" class="govuk-button" data-module="govuk-button">Save and continue</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

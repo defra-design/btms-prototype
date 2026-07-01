@@ -1,0 +1,37 @@
+{% extends "CHEDD/_base.html" %}
+
+{% block content %}
+<div class="govuk-width-container">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <p class="chedd-ref">DRAFT.GB.2024.7006103 - CHEDD</p>
+      <span class="govuk-caption-l">Description of the goods</span>
+      <h1 class="govuk-heading-l">Commodity</h1>
+
+      <table class="govuk-table">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th class="govuk-table__header">Commodity code</th>
+            <th class="govuk-table__header">Description</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">10086000</td>
+            <td class="govuk-table__cell">Peppers of the Capsicum species (sweet or other than sweet)</td>
+          </tr>
+        </tbody>
+      </table>
+
+      {{ govukRadios({
+        name: "add-another-commodity",
+        fieldset: { legend: { text: "Do you want to add another commodity?", classes: "govuk-fieldset__legend--m" } },
+        hint: { text: "You can only add another commodity if it has the same country of origin. If not, create a separate notification." },
+        items: [{ text: "Yes" }, { text: "No" }]
+      }) }}
+
+      <a href="/CHEDD/04-main-reason-importing" class="govuk-button" data-module="govuk-button">Save and continue</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

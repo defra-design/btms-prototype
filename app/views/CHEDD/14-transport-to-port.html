@@ -1,0 +1,74 @@
+{% extends "CHEDD/_base.html" %}
+
+{% block content %}
+<div class="govuk-width-container">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <p class="chedd-ref">DRAFT.GB.2024.7006103 - CHEDD</p>
+      <span class="govuk-caption-l">Transport</span>
+      <h1 class="govuk-heading-l">Transport to the port of entry</h1>
+
+      {{ govukInput({ label: { text: "Port of entry", classes: "govuk-label--m" }, id: "port-entry", name: "port-entry", value: "Entry port of entry" }) }}
+      {{ govukSelect({ id: "transport-means", name: "transport-means", label: { text: "Means of transport to port of entry", classes: "govuk-label--m" }, items: [{ value: "", text: "Select means of transport to port of entry" }, { value: "road", text: "Road vehicle" }, { value: "air", text: "Air" }] }) }}
+
+      {{ govukInput({ label: { text: "Transport identification", classes: "govuk-label--m" }, id: "transport-id", name: "transport-id" }) }}
+      <p class="govuk-body chedd-muted">To identify the means of transport, enter (one of the following):</p>
+      <ul class="govuk-list govuk-list--bullet chedd-muted">
+        <li>flight number</li>
+        <li>train number</li>
+        <li>road vehicle registration number</li>
+        <li>vessel name (for ferries, also the road vehicle registration number)</li>
+      </ul>
+
+      {{ govukRadios({
+        name: "trailers",
+        fieldset: { legend: { text: "Are any road trailers or shipping containers being used to transport the consignment?", classes: "govuk-fieldset__legend--m" } },
+        hint: { text: "Provide details of all road trailers and containers or your consignment may be delayed. You may need to contact your haulier for this." },
+        items: [
+          { text: "Yes", conditional: { html: govukInput({ label: { text: "Container or trailer number", classes: "govuk-label--s" }, hint: { text: "Enter the container identification number, or the trailer registration number or number plate." }, id: "container-number", name: "container-number", classes: "govuk-input--width-10" }) + govukInput({ label: { text: "Seal number", classes: "govuk-label--s" }, hint: { text: "Enter the seal number on the official certificate or any other seal mentioned in the accompanying documents." }, id: "seal-number", name: "seal-number", classes: "govuk-input--width-10" }) + govukCheckboxes({ name: "official-seal", items: [{ text: "Official seal", hint: { text: "An official seal is affixed under the supervision of the competent authority issuing the certificate." } }] }) + '<p class="govuk-body"><a href="#" class="govuk-link">Add another container or trailer</a></p>' } },
+          { text: "No" }
+        ]
+      }) }}
+
+      {{ govukInput({ label: { text: "Transport document reference", classes: "govuk-label--m" }, id: "transport-doc-ref", name: "transport-doc-ref", 
+        hint: { text: "Enter the reference number on the air waybill, bill of lading, sea waybill, road consignment note (CMR) or other transport document." } }) }}
+
+      {{ govukDateInput({
+        id: "arrival-date",
+        namePrefix: "arrival-date",
+        fieldset: { legend: { text: "Estimated arrival at port of entry", classes: "govuk-fieldset__legend--m" } },
+        hint: { text: "For example, 27 3 2023" },
+        items: [
+          { name: "day", classes: "govuk-input--width-2" },
+          { name: "month", classes: "govuk-input--width-2" },
+          { name: "year", classes: "govuk-input--width-4" }
+        ]
+      }) }}
+
+      <div class="govuk-form-group">
+        <p class="govuk-body chedd-muted">24 hour format, for example, 14 50</p>
+        <div class="govuk-date-input" id="arrival-time">
+          <div class="govuk-date-input__item">
+            <div class="govuk-form-group">
+              <label class="govuk-label" for="arrival-hour">Hour</label>
+              <input class="govuk-input govuk-input--width-2" id="arrival-hour" name="arrival-hour" type="text">
+            </div>
+          </div>
+          <div class="govuk-date-input__item">
+            <div class="govuk-form-group">
+              <label class="govuk-label" for="arrival-minute">Minutes</label>
+              <input class="govuk-input govuk-input--width-2" id="arrival-minute" name="arrival-minute" type="text">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="chedd-actions">
+        <a href="/CHEDD/05-notification-hub" class="govuk-button govuk-button--secondary" data-module="govuk-button">Save and return to hub</a>
+        <a href="/CHEDD/15-goods-movement-services" class="govuk-button" data-module="govuk-button">Save and continue</a>
+      </div>
+      <p class="govuk-body"><a href="/CHEDD/05-notification-hub" class="govuk-link">Cancel and return to hub</a></p>
+    </div>
+  </div>
+</div>
+{% endblock %}

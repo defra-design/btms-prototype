@@ -1,0 +1,30 @@
+{% extends "CHEDD/_base.html" %}
+{% set showDashboard = true %}
+
+{% block content %}
+<div class="govuk-width-container">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <p class="chedd-ref">DRAFT.GB.2024.7006103 - CHEDD</p>
+      <span class="govuk-caption-l">About the consignment</span>
+      <h1 class="govuk-heading-l">Origin of the animal or product</h1>
+
+      {{ govukSelect({
+        id: "origin-country",
+        name: "origin-country",
+        label: { text: "Country of origin", classes: "govuk-label--m" },
+        items: [
+          { value: "", text: "Select a country" },
+          { value: "austria", text: "Austria" },
+          { value: "france", text: "France" },
+          { value: "germany", text: "Germany" }
+        ]
+      }) }}
+
+      <p class="govuk-body"><a href="#" class="govuk-link">If the country of origin is not listed</a></p>
+
+      <a href="/CHEDD/03-origin-import" class="govuk-button" data-module="govuk-button">Save and continue</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

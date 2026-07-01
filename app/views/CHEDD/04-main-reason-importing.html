@@ -1,0 +1,23 @@
+{% extends "CHEDD/_base.html" %}
+
+{% block content %}
+<div class="govuk-width-container">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <p class="chedd-ref">DRAFT.GB.2024.7006103 - CHEDD</p>
+      <span class="govuk-caption-l">About the consignment</span>
+      <h1 class="govuk-heading-l">What is the main reason for importing the consignment?</h1>
+
+      {{ govukRadios({
+        name: "reason",
+        items: [
+          { text: "Internal market", hint: { text: "The consignment is intended for sale or use in Great Britain (England, Scotland or Wales)." } },
+          { text: "Non-internal market", checked: true, hint: { text: "The consignment is not intended for sale or use in Great Britain and will be exported to another country." } }
+        ]
+      }) }}
+
+      <a href="/CHEDD/05-notification-hub" class="govuk-button" data-module="govuk-button">Save and continue</a>
+    </div>
+  </div>
+</div>
+{% endblock %}
