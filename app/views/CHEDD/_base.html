@@ -6,8 +6,18 @@
 
 
 {% block head %}
+  <link rel="stylesheet" href="/public/vendor/location-autocomplete.min.css" />
   {{ super() }}
   <style>
+    .autocomplete__input,
+    .autocomplete__option,
+    .autocomplete__hint {
+      font-family: "GDS Transport", arial, sans-serif;
+      font-weight: 400;
+      font-size: 1rem;
+      -webkit-font-smoothing: antialiased;
+    }
+
     .chedd-account {
       padding-top: 10px;
       border-bottom: 1px solid #b1b4b6;

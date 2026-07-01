@@ -12,6 +12,7 @@
     "@ministryofjustice/frontend": "^5.1.5",
     "chart.js": "^4.5.0",
     "express": "^5.1.0",
+    "govuk-country-and-territory-autocomplete": "^2.0.0",
     "govuk-frontend": "^5.11.0",
     "govuk-prototype-kit": "13.17.0",
     "jquery": "3.7.1",
