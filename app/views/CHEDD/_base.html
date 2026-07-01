@@ -4,6 +4,7 @@
 {% set showDashboard = true if showDashboard is not defined else showDashboard %}
 {% set showBack = true if showBack is not defined else showBack %}
 
+
 {% block head %}
   {{ super() }}
   <style>
@@ -186,5 +187,3 @@
     </div>
   </div>
 {% endblock %}
-
-{% block content %}{% endblock %}
