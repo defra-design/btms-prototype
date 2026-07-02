@@ -275,14 +275,87 @@
         </select>
       </div>
 
+      <details class="govuk-details">
+        <summary class="govuk-details__summary">
+          <span class="govuk-details__summary-text">
+            If the country of origin is not listed
+          </span>
+        </summary>
+        <div class="govuk-details__text">
+          We need to know your nationality so we can work out which elections you're entitled to vote in.
+          If you cannot provide your nationality, you'll have to send copies of identity documents through the post.
+        </div>
+      </details>
 
-      <p class="govuk-body"><a href="#" class="govuk-link">If the country of origin is not listed</a></p>
-
-      {{ govukRadios({
+      {# {{ govukRadios({
         name: "region-code",
         fieldset: { legend: { text: "Does your consignment require a region code?", classes: "govuk-fieldset__legend--m" } },
         items: [{ text: "Yes" }, { text: "No" }]
-      }) }}
+      }) }} #}
+
+      <div class="govuk-form-group">
+  <fieldset class="govuk-fieldset" aria-describedby="contact-hint">
+    <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+      <h1 class="govuk-fieldset__heading">
+        Does the consignment have a region of origin code?
+      </h1>
+    </legend>
+    {# <div id="contact-hint" class="govuk-hint">
+      Select one option
+    </div> #}
+    <div class="govuk-radios" data-module="govuk-radios">
+      <div class="govuk-radios__item">
+        <input class="govuk-radios__input" id="contact" name="contact" type="radio" value="email" data-aria-controls="conditional-contact">
+        <label class="govuk-label govuk-radios__label" for="contact">
+          Yes
+        </label>
+      </div>
+      <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-contact">
+       <div class="govuk-form-group">
+          <label class="govuk-label govuk-label--s" for="cost">
+            Enter the region of origin code
+            </label>
+            <div class="govuk-hint" id="region-code-hint">
+              Enter up to 5 characters
+            </div>
+          <div class="govuk-input__wrapper">
+            <div class="govuk-input__prefix" aria-hidden="true">KY</div>
+            <input class="govuk-input govuk-input--width-5" id="cost" name="cost" type="text" spellcheck="false">
+          </div>
+        </div>
+      </div>
+  
+      <div class="govuk-radios__item">
+        <input class="govuk-radios__input" id="contact-2" name="contact" type="radio" value="phone"">
+        <label class="govuk-label govuk-radios__label" for="contact-2">
+          No
+        </label>
+      </div>
+      {# <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-contact-2">
+        <div class="govuk-form-group">
+          <label class="govuk-label" for="contact-by-phone">
+            Phone number
+          </label>
+          <input class="govuk-input govuk-!-width-one-third" id="contact-by-phone" name="contactByPhone" type="tel" autocomplete="tel">
+        </div>
+      </div> #}
+      {# <div class="govuk-radios__item">
+        <input class="govuk-radios__input" id="contact-3" name="contact" type="radio" value="text" data-aria-controls="conditional-contact-3">
+        <label class="govuk-label govuk-radios__label" for="contact-3">
+          Text message
+        </label>
+      </div> #}
+      {# <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-contact-3">
+        <div class="govuk-form-group">
+          <label class="govuk-label" for="contact-by-text">
+            Mobile phone number
+          </label>
+          <input class="govuk-input govuk-!-width-one-third" id="contact-by-text" name="contactByText" type="tel" autocomplete="tel">
+        </div>
+      </div> #}
+    </div>
+  </fieldset>
+</div>
 
       <div class="govuk-form-group">
         <label class="govuk-label govuk-label--m" for="origin-assigned-country">Country from where assigned</label>
@@ -552,14 +625,14 @@
       </div>
 
       {{ govukInput({
-        label: { text: "Add a reference number for this consignment (optional)", classes: "govuk-label--m" },
+        label: { text: "Your internal reference for this consignment (optional)", classes: "govuk-label--m" },
         hint: { text: "Enter any internal reference number you want to use to identify this consignment, or leave blank." },
         id: "consignment-ref",
         name: "consignment-ref",
         classes: "govuk-input govuk-input--width-40"
       }) }}
 
-      <a href="/CHEDD/06-commodity-search" class="govuk-button" data-module="govuk-button">Save and continue</a>
+      <a href="/chedd-traces/04-commodity-search" class="govuk-button" data-module="govuk-button">Save and continue</a>
     </div>
   </div>
 </div>
