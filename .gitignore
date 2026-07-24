@@ -10,3 +10,8 @@ usage-data-config.json
 # General ignores
 .DS_Store
 .idea
+
+# Editor/assistant tooling
+.claude/
+.cursor/
+CLAUDE.md
