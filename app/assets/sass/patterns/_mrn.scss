@@ -284,8 +284,16 @@ tr.filtered-match-no  .govuk-table__cell {
     padding: 15px;
     background-color: #fff;
     border: 1px solid #b1b4b6;
-    font-size: 1rem;
+    font-size: 16px;
     line-height: 1.25;
+
+    p,
+    a,
+    th,
+    td,
+    strong {
+      font-size: 16px;
+    }
 
     &__title {
       display: block;
@@ -328,6 +336,10 @@ tr.filtered-match-no  .govuk-table__cell {
         font-weight: 700;
         border-top: 1px solid #b1b4b6;
       }
+    }
+
+    &__details {
+      margin: 15px 0 0;
     }
   }
 
@@ -435,5 +447,121 @@ tr.filtered-match-no  .govuk-table__cell {
   .govuk-main-wrapper {
     padding: 10px;
   }
+  }
+}
+
+.mismatch-detail {
+  border: 1px solid govuk-colour("mid-grey");
+  margin-bottom: govuk-spacing(8);
+
+  &__title {
+    border-bottom: 1px solid govuk-colour("mid-grey");
+    padding-bottom: govuk-spacing(2);
+  }
+
+  &__summary {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: govuk-colour("light-grey");
+
+    th,
+    td {
+      padding: govuk-spacing(3) govuk-spacing(4) 0;
+      text-align: left;
+      vertical-align: top;
+      font-weight: 700;
+    }
+
+    td {
+      padding-top: govuk-spacing(1);
+      padding-bottom: govuk-spacing(3);
+      font-weight: 400;
+    }
+  }
+
+  &__qty {
+    color: govuk-colour("red");
+  }
+
+  &__body {
+    padding: govuk-spacing(4);
+
+    > .govuk-heading-s:first-child {
+      margin-top: 0;
+    }
+  }
+
+  &__compare {
+    margin: 0 0 govuk-spacing(6);
+
+    div {
+      display: flex;
+      gap: govuk-spacing(6);
+      margin-bottom: govuk-spacing(2);
+    }
+
+    dt {
+      min-width: 10rem;
+      font-weight: 400;
+    }
+
+    dd {
+      margin: 0;
+    }
+  }
+
+  &__difference {
+    border-top: 1px solid govuk-colour("mid-grey");
+    margin-top: govuk-spacing(2);
+    padding-top: govuk-spacing(2);
+
+    dd {
+      font-weight: 700;
+    }
+  }
+
+  &__ched {
+    margin-bottom: govuk-spacing(4);
+
+    .govuk-table {
+      margin-bottom: 0;
+    }
+  }
+
+  &__ched-ref {
+    margin-bottom: govuk-spacing(2);
+
+    span {
+      font-weight: 700;
+      margin-right: govuk-spacing(2);
+    }
+  }
+
+  &__total {
+    th,
+    td {
+      font-weight: 700;
+    }
+  }
+
+  @media (max-width: 40.0625em) {
+    &__summary,
+    &__summary tbody,
+    &__summary tr,
+    &__summary th,
+    &__summary td {
+      display: block;
+      width: 100%;
+    }
+
+    &__summary thead {
+      display: none;
+    }
+
+    &__summary td::before {
+      content: attr(data-label);
+      display: block;
+      font-weight: 700;
+    }
   }
 }

@@ -37,8 +37,10 @@
 
   .govuk-table__cell:hover .tooltip,
   .govuk-table__cell:focus .tooltip,
+  .govuk-table__cell:focus-within .tooltip,
   .tooltip-container:hover .tooltip,
-  .tooltip-container:focus .tooltip{
+  .tooltip-container:focus .tooltip,
+  .tooltip-container:focus-within .tooltip {
     visibility: visible;
   }
   .govuk-table__cell, .tooltip-container {
@@ -47,20 +49,15 @@
 
   }
 
-// index page styles
+// Space each prototype link so the description sits clearly underneath it.
 .index {
-  .jira {
-    display: table;
-    margin: 5px 0;
-    font-size: 16px!important;
-    color: #0b0c0c !important;
+  .app-prototype-index__list > li {
+    margin-bottom: 20px;
+  }
 
-    }
-    li span {
-      display: table;
-    margin: 5px 0;
-    font-size: 16px!important;
-    }
+  .app-prototype-index__list > li:last-child {
+    margin-bottom: 0;
+  }
 }
 
 

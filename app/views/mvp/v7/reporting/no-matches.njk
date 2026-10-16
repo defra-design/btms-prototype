@@ -1,0 +1,97 @@
+{% extends "layouts/forms.html" %}
+{% set title = 'BTMS reporting data' %}
+{% set fullWidth = true %}
+{% set hideButton = true %}
+{% set showHeader = true %}   {# or showSubheader, depending on your layout #}
+{% set bodyClasses = 'mrn-list' %}
+{% set hideBackLink = true %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+  text: "Back to reporting",
+  href: "summary-view"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+    <h1 class="govuk-heading-l">
+      Showing {{ total }} no match{% if total != 1 %}es{% endif %}
+    </h1>
+<p class="govuk-hint">Clicking an MRN opens the search results in a new tab.</p>
+    {% if total == 0 %}
+      <p class="govuk-body">No MRNs found.</p>
+    {% else %}
+      {% if displayRange %}
+        <p class="govuk-body">{{ displayRange }}</p>
+      {% endif %}
+
+<table class="govuk-table no-match">
+  <thead class="govuk-table__head">
+    <tr class="govuk-table__row">
+      <th scope="col" class="govuk-table__header">MRN</th>
+      <th scope="col" class="govuk-table__header">Commodity code</th>
+      <th scope="col" class="govuk-table__header">Description</th>
+      <th scope="col" class="govuk-table__header">CHED reference</th>
+      {# <th scope="col" class="govuk-table__header">Authority</th> #}
+      <th scope="col" class="govuk-table__header">Last updated</th>
+
+    </tr>
+  </thead>
+
+  <tbody class="govuk-table__body">
+    {% for row in rows %}
+      <tr class="govuk-table__row">
+  <td class="govuk-table__cell">
+        <a class="govuk-link"
+          href="/mvp/v4/search-results?mrn={{ row.mrn | urlencode }}&cc={{ row.commodityCode }}&desc={{ row.description | urlencode }}&ched={{ row.chedRef | urlencode }}&auth={{ row.authority | urlencode }}&updated={{ row.lastUpdated | urlencode }}"
+          target="_blank"
+         rel="noopener noreferrer">
+          {{ row.mrn }}
+
+        </a>
+      </td>
+        <td class="govuk-table__cell">{{ row.commodityCode }}</td>
+        <td class="govuk-table__cell">{{ row.description }}</td>
+        <td class="govuk-table__cell">{{ row.chedRef or "None" }}</td>
+        {# <td class="govuk-table__cell">{{ row.authority }}</td> #}
+                <td class="govuk-table__cell">{{ row.lastUpdated }}</td>
+
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+
+      {# Pagination #}
+      {% if pagination.pages > 1 %}
+        <nav class="govuk-pagination" role="navigation" aria-label="results">
+          <ul class="govuk-pagination__list">
+            {% if pagination.prev %}
+              <li class="govuk-pagination__prev">
+                <a class="govuk-link govuk-pagination__link" href="?page={{ pagination.prev }}" rel="prev">Previous</a>
+              </li>
+            {% endif %}
+
+            {% for p in pagination.window %}
+              <li class="govuk-pagination__item{% if p == pagination.page %} govuk-pagination__item--current{% endif %}">
+                {% if p == pagination.page %}
+                  <span class="govuk-pagination__link">{{ p }}</span>
+                {% else %}
+                  <a class="govuk-link govuk-pagination__link" href="?page={{ p }}">{{ p }}</a>
+                {% endif %}
+              </li>
+            {% endfor %}
+
+            {% if pagination.next %}
+              <li class="govuk-pagination__next">
+                <a class="govuk-link govuk-pagination__link" href="?page={{ pagination.next }}" rel="next">Next</a>
+              </li>
+            {% endif %}
+          </ul>
+        </nav>
+      {% endif %}
+    {% endif %}
+
+
+{% endblock %}

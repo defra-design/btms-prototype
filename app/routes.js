@@ -23,3 +23,12 @@ require('./views/mvp/v6/search')(router)
 require('./views/mvp/v6/reporting')(router)
 require('./views/mvp/v6/admin/routes')(router)
 require('./views/mvp/v6/timeline/routes')(router)
+
+router.use('/mvp/v7', (req, res, next) => {
+  res.locals.prototypeVersion = 'v7'
+  next()
+})
+require('./views/mvp/v7/search')(router)
+require('./views/mvp/v7/reporting')(router)
+require('./views/mvp/v7/admin/routes')(router)
+require('./views/mvp/v7/timeline/routes')(router)

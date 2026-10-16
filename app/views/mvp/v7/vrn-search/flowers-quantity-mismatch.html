@@ -1,0 +1,157 @@
+{% extends "layouts/main.html" %}
+{% set signedIn = 'true' %}
+{% set showMenu = true %}
+{% set menu = true %}
+{% set title = 'Item 2, OTHER FLOWERS' %}
+{% set backHref = '/mvp/v7/vrn-search/flowers-declaration-details-tabs?q=25GBDJRJCC9G1PKAR0' %}
+{% set backText = 'Back to search results' %}
+{% set bodyClasses = 'mrn v4' %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+
+    <span class="govuk-caption-l">Item 2</span>
+    <h1 class="govuk-heading-l mismatch-detail__title">OTHER FLOWERS</h1>
+
+    <div class="mismatch-detail">
+      <table class="mismatch-detail__summary">
+        <caption class="govuk-visually-hidden">Item 2 on MRN 25GBDJRJCC9G1PKAR0</caption>
+        <thead>
+          <tr>
+            <th scope="col">Commodity code</th>
+            <th scope="col">Quantity / Weight</th>
+            <th scope="col">MRN</th>
+            <th scope="col">CHED reference</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-label="Commodity code">0603197090</td>
+            <td class="mismatch-detail__qty" data-label="Quantity / Weight">708.5</td>
+            <td data-label="MRN">25GBDJRJCC9G1PKAR0</td>
+            <td data-label="CHED reference">GBCHD2025.6966596</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="mismatch-detail__body">
+        <h2 class="govuk-heading-s">Why this item does not match</h2>
+        <p class="govuk-body">The weight declared on this MRN item is different from the combined weight of the linked CHED items.</p>
+
+        <dl class="mismatch-detail__compare">
+          <div>
+            <dt>Declared on MRN:</dt>
+            <dd>708.5</dd>
+          </div>
+          <div>
+            <dt>Declared on CHED:</dt>
+            <dd>709.5</dd>
+          </div>
+          <div class="mismatch-detail__difference">
+            <dt>Difference</dt>
+            <dd>1.00</dd>
+          </div>
+        </dl>
+
+        <h2 class="govuk-heading-s">Linked IPAFFS CHEDs</h2>
+
+        <section class="mismatch-detail__ched">
+          <p class="mismatch-detail__ched-ref"><span>CHED reference</span> CHEDPP.GB.2025.6966596</p>
+          <table class="govuk-table">
+            <caption class="govuk-visually-hidden">Items on CHEDPP.GB.2025.6966596 for commodity code 0603197090</caption>
+            <thead class="govuk-table__head">
+              <tr class="govuk-table__row">
+                <th scope="col" class="govuk-table__header">Item number</th>
+                <th scope="col" class="govuk-table__header">Commodity code</th>
+                <th scope="col" class="govuk-table__header">Description</th>
+                <th scope="col" class="govuk-table__header">Quantity / Weight</th>
+                <th scope="col" class="govuk-table__header">Authority</th>
+                <th scope="col" class="govuk-table__header">Decision</th>
+              </tr>
+            </thead>
+            <tbody class="govuk-table__body">
+              <tr class="govuk-table__row">
+                <td class="govuk-table__cell">29</td>
+                <td class="govuk-table__cell">0603197090</td>
+                <td class="govuk-table__cell">Eryngium sp.</td>
+                <td class="govuk-table__cell">168</td>
+                <td class="govuk-table__cell">PHSI</td>
+                <td class="govuk-table__cell">Compliant</td>
+              </tr>
+              <tr class="govuk-table__row">
+                <td class="govuk-table__cell">30</td>
+                <td class="govuk-table__cell">0603197090</td>
+                <td class="govuk-table__cell">Gypsophila sp.</td>
+                <td class="govuk-table__cell">325.50</td>
+                <td class="govuk-table__cell">PHSI</td>
+                <td class="govuk-table__cell">Compliant</td>
+              </tr>
+              <tr class="govuk-table__row">
+                <td class="govuk-table__cell">31</td>
+                <td class="govuk-table__cell">0603197090</td>
+                <td class="govuk-table__cell">Hypericum sp.</td>
+                <td class="govuk-table__cell">96</td>
+                <td class="govuk-table__cell">PHSI</td>
+                <td class="govuk-table__cell">Compliant</td>
+              </tr>
+              <tr class="govuk-table__row">
+                <td class="govuk-table__cell">32</td>
+                <td class="govuk-table__cell">0603197090</td>
+                <td class="govuk-table__cell">Solidago sp.</td>
+                <td class="govuk-table__cell">120</td>
+                <td class="govuk-table__cell">PHSI</td>
+                <td class="govuk-table__cell">Compliant</td>
+              </tr>
+              <tr class="govuk-table__row mismatch-detail__total">
+                <th scope="row" class="govuk-table__header">Total</th>
+                <td class="govuk-table__cell"></td>
+                <td class="govuk-table__cell"></td>
+                <td class="govuk-table__cell">608.5</td>
+                <td class="govuk-table__cell"></td>
+                <td class="govuk-table__cell"></td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="mismatch-detail__ched">
+          <p class="mismatch-detail__ched-ref"><span>CHED reference</span> CHEDPP.GB.2025.6966544</p>
+          <table class="govuk-table">
+            <caption class="govuk-visually-hidden">Items on CHEDPP.GB.2025.6966544 for commodity code 0603197090</caption>
+            <thead class="govuk-table__head">
+              <tr class="govuk-table__row">
+                <th scope="col" class="govuk-table__header">Item number</th>
+                <th scope="col" class="govuk-table__header">Commodity code</th>
+                <th scope="col" class="govuk-table__header">Description</th>
+                <th scope="col" class="govuk-table__header">Quantity / Weight</th>
+                <th scope="col" class="govuk-table__header">Authority</th>
+                <th scope="col" class="govuk-table__header">Decision</th>
+              </tr>
+            </thead>
+            <tbody class="govuk-table__body">
+              <tr class="govuk-table__row">
+                <td class="govuk-table__cell">29</td>
+                <td class="govuk-table__cell">0603197090</td>
+                <td class="govuk-table__cell">Eryngium sp.</td>
+                <td class="govuk-table__cell">100</td>
+                <td class="govuk-table__cell">PHSI</td>
+                <td class="govuk-table__cell">Compliant</td>
+              </tr>
+              <tr class="govuk-table__row mismatch-detail__total">
+                <th scope="row" class="govuk-table__header">Total</th>
+                <td class="govuk-table__cell"></td>
+                <td class="govuk-table__cell"></td>
+                <td class="govuk-table__cell">100</td>
+                <td class="govuk-table__cell"></td>
+                <td class="govuk-table__cell"></td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

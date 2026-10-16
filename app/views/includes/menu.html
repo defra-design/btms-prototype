@@ -1,5 +1,6 @@
 
 
+{% set prototypeVersion = prototypeVersion or 'v6' %}
 <div class="govuk-service-navigation" data-module="govuk-service-navigation">
   <div class="govuk-width-container">
     <div class="govuk-service-navigation__container">
@@ -13,7 +14,7 @@
         <ul class="govuk-service-navigation__list" id="navigation">
           <li class="govuk-service-navigation__item {{ 'govuk-service-navigation__item--active' if currentPage == 'search' }}">
             <a class="govuk-service-navigation__link"
-               href="/mvp/v6/search"
+               href="/mvp/{{ prototypeVersion }}/search"
                {% if currentPage == 'search' %}aria-current="true"{% endif %}>
               Search
             </a>
@@ -21,7 +22,7 @@
 
           <li class="govuk-service-navigation__item {{ 'govuk-service-navigation__item--active' if currentPage == 'reporting' }}">
             <a class="govuk-service-navigation__link"
-               href="/mvp/v6/reporting/summary-view"
+               href="/mvp/{{ prototypeVersion }}/reporting/summary-view"
                {% if currentPage == 'reporting' %}aria-current="true"{% endif %}>
               <strong class="govuk-service-navigation__active-fallback">Reporting</strong>
             </a>
@@ -29,21 +30,21 @@
 
           <li class="govuk-service-navigation__item {{ 'govuk-service-navigation__item--active' if currentPage == 'latest-activity' }}">
             <a class="govuk-service-navigation__link"
-               href="/mvp/v6/latest-activity"
+               href="/mvp/{{ prototypeVersion }}/latest-activity"
                {% if currentPage == 'latest-activity' %}aria-current="true"{% endif %}>
                Latest activity
             </a>
           </li>
         <!-- <li class="govuk-service-navigation__item {{ 'govuk-service-navigation__item--active' if currentPage == 'user-guide' }}">
             <a class="govuk-service-navigation__link"
-               href="/mvp/v6/user-guide"
+               href="/mvp/{{ prototypeVersion }}/user-guide"
                {% if currentPage == 'user-guide' %}aria-current="true"{% endif %}>
                User guide
             </a>
           </li> -->
                 <li class="govuk-service-navigation__item {{ 'govuk-service-navigation__item--active' if currentPage == 'admin' }}">
             <a class="govuk-service-navigation__link"
-               href="/mvp/v6/admin/view"
+               href="/mvp/{{ prototypeVersion }}/admin/view"
                {% if currentPage == 'admin' %}aria-current="true"{% endif %}>
                Admin view
             </a>
@@ -54,14 +55,14 @@
           {% if _hideManageAccount != 'true' %}
             <li class="govuk-service-navigation__item app-push-right {{ 'govuk-service-navigation__item--active' if currentPage == 'manage-account' }}">
               <a class="govuk-service-navigation__link"
-                href="/mvp/v6/manage-account"
+                href="/mvp/{{ prototypeVersion }}/manage-account"
                 {% if currentPage == 'manage-account' %}aria-current="true"{% endif %}>
                 Manage account
               </a>
             </li>
           {% endif %}
           <li class="govuk-service-navigation__item">
-            <a class="govuk-service-navigation__link" href="/mvp/v6/sign-out">Sign out</a>
+            <a class="govuk-service-navigation__link" href="/mvp/{{ prototypeVersion }}/sign-out">Sign out</a>
           </li>
         </ul>
 

@@ -1,0 +1,56 @@
+{% extends "layouts/forms.html" %}
+{% set title = 'You are signed out' %}
+{% set signedIn = 'false' %}
+{% set fullWidth = false %}
+{% set hideButton = false %}
+{% set showheader = true %}
+{% set hideBackLink = true %}
+{% set bodyClasses = 'signIn' %}
+{% set buttonText = 'Sign in' %}
+
+
+{% block form %}
+
+  <h1 class="govuk-heading-l">
+    {{title}}
+
+  </h1>
+
+  <p class="govuk-body">
+            You will need to sign in again to access {{ serviceName }}.
+  </p>
+<hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+
+{{ govukRadios({
+  name: "signIn",
+  class: "radio",
+fieldset: {
+    legend: {
+      text: "How do you want to sign in?",
+      isPageHeading: showHeading,
+      classes: "govuk-fieldset__legend--m"
+    }
+  },
+  value: data.signIn,
+  items: [
+    {
+      value: "entra",
+      text: "Defra Single Sign-on",
+      hint: {
+        text: "If you have a Defra, APHA or FSA email address"
+      }          
+    },
+    {
+      value: "gg",
+      text: "Government Gateway",
+      hint: {
+        text: "If you have an HMRC or PHA email address"
+      } 
+    }
+  ]
+}) }}
+
+ 
+
+
+  {% endblock %}

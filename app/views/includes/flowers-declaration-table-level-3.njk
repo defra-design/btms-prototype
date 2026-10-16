@@ -20,7 +20,8 @@
     <td class="govuk-table__cell">0603197090</td>
     <td class="govuk-table__cell">OTHER FLOWERS</td>
     <td class="govuk-table__cell">
-      {{ level3QuantityTooltip('708.5', otherFlowersCommodityCode, chedPpRef, '708.5', otherFlowersChedQty, '1.00') }}
+      {% set detailsHref = '/mvp/v7/vrn-search/flowers-quantity-mismatch?q=' ~ (title | urlencode) if prototypeVersion == 'v7' else '' %}
+      {{ level3QuantityTooltip('708.5', otherFlowersCommodityCode, chedRef, '708.5', otherFlowersChedQty, '1.00', detailsHref) }}
     </td>
     <td class="govuk-table__cell">{{ chedRef }}</td>
     <td class="govuk-table__cell">
