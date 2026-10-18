@@ -460,12 +460,14 @@ tr.filtered-match-no  .govuk-table__cell {
   }
 
   &__summary {
+    @include govuk-font($size: 19);
     width: 100%;
     border-collapse: collapse;
     background-color: govuk-colour("light-grey");
 
     th,
     td {
+      @include govuk-font($size: 19, $weight: bold);
       padding: govuk-spacing(3) govuk-spacing(4) 0;
       text-align: left;
       vertical-align: top;
@@ -473,14 +475,14 @@ tr.filtered-match-no  .govuk-table__cell {
     }
 
     td {
+      @include govuk-font($size: 19);
       padding-top: govuk-spacing(1);
       padding-bottom: govuk-spacing(3);
-      font-weight: 400;
     }
-  }
 
-  &__qty {
-    color: govuk-colour("red");
+    td.mismatch-detail__qty {
+      color: govuk-colour("red");
+    }
   }
 
   &__body {
@@ -492,6 +494,8 @@ tr.filtered-match-no  .govuk-table__cell {
   }
 
   &__compare {
+    @include govuk-font($size: 19);
+    max-width: 24rem; // keep the difference rule to the width of the figures
     margin: 0 0 govuk-spacing(6);
 
     div {
@@ -500,13 +504,14 @@ tr.filtered-match-no  .govuk-table__cell {
       margin-bottom: govuk-spacing(2);
     }
 
-    dt {
-      min-width: 10rem;
-      font-weight: 400;
+    dt,
+    dd {
+      @include govuk-font($size: 19);
+      margin: 0;
     }
 
-    dd {
-      margin: 0;
+    dt {
+      min-width: 10rem;
     }
   }
 
@@ -516,7 +521,7 @@ tr.filtered-match-no  .govuk-table__cell {
     padding-top: govuk-spacing(2);
 
     dd {
-      font-weight: 700;
+      @include govuk-font($size: 19, $weight: bold);
     }
   }
 
@@ -529,7 +534,8 @@ tr.filtered-match-no  .govuk-table__cell {
   }
 
   &__ched-ref {
-    margin-bottom: govuk-spacing(2);
+    @include govuk-font($size: 19);
+    margin: 0 0 govuk-spacing(2);
 
     span {
       font-weight: 700;
