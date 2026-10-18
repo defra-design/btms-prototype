@@ -1,0 +1,110 @@
+{% extends "layouts/main.html" %}
+{% set signedIn = 'true' %}
+{% set showMenu = true %}
+{% set menu = true %}
+{% set title = 'Item 2, OTHER FLOWERS' %}
+{% set backHref = '/mvp/v7-2/25GBDJRJCC9G1PKAR0#item-2' %}
+{% set backText = 'Back to 25GBDJRJCC9G1PKAR0' %}
+{% set bodyClasses = 'mrn v4 mismatch-page' %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+
+    <span class="govuk-caption-l">MRN 25GBDJRJCC9G1PKAR0, item 2</span>
+    <h1 class="govuk-heading-l">OTHER FLOWERS</h1>
+
+    <div class="govuk-warning-text">
+      <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+      <strong class="govuk-warning-text__text">
+        <span class="govuk-visually-hidden">Warning</span>
+        The combined quantity or weight on the CHEDs is 1 more than on the MRN.
+      </strong>
+    </div>
+
+    <dl class="govuk-summary-list">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Commodity code</dt>
+        <dd class="govuk-summary-list__value">0603197090</dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Quantity / Weight on MRN</dt>
+        <dd class="govuk-summary-list__value">708.5</dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">CHED references</dt>
+        <dd class="govuk-summary-list__value">GBCHD2025.6966596 (CHEDPP.GB.2025.6966596 in IPAFFS)<br>GBCHD2025.6966544 (CHEDPP.GB.2025.6966544 in IPAFFS)</dd>
+      </div>
+    </dl>
+
+    <h2 class="govuk-heading-m">Quantities compared</h2>
+    <table class="govuk-table">
+      <caption class="govuk-visually-hidden">Quantity or weight on the MRN compared with the CHED</caption>
+      <tbody class="govuk-table__body">
+        <tr class="govuk-table__row">
+          <th scope="row" class="govuk-table__header">Declared on MRN item 2</th>
+          <td class="govuk-table__cell govuk-table__cell--numeric">708.5</td>
+        </tr>
+        <tr class="govuk-table__row">
+          <th scope="row" class="govuk-table__header">Combined total on CHEDs</th>
+          <td class="govuk-table__cell govuk-table__cell--numeric">709.5</td>
+        </tr>
+        <tr class="govuk-table__row">
+          <th scope="row" class="govuk-table__header">Difference</th>
+          <td class="govuk-table__cell govuk-table__cell--numeric govuk-!-font-weight-bold">1 more on CHEDs</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2 class="govuk-heading-m">CHED items included in the total</h2>
+    <table class="govuk-table">
+      <caption class="govuk-visually-hidden">CHED items with commodity code 0603197090</caption>
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th scope="col" class="govuk-table__header">CHED reference</th>
+          <th scope="col" class="govuk-table__header">Item number</th>
+          <th scope="col" class="govuk-table__header">Description</th>
+          <th scope="col" class="govuk-table__header govuk-table__header--numeric">Quantity / Weight</th>
+        </tr>
+      </thead>
+      <tbody class="govuk-table__body">
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell">CHEDPP.GB.2025.6966596</td>
+          <td class="govuk-table__cell">29</td>
+          <td class="govuk-table__cell">Eryngium sp.</td>
+          <td class="govuk-table__cell govuk-table__cell--numeric">68</td>
+        </tr>
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell">CHEDPP.GB.2025.6966596</td>
+          <td class="govuk-table__cell">30</td>
+          <td class="govuk-table__cell">Gypsophila sp.</td>
+          <td class="govuk-table__cell govuk-table__cell--numeric">325.5</td>
+        </tr>
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell">CHEDPP.GB.2025.6966596</td>
+          <td class="govuk-table__cell">31</td>
+          <td class="govuk-table__cell">Hypericum sp.</td>
+          <td class="govuk-table__cell govuk-table__cell--numeric">96</td>
+        </tr>
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell">CHEDPP.GB.2025.6966596</td>
+          <td class="govuk-table__cell">32</td>
+          <td class="govuk-table__cell">Solidago sp.</td>
+          <td class="govuk-table__cell govuk-table__cell--numeric">120</td>
+        </tr>
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell">CHEDPP.GB.2025.6966544</td>
+          <td class="govuk-table__cell">1</td>
+          <td class="govuk-table__cell">Eryngium sp.</td>
+          <td class="govuk-table__cell govuk-table__cell--numeric">100</td>
+        </tr>
+        <tr class="govuk-table__row">
+          <th scope="row" class="govuk-table__header" colspan="3">Combined total on CHEDs</th>
+          <td class="govuk-table__cell govuk-table__cell--numeric govuk-!-font-weight-bold">709.5</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>
+{% endblock %}

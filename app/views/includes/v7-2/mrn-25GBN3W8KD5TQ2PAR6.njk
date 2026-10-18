@@ -1,0 +1,68 @@
+{% from "includes/v7-2/level-3-quantity-tooltip.njk" import level3QuantityTooltip %}
+{# Second MRN in this result. Its 2 items are on the same 2 CHEDs as MRN 25GBDJRJCC9G1PKAR0 (one item on each) #}
+<div class="mrn-container" id="mrn-toggle-25GBN3W8KD5TQ2PAR6">
+  <div class="toggle-area" data-target="commodityTable-25GBN3W8KD5TQ2PAR6">
+    <div class="container govuk-body">
+      <dl class="definition-list">
+        <div class="row"><dt>MRN</dt><dd>25GBN3W8KD5TQ2PAR6</dd></div>
+        <div class="row"><dt>CDS status</dt><dd><span class="govuk-tag govuk-tag--yellow">In progress - Awaiting CDS</span></dd></div>
+        <div class="row"><dt>Last updated</dt><dd>8 December 2025, 11:02</dd></div>
+      </dl>
+      <div class="toggle-wrapper">
+        <div id="toggleArrowContainer">
+          <i id="toggleArrow" class="fas fa-chevron-up"></i>
+        </div>
+      </div>
+    </div>
+
+    <div id="commodityTable-25GBN3W8KD5TQ2PAR6" class="commodity-table">
+      <table class="govuk-table data-table">
+        <caption class="govuk-visually-hidden">Item details for declaration 25GBN3W8KD5TQ2PAR6</caption>
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header">Item number</th>
+            <th scope="col" class="govuk-table__header">Commodity code</th>
+            <th scope="col" class="govuk-table__header">Description</th>
+            <th scope="col" class="govuk-table__header">Quantity / Weight</th>
+            <th scope="col" class="govuk-table__header">CHED reference</th>
+            <th scope="col" class="govuk-table__header">Match</th>
+            <th scope="col" class="govuk-table__header">Authority</th>
+            <th scope="col" class="govuk-table__header">Decision</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+  <tr class="match PHSI release">
+    <td class="govuk-table__cell">1</td>
+    <td class="govuk-table__cell">0603197030</td>
+    <td class="govuk-table__cell">SWEET PEAS</td>
+    <td class="govuk-table__cell">150</td>
+    <td class="govuk-table__cell">GBCHD2025.6966596</td>
+    <td class="govuk-table__cell"><span class="govuk-tag govuk-tag--green">Yes</span></td>
+    <td class="govuk-table__cell decision"><ul class="govuk-list"><li class="PHSI">PHSI</li></ul></td>
+    <td class="govuk-table__cell decision"><ul class="govuk-list"><li class="PHSI">Release - Inspection complete</li></ul></td>
+  </tr>
+  <tr class="no-match PHSI release" id="mrn-25GBN3W8KD5TQ2PAR6-row-2">
+    <td class="govuk-table__cell">2</td>
+    <td class="govuk-table__cell">0603197050</td>
+    <td class="govuk-table__cell">DAHLIAS</td>
+    <td class="govuk-table__cell">
+      {{ level3QuantityTooltip('80', '0603197050', 'GBCHD2025.6966544', '80', '86', '6 more on CHED', '/mvp/v7-2/25GBDJRJCC9G1PKAR0/no-matches#mrn-25GBN3W8KD5TQ2PAR6-item-2', false, 'Incorrect quantity or weight', ['6']) }}
+    </td>
+    <td class="govuk-table__cell">GBCHD2025.6966544</td>
+    <td class="govuk-table__cell">
+      <span class="matching-view__today"><span class="govuk-tag govuk-tag--green">Yes</span></span>
+      <span class="matching-view__level-3"><strong class="govuk-tag govuk-tag--red">No</strong></span>
+    </td>
+    <td class="govuk-table__cell decision"><ul class="govuk-list"><li class="PHSI">PHSI</li></ul></td>
+    <td class="govuk-table__cell decision">
+      <ul class="govuk-list">
+        <li class="PHSI matching-view__today">Release - Inspection complete</li>
+        <li class="PHSI matching-view__level-3">No match - Incorrect quantity or weight</li>
+      </ul>
+    </td>
+  </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

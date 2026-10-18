@@ -1,0 +1,51 @@
+{# Tooltip links jump to the matching line(s) and highlight just those lines.
+   data-highlight="id1 id2" lists every row to highlight; otherwise the link's target row is used.
+   Opens a collapsed card first if the row is inside one. #}
+<script>
+  (function () {
+    function rowsFor (id, link) {
+      var ids = link && link.getAttribute('data-highlight') ? link.getAttribute('data-highlight').split(' ') : [id];
+      var rows = [];
+      ids.forEach(function (i) {
+        var tr = document.getElementById(i);
+        if (!tr || tr.tagName !== 'TR') return;
+        rows.push(tr);
+        // An MRN item split over several CHEDs continues on the next rows (second / second2)
+        var next = tr.nextElementSibling;
+        while (next && /\bsecond2?\b/.test(next.className)) { rows.push(next); next = next.nextElementSibling; }
+      });
+      return rows;
+    }
+
+    function openCollapsed (el) {
+      var p = el;
+      while ((p = p.parentElement)) {
+        if (p.id && p.style && p.style.display === 'none') {
+          var toggle = document.querySelector('.toggle-area[data-target="' + p.id + '"] #toggleArrowContainer');
+          if (toggle) toggle.click();
+        }
+      }
+    }
+
+    function go (id, link) {
+      var target = document.getElementById(id);
+      if (!target) return;
+      document.querySelectorAll('.is-highlighted').forEach(function (r) { r.classList.remove('is-highlighted'); });
+      openCollapsed(target);
+      rowsFor(id, link).forEach(function (r) { r.classList.add('is-highlighted'); });
+      target.scrollIntoView({ block: 'start' });
+    }
+
+    document.addEventListener('click', function (e) {
+      var link = e.target.closest('.tooltip a[href^="#"]');
+      if (!link) return;
+      e.preventDefault();
+      var id = link.getAttribute('href').slice(1);
+      history.pushState(null, '', '#' + id);
+      go(id, link);
+    });
+
+    window.addEventListener('load', function () { if (location.hash) go(location.hash.slice(1)); });
+    window.addEventListener('popstate', function () { if (location.hash) go(location.hash.slice(1)); });
+  })();
+</script>

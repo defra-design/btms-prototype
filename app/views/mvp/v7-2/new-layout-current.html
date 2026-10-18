@@ -1,0 +1,485 @@
+{% extends "layouts/forms.html" %}
+{% set signedIn = 'true' %}
+{% set fullWidth = true %}
+{% set hideButton = true %}
+{% set breadcrumb = true %}
+{% set showSubheader = true %}
+{% set subHeader = 'Showing result for' %}
+{% set title = data.mrn or data.title or data.searchTerm or '25GB3FJBV1UEKBDAR0' %}
+{% set menu = true %}
+
+{% set bodyClasses = 'mrn accordion v4' %}
+{% set cssClassName = 'auth' %}
+{% set hideManageAccount = 'false' %}
+{% set showEdit = true %}
+{% set hideBackLink = false %}
+
+{% block form %}
+
+<h2 class="govuk-heading-m sectionHeader">{{ data.Cds | safe }}</h2>
+
+{% include 'includes/mrn-filters.html' %}
+
+<div class="mrn-container" id="mrn-toggle">
+
+  <div class="toggle-area" data-target="commodityTable3">
+    <div class="container govuk-body">
+      <dl class="definition-list">
+        <div class="row">
+          <dt>MRN</dt>
+          <dd id="mrn-display">25GB3FJBV1UEKBDAR0</dd>
+        </div>
+      <div class="row">
+          <dt>DUCR</dt>
+          <dd>4GB943952494000-BER047811</dd>
+        </div>
+
+        <div class="row">
+          <dt>CDS status</dt>
+          <dd>
+            <strong id="cds-status-tag" class="govuk-tag status govuk-tag--yellow">Current</strong>
+          </dd>
+        </div>
+        <div class="row">
+          <dt>Last updated</dt>
+          <dd id="last-updated">{{ '22 May 2024' | mrnTime }}</dd>
+        </div>
+      </dl>
+
+      <!-- SR-only live region so screen readers announce changes -->
+      <div id="mrn-live" class="govuk-visually-hidden" aria-live="polite"></div>
+
+      <!-- TOP toggle (shown when collapsed) -->
+
+
+      <!-- Extra fields inside grey header -->
+      <dl id="mrn-extra-1" class="definition-list extra govuk-visually-hidden">
+        <div class="row">
+          <dt>DUCR</dt>
+          <dd id="ducr-display">4GB943952494000-BER047811</dd>
+        </div>
+        <div class="row">
+          <dt>GVMS Status</dt>
+          <dd id="gvms-display">Embarked</dd>
+        </div>
+        <div class="row">
+          <dt>Time of arrival</dt>
+          <dd id="eta-display">{{ '22 May 2024' | chedTime }}</dd>
+        </div>
+        <div class="row">
+          <dt> </dt>
+          <dd> </dd>
+        </div>
+      </dl>
+
+      <!-- BOTTOM toggle (shown when expanded) -->
+      <div class="details-toggle-wrapper details-toggle-wrapper--bottom">
+      </div>
+
+      <!-- Keep your existing table chevron -->
+      <div class="toggle-wrapper">
+        <div id="toggleArrowContainer">
+          <i id="toggleArrow" class="fas fa-chevron-down"></i>
+        </div>
+      </div>
+    </div>
+
+    <div id="commodityTable3" class="commodity-table">
+      <table class="govuk-table data-table">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header">Item number</th>
+            <th scope="col" class="govuk-table__header">Commodity code</th>
+            <th scope="col" class="govuk-table__header">Description</th>
+            <th scope="col" class="govuk-table__header">Quantity / Weight</th>
+            <th scope="col" class="govuk-table__header">CHED reference</th>
+            <th scope="col" class="govuk-table__header">Match</th>
+            <th scope="col" class="govuk-table__header">Authority</th>
+            <th scope="col" class="govuk-table__header">Decision</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          <!-- your existing rows unchanged -->
+          <tr class="match FNAO first hold">
+            <td class="govuk-table__cell">1</td>
+            <td class="govuk-table__cell">0709609920</td>
+            <td class="govuk-table__cell">CHILLI PEPPERS</td>
+            <td class="govuk-table__cell">3600</td>
+            <td class="govuk-table__cell split">GBCHD2025.5764207</td>
+            <td class="govuk-table__cell split"><strong class="govuk-tag govuk-tag--green">Yes</strong></td>
+            <td class="govuk-table__cell split">FNAO</td>
+            <td class="govuk-table__cell split">
+              <ul class="govuk-list">
+                <li class="FNAO">Hold - Awaiting decision </li>
+              </ul>
+            </td>
+          </tr>
+
+          <tr class="match PHSI HMI first release hold second2">
+            <td class="govuk-table__cell blank-cell">1</td>
+            <td class="govuk-table__cell blank-cell">0709609920</td>
+            <td class="govuk-table__cell blank-cell">CHILLI PEPPERS</td>
+            <td class="govuk-table__cell blank-cell">3600</td>
+            <td class="govuk-table__cell split">GBCHD2025.5764082</td>
+            <td class="govuk-table__cell split"><strong class="govuk-tag govuk-tag--green">Yes</strong></td>
+            <td class="govuk-table__cell decision split">
+              <ul class="govuk-list">
+                <li class="PHSI">PHSI </li>
+                <li class="HMI ">HMI </li>
+              </ul>
+            </td>
+            <td class="govuk-table__cell split">
+              <ul class="govuk-list ">
+                <li class="PHSI">Release -Inspection complete </li>
+                <li class="HMI">Hold - Awaiting decision </li>
+              </ul>
+            </td>
+          </tr>
+
+          <tr class="no-match third">
+            <td class="govuk-table__cell blank-cell">1</td>
+            <td class="govuk-table__cell blank-cell">0709609920</td>
+            <td class="govuk-table__cell blank-cell">CHILLI PEPPERS</td>
+            <td class="govuk-table__cell blank-cell">3600</td>
+            <td class="govuk-table__cell" tabindex="0">
+              <span class="tooltiplink error">GBCHD2025.5764223</span>
+              <span class="tooltip" role="tooltip">
+                {{ data.noMatchContextual | safe }}
+              </span>
+            </td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--red">No</strong></td>
+            <td class="govuk-table__cell">FNAO</td>
+            <td class="govuk-table__cell">No match</td>
+          </tr>
+
+          <tr class="govuk-table__row match refused FNAO first">
+            <td class="govuk-table__cell">2</td>
+            <td class="govuk-table__cell">0709609920</td>
+            <td class="govuk-table__cell">SWEET PEPPERS</td>
+            <td class="govuk-table__cell">4470</td>
+            <td class="govuk-table__cell split">GBCHD2025.5764242</td>
+            <td class="govuk-table__cell split"><strong class="govuk-tag govuk-tag--green">Yes</strong></td>
+            <td class="govuk-table__cell split">FNAO</td>
+            <td class="govuk-table__cell decision split">
+              <ul class="govuk-list">
+                <li class="FNAO">Refused - Not acceptable </li>
+              </ul>
+            </td>
+          </tr>
+
+          <tr class="govuk-table__row match hold release PHSI HMI second">
+            <td class="govuk-table__cell blank-cell">2</td>
+            <td class="govuk-table__cell blank-cell">0709609920</td>
+            <td class="govuk-table__cell blank-cell">SWEET PEPPERS</td>
+            <td class="govuk-table__cell blank-cell">4470</td>
+            <td class="govuk-table__cell">GBCHD2025.5764082</td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Yes</strong></td>
+            <td class="govuk-table__cell decision">
+              <ul class="govuk-list">
+                <li class="PHSI">PHSI</li>
+                <li class="HMI">HMI</li>
+              </ul>
+            </td>
+            <td class="govuk-table__cell decision">
+              <ul class="govuk-list">
+                <li class="PHSI">Release -Inspection complete </li>
+                <li class="HMI">Hold - Awaiting decision </li>
+              </ul>
+            </td>
+          </tr>
+
+          <tr class="govuk-table__row match release hold HMI PHSI">
+            <td class="govuk-table__cell">8</td>
+            <td class="govuk-table__cell">0808309090</td>
+            <td class="govuk-table__cell">PEARS</td>
+            <td class="govuk-table__cell">570</td>
+            <td class="govuk-table__cell">GBCHD2025.5764082</td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Yes</strong></td>
+            <td class="govuk-table__cell decision">
+              <ul class="govuk-list">
+                <li class="PHSI">PHSI</li>
+                <li class="HMI error">HMI</li>
+              </ul>
+            </td>
+            <td class="govuk-table__cell decision">
+              <ul class="govuk-list">
+                <li class="PHSI">Release -Inspection complete </li>
+                <li class="HMI">
+                  <span class="tooltiplink error">HMI check not provided</span>
+                  <span class="tooltip" role="tooltip">
+                    Customs declaration states this item requires an HMI check. IPAFFS has not provided that decision. Contact the National Clearance Hub.
+                  </span>
+                </li>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+</div>
+
+<h2 class="govuk-heading-m sectionHeader ched-header">{{ data.Ipaffs | safe }}</h2>
+{% include 'includes/ched-filters.html' %}
+<div class="ched-container toggle-area" data-target="commodityTable5">
+  <div class="container govuk-body">
+    <dl class="definition-list ">
+      <div class="row">
+        <dt>CHED reference</dt>
+        <dd>
+            <a href="https://ipaffs-prototype.herokuapp.com/part-2/chedp-landbridge/00-ched-overview"
+              target="_blank"><span>CHEDPP.GB.2025.5628254
+              </span></a>
+          <i class="fas fa-external-link-alt"></i>
+        </dd>
+      </div>
+      <div class="row">
+        <dt>CHED Status</dt>
+        <dd>Valid</dd>
+      </div>
+      <div class="row">
+        <dt>Risk outcome</dt>
+        <dd>No inspection</dd>
+      </div>
+      <div class="row">
+        <dt>Last updated</dt>
+        <dd>{{ '22 May 2024' | chedTime }}</dd>
+      </div>
+    </dl>
+    <div class="toggle-wrapper">
+      <!-- Chevron arrow wrapper -->
+      <div id="toggleArrowContainer">
+        <i id="toggleArrow" class="fas fa-chevron-down"></i>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div id="commodityTable5" class="commodity-table">
+
+
+    <table class="govuk-table data-table">
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th scope="col" class="govuk-table__header">Item number</th>
+          <th scope="col" class="govuk-table__header">Commodity code</th>
+          <th scope="col" class="govuk-table__header ">Description</th>
+          <th scope="col" class="govuk-table__header ">Quantity / Weight</th>
+          <th scope="col" class="govuk-table__header">Authority</th>
+
+          <th scope="col" class="govuk-table__header ">Decision </th>
+
+        </tr>
+      </thead>
+      <tbody class="govuk-table__body">
+        <tr class="govuk-table__row PHSI HMI">
+          <td class="govuk-table__cell">1</td>
+          <td class="govuk-table__cell">08101000</td>
+          <td class="govuk-table__cell">Fragaria x ananassa </td>
+          <td class="govuk-table__cell">2883.6</td>
+               <td class="govuk-table__cell decision ">
+            <ul class="govuk-list">
+              <li class="PHSI">
+               PHSI
+              </li>
+              <li class="HMI">
+               HMI
+              </li>
+            </ul>
+          </td>
+          <td class="govuk-table__cell decision ">
+            <ul class="govuk-list">
+              <li class="PHSI">
+                Acceptable for internal market
+              </li>
+              <li class="HMI">
+                Acceptable for internal market
+              </li>
+            </ul>
+          </td>
+        </tr>
+
+
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="ched-container toggle-area" data-target="commodityTable6">
+  <div class="container govuk-body">
+    <dl class="definition-list ">
+      <div class="row">
+        <dt>CHED reference</dt>
+        <dd>
+          <a href="https://ipaffs-prototype.herokuapp.com/part-2/chedp-landbridge/00-ched-overview"
+            target="_blank"><span>CHEDPP.GB.2025.5628266
+            </span></a>
+          <i class="fas fa-external-link-alt"></i>
+        </dd>
+      </div>
+      <div class="row">
+        <dt>CHED Status</dt>
+        <dd>Valid</dd>
+      </div>
+      <div class="row">
+        <dt>Risk outcome</dt>
+        <dd>No inspection</dd>
+      </div>
+      <div class="row">
+        <dt>Last updated</dt>
+        <dd>{{ '22 May 2024' | chedTime }}</dd>
+      </div>
+    </dl>
+    <div class="toggle-wrapper">
+      <!-- Chevron arrow wrapper -->
+      <div id="toggleArrowContainer">
+        <i id="toggleArrow" class="fas fa-chevron-down"></i>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div id="commodityTable6" class="commodity-table">
+
+
+    <table class="govuk-table data-table">
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th scope="col" class="govuk-table__header">Item number</th>
+          <th scope="col" class="govuk-table__header">Commodity code</th>
+          <th scope="col" class="govuk-table__header ">Description</th>
+          <th scope="col" class="govuk-table__header ">Quantity / Weight</th>
+          <th scope="col" class="govuk-table__header">Authority</th>
+
+          <th scope="col" class="govuk-table__header ">Decision </th>
+
+        </tr>
+      </thead>
+      <tbody class="govuk-table__body">
+        <tr class="govuk-table__row PHSI HMI">
+          <td class="govuk-table__cell">1</td>
+          <td class="govuk-table__cell">08101000</td>
+          <td class="govuk-table__cell">Fragaria x ananassa </td>
+          <td class="govuk-table__cell">2883.6</td>
+              <td class="govuk-table__cell decision ">
+            <ul class="govuk-list">
+              <li class="PHSI">
+                PHSI
+              </li>
+              <li class="HMI">
+                HMI
+              </li>
+            </ul>
+          </td>
+          <td class="govuk-table__cell decision ">
+            <ul class="govuk-list">
+              <li class="PHSI">
+                Acceptable for internal market
+              </li>
+              <li class="HMI">
+                Acceptable for internal market
+              </li>
+            </ul>
+          </td>
+        </tr>
+
+
+      </tbody>
+    </table>
+  </div>
+</div>
+<!-- CHE D sections unchanged … -->
+
+<style>
+/* Header grid */
+.mrn .mrn-container dd {
+  margin: 0.3rem 0 0 0;
+}
+.mrn  .mrn-container .definition-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 0.3fr));
+  gap: 0 0;
+  padding: 1em 0.5em 0em 1em;
+  margin: 0;
+}
+.mrn-container #mrn-extra-1 {
+  padding: 1em 0.5em 0em 1em;
+}
+
+/* Inline details toggles */
+.details-toggle-wrapper { display: inline-flex; align-items: center; gap: 0; padding: 0.3em 0.8em 0.5em; }
+.details-toggle, .mrn .fas { color: #1d70b8; margin-left: 4px; }
+.details-toggle-wrapper--bottom { margin-top: 0.6em; }
+.details-toggle { border: 0; padding: 0; background: none; cursor: pointer; }
+.details-chevron { transition: transform .2s ease; }
+.details-chevron.is-open { transform: rotate(180deg); }
+</style>
+
+<script>
+/*
+  Dynamic header updater for new-layout-current:
+  - Reads ?mrn=... from the URL on load.
+  - Updates MRN text, CDS status + tag colour, last-updated, and optional fields.
+*/
+
+(function () {
+  // Map the MRNs you link from the interstitial to their status/metadata
+  const MRN_DATA = {
+    "25GB3FJBV1UEKBDAR0": { cdsText: "Current", cdsColour: "yellow", lastUpdated: "22 May 2024", ducr: "4GB943952494000-BER047811", gvms: "Embarked", eta: "22 May 2024", gmr: "GMRCQP7UIYNS" },
+    "25GB9LQ7X2MZ4H8R1K": { cdsText: "In progress", cdsColour: "yellow", lastUpdated: "07 Oct 2025", ducr: "5GB123456789000-ABC001122", gvms: "En route",  eta: "07 Oct 2025", gmr: "GMRCQP7UIYNS" },
+    "25GB9TR8W5AZ1D4X9J": { cdsText: "In progress", cdsColour: "yellow", lastUpdated: "07 Oct 2025", ducr: "5GB987654321000-XYZ009988", gvms: "En route",  eta: "07 Oct 2025", gmr: "GMRCQP7UIYNS" },
+    "25GB7KP3Q9LC2F5R8M": { cdsText: "Finalised – Released", cdsColour: "green", lastUpdated: "07 Oct 2025", ducr: "6GB192837465000-QWE453210", gvms: "Cleared",  eta: "07 Oct 2025", gmr: "GMRCQP7UIYNS" },
+    "25GB4VN6T1XZ7B3Q5L": { cdsText: "In progress", cdsColour: "yellow", lastUpdated: "06 Oct 2025", ducr: "3GB564738291000-ASD112233", gvms: "Embarked", eta: "06 Oct 2025", gmr: "GMRCQP7UIYNS" },
+    "25GB3FJBV1UEKBDAR0": { cdsText: "Finalised – Destroyed", cdsColour: "red", lastUpdated: "06 Oct 2025", ducr: "3GB564738291000-ASD112233", gvms: "Embarked", eta: "06 Oct 2025", gmr: "GMRCQP7UIYNS" },
+    "25GB8HF2M6YR9J1P0C": { cdsText: "Unknown", cdsColour: "grey", lastUpdated: "—", ducr: "—", gvms: "—", eta: "—", gmr: "GMRCQP7UIYNS" }
+  };
+
+  // Grab elements once
+  const elMRN  = document.getElementById('mrn-display');
+  const elGMR  = document.getElementById('gmr-display');
+  const elTag  = document.getElementById('cds-status-tag');
+  const elLU   = document.getElementById('last-updated');
+  const elDUCR = document.getElementById('ducr-display');
+  const elGVMS = document.getElementById('gvms-display');
+  const elETA  = document.getElementById('eta-display');
+  const live   = document.getElementById('mrn-live');
+
+  function applyTagColour(tagEl, colour) {
+    tagEl.classList.remove('govuk-tag--yellow','govuk-tag--green','govuk-tag--red','govuk-tag--blue','govuk-tag--grey');
+    if (colour) tagEl.classList.add('govuk-tag--' + colour);
+  }
+
+  function renderMRN(mrn) {
+    const data = MRN_DATA[mrn];
+    if (!data || !elMRN || !elTag || !elLU) return;
+
+    elMRN.textContent = mrn;
+    elTag.textContent = data.cdsText;
+    applyTagColour(elTag, data.cdsColour);
+
+    elLU.textContent = data.lastUpdated || '—';
+    if (elGMR)  elGMR.textContent  = data.gmr || elGMR.textContent;
+    if (elDUCR) elDUCR.textContent = data.ducr || '—';
+    if (elGVMS) elGVMS.textContent = data.gvms || '—';
+    if (elETA)  elETA.textContent  = data.eta || '—';
+
+    if (live) live.textContent = `Updated to MRN ${mrn}, CDS status ${data.cdsText}.`;
+  }
+
+  // On load, use ?mrn=... if present, otherwise keep default
+  const params = new URLSearchParams(location.search);
+  const qsMRN = params.get('mrn');
+  if (qsMRN && MRN_DATA[qsMRN]) {
+    renderMRN(qsMRN);
+  } else {
+    const current = (elMRN && elMRN.textContent || '').trim();
+    if (MRN_DATA[current]) renderMRN(current);
+  }
+})();
+</script>
+
+{% endblock %}

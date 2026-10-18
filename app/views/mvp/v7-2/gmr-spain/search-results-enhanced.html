@@ -1,0 +1,574 @@
+{% extends "layouts/forms.html" %}
+{% from "govuk/components/warning-text/macro.njk" import govukWarningText %}
+{% set signedIn = 'true' %}
+{% set fullWidth = true %}
+{% set hideButton = true %}
+{% set breadcrumb = true %}
+{% set showSubheader = true %}
+{% set subHeader = 'Showing result for' %}
+{% set title = data.searchTerm or '25GB39TWY8009YRAR9' %}
+{% set bodyClasses = 'mrn accordion v4' %}
+{% set cssClassName = 'auth' %}
+{% set hideManageAccount = 'false' %}
+{% set showEdit = true %}
+{% set hideBackLink = true %}
+{% set menu = true %}
+
+{% block form %}
+
+<h2 class="govuk-heading-m sectionHeader">{{ data.Cds | safe }}</h2>
+{% include 'includes/mrn-filters.html' %}
+
+<!-- Summary Statistics Bar -->
+<div class="govuk-summary-bar govuk-!-margin-bottom-4" style="background-color: #f3f2f1; padding: 15px; border-left: 4px solid #1d70b8;">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+      <dl class="govuk-summary-list govuk-summary-list--no-border" style="margin-bottom: 0;">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key" style="width: auto; padding-right: 20px;">
+            <strong>19</strong> items
+          </dt>
+          <dd class="govuk-summary-list__value" style="width: auto; padding-right: 20px;">
+            <strong class="govuk-tag govuk-tag--green">12</strong> matches
+          </dd>
+          <dd class="govuk-summary-list__value" style="width: auto; padding-right: 20px;">
+            <strong class="govuk-tag govuk-tag--red">7</strong> no matches
+          </dd>
+          <dd class="govuk-summary-list__value" style="width: auto;">
+            <strong class="govuk-tag govuk-tag--red" style="background-color: #d4351c;">
+              <span class="govuk-visually-hidden">Error: </span>
+              <i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 3 errors
+            </strong>
+          </dd>
+        </div>
+      </dl>
+    </div>
+  </div>
+</div>
+
+<div class="mrn-container" id="mrn-toggle">
+
+  <div class="mrn-container toggle-area" data-target="commodityTable1">
+    <div class="container govuk-body">
+      <dl class="definition-list ">
+        <div class="row">
+          <dt>MRN</dt>
+          <dd>
+            {{ title }}
+          </dd>
+        </div>
+        <div class="row">
+          <dt>DUCR</dt>
+          <dd>
+            5GB776695167000-IM106796
+          </dd>
+        </div>
+        <div class="row">
+          <dt>CDS status</dt>
+          <dd> <strong class="govuk-tag govuk-tag--yellow">In progress</strong> </dd>
+        </div>
+        <div class="row">
+          <dt>Last updated</dt>
+          <dd>{{ '22 May 2024' | mrnTime }}</dd>
+        </div>
+      </dl>
+      <div class="toggle-wrapper">
+        <!-- Chevron arrow wrapper -->
+        <div id="toggleArrowContainer">
+          <i id="toggleArrow" class="fas fa-chevron-down"></i>
+        </div>
+      </div>
+    </div>
+
+    <div id="commodityTable1" class="commodity-table">
+      <table class="govuk-table data-table">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header">Item number</th>
+            <th scope="col" class="govuk-table__header">Commodity code</th>
+            <th scope="col" class="govuk-table__header ">Description</th>
+            <th scope="col" class="govuk-table__header ">Quantity / Weight</th>
+            <th scope="col" class="govuk-table__header">CHED reference</th>
+            <th scope="col" class="govuk-table__header">Match</th>
+            <th scope="col" class="govuk-table__header">Authority</th>
+            <th scope="col" class="govuk-table__header">Decision</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body ">
+
+          <tr class="govuk-table__row match release PHSI">
+            <td class="govuk-table__cell">1</td>
+            <td class="govuk-table__cell">0808309090</td>
+            <td class="govuk-table__cell">PEARS</td>
+            <td class="govuk-table__cell">56.96</td>
+            <td class="govuk-table__cell">
+              <ul class="govuk-list">
+                <li>
+                  GBCHD2025.5736652
+                </li>
+            </td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Yes</strong></td>
+            <td class="govuk-table__cell decision">
+              <ul class="govuk-list">
+                <li class="PHSI">
+                  PHSI
+                </li>
+              </ul>
+            </td>
+            <td class="govuk-table__cell decision">
+              <ul class="govuk-list">
+                <li class="POAO">
+                  Release - Inspection Complete
+                </li>
+              </ul>
+            </td>
+          </tr>
+          <tr class="govuk-table__row match release IUU">
+            <td class="govuk-table__cell">2</td>
+            <td class="govuk-table__cell">0808309090</td>
+            <td class="govuk-table__cell">PEARS</td>
+            <td class="govuk-table__cell">56.96</td>
+            <td class="govuk-table__cell">
+              <ul class="govuk-list">
+                <li>
+                  GBCHD2025.5736652
+                </li>
+            </td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Yes</strong></td>
+            <td class="govuk-table__cell decision">
+              <ul class="govuk-list">
+                <li class="PHSI">
+                  PHSI
+                </li>
+              </ul>
+            </td>
+            <td class="govuk-table__cell decision">
+              <ul class="govuk-list">
+                <li class="IUU">
+                  Release - IUU inspection complete
+                </li>
+              </ul>
+            </td>
+          </tr>
+
+          <tr class="govuk-table__row match refused PHSI">
+            <td class="govuk-table__cell">3</td>
+            <td class="govuk-table__cell">0808309090</td>
+            <td class="govuk-table__cell">PEARS</td>
+            <td class="govuk-table__cell">56.96</td>
+            <td class="govuk-table__cell">
+              <ul class="govuk-list">
+                <li>
+                  GBCHD2025.5736652
+                </li>
+            </td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Yes</strong></td>
+            <td class="govuk-table__cell decision">
+              <ul class="govuk-list">
+                <li class="PHSI">
+                  PHSI
+                </li>
+              </ul>
+            </td>
+            <td class="govuk-table__cell decision">
+              <ul class="govuk-list">
+                <li class="POAO">
+                  Refused - Destroy
+                </li>
+              </ul>
+            </td>
+          </tr>
+          <tr class="govuk-table__row match hold PHSI">
+            <td class="govuk-table__cell">4</td>
+            <td class="govuk-table__cell">0808309090</td>
+            <td class="govuk-table__cell">PEARS</td>
+            <td class="govuk-table__cell">56.96</td>
+            <td class="govuk-table__cell">
+              GBCHD2025.5736652
+            </td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Yes</strong></td>
+            <td class="govuk-table__cell decision phsi">
+              PHSI
+            </td>
+            <td class="govuk-table__cell decision">
+              Hold - Awaiting decision
+            </td>
+          </tr>
+
+          <!-- Error row with improved visibility -->
+          <tr class="no-match error-row">
+            <td class="govuk-table__cell ">5 (E70)</td>
+            <td class="govuk-table__cell">0808309090</td>
+            <td class="govuk-table__cell">PEARS</td>
+            <td class="govuk-table__cell ">56.96</td>
+            <td class="govuk-table__cell">
+              <div class="govuk-warning-text govuk-!-margin-0" style="max-width: none;">
+                <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+                <strong class="govuk-warning-text__text">
+                  <span class="govuk-warning-text__assistive">Warning</span>
+                  <span class="tooltiplink error" style="text-decoration: underline; cursor: help;">GBCHD2025.5736652</span>
+                  <span class="tooltip" role="tooltip">
+                    CHED reference <strong>GBCHD2025.5736652</strong> cannot be found in IPAFFS. Check that the reference is correct.
+                  </span>
+                </strong>
+              </div>
+            </td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--red">No</strong></td>
+            <td class="govuk-table__cell">PHSI</td>
+            <td class="govuk-table__cell">No match - CHED cannot be found</td>
+          </tr>
+          <tr class="no-match">
+            <td class="govuk-table__cell ">6 (E71)</td>
+            <td class="govuk-table__cell">0808309090</td>
+            <td class="govuk-table__cell">PEARS</td>
+            <td class="govuk-table__cell ">56.96</td>
+            <td class="govuk-table__cell  " tabindex="0">
+              <span class="tooltiplink error">GBCHD2025.5736652</span>
+              <span class="tooltip" role="tooltip">
+                This CHED has been cancelled. Update the customs declaration with a new reference.
+              </span>
+            </td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--red">No</strong></td>
+            <td class="govuk-table__cell">PHSI</td>
+            <td class="govuk-table__cell">No match - CHED cancelled</td>
+          </tr>
+          <tr class="no-match">
+            <td class="govuk-table__cell ">7 (E72)</td>
+            <td class="govuk-table__cell">0808309090</td>
+            <td class="govuk-table__cell">PEARS</td>
+            <td class="govuk-table__cell ">56.96</td>
+            <td class="govuk-table__cell  " tabindex="0">
+              <span class="tooltiplink error">GBCHD2025.5736652</span>
+              <span class="tooltip" role="tooltip">
+                This CHED has been replaced. Update the customs declaration with a new reference.
+              </span>
+            </td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--red">No</strong></td>
+            <td class="govuk-table__cell">PHSI</td>
+            <td class="govuk-table__cell">No match - CHED replaced</td>
+          </tr>
+
+          <tr class="no-match">
+            <td class="govuk-table__cell ">8 (E73)</td>
+            <td class="govuk-table__cell">0808309090</td>
+            <td class="govuk-table__cell">PEARS</td>
+            <td class="govuk-table__cell ">56.96</td>
+            <td class="govuk-table__cell  " tabindex="0">
+              <span class="tooltiplink error">GBCHD2025.5736652</span>
+              <span class="tooltip" role="tooltip">
+                This CHED has been deleted. Update the customs declaration with a new reference.
+              </span>
+            </td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--red">No</strong></td>
+            <td class="govuk-table__cell">PHSI</td>
+            <td class="govuk-table__cell">No match - CHED deleted</td>
+          </tr>
+          <tr class="govuk-table__row match hold PHSI">
+            <td class="govuk-table__cell">9 (E74)</td>
+            <td class="govuk-table__cell">0808309090</td>
+            <td class="govuk-table__cell">PEARS</td>
+            <td class="govuk-table__cell">56.96</td>
+            <td class="govuk-table__cell">
+              <span class="tooltiplink error">GBCHD2025.5736652</span>
+              <span class="tooltip" role="tooltip">
+                This consignment needs to be split in IPAFFS, creating an updated CHED reference with either a V or an R at the end.
+              </span>
+            </td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Yes</strong></td>
+            <td class="govuk-table__cell decision">
+              <ul class="govuk-list">
+                <li class="PHSI">
+                  PHSI
+                </li>
+              </ul>
+            </td>
+            <td class="govuk-table__cell decision">
+              Hold - Partially rejected
+            </td>
+          </tr>
+          <tr class="no-match">
+            <td class="govuk-table__cell">10 (E75)</td>
+            <td class="govuk-table__cell">0808309090</td>
+            <td class="govuk-table__cell">PEARS</td>
+            <td class="govuk-table__cell">56.96</td>
+            <td class="govuk-table__cell">
+              <span class="tooltiplink error">GBCHD2025.5736652</span>
+              <span class="tooltip" role="tooltip">
+                Update the customs declaration to reference the new CHED references that have either a V or an R at the end.
+              </span>
+            </td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--red">No</strong></td>
+            <td class="govuk-table__cell decision">
+              PHSI
+            </td>
+            <td class="govuk-table__cell decision">
+              <ul class="govuk-list">
+                <li class="">
+                  No match - Split consignment
+                </li>
+              </ul>
+            </td>
+          </tr>
+          <tr class="no-match">
+            <td class="govuk-table__cell ">11 (E82)</td>
+            <td class="govuk-table__cell">0808309090</td>
+            <td class="govuk-table__cell">PEARS</td>
+            <td class="govuk-table__cell ">56.96</td>
+            <td class="govuk-table__cell  " tabindex="0">
+              <span class="tooltiplink error">GBCHD2025.5736652</span>
+              <span class="tooltip" role="tooltip">
+                This customs declaration with a HMI-GMS item has been selected for HMI-GMS inspection. Amend the customs declaration so that it has a N002 documentCode and reference the CHED-PP.
+              </span>
+            </td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--red">No</strong></td>
+            <td class="govuk-table__cell">PHSI</td>
+            <td class="govuk-table__cell">No Match - Selected for HMI GMS inspection </td>
+          </tr>
+          <tr class="no-match">
+            <td class="govuk-table__cell ">12 (E83)</td>
+            <td class="govuk-table__cell">0808309090</td>
+            <td class="govuk-table__cell">PEARS</td>
+            <td class="govuk-table__cell ">56.96</td>
+            <td class="govuk-table__cell " tabindex="0">
+              <span class="tooltiplink error">GBCHD2025.5736652</span>
+              <span class="tooltip" role="tooltip">
+                BTMS does not have the right information to provide a decision for this check code as a Document Reference / CHED has not been provided for this item.
+              </span>
+            </td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--red">No</strong></td>
+            <td class="govuk-table__cell">PHSI</td>
+            <td class="govuk-table__cell">No match </td>
+          </tr>
+
+          <tr class="no-match">
+            <td class="govuk-table__cell ">13 (E84)</td>
+            <td class="govuk-table__cell">0808309090</td>
+            <td class="govuk-table__cell">PEARS</td>
+            <td class="govuk-table__cell ">56.96</td>
+            <td class="govuk-table__cell  " tabindex="0">
+              <span class="tooltiplink error">GBCHD2025.5736652</span>
+              <span class="tooltip" role="tooltip">
+                Create a new IPAFFS notification for the correct CHED type. Reference the new CHED on the customs declaration.
+              </span>
+            </td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--red">No</strong></td>
+            <td class="govuk-table__cell">PHSI</td>
+            <td class="govuk-table__cell">No match - Incorrect CHED type</td>
+          </tr>
+
+          <!-- Error row with improved visibility -->
+          <tr class="govuk-table__row match hold HMI PHSI error-row">
+            <td class="govuk-table__cell">14 (E85)</td>
+            <td class="govuk-table__cell">0808309090</td>
+            <td class="govuk-table__cell">PEARS</td>
+            <td class="govuk-table__cell">56.96</td>
+            <td class="govuk-table__cell">
+              <div class="govuk-warning-text govuk-!-margin-0" style="max-width: none;">
+                <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+                <strong class="govuk-warning-text__text">
+                  <span class="govuk-warning-text__assistive">Warning</span>
+                  <span class="tooltiplink error" style="text-decoration: underline; cursor: help;">GBCHD2025.5736652</span>
+                  <span class="tooltip" role="tooltip">
+                    Customs declaration states this item requires a PHSI check. IPAFFS has not provided that decision. Contact the National Clearance Hub.
+                  </span>
+                </strong>
+              </div>
+            </td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Yes</strong></td>
+            <td class="govuk-table__cell decision">
+              <ul class="govuk-list">
+                <li class="PHSI ">PHSI</li>
+                <li class="HMI ">HMI</li>
+              </ul>
+            </td>
+            <td class="govuk-table__cell decision">
+              <ul class="govuk-list">
+                <li class="HMI">
+                  Hold - PHSI decision not provided
+                </li>
+                <li class="PHSI">Release - Inspection complete </li>
+              </ul>
+            </td>
+          </tr>
+
+          <tr class="govuk-table__row match hold hmi phsi">
+            <td class="govuk-table__cell">15 (E86)</td>
+            <td class="govuk-table__cell">0808309090</td>
+            <td class="govuk-table__cell">PEARS</td>
+            <td class="govuk-table__cell">56.96</td>
+            <td class="govuk-table__cell">
+              <span class="tooltiplink error">GBCHD2025.5736652</span>
+              <span class="tooltip" role="tooltip">
+                Customs declaration states this item requires an HMI check. IPAFFS has not provided that decision. Contact the National Clearance Hub.
+              </span>
+            </td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Yes</strong></td>
+            <td class="govuk-table__cell decision">
+              <ul class="govuk-list">
+                <li class="PHSI">PHSI</li>
+                <li class="HMI">HMI</li>
+              </ul>
+            </td>
+            <td class="govuk-table__cell decision">
+              <ul class="govuk-list">
+                <li class="PHSI">Release - Inspection complete </li>
+                <li class="HMI">
+                  Hold - HMI decision not provided
+                </li>
+              </ul>
+            </td>
+          </tr>
+          <tr class="no-match HMI">
+            <td class="govuk-table__cell ">16 (E87)</td>
+            <td class="govuk-table__cell">0808309090</td>
+            <td class="govuk-table__cell">PEARS</td>
+            <td class="govuk-table__cell ">56.96</td>
+            <td class="govuk-table__cell  " tabindex="0">
+              <span class="tooltiplink error">Requires CHED</span>
+              <span class="tooltip" role="tooltip">
+                This customs declaration with a GMS item has been selected for HMI GMS inspection. Create a new CHED PP referencing the HMI GMS item and amend the Customs Declaration to reference the CHED PP.
+              </span>
+            </td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--red">No</strong></td>
+            <td class="govuk-table__cell HMI">HMI</td>
+            <td class="govuk-table__cell">No match - Selected for HMI GMS inspection</td>
+          </tr>
+
+          <tr class="govuk-table__row match hold PHSI">
+            <td class="govuk-table__cell">17 (E88)</td>
+            <td class="govuk-table__cell">0808309090</td>
+            <td class="govuk-table__cell">PEARS</td>
+            <td class="govuk-table__cell">56.96</td>
+            <td class="govuk-table__cell">
+              GBCHD2025.5736652
+            </td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Yes</strong></td>
+            <td class="govuk-table__cell decision">
+              PHSI
+            </td>
+            <td class="govuk-table__cell decision">
+              <ul class="govuk-list">
+                <li class="POAO">
+                  Hold - Awaiting IPAFFS update
+                </li>
+              </ul>
+            </td>
+          </tr>
+          <tr class="govuk-table__row match hold PHSI">
+            <td class="govuk-table__cell">18</td>
+            <td class="govuk-table__cell">0808309090</td>
+            <td class="govuk-table__cell">PEARS</td>
+            <td class="govuk-table__cell">56.96</td>
+            <td class="govuk-table__cell">
+              GBCHD2025.5736652
+            </td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Yes</strong></td>
+            <td class="govuk-table__cell decision">
+              PHSI
+            </td>
+            <td class="govuk-table__cell decision">
+              Release - Inspection complete
+            </td>
+          </tr>
+          <!-- Error row with improved visibility -->
+          <tr class="no-match PHSI error-row">
+            <td class="govuk-table__cell ">19 (E99)</td>
+            <td class="govuk-table__cell">0808309090</td>
+            <td class="govuk-table__cell">PEARS</td>
+            <td class="govuk-table__cell ">56.96</td>
+            <td class="govuk-table__cell">
+              <div class="govuk-warning-text govuk-!-margin-0" style="max-width: none;">
+                <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+                <strong class="govuk-warning-text__text">
+                  <span class="govuk-warning-text__assistive">Warning</span>
+                  <span class="tooltiplink error" style="text-decoration: underline; cursor: help;">GBCHD2025.5736652</span>
+                  <span class="tooltip" role="tooltip">
+                    An unknown error has occurred
+                  </span>
+                </strong>
+              </div>
+            </td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--red">No</strong></td>
+            <td class="govuk-table__cell">
+              <ul class="govuk-list">
+                <li class="PHSI">
+                  PHSI
+                </li>
+              </ul>
+            </td>
+            <td class="govuk-table__cell">No match - Unknown error</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+</div>
+
+<h2 class="govuk-heading-m sectionHeader ched-header">{{ data.Ipaffs | safe }}</h2>
+{% include 'includes/ched-filters.html' %}
+
+<div class="ched-container toggle-area" data-target="commodityTable3">
+  <div class="container govuk-body">
+    <dl class="definition-list ">
+      <div class="row">
+        <dt>CHED reference</dt>
+        <dd>
+          <a href="https://ipaffs-prototype.herokuapp.com/part-2/chedp-landbridge/00-ched-overview"
+            target="_blank"><span>CHEDPP.GB.2025.5736652</span></a>
+          <i class="fas fa-external-link-alt"></i>
+        </dd>
+      </div>
+      <div class="row">
+        <dt>CHED Status</dt>
+        <dd>New</dd>
+      </div>
+      <div class="row">
+        <dt>Risk outcome</dt>
+        <dd>No inspection</dd>
+      </div>
+      <div class="row">
+        <dt>Last updated</dt>
+        <dd>{{ '22 May 2024' | chedTime }}</dd>
+      </div>
+    </dl>
+    <div class="toggle-wrapper">
+      <!-- Chevron arrow wrapper -->
+      <div id="toggleArrowContainer">
+        <i id="toggleArrow" class="fas fa-chevron-down"></i>
+      </div>
+    </div>
+  </div>
+
+  <div id="commodityTable3" class="commodity-table">
+    <table class="govuk-table data-table">
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th scope="col" class="govuk-table__header first">Item number</th>
+          <th scope="col" class="govuk-table__header second">Commodity code</th>
+          <th scope="col" class="govuk-table__header third ">Description</th>
+          <th scope="col" class="govuk-table__header forth ">Quantity / Weight</th>
+          <th scope="col" class="govuk-table__header forth ">Authority</th>
+          <th scope="col" class="govuk-table__header fifth ">Decision (authority)</th>
+        </tr>
+      </thead>
+      <tbody class="govuk-table__body">
+        <tr class="govuk-table__row FNAO">
+          <td class="govuk-table__cell">1</td>
+          <td class="govuk-table__cell">0709999090</td>
+          <td class="govuk-table__cell">Ipomoea aquatica</td>
+          <td class="govuk-table__cell">300</td>
+          <td class="govuk-table__cell decision multi-auth">
+            PHSI
+          </td>
+          <td class="govuk-table__cell decision multi-auth">
+            No decision given
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}

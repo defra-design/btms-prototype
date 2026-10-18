@@ -1,0 +1,16 @@
+{# v7-2 tabs: Latest and No matches are named by MRN, e.g. /mvp/v7-2/25GBDJRJCC9G1PKAR0/no-matches #}
+{% set noMatchCounts = { '25GBDJRJCC9G1PKAR0': 22, '25GBK7T2LQ9V4XNAR3': 1 } %}
+{% set noMatchCount = noMatchCounts[title] %}
+<ul class="govuk-tabs__list">
+  <li class="govuk-tabs__list-item{% if activeTab == 'latest' %} govuk-tabs__list-item--selected{% endif %}">
+    <a class="govuk-tabs__tab" href="/mvp/v7-2/{{ title }}"{% if activeTab == 'latest' %} aria-current="page"{% endif %}>Latest</a>
+  </li>
+  {% if showTimelineTab != false %}
+  <li class="govuk-tabs__list-item{% if activeTab == 'timeline' %} govuk-tabs__list-item--selected{% endif %}">
+    <a class="govuk-tabs__tab" href="/mvp/v7-2/vrn-search/search-results-timeline?q={{ title | urlencode }}"{% if activeTab == 'timeline' %} aria-current="page"{% endif %}>Timeline</a>
+  </li>
+  {% endif %}
+  <li class="govuk-tabs__list-item{% if activeTab == 'no-matches' %} govuk-tabs__list-item--selected{% endif %}">
+    <a class="govuk-tabs__tab" href="/mvp/v7-2/{{ title }}/no-matches"{% if activeTab == 'no-matches' %} aria-current="page"{% endif %}>No matches{% if noMatchCount %} ({{ noMatchCount }}){% endif %}</a>
+  </li>
+</ul>

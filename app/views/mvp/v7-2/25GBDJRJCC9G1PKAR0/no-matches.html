@@ -1,0 +1,1052 @@
+{# v7 No matches, design 2: each item shown as the three BTMS matching levels.
+   Items 2, 3, 6, 9 and 10 of MRN 25GBDJRJCC9G1PKAR0, and item 2 of MRN 25GBN3W8KD5TQ2PAR6, match the Latest tab. Items 11 to 26 are dummy items to show the page at scale. #}
+{% extends "layouts/forms.html" %}
+{% set signedIn = 'true' %}
+{% set fullWidth = true %}
+{% set hideButton = true %}
+{% set breadcrumb = true %}
+{% set showSubheader = true %}
+{% set subHeader = 'Showing result for' %}
+{% set title = '25GBDJRJCC9G1PKAR0' %}
+{% set bodyClasses = 'mrn accordion v4 v7-2' %}
+{% set hideBackLink = true %}
+{% set showMenu = true %}
+{% set searchLinkHref = '/mvp/v7-2/search' %}
+{% set menu = true %}
+{% set activeTab = 'no-matches' %}
+{% set showLevel3Tab = false %}
+
+{% block form %}
+
+<div class="govuk-tabs govuk-tabs--link-tabs">
+  {% include 'includes/v7-2/tabs.njk' %}
+
+  <div class="govuk-tabs__panel" id="no-matches">
+    <h2 class="govuk-heading-m sectionHeader">No matches</h2>
+    <p class="govuk-body no-match-intro">Each item is checked in 3 levels. Matching stops at the first level that fails.</p>
+
+    <div class="inline-form-group level-filters">
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="nm-mrn">MRN</label>
+        <select class="govuk-select" id="nm-mrn">
+          <option value="all" selected>Show all</option>
+          <option value="25GBDJRJCC9G1PKAR0">25GBDJRJCC9G1PKAR0</option>
+          <option value="25GBN3W8KD5TQ2PAR6">25GBN3W8KD5TQ2PAR6</option>
+        </select>
+      </div>
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="nm-reason">Reason</label>
+        <select class="govuk-select" id="nm-reason">
+          <option value="all" selected>Show all</option>
+          <option value="ched-not-found">Level 1: CHED not found</option>
+          <option value="commodity-code">Level 2: Incorrect commodity code</option>
+          <option value="quantity">Level 3: Incorrect quantity or weight</option>
+        </select>
+      </div>
+      <div class="govuk-form-group">
+        <a href="#" class="clear-filter level-filters__clear" hidden>Clear filters</a>
+      </div>
+    </div>
+
+    <div class="level-results-bar">
+      <p class="govuk-visually-hidden level-results-bar__count" aria-live="polite">Showing 22 of 22 items that do not match</p>
+      <button type="button" class="no-match-toggle-all">Open all<span class="govuk-visually-hidden"> items</span></button>
+    </div>
+
+  <section class="no-match-group" data-mrn="25GBDJRJCC9G1PKAR0" aria-labelledby="group-25GBDJRJCC9G1PKAR0">
+    <h3 class="govuk-heading-s no-match-group__heading" id="group-25GBDJRJCC9G1PKAR0">MRN 25GBDJRJCC9G1PKAR0 <span class="no-match-group__count">21 items do not match</span></h3>
+  <div class="ched-container toggle-area no-match-card" data-mrn="25GBDJRJCC9G1PKAR0" id="item-2" data-target="levels-2" data-collapsed="true"
+       data-reason="quantity" data-ched="GBCHD2025.6966596 GBCHD2025.6966544">
+    <div class="container govuk-body">
+      <div class="no-match-card__header">
+        <h4 class="no-match-card__title"><span class="level-card__item">Item 2</span> OTHER FLOWERS</h4>
+        <strong class="govuk-tag govuk-tag--red">Incorrect quantity or weight</strong>
+      </div>
+      <div class="toggle-wrapper">
+        <div id="toggleArrowContainer" aria-label="Show or hide item 2, OTHER FLOWERS">
+          <i id="toggleArrow" class="fas"></i>
+        </div>
+      </div>
+    </div>
+    <div id="levels-2" class="commodity-table level-card__body">
+      <ol class="level-checks">
+      <li class="level-check level-check--pass">
+        <div class="level-check__content">
+          <p class="level-check__label"><span class="level-check__level">Level 1</span><span class="level-check__name">CHED reference</span><strong class="govuk-tag govuk-tag--green level-check__tag">Match</strong></p>
+        </div>
+      </li>
+      <li class="level-check level-check--pass">
+        <div class="level-check__content">
+          <p class="level-check__label"><span class="level-check__level">Level 2</span><span class="level-check__name">Commodity code</span><strong class="govuk-tag govuk-tag--green level-check__tag">Match</strong></p>
+        </div>
+      </li>
+      <li class="level-check level-check--fail">
+        <div class="level-check__content">
+          <p class="level-check__label"><span class="level-check__level">Level 3</span><span class="level-check__name">Quantity / Weight</span><strong class="govuk-tag govuk-tag--red level-check__tag">No match</strong></p>
+          <table class="govuk-table data-table level-check__table level-check__table--reconcile">
+            <caption class="govuk-visually-hidden">CHED items making up the total</caption>
+            <thead class="govuk-table__head"><tr class="govuk-table__row"><th scope="col" class="govuk-table__header">Reference</th><th scope="col" class="govuk-table__header">Item number</th><th scope="col" class="govuk-table__header">Description</th><th scope="col" class="govuk-table__header govuk-table__header--numeric">Quantity / Weight</th></tr></thead>
+            <tbody class="govuk-table__body">
+            <tr class="govuk-table__row level-check__section"><th scope="rowgroup" class="govuk-table__header" colspan="4">MRN</th></tr>
+            <tr class="govuk-table__row level-check__mrn"><td class="govuk-table__cell">25GBDJRJCC9G1PKAR0</td><td class="govuk-table__cell">2</td><td class="govuk-table__cell">OTHER FLOWERS</td><td class="govuk-table__cell govuk-table__cell--numeric">708.5</td></tr>
+            <tr class="govuk-table__row level-check__section"><th scope="rowgroup" class="govuk-table__header" colspan="4">CHEDs</th></tr>
+            <tr class="govuk-table__row"><td class="govuk-table__cell">CHEDPP.GB.2025.6966596</td><td class="govuk-table__cell">30</td><td class="govuk-table__cell">Gypsophila sp.</td><td class="govuk-table__cell govuk-table__cell--numeric">325.5</td></tr>
+            <tr class="govuk-table__row"><td class="govuk-table__cell">CHEDPP.GB.2025.6966596</td><td class="govuk-table__cell">31</td><td class="govuk-table__cell">Hypericum sp.</td><td class="govuk-table__cell govuk-table__cell--numeric">96</td></tr>
+            <tr class="govuk-table__row"><td class="govuk-table__cell">CHEDPP.GB.2025.6966596</td><td class="govuk-table__cell">32</td><td class="govuk-table__cell">Solidago sp.</td><td class="govuk-table__cell govuk-table__cell--numeric">120</td></tr>
+            <tr class="govuk-table__row"><td class="govuk-table__cell">CHEDPP.GB.2025.6966544</td><td class="govuk-table__cell">1</td><td class="govuk-table__cell">Eryngium sp.</td><td class="govuk-table__cell govuk-table__cell--numeric">168</td></tr>
+            <tr class="govuk-table__row level-check__total"><th scope="row" class="govuk-table__header" colspan="3">CHED total</th><td class="govuk-table__cell govuk-table__cell--numeric"><strong>709.5</strong></td></tr>
+            <tr class="govuk-table__row level-check__result"><th scope="row" class="govuk-table__header" colspan="3">Difference</th><td class="govuk-table__cell govuk-table__cell--numeric">1 more on CHEDs</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </li>
+      </ol>
+    </div>
+  </div>
+  <div class="ched-container toggle-area no-match-card" data-mrn="25GBDJRJCC9G1PKAR0" id="item-3" data-target="levels-3" data-collapsed="true"
+       data-reason="quantity" data-ched="GBCHD2025.6966544">
+    <div class="container govuk-body">
+      <div class="no-match-card__header">
+        <h4 class="no-match-card__title"><span class="level-card__item">Item 3</span> STATICE</h4>
+        <strong class="govuk-tag govuk-tag--red">Incorrect quantity or weight</strong>
+      </div>
+      <div class="toggle-wrapper">
+        <div id="toggleArrowContainer" aria-label="Show or hide item 3, STATICE">
+          <i id="toggleArrow" class="fas"></i>
+        </div>
+      </div>
+    </div>
+    <div id="levels-3" class="commodity-table level-card__body">
+      <ol class="level-checks">
+      <li class="level-check level-check--pass">
+        <div class="level-check__content">
+          <p class="level-check__label"><span class="level-check__level">Level 1</span><span class="level-check__name">CHED reference</span><strong class="govuk-tag govuk-tag--green level-check__tag">Match</strong></p>
+        </div>
+      </li>
+      <li class="level-check level-check--pass">
+        <div class="level-check__content">
+          <p class="level-check__label"><span class="level-check__level">Level 2</span><span class="level-check__name">Commodity code</span><strong class="govuk-tag govuk-tag--green level-check__tag">Match</strong></p>
+        </div>
+      </li>
+      <li class="level-check level-check--fail">
+        <div class="level-check__content">
+          <p class="level-check__label"><span class="level-check__level">Level 3</span><span class="level-check__name">Quantity / Weight</span><strong class="govuk-tag govuk-tag--red level-check__tag">No match</strong></p>
+          <table class="govuk-table data-table level-check__table level-check__table--reconcile">
+            <caption class="govuk-visually-hidden">CHED item for this commodity code</caption>
+            <thead class="govuk-table__head"><tr class="govuk-table__row"><th scope="col" class="govuk-table__header">Reference</th><th scope="col" class="govuk-table__header">Item number</th><th scope="col" class="govuk-table__header">Description</th><th scope="col" class="govuk-table__header govuk-table__header--numeric">Quantity / Weight</th></tr></thead>
+            <tbody class="govuk-table__body">
+            <tr class="govuk-table__row level-check__section"><th scope="rowgroup" class="govuk-table__header" colspan="4">MRN</th></tr>
+            <tr class="govuk-table__row level-check__mrn"><td class="govuk-table__cell">25GBDJRJCC9G1PKAR0</td><td class="govuk-table__cell">3</td><td class="govuk-table__cell">STATICE</td><td class="govuk-table__cell govuk-table__cell--numeric">250</td></tr>
+            <tr class="govuk-table__row level-check__section"><th scope="rowgroup" class="govuk-table__header" colspan="4">CHED</th></tr>
+            <tr class="govuk-table__row"><td class="govuk-table__cell">CHEDPP.GB.2025.6966544</td><td class="govuk-table__cell">5</td><td class="govuk-table__cell">Limonium sp.</td><td class="govuk-table__cell govuk-table__cell--numeric">260</td></tr>
+            <tr class="govuk-table__row level-check__total"><th scope="row" class="govuk-table__header" colspan="3">CHED total</th><td class="govuk-table__cell govuk-table__cell--numeric"><strong>260</strong></td></tr>
+            <tr class="govuk-table__row level-check__result"><th scope="row" class="govuk-table__header" colspan="3">Difference</th><td class="govuk-table__cell govuk-table__cell--numeric">10 more on CHED</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </li>
+      </ol>
+    </div>
+  </div>
+  <div class="ched-container toggle-area no-match-card" data-mrn="25GBDJRJCC9G1PKAR0" id="item-6" data-target="levels-6" data-collapsed="true"
+       data-reason="quantity" data-ched="GBCHD2025.6966596">
+    <div class="container govuk-body">
+      <div class="no-match-card__header">
+        <h4 class="no-match-card__title"><span class="level-card__item">Item 6</span> CHRYSANTHEMUM</h4>
+        <strong class="govuk-tag govuk-tag--red">Incorrect quantity or weight</strong>
+      </div>
+      <div class="toggle-wrapper">
+        <div id="toggleArrowContainer" aria-label="Show or hide item 6, CHRYSANTHEMUM">
+          <i id="toggleArrow" class="fas"></i>
+        </div>
+      </div>
+    </div>
+    <div id="levels-6" class="commodity-table level-card__body">
+      <ol class="level-checks">
+      <li class="level-check level-check--pass">
+        <div class="level-check__content">
+          <p class="level-check__label"><span class="level-check__level">Level 1</span><span class="level-check__name">CHED reference</span><strong class="govuk-tag govuk-tag--green level-check__tag">Match</strong></p>
+        </div>
+      </li>
+      <li class="level-check level-check--pass">
+        <div class="level-check__content">
+          <p class="level-check__label"><span class="level-check__level">Level 2</span><span class="level-check__name">Commodity code</span><strong class="govuk-tag govuk-tag--green level-check__tag">Match</strong></p>
+        </div>
+      </li>
+      <li class="level-check level-check--fail">
+        <div class="level-check__content">
+          <p class="level-check__label"><span class="level-check__level">Level 3</span><span class="level-check__name">Quantity / Weight</span><strong class="govuk-tag govuk-tag--red level-check__tag">No match</strong></p>
+          <table class="govuk-table data-table level-check__table level-check__table--reconcile">
+            <caption class="govuk-visually-hidden">CHED item for this commodity code</caption>
+            <thead class="govuk-table__head"><tr class="govuk-table__row"><th scope="col" class="govuk-table__header">Reference</th><th scope="col" class="govuk-table__header">Item number</th><th scope="col" class="govuk-table__header">Description</th><th scope="col" class="govuk-table__header govuk-table__header--numeric">Quantity / Weight</th></tr></thead>
+            <tbody class="govuk-table__body">
+            <tr class="govuk-table__row level-check__section"><th scope="rowgroup" class="govuk-table__header" colspan="4">MRN</th></tr>
+            <tr class="govuk-table__row level-check__mrn"><td class="govuk-table__cell">25GBDJRJCC9G1PKAR0</td><td class="govuk-table__cell">6</td><td class="govuk-table__cell">CHRYSANTHEMUM</td><td class="govuk-table__cell govuk-table__cell--numeric">2143</td></tr>
+            <tr class="govuk-table__row level-check__section"><th scope="rowgroup" class="govuk-table__header" colspan="4">CHED</th></tr>
+            <tr class="govuk-table__row"><td class="govuk-table__cell">CHEDPP.GB.2025.6966596</td><td class="govuk-table__cell">34</td><td class="govuk-table__cell">Chrysanthemum sp.</td><td class="govuk-table__cell govuk-table__cell--numeric">2138</td></tr>
+            <tr class="govuk-table__row level-check__total"><th scope="row" class="govuk-table__header" colspan="3">CHED total</th><td class="govuk-table__cell govuk-table__cell--numeric"><strong>2138</strong></td></tr>
+            <tr class="govuk-table__row level-check__result"><th scope="row" class="govuk-table__header" colspan="3">Difference</th><td class="govuk-table__cell govuk-table__cell--numeric">5 more on MRN</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </li>
+      </ol>
+    </div>
+  </div>
+  <div class="ched-container toggle-area no-match-card" data-mrn="25GBDJRJCC9G1PKAR0" id="item-9" data-target="levels-9" data-collapsed="true"
+       data-reason="ched-not-found" data-ched="GBCHD2025.6966999">
+    <div class="container govuk-body">
+      <div class="no-match-card__header">
+        <h4 class="no-match-card__title"><span class="level-card__item">Item 9</span> TULIPS</h4>
+        <strong class="govuk-tag govuk-tag--red">CHED not found</strong>
+      </div>
+      <div class="toggle-wrapper">
+        <div id="toggleArrowContainer" aria-label="Show or hide item 9, TULIPS">
+          <i id="toggleArrow" class="fas"></i>
+        </div>
+      </div>
+    </div>
+    <div id="levels-9" class="commodity-table level-card__body">
+      <ol class="level-checks">
+      <li class="level-check level-check--fail">
+        <div class="level-check__content">
+          <p class="level-check__label"><span class="level-check__level">Level 1</span><span class="level-check__name">CHED reference</span><strong class="govuk-tag govuk-tag--red level-check__tag">No match</strong></p>
+          <p class="level-check__summary"><strong>GBCHD2025.6966999</strong> cannot be found in IPAFFS.</p>
+          <p class="level-check__summary">Check the reference is correct, or that the CHED has been submitted.</p>
+        </div>
+      </li>
+      <li class="level-check level-check--skip">
+        <div class="level-check__content">
+          <p class="level-check__label"><span class="level-check__level">Level 2</span><span class="level-check__name">Commodity code</span><strong class="govuk-tag govuk-tag--grey level-check__tag">Not checked</strong></p>
+        </div>
+      </li>
+      <li class="level-check level-check--skip">
+        <div class="level-check__content">
+          <p class="level-check__label"><span class="level-check__level">Level 3</span><span class="level-check__name">Quantity / Weight</span><strong class="govuk-tag govuk-tag--grey level-check__tag">Not checked</strong></p>
+        </div>
+      </li>
+      </ol>
+    </div>
+  </div>
+  <div class="ched-container toggle-area no-match-card" data-mrn="25GBDJRJCC9G1PKAR0" id="item-10" data-target="levels-10" data-collapsed="true"
+       data-reason="commodity-code" data-ched="GBCHD2025.6966544">
+    <div class="container govuk-body">
+      <div class="no-match-card__header">
+        <h4 class="no-match-card__title"><span class="level-card__item">Item 10</span> GERBERAS</h4>
+        <strong class="govuk-tag govuk-tag--red">Incorrect commodity code</strong>
+      </div>
+      <div class="toggle-wrapper">
+        <div id="toggleArrowContainer" aria-label="Show or hide item 10, GERBERAS">
+          <i id="toggleArrow" class="fas"></i>
+        </div>
+      </div>
+    </div>
+    <div id="levels-10" class="commodity-table level-card__body">
+      <ol class="level-checks">
+      <li class="level-check level-check--pass">
+        <div class="level-check__content">
+          <p class="level-check__label"><span class="level-check__level">Level 1</span><span class="level-check__name">CHED reference</span><strong class="govuk-tag govuk-tag--green level-check__tag">Match</strong></p>
+        </div>
+      </li>
+      <li class="level-check level-check--fail">
+        <div class="level-check__content">
+          <p class="level-check__label"><span class="level-check__level">Level 2</span><span class="level-check__name">Commodity code</span><strong class="govuk-tag govuk-tag--red level-check__tag">No match</strong></p>
+          <p class="level-check__summary">Commodity code <strong>0603198000</strong> cannot be found in IPAFFS.</p>
+          <p class="level-check__summary">Check that the code is correct.</p>
+        </div>
+      </li>
+      <li class="level-check level-check--skip">
+        <div class="level-check__content">
+          <p class="level-check__label"><span class="level-check__level">Level 3</span><span class="level-check__name">Quantity / Weight</span><strong class="govuk-tag govuk-tag--grey level-check__tag">Not checked</strong></p>
+        </div>
+      </li>
+      </ol>
+    </div>
+  </div>
+  <div class="ched-container toggle-area no-match-card" data-mrn="25GBDJRJCC9G1PKAR0" id="item-11" data-target="levels-11" data-collapsed="true"
+       data-reason="quantity" data-ched="GBCHD2025.6966596">
+    <div class="container govuk-body">
+      <div class="no-match-card__header">
+        <h4 class="no-match-card__title"><span class="level-card__item">Item 11</span> ALSTROEMERIA</h4>
+        <strong class="govuk-tag govuk-tag--red">Incorrect quantity or weight</strong>
+      </div>
+      <div class="toggle-wrapper">
+        <div id="toggleArrowContainer" aria-label="Show or hide item 11, ALSTROEMERIA">
+          <i id="toggleArrow" class="fas"></i>
+        </div>
+      </div>
+    </div>
+    <div id="levels-11" class="commodity-table level-card__body">
+      <ol class="level-checks">
+      <li class="level-check level-check--pass">
+        <div class="level-check__content">
+          <p class="level-check__label"><span class="level-check__level">Level 1</span><span class="level-check__name">CHED reference</span><strong class="govuk-tag govuk-tag--green level-check__tag">Match</strong></p>
+        </div>
+      </li>
+      <li class="level-check level-check--pass">
+        <div class="level-check__content">
+          <p class="level-check__label"><span class="level-check__level">Level 2</span><span class="level-check__name">Commodity code</span><strong class="govuk-tag govuk-tag--green level-check__tag">Match</strong></p>
+        </div>
+      </li>
+      <li class="level-check level-check--fail">
+        <div class="level-check__content">
+          <p class="level-check__label"><span class="level-check__level">Level 3</span><span class="level-check__name">Quantity / Weight</span><strong class="govuk-tag govuk-tag--red level-check__tag">No match</strong></p>
+          <table class="govuk-table data-table level-check__table level-check__table--reconcile">
+            <caption class="govuk-visually-hidden">CHED item for this commodity code</caption>
+            <thead class="govuk-table__head"><tr class="govuk-table__row"><th scope="col" class="govuk-table__header">Reference</th><th scope="col" class="govuk-table__header">Item number</th><th scope="col" class="govuk-table__header">Description</th><th scope="col" class="govuk-table__header govuk-table__header--numeric">Quantity / Weight</th></tr></thead>
+            <tbody class="govuk-table__body">
+            <tr class="govuk-table__row level-check__section"><th scope="rowgroup" class="govuk-table__header" colspan="4">MRN</th></tr>
+            <tr class="govuk-table__row level-check__mrn"><td class="govuk-table__cell">25GBDJRJCC9G1PKAR0</td><td class="govuk-table__cell">11</td><td class="govuk-table__cell">ALSTROEMERIA</td><td class="govuk-table__cell govuk-table__cell--numeric">200</td></tr>
+            <tr class="govuk-table__row level-check__section"><th scope="rowgroup" class="govuk-table__header" colspan="4">CHED</th></tr>
+            <tr class="govuk-table__row"><td class="govuk-table__cell">CHEDPP.GB.2025.6966596</td><td class="govuk-table__cell">40</td><td class="govuk-table__cell">Alstroemeria sp.</td><td class="govuk-table__cell govuk-table__cell--numeric">198</td></tr>
+            <tr class="govuk-table__row level-check__total"><th scope="row" class="govuk-table__header" colspan="3">CHED total</th><td class="govuk-table__cell govuk-table__cell--numeric"><strong>198</strong></td></tr>
+            <tr class="govuk-table__row level-check__result"><th scope="row" class="govuk-table__header" colspan="3">Difference</th><td class="govuk-table__cell govuk-table__cell--numeric">2 more on MRN</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </li>
+      </ol>
+    </div>
+  </div>
+  <div class="ched-container toggle-area no-match-card" data-mrn="25GBDJRJCC9G1PKAR0" id="item-12" data-target="levels-12" data-collapsed="true"
+       data-reason="ched-not-found" data-ched="GBCHD2025.6907001">
+    <div class="container govuk-body">
+      <div class="no-match-card__header">
+        <h4 class="no-match-card__title"><span class="level-card__item">Item 12</span> FREESIA</h4>
+        <strong class="govuk-tag govuk-tag--red">CHED not found</strong>
+      </div>
+      <div class="toggle-wrapper">
+        <div id="toggleArrowContainer" aria-label="Show or hide item 12, FREESIA">
+          <i id="toggleArrow" class="fas"></i>
+        </div>
+      </div>
+    </div>
+    <div id="levels-12" class="commodity-table level-card__body">
+      <ol class="level-checks">
+      <li class="level-check level-check--fail">
+        <div class="level-check__content">
+          <p class="level-check__label"><span class="level-check__level">Level 1</span><span class="level-check__name">CHED reference</span><strong class="govuk-tag govuk-tag--red level-check__tag">No match</strong></p>
+          <p class="level-check__summary"><strong>GBCHD2025.6907001</strong> cannot be found in IPAFFS.</p>
+          <p class="level-check__summary">Check the reference is correct, or that the CHED has been submitted.</p>
+        </div>
+      </li>
+      <li class="level-check level-check--skip">
+        <div class="level-check__content">
+          <p class="level-check__label"><span class="level-check__level">Level 2</span><span class="level-check__name">Commodity code</span><strong class="govuk-tag govuk-tag--grey level-check__tag">Not checked</strong></p>
+        </div>
+      </li>
+      <li class="level-check level-check--skip">
+        <div class="level-check__content">
+          <p class="level-check__label"><span class="level-check__level">Level 3</span><span class="level-check__name">Quantity / Weight</span><strong class="govuk-tag govuk-tag--grey level-check__tag">Not checked</strong></p>
+        </div>
+      </li>
+      </ol>
+    </div>
+  </div>
+  <div class="ched-container toggle-area no-match-card" data-mrn="25GBDJRJCC9G1PKAR0" id="item-13" data-target="levels-13" data-collapsed="true"
+       data-reason="quantity" data-ched="GBCHD2025.6966610">
+    <div class="container govuk-body">
+      <div class="no-match-card__header">
+        <h4 class="no-match-card__title"><span class="level-card__item">Item 13</span> LISIANTHUS</h4>
+        <strong class="govuk-tag govuk-tag--red">Incorrect quantity or weight</strong>
+      </div>
+      <div class="toggle-wrapper">
+        <div id="toggleArrowContainer" aria-label="Show or hide item 13, LISIANTHUS">
+          <i id="toggleArrow" class="fas"></i>
+        </div>
+      </div>
+    </div>
+    <div id="levels-13" class="commodity-table level-card__body">
+      <ol class="level-checks">
+      <li class="level-check level-check--pass">
+        <div class="level-check__content">
+          <p class="level-check__label"><span class="level-check__level">Level 1</span><span class="level-check__name">CHED reference</span><strong class="govuk-tag govuk-tag--green level-check__tag">Match</strong></p>
+        </div>
+      </li>
+      <li class="level-check level-check--pass">
+        <div class="level-check__content">
+          <p class="level-check__label"><span class="level-check__level">Level 2</span><span class="level-check__name">Commodity code</span><strong class="govuk-tag govuk-tag--green level-check__tag">Match</strong></p>
+        </div>
+      </li>
+      <li class="level-check level-check--fail">
+        <div class="level-check__content">
+          <p class="level-check__label"><span class="level-check__level">Level 3</span><span class="level-check__name">Quantity / Weight</span><strong class="govuk-tag govuk-tag--red level-check__tag">No match</strong></p>
+          <table class="govuk-table data-table level-check__table level-check__table--reconcile">
+            <caption class="govuk-visually-hidden">CHED item for this commodity code</caption>
+            <thead class="govuk-table__head"><tr class="govuk-table__row"><th scope="col" class="govuk-table__header">Reference</th><th scope="col" class="govuk-table__header">Item number</th><th scope="col" class="govuk-table__header">Description</th><th scope="col" class="govuk-table__header govuk-table__header--numeric">Quantity / Weight</th></tr></thead>
+            <tbody class="govuk-table__body">
+            <tr class="govuk-table__row level-check__section"><th scope="rowgroup" class="govuk-table__header" colspan="4">MRN</th></tr>
+            <tr class="govuk-table__row level-check__mrn"><td class="govuk-table__cell">25GBDJRJCC9G1PKAR0</td><td class="govuk-table__cell">13</td><td class="govuk-table__cell">LISIANTHUS</td><td class="govuk-table__cell govuk-table__cell--numeric">274</td></tr>
+            <tr class="govuk-table__row level-check__section"><th scope="rowgroup" class="govuk-table__header" colspan="4">CHED</th></tr>
+            <tr class="govuk-table__row"><td class="govuk-table__cell">CHEDPP.GB.2025.6966610</td><td class="govuk-table__cell">42</td><td class="govuk-table__cell">Eustoma sp.</td><td class="govuk-table__cell govuk-table__cell--numeric">264</td></tr>
+            <tr class="govuk-table__row level-check__total"><th scope="row" class="govuk-table__header" colspan="3">CHED total</th><td class="govuk-table__cell govuk-table__cell--numeric"><strong>264</strong></td></tr>
+            <tr class="govuk-table__row level-check__result"><th scope="row" class="govuk-table__header" colspan="3">Difference</th><td class="govuk-table__cell govuk-table__cell--numeric">10 more on MRN</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </li>
+      </ol>
+    </div>
+  </div>
+  <div class="ched-container toggle-area no-match-card" data-mrn="25GBDJRJCC9G1PKAR0" id="item-14" data-target="levels-14" data-collapsed="true"
+       data-reason="commodity-code" data-ched="GBCHD2025.6966655">
+    <div class="container govuk-body">
+      <div class="no-match-card__header">
+        <h4 class="no-match-card__title"><span class="level-card__item">Item 14</span> PEONIES</h4>
+        <strong class="govuk-tag govuk-tag--red">Incorrect commodity code</strong>
+      </div>
+      <div class="toggle-wrapper">
+        <div id="toggleArrowContainer" aria-label="Show or hide item 14, PEONIES">
+          <i id="toggleArrow" class="fas"></i>
+        </div>
+      </div>
+    </div>
+    <div id="levels-14" class="commodity-table level-card__body">
+      <ol class="level-checks">
+      <li class="level-check level-check--pass">
+        <div class="level-check__content">
+          <p class="level-check__label"><span class="level-check__level">Level 1</span><span class="level-check__name">CHED reference</span><strong class="govuk-tag govuk-tag--green level-check__tag">Match</strong></p>
+        </div>
+      </li>
+      <li class="level-check level-check--fail">
+        <div class="level-check__content">
+          <p class="level-check__label"><span class="level-check__level">Level 2</span><span class="level-check__name">Commodity code</span><strong class="govuk-tag govuk-tag--red level-check__tag">No match</strong></p>
+          <p class="level-check__summary">Commodity code <strong>0603196000</strong> cannot be found in IPAFFS.</p>
+          <p class="level-check__summary">Check that the code is correct.</p>
+        </div>
+      </li>
+      <li class="level-check level-check--skip">
+        <div class="level-check__content">
+          <p class="level-check__label"><span class="level-check__level">Level 3</span><span class="level-check__name">Quantity / Weight</span><strong class="govuk-tag govuk-tag--grey level-check__tag">Not checked</strong></p>
+        </div>
+      </li>
+      </ol>
+    </div>
+  </div>
+  <div class="ched-container toggle-area no-match-card" data-mrn="25GBDJRJCC9G1PKAR0" id="item-15" data-target="levels-15" data-collapsed="true"
+       data-reason="ched-not-found" data-ched="GBCHD2025.6907004">
+    <div class="container govuk-body">
+      <div class="no-match-card__header">
+        <h4 class="no-match-card__title"><span class="level-card__item">Item 15</span> RANUNCULUS</h4>
+        <strong class="govuk-tag govuk-tag--red">CHED not found</strong>
+      </div>
+      <div class="toggle-wrapper">
+        <div id="toggleArrowContainer" aria-label="Show or hide item 15, RANUNCULUS">
+          <i id="toggleArrow" class="fas"></i>
+        </div>
+      </div>
+    </div>
+    <div id="levels-15" class="commodity-table level-card__body">
+      <ol class="level-checks">
+      <li class="level-check level-check--fail">
+        <div class="level-check__content">
+          <p class="level-check__label"><span class="level-check__level">Level 1</span><span class="level-check__name">CHED reference</span><strong class="govuk-tag govuk-tag--red level-check__tag">No match</strong></p>
+          <p class="level-check__summary"><strong>GBCHD2025.6907004</strong> cannot be found in IPAFFS.</p>
+          <p class="level-check__summary">Check the reference is correct, or that the CHED has been submitted.</p>
+        </div>
+      </li>
+      <li class="level-check level-check--skip">
+        <div class="level-check__content">
+          <p class="level-check__label"><span class="level-check__level">Level 2</span><span class="level-check__name">Commodity code</span><strong class="govuk-tag govuk-tag--grey level-check__tag">Not checked</strong></p>
+        </div>
+      </li>
+      <li class="level-check level-check--skip">
+        <div class="level-check__content">
+          <p class="level-check__label"><span class="level-check__level">Level 3</span><span class="level-check__name">Quantity / Weight</span><strong class="govuk-tag govuk-tag--grey level-check__tag">Not checked</strong></p>
+        </div>
+      </li>
+      </ol>
+    </div>
+  </div>
+  <div class="ched-container toggle-area no-match-card" data-mrn="25GBDJRJCC9G1PKAR0" id="item-16" data-target="levels-16" data-collapsed="true"
+       data-reason="commodity-code" data-ched="GBCHD2025.6966544">
+    <div class="container govuk-body">
+      <div class="no-match-card__header">
+        <h4 class="no-match-card__title"><span class="level-card__item">Item 16</span> ANEMONES</h4>
+        <strong class="govuk-tag govuk-tag--red">Incorrect commodity code</strong>
+      </div>
+      <div class="toggle-wrapper">
+        <div id="toggleArrowContainer" aria-label="Show or hide item 16, ANEMONES">
+          <i id="toggleArrow" class="fas"></i>
+        </div>
+      </div>
+    </div>
+    <div id="levels-16" class="commodity-table level-card__body">
+      <ol class="level-checks">
+      <li class="level-check level-check--pass">
+        <div class="level-check__content">
+          <p class="level-check__label"><span class="level-check__level">Level 1</span><span class="level-check__name">CHED reference</span><strong class="govuk-tag govuk-tag--green level-check__tag">Match</strong></p>
+        </div>
+      </li>
+      <li class="level-check level-check--fail">
+        <div class="level-check__content">
+          <p class="level-check__label"><span class="level-check__level">Level 2</span><span class="level-check__name">Commodity code</span><strong class="govuk-tag govuk-tag--red level-check__tag">No match</strong></p>
+          <p class="level-check__summary">Commodity code <strong>0603191100</strong> cannot be found in IPAFFS.</p>
+          <p class="level-check__summary">Check that the code is correct.</p>
+        </div>
+      </li>
+      <li class="level-check level-check--skip">
+        <div class="level-check__content">
+          <p class="level-check__label"><span class="level-check__level">Level 3</span><span class="level-check__name">Quantity / Weight</span><strong class="govuk-tag govuk-tag--grey level-check__tag">Not checked</strong></p>
+        </div>
+      </li>
+      </ol>
+    </div>
+  </div>
+  <div class="ched-container toggle-area no-match-card" data-mrn="25GBDJRJCC9G1PKAR0" id="item-17" data-target="levels-17" data-collapsed="true"
+       data-reason="quantity" data-ched="GBCHD2025.6966610">
+    <div class="container govuk-body">
+      <div class="no-match-card__header">
+        <h4 class="no-match-card__title"><span class="level-card__item">Item 17</span> SUNFLOWERS</h4>
+        <strong class="govuk-tag govuk-tag--red">Incorrect quantity or weight</strong>
+      </div>
+      <div class="toggle-wrapper">
+        <div id="toggleArrowContainer" aria-label="Show or hide item 17, SUNFLOWERS">
+          <i id="toggleArrow" class="fas"></i>
+        </div>
+      </div>
+    </div>
+    <div id="levels-17" class="commodity-table level-card__body">
+      <ol class="level-checks">
+      <li class="level-check level-check--pass">
+        <div class="level-check__content">
+          <p class="level-check__label"><span class="level-check__level">Level 1</span><span class="level-check__name">CHED reference</span><strong class="govuk-tag govuk-tag--green level-check__tag">Match</strong></p>
+        </div>
+      </li>
+      <li class="level-check level-check--pass">
+        <div class="level-check__content">
+          <p class="level-check__label"><span class="level-check__level">Level 2</span><span class="level-check__name">Commodity code</span><strong class="govuk-tag govuk-tag--green level-check__tag">Match</strong></p>
+        </div>
+      </li>
+      <li class="level-check level-check--fail">
+        <div class="level-check__content">
+          <p class="level-check__label"><span class="level-check__level">Level 3</span><span class="level-check__name">Quantity / Weight</span><strong class="govuk-tag govuk-tag--red level-check__tag">No match</strong></p>
+          <table class="govuk-table data-table level-check__table level-check__table--reconcile">
+            <caption class="govuk-visually-hidden">CHED item for this commodity code</caption>
+            <thead class="govuk-table__head"><tr class="govuk-table__row"><th scope="col" class="govuk-table__header">Reference</th><th scope="col" class="govuk-table__header">Item number</th><th scope="col" class="govuk-table__header">Description</th><th scope="col" class="govuk-table__header govuk-table__header--numeric">Quantity / Weight</th></tr></thead>
+            <tbody class="govuk-table__body">
+            <tr class="govuk-table__row level-check__section"><th scope="rowgroup" class="govuk-table__header" colspan="4">MRN</th></tr>
+            <tr class="govuk-table__row level-check__mrn"><td class="govuk-table__cell">25GBDJRJCC9G1PKAR0</td><td class="govuk-table__cell">17</td><td class="govuk-table__cell">SUNFLOWERS</td><td class="govuk-table__cell govuk-table__cell--numeric">422</td></tr>
+            <tr class="govuk-table__row level-check__section"><th scope="rowgroup" class="govuk-table__header" colspan="4">CHED</th></tr>
+            <tr class="govuk-table__row"><td class="govuk-table__cell">CHEDPP.GB.2025.6966610</td><td class="govuk-table__cell">46</td><td class="govuk-table__cell">Helianthus sp.</td><td class="govuk-table__cell govuk-table__cell--numeric">417</td></tr>
+            <tr class="govuk-table__row level-check__total"><th scope="row" class="govuk-table__header" colspan="3">CHED total</th><td class="govuk-table__cell govuk-table__cell--numeric"><strong>417</strong></td></tr>
+            <tr class="govuk-table__row level-check__result"><th scope="row" class="govuk-table__header" colspan="3">Difference</th><td class="govuk-table__cell govuk-table__cell--numeric">5 more on MRN</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </li>
+      </ol>
+    </div>
+  </div>
+  <div class="ched-container toggle-area no-match-card" data-mrn="25GBDJRJCC9G1PKAR0" id="item-18" data-target="levels-18" data-collapsed="true"
+       data-reason="quantity" data-ched="GBCHD2025.6966655">
+    <div class="container govuk-body">
+      <div class="no-match-card__header">
+        <h4 class="no-match-card__title"><span class="level-card__item">Item 18</span> HYDRANGEA</h4>
+        <strong class="govuk-tag govuk-tag--red">Incorrect quantity or weight</strong>
+      </div>
+      <div class="toggle-wrapper">
+        <div id="toggleArrowContainer" aria-label="Show or hide item 18, HYDRANGEA">
+          <i id="toggleArrow" class="fas"></i>
+        </div>
+      </div>
+    </div>
+    <div id="levels-18" class="commodity-table level-card__body">
+      <ol class="level-checks">
+      <li class="level-check level-check--pass">
+        <div class="level-check__content">
+          <p class="level-check__label"><span class="level-check__level">Level 1</span><span class="level-check__name">CHED reference</span><strong class="govuk-tag govuk-tag--green level-check__tag">Match</strong></p>
+        </div>
+      </li>
+      <li class="level-check level-check--pass">
+        <div class="level-check__content">
+          <p class="level-check__label"><span class="level-check__level">Level 2</span><span class="level-check__name">Commodity code</span><strong class="govuk-tag govuk-tag--green level-check__tag">Match</strong></p>
+        </div>
+      </li>
+      <li class="level-check level-check--fail">
+        <div class="level-check__content">
+          <p class="level-check__label"><span class="level-check__level">Level 3</span><span class="level-check__name">Quantity / Weight</span><strong class="govuk-tag govuk-tag--red level-check__tag">No match</strong></p>
+          <table class="govuk-table data-table level-check__table level-check__table--reconcile">
+            <caption class="govuk-visually-hidden">CHED item for this commodity code</caption>
+            <thead class="govuk-table__head"><tr class="govuk-table__row"><th scope="col" class="govuk-table__header">Reference</th><th scope="col" class="govuk-table__header">Item number</th><th scope="col" class="govuk-table__header">Description</th><th scope="col" class="govuk-table__header govuk-table__header--numeric">Quantity / Weight</th></tr></thead>
+            <tbody class="govuk-table__body">
+            <tr class="govuk-table__row level-check__section"><th scope="rowgroup" class="govuk-table__header" colspan="4">MRN</th></tr>
+            <tr class="govuk-table__row level-check__mrn"><td class="govuk-table__cell">25GBDJRJCC9G1PKAR0</td><td class="govuk-table__cell">18</td><td class="govuk-table__cell">HYDRANGEA</td><td class="govuk-table__cell govuk-table__cell--numeric">459</td></tr>
+            <tr class="govuk-table__row level-check__section"><th scope="rowgroup" class="govuk-table__header" colspan="4">CHED</th></tr>
+            <tr class="govuk-table__row"><td class="govuk-table__cell">CHEDPP.GB.2025.6966655</td><td class="govuk-table__cell">47</td><td class="govuk-table__cell">Hydrangea sp.</td><td class="govuk-table__cell govuk-table__cell--numeric">469</td></tr>
+            <tr class="govuk-table__row level-check__total"><th scope="row" class="govuk-table__header" colspan="3">CHED total</th><td class="govuk-table__cell govuk-table__cell--numeric"><strong>469</strong></td></tr>
+            <tr class="govuk-table__row level-check__result"><th scope="row" class="govuk-table__header" colspan="3">Difference</th><td class="govuk-table__cell govuk-table__cell--numeric">10 more on CHED</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </li>
+      </ol>
+    </div>
+  </div>
+  <div class="ched-container toggle-area no-match-card" data-mrn="25GBDJRJCC9G1PKAR0" id="item-19" data-target="levels-19" data-collapsed="true"
+       data-reason="commodity-code" data-ched="GBCHD2025.6966596">
+    <div class="container govuk-body">
+      <div class="no-match-card__header">
+        <h4 class="no-match-card__title"><span class="level-card__item">Item 19</span> DELPHINIUM</h4>
+        <strong class="govuk-tag govuk-tag--red">Incorrect commodity code</strong>
+      </div>
+      <div class="toggle-wrapper">
+        <div id="toggleArrowContainer" aria-label="Show or hide item 19, DELPHINIUM">
+          <i id="toggleArrow" class="fas"></i>
+        </div>
+      </div>
+    </div>
+    <div id="levels-19" class="commodity-table level-card__body">
+      <ol class="level-checks">
+      <li class="level-check level-check--pass">
+        <div class="level-check__content">
+          <p class="level-check__label"><span class="level-check__level">Level 1</span><span class="level-check__name">CHED reference</span><strong class="govuk-tag govuk-tag--green level-check__tag">Match</strong></p>
+        </div>
+      </li>
+      <li class="level-check level-check--fail">
+        <div class="level-check__content">
+          <p class="level-check__label"><span class="level-check__level">Level 2</span><span class="level-check__name">Commodity code</span><strong class="govuk-tag govuk-tag--red level-check__tag">No match</strong></p>
+          <p class="level-check__summary">Commodity code <strong>0603199300</strong> cannot be found in IPAFFS.</p>
+          <p class="level-check__summary">Check that the code is correct.</p>
+        </div>
+      </li>
+      <li class="level-check level-check--skip">
+        <div class="level-check__content">
+          <p class="level-check__label"><span class="level-check__level">Level 3</span><span class="level-check__name">Quantity / Weight</span><strong class="govuk-tag govuk-tag--grey level-check__tag">Not checked</strong></p>
+        </div>
+      </li>
+      </ol>
+    </div>
+  </div>
+  <div class="ched-container toggle-area no-match-card" data-mrn="25GBDJRJCC9G1PKAR0" id="item-20" data-target="levels-20" data-collapsed="true"
+       data-reason="quantity" data-ched="GBCHD2025.6966544">
+    <div class="container govuk-body">
+      <div class="no-match-card__header">
+        <h4 class="no-match-card__title"><span class="level-card__item">Item 20</span> STOCKS</h4>
+        <strong class="govuk-tag govuk-tag--red">Incorrect quantity or weight</strong>
+      </div>
+      <div class="toggle-wrapper">
+        <div id="toggleArrowContainer" aria-label="Show or hide item 20, STOCKS">
+          <i id="toggleArrow" class="fas"></i>
+        </div>
+      </div>
+    </div>
+    <div id="levels-20" class="commodity-table level-card__body">
+      <ol class="level-checks">
+      <li class="level-check level-check--pass">
+        <div class="level-check__content">
+          <p class="level-check__label"><span class="level-check__level">Level 1</span><span class="level-check__name">CHED reference</span><strong class="govuk-tag govuk-tag--green level-check__tag">Match</strong></p>
+        </div>
+      </li>
+      <li class="level-check level-check--pass">
+        <div class="level-check__content">
+          <p class="level-check__label"><span class="level-check__level">Level 2</span><span class="level-check__name">Commodity code</span><strong class="govuk-tag govuk-tag--green level-check__tag">Match</strong></p>
+        </div>
+      </li>
+      <li class="level-check level-check--fail">
+        <div class="level-check__content">
+          <p class="level-check__label"><span class="level-check__level">Level 3</span><span class="level-check__name">Quantity / Weight</span><strong class="govuk-tag govuk-tag--red level-check__tag">No match</strong></p>
+          <table class="govuk-table data-table level-check__table level-check__table--reconcile">
+            <caption class="govuk-visually-hidden">CHED item for this commodity code</caption>
+            <thead class="govuk-table__head"><tr class="govuk-table__row"><th scope="col" class="govuk-table__header">Reference</th><th scope="col" class="govuk-table__header">Item number</th><th scope="col" class="govuk-table__header">Description</th><th scope="col" class="govuk-table__header govuk-table__header--numeric">Quantity / Weight</th></tr></thead>
+            <tbody class="govuk-table__body">
+            <tr class="govuk-table__row level-check__section"><th scope="rowgroup" class="govuk-table__header" colspan="4">MRN</th></tr>
+            <tr class="govuk-table__row level-check__mrn"><td class="govuk-table__cell">25GBDJRJCC9G1PKAR0</td><td class="govuk-table__cell">20</td><td class="govuk-table__cell">STOCKS</td><td class="govuk-table__cell govuk-table__cell--numeric">533</td></tr>
+            <tr class="govuk-table__row level-check__section"><th scope="rowgroup" class="govuk-table__header" colspan="4">CHED</th></tr>
+            <tr class="govuk-table__row"><td class="govuk-table__cell">CHEDPP.GB.2025.6966544</td><td class="govuk-table__cell">49</td><td class="govuk-table__cell">Matthiola sp.</td><td class="govuk-table__cell govuk-table__cell--numeric">536</td></tr>
+            <tr class="govuk-table__row level-check__total"><th scope="row" class="govuk-table__header" colspan="3">CHED total</th><td class="govuk-table__cell govuk-table__cell--numeric"><strong>536</strong></td></tr>
+            <tr class="govuk-table__row level-check__result"><th scope="row" class="govuk-table__header" colspan="3">Difference</th><td class="govuk-table__cell govuk-table__cell--numeric">3 more on CHED</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </li>
+      </ol>
+    </div>
+  </div>
+  <div class="ched-container toggle-area no-match-card" data-mrn="25GBDJRJCC9G1PKAR0" id="item-21" data-target="levels-21" data-collapsed="true"
+       data-reason="quantity" data-ched="GBCHD2025.6966610">
+    <div class="container govuk-body">
+      <div class="no-match-card__header">
+        <h4 class="no-match-card__title"><span class="level-card__item">Item 21</span> SWEET WILLIAM</h4>
+        <strong class="govuk-tag govuk-tag--red">Incorrect quantity or weight</strong>
+      </div>
+      <div class="toggle-wrapper">
+        <div id="toggleArrowContainer" aria-label="Show or hide item 21, SWEET WILLIAM">
+          <i id="toggleArrow" class="fas"></i>
+        </div>
+      </div>
+    </div>
+    <div id="levels-21" class="commodity-table level-card__body">
+      <ol class="level-checks">
+      <li class="level-check level-check--pass">
+        <div class="level-check__content">
+          <p class="level-check__label"><span class="level-check__level">Level 1</span><span class="level-check__name">CHED reference</span><strong class="govuk-tag govuk-tag--green level-check__tag">Match</strong></p>
+        </div>
+      </li>
+      <li class="level-check level-check--pass">
+        <div class="level-check__content">
+          <p class="level-check__label"><span class="level-check__level">Level 2</span><span class="level-check__name">Commodity code</span><strong class="govuk-tag govuk-tag--green level-check__tag">Match</strong></p>
+        </div>
+      </li>
+      <li class="level-check level-check--fail">
+        <div class="level-check__content">
+          <p class="level-check__label"><span class="level-check__level">Level 3</span><span class="level-check__name">Quantity / Weight</span><strong class="govuk-tag govuk-tag--red level-check__tag">No match</strong></p>
+          <table class="govuk-table data-table level-check__table level-check__table--reconcile">
+            <caption class="govuk-visually-hidden">CHED item for this commodity code</caption>
+            <thead class="govuk-table__head"><tr class="govuk-table__row"><th scope="col" class="govuk-table__header">Reference</th><th scope="col" class="govuk-table__header">Item number</th><th scope="col" class="govuk-table__header">Description</th><th scope="col" class="govuk-table__header govuk-table__header--numeric">Quantity / Weight</th></tr></thead>
+            <tbody class="govuk-table__body">
+            <tr class="govuk-table__row level-check__section"><th scope="rowgroup" class="govuk-table__header" colspan="4">MRN</th></tr>
+            <tr class="govuk-table__row level-check__mrn"><td class="govuk-table__cell">25GBDJRJCC9G1PKAR0</td><td class="govuk-table__cell">21</td><td class="govuk-table__cell">SWEET WILLIAM</td><td class="govuk-table__cell govuk-table__cell--numeric">570</td></tr>
+            <tr class="govuk-table__row level-check__section"><th scope="rowgroup" class="govuk-table__header" colspan="4">CHED</th></tr>
+            <tr class="govuk-table__row"><td class="govuk-table__cell">CHEDPP.GB.2025.6966610</td><td class="govuk-table__cell">50</td><td class="govuk-table__cell">Dianthus barbatus</td><td class="govuk-table__cell govuk-table__cell--numeric">568</td></tr>
+            <tr class="govuk-table__row level-check__total"><th scope="row" class="govuk-table__header" colspan="3">CHED total</th><td class="govuk-table__cell govuk-table__cell--numeric"><strong>568</strong></td></tr>
+            <tr class="govuk-table__row level-check__result"><th scope="row" class="govuk-table__header" colspan="3">Difference</th><td class="govuk-table__cell govuk-table__cell--numeric">2 more on MRN</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </li>
+      </ol>
+    </div>
+  </div>
+  <div class="ched-container toggle-area no-match-card" data-mrn="25GBDJRJCC9G1PKAR0" id="item-22" data-target="levels-22" data-collapsed="true"
+       data-reason="quantity" data-ched="GBCHD2025.6966655">
+    <div class="container govuk-body">
+      <div class="no-match-card__header">
+        <h4 class="no-match-card__title"><span class="level-card__item">Item 22</span> IRIS</h4>
+        <strong class="govuk-tag govuk-tag--red">Incorrect quantity or weight</strong>
+      </div>
+      <div class="toggle-wrapper">
+        <div id="toggleArrowContainer" aria-label="Show or hide item 22, IRIS">
+          <i id="toggleArrow" class="fas"></i>
+        </div>
+      </div>
+    </div>
+    <div id="levels-22" class="commodity-table level-card__body">
+      <ol class="level-checks">
+      <li class="level-check level-check--pass">
+        <div class="level-check__content">
+          <p class="level-check__label"><span class="level-check__level">Level 1</span><span class="level-check__name">CHED reference</span><strong class="govuk-tag govuk-tag--green level-check__tag">Match</strong></p>
+        </div>
+      </li>
+      <li class="level-check level-check--pass">
+        <div class="level-check__content">
+          <p class="level-check__label"><span class="level-check__level">Level 2</span><span class="level-check__name">Commodity code</span><strong class="govuk-tag govuk-tag--green level-check__tag">Match</strong></p>
+        </div>
+      </li>
+      <li class="level-check level-check--fail">
+        <div class="level-check__content">
+          <p class="level-check__label"><span class="level-check__level">Level 3</span><span class="level-check__name">Quantity / Weight</span><strong class="govuk-tag govuk-tag--red level-check__tag">No match</strong></p>
+          <table class="govuk-table data-table level-check__table level-check__table--reconcile">
+            <caption class="govuk-visually-hidden">CHED item for this commodity code</caption>
+            <thead class="govuk-table__head"><tr class="govuk-table__row"><th scope="col" class="govuk-table__header">Reference</th><th scope="col" class="govuk-table__header">Item number</th><th scope="col" class="govuk-table__header">Description</th><th scope="col" class="govuk-table__header govuk-table__header--numeric">Quantity / Weight</th></tr></thead>
+            <tbody class="govuk-table__body">
+            <tr class="govuk-table__row level-check__section"><th scope="rowgroup" class="govuk-table__header" colspan="4">MRN</th></tr>
+            <tr class="govuk-table__row level-check__mrn"><td class="govuk-table__cell">25GBDJRJCC9G1PKAR0</td><td class="govuk-table__cell">22</td><td class="govuk-table__cell">IRIS</td><td class="govuk-table__cell govuk-table__cell--numeric">607</td></tr>
+            <tr class="govuk-table__row level-check__section"><th scope="rowgroup" class="govuk-table__header" colspan="4">CHED</th></tr>
+            <tr class="govuk-table__row"><td class="govuk-table__cell">CHEDPP.GB.2025.6966655</td><td class="govuk-table__cell">51</td><td class="govuk-table__cell">Iris sp.</td><td class="govuk-table__cell govuk-table__cell--numeric">612</td></tr>
+            <tr class="govuk-table__row level-check__total"><th scope="row" class="govuk-table__header" colspan="3">CHED total</th><td class="govuk-table__cell govuk-table__cell--numeric"><strong>612</strong></td></tr>
+            <tr class="govuk-table__row level-check__result"><th scope="row" class="govuk-table__header" colspan="3">Difference</th><td class="govuk-table__cell govuk-table__cell--numeric">5 more on CHED</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </li>
+      </ol>
+    </div>
+  </div>
+  <div class="ched-container toggle-area no-match-card" data-mrn="25GBDJRJCC9G1PKAR0" id="item-23" data-target="levels-23" data-collapsed="true"
+       data-reason="ched-not-found" data-ched="GBCHD2025.6907012">
+    <div class="container govuk-body">
+      <div class="no-match-card__header">
+        <h4 class="no-match-card__title"><span class="level-card__item">Item 23</span> ASTER</h4>
+        <strong class="govuk-tag govuk-tag--red">CHED not found</strong>
+      </div>
+      <div class="toggle-wrapper">
+        <div id="toggleArrowContainer" aria-label="Show or hide item 23, ASTER">
+          <i id="toggleArrow" class="fas"></i>
+        </div>
+      </div>
+    </div>
+    <div id="levels-23" class="commodity-table level-card__body">
+      <ol class="level-checks">
+      <li class="level-check level-check--fail">
+        <div class="level-check__content">
+          <p class="level-check__label"><span class="level-check__level">Level 1</span><span class="level-check__name">CHED reference</span><strong class="govuk-tag govuk-tag--red level-check__tag">No match</strong></p>
+          <p class="level-check__summary"><strong>GBCHD2025.6907012</strong> cannot be found in IPAFFS.</p>
+          <p class="level-check__summary">Check the reference is correct, or that the CHED has been submitted.</p>
+        </div>
+      </li>
+      <li class="level-check level-check--skip">
+        <div class="level-check__content">
+          <p class="level-check__label"><span class="level-check__level">Level 2</span><span class="level-check__name">Commodity code</span><strong class="govuk-tag govuk-tag--grey level-check__tag">Not checked</strong></p>
+        </div>
+      </li>
+      <li class="level-check level-check--skip">
+        <div class="level-check__content">
+          <p class="level-check__label"><span class="level-check__level">Level 3</span><span class="level-check__name">Quantity / Weight</span><strong class="govuk-tag govuk-tag--grey level-check__tag">Not checked</strong></p>
+        </div>
+      </li>
+      </ol>
+    </div>
+  </div>
+  <div class="ched-container toggle-area no-match-card" data-mrn="25GBDJRJCC9G1PKAR0" id="item-24" data-target="levels-24" data-collapsed="true"
+       data-reason="quantity" data-ched="GBCHD2025.6966544">
+    <div class="container govuk-body">
+      <div class="no-match-card__header">
+        <h4 class="no-match-card__title"><span class="level-card__item">Item 24</span> CALLA LILIES</h4>
+        <strong class="govuk-tag govuk-tag--red">Incorrect quantity or weight</strong>
+      </div>
+      <div class="toggle-wrapper">
+        <div id="toggleArrowContainer" aria-label="Show or hide item 24, CALLA LILIES">
+          <i id="toggleArrow" class="fas"></i>
+        </div>
+      </div>
+    </div>
+    <div id="levels-24" class="commodity-table level-card__body">
+      <ol class="level-checks">
+      <li class="level-check level-check--pass">
+        <div class="level-check__content">
+          <p class="level-check__label"><span class="level-check__level">Level 1</span><span class="level-check__name">CHED reference</span><strong class="govuk-tag govuk-tag--green level-check__tag">Match</strong></p>
+        </div>
+      </li>
+      <li class="level-check level-check--pass">
+        <div class="level-check__content">
+          <p class="level-check__label"><span class="level-check__level">Level 2</span><span class="level-check__name">Commodity code</span><strong class="govuk-tag govuk-tag--green level-check__tag">Match</strong></p>
+        </div>
+      </li>
+      <li class="level-check level-check--fail">
+        <div class="level-check__content">
+          <p class="level-check__label"><span class="level-check__level">Level 3</span><span class="level-check__name">Quantity / Weight</span><strong class="govuk-tag govuk-tag--red level-check__tag">No match</strong></p>
+          <table class="govuk-table data-table level-check__table level-check__table--reconcile">
+            <caption class="govuk-visually-hidden">CHED item for this commodity code</caption>
+            <thead class="govuk-table__head"><tr class="govuk-table__row"><th scope="col" class="govuk-table__header">Reference</th><th scope="col" class="govuk-table__header">Item number</th><th scope="col" class="govuk-table__header">Description</th><th scope="col" class="govuk-table__header govuk-table__header--numeric">Quantity / Weight</th></tr></thead>
+            <tbody class="govuk-table__body">
+            <tr class="govuk-table__row level-check__section"><th scope="rowgroup" class="govuk-table__header" colspan="4">MRN</th></tr>
+            <tr class="govuk-table__row level-check__mrn"><td class="govuk-table__cell">25GBDJRJCC9G1PKAR0</td><td class="govuk-table__cell">24</td><td class="govuk-table__cell">CALLA LILIES</td><td class="govuk-table__cell govuk-table__cell--numeric">681</td></tr>
+            <tr class="govuk-table__row level-check__section"><th scope="rowgroup" class="govuk-table__header" colspan="4">CHED</th></tr>
+            <tr class="govuk-table__row"><td class="govuk-table__cell">CHEDPP.GB.2025.6966544</td><td class="govuk-table__cell">53</td><td class="govuk-table__cell">Zantedeschia sp.</td><td class="govuk-table__cell govuk-table__cell--numeric">682</td></tr>
+            <tr class="govuk-table__row level-check__total"><th scope="row" class="govuk-table__header" colspan="3">CHED total</th><td class="govuk-table__cell govuk-table__cell--numeric"><strong>682</strong></td></tr>
+            <tr class="govuk-table__row level-check__result"><th scope="row" class="govuk-table__header" colspan="3">Difference</th><td class="govuk-table__cell govuk-table__cell--numeric">1 more on CHED</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </li>
+      </ol>
+    </div>
+  </div>
+  <div class="ched-container toggle-area no-match-card" data-mrn="25GBDJRJCC9G1PKAR0" id="item-25" data-target="levels-25" data-collapsed="true"
+       data-reason="quantity" data-ched="GBCHD2025.6966610">
+    <div class="container govuk-body">
+      <div class="no-match-card__header">
+        <h4 class="no-match-card__title"><span class="level-card__item">Item 25</span> PROTEA</h4>
+        <strong class="govuk-tag govuk-tag--red">Incorrect quantity or weight</strong>
+      </div>
+      <div class="toggle-wrapper">
+        <div id="toggleArrowContainer" aria-label="Show or hide item 25, PROTEA">
+          <i id="toggleArrow" class="fas"></i>
+        </div>
+      </div>
+    </div>
+    <div id="levels-25" class="commodity-table level-card__body">
+      <ol class="level-checks">
+      <li class="level-check level-check--pass">
+        <div class="level-check__content">
+          <p class="level-check__label"><span class="level-check__level">Level 1</span><span class="level-check__name">CHED reference</span><strong class="govuk-tag govuk-tag--green level-check__tag">Match</strong></p>
+        </div>
+      </li>
+      <li class="level-check level-check--pass">
+        <div class="level-check__content">
+          <p class="level-check__label"><span class="level-check__level">Level 2</span><span class="level-check__name">Commodity code</span><strong class="govuk-tag govuk-tag--green level-check__tag">Match</strong></p>
+        </div>
+      </li>
+      <li class="level-check level-check--fail">
+        <div class="level-check__content">
+          <p class="level-check__label"><span class="level-check__level">Level 3</span><span class="level-check__name">Quantity / Weight</span><strong class="govuk-tag govuk-tag--red level-check__tag">No match</strong></p>
+          <table class="govuk-table data-table level-check__table level-check__table--reconcile">
+            <caption class="govuk-visually-hidden">CHED item for this commodity code</caption>
+            <thead class="govuk-table__head"><tr class="govuk-table__row"><th scope="col" class="govuk-table__header">Reference</th><th scope="col" class="govuk-table__header">Item number</th><th scope="col" class="govuk-table__header">Description</th><th scope="col" class="govuk-table__header govuk-table__header--numeric">Quantity / Weight</th></tr></thead>
+            <tbody class="govuk-table__body">
+            <tr class="govuk-table__row level-check__section"><th scope="rowgroup" class="govuk-table__header" colspan="4">MRN</th></tr>
+            <tr class="govuk-table__row level-check__mrn"><td class="govuk-table__cell">25GBDJRJCC9G1PKAR0</td><td class="govuk-table__cell">25</td><td class="govuk-table__cell">PROTEA</td><td class="govuk-table__cell govuk-table__cell--numeric">718</td></tr>
+            <tr class="govuk-table__row level-check__section"><th scope="rowgroup" class="govuk-table__header" colspan="4">CHED</th></tr>
+            <tr class="govuk-table__row"><td class="govuk-table__cell">CHEDPP.GB.2025.6966610</td><td class="govuk-table__cell">54</td><td class="govuk-table__cell">Protea sp.</td><td class="govuk-table__cell govuk-table__cell--numeric">715</td></tr>
+            <tr class="govuk-table__row level-check__total"><th scope="row" class="govuk-table__header" colspan="3">CHED total</th><td class="govuk-table__cell govuk-table__cell--numeric"><strong>715</strong></td></tr>
+            <tr class="govuk-table__row level-check__result"><th scope="row" class="govuk-table__header" colspan="3">Difference</th><td class="govuk-table__cell govuk-table__cell--numeric">3 more on MRN</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </li>
+      </ol>
+    </div>
+  </div>
+  <div class="ched-container toggle-area no-match-card" data-mrn="25GBDJRJCC9G1PKAR0" id="item-26" data-target="levels-26" data-collapsed="true"
+       data-reason="commodity-code" data-ched="GBCHD2025.6966655">
+    <div class="container govuk-body">
+      <div class="no-match-card__header">
+        <h4 class="no-match-card__title"><span class="level-card__item">Item 26</span> WAX FLOWER</h4>
+        <strong class="govuk-tag govuk-tag--red">Incorrect commodity code</strong>
+      </div>
+      <div class="toggle-wrapper">
+        <div id="toggleArrowContainer" aria-label="Show or hide item 26, WAX FLOWER">
+          <i id="toggleArrow" class="fas"></i>
+        </div>
+      </div>
+    </div>
+    <div id="levels-26" class="commodity-table level-card__body">
+      <ol class="level-checks">
+      <li class="level-check level-check--pass">
+        <div class="level-check__content">
+          <p class="level-check__label"><span class="level-check__level">Level 1</span><span class="level-check__name">CHED reference</span><strong class="govuk-tag govuk-tag--green level-check__tag">Match</strong></p>
+        </div>
+      </li>
+      <li class="level-check level-check--fail">
+        <div class="level-check__content">
+          <p class="level-check__label"><span class="level-check__level">Level 2</span><span class="level-check__name">Commodity code</span><strong class="govuk-tag govuk-tag--red level-check__tag">No match</strong></p>
+          <p class="level-check__summary">Commodity code <strong>0603191200</strong> cannot be found in IPAFFS.</p>
+          <p class="level-check__summary">Check that the code is correct.</p>
+        </div>
+      </li>
+      <li class="level-check level-check--skip">
+        <div class="level-check__content">
+          <p class="level-check__label"><span class="level-check__level">Level 3</span><span class="level-check__name">Quantity / Weight</span><strong class="govuk-tag govuk-tag--grey level-check__tag">Not checked</strong></p>
+        </div>
+      </li>
+      </ol>
+    </div>
+  </div>
+  </section>
+
+  <section class="no-match-group" data-mrn="25GBN3W8KD5TQ2PAR6" aria-labelledby="group-25GBN3W8KD5TQ2PAR6">
+    <h3 class="govuk-heading-s no-match-group__heading" id="group-25GBN3W8KD5TQ2PAR6">MRN 25GBN3W8KD5TQ2PAR6 <span class="no-match-group__count">1 item does not match</span></h3>
+  <div class="ched-container toggle-area no-match-card" data-mrn="25GBN3W8KD5TQ2PAR6" id="mrn-25GBN3W8KD5TQ2PAR6-item-2" data-target="levels-mrn-25GBN3W8KD5TQ2PAR6-item-2" data-collapsed="true"
+       data-reason="quantity" data-ched="GBCHD2025.6966544">
+    <div class="container govuk-body">
+      <div class="no-match-card__header">
+        <h4 class="no-match-card__title"><span class="level-card__item">Item 2</span> DAHLIAS</h4>
+        <strong class="govuk-tag govuk-tag--red">Incorrect quantity or weight</strong>
+      </div>
+      <div class="toggle-wrapper">
+        <div id="toggleArrowContainer" aria-label="Show or hide MRN 25GBN3W8KD5TQ2PAR6 item 2, DAHLIAS">
+          <i id="toggleArrow" class="fas"></i>
+        </div>
+      </div>
+    </div>
+    <div id="levels-mrn-25GBN3W8KD5TQ2PAR6-item-2" class="commodity-table level-card__body">
+      <ol class="level-checks">
+      <li class="level-check level-check--pass">
+        <div class="level-check__content">
+          <p class="level-check__label"><span class="level-check__level">Level 1</span><span class="level-check__name">CHED reference</span><strong class="govuk-tag govuk-tag--green level-check__tag">Match</strong></p>
+        </div>
+      </li>
+      <li class="level-check level-check--pass">
+        <div class="level-check__content">
+          <p class="level-check__label"><span class="level-check__level">Level 2</span><span class="level-check__name">Commodity code</span><strong class="govuk-tag govuk-tag--green level-check__tag">Match</strong></p>
+        </div>
+      </li>
+      <li class="level-check level-check--fail">
+        <div class="level-check__content">
+          <p class="level-check__label"><span class="level-check__level">Level 3</span><span class="level-check__name">Quantity / Weight</span><strong class="govuk-tag govuk-tag--red level-check__tag">No match</strong></p>
+          <table class="govuk-table data-table level-check__table level-check__table--reconcile">
+            <caption class="govuk-visually-hidden">CHED item for this commodity code</caption>
+            <thead class="govuk-table__head"><tr class="govuk-table__row"><th scope="col" class="govuk-table__header">Reference</th><th scope="col" class="govuk-table__header">Item number</th><th scope="col" class="govuk-table__header">Description</th><th scope="col" class="govuk-table__header govuk-table__header--numeric">Quantity / Weight</th></tr></thead>
+            <tbody class="govuk-table__body">
+            <tr class="govuk-table__row level-check__section"><th scope="rowgroup" class="govuk-table__header" colspan="4">MRN</th></tr>
+            <tr class="govuk-table__row level-check__mrn"><td class="govuk-table__cell">25GBN3W8KD5TQ2PAR6</td><td class="govuk-table__cell">2</td><td class="govuk-table__cell">DAHLIAS</td><td class="govuk-table__cell govuk-table__cell--numeric">80</td></tr>
+            <tr class="govuk-table__row level-check__section"><th scope="rowgroup" class="govuk-table__header" colspan="4">CHED</th></tr>
+            <tr class="govuk-table__row"><td class="govuk-table__cell">CHEDPP.GB.2025.6966544</td><td class="govuk-table__cell">6</td><td class="govuk-table__cell">Dahlia sp.</td><td class="govuk-table__cell govuk-table__cell--numeric">86</td></tr>
+            <tr class="govuk-table__row level-check__total"><th scope="row" class="govuk-table__header" colspan="3">CHED total</th><td class="govuk-table__cell govuk-table__cell--numeric"><strong>86</strong></td></tr>
+            <tr class="govuk-table__row level-check__result"><th scope="row" class="govuk-table__header" colspan="3">Difference</th><td class="govuk-table__cell govuk-table__cell--numeric">6 more on CHED</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </li>
+      </ol>
+    </div>
+  </div>
+  </section>
+
+    <p class="govuk-body level-results-empty" hidden>No items match these filters. <a href="#" class="govuk-link level-filters__clear-inline">Clear filters</a></p>
+  </div>
+</div>
+
+<script>
+  window.addEventListener('load', function () {
+    var cards = Array.prototype.slice.call(document.querySelectorAll('.no-match-card'));
+    var mrn = document.getElementById('nm-mrn');
+    var reason = document.getElementById('nm-reason');
+    var groups = Array.prototype.slice.call(document.querySelectorAll('.no-match-group'));
+    var count = document.querySelector('.level-results-bar__count');
+    var empty = document.querySelector('.level-results-empty');
+    var clear = document.querySelector('.level-filters__clear');
+    var toggleAll = document.querySelector('.no-match-toggle-all');
+
+    function visible () { return cards.filter(function (c) { return !c.hidden; }); }
+    function toggleOf (c) { return c.querySelector('#toggleArrowContainer'); }
+    function isOpen (c) { return toggleOf(c).getAttribute('aria-expanded') === 'true'; }
+    function setOpen (c, open) { if (isOpen(c) !== open) toggleOf(c).click(); }
+    function updateToggleAll () {
+      var shown = visible();
+      toggleAll.hidden = shown.length === 0;
+      toggleAll.firstChild.nodeValue = shown.length && shown.every(isOpen) ? 'Close all' : 'Open all';
+    }
+
+    function apply () {
+      var m = mrn.value, r = reason.value;
+      cards.forEach(function (card) {
+        var ok = (m === 'all' || card.dataset.mrn === m) &&
+                 (r === 'all' || card.dataset.reason === r);
+        card.hidden = !ok;
+      });
+      groups.forEach(function (g) {
+        var k = g.querySelectorAll('.no-match-card:not([hidden])').length;
+        g.hidden = k === 0;
+        g.querySelector('.no-match-group__count').textContent = k + (k === 1 ? ' item does not match' : ' items do not match');
+      });
+      var n = visible().length;
+      count.textContent = 'Showing ' + n + ' of ' + cards.length + ' items that do not match';
+      empty.hidden = n !== 0;
+      clear.hidden = m === 'all' && r === 'all';
+      updateToggleAll();
+    }
+
+    function reset (e) {
+      if (e) e.preventDefault();
+      mrn.value = reason.value = 'all';
+      apply();
+    }
+
+    [mrn, reason].forEach(function (s) { s.addEventListener('change', apply); });
+    clear.addEventListener('click', reset);
+    document.querySelector('.level-filters__clear-inline').addEventListener('click', reset);
+
+    toggleAll.addEventListener('click', function () {
+      var shown = visible(), open = !shown.every(isOpen);
+      shown.forEach(function (c) { setOpen(c, open); });
+      updateToggleAll();
+    });
+    cards.forEach(function (c) { toggleOf(c).addEventListener('click', function () { setTimeout(updateToggleAll, 0); }); });
+
+    function openFromHash () {
+      var card = location.hash && document.querySelector('.no-match-card' + location.hash);
+      if (card) { if (card.hidden) reset(); setOpen(card, true); card.scrollIntoView(); updateToggleAll(); }
+    }
+    window.addEventListener('hashchange', openFromHash);
+    apply();
+    openFromHash();
+  });
+</script>
+
+<script>
+  // The whole card header opens and closes the card, not just the chevron.
+  // The chevron stays the keyboard control (it is the role="button").
+  window.addEventListener('load', function () {
+    document.querySelectorAll('.no-match-card > .container').forEach(function (header) {
+      header.classList.add('no-match-card__toggle-area');
+      header.addEventListener('click', function (e) {
+        if (e.target.closest('#toggleArrowContainer') || e.target.closest('a')) return;
+        header.querySelector('#toggleArrowContainer').click();
+      });
+    });
+  });
+</script>
+
+{% endblock %}

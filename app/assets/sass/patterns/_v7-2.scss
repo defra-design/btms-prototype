@@ -1,0 +1,517 @@
+// v7-2 styles (No matches tab, matching levels, many-to-many).
+// Kept separate so v7 stays exactly as committed on 16 October 2026.
+
+// Smaller level 3 pop-ups in v7-2
+.v7-2 .tooltip--level-3 {
+  min-width: 17rem;
+  max-width: 21rem;
+  padding: 12px;
+  font-size: 14px;
+  line-height: 1.3;
+
+  p,
+  a,
+  th,
+  td,
+  strong {
+    font-size: 14px;
+  }
+
+  .tooltip--level-3__title {
+    margin-bottom: 8px;
+  }
+
+  .tooltip--level-3__intro {
+    margin-bottom: 10px;
+  }
+
+  /* Several CHEDs: lead-in, then one CHED per line, then the action */
+  .tooltip--level-3__lead {
+    margin-bottom: 4px;
+  }
+
+  .tooltip--level-3__refs {
+    margin: 0 0 10px;
+    padding-left: 20px;
+    list-style: disc;
+
+    li {
+      margin-bottom: 4px;
+    }
+  }
+
+  .tooltip--level-3__table th,
+  .tooltip--level-3__table td {
+    padding: 6px 0;
+  }
+
+  .tooltip--level-3__details {
+    margin: 10px 0 0;
+  }
+}
+
+.mrn tr[id^="item-"] { scroll-margin-top: 60px; }
+
+// "No matches details" tab
+.no-match-intro {
+  font-size: 16px;
+}
+
+.no-match-card {
+  margin-bottom: govuk-spacing(6);
+  scroll-margin-top: 20px;
+
+  &__header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: govuk-spacing(3);
+    min-height: 3rem;
+    padding: govuk-spacing(3) 80px govuk-spacing(3) govuk-spacing(3);
+  }
+
+  &__title {
+    @include govuk-font($size: 19, $weight: bold);
+    margin: 0;
+  }
+
+  &__body {
+    padding: govuk-spacing(3) !important;
+  }
+
+  &__meta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: govuk-spacing(3);
+    margin: 0 0 govuk-spacing(4);
+
+    dd {
+      width: auto;
+    }
+  }
+
+  &__error {
+    color: $govuk-error-colour;
+  }
+
+  // Grey rule down the left, like the Figma
+  &__reason {
+    border-left: 4px solid $govuk-border-colour;
+    padding: govuk-spacing(1) 0 govuk-spacing(3) govuk-spacing(4);
+  }
+
+  &__subheading {
+    @include govuk-font($size: 16, $weight: bold);
+    margin: govuk-spacing(2) 0;
+  }
+
+  &__text {
+    @include govuk-font($size: 14);
+    margin: 0 0 govuk-spacing(3);
+  }
+
+  &__compare {
+    display: inline-block;
+    min-width: 16rem;
+    margin: 0 0 govuk-spacing(5);
+
+    div {
+      display: flex;
+      justify-content: space-between;
+      gap: govuk-spacing(6);
+      padding: govuk-spacing(1) 0;
+    }
+
+    dt {
+      font-weight: 400;
+    }
+
+    dd {
+      width: auto;
+      margin: 0;
+      text-align: right;
+    }
+  }
+
+  &__difference {
+    border-top: 1px solid $govuk-border-colour;
+    margin-top: govuk-spacing(1);
+    padding-top: govuk-spacing(2) !important;
+
+    dd {
+      font-weight: 700;
+    }
+  }
+
+  &__ched-ref {
+    @include govuk-font($size: 14);
+    margin: 0 0 govuk-spacing(1);
+
+    strong {
+      margin-right: govuk-spacing(2);
+    }
+  }
+
+  &__table {
+    margin-bottom: govuk-spacing(4) !important;
+  }
+
+  &__total .govuk-table__header {
+    font-weight: 400;
+  }
+
+  .govuk-table__body tr.no-match-card__total td,
+  .govuk-table__body tr.no-match-card__total th {
+    border-top: 1px solid $govuk-border-colour;
+    border-bottom: 1px solid $govuk-border-colour !important;
+  }
+}
+
+
+
+
+// No matches, design 2: matching levels
+.level-card__item {
+  font-weight: 400;
+  color: $govuk-secondary-text-colour;
+  margin-right: 4px;
+}
+
+.level-card__body {
+  padding: govuk-spacing(2) govuk-spacing(3) !important;
+}
+
+.level-checks {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.level-check {
+  display: flex;
+  gap: govuk-spacing(3);
+  padding: govuk-spacing(3) 0;
+  border-bottom: 1px solid $govuk-border-colour;
+
+  &:last-child {
+    border-bottom: 0;
+  }
+
+  // Same Yes / No tags as the Match columns, in a fixed-width column
+  &__status {
+    flex: 0 0 6.5rem;
+
+    .govuk-tag {
+      font-size: 14px;
+    }
+  }
+
+  &__content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__label {
+    @include govuk-font($size: 16, $weight: bold);
+    margin: 0 0 govuk-spacing(1);
+  }
+
+  &__level {
+    font-weight: 400;
+    color: $govuk-secondary-text-colour;
+    margin-right: 4px;
+  }
+
+  &__summary {
+    @include govuk-font($size: 14);
+    margin: 0;
+  }
+
+  &__table {
+    margin: govuk-spacing(3) 0 govuk-spacing(1) !important;
+  }
+
+  &__total .govuk-table__header {
+    font-weight: 400;
+  }
+
+  .govuk-table__body tr.level-check__total th,
+  .govuk-table__body tr.level-check__total td {
+    border-top: 1px solid $govuk-text-colour !important;
+  }
+
+  &--fail .level-check__summary {
+    color: $govuk-text-colour;
+  }
+
+  &--skip .level-check__label,
+  &--skip .level-check__summary {
+    color: $govuk-secondary-text-colour;
+  }
+}
+
+// Design 2 filters, count and Open all
+.level-filters {
+  flex-wrap: wrap;
+}
+
+.level-results-bar {
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-end; /* count now lives in the tab label; keep Open all on the right */
+  gap: govuk-spacing(3);
+  margin: govuk-spacing(2) 0 govuk-spacing(3);
+
+  &__count {
+    @include govuk-font($size: 16, $weight: bold);
+    margin: 0;
+  }
+}
+
+.no-match-toggle-all {
+  @include govuk-font($size: 16);
+  padding: 0;
+  border: 0;
+  background: none;
+  color: $govuk-link-colour;
+  text-decoration: underline;
+  cursor: pointer;
+
+  &:hover {
+    color: $govuk-link-hover-colour;
+  }
+
+  &:focus {
+    @include govuk-focused-text;
+  }
+}
+
+.level-card__meta {
+  @include govuk-font($size: 14);
+  color: $govuk-secondary-text-colour;
+}
+
+.no-match-card[hidden] {
+  display: none;
+}
+
+.level-filters__clear[hidden] {
+  display: none;
+}
+
+// Tighter spacing for the long, collapsed list in design 2
+.no-match-card[data-reason] {
+  margin-bottom: govuk-spacing(2);
+  padding-bottom: 0 !important;
+}
+
+// Figma card on MRN 25GBK7T2LQ9V4XNAR3: 3 columns of details, roomier spacing
+.no-match-card__meta--3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+#item-2.no-match-card:not([data-reason]) {
+  margin-bottom: govuk-spacing(6);
+}
+
+// Keep "1 more on CHEDs" on one line in pop-ups
+.v7-2 .tooltip--level-3__difference td {
+  white-space: nowrap;
+}
+
+// Level 3: MRN against CHED as a small table, like the pop-ups
+.level-check__compare {
+  width: 100%;
+  max-width: 24rem;
+  margin: govuk-spacing(1) 0 govuk-spacing(3);
+  border-collapse: collapse;
+
+  th,
+  td {
+    @include govuk-font($size: 14);
+    padding: govuk-spacing(1) 0;
+    text-align: left;
+    font-weight: 400;
+    border-bottom: 1px solid $govuk-border-colour;
+  }
+
+  td {
+    text-align: right;
+    white-space: nowrap;
+  }
+}
+
+.level-check__compare-difference {
+  th,
+  td {
+    font-weight: 700 !important;
+    border-bottom: 0 !important;
+  }
+}
+
+// Line under the total row runs the full width
+.level-check__table .level-check__total th,
+.level-check__table .level-check__total td {
+  border-bottom: 1px solid $govuk-border-colour !important;
+}
+
+// Level result sits on the heading line: "Level 1 CHED reference [Match]"
+.level-check__tag {
+  margin-left: govuk-spacing(2);
+  font-size: 14px !important;
+  vertical-align: text-bottom;
+}
+
+// One reconciliation table: CHED lines, total, MRN, difference. Narrower so labels sit near the numbers.
+.level-check__table {
+  max-width: none;
+}
+
+.level-check__table .level-check__mrn th,
+.level-check__table .level-check__mrn td {
+  font-weight: 400;
+}
+
+.level-check__table .level-check__result th,
+.level-check__table .level-check__result td {
+  font-weight: 700;
+  border-bottom: 0 !important;
+  white-space: nowrap;
+}
+
+// Level 3 reconciliation tables: same columns on every card, result row set apart
+.level-check__table--reconcile {
+  table-layout: fixed;
+  width: 100%;
+
+  th:nth-child(1), td:nth-child(1) { width: 38%; }
+  th:nth-child(2), td:nth-child(2) { width: 16%; }
+  th:nth-child(3), td:nth-child(3) { width: 28%; }
+  th:nth-child(4), td:nth-child(4) { width: 18%; }
+
+  .level-check__result th,
+  .level-check__result td {
+    border-top: 2px solid $govuk-text-colour;
+  }
+}
+
+// Level heading on a grid so the tags line up: [Level 1][CHED reference      ][Match]
+.level-check__label {
+  display: grid;
+  grid-template-columns: 4rem 11rem auto;
+  align-items: center;
+  justify-items: start;
+}
+
+.level-check__name {
+  font-weight: 700;
+}
+
+.level-check__label .level-check__tag {
+  margin-left: 0;
+}
+
+// Design 2 card header on a grid so the reason tags line up down the page:
+// [Item 2][OTHER FLOWERS     ][Incorrect quantity or weight]
+.no-match-card[data-reason] .no-match-card__header {
+  display: grid;
+  grid-template-columns: 16rem auto;
+  align-items: center;
+  justify-items: start;
+}
+
+.no-match-card[data-reason] .no-match-card__title {
+  display: grid;
+  grid-template-columns: 4.5rem auto;
+  align-items: baseline;
+}
+
+// Second MRN on the page: show which MRN the card belongs to
+.no-match-card[data-reason] .no-match-card__header {
+  grid-template-columns: 16rem auto auto;
+}
+
+.level-card__mrn {
+  @include govuk-font($size: 14);
+  color: $govuk-secondary-text-colour;
+}
+
+// No matches grouped by MRN
+.no-match-group {
+  margin-bottom: govuk-spacing(6);
+
+  &[hidden] {
+    display: none;
+  }
+
+  &__heading {
+    margin: govuk-spacing(4) 0 govuk-spacing(3);
+    padding-bottom: govuk-spacing(2);
+    border-bottom: 2px solid $govuk-text-colour;
+  }
+
+  &__count {
+    @include govuk-font($size: 16);
+    color: $govuk-secondary-text-colour;
+    margin-left: govuk-spacing(2);
+  }
+}
+
+.no-match-card[data-reason] .no-match-card__header {
+  grid-template-columns: 16rem auto;
+}
+
+// MRN line first, then the CHED lines: separate the MRN from the CHED lines
+
+
+// MRN and CHED bands so each side of the comparison is easy to find
+.level-check__table--reconcile .level-check__section th {
+  @include govuk-font($size: 14, $weight: bold);
+  padding: govuk-spacing(1) govuk-spacing(2) !important;
+  background-color: govuk-colour("light-grey");
+  border-bottom: 0 !important;
+}
+
+
+
+// Whole card header is clickable
+.no-match-card__toggle-area {
+  cursor: pointer;
+
+  &:hover {
+    background-color: #e8e7e6;
+  }
+}
+
+// Full width of the card, one inset for every cell so the bands, rows and totals line up
+.level-check__table--reconcile {
+  width: 100%;
+  max-width: none !important;
+
+  th,
+  td {
+    padding-left: govuk-spacing(2) !important;
+    padding-right: govuk-spacing(2) !important;
+  }
+} /* one inset for every cell */
+
+// In-page anchors from tooltips (MRN row <-> CHED row / CHED card).
+// Land with some space above, and highlight the target so it is obvious where you are.
+@media (prefers-reduced-motion: no-preference) {
+  html:has(body.v7-2) {
+    scroll-behavior: smooth;
+  }
+}
+
+.v7-2 {
+  tr[id],
+  .ched-container[id] {
+    scroll-margin-top: 120px; // leave the rows and heading above in view for context
+  }
+
+  // Only the linked line(s) are highlighted, set by includes/v7-2/anchor-open.njk
+  tr.is-highlighted > td,
+  tr.is-highlighted > th {
+    background-color: #fff7bf;
+  }
+}

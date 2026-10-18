@@ -1,0 +1,116 @@
+{# v7-2 No matches for MRN 25GBK7T2LQ9V4XNAR3 #}
+{% extends "layouts/forms.html" %}
+{% set signedIn = 'true' %}
+{% set fullWidth = true %}
+{% set hideButton = true %}
+{% set breadcrumb = true %}
+{% set showSubheader = true %}
+{% set subHeader = 'Showing result for' %}
+{% set title = '25GBK7T2LQ9V4XNAR3' %}
+{% set showTimelineTab = false %}
+{% set bodyClasses = 'mrn accordion v4 v7-2' %}
+{% set hideBackLink = true %}
+{% set showMenu = true %}
+{% set searchLinkHref = '/mvp/v7-2/search' %}
+{% set menu = true %}
+{% set activeTab = 'no-matches' %}
+{% set showLevel3Tab = false %}
+
+{% block form %}
+
+<div class="govuk-tabs govuk-tabs--link-tabs">
+  {% include 'includes/v7-2/tabs.njk' %}
+
+  <div class="govuk-tabs__panel" id="no-matches">
+    <h2 class="govuk-heading-m sectionHeader">No matches</h2>
+
+  <div class="ched-container toggle-area no-match-card" id="item-2" data-target="no-match-2">
+    <div class="container govuk-body">
+      <div class="no-match-card__header">
+        <h3 class="no-match-card__title"><span class="level-card__item">Item 2</span> ORCHIDS</h3>
+        <strong class="govuk-tag govuk-tag--red">Incorrect quantity or weight</strong>
+      </div>
+      <div class="toggle-wrapper">
+        <div id="toggleArrowContainer" aria-label="Show or hide item 2, ORCHIDS">
+          <i id="toggleArrow" class="fas"></i>
+        </div>
+      </div>
+    </div>
+
+    <div id="no-match-2" class="commodity-table no-match-card__body">
+      <dl class="no-match-card__meta no-match-card__meta--3">
+        <div><dt>MRN</dt><dd>25GBK7T2LQ9V4XNAR3</dd></div>
+        <div><dt>Commodity code</dt><dd>0603130000</dd></div>
+        <div><dt>Quantity / Weight</dt><dd class="no-match-card__error">120</dd></div>
+      </dl>
+
+      <div class="no-match-card__reason">
+        <h4 class="no-match-card__subheading">Incorrect quantity or weight</h4>
+        <p class="no-match-card__text">The quantity or weight on this item does not match CHEDPP.GB.2025.6966702.</p>
+
+        <dl class="no-match-card__compare">
+          <div><dt>Declared on MRN</dt><dd>120</dd></div>
+          <div><dt>Declared on CHED</dt><dd>130</dd></div>
+          <div class="no-match-card__difference"><dt>Difference</dt><dd>10 more on CHED</dd></div>
+        </dl>
+
+        <h4 class="no-match-card__subheading">Linked CHED line items</h4>
+        <p class="no-match-card__ched-ref"><strong>CHED reference</strong> <a class="govuk-link" href="/mvp/v7-2/25GBK7T2LQ9V4XNAR3#ched-6966702">CHEDPP.GB.2025.6966702</a></p>
+        <table class="govuk-table data-table no-match-card__table">
+          <caption class="govuk-visually-hidden">Linked items on CHEDPP.GB.2025.6966702</caption>
+          <thead class="govuk-table__head">
+            <tr class="govuk-table__row">
+              <th scope="col" class="govuk-table__header">Item number</th>
+              <th scope="col" class="govuk-table__header">Commodity code</th>
+              <th scope="col" class="govuk-table__header">Description</th>
+              <th scope="col" class="govuk-table__header">Quantity / Weight</th>
+              <th scope="col" class="govuk-table__header">Authority</th>
+              <th scope="col" class="govuk-table__header">Decision</th>
+            </tr>
+          </thead>
+          <tbody class="govuk-table__body">
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">4</td>
+              <td class="govuk-table__cell">06031300</td>
+              <td class="govuk-table__cell">Phalaenopsis sp.</td>
+              <td class="govuk-table__cell">60</td>
+              <td class="govuk-table__cell">PHSI</td>
+              <td class="govuk-table__cell">Compliant</td>
+            </tr>
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">5</td>
+              <td class="govuk-table__cell">06031300</td>
+              <td class="govuk-table__cell">Cymbidium sp.</td>
+              <td class="govuk-table__cell">70</td>
+              <td class="govuk-table__cell">PHSI</td>
+              <td class="govuk-table__cell">Compliant</td>
+            </tr>
+            <tr class="govuk-table__row no-match-card__total">
+              <th scope="row" class="govuk-table__header" colspan="3">Total</th>
+              <td class="govuk-table__cell"><strong>130</strong></td>
+              <td class="govuk-table__cell"></td>
+              <td class="govuk-table__cell"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+<script>
+  // The whole card header opens and closes the card, not just the chevron.
+  // The chevron stays the keyboard control (it is the role="button").
+  window.addEventListener('load', function () {
+    document.querySelectorAll('.no-match-card > .container').forEach(function (header) {
+      header.classList.add('no-match-card__toggle-area');
+      header.addEventListener('click', function (e) {
+        if (e.target.closest('#toggleArrowContainer') || e.target.closest('a')) return;
+        header.querySelector('#toggleArrowContainer').click();
+      });
+    });
+  });
+</script>
+
+{% endblock %}
