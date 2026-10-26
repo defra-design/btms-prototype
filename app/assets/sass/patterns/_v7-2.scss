@@ -496,12 +496,7 @@
 } /* one inset for every cell */
 
 // In-page anchors from tooltips (MRN row <-> CHED row / CHED card).
-// Land with some space above, and highlight the target so it is obvious where you are.
-@media (prefers-reduced-motion: no-preference) {
-  html:has(body.v7-2) {
-    scroll-behavior: smooth;
-  }
-}
+// Jump straight there (no smooth scroll), land with some space above, and highlight the target.
 
 .v7-2 {
   tr[id],
@@ -514,4 +509,163 @@
   tr.is-highlighted > th {
     background-color: #fff7bf;
   }
+}
+
+// CDS status and CHED status tags use the same regular weight as the other tags (Yes / No, reasons),
+// overriding the bold set for .definition-list tags in _mrn.scss.
+.v7-2 .definition-list .govuk-tag {
+  font-weight: 400 !important;
+}
+
+// Version 3: Level 1 and 2 match details, one CHED per line when there are several
+.level-check__list {
+  @include govuk-font($size: 14);
+  margin: govuk-spacing(1) 0 0 !important;
+
+  li {
+    @include govuk-font($size: 14);
+    margin-bottom: 2px;
+  }
+}
+
+.level-check--pass .level-check__summary + .level-check__summary {
+  margin-top: 2px;
+}
+
+// Version 3: "Level N" and "Item N" sit above the name as a small caption to save width.
+// Tags keep one column so they still line up down the page.
+.nm-v3 {
+  .level-check__label {
+    grid-template-columns: 13rem auto; // lines the tags up with the reason tag in the card header
+    grid-template-areas:
+      "level level"
+      "name  tag";
+    row-gap: 0;
+  }
+
+  .level-check__level {
+    grid-area: level;
+    @include govuk-font($size: 14);
+    color: $govuk-secondary-text-colour;
+    margin: 0;
+  }
+
+  .level-check__name { grid-area: name; }
+  .level-check__label .level-check__tag { grid-area: tag; }
+
+  .no-match-card[data-reason] .no-match-card__header {
+    grid-template-columns: 12rem auto;
+    align-items: end; // reason tag sits on the item name's line, under the "Item N" caption
+  }
+
+  .no-match-card[data-reason] .no-match-card__title {
+    display: block;
+  }
+
+  .level-card__item {
+    display: block;
+    @include govuk-font($size: 14);
+    color: $govuk-secondary-text-colour;
+    margin: 0 0 2px;
+  }
+}
+
+// Version 3: task list pattern. Status on the right edge; only "No match" is a tag.
+.nm-v3 {
+  .level-check__label {
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "level ."
+      "name  tag";
+  }
+
+  .level-check__label .level-check__tag {
+    justify-self: end;
+  }
+
+  .level-check__status {
+    @include govuk-font($size: 16);
+    font-size: 16px !important;
+    color: $govuk-text-colour;
+  }
+
+  .level-check__status--muted {
+    color: $govuk-secondary-text-colour;
+  }
+
+  // Reason tag in a fixed column just past the longest item name (CHRYSANTHEMUM),
+  // so the eye moves a short way from name to reason and the tags still line up
+  .no-match-card[data-reason] .no-match-card__header {
+    grid-template-columns: 12rem 1fr;
+  }
+
+  .no-match-card[data-reason] .no-match-card__header > .govuk-tag {
+    justify-self: start;
+    margin-bottom: 2px; // centres the tag on the item name's line
+  }
+}
+
+// Version 3: line the table text up with the level text above it.
+// The table bleeds into the card padding so its cell text starts on the same edge,
+// while the MRN / CHED bands keep their inset.
+.nm-v3 .level-check__table--reconcile {
+  width: calc(100% + #{govuk-spacing(4)}) !important;
+  margin-left: -(govuk-spacing(2)) !important;
+  margin-right: -(govuk-spacing(2)) !important;
+}
+
+// Version 3: the rule above Difference uses the table border colour, not black
+.nm-v3 .level-check__table--reconcile .level-check__result th,
+.nm-v3 .level-check__table--reconcile .level-check__result td {
+  border-top-color: $govuk-border-colour;
+}
+
+// Version 3: space between the paragraphs of a "No match" message (what is wrong, then what to do)
+.nm-v3 .level-check--fail .level-check__summary + .level-check__summary {
+  margin-top: govuk-spacing(2);
+}
+
+// Version 3: same space above the first level as below the last one (about 20px)
+.nm-v3 .level-card__body {
+  padding-top: govuk-spacing(1) !important;
+}
+
+// Version 3: MRN group heading with the count underneath in its own paragraph
+.nm-v3 {
+  .no-match-group__header {
+    margin: govuk-spacing(4) 0 govuk-spacing(3);
+    padding-bottom: govuk-spacing(2);
+    border-bottom: 2px solid $govuk-text-colour;
+  }
+
+  .no-match-group__heading {
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  .no-match-group__count {
+    display: block;
+    margin: govuk-spacing(1) 0 0;
+  }
+}
+
+// Version 3: Open all sits on the MRN heading row (like the accordion's "Show all sections"),
+// and the space above the group is tightened so the heading is anchored to its cards
+.nm-v3 {
+  .level-results-bar {
+    margin: 0;
+  }
+
+  .no-match-group__header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: baseline;
+    column-gap: govuk-spacing(3);
+    margin-top: govuk-spacing(4);
+  }
+
+  .no-match-group__heading { grid-column: 1; grid-row: 1; }
+  .no-match-group__header .no-match-toggle-all { grid-column: 2; grid-row: 1; }
+  .no-match-group__count { grid-column: 1 / -1; grid-row: 2; }
 }

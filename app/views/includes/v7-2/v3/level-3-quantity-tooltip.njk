@@ -1,0 +1,15 @@
+{# Version 3: generic quantity or weight tooltip. Same arguments as the v7-2 macro so the tables do not change. #}
+{% macro level3QuantityTooltip(displayQty, commodityCode, chedRef, mrnQty, chedQty, difference, detailsHref, multiChed=false, tooltipTitle="Incorrect quantity or weight", chedItems=[]) %}
+  {% set refs = chedRef.split(' and ') %}
+  <span class="matching-view__today">{{ displayQty }}</span>
+  <span class="matching-view__level-3">
+    <span class="tooltiplink error" tabindex="0">{{ displayQty }}</span>
+    <span class="tooltip tooltip--level-3">
+      <strong class="tooltip--level-3__title">{{ tooltipTitle }}</strong>
+      <p class="tooltip--level-3__intro">The declared quantity / weight (<strong>{{ displayQty }}</strong>) does not match CHED reference{{ 's' if refs | length > 1 }} {{ refs | join(' and ') }}.</p>
+      {% if detailsHref %}
+        <p class="tooltip--level-3__details"><a class="govuk-link" href="{{ detailsHref }}">View details</a></p>
+      {% endif %}
+    </span>
+  </span>
+{% endmacro %}
