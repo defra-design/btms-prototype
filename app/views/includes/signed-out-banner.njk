@@ -1,0 +1,14 @@
+{# Shown on "How do you want to sign in?" after selecting Sign out (see routes.js).
+   Standard (blue) notification banner with the header renamed to "Signed out".
+   It does not take focus on page load, so there is no yellow focus ring.
+   Add &banner=green to the URL to compare the green version. #}
+{% if signedOut %}
+<div class="govuk-notification-banner{% if greenBanner %} govuk-notification-banner--success{% endif %}" {% if greenBanner %}role="alert" {% else %}role="region" {% endif %}aria-labelledby="signed-out-banner-title" data-module="govuk-notification-banner">
+  <div class="govuk-notification-banner__header">
+    <h2 class="govuk-notification-banner__title" id="signed-out-banner-title">Signed out</h2>
+  </div>
+  <div class="govuk-notification-banner__content">
+    <p class="govuk-body govuk-!-margin-bottom-0">You will need to sign in again to access {{ serviceName }}.</p>
+  </div>
+</div>
+{% endif %}
