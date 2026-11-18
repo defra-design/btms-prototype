@@ -21,7 +21,7 @@
     <td class="govuk-table__cell">0603197090</td>
     <td class="govuk-table__cell">OTHER FLOWERS</td>
     <td class="govuk-table__cell">
-      {% set detailsHref = '/mvp/v7-2/25GBDJRJCC9G1PKAR0/no-matches#item-2' if prototypeVersion == 'v7-2' else '' %}
+      {% set detailsHref = '/mvp/v7-3/25GBDJRJCC9G1PKAR0/no-matches#item-2' if prototypeVersion == 'v7-2' else '' %}
       {{ level3QuantityTooltip('708.5', otherFlowersCommodityCode, chedRef ~ ' and ' ~ chedRef2, '708.5', otherFlowersChedQty, '1 more on CHEDs', detailsHref, true, 'Incorrect quantity or weight', ['30, 31 and 32', '1']) }}
     </td>
     <td class="govuk-table__cell split">{{ chedRef }}</td>
@@ -60,7 +60,7 @@
     <td class="govuk-table__cell">0603197010</td>
     <td class="govuk-table__cell">STATICE</td>
     <td class="govuk-table__cell">
-      {{ level3QuantityTooltip('250', '0603197010', chedRef2, '250', '260', '10 more on CHED', '/mvp/v7-2/25GBDJRJCC9G1PKAR0/no-matches#item-3', false, 'Incorrect quantity or weight', ['5']) }}
+      {{ level3QuantityTooltip('250', '0603197010', chedRef2, '250', '260', '10 more on CHED', '/mvp/v7-3/25GBDJRJCC9G1PKAR0/no-matches#item-3', false, 'Incorrect quantity or weight', ['5']) }}
     </td>
     <td class="govuk-table__cell">{{ chedRef2 }}</td>
     <td class="govuk-table__cell">
@@ -90,7 +90,7 @@
     <td class="govuk-table__cell">0603140000</td>
     <td class="govuk-table__cell">CHRYSANTHEMUM</td>
     <td class="govuk-table__cell">
-      {% set chrysDetailsHref = '/mvp/v7-2/25GBDJRJCC9G1PKAR0/no-matches#item-6' if prototypeVersion == 'v7-2' else '' %}
+      {% set chrysDetailsHref = '/mvp/v7-3/25GBDJRJCC9G1PKAR0/no-matches#item-6' if prototypeVersion == 'v7-2' else '' %}
       {{ level3QuantityTooltip('2143', '0603140000', chedRef, '2143', '2138', '5 more on MRN', chrysDetailsHref, false, 'Incorrect quantity or weight', ['34']) }}
     </td>
     <td class="govuk-table__cell">{{ chedRef }}</td>
@@ -128,7 +128,7 @@
   </tr>
   {# Level 1 no match: the CHED reference on the MRN does not exist in IPAFFS #}
   {% set missingChedRef = 'GBCHD2025.6966999' %}
-  {% set tulipsDetailsHref = '/mvp/v7-2/25GBDJRJCC9G1PKAR0/no-matches#item-9' %}
+  {% set tulipsDetailsHref = '/mvp/v7-3/25GBDJRJCC9G1PKAR0/no-matches#item-9' %}
   <tr class="no-match PHSI" id="item-9">
     <td class="govuk-table__cell">9</td>
     <td class="govuk-table__cell">0603199000</td>
@@ -151,7 +151,7 @@
     </td>
   </tr>
   {# Level 2 no match: the commodity code on the MRN is not on the linked CHED #}
-  {% set gerberasDetailsHref = '/mvp/v7-2/25GBDJRJCC9G1PKAR0/no-matches#item-10' %}
+  {% set gerberasDetailsHref = '/mvp/v7-3/25GBDJRJCC9G1PKAR0/no-matches#item-10' %}
   <tr class="no-match PHSI" id="item-10">
     <td class="govuk-table__cell">10</td>
     <td class="govuk-table__cell">

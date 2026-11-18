@@ -23,7 +23,7 @@ const searchRedirects = {
   'GMRA00002TT2': 'timeline/gmr',
   'GMRA00002KW3': 'gmr-spain/gmr',
   '26GB16ICKGJAY5MAR4': 'vrn-search/watermelons-declaration-details',
-  '25GBDJRJCC9G1PKAR0': '25GBDJRJCC9G1PKAR0',
+  '25GBDJRJCC9G1PKAR0': '/mvp/v7-3/25GBDJRJCC9G1PKAR0', // now V7.3
   '25GBK7T2LQ9V4XNAR3': '25GBK7T2LQ9V4XNAR3',
   '25GB4VN6T1XZ7B3Q5L': 'vrn-search/search-results-timeline',
   '25GBDD03IWJ3IHIAR1': 'vrn-search/search-results-timeline',
@@ -70,7 +70,8 @@ module.exports = (router) => {
     if (searchRedirects[search]) {
       data.searchTerm = search;
       data.title = search;
-      return res.redirect(`/mvp/v7-2/${searchRedirects[search]}?q=${encodeURIComponent(search)}`);
+      const target = searchRedirects[search].startsWith('/') ? searchRedirects[search] : `/mvp/v7-2/${searchRedirects[search]}`;
+      return res.redirect(`${target}?q=${encodeURIComponent(search)}`);
     }
 
     // Handle TRN/VRN search - redirect to TRN/VRN results page
@@ -228,9 +229,9 @@ module.exports = (router) => {
 
   // v7-2: MRN pages are named by MRN. Old addresses redirect to them.
   const v72Redirects = {
-    'vrn-search/flowers-declaration-details-tabs': '/mvp/v7-2/25GBDJRJCC9G1PKAR0',
-    'vrn-search/flowers-declaration-details-tabs-level-3': '/mvp/v7-2/25GBDJRJCC9G1PKAR0',
-    'vrn-search/flowers-no-matches-levels': '/mvp/v7-2/25GBDJRJCC9G1PKAR0/no-matches',
+    'vrn-search/flowers-declaration-details-tabs': '/mvp/v7-3/25GBDJRJCC9G1PKAR0',
+    'vrn-search/flowers-declaration-details-tabs-level-3': '/mvp/v7-3/25GBDJRJCC9G1PKAR0',
+    'vrn-search/flowers-no-matches-levels': '/mvp/v7-3/25GBDJRJCC9G1PKAR0/no-matches',
     'vrn-search/shared-ched-declaration-details': '/mvp/v7-2/25GBK7T2LQ9V4XNAR3',
     'vrn-search/shared-ched-no-matches': '/mvp/v7-2/25GBK7T2LQ9V4XNAR3/no-matches'
   };

@@ -14,9 +14,11 @@ const router = govukPrototypeKit.requests.setupRouter()
 // Sign out (all versions): skip the separate "You are signed out" page and go straight to
 // "How do you want to sign in?" with a "You are signed out" banner.
 // Versions without their own sign-in page (v1 to v3) use v4's.
-const signInChooseVersions = ['v4', 'v5', 'v6', 'v7', 'v7-2']
+const signInChooseVersions = ['v4', 'v5', 'v6', 'v7-1', 'v7-2']
 router.get(/^\/mvp\/([^/]+)\/(?:.*\/)?sign-out\/?$/, (req, res) => {
-  const version = signInChooseVersions.includes(req.params[0]) ? req.params[0] : 'v4'
+  // V7.3 to V7.5 are MRN pages only, so they share V7.2's sign in
+  const requested = ['v7-3', 'v7-4', 'v7-5'].includes(req.params[0]) ? 'v7-2' : req.params[0]
+  const version = signInChooseVersions.includes(requested) ? requested : 'v4'
   res.redirect('/mvp/' + version + '/sign-in-choose?signedOut=true')
 })
 router.get(/^\/mvp\/[^/]+\/sign-in-choose\/?$/, (req, res, next) => {
@@ -38,14 +40,14 @@ require('./views/mvp/v6/reporting')(router)
 require('./views/mvp/v6/admin/routes')(router)
 require('./views/mvp/v6/timeline/routes')(router)
 
-router.use('/mvp/v7', (req, res, next) => {
-  res.locals.prototypeVersion = 'v7'
+router.use('/mvp/v7-1', (req, res, next) => {
+  res.locals.prototypeVersion = 'v7-1'
   next()
 })
-require('./views/mvp/v7/search')(router)
-require('./views/mvp/v7/reporting')(router)
-require('./views/mvp/v7/admin/routes')(router)
-require('./views/mvp/v7/timeline/routes')(router)
+require('./views/mvp/v7-1/search')(router)
+require('./views/mvp/v7-1/reporting')(router)
+require('./views/mvp/v7-1/admin/routes')(router)
+require('./views/mvp/v7-1/timeline/routes')(router)
 
 router.use('/mvp/v7-2', (req, res, next) => {
   res.locals.prototypeVersion = 'v7-2'
@@ -55,3 +57,10 @@ require('./views/mvp/v7-2/search')(router)
 require('./views/mvp/v7-2/reporting')(router)
 require('./views/mvp/v7-2/admin/routes')(router)
 require('./views/mvp/v7-2/timeline/routes')(router)
+
+// V7.3, V7.4 and V7.5: No match MRN pages only (V7.3 = version 2, V7.4 = version 3, V7.5 = labels and tooltips).
+// The menu, search and timeline links use V7.2.
+router.use(['/mvp/v7-3', '/mvp/v7-4', '/mvp/v7-5'], (req, res, next) => {
+  res.locals.prototypeVersion = 'v7-2'
+  next()
+})

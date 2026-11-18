@@ -1,7 +1,7 @@
-{# v7-2 tabs: Latest and No matches are named by MRN, e.g. /mvp/v7-2/25GBDJRJCC9G1PKAR0/no-matches #}
+{# v7-2 tabs: Latest and No matches are named by MRN, e.g. /mvp/v7-3/25GBDJRJCC9G1PKAR0/no-matches #}
 {% set noMatchCounts = { '25GBDJRJCC9G1PKAR0': 22, '25GBK7T2LQ9V4XNAR3': 1 } %}
 {% set noMatchCount = noMatchCounts[title] %}
-{% set tabBase = tabBase or '/mvp/v7-2' %}
+{% set tabBase = tabBase or ('/mvp/v7-3' if title == '25GBDJRJCC9G1PKAR0' else '/mvp/v7-2') %}
 <ul class="govuk-tabs__list">
   <li class="govuk-tabs__list-item{% if activeTab == 'latest' %} govuk-tabs__list-item--selected{% endif %}">
     <a class="govuk-tabs__tab" href="{{ tabBase }}/{{ title }}"{% if activeTab == 'latest' %} aria-current="page"{% endif %}>Latest</a>
